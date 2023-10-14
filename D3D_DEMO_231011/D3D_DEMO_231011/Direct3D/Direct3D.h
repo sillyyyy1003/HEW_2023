@@ -109,8 +109,15 @@ BOOL D3D_CreateBuffer(void);
 	@brief　ブレンドステート作成する関数
 	@param	無し
 	@return 失敗した時　エラー表示
-*/
+
 BOOL D3D_CreateBlendState(void);
+
+/*
+	@brief	画面塗りつぶしと設定を行う関数
+	@param	無し
+	@return 無し
+*/
+void D3D_ClearScreen(void);
 
 
 /*
@@ -133,6 +140,14 @@ D3D_DATA* GetD3D_DATA(void);
 	@return g_pD3D->Device
 */
 ID3D11Device* GetD3D_Device(void);
+
+/*
+	@brief	g_pD3D->Contextのゲッター
+	@param	無し
+	@return g_pD3D->Context
+*/
+ID3D11DeviceContext* GetD3D_Context(void);
+
 
 
 // グローバル変数のextern宣言

@@ -53,12 +53,6 @@ public:
 
 
 
-	///*
-	//	@brief	•`‰æ‚Ìİ’è‚Æ•`‰æ
-	//	@param	–³‚µ
-	//	@return	–³‚µ
-	//*/
-	//virtual void Draw(void);
 
 
 };

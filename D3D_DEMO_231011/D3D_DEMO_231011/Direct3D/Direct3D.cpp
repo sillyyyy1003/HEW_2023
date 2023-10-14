@@ -2,6 +2,7 @@
 #include "Shader/PixelShader.h"
 #include "Shader/VertexShader.h"
 #include <atltypes.h>		// CRectを使うためのヘッダーファイル
+#include "../Sprite.h"
 
 // ライブラリのリンク設定
 #pragma comment (lib, "d3d11.lib")
@@ -12,12 +13,19 @@
 static D3D_DATA* g_pD3D;        //DirectXの機能を含めた構造体
 static UINT g_ScreenWidth;      //画面の幅
 static UINT g_ScreenHeight;     //画面の高さ
-ID3D11Buffer* g_ConstantBuffer;//定数バッファ用変数
+ID3D11Buffer* g_ConstantBuffer; //定数バッファ用変数
 
 
 D3D_DATA* GetD3D_DATA(void) { return g_pD3D; }
 
 ID3D11Device* GetD3D_Device(void){ return g_pD3D->Device;}
+
+ID3D11DeviceContext* GetD3D_Context(void)
+{
+    return g_pD3D->Context;
+}
+
+
 
 void DirectXInit(HWND hWnd)
 {
@@ -329,6 +337,40 @@ BOOL D3D_CreateBlendState(void)
 
 }
 
+void D3D_ClearScreen(void)
+{
+    // 画面塗りつぶし色
+    float clearColor[4] = { 0.0f, 0.0f, 1.0f, 1.0f }; //red,green,blue,alpha
+
+    // 描画先のキャンバスと使用する深度バッファを指定する
+    GetD3D_Context()->OMSetRenderTargets(1, &GetD3D_DATA()->RenderTarget, GetD3D_DATA()->DepthStencilView);
+    // 描画先キャンバスを塗りつぶす
+    GetD3D_Context()->ClearRenderTargetView(GetD3D_DATA()->RenderTarget, clearColor);
+    // 深度バッファをリセットする
+    GetD3D_Context()->ClearDepthStencilView(GetD3D_DATA()->DepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+    UINT strides = sizeof(VERTEX);
+    UINT offsets = 0;
+    GetD3D_Context()->IASetInputLayout(GetD3D_DATA()->InputLayout);
+
+
+    GetD3D_Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    GetD3D_Context()->VSSetShader(GetD3D_DATA()->VertexShader, NULL, 0);
+    GetD3D_Context()->RSSetViewports(1, &GetD3D_DATA()->Viewport);
+    GetD3D_Context()->PSSetShader(GetD3D_DATA()->PixelShader, NULL, 0);
+
+    // ピクセルシェーダーにサンプラーを渡す
+    GetD3D_Context()->PSSetSamplers(0, 1, &GetD3D_DATA()->Sampler);
+
+
+    // 定数バッファを頂点シェーダーにセットする
+    GetD3D_Context()->VSSetConstantBuffers(0, 1, &g_ConstantBuffer);
+    //定数バッファをピクセルシェーダーににセットする
+    GetD3D_Context()->PSSetConstantBuffers(0, 1, &g_ConstantBuffer);
+
+
+}
+
 void D3D_Release(void)
 {
 	//POINTERメモリを解放
@@ -351,7 +393,6 @@ void D3D_Release(void)
 		free(g_pD3D); //mallocで確保したメモリを解放する関数
 		g_pD3D = NULL;
 	}
-
 
 }
 
