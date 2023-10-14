@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Direct3D\Direct3D.cpp" />
-    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -138,7 +138,7 @@
     <ClInclude Include="Direct3D\Direct3D.h" />
     <ClInclude Include="Direct3D\Shader\PixelShader.h" />
     <ClInclude Include="Direct3D\Shader\VertexShader.h" />
-    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="WICTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>

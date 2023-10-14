@@ -1,16 +1,7 @@
 #pragma once
 #include "Direct3D/Direct3D.h"
 
-/// <summary>
-/// 
-/// </summary>
-struct BASEDATA 
-{
 
-	float x, y, z;		//位置座標
-	float u, v;			//テクスチャのUV座標
-
-};
 
 /// <summary>
 /// 頂点バッファとテクスチャを保存する構造体
@@ -45,9 +36,9 @@ public:
 	~Material();
 
 	/*
-		@brief	
-		@param	
-		@return	
+		@brief	読み込み済みのテクスチャを受け取る
+		@param	読み込み済みのテクスチャポインター
+		@return	無し
 	*/
 	void SetTexture(ID3D11ShaderResourceView* _texture);
 

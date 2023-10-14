@@ -1,31 +1,32 @@
-#pragma once
+ï»¿#pragma once
 #include"Direct3D/Direct3D.h"
-#include"WICTextureLoader.h"	//ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İƒ‰ƒCƒuƒ‰ƒŠ
+#include"WICTextureLoader.h"	//ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 
+//ãƒ†ã‚¯ã‚¹ãƒãƒ£Â·ã‚µã‚¦ãƒ³ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚’è¡Œã†é–¢æ•°
 class Assets
 {
 public:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
 	ID3D11ShaderResourceView* textureTest;
 
 
 public:
 	//----------------------------//
-	// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾
+	// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 	//----------------------------//
 
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Assets();
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Assets();
 
 	/*
-		@brief	ƒtƒ@ƒCƒ‹“Ç‚İ‚İ‚ğs‚¤ŠÖ”
-		@param	ƒtƒ@ƒCƒ‹–¼
-		@return SRV‚Ìƒ|ƒCƒ“ƒ^[
+		@brief	ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚’è¡Œã†é–¢æ•°
+		@param	ãƒ•ã‚¡ã‚¤ãƒ«å
+		@return SRVã®ãƒã‚¤ãƒ³ã‚¿ãƒ¼
 	*/
 	ID3D11ShaderResourceView* LoadTexture(const char* _fileName);
 

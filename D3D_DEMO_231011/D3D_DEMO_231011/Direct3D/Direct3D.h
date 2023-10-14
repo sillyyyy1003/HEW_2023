@@ -8,6 +8,11 @@ using namespace DirectX;
 //マクロ解放
 #define SAFE_RELEASE(p)      { if( NULL != p ) { p->Release(); p = NULL; } }
 
+//x,yを表す構造体
+struct FLOAT2 
+{
+	float x, y;
+};
 
 //定数バッファ用構造体
 struct CONSTBUFFER 
