@@ -29,11 +29,14 @@ public:
 	//----------------------------//
 	// 変数
 	//----------------------------//
+	//モデルの情報を格納する変数
 	VERTEX m_BaseData;
 
-	float m_OffsetU = 0.0f;
-	float m_OffsetV = 0.0f;
+	//回転
+	DirectX::XMFLOAT3 m_rotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 
+	//画像の大きさ(Default Data:1.0)
+	DirectX::XMFLOAT3 m_scale = DirectX::XMFLOAT3(1.0, 1.0f, 1.0f);
 
 
 
@@ -52,6 +55,12 @@ public:
 	/// <param name="splitX">横分割</param>
 	/// <param name="splitY">縦分割</param>
 	Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, float splitX, float splitY);
+
+	/// <summary>
+	/// シェーダーに渡す行列の処理を行う関数(回転/拡大縮小)
+	/// </summary>
+	/// <param name="cb">シェーダーに渡す行列</param>
+	void GenerateMatrix(CONSTBUFFER& cb);
 
 
 	virtual void Draw(void);

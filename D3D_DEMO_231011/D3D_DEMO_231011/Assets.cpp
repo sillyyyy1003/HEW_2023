@@ -4,12 +4,12 @@
 
 Assets::Assets()
 {
-    textureTest = LoadTexture("assets/testtexture");
+    textureTest = LoadTexture("assets/char01.png");
 }
 
 Assets::~Assets()
 {
-    delete textureTest;
+   SAFE_RELEASE(textureTest);
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)

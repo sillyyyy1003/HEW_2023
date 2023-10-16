@@ -8,6 +8,10 @@ using namespace DirectX;
 //マクロ解放
 #define SAFE_RELEASE(p)      { if( NULL != p ) { p->Release(); p = NULL; } }
 
+//縦横比
+#define RATIO_H		(9.0f)		//アスペクト比(縦)
+#define RATIO_W		(16.0f)		//アスペクト比(横)
+
 //x,yを表す構造体
 struct FLOAT2 
 {
@@ -109,7 +113,7 @@ BOOL D3D_CreateBuffer(void);
 	@brief　ブレンドステート作成する関数
 	@param	無し
 	@return 失敗した時　エラー表示
-
+*/
 BOOL D3D_CreateBlendState(void);
 
 /*

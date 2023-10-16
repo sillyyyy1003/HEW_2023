@@ -3,13 +3,14 @@
 Sprite::Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, float splitX, float splitY)
 {
 	
-
+	//モデル頂点データ作成
 	const float left = -(_width / 2.0f); 
 	const float right = _width / 2.0f;
 	const float top = _height / 2.0f;;
 	const float bottom = -(_height / 2.0f);
 	const float z = 0.0f;
 
+	//割った後のテクスチャ、一枚ずつの大きさ（幅、高）
 	const float u = 1.0 / splitX;
 	const float v = 1.0 / splitY;
 	
