@@ -17,6 +17,15 @@ private:
 	//カメラの上方向
 	XMFLOAT3 m_UpDir = XMFLOAT3(0.0f, 1.0f, 0.0f);
 
+private:
+	
+	//コンストラクタ
+	Camera() = default;
+
+	//唯一のインスタンスを定義
+	static Camera* m_camera;
+
+
 public:
 	
 	
@@ -30,6 +39,12 @@ public:
 	/// <returns>作成下カメラ用行列を返す関数</returns>
 	DirectX::XMMATRIX GetMatrixView(void);
 	
+	/// <summary>
+	/// 唯一のインスタンスを返す関数
+	/// </summary>
+	/// <returns>m_camera->WorldCamera</returns>
+	Camera* GetCamera(void);
+
 	virtual void Update();
 
 	/// <summary>
@@ -47,8 +62,9 @@ public:
 	//注視点位置を返す関数
 	DirectX::XMFLOAT3 GetFocusPos(void);
 	
-
-	//カメラの上方向変更を行う関数
+	/// <summary>
+	/// カメラの上方向変更を行う関数
+	/// </summary>
 	void SetUpDir(XMFLOAT3 _Updir);
 	//カメラの上方向を返す関数
 	DirectX::XMFLOAT3 GetUpDir(void);

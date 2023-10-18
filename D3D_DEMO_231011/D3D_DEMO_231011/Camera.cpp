@@ -1,9 +1,23 @@
 #include "Camera.h"
+//Singleton インスタンス定義
+Camera* Camera::m_camera = nullptr;
 
 DirectX::XMMATRIX Camera::GetMatrixView(void)
 {
     return m_MatrixView;
 }
+
+Camera* Camera::GetCamera()
+{
+    if (m_camera == nullptr) 
+    {
+        m_camera = new Camera();
+    }
+    
+    return m_camera;
+}
+
+
 
 void Camera::Update()
 {

@@ -362,7 +362,6 @@ void D3D_ClearScreen(void)
     // ピクセルシェーダーにサンプラーを渡す
     GetD3D_Context()->PSSetSamplers(0, 1, &GetD3D_DATA()->Sampler);
 
-
     // 定数バッファを頂点シェーダーにセットする
     GetD3D_Context()->VSSetConstantBuffers(0, 1, &g_ConstantBuffer);
     //定数バッファをピクセルシェーダーににセットする
@@ -383,9 +382,13 @@ void D3D_Release(void)
     SAFE_RELEASE(g_pD3D->InputLayout);
     SAFE_RELEASE(g_pD3D->VertexShader);
     SAFE_RELEASE(g_pD3D->PixelShader);
+    //SAFE_RELEASE(g_pD3D->Viewport);
     SAFE_RELEASE(g_pD3D->BlendAlpha);
     SAFE_RELEASE(g_pD3D->BlendAdd);
     SAFE_RELEASE(g_pD3D->Sampler);
+
+
+
 
 	//malloc関数で確保したメモリを解放
 	if (g_pD3D != NULL)

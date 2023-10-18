@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
+#include "Camera.h"
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -14,6 +15,8 @@
 // グローバル変数定義
 //----------------------------//
 Assets* g_Assets;
+
+Camera* g_WorldCamera;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -64,6 +67,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	//----------------------------//
 	DirectXInit(hWnd);
 
+	//アセットの初期化
 	g_Assets = new Assets();
 
 	//----------------------------//

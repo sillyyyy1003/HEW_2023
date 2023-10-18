@@ -19,26 +19,44 @@
     <Filter Include="DirectX\Shader">
       <UniqueIdentifier>{1905aa0a-ca99-46d9-bcfe-ec61824d516f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseClass">
+      <UniqueIdentifier>{eb448306-d8e5-4dda-943f-2a627b3bb8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseClass\Graphic">
+      <UniqueIdentifier>{d998c243-bc66-432b-9563-9b5d904041b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a5bd1866-ee0f-4eca-81f7-e00b1701901b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseClass\Graphic\Material">
+      <UniqueIdentifier>{add98167-a06b-400f-91d0-fef27739bcc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Direct3D\Direct3D.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Assets.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="WICTextureLoader.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>BaseClass</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>BaseClass\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>BaseClass\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>BaseClass\Graphic\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="WICTextureLoader.cpp">
+      <Filter>BaseClass\Graphic\Material</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,20 +69,26 @@
     <ClInclude Include="Direct3D\Shader\VertexShader.h">
       <Filter>DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Assets.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>BaseClass</Filter>
     </ClInclude>
-    <ClInclude Include="WICTextureLoader.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>BaseClass\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>BaseClass\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>BaseClass\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>BaseClass\Graphic\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="WICTextureLoader.h">
+      <Filter>BaseClass\Graphic\Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

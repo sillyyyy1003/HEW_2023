@@ -1,5 +1,7 @@
 #pragma once
 #include "Material.h"
+#include "Animation.h"
+#include "Camera.h"
 
 
 /// <summary>
@@ -7,10 +9,18 @@
 /// </summary>
 struct VERTEX
 {
-
-	float x, y, z;		//位置座標
+	float x, y, z;		//頂点の位置座標
 	float u, v;			//テクスチャのUV座標
 
+};
+
+//定数バッファ用構造体
+struct CONSTBUFFER
+{
+	DirectX::XMMATRIX matrixTex;		//UV座標移動行列
+	DirectX::XMMATRIX matrixProj;		//投影行列
+	DirectX::XMMATRIX matrixWorld;		//ワールド変換行列
+	DirectX::XMFLOAT4 materialDiffuse;	//マテリアル色
 };
 
 /// <summary>
@@ -24,20 +34,31 @@ private:
 	//char m_Name[256];
 
 
-
 public:
 	//----------------------------//
 	// 変数
 	//----------------------------//
-	//モデルの情報を格納する変数
-	VERTEX m_BaseData;
 
+
+	//仮想世界のワールド座標
+	DirectX::XMFLOAT3 m_pos = { 0.0f,0.0f,0.0f };
+	
 	//回転
-	DirectX::XMFLOAT3 m_rotation = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
+	DirectX::XMFLOAT3 m_rotation = { 0.0f, 0.0f, 0.0f };
 
 	//画像の大きさ(Default Data:1.0)
-	DirectX::XMFLOAT3 m_scale = DirectX::XMFLOAT3(1.0, 1.0f, 1.0f);
+	DirectX::XMFLOAT3 m_scale = { 1.0, 1.0f, 1.0f };
 
+	//UV座標
+	DirectX::XMFLOAT2 m_offsetUV = { 0.0f,0.0f };
+
+	//縦横分割
+	DirectX::XMINT2 m_split = { 1,1 };
+
+	//このキャラクターのマテリアル色(DEFAULT COLOR:WHITE)
+	DirectX::XMFLOAT4 m_materialDiffuse = { 1.0f,1.0f,1.0f,1.0f };
+
+	Camera* m_camera;
 
 
 public:
@@ -54,7 +75,7 @@ public:
 	/// <param name="_height">画面に描画する高さ</param>
 	/// <param name="splitX">横分割</param>
 	/// <param name="splitY">縦分割</param>
-	Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, float splitX, float splitY);
+	Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	/// <summary>
 	/// シェーダーに渡す行列の処理を行う関数(回転/拡大縮小)
@@ -63,7 +84,12 @@ public:
 	void GenerateMatrix(CONSTBUFFER& cb);
 
 
+	/// <summary>
+	/// 描画を行う関数
+	/// </summary>
 	virtual void Draw(void);
+
+	virtual void UpdateUV(XMFLOAT2 _offsetUV);
 
 
 

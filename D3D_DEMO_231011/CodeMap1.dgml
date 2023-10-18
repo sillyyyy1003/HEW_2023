@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph DataVirtualized="True" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes />
+  <Links />
+  <Properties>
+    <Property Id="DataVirtualized" Label="仮想化されたデータ" Description="true の場合、仮想化されたノードまたはリンク (実際にはグラフ内に作成されていない) のデータを表すノードおよびリンクをグラフに含めることができます。" DataType="System.Boolean" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+</DirectedGraph>

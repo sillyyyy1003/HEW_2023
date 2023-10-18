@@ -12,20 +12,6 @@ using namespace DirectX;
 #define RATIO_H		(9.0f)		//アスペクト比(縦)
 #define RATIO_W		(16.0f)		//アスペクト比(横)
 
-//x,yを表す構造体
-struct FLOAT2 
-{
-	float x, y;
-};
-
-//定数バッファ用構造体
-struct CONSTBUFFER 
-{
-	DirectX::XMMATRIX matrixTex;	//UV座標移動行列
-	DirectX::XMMATRIX matrixProj;	//投影行列
-	DirectX::XMMATRIX matrixWorld;	//ワールド変換行列
-};
-
 //Direct3D関連変数をまとめる構造体
 struct D3D_DATA
 {
