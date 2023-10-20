@@ -60,6 +60,7 @@ public:
 
 	Camera* m_camera;
 
+	Animation* m_animation;
 
 public:
 

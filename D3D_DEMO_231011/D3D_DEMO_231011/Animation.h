@@ -12,17 +12,18 @@ protected:
 	// UVアニメーション用オフセット
 	DirectX::XMFLOAT2 m_offsetUV = { 0.0f,0.0f };
 
-	//縦フレーム何番目
-	int m_AnimePattern = 0;
+	//横・縦フレーム何番目
+	int m_frameX = 0;	//横何番目
+	int m_frameY = 0;	//縦何番目→アニメパターン
+
+	//テクスチャの縦横分割
+	DirectX::XMINT2 m_split = { 1,1 };
 
 	//横フレームの何番目からスタート
 	int m_StartFrame = 0;
 
 	//横フレームの何番目まで終わる
 	int m_EndFrame = 0;
-
-	//テクスチャの縦横分割
-	DirectX::XMINT2 m_split = { 1,1 };
 
 	// アニメーションのカウンター
 	float m_AnimeCounter = 0.0f;
@@ -40,15 +41,19 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	/// <param name="XMINT2"></param>
-	Animation(XMINT2 _split);
+	Animation(void);
 
+	/// <summary>
+	/// 縦横分割の初期設定
+	/// </summary>
+	/// <param name="_split">縦横分割 SPRITEと一致する</param>
+	void SetSplit(XMINT2 _split);
+		
 	/// <summary>
 	/// UV座標の更新を行う関数
 	/// </summary>
-	/// <param name="_frameX">横何番目 aniTabの値を代入</param>
-	/// <param name="_frameY">animePattern 縦フレーム何番目</param>
-	virtual void Update(int _frameX,int _frameY);
+	/// NOTE:継承クラスでアニメテーブルの設定と縦横のアニメ更新を行う
+	virtual void Update(void);
 
 	/// <summary>
 	/// 再生速度を設定する関数

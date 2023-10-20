@@ -138,6 +138,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TrackCamera.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TrackCamera.h" />
     <ClInclude Include="WICTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>

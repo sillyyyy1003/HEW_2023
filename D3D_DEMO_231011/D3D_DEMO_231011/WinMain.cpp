@@ -70,6 +70,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	//アセットの初期化
 	g_Assets = new Assets();
 
+
 	//----------------------------//
 	// 	ゲームクラスの初期化処理
 	//----------------------------//

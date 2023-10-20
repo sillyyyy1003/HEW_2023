@@ -31,6 +31,12 @@
     <Filter Include="BaseClass\Graphic\Material">
       <UniqueIdentifier>{add98167-a06b-400f-91d0-fef27739bcc9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BaseClass\Camera">
+      <UniqueIdentifier>{92719a49-e59c-469a-9daa-b0886954cf65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{eee7e883-c24a-4902-bd83-53dceccccd8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp" />
@@ -40,23 +46,26 @@
     <ClCompile Include="Assets.cpp">
       <Filter>BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>BaseClass</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>BaseClass\Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>BaseClass\Graphic</Filter>
-    </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClCompile>
     <ClCompile Include="WICTextureLoader.cpp">
       <Filter>BaseClass\Graphic\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>BaseClass\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackCamera.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,23 +81,26 @@
     <ClInclude Include="Assets.h">
       <Filter>BaseClass</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>BaseClass\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>BaseClass\Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>BaseClass\Graphic</Filter>
-    </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClInclude>
     <ClInclude Include="WICTextureLoader.h">
       <Filter>BaseClass\Graphic\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>BaseClass\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackCamera.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
