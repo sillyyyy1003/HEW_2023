@@ -61,6 +61,7 @@
     <ClCompile Include="WICTextureLoader.cpp">
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -75,6 +76,10 @@
     </ClCompile>
     <ClCompile Include="ObjectAnimation.cpp">
       <Filter>Animation</Filter>
+=======
+    <ClCompile Include="Input.cpp">
+      <Filter>ソース ファイル</Filter>
+>>>>>>> 5ab2dbb93e7384aacdc3c553fac18acec59bac71
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +107,7 @@
     <ClInclude Include="WICTextureLoader.h">
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -116,6 +122,10 @@
     </ClInclude>
     <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation</Filter>
+=======
+    <ClInclude Include="Input.h">
+      <Filter>ヘッダー ファイル</Filter>
+>>>>>>> 5ab2dbb93e7384aacdc3c553fac18acec59bac71
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
