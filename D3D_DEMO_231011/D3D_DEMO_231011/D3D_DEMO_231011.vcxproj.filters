@@ -58,6 +58,9 @@
     <ClCompile Include="WICTextureLoader.cpp">
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -89,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="WICTextureLoader.h">
       <Filter>BaseClass\Graphic\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
