@@ -23,13 +23,13 @@ protected:
 	int m_StartFrame = 0;
 
 	//横フレームの何番目まで終わる
-	int m_EndFrame = 0;
+	int m_endFrame = 0;
 
 	// アニメーションのカウンター
-	float m_AnimeCounter = 0.0f;
+	float m_animeCounter = 0.0f;
 
 	//再生速度
-	float m_AnimeSpeed = 0.0f;
+	float m_animeSpeed = 0.0f;
 
 public:
 
@@ -39,15 +39,20 @@ public:
 
 public:
 	/// <summary>
-	/// 初期化
+	/// 初期化　縦横分割を設定する
 	/// </summary>
-	Animation(void);
+	/// <param name="splitX">横分割数</param>
+	/// <param name="splitY">縦分割数</param>
+	Animation(int splitX,int splitY);
 
 	/// <summary>
 	/// 縦横分割の初期設定
 	/// </summary>
 	/// <param name="_split">縦横分割 SPRITEと一致する</param>
 	void SetSplit(XMINT2 _split);
+
+
+	DirectX::XMINT2 GetSplit(void);
 		
 	/// <summary>
 	/// UV座標の更新を行う関数

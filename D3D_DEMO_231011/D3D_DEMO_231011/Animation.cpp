@@ -4,15 +4,20 @@
 // グローバル変数定義
 //----------------------------//
 
-
-Animation::Animation()
+Animation::Animation(int splitX, int splitY)
 {
-    
+    m_split.x = splitX;
+    m_split.y = splitY;
 }
 
 void Animation::SetSplit(XMINT2 _split)
 {
     m_split = _split;
+}
+
+DirectX::XMINT2 Animation::GetSplit(void)
+{
+    return m_split;
 }
 
 void Animation::Update()
@@ -23,7 +28,7 @@ void Animation::Update()
 
 void Animation::SetAnimeSpeed(float _speed)
 {
-    m_AnimeSpeed = _speed;
+    m_animeSpeed = _speed;
 }
 
 void Animation::SetAnimePattern(int _animePattern)

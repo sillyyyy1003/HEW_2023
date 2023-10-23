@@ -1,10 +1,13 @@
 #include "Sprite.h"
 #include "Camera.h"
+#include "Assets.h"
+
+extern Assets* g_Assets;
 
 Sprite::Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
 	//縦横分割を設定
-	m_split = XMINT2(splitX, splitY);
+	m_split=(XMINT2(splitX, splitY));
 
 	//モデル頂点データ作成
 	const float left = -(_width / 2.0f); 
@@ -77,7 +80,8 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
 
 	//UVアニメーション行列作成
-	XMMATRIX matrixTex = XMMatrixTranslation(m_offsetUV.x, m_offsetUV.y, 0.0f);
+	m_anime->Update();
+	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 	
 	cb.matrixProj = XMMatrixTranspose(matrixProj);
 	cb.matrixTex = XMMatrixTranspose(matrixTex);
@@ -104,7 +108,7 @@ void Sprite::Draw(void)
 	GetD3D_Context()->IASetVertexBuffers(0, 1, &Material::m_modelData.vertexBuffer, &strides, &offsets);
 
 	//ピクセルシェーダーにテクスチャを渡す
-	GetD3D_Context()->PSGetShaderResources(0, 1, &Material::m_modelData.texture);
+	GetD3D_Context()->PSSetShaderResources(0, 1, &Material::m_modelData.texture);
 
 	//vertexCount:描画する頂点数
 	GetD3D_Context()->Draw(6, 0);
@@ -112,10 +116,6 @@ void Sprite::Draw(void)
 
 }
 
-void Sprite::UpdateUV(XMFLOAT2 _offsetUV)
-{
-	m_offsetUV = _offsetUV;
-}
 
 
 

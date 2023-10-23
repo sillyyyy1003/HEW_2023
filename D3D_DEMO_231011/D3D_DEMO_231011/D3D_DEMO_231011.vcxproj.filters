@@ -31,11 +31,14 @@
     <Filter Include="BaseClass\Graphic\Material">
       <UniqueIdentifier>{add98167-a06b-400f-91d0-fef27739bcc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseClass\Camera">
-      <UniqueIdentifier>{92719a49-e59c-469a-9daa-b0886954cf65}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{eee7e883-c24a-4902-bd83-53dceccccd8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{f103a71d-d444-405b-a2a5-0381858d6f56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{92719a49-e59c-469a-9daa-b0886954cf65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,12 +62,18 @@
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>BaseClass\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackCamera.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackCamera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectAnimation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>
@@ -94,12 +103,18 @@
       <Filter>BaseClass\Graphic\Material</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>BaseClass\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackCamera.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackCamera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>

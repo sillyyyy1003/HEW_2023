@@ -29,7 +29,6 @@ ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)
 
     if (FAILED(hr)) {
         //読み込みが失敗した場合
-
         //読み込み失敗のファイル名変換
         char outStr[128];
         wsprintfA(outStr, "%sを読み込み失敗", _fileName);
