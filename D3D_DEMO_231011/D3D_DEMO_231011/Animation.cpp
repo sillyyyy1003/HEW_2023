@@ -4,26 +4,36 @@
 // グローバル変数定義
 //----------------------------//
 
+Animation::Animation(int splitX, int splitY)
+{
+    m_split.x = splitX;
+    m_split.y = splitY;
+}
 
-Animation::Animation(XMINT2 _split)
+void Animation::SetSplit(XMINT2 _split)
 {
     m_split = _split;
 }
 
-void Animation::Update(int _frameX, int _frameY)
+DirectX::XMINT2 Animation::GetSplit(void)
 {
-    m_offsetUV.x = 1.0 / m_split.x * _frameX;
-    m_offsetUV.y = 1.0 / m_split.y * _frameY;
+    return m_split;
+}
+
+void Animation::Update()
+{
+    m_offsetUV.x = 1.0 / m_split.x * m_frameX;
+    m_offsetUV.y = 1.0 / m_split.y * m_frameY;
 }
 
 void Animation::SetAnimeSpeed(float _speed)
 {
-    m_AnimeSpeed = _speed;
+    m_animeSpeed = _speed;
 }
 
 void Animation::SetAnimePattern(int _animePattern)
 {
-    m_AnimePattern = _animePattern;
+    m_frameY = _animePattern;
 }
 
 DirectX::XMFLOAT2 Animation::GetUVOffset(void)

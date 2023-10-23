@@ -17,13 +17,17 @@ private:
 	//カメラの上方向
 	XMFLOAT3 m_UpDir = XMFLOAT3(0.0f, 1.0f, 0.0f);
 
+/*
 private:
 	
 	//コンストラクタ
-	Camera() = default;
+	Camera() {};
 
+*/
+
+public:
 	//唯一のインスタンスを定義
-	static Camera* m_camera;
+	//static Camera* m_camera;
 
 
 public:
@@ -32,7 +36,8 @@ public:
 	//----------------------------//
 	// 関数のプロトタイプ宣言
 	//----------------------------//
-	
+	Camera();
+
 	/// <summary>
 	/// View変換行列の作成＝カメラ用の行列
 	/// </summary>
@@ -43,8 +48,7 @@ public:
 	/// 唯一のインスタンスを返す関数
 	/// </summary>
 	/// <returns>m_camera->WorldCamera</returns>
-	Camera* GetCamera(void);
-
+	//Camera* GetCamera(void);
 	virtual void Update();
 
 	/// <summary>

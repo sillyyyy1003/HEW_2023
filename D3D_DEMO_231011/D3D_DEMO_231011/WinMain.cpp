@@ -2,7 +2,8 @@
 #include <Windows.h>
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
-#include "Camera.h"
+#include "TrackCamera.h"
+#include "Game.h"
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -17,6 +18,9 @@
 Assets* g_Assets;
 
 Camera* g_WorldCamera;
+
+Game* g_Game;
+
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -70,10 +74,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	//アセットの初期化
 	g_Assets = new Assets();
 
+	//g_WorldCamera = new TrackCamera();
+	g_WorldCamera = new Camera();
+
 	//----------------------------//
 	// 	ゲームクラスの初期化処理
 	//----------------------------//
-
+	g_Game = new Game();
 
 	MSG msg;
 
@@ -97,8 +104,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 			//----------------------------//
 			// 	ゲームループ 
 			//----------------------------//
-			
+			g_WorldCamera->Update();
 
+			g_Game->Update();
+
+			g_Game->Draw();
 
 		}
 	} 
@@ -110,6 +120,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 	//アセット解放処理
 	delete g_Assets;
+
+	delete g_WorldCamera;
+
+	delete g_Game;
 
 	//Direct3D解放処理
 	D3D_Release();

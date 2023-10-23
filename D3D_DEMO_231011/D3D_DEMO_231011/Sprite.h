@@ -39,20 +39,16 @@ public:
 	// 変数
 	//----------------------------//
 
-
 	//仮想世界のワールド座標
 	DirectX::XMFLOAT3 m_pos = { 0.0f,0.0f,0.0f };
-	
+
 	//回転
 	DirectX::XMFLOAT3 m_rotation = { 0.0f, 0.0f, 0.0f };
 
 	//画像の大きさ(Default Data:1.0)
 	DirectX::XMFLOAT3 m_scale = { 1.0, 1.0f, 1.0f };
 
-	//UV座標
-	DirectX::XMFLOAT2 m_offsetUV = { 0.0f,0.0f };
-
-	//縦横分割
+	//縦横分割->描画用
 	DirectX::XMINT2 m_split = { 1,1 };
 
 	//このキャラクターのマテリアル色(DEFAULT COLOR:WHITE)
@@ -60,6 +56,7 @@ public:
 
 	Camera* m_camera;
 
+	Animation* m_anime = nullptr;
 
 public:
 
@@ -88,18 +85,6 @@ public:
 	/// 描画を行う関数
 	/// </summary>
 	virtual void Draw(void);
-
-	virtual void UpdateUV(XMFLOAT2 _offsetUV);
-
-
-
-
-
-
-
-
-
-
 
 
 };
