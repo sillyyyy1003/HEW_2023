@@ -8,11 +8,11 @@ extern Assets* g_Assets;
 
 Game::Game()
 {
-	
+	//オブジェクト初期化
 	testObject = new Object(g_Assets->textureTest, 1, 1, 3, 4);
-	
+	//アニメーション速度を設定
 	testObject->m_sprite->m_anime->SetAnimeSpeed(0.01f);
-
+	//アニメーションパターンを設定
 	testObject->m_anime->SetAnimePattern(1);
 }
 
