@@ -1,31 +1,14 @@
-﻿  compilation object save succeeded; see C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\PixelShader.cso
-  compilation object save succeeded; see C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\VertexShader.cso
-  Animation.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(26,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Assets.cpp
-  Camera.cpp
-  Direct3D.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(250,29): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(251,30): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+﻿  Assets.cpp
   Game.cpp
-  Material.cpp
-  Object.cpp
-  ObjectAnimation.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(88,2): warning C4060: switch ステートメントに 'case' または 'default' ラベルがありません。
   Sprite.cpp
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(20,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(20,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(21,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(21,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-  TrackCamera.cpp
-  WICTextureLoader.cpp
   WinMain.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(109,12): error C2039: 'Update': 'Game' のメンバーではありません
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(6): message : 'Game' の宣言を確認してください
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(111,12): error C2039: 'Draw': 'Game' のメンバーではありません
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(6): message : 'Game' の宣言を確認してください
   コードを生成中...
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(146): warning C4715: 'D3D_CreateRenderTarget': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(275): warning C4715: 'D3D_CreateSampler': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(338): warning C4715: 'D3D_CreateBlendState': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(297): warning C4715: 'D3D_CreateBuffer': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(192): warning C4715: 'D3D_CreateDepthStencil': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(242): warning C4715: 'D3D_CreateShader': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(115): warning C4715: 'D3D_CreateDevice': 値を返さないコントロール パスがあります。
-  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

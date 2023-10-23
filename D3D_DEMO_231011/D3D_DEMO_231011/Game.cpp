@@ -16,9 +16,40 @@ Game::Game()
 	testObject->m_anime->SetAnimePattern(1);
 }
 
-void Game::Update(void)
+void Game::GameUpdate(void)
 {
-	testObject->m_anime->Update();
+	switch (m_gameScene)
+	{
+	case TITLE:
+
+		TitleUpdate();
+		break;
+		
+	case STAGE1:
+
+		StageUpdate();
+		break;
+
+	case RESULT:
+
+		ResultUpdate();
+		break;
+
+	}
+}
+
+void Game::TitleUpdate(void)
+{
+	testObject->Update();
+}
+
+void Game::StageUpdate(void)
+{
+}
+
+void Game::ResultUpdate(void)
+{
+
 }
 
 Game::~Game()
@@ -26,20 +57,56 @@ Game::~Game()
 	delete testObject;
 }
 
-void Game::Draw()
+void Game::GameDraw()
 {
 
 	D3D_ClearScreen();
 
 	//============ ここから描画処理 ============//
 	
+	switch (m_gameScene) 
+	{
+		switch (m_gameScene)
+		{
+		case TITLE:
 
-	testObject->m_sprite->Draw();
+			TitleDraw();
+			break;
 
-	
+		case STAGE1:
+
+			StageDraw();
+			break;
+
+		case RESULT:
+
+			ResultDraw();
+			break;
+
+		}
+
+	}
+
 	//============ ここまで描画処理 ============//
 	 
-	//Update Screen
 	//ダブルバッファの切り替えを行い画面を更新する
 	GetD3D_DATA()->SwapChain->Present(0, 0);
+}
+
+void Game::TitleDraw(void)
+{
+	testObject->m_sprite->Draw();
+}
+
+void Game::StageDraw(void)
+{
+}
+
+void Game::ResultDraw(void)
+{
+}
+
+void Game::SetGameScene(GAMESCENE scene)
+{
+	m_gameScene = scene;
 }
