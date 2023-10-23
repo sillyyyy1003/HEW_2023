@@ -118,27 +118,39 @@ void D3D_ClearScreen(void);
 void D3D_Release(void);
 
 /*
-	@brief	g_pD3Dのゲッター
+	@brief	g_pD3Dを返す
 	@param	無し
 	@return g_pD3D
 */
 D3D_DATA* GetD3D_DATA(void);
 
 /*
-	@brief	g_pD3D->Deviceのゲッター
+	@brief	g_pD3D->Deviceを返す
 	@param	無し
 	@return g_pD3D->Device
 */
 ID3D11Device* GetD3D_Device(void);
 
 /*
-	@brief	g_pD3D->Contextのゲッター
+	@brief	g_pD3D->Contextを返す
 	@param	無し
 	@return g_pD3D->Context
 */
 ID3D11DeviceContext* GetD3D_Context(void);
 
+/*
+	@brief	透過合成用BlendStateを返す
+	@param	無し
+	@return g_pD3D->BlendAlpha
+*/
+ID3D11BlendState* GetBlendAlpha(void);
 
+/*
+	@brief	透過合成用BlendStateを返す
+	@param	無し
+	@return g_pD3D->BlendAdd
+*/
+ID3D11BlendState* GetBlendAdd(void);
 
 // グローバル変数のextern宣言
 extern ID3D11Buffer* g_ConstantBuffer;

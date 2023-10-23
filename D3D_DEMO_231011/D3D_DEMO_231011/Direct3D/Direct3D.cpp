@@ -18,12 +18,14 @@ ID3D11Buffer* g_ConstantBuffer; //定数バッファ用変数
 
 D3D_DATA* GetD3D_DATA(void) { return g_pD3D; }
 
-ID3D11Device* GetD3D_Device(void){ return g_pD3D->Device;}
+ID3D11Device* GetD3D_Device(void){ return g_pD3D->Device; }
 
-ID3D11DeviceContext* GetD3D_Context(void)
-{
-    return g_pD3D->Context;
-}
+ID3D11DeviceContext* GetD3D_Context(void){ return g_pD3D->Context; }
+
+ID3D11BlendState* GetBlendAlpha(void){ return g_pD3D->BlendAlpha; }
+
+ID3D11BlendState* GetBlendAdd(void){ return g_pD3D->BlendAdd;}
+
 
 
 
