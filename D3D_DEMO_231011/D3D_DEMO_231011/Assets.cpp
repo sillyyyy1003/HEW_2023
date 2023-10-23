@@ -4,11 +4,19 @@
 
 Assets::Assets()
 {
+    //===========ここからでテクスチャファイルを追加=============//
+    //要注意!! 「L」いりません
     textureTest = LoadTexture("assets/char01.png");
+
+
+
+
+
 }
 
 Assets::~Assets()
 {
+
    SAFE_RELEASE(textureTest);
 }
 
