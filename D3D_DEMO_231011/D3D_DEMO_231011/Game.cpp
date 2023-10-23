@@ -8,7 +8,9 @@ extern Assets* g_Assets;
 
 Game::Game()
 {
+	
 	testObject = new Object(g_Assets->textureTest, 1, 1, 3, 4);
+	
 	testObject->m_sprite->m_anime->SetAnimeSpeed(0.01f);
 
 	testObject->m_anime->SetAnimePattern(1);

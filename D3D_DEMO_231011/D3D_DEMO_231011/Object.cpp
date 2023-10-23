@@ -1,5 +1,4 @@
 #include "Object.h"
-#include "ObjectAnimation.h"
 
 extern Camera* g_WorldCamera;
 
