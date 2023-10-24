@@ -25,5 +25,5 @@ Object::~Object(void)
 {
 	delete m_sprite;
 	
-	//delete m_anime;
+	delete m_anime;
 }
