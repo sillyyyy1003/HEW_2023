@@ -26,6 +26,11 @@ ID3D11BlendState* GetBlendAlpha(void){ return g_pD3D->BlendAlpha; }
 
 ID3D11BlendState* GetBlendAdd(void){ return g_pD3D->BlendAdd;}
 
+void SetBlendState(ID3D11BlendState* _blendState)
+{
+     GetD3D_Context()->OMSetBlendState(_blendState,NULL, 0xffffffff);
+}
+
 
 
 

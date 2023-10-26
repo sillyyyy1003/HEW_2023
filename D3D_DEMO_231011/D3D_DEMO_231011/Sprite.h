@@ -1,7 +1,7 @@
 #pragma once
 #include "Material.h"
-#include "Animation.h"
 #include "Camera.h"
+#include "Animation.h"
 
 
 /// <summary>
@@ -86,6 +86,10 @@ public:
 	/// </summary>
 	virtual void Draw(void);
 
+	/// <summary>
+	/// Œã•Ð•t‚¯
+	/// </summary>
+	~Sprite(void);
 
 };
 

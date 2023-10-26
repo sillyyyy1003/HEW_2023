@@ -1,5 +1,6 @@
 #undef UNICODE  //Unicodeではなく、マルチバイト文字を使う
 #include <Windows.h>
+#include <atltypes.h>	
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
 #include "TrackCamera.h"
@@ -74,8 +75,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	//アセットの初期化
 	g_Assets = new Assets();
 
-	//g_WorldCamera = new TrackCamera();
-	g_WorldCamera = new Camera();
+	//カメラの初期化
+	g_WorldCamera = new TrackCamera();
+	//g_WorldCamera = new Camera();
 
 	//----------------------------//
 	// 	ゲームクラスの初期化処理
@@ -106,9 +108,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 			//----------------------------//
 			g_WorldCamera->Update();
 
-			g_Game->Update();
+			g_Game->GameUpdate();
 
-			g_Game->Draw();
+			g_Game->GameDraw();
 
 		}
 	} 
@@ -140,6 +142,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+
+	CRect rect;
+	int width = 0;
+	int height = 0;
+	char str[30] = {};
+	
 	switch (uMsg) 
 	{
 	case WM_DESTROY:		//ウィンドウ破棄のメッセージ
@@ -151,7 +159,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_LBUTTONDOWN:	// 左クリックされた時
-		
+
+	GetWindowRect(hWnd, rect);
+	width = rect.right - rect.left;
+	height = rect.bottom - rect.top;
+	wsprintf(str, "Window Size: %d %d", width, height);
+	MessageBoxA(NULL, str, "エラー", MB_OK | MB_ICONERROR); 
+	
 		break;
 
 	case WM_RBUTTONDOWN:	// 右クリックされた時

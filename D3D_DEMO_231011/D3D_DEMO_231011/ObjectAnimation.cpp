@@ -41,5 +41,4 @@ void ObjectAnimation::Update(void)
 
     Animation::Update();
 
-
 }

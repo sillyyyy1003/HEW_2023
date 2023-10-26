@@ -3,6 +3,7 @@
 
 
 
+extern Camera* g_WorldCamera;
 class Game
 {
 private:
@@ -17,8 +18,9 @@ private:
 
 private:
 
-	Object* testObject;
+	Object* testObject;			//test—pƒLƒƒƒ‰
 
+	Object* testBg;		//test—p”wŒi
 	
 
 public:

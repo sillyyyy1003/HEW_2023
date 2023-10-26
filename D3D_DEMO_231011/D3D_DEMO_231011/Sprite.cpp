@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
+#include "ObjectAnimation.h"
 
 extern Assets* g_Assets;
 
@@ -9,8 +10,9 @@ Sprite::Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, i
 	//縦横分割を設定
 	m_split=(XMINT2(splitX, splitY));
 
+
 	//モデル頂点データ作成
-	const float left = -(_width / 2.0f); 
+	const float left = -(_width / (2.0f));
 	const float right = _width / 2.0f;
 	const float top = _height / 2.0f;;
 	const float bottom = -(_height / 2.0f);
@@ -80,7 +82,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
 
 	//UVアニメーション行列作成
-	m_anime->Update();
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 	
 	cb.matrixProj = XMMatrixTranspose(matrixProj);
@@ -114,6 +115,12 @@ void Sprite::Draw(void)
 	GetD3D_Context()->Draw(6, 0);
 
 
+}
+
+Sprite::~Sprite(void)
+{
+	//
+	delete m_anime;
 }
 
 

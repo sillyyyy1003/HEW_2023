@@ -6,8 +6,9 @@ Assets::Assets()
 {
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
-    textureTest = LoadTexture("assets/char01.png");
+    testchar01 = LoadTexture("assets/char01.png");
 
+    testbg01 = LoadTexture("assets/testbg.png");
 
 
 
@@ -17,7 +18,9 @@ Assets::Assets()
 Assets::~Assets()
 {
 
-   SAFE_RELEASE(textureTest);
+   SAFE_RELEASE(testchar01);
+   SAFE_RELEASE(testbg01);
+
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)
