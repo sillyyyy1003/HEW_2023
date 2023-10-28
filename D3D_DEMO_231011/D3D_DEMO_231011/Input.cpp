@@ -1,4 +1,6 @@
 #include "Input.h"
+#pragma warning(push)
+#pragma warning(disable: 26812 )// enumのエラーを抑制する
 
 // ゲームパッドの振動
 XINPUT_VIBRATION vibration;
@@ -344,3 +346,6 @@ WORD ThumbToDPad(SHORT sThumbX, SHORT sThumbY, SHORT sDeadZone)
 
     return wButtons;
 }
+
+// enumのエラーを抑制する
+#pragma warning(pop)
