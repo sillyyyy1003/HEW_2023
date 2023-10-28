@@ -1,6 +1,5 @@
 #undef UNICODE  //Unicodeではなく、マルチバイト文字を使う
 #include <Windows.h>
-#include <atltypes.h>	
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
 #include "TrackCamera.h"
@@ -142,12 +141,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-
-	CRect rect;
-	int width = 0;
-	int height = 0;
-	char str[30] = {};
-	
+	/*
+	//CRect rect;
+	//int width = 0;
+	//int height = 0;
+	//char str[30] = {};
+	*/
 	switch (uMsg) 
 	{
 	case WM_DESTROY:		//ウィンドウ破棄のメッセージ
@@ -160,12 +159,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:	// 左クリックされた時
 
-	GetWindowRect(hWnd, rect);
-	width = rect.right - rect.left;
-	height = rect.bottom - rect.top;
-	wsprintf(str, "Window Size: %d %d", width, height);
-	MessageBoxA(NULL, str, "エラー", MB_OK | MB_ICONERROR); 
-	
+	/*
+	//GetWindowRect(hWnd, rect);
+	//width = rect.right - rect.left;
+	//height = rect.bottom - rect.top;
+	//wsprintf(str, "Window Size: %d %d", width, height);
+	//MessageBoxA(NULL, str, "エラー", MB_OK | MB_ICONERROR); 
+	*/
 		break;
 
 	case WM_RBUTTONDOWN:	// 右クリックされた時
