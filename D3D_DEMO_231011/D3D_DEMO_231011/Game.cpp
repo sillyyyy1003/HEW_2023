@@ -9,17 +9,17 @@ extern Assets* g_Assets;
 Game::Game()
 {
 	//オブジェクト初期化
-	testObject = new Object(g_Assets->testchar01, 1, 1, 3, 4);
+	testObject = new Object(g_Assets->testchar01, 96, 96, 3, 4);
 	//アニメーションクラス初期化->どのアニメーションにする
 	testObject->m_sprite->m_anime = new ObjectAnimation(3, 4);
 	//アニメーション速度を設定
-	testObject->m_sprite->m_anime->SetAnimeSpeed(0.005f);
+	testObject->m_sprite->m_anime->SetAnimeSpeed(0.1f);
 	//アニメーションパターンを設定
-	testObject->m_sprite->m_anime->SetAnimePattern(2);
+	testObject->m_sprite->m_anime->SetAnimePattern(0);
 
 
 	//オブジェクト初期化
-	testBg = new Object(g_Assets->testbg01, 13.3, 7.5, 1, 1);
+	testBg = new Object(g_Assets->testbg01, 1280, 720, 1, 1);
 	testBg->m_sprite->m_pos.z = 0.1;//前後の位置設定をクラス化で行う
 	//アニメーションクラス初期化->どのアニメーションにする
 	testBg->m_sprite->m_anime = new ObjectAnimation(1, 1);
@@ -54,9 +54,9 @@ void Game::GameUpdate(void)
 }
 
 void Game::TitleUpdate(void)
-{
-	testObject->Update();
+{	
 	testBg->Update();
+	testObject->Update();
 }
 
 void Game::StageUpdate(void)

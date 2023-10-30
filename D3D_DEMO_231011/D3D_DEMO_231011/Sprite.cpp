@@ -12,10 +12,11 @@ Sprite::Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, i
 
 
 	//モデル頂点データ作成
-	const float left = -(_width / (2.0f));
-	const float right = _width / 2.0f;
-	const float top = _height / 2.0f;;
-	const float bottom = -(_height / 2.0f);
+	//Notion:*1.25/96 -> 入力した画像の大きさをそのまま表示するため
+	const float left = -(_width / 2.0f) * 1.25 / 96;
+	const float right = (_width / 2.0f) * 1.25 / 96;
+	const float top = (_height / 2.0f) * 1.25 / 96;
+	const float bottom = -(_height / 2.0f) * 1.25 / 96;
 	const float z = 0.0f;
 
 	//割った後のテクスチャ、一枚ずつの大きさ（幅、高）
