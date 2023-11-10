@@ -1,8 +1,10 @@
 #pragma once
 #include "Object.h"
+#include"TestObject.h"
 
 
 
+extern Camera* g_WorldCamera;
 class Game
 {
 private:
@@ -17,8 +19,9 @@ private:
 
 private:
 
-	Object* testObject;
-
+	//Object* testObject;		//test用キャラ
+	TestObject* testObj;		//test用キャラ
+	Object* testBg;				//test用背景
 	
 
 public:

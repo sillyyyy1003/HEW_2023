@@ -9,7 +9,17 @@ public:
 	//----------------------------//
 	// 変数
 	//----------------------------//
-	ID3D11ShaderResourceView* textureTest;
+	
+	//テスト用
+	ID3D11ShaderResourceView* testchar01;	//キャラ用テクスチャ
+	ID3D11ShaderResourceView* testbg01;		//背景用テクスチャ
+
+	//テスト用 Using Shadow
+	ID3D11ShaderResourceView* testbgbox;	//箱型用テクスチャ
+	ID3D11ShaderResourceView* testObj;		//オブジェクト用テクスチャ
+	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ
+	
+
 
 
 public:

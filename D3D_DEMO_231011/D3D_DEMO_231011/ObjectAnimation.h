@@ -8,7 +8,6 @@ public:
 
 	ObjectAnimation(int splitX, int splitY);
 
-
 	/// <summary>
 	/// ‚±‚Ì’†‚ÉanimeTable‚ğ•ÏX
 	/// </summary>

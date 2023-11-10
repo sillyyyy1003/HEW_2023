@@ -1,10 +1,7 @@
 #pragma once
 #include "Sprite.h"
-#include "ObjectAnimation.h"
 
-
-
-//test 
+//オブジェクト基底
 class Object
 {
 public:
@@ -14,9 +11,7 @@ public:
 	//図形情報を扱われている
 	Sprite* m_sprite;
 
-	//アニメーションを扱われている
-	//オブジェクト種類によって、クラス名が変わる
-	ObjectAnimation* m_anime;
+
 
 public:
 	
