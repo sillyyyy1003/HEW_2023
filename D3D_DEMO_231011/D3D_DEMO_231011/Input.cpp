@@ -1,4 +1,38 @@
 #include "Input.h"
+<<<<<<< HEAD
+/*
+
+キー入力用関数作成途中
+
+WinMain.cppの26行目 newInputをする
+
+
+*/
+
+
+
+
+void Input::SetKeyDownState(int key)
+{
+}
+
+void Input::SetKeyUpState(int key)
+{
+}
+
+bool Input::GetKeyPress(int key)
+{
+	return m_KeyState[key];
+}
+
+bool Input::GetKeyTrigger(int key)
+{
+	return false;
+}
+
+void Input::Upadate()
+{
+=======
 
 // ゲームパッドの振動
 XINPUT_VIBRATION vibration;
@@ -343,4 +377,5 @@ WORD ThumbToDPad(SHORT sThumbX, SHORT sThumbY, SHORT sDeadZone)
     }
 
     return wButtons;
+>>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
 }

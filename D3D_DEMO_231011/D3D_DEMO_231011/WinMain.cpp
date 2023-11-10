@@ -4,7 +4,11 @@
 #include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
+<<<<<<< HEAD
+#include"Input.h"
+=======
 #include "KBInput.h"
+>>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -24,8 +28,12 @@ Camera* g_WorldCamera;
 
 Game* g_Game;
 
+<<<<<<< HEAD
+Input* g_Input;
+=======
 KBInput* g_KbInput = new KBInput();
 
+>>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 

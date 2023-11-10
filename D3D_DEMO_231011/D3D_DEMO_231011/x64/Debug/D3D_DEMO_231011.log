@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+﻿  Input.cpp
+  D3D_DEMO_231011.vcxproj -> C:\Users\ouga1\Documents\HEW\Test\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+=======
 ﻿  TestObject.cpp
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(38,17): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(43,36): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(44,36): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+>>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
