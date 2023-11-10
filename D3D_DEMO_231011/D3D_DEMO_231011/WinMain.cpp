@@ -5,6 +5,7 @@
 #include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
+#include"Input.h"
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -22,6 +23,7 @@ Camera* g_WorldCamera;
 
 Game* g_Game;
 
+Input* g_Input;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
