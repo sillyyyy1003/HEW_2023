@@ -4,6 +4,7 @@
 #include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
+#include "KBInput.h"
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -22,6 +23,8 @@ Assets* g_Assets;
 Camera* g_WorldCamera;
 
 Game* g_Game;
+
+KBInput* g_KbInput = new KBInput();
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -84,7 +87,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	g_Game = new Game();
 
 	//ブラッシュアップ頻度(fps処理)
-
 	// FPS表示用変数
 	int fpsCounter = 0;
 	long long oldTick = GetTickCount64();//現在時間を保存
@@ -100,7 +102,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	long long numCount_1frame = frequency / FPS_DATA; //FPSの値を変更する
 	// 現在時間（単位：カウント）を取得
 	QueryPerformanceCounter(&liWork);
-	//
 	long long oldCount = liWork.QuadPart;
 	long long nowCount = oldCount;
 
@@ -121,9 +122,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 		}
 		else
 		{
-			// 1/60秒経過したか？
+			//現在時間を取得（単位：カウント）
 			QueryPerformanceCounter(&liWork);
-			nowCount = liWork.QuadPart; // 現在時間を取得（単位：カウント）
+			nowCount = liWork.QuadPart; 
+
+			//1/60秒経過したか？
 			if (nowCount >= oldCount + numCount_1frame)
 			{
 
@@ -136,6 +139,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 				g_Game->GameDraw();
 
+				g_KbInput->Update();
+
 				//----------------------------//
 				// 	FPSブラッシュアップ
 				//----------------------------//
@@ -145,14 +150,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 			//現在時間取得
 			nowTick = GetTickCount64(); 
+
 			//１秒経過したか？
 			if (nowTick >= oldTick + 1000)
 			{
+				/*
 				// FPSを表示する
 				char str[32];
 				wsprintfA(str, "FPS=%d", fpsCounter);
 				SetWindowTextA(hWnd, str);
-				// カウンターをリセット
+				//カウンターをリセット
+				*/
 				fpsCounter = 0;
 				oldTick = nowTick;
 			}
@@ -172,6 +180,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	delete g_Game;
 	//Direct3D解放処理
 	D3D_Release();
+	//入力解放処理
+	delete g_KbInput;
+
 
 	//----------------------------//
 	// ウィンドウズの終了処理
@@ -209,11 +220,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_KEYDOWN:		// キーが押された時
-		
+		g_KbInput->SetKeyDownState(wParam);
 		break;
 
 	case WM_KEYUP:			// キーが離された時
-
+		g_KbInput->SetKeyUpState(wParam);
 		break;
 
 	default:				// 上のcase以外の場合の処理を実行
@@ -225,7 +236,3 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-//FPSを表示する
-//char str[32];
-//wsprintfA(str, "FPS=%d", fpsCounter);
-//SetWindowTextA(hWnd, str);

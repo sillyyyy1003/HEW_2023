@@ -31,7 +31,6 @@ class Sprite :public Material
 private:
 
 	//スプライトの名前を設定、エラーチェックに使う
-	//char m_Name[256];
 
 
 public:
@@ -64,6 +63,10 @@ public:
 	// 関数のプロトタイプ宣言
 	//----------------------------//
 
+	// モデルの作成->廃棄
+	//Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	Sprite(void);
+
 	/// <summary>
 	/// モデルの作成
 	/// </summary>
@@ -72,7 +75,12 @@ public:
 	/// <param name="_height">画面に描画する高さ</param>
 	/// <param name="splitX">横分割</param>
 	/// <param name="splitY">縦分割</param>
-	Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+
+	/// <summary>
+	/// 位置の初期化
+	/// </summary>
+	void InitPos(float x, float y, float z);
 
 	/// <summary>
 	/// シェーダーに渡す行列の処理を行う関数(回転/拡大縮小)

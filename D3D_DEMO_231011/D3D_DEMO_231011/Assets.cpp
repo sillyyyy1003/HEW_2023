@@ -7,9 +7,11 @@ Assets::Assets()
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
     testchar01 = LoadTexture("assets/char01.png");
-
     testbg01 = LoadTexture("assets/testbg.png");
 
+    testbgbox = LoadTexture("assets/testBox.png");
+    testObj = LoadTexture("assets/testTex.png");
+    testShadow = LoadTexture("assets/testShadow.png");
 
 
 
@@ -17,9 +19,12 @@ Assets::Assets()
 
 Assets::~Assets()
 {
-
    SAFE_RELEASE(testchar01);
    SAFE_RELEASE(testbg01);
+
+   SAFE_RELEASE(testbgbox);
+   SAFE_RELEASE(testObj);
+   SAFE_RELEASE(testShadow);
 
 }
 
