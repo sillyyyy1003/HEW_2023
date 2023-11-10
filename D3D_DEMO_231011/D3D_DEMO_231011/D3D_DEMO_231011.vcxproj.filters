@@ -46,6 +46,13 @@
     <ClCompile Include="Input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="KBInput.cpp">
+      <Filter>KeyboardInput</Filter>
+    </ClCompile>
+    <ClCompile Include="UiObject.cpp">
+      <Filter>UIObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -90,6 +97,13 @@
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="KBInput.h">
+      <Filter>KeyboardInput</Filter>
+    </ClInclude>
+    <ClInclude Include="UiObject.h">
+      <Filter>UIObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -118,6 +132,15 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIObject">
+      <UniqueIdentifier>{8938aaf3-6261-4777-bb2e-d481a2cd730c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KeyboardInput">
+      <UniqueIdentifier>{ddead9df-1d02-40a5-9189-4b62502369d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TestObject">
+      <UniqueIdentifier>{05ce2e89-4541-4134-bb5d-06214c866565}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

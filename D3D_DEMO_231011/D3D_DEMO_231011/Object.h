@@ -1,8 +1,5 @@
 #pragma once
 #include "Sprite.h"
-#include "ObjectAnimation.h"
-
-
 
 //オブジェクト基底
 class Object
@@ -13,6 +10,8 @@ public:
 	//----------------------------//
 	//図形情報を扱われている
 	Sprite* m_sprite;
+
+
 
 public:
 	

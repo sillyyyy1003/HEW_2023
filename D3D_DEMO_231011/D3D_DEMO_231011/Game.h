@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include"TestObject.h"
 
 
 
@@ -18,9 +19,9 @@ private:
 
 private:
 
-	Object* testObject;			//test用キャラ
-
-	Object* testBg;		//test用背景
+	//Object* testObject;		//test用キャラ
+	TestObject* testObj;		//test用キャラ
+	Object* testBg;				//test用背景
 	
 
 public:

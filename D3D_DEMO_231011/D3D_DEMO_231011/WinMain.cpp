@@ -1,17 +1,22 @@
 #undef UNICODE  //Unicodeではなく、マルチバイト文字を使う
 #include <Windows.h>
-#include <atltypes.h>	
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
+<<<<<<< HEAD
 #include"Input.h"
+=======
+#include "KBInput.h"
+>>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
 
-#define SCREEN_WIDTH (1280)	// ウインドウの幅
-#define SCREEN_HEIGHT (720)	// ウインドウの高さ
+#define SCREEN_WIDTH	(1280)	// ウインドウの幅
+#define SCREEN_HEIGHT	(720)	// ウインドウの高さ
+
+#define FPS_DATA		(60)
 
 
 //----------------------------//
@@ -23,7 +28,12 @@ Camera* g_WorldCamera;
 
 Game* g_Game;
 
+<<<<<<< HEAD
 Input* g_Input;
+=======
+KBInput* g_KbInput = new KBInput();
+
+>>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -67,11 +77,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 	// ウィンドウの状態を直ちに反映(ウィンドウのクライアント領域を更新)
 	UpdateWindow(hWnd);
+	
+	//----------------------------//
+	// 	ゲームループに入る前に
+	//----------------------------//
 
-	// ゲームループに入る前に
-	//----------------------------//
 	// DirectXの初期化処理
-	//----------------------------//
 	DirectXInit(hWnd);
 
 	//アセットの初期化
@@ -79,12 +90,28 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 	//カメラの初期化
 	g_WorldCamera = new TrackCamera();
-	//g_WorldCamera = new Camera();
-
-	//----------------------------//
-	// 	ゲームクラスの初期化処理
-	//----------------------------//
+	
+	//ゲームクラスの初期化処理
 	g_Game = new Game();
+
+	//ブラッシュアップ頻度(fps処理)
+	// FPS表示用変数
+	int fpsCounter = 0;
+	long long oldTick = GetTickCount64();//現在時間を保存
+	long long nowTick = oldTick; // 現在時間取得用
+
+	// FPS固定用変数
+	LARGE_INTEGER liWork; // 関数から値を受け取る用
+	long long frequency; // 計測精度
+	// 計測精度を取得
+	QueryPerformanceFrequency(&liWork);
+	frequency = liWork.QuadPart; // １秒あたりの解像度が入る
+	// １フレームあたりのカウント値を計算
+	long long numCount_1frame = frequency / FPS_DATA; //FPSの値を変更する
+	// 現在時間（単位：カウント）を取得
+	QueryPerformanceCounter(&liWork);
+	long long oldCount = liWork.QuadPart;
+	long long nowCount = oldCount;
 
 	MSG msg;
 
@@ -103,16 +130,48 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 		}
 		else
 		{
+			//現在時間を取得（単位：カウント）
+			QueryPerformanceCounter(&liWork);
+			nowCount = liWork.QuadPart; 
 
+			//1/60秒経過したか？
+			if (nowCount >= oldCount + numCount_1frame)
+			{
 
-			//----------------------------//
-			// 	ゲームループ 
-			//----------------------------//
-			g_WorldCamera->Update();
+				//----------------------------//
+				// 	ゲームループ 
+				//----------------------------//
+				g_WorldCamera->Update();
 
-			g_Game->GameUpdate();
+				g_Game->GameUpdate();
 
-			g_Game->GameDraw();
+				g_Game->GameDraw();
+
+				g_KbInput->Update();
+
+				//----------------------------//
+				// 	FPSブラッシュアップ
+				//----------------------------//
+				fpsCounter++; // ゲームループ実行回数をカウント＋１
+				oldCount = nowCount;
+			}
+
+			//現在時間取得
+			nowTick = GetTickCount64(); 
+
+			//１秒経過したか？
+			if (nowTick >= oldTick + 1000)
+			{
+				/*
+				// FPSを表示する
+				char str[32];
+				wsprintfA(str, "FPS=%d", fpsCounter);
+				SetWindowTextA(hWnd, str);
+				//カウンターをリセット
+				*/
+				fpsCounter = 0;
+				oldTick = nowTick;
+			}
 
 		}
 	} 
@@ -121,16 +180,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	// ゲームクラスの終了処理
 	//----------------------------//
 
-
 	//アセット解放処理
 	delete g_Assets;
-
+	//カメラ解放処理
 	delete g_WorldCamera;
-
+	//ゲームの解放処理
 	delete g_Game;
-
 	//Direct3D解放処理
 	D3D_Release();
+	//入力解放処理
+	delete g_KbInput;
+
 
 	//----------------------------//
 	// ウィンドウズの終了処理
@@ -145,11 +205,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 
-	CRect rect;
-	int width = 0;
-	int height = 0;
-	char str[30] = {};
-	
 	switch (uMsg) 
 	{
 	case WM_DESTROY:		//ウィンドウ破棄のメッセージ
@@ -162,12 +217,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:	// 左クリックされた時
 
-	GetWindowRect(hWnd, rect);
-	width = rect.right - rect.left;
-	height = rect.bottom - rect.top;
-	wsprintf(str, "Window Size: %d %d", width, height);
-	MessageBoxA(NULL, str, "エラー", MB_OK | MB_ICONERROR); 
-	
 		break;
 
 	case WM_RBUTTONDOWN:	// 右クリックされた時
@@ -179,11 +228,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_KEYDOWN:		// キーが押された時
-		
+		g_KbInput->SetKeyDownState(wParam);
 		break;
 
 	case WM_KEYUP:			// キーが離された時
-
+		g_KbInput->SetKeyUpState(wParam);
 		break;
 
 	default:				// 上のcase以外の場合の処理を実行
@@ -194,3 +243,4 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
+
