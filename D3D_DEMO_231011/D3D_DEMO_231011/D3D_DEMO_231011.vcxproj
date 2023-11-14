@@ -137,8 +137,14 @@
     <ClCompile Include="Direct3D\Direct3D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="KBInput.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectAnimation.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="TrackCamera.cpp" />
+    <ClCompile Include="UiObject.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -151,8 +157,14 @@
     <ClInclude Include="Direct3D\Shader\VertexShader.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="KBInput.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectAnimation.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TestObject.h" />
+    <ClInclude Include="TrackCamera.h" />
+    <ClInclude Include="UiObject.h" />
     <ClInclude Include="WICTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>

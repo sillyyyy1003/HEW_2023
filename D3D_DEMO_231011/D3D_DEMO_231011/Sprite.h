@@ -1,7 +1,7 @@
 #pragma once
 #include "Material.h"
-#include "Animation.h"
 #include "Camera.h"
+#include "Animation.h"
 
 
 /// <summary>
@@ -12,6 +12,11 @@ struct VERTEX
 	float x, y, z;		//頂点の位置座標
 	float u, v;			//テクスチャのUV座標
 
+};
+
+struct BOX
+{
+	float fLeft, fTop, fRight, fBottom;
 };
 
 //定数バッファ用構造体
@@ -31,7 +36,6 @@ class Sprite :public Material
 private:
 
 	//スプライトの名前を設定、エラーチェックに使う
-	//char m_Name[256];
 
 
 public:
@@ -39,20 +43,16 @@ public:
 	// 変数
 	//----------------------------//
 
-
 	//仮想世界のワールド座標
 	DirectX::XMFLOAT3 m_pos = { 0.0f,0.0f,0.0f };
-	
+
 	//回転
 	DirectX::XMFLOAT3 m_rotation = { 0.0f, 0.0f, 0.0f };
 
 	//画像の大きさ(Default Data:1.0)
 	DirectX::XMFLOAT3 m_scale = { 1.0, 1.0f, 1.0f };
 
-	//UV座標
-	DirectX::XMFLOAT2 m_offsetUV = { 0.0f,0.0f };
-
-	//縦横分割
+	//縦横分割->描画用
 	DirectX::XMINT2 m_split = { 1,1 };
 
 	//このキャラクターのマテリアル色(DEFAULT COLOR:WHITE)
@@ -60,12 +60,17 @@ public:
 
 	Camera* m_camera;
 
+	Animation* m_anime = nullptr;
 
 public:
 
 	//----------------------------//
 	// 関数のプロトタイプ宣言
 	//----------------------------//
+
+	// モデルの作成->廃棄
+	//Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	Sprite(void);
 
 	/// <summary>
 	/// モデルの作成
@@ -75,7 +80,12 @@ public:
 	/// <param name="_height">画面に描画する高さ</param>
 	/// <param name="splitX">横分割</param>
 	/// <param name="splitY">縦分割</param>
-	Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+
+	/// <summary>
+	/// 位置の初期化
+	/// </summary>
+	void InitPos(float x, float y, float z);
 
 	/// <summary>
 	/// シェーダーに渡す行列の処理を行う関数(回転/拡大縮小)
@@ -89,18 +99,10 @@ public:
 	/// </summary>
 	virtual void Draw(void);
 
-	virtual void UpdateUV(XMFLOAT2 _offsetUV);
-
-
-
-
-
-
-
-
-
-
-
+	/// <summary>
+	/// 後片付け
+	/// </summary>
+	~Sprite(void);
 
 };
 

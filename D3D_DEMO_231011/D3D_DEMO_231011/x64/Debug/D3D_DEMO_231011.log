@@ -1,2 +1,9 @@
-﻿  Input.cpp
+﻿  Game.cpp
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(31,47): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(65,33): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(255,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(256,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(261,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(262,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(371): warning C4715: 'Game::SideCollision': 値を返さないコントロール パスがあります。
   D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
