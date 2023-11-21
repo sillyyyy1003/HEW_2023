@@ -1,23 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-﻿  Assets.cpp
-  Game.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(88,2): warning C4060: switch ステートメントに 'case' または 'default' ラベルがありません。
-  Sprite.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(20,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(20,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(21,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(21,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-  WinMain.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(109,12): error C2039: 'Update': 'Game' のメンバーではありません
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(6): message : 'Game' の宣言を確認してください
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(111,12): error C2039: 'Draw': 'Game' のメンバーではありません
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(6): message : 'Game' の宣言を確認してください
-  コードを生成中...
-=======
-﻿  D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
->>>>>>> 5ab2dbb93e7384aacdc3c553fac18acec59bac71
-=======
-﻿  Input.cpp
+﻿  Game.cpp
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(31,47): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(65,33): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(255,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(256,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(261,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(262,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(371): warning C4715: 'Game::SideCollision': 値を返さないコントロール パスがあります。
   D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
->>>>>>> 5530da9b6dbbd662265497d398aa1beebeec3439

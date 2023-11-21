@@ -1,8 +1,10 @@
 #pragma once
 #include "Object.h"
+#include"TestObject.h"
 
 
 
+extern Camera* g_WorldCamera;
 class Game
 {
 private:
@@ -17,8 +19,11 @@ private:
 
 private:
 
-	Object* testObject;
-
+	//Object* testObject;		//test用キャラ
+	TestObject* testObj;		//test用キャラ
+	TestObject* testObj2;		//test用キャラ
+	TestObject* testObj3;		//test用キャラ
+	Object* testBg;				//test用背景
 	
 
 public:
@@ -40,6 +45,27 @@ public:
 	void TitleDraw(void);
 	void StageDraw(void);
 	void ResultDraw(void);
+
+	// 当たり判定
+// 円と円同士の当たり判定
+	int CircleHit(BOUNDING_CIRCLE bc1, BOUNDING_CIRCLE bc2);
+
+	// 四角形と円の当たり判定
+	int SqureandCircle(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj);
+	// 四角形と円の当たり判定に使う関数
+	bool CheckHit(const BOX& t_box, const BOUNDING_CIRCLE bc1);
+
+	// 四角形同士の当たり判定
+	int SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2);
+
+	// オブジェクト同士を合体させる関数
+	void CombineObjects(int HitNum, BOUNDING_CIRCLE Combine, BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj);
+
+	// 上下左右で別の当たり判定をとるための関数
+	int SideCollision(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2);
+
+	//　すべての当たり判定を管理する
+	void TestCollision();
 
 	//シーンを設定する
 	void SetGameScene(GAMESCENE scene);

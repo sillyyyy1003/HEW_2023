@@ -152,5 +152,12 @@ ID3D11BlendState* GetBlendAlpha(void);
 */
 ID3D11BlendState* GetBlendAdd(void);
 
+/*
+	@brief	BlendStateを入れ替わる(透過合成/加算合成）
+	@param	ブレンド状態
+	@return 無し
+*/
+void SetBlendState(ID3D11BlendState* _blendState);
+
 // グローバル変数のextern宣言
 extern ID3D11Buffer* g_ConstantBuffer;

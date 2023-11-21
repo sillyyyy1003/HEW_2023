@@ -6,9 +6,14 @@ Assets::Assets()
 {
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
-    textureTest = LoadTexture("assets/char01.png");
+    testchar01 = LoadTexture("assets/char01.png");
+    testbg01 = LoadTexture("assets/testbg.png");
 
+    testbgbox = LoadTexture("assets/testBox.png");
+    testObj = LoadTexture("assets/circle.png");
+    //testShadow = LoadTexture("assets/testShadow.png");
 
+    square = LoadTexture("assets/polygon.png");
 
 
 
@@ -16,8 +21,13 @@ Assets::Assets()
 
 Assets::~Assets()
 {
+   SAFE_RELEASE(testchar01);
+   SAFE_RELEASE(testbg01);
 
-   SAFE_RELEASE(textureTest);
+   SAFE_RELEASE(testbgbox);
+   SAFE_RELEASE(testObj);
+   SAFE_RELEASE(testShadow);
+
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)
