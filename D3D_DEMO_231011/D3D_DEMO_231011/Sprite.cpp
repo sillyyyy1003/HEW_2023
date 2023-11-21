@@ -82,7 +82,7 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	//UVアニメーション行列作成
 	m_anime->Update();
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
-	
+
 	cb.matrixProj = XMMatrixTranspose(matrixProj);
 	cb.matrixTex = XMMatrixTranspose(matrixTex);
 	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
