@@ -12,9 +12,11 @@ public:
 	Sprite* m_objSprite;
 	Sprite* m_shadowSprite;
 
-
 	//現在の向きを表すベクトル変数
 	DirectX::XMFLOAT3 m_dir = { 0.0f,0.0f,0.0f };
+
+	//操作できるかどうかを扱う変数
+	bool isActive = false;
 
 
 public:

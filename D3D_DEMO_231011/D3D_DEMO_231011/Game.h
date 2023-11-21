@@ -3,8 +3,6 @@
 #include"TestObject.h"
 
 
-
-extern Camera* g_WorldCamera;
 class Game
 {
 private:
@@ -18,11 +16,12 @@ private:
 	GAMESCENE m_gameScene = TITLE;
 
 private:
+	Object* testWall;
+	Object* testGround;
 
-	//Object* testObject;		//test用キャラ
-	TestObject* testObj;		//test用キャラ
-	Object* testBg;				//test用背景
-	
+	Object* testChara;	//プレイヤー
+
+	//TestObject* testChara;
 
 public:
 	//コンストラクタ

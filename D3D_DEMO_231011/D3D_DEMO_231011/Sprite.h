@@ -32,6 +32,8 @@ private:
 
 	//スプライトの名前を設定、エラーチェックに使う
 
+protected:
+
 
 public:
 	//----------------------------//
@@ -53,10 +55,14 @@ public:
 	//このキャラクターのマテリアル色(DEFAULT COLOR:WHITE)
 	DirectX::XMFLOAT4 m_materialDiffuse = { 1.0f,1.0f,1.0f,1.0f };
 
-	Camera* m_camera;
+	//カメラ
+	Camera* m_camera = nullptr;
 
+	//アニメーション
 	Animation* m_anime = nullptr;
 
+	//平行投影か透視投影を使うの判断
+	bool isPerspective = false;
 public:
 
 	//----------------------------//
@@ -65,6 +71,8 @@ public:
 
 	// モデルの作成->廃棄
 	//Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	
+	///コンストラクタ
 	Sprite(void);
 
 	/// <summary>
@@ -84,9 +92,10 @@ public:
 
 	/// <summary>
 	/// シェーダーに渡す行列の処理を行う関数(回転/拡大縮小)
+	/// 平行投影用
 	/// </summary>
 	/// <param name="cb">シェーダーに渡す行列</param>
-	void GenerateMatrix(CONSTBUFFER& cb);
+	virtual void GenerateMatrix(CONSTBUFFER& cb);
 
 
 	/// <summary>

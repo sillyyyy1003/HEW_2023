@@ -52,7 +52,9 @@
     <ClCompile Include="UiObject.cpp">
       <Filter>UIObject</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="TestObject.cpp">
+      <Filter>TestObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -103,7 +105,9 @@
     <ClInclude Include="UiObject.h">
       <Filter>UIObject</Filter>
     </ClInclude>
-    <ClInclude Include="TestObject.h" />
+    <ClInclude Include="TestObject.h">
+      <Filter>TestObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">

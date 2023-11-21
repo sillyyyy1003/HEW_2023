@@ -10,6 +10,7 @@ TestObject::TestObject()
 	m_objSprite = new Sprite();
 	m_shadowSprite = new Sprite();
 
+
 	//カメラ初期化
 	m_objSprite->m_camera = g_WorldCamera;
 	m_shadowSprite->m_camera = g_WorldCamera;
@@ -31,20 +32,36 @@ void TestObject::Update(void)
 	XMFLOAT3 dir = { 0,0,0 };
 	float moveSpeed = 0.0f;
 
-	if (g_KbInput->GetKeyPress(VK_DOWN))
-	{
-		//オブジェクトの移動
-		dir.y = -1;
-		dir.x = dir.y / tan(XMConvertToRadians(30));
-		moveSpeed = 0.01f;
+	if (isActive) {
 
-		//影の変化
-		//大きさの変化
-		m_shadowSprite->m_scale.x += 0.01;
-		m_shadowSprite->m_scale.y += 0.01;
-		//
+		if (g_KbInput->GetKeyPress(VK_DOWN))
+		{
+			//オブジェクトの移動
+			//TEST CODE
+			dir.y = -1;
+			dir.x = dir.y / tan(XMConvertToRadians(30));
+			moveSpeed = 0.01f;
+
+			//影の変化
+			//大きさの変化
+			//TEST CODE
+			m_shadowSprite->m_scale.x += 0.01;
+			m_shadowSprite->m_scale.y += 0.01;
+
+		}
+
+		if (g_KbInput->GetKeyPress(VK_UP)) {
+
+			//TEST CODE 
+			dir.y = 1;
+			dir.x = dir.y / tan(XMConvertToRadians(30));
+			moveSpeed = 0.01f;
+			//長さだけが返る
+			m_shadowSprite->m_scale.y += 0.01;
+
+		}
 	}
-
+	
 
 	if (dir.x != 0.0f || dir.y != 0.0f) 
 	{

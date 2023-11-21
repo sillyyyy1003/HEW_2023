@@ -41,6 +41,7 @@ VS_OUT vs_main( VS_IN input )
     // 平行投影のため行列を頂点に掛ける
     output.pos = mul(input.pos, matrixProj);
     
+    
     // UV座標を移動させる
     float4 uv;
     uv.xy = input.tex; // 行列掛け算のためfloat4型に移す

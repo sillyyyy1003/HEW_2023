@@ -15,11 +15,20 @@ public:
 
 public:
 	
-	// コンストラクタ＝初期化行う
+	/// <summary>
+	/// コンストラクタ＝初期化行う
+	/// </summary>
+	/// <param name="texture"></param>
+	/// <param name="_width">width</param>
+	/// <param name="_height">height</param>
+	/// <param name="splitX"></param>
+	/// <param name="splitY"></param>
 	Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	//アニメーションの更新を行う
 	virtual void Update(void);
+
+	void Draw(void);
 	
 	// 片付け処理
 	~Object(void);

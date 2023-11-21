@@ -154,13 +154,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 			//１秒経過したか？
 			if (nowTick >= oldTick + 1000)
 			{
-				/*
-				// FPSを表示する
-				char str[32];
-				wsprintfA(str, "FPS=%d", fpsCounter);
-				SetWindowTextA(hWnd, str);
-				//カウンターをリセット
-				*/
 				fpsCounter = 0;
 				oldTick = nowTick;
 			}

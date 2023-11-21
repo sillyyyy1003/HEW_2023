@@ -10,10 +10,13 @@ private:
 	//----------------------------//
 	//カメラ用の行列
 	DirectX::XMMATRIX m_MatrixView;
+
+protected:
+
 	//カメラの位置
-	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 0.0f, -2.0f);
+	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 0.0f, -7.0f); 
 	//注視点
-	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0f, 0.0f, 1.0f);
+	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0f, 0.0f,	2.0f);
 	//カメラの上方向
 	XMFLOAT3 m_UpDir = XMFLOAT3(0.0f, 1.0f, 0.0f);
 
