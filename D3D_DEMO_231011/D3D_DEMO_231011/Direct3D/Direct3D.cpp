@@ -134,7 +134,7 @@ BOOL D3D_CreateRenderTarget(void)
     {
         //取得失敗した場合
         return FALSE;
-        //エラー表示
+        //エラー表示//error
         MessageBoxA(NULL, "バッファ取得失敗", "エラー", MB_OK | MB_ICONERROR);
     }
     else
