@@ -13,11 +13,11 @@ extern TrackCamera* g_WorldCamera;
 
 Game::Game()
 {
-	//ƒIƒuƒWƒFƒNƒgì¬
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä½œæˆ
 	testWall = new Object(g_Assets->testWallbg, 1280, 720, 1, 1);
 	testGround = new Object(g_Assets->testGroundbg, 1280, 720, 1, 1);
 
-	//ƒIƒuƒWƒFƒNƒg‚Ì‰Šúİ’èEƒeƒNƒXƒ`ƒƒ‚Ì“Ç‚İ‚İ
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸè¨­å®šãƒ»ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®èª­ã¿è¾¼ã¿
 	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);
 
 	testTree = new GameObject();
@@ -26,11 +26,11 @@ Game::Game()
 
 	
 
-	//‰e‚Ì‰Šúİ’è
+	//å½±ã®åˆæœŸè¨­å®š
 
 
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“‚Ìİ’è
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è¨­å®š
 	testWall->m_sprite->m_anime = new StaticAnimation(1, 1);
 	testGround->m_sprite->m_anime = new ObjectAnimation(1, 1);
 	testChara->m_sprite->m_anime = new ObjectAnimation(3, 4);
@@ -41,7 +41,7 @@ Game::Game()
 
 
 
-	//‰ŠúˆÊ’uİ’è
+	//åˆæœŸä½ç½®è¨­å®š
 	testWall->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
 
 	testGround->m_sprite->m_pos = { 0.0f, 1.5f,2.0f};
@@ -53,7 +53,7 @@ Game::Game()
 	testChara->m_sprite->m_pos.z = -0.5f;
 	testChara->m_sprite->m_scale = { 3.0f,3.0f,3.0f };
 
-	//‰e‚ÌˆÊ’uİ’è
+	//å½±ã®ä½ç½®è¨­å®š
 	testTree->m_shadow->m_obj->m_pos.z = 1.99f;
 
 	//g_WorldCamera->TrackCamera::SetTarget(testChara);
@@ -109,7 +109,7 @@ void Game::TitleUpdate(void)
 
 	testWall->Update();
 
-	//”wŒi
+	//èƒŒæ™¯
 	testGround->Update();
 	testChara->Update();
 
@@ -140,7 +140,7 @@ void Game::GameDraw()
 
 	D3D_ClearScreen();
 
-	//============ ‚±‚±‚©‚ç•`‰æˆ— ============//
+	//============ ã“ã“ã‹ã‚‰æç”»å‡¦ç† ============//
 	
 	
 	switch (m_gameScene)
@@ -162,9 +162,9 @@ void Game::GameDraw()
 
 		}
 
-	//============ ‚±‚±‚Ü‚Å•`‰æˆ— ============//
+	//============ ã“ã“ã¾ã§æç”»å‡¦ç† ============//
 	 
-	//ƒ_ƒuƒ‹ƒoƒbƒtƒ@‚ÌØ‚è‘Ö‚¦‚ğs‚¢‰æ–Ê‚ğXV‚·‚é
+	//ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ã®åˆ‡ã‚Šæ›¿ãˆã‚’è¡Œã„ç”»é¢ã‚’æ›´æ–°ã™ã‚‹
 	GetD3D_DATA()->SwapChain->Present(0, 0);
 }
 

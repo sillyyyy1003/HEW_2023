@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include "Sprite.h"
 
 class ShadowObject
 {
 public:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
 	
 	Sprite* m_obj;
@@ -19,7 +19,7 @@ public:
 	//Constructor
 	ShadowObject(void);
 
-	//‰e‚Ìƒ‚ƒfƒ‹ì¬
+	//å½±ã®ãƒ¢ãƒ‡ãƒ«ä½œæˆ
 	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	//
@@ -27,7 +27,7 @@ public:
 
 	BOOL CheckShadow(void);
 
-	//•`‰æŠÖ”
+	//æç”»é–¢æ•°
 	void Draw(void);
 
 	~ShadowObject(void);

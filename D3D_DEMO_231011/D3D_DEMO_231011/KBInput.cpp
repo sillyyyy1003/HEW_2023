@@ -18,7 +18,7 @@ bool KBInput::GetKeyPress(int key)
 
 bool KBInput::GetKeyTrigger(int key)
 {
-	// 1フレーム前の押下状態がfalseでかつ現在フレームの押下状態がtrue
+	// 1繝輔Ξ繝ｼ繝蜑阪�ｮ謚ｼ荳狗憾諷九′false縺ｧ縺九▽迴ｾ蝨ｨ繝輔Ξ繝ｼ繝縺ｮ謚ｼ荳狗憾諷九′true
 	if (oldKeyState[key] == false && keyState[key] == true)
 	{
 		return true;

@@ -6,61 +6,61 @@ class Camera
 {
 private:
 	//----------------------------//
-	// �ϐ�
+	// 変数
 	//----------------------------//
-	//�J�����p�̍s��
+	//カメラ用の行列
 	DirectX::XMMATRIX m_MatrixView;
 
 protected:
 
-	//�J�����̈ʒu
+	//カメラの位置
 	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 0.0f, -7.0f); 
-	//�����_
+	//注視点
 	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0f, 0.0f,	2.0f);
-	//�J�����̏����
+	//カメラの上方向
 	XMFLOAT3 m_UpDir = XMFLOAT3(0.0f, 1.0f, 0.0f);
 
 
 public:
-	//�B��̃C���X�^���X���`
+	//唯一のインスタンスを定義
 	static Camera* m_camera;
 
 public:
 	
 	//----------------------------//
-	// �֐��̃v���g�^�C�v�錾
+	// 関数のプロトタイプ宣言
 	//----------------------------//
 	//Camera();
 
 	/// <summary>
-	/// View�ϊ��s��̍쐬���J�����p�̍s��
+	/// View変換行列の作成＝カメラ用の行列
 	/// </summary>
-	/// <returns>�쐬���J�����p�s���Ԃ��֐�</returns>
+	/// <returns>作成下カメラ用行列を返す関数</returns>
 	DirectX::XMMATRIX GetMatrixView(void);
 	
-	//�J�����̈ʒu�ƒ����_�̍X�V���s��
+	//カメラの位置と注視点の更新を行う
 	virtual void Update();
 
 	/// <summary>
-	/// �J�����ʒu�ύX���s���֐�
+	/// カメラ位置変更を行う関数
 	/// </summary>
 	void SetCameraPos(XMFLOAT3 _cameraPos);
-	//�J�����ʒu��Ԃ��֐�
+	//カメラ位置を返す関数
 	DirectX::XMFLOAT3 GetCameraPos(void);
 
 
 	/// <summary>
-	/// �����_�ʒu�ύX���s���֐�
+	/// 注視点位置変更を行う関数
 	/// </summary>
 	void SetFocusPos(XMFLOAT3 _focusPos);
-	//�����_�ʒu��Ԃ��֐�
+	//注視点位置を返す関数
 	DirectX::XMFLOAT3 GetFocusPos(void);
 	
 	/// <summary>
-	/// �J�����̏�����ύX���s���֐�
+	/// カメラの上方向変更を行う関数
 	/// </summary>
 	void SetUpDir(XMFLOAT3 _Updir);
-	//�J�����̏������Ԃ��֐�
+	//カメラの上方向を返す関数
 	DirectX::XMFLOAT3 GetUpDir(void);
 
 };

@@ -1,41 +1,41 @@
 //void Game::TestCollision()
 //{
-//	BOUNDING_CIRCLE circle1 = testObj->GetBoundingCircle();// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg
-//	BOUNDING_CIRCLE circle2 = testObj2->GetBoundingCircle();// ‘€ì‚µ‚Ä‚¢‚È‚¢ƒIƒuƒWƒFƒNƒg 
-//	BOUNDING_CIRCLE circle3 = testObj3->GetBoundingCircle();// ‘€ì‚µ‚Ä‚¢‚È‚¢ƒIƒuƒWƒFƒNƒg 
-//	BOUNDING_CIRCLE Combine = circle1;// ‰~‚ÌÀ•W‚ğ‹L˜^‚·‚é
+//	BOUNDING_CIRCLE circle1 = testObj->GetBoundingCircle();// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+//	BOUNDING_CIRCLE circle2 = testObj2->GetBoundingCircle();// æ“ä½œã—ã¦ã„ãªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ 
+//	BOUNDING_CIRCLE circle3 = testObj3->GetBoundingCircle();// æ“ä½œã—ã¦ã„ãªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ 
+//	BOUNDING_CIRCLE Combine = circle1;// å††ã®åº§æ¨™ã‚’è¨˜éŒ²ã™ã‚‹
 //
-//	// ‚±‚±‚Å“–‚½‚è”»’è‚ğØ‚è‘Ö‚¦‚é
-//	//‰~“¯m
+//	// ã“ã“ã§å½“ãŸã‚Šåˆ¤å®šã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
+//	//å††åŒå£«
 //	//MoveObjects(CircleHit(circle1, circle2), Combine, circle1, circle2);
 //
-//	if (!testObj3->isPlayer)// ƒIƒuƒWƒFƒNƒg“¯m‚ªG‚ê‚½‚ç“–‚½‚è”»’è‚ğÁ‚·
+//	if (!testObj3->isPlayer)// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŒå£«ãŒè§¦ã‚ŒãŸã‚‰å½“ãŸã‚Šåˆ¤å®šã‚’æ¶ˆã™
 //	{
-//		// ‰~‚ÆlŠp
-//		// SqureandCircleŠÖ”@ˆø”‚PF‰~@‚QFlŠp 3:lŠp‚ÌƒeƒNƒXƒ`ƒƒ‚ª“ü‚Á‚Ä‚¢‚é•û‚ğ“ü‚ê‚é
-//		// MoveObjectsŠÖ”@ˆø”‚PFƒIƒuƒWƒFƒNƒg‚ª‚Ç‚±‚É“–‚½‚Á‚½‚Ì‚©‚Ì–ß‚è’l@ˆø”‚QF‡‘Ì‚³‚¹‚éŒ³‚ÌƒIƒuƒWƒFƒNƒg‚ÌÀ•W
-//		// @@@@@@     ˆø”‚R,‚S,‚TFMoveObjectsŠÖ”‚Ìˆø”‚Æ“¯‚¶
+//		// å††ã¨å››è§’
+//		// SqureandCircleé–¢æ•°ã€€å¼•æ•°ï¼‘ï¼šå††ã€€ï¼’ï¼šå››è§’ 3:å››è§’ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãŒå…¥ã£ã¦ã„ã‚‹æ–¹ã‚’å…¥ã‚Œã‚‹
+//		// MoveObjectsé–¢æ•°ã€€å¼•æ•°ï¼‘ï¼šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã©ã“ã«å½“ãŸã£ãŸã®ã‹ã®æˆ»ã‚Šå€¤ã€€å¼•æ•°ï¼’ï¼šåˆä½“ã•ã›ã‚‹å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™
+//		// ã€€ã€€ã€€ã€€ã€€ã€€     å¼•æ•°ï¼“,ï¼”,ï¼•ï¼šMoveObjectsé–¢æ•°ã®å¼•æ•°ã¨åŒã˜
 //		CombineObjects(SqureandCircle(circle1, circle3, testObj3), Combine, circle1, circle3, testObj3);
 //	}
 //
 //
-//	if (!testObj2->isPlayer)// ƒIƒuƒWƒFƒNƒg“¯m‚ªG‚ê‚½‚ç“–‚½‚è”»’è‚ğÁ‚·
+//	if (!testObj2->isPlayer)// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŒå£«ãŒè§¦ã‚ŒãŸã‚‰å½“ãŸã‚Šåˆ¤å®šã‚’æ¶ˆã™
 //	{
-//		// lŠp‚ÆlŠp
+//		// å››è§’ã¨å››è§’
 //		CombineObjects(SqureHit(circle1, circle2), Combine, circle1, circle2, testObj2);
 //	}
 //}
 //
 //int Game::CircleHit(BOUNDING_CIRCLE bc1, BOUNDING_CIRCLE bc2)
 //{
-//	//bc1 ‰~@bc2 ‰~
-//	float teihen = bc2.center.x - bc1.center.x;// ’ê•Ó‚Ì’·‚³
-//	float takasa = bc2.center.y - bc1.center.y;// ‚‚³
-//	float r2 = bc1.radius + bc2.radius; // ‰~1‚Ì”¼Œa{‰~2‚Ì”¼Œa
+//	//bc1 å††ã€€bc2 å††
+//	float teihen = bc2.center.x - bc1.center.x;// åº•è¾ºã®é•·ã•
+//	float takasa = bc2.center.y - bc1.center.y;// é«˜ã•
+//	float r2 = bc1.radius + bc2.radius; // å††1ã®åŠå¾„ï¼‹å††2ã®åŠå¾„
 //
 //	if (teihen * teihen + takasa * takasa <= r2 * r2)
 //	{
-//		// ã‰º¶‰E‚Ì“–‚½‚è”»’è‚Å•Ê‚Ì–ß‚è’l‚ğ•Ô‚·
+//		// ä¸Šä¸‹å·¦å³ã®å½“ãŸã‚Šåˆ¤å®šã§åˆ¥ã®æˆ»ã‚Šå€¤ã‚’è¿”ã™
 //		return SideCollision(bc1, bc2);
 //	}
 //
@@ -46,13 +46,13 @@
 //{
 //	bool nResult = false;
 //
-//	// lŠpŒ`‚Ìl•Ó‚É‘Î‚µ‚Ä‰~‚Ì”¼Œa•ª‚¾‚¯‘«‚µ‚½‚Æ‚«‰~‚ªd‚È‚Á‚Ä‚¢‚½‚ç
+//	// å››è§’å½¢ã®å››è¾ºã«å¯¾ã—ã¦å††ã®åŠå¾„åˆ†ã ã‘è¶³ã—ãŸã¨ãå††ãŒé‡ãªã£ã¦ã„ãŸã‚‰
 //	if ((bc1.center.x > t_box.fLeft - bc1.radius) &&
 //		(bc1.center.x < t_box.fRight + bc1.radius) &&
 //		(bc1.center.y > t_box.fTop - bc1.radius) &&
 //		(bc1.center.y < t_box.fBottom + bc1.radius))
 //	{
-//		// “–‚½‚Á‚Ä‚¢‚é
+//		// å½“ãŸã£ã¦ã„ã‚‹
 //		nResult = true;
 //	}
 //
@@ -61,40 +61,40 @@
 //
 //int Game::SqureandCircle(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj)
 //{
-//	BOX squre; // lŠpŒ`‚Ìl•Ó‚ğ“ü‚ê‚é•Ï”‚ğæ“¾‚·‚é
+//	BOX squre; // å››è§’å½¢ã®å››è¾ºã‚’å…¥ã‚Œã‚‹å¤‰æ•°ã‚’å–å¾—ã™ã‚‹
 //
-//	// lŠpŒ`‚Ì¶‰E‚ÉG‚ê‚½ê‡‚Ìl•Ó‚ÌÀ•W
+//	// å››è§’å½¢ã®å·¦å³ã«è§¦ã‚ŒãŸå ´åˆã®å››è¾ºã®åº§æ¨™
 //	float X_posx1 = 1.4 + circle2.center.x + testObj->Scale_countX;
 //	float X_posx2 = -1.4 + circle2.center.x - testObj->Scale_countX;
 //	float X_posy1 = 1 + circle2.center.y + testObj->Scale_countY;
 //	float X_posy2 = -1 + circle2.center.y - testObj->Scale_countY;
 //
-//	// lŠpŒ`‚Ìã‰º‚ÉG‚ê‚½ê‡‚Ìl•Ó‚ÌÀ•W
+//	// å››è§’å½¢ã®ä¸Šä¸‹ã«è§¦ã‚ŒãŸå ´åˆã®å››è¾ºã®åº§æ¨™
 //	float Y_posx1 = 1.4 + circle2.center.y + testObj->Scale_countX;
 //	float Y_posx2 = -1.4 + circle2.center.y - testObj->Scale_countX;
 //	float Y_posy1 = 1 + circle2.center.x + testObj->Scale_countX;
 //	float Y_posy2 = -1 + circle2.center.x - testObj->Scale_countX;
 //	//testObj2->m_objSprite->InitBox(-1, -1.4, 1, -1.4);
 //
-//	// ¶‰E
-//	// lŠpŒ`‚Ì¶‘¤‚É‰~‚ªG‚ê‚½ê‡‚Ì“–‚½‚è”»’è
-//	if (CheckHit(squre = { X_posx2, X_posy2, X_posx2, X_posy1 }, circle1))// ¶
+//	// å·¦å³
+//	// å››è§’å½¢ã®å·¦å´ã«å††ãŒè§¦ã‚ŒãŸå ´åˆã®å½“ãŸã‚Šåˆ¤å®š
+//	if (CheckHit(squre = { X_posx2, X_posy2, X_posx2, X_posy1 }, circle1))// å·¦
 //	{
 //		return 1;
 //	}
-//	// lŠpŒ`‚Ì‰E‘¤‚É‰~‚ªG‚ê‚½ê‡‚Ì“–‚½‚è”»’è
-//	else if (CheckHit(squre = { X_posx1, X_posy2, X_posx1, X_posy1 }, circle1))// ‰E
+//	// å››è§’å½¢ã®å³å´ã«å††ãŒè§¦ã‚ŒãŸå ´åˆã®å½“ãŸã‚Šåˆ¤å®š
+//	else if (CheckHit(squre = { X_posx1, X_posy2, X_posx1, X_posy1 }, circle1))// å³
 //	{
 //		return 4;
 //	}
-//	// ã‰º
-//	// lŠpŒ`‚Ì‰º‘¤‚É‰~‚ªG‚ê‚½ê‡‚Ì“–‚½‚è”»’è
-//	else if (CheckHit(squre = { Y_posy2, Y_posx2, Y_posy1, Y_posx2 }, circle1))// ‰º
+//	// ä¸Šä¸‹
+//	// å››è§’å½¢ã®ä¸‹å´ã«å††ãŒè§¦ã‚ŒãŸå ´åˆã®å½“ãŸã‚Šåˆ¤å®š
+//	else if (CheckHit(squre = { Y_posy2, Y_posx2, Y_posy1, Y_posx2 }, circle1))// ä¸‹
 //	{
 //		return 2;
 //	}
-//	// lŠpŒ`‚Ìã‘¤‚É‰~‚ªG‚ê‚½ê‡‚Ì“–‚½‚è”»’è
-//	else if (CheckHit(squre = { Y_posy2, Y_posx1, Y_posy1, Y_posx1 }, circle1))// ã
+//	// å››è§’å½¢ã®ä¸Šå´ã«å††ãŒè§¦ã‚ŒãŸå ´åˆã®å½“ãŸã‚Šåˆ¤å®š
+//	else if (CheckHit(squre = { Y_posy2, Y_posx1, Y_posy1, Y_posx1 }, circle1))// ä¸Š
 //	{
 //		return 3;
 //	}
@@ -104,13 +104,13 @@
 //
 //int Game::SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2)
 //{
-//	// lŠpŒ`“¯m‚Ì“–‚½‚è”»’è
+//	// å››è§’å½¢åŒå£«ã®å½“ãŸã‚Šåˆ¤å®š
 //	if ((circle1.center.x + circle1.radius >= circle2.center.x - circle2.radius) &&
 //		(circle2.center.x + circle2.radius >= circle1.center.x - circle1.radius) &&
 //		(circle1.center.y + circle1.radius >= circle2.center.y - circle2.radius) &&
 //		(circle2.center.y + circle2.radius >= circle1.center.y - circle1.radius))
 //	{
-//		// ã‰º¶‰E‚Ì“–‚½‚è”»’è‚Å•Ê‚Ì–ß‚è’l‚ğ•Ô‚·
+//		// ä¸Šä¸‹å·¦å³ã®å½“ãŸã‚Šåˆ¤å®šã§åˆ¥ã®æˆ»ã‚Šå€¤ã‚’è¿”ã™
 //		return SideCollision(circle1, circle2);
 //	}
 //	return 0;
@@ -121,62 +121,62 @@
 //	switch (HitNum)
 //	{
 //	case 1:
-//		// ¶
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì‰¡‚ÌÀ•W‚ğŒvZ‚·‚é
+//		// å·¦
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¨ªã®åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹
 //		Combine.center.x = circle1.center.x + circle1.radius + circle2.radius;
-//		// ‚Ô‚Â‚©‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì^‰¡‚ÉˆÚ“®‚³‚¹‚é
+//		// ã¶ã¤ã‹ã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çœŸæ¨ªã«ç§»å‹•ã•ã›ã‚‹
 //		testObj->SetBoundingCircle(Combine);
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚æ‚¤‚ÉˆÚ“®‚·‚é
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒã˜ã‚ˆã†ã«ç§»å‹•ã™ã‚‹
 //		testObj->isPlayer = true;
 //		break;
 //	case 2:
-//		// ‰º
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì‰¡‚ÌÀ•W‚ğŒvZ‚·‚é
+//		// ä¸‹
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¨ªã®åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹
 //		Combine.center.y = circle1.center.y + circle1.radius + circle2.radius;
-//		// ‚Ô‚Â‚©‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì^‰¡‚ÉˆÚ“®‚³‚¹‚é
+//		// ã¶ã¤ã‹ã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çœŸæ¨ªã«ç§»å‹•ã•ã›ã‚‹
 //		testObj->SetBoundingCircle(Combine);
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚æ‚¤‚ÉˆÚ“®‚·‚é
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒã˜ã‚ˆã†ã«ç§»å‹•ã™ã‚‹
 //		testObj->isPlayer = true;
 //		break;
 //	case 3:
-//		// ã
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì‰¡‚ÌÀ•W‚ğŒvZ‚·‚é
+//		// ä¸Š
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¨ªã®åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹
 //		Combine.center.y = circle1.center.y - circle1.radius - circle2.radius;
-//		// ‚Ô‚Â‚©‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì^‰¡‚ÉˆÚ“®‚³‚¹‚é
+//		// ã¶ã¤ã‹ã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çœŸæ¨ªã«ç§»å‹•ã•ã›ã‚‹
 //		testObj->SetBoundingCircle(Combine);
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚æ‚¤‚ÉˆÚ“®‚·‚é
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒã˜ã‚ˆã†ã«ç§»å‹•ã™ã‚‹
 //		testObj->isPlayer = true;
 //		break;
 //	case 4:
-//		// ‰E
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì‰¡‚ÌÀ•W‚ğŒvZ‚·‚é
+//		// å³
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¨ªã®åº§æ¨™ã‚’è¨ˆç®—ã™ã‚‹
 //		Combine.center.x = circle1.center.x - circle1.radius - circle2.radius;
-//		// ‚Ô‚Â‚©‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Ì^‰¡‚ÉˆÚ“®‚³‚¹‚é
+//		// ã¶ã¤ã‹ã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®çœŸæ¨ªã«ç§»å‹•ã•ã›ã‚‹
 //		testObj->SetBoundingCircle(Combine);
-//		// ‘€ì‚µ‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚æ‚¤‚ÉˆÚ“®‚·‚é
+//		// æ“ä½œã—ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒã˜ã‚ˆã†ã«ç§»å‹•ã™ã‚‹
 //		testObj->isPlayer = true;
 //		break;
 //	default:
-//		// “–‚½‚Á‚Ä‚¢‚È‚¢
+//		// å½“ãŸã£ã¦ã„ãªã„
 //		break;
 //	}
 //}
 //
 //int Game::SideCollision(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2)
 //{
-//	if (circle1.center.x + circle1.radius < circle2.center.x)// ¶
+//	if (circle1.center.x + circle1.radius < circle2.center.x)// å·¦
 //	{
 //		return 1;
 //	}
-//	else if (circle1.center.x - circle1.radius > circle2.center.x)// ‰E
+//	else if (circle1.center.x - circle1.radius > circle2.center.x)// å³
 //	{
 //		return 4;
 //	}
-//	else if (circle1.center.y < circle2.center.y)// ‰º
+//	else if (circle1.center.y < circle2.center.y)// ä¸‹
 //	{
 //		return 2;
 //	}
-//	else if (circle1.center.y > circle2.center.y)// ã
+//	else if (circle1.center.y > circle2.center.y)// ä¸Š
 //	{
 //		return 3;
 //	}

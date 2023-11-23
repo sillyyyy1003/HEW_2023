@@ -1,11 +1,11 @@
 #pragma once
 #include"Object.h"
 
-//ui‚Ég‚í‚ê‚Ä‚éƒIƒuƒWƒFƒNƒg
+//uiã«ä½¿ã‚ã‚Œã¦ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 class UiObject: public Object
 {
 public:
-	//‰Šú‰»
+	//åˆæœŸåŒ–
 	UiObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	//

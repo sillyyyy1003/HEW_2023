@@ -1,14 +1,14 @@
 #pragma once
 #include "Sprite.h"
 
-//ƒIƒuƒWƒFƒNƒgŠî’ê
+//ï¾‚ã‚ªï¾‚ãƒ–ï¾‚ã‚¸ï¾‚ã‚§ï¾‚ã‚¯ï¾‚ãƒˆï¾‚ç”˜ï½®ï¾‚å¢œï¿½
 class Object
 {
 public:
 	//----------------------------//
-	// •Ï”
+	// ï¾‚ç±³ç¯ é’ï¿½
 	//----------------------------//
-	//}Œ`î•ñ‚ğˆµ‚í‚ê‚Ä‚¢‚é
+	//ï¾‚å›³ï¾‚å½¢ï¾‚æ¹˜ï½®ï¾‚é ï¿½ï¾‚ã¦å •æ¡ˆï½¾ï¾‚ã¥ï½­ï¾‚ã¦åã¥ï¿½ï¾‚ã­ä¼‰ã¥ï½©
 	Sprite* m_sprite;
 
 
@@ -16,7 +16,7 @@ public:
 public:
 	
 	/// <summary>
-	/// ƒRƒ“ƒXƒgƒ‰ƒNƒ^‰Šú‰»s‚¤
+	/// ï¾‚ã‚³ï¾‚Î´ç£ã‚¹ï¾‚ãƒˆï¾‚Î´å¯ã‚¯ï¾‚ã‚¿ï¾‚ï¿½ï¾‚ï¿½ï¾‚æ¸‰å¯ç”˜ï½ºï¾‚å«ï½¥ï¾‚è¡Œï¾‚ã¤ï½¤
 	/// </summary>
 	/// <param name="texture"></param>
 	/// <param name="_width">width</param>
@@ -25,12 +25,12 @@ public:
 	/// <param name="splitY"></param>
 	Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV‚ğs‚¤
+	//ï¾‚ã‚¢ï¾‚ãƒ‹ï¾‚Î´ï¿½ï¾‚ãƒ¼ï¾‚ã‚·ï¾‚Î´ï¿½ï¾‚Î´ç£ã¦å ‹æ›´ï¾‚æ–°ï¾‚ã¦å •è¡Œï¾‚ã¤ï½¤
 	virtual void Update(void);
 
 	void Draw(void);
 	
-	// •Ğ•t‚¯ˆ—
+	// ï¾‚ç±³é’ä»˜ï¾‚ã§ï½»ï¾‚æ¸‰æŒ‰çŒŸï¿½
 	~Object(void);
 };
 

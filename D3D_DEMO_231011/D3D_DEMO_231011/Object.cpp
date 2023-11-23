@@ -6,22 +6,22 @@ extern KBInput* g_KbInput;
 
 Object::Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	//}Œ`‰Šú‰»
+	//å›³å½¢åˆæœŸåŒ–
 	m_sprite = new Sprite();
 	m_sprite->CreateModel(texture, _width, _height, splitX, splitY);
 
-	//ƒJƒƒ‰‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©åˆæœŸåŒ–
 	m_sprite->m_camera = g_WorldCamera;
 }
 
 void Object::Update(void)
 {
-	//“ü—Í
+	//å…¥åŠ›
 
 
 
 	
-	//ƒAƒjƒ[ƒVƒ‡ƒ“XV
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ›´æ–°
 	m_sprite->m_anime->Update();
 
 }

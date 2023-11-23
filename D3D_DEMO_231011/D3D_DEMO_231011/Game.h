@@ -9,9 +9,9 @@ class Game
 private:
 	enum GAMESCENE 
 	{
-		TITLE,		//ƒ^ƒCƒgƒ‹
-		STAGE1,		//ƒQ[ƒ€ƒV[ƒ“
-		RESULT,		//ƒŠƒUƒ‹ƒgƒV[ƒ“
+		TITLE,		//ã‚¿ã‚¤ãƒˆãƒ«
+		STAGE1,		//ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
+		RESULT,		//ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³
 	};
 
 	GAMESCENE m_gameScene = TITLE;
@@ -19,53 +19,53 @@ private:
 private:
 	Object* testWall;
 	Object* testGround;
-	Object* testChara;	//ƒvƒŒƒCƒ„[
+	Object* testChara;	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 
-	GameObject* testTree;	//–Ø
+	GameObject* testTree;	//æœ¨
 
 
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Game();
 
-	//ƒQ[ƒ€–{‘Ì
+	//ã‚²ãƒ¼ãƒ æœ¬ä½“
 	void GameUpdate(void);
 	void TitleUpdate(void);
 	void StageUpdate(void);
 	void ResultUpdate(void);
 
 
-	//Œã•Ğ•t‚¯
+	//å¾Œç‰‡ä»˜ã‘
 	~Game();
 
-	//•`‰æ
+	//æç”»
 	void GameDraw(void);
 	void TitleDraw(void);
 	void StageDraw(void);
 	void ResultDraw(void);
 
-	// “–‚½‚è”»’è
-	// ‰~‚Æ‰~“¯m‚Ì“–‚½‚è”»’è
+	// å½“ãŸã‚Šåˆ¤å®š
+	// å††ã¨å††åŒå£«ã®å½“ãŸã‚Šåˆ¤å®š
 	int CircleHit(BOUNDING_CIRCLE bc1, BOUNDING_CIRCLE bc2);
 
-	// lŠpŒ`‚Æ‰~‚Ì“–‚½‚è”»’è
+	// å››è§’å½¢ã¨å††ã®å½“ãŸã‚Šåˆ¤å®š
 	int SqureandCircle(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj);
-	// lŠpŒ`‚Æ‰~‚Ì“–‚½‚è”»’è‚Ég‚¤ŠÖ”
+	// å››è§’å½¢ã¨å††ã®å½“ãŸã‚Šåˆ¤å®šã«ä½¿ã†é–¢æ•°
 	bool CheckHit(const BOX& t_box, const BOUNDING_CIRCLE bc1);
 
-	// lŠpŒ`“¯m‚Ì“–‚½‚è”»’è
+	// å››è§’å½¢åŒå£«ã®å½“ãŸã‚Šåˆ¤å®š
 	int SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2);
 
-	// ƒIƒuƒWƒFƒNƒg“¯m‚ğ‡‘Ì‚³‚¹‚éŠÖ”
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆåŒå£«ã‚’åˆä½“ã•ã›ã‚‹é–¢æ•°
 	void CombineObjects(int HitNum, BOUNDING_CIRCLE Combine, BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj);
 
-	// ã‰º¶‰E‚Å•Ê‚Ì“–‚½‚è”»’è‚ğ‚Æ‚é‚½‚ß‚ÌŠÖ”
+	// ä¸Šä¸‹å·¦å³ã§åˆ¥ã®å½“ãŸã‚Šåˆ¤å®šã‚’ã¨ã‚‹ãŸã‚ã®é–¢æ•°
 	int SideCollision(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2);
 
-	//@‚·‚×‚Ä‚Ì“–‚½‚è”»’è‚ğŠÇ—‚·‚é
+	//ã€€ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®šã‚’ç®¡ç†ã™ã‚‹
 	void TestCollision();
 
-	//ƒV[ƒ“‚ğİ’è‚·‚é
+	//ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹
 	void SetGameScene(GAMESCENE scene);
 
 	

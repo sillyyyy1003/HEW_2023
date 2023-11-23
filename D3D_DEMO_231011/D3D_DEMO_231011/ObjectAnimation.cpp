@@ -1,4 +1,4 @@
-#include "ObjectAnimation.h"
+ï»¿#include "ObjectAnimation.h"
 
 ObjectAnimation::ObjectAnimation(int splitX, int splitY):Animation(splitX,splitY)
 {
@@ -7,25 +7,25 @@ ObjectAnimation::ObjectAnimation(int splitX, int splitY):Animation(splitX,splitY
 
 void ObjectAnimation::Update(void)
 {
-    //‚±‚±‚ÅƒAƒjƒ[ƒVƒ‡ƒ“ƒpƒ^[ƒ“‚ğ•ÏX
+    //ã“ã“ã§ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’å¤‰æ›´
     int animeTable[32] = { 0, 0, 1, 2, 2, 1, -1 };
 
-    // •\¦‚³‚¹‚éƒRƒ}ID‚ğæ“¾
+    // è¡¨ç¤ºã•ã›ã‚‹ã‚³ãƒIDã‚’å–å¾—
     int animeID = animeTable[(int)Animation::m_animeCounter];
 
  
     if (Animation::isPlaying)
     {
-        // ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒJƒEƒ“ƒ^[‚ği‚ß‚é
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚’é€²ã‚ã‚‹
         Animation::m_animeCounter += Animation::m_animeSpeed;
 
-        //ƒ‹[ƒv‚·‚éê‡
+        //ãƒ«ãƒ¼ãƒ—ã™ã‚‹å ´åˆ
         if (animeTable[(int)Animation::m_animeCounter] == -1) 
         {
             Animation::m_animeCounter = 0.0f;
         }
         
-        //ƒ‹[ƒv‚µ‚È‚¢ê‡
+        //ãƒ«ãƒ¼ãƒ—ã—ãªã„å ´åˆ
         if (animeTable[(int)Animation::m_animeCounter] == -2) {
             isPlaying = false;
             Animation::m_animeCounter = 0.0f;
@@ -33,11 +33,11 @@ void ObjectAnimation::Update(void)
 
     }
 
-    //•\¦‚³‚¹‚éƒRƒ}‚ÌUV‚ğŒvZ
+    //è¡¨ç¤ºã•ã›ã‚‹ã‚³ãƒã®UVã‚’è¨ˆç®—
     m_frameX = animeID % m_split.x;
 
 
-    //UVÀ•WXV
+    //UVåº§æ¨™æ›´æ–°
     Animation::Update();
 
 

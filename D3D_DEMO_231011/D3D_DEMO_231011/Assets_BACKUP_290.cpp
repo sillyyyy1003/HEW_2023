@@ -7,18 +7,10 @@ Assets::Assets()
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
 
-<<<<<<< HEAD
 
 
     testObj = LoadTexture("assets/testTex.png");
     testShadow = LoadTexture("assets/testShadow.png");
-=======
-    testbgbox = LoadTexture("assets/testBox.png");
-    testObj = LoadTexture("assets/circle.png");
-    //testShadow = LoadTexture("assets/testShadow.png");
-
-    square = LoadTexture("assets/polygon.png");
->>>>>>> feature/Sakai
 
     testWallbg = LoadTexture("assets/wallbg.png");
     testGroundbg = LoadTexture("assets/groundbg.png");

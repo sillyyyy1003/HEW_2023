@@ -10,7 +10,7 @@ Sprite::Sprite(void)
 
 void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	//c‰¡•ªŠ„‚ðÝ’è
+	//ç¸¦æ¨ªåˆ†å‰²ã‚’è¨­å®š
 	m_split.x = splitX;
 	m_split.y = splitY;
 
@@ -18,12 +18,12 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 
 	float left, right, top, bottom, z = 0.0f;
 
-	//Š„‚Á‚½Œã‚ÌƒeƒNƒXƒ`ƒƒAˆê–‡‚¸‚Â‚Ì‘å‚«‚³i•A‚j
+	//å‰²ã£ãŸå¾Œã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã€ä¸€æžšãšã¤ã®å¤§ãã•ï¼ˆå¹…ã€é«˜ï¼‰
 	const float u = 1.0 / m_split.x;
 	const float v = 1.0 / m_split.y;
 
-	//ƒ‚ƒfƒ‹’¸“_ƒf[ƒ^ì¬
-	//Notion:*1.25/96 -> “ü—Í‚µ‚½‰æ‘œ‚Ì‘å‚«‚³‚ð‚»‚Ì‚Ü‚Ü•\Ž¦‚·‚é‚½‚ß
+	//ãƒ¢ãƒ‡ãƒ«é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ä½œæˆ
+	//Notion:*1.25/96 -> å…¥åŠ›ã—ãŸç”»åƒã®å¤§ãã•ã‚’ãã®ã¾ã¾è¡¨ç¤ºã™ã‚‹ãŸã‚
 	left = -(_width / 2.0f) * 1.25 / 96;
 	right = (_width / 2.0f) * 1.25 / 96;
 	top = (_height / 2.0f) * 1.25 / 96;
@@ -33,38 +33,38 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 
 	VERTEX vertexList[] = {
 
-		//’¸“_‚ªŽžŒv‰ñ‚è‚ÉŽOŠpŒ`‚ðŒ`¬‚·‚é‘¤‚ªƒ|ƒŠƒSƒ“‚Ì•\‚É‚È‚é
-		{left,	top,	z,	0.0f,	0.0f},		//¶ã
-		{right,	bottom,	z,	u,		v},			//‰E‰º
-		{left,	bottom,	z,	0.0f,	v},			//¶‰º
+		//é ‚ç‚¹ãŒæ™‚è¨ˆå›žã‚Šã«ä¸‰è§’å½¢ã‚’å½¢æˆã™ã‚‹å´ãŒãƒãƒªã‚´ãƒ³ã®è¡¨ã«ãªã‚‹
+		{left,	top,	z,	0.0f,	0.0f},		//å·¦ä¸Š
+		{right,	bottom,	z,	u,		v},			//å³ä¸‹
+		{left,	bottom,	z,	0.0f,	v},			//å·¦ä¸‹
 
-		{left,	top,	z,	0.0f,	0.0f},		//¶ã
-		{right,	top,	z,	u,		0.0f},		//‰Eã
-		{right,	bottom,	z,	u,		v},			//‰E‰º
+		{left,	top,	z,	0.0f,	0.0f},		//å·¦ä¸Š
+		{right,	top,	z,	u,		0.0f},		//å³ä¸Š
+		{right,	bottom,	z,	u,		v},			//å³ä¸‹
 
 	};
 
-	// ’¸“_ƒoƒbƒtƒ@‚ðì¬‚·‚é
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ä½œæˆã™ã‚‹
 	D3D11_BUFFER_DESC bufferDesc;
-	bufferDesc.ByteWidth = sizeof(vertexList);// Šm•Û‚·‚éƒoƒbƒtƒ@ƒTƒCƒY‚ðŽw’è
+	bufferDesc.ByteWidth = sizeof(vertexList);// ç¢ºä¿ã™ã‚‹ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚ºã‚’æŒ‡å®š
 	bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;// ’¸“_ƒoƒbƒtƒ@ì¬‚ðŽw’è
+	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ä½œæˆã‚’æŒ‡å®š
 	bufferDesc.CPUAccessFlags = 0;
 	bufferDesc.MiscFlags = 0;
 	bufferDesc.StructureByteStride = 0;
 
 	D3D11_SUBRESOURCE_DATA subResourceData;
-	subResourceData.pSysMem = vertexList;// VRAM‚É‘—‚éƒf[ƒ^‚ðŽw’è
+	subResourceData.pSysMem = vertexList;// VRAMã«é€ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’æŒ‡å®š
 	subResourceData.SysMemPitch = 0;
 	subResourceData.SysMemSlicePitch = 0;
 	hr = GetD3D_Device()->CreateBuffer(&bufferDesc, &subResourceData, &(m_modelData.vertexBuffer));
 
 	if (FAILED(hr)) {
 		throw hr;
-		MessageBoxA(NULL, "’¸“_ƒoƒbƒtƒ@‚Ìì¬Ž¸”sI", "ƒGƒ‰[”­¶", MB_OK | MB_ICONERROR);
+		MessageBoxA(NULL, "é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆå¤±æ•—ï¼", "ã‚¨ãƒ©ãƒ¼ç™ºç”Ÿ", MB_OK | MB_ICONERROR);
 	}
 
-	//ƒeƒNƒXƒ`ƒƒ‚ðŽÀ‘•
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å®Ÿè£…
 	SetTexture(texture);
 }
 
@@ -79,40 +79,40 @@ void Sprite::InitPos(float x, float y, float z)
 void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 {
 
-	//ƒJƒƒ‰‚Ìs—ñì¬
+	//ã‚«ãƒ¡ãƒ©ã®è¡Œåˆ—ä½œæˆ
 	XMMATRIX matrixView = m_camera->GetMatrixView();
 	
-	//•½s“Š‰e‚Ìs—ñì¬
+	//å¹³è¡ŒæŠ•å½±ã®è¡Œåˆ—ä½œæˆ
 	XMMATRIX matrixProjParallel = XMMatrixOrthographicLH(RATIO_W, RATIO_H, 0.0f, 3.0f);
 
-	//“§Ž‹“Š‰e‚Ìs—ñì¬
+	//é€è¦–æŠ•å½±ã®è¡Œåˆ—ä½œæˆ
 	XMMATRIX matrixProjPerspective= XMMatrixPerspectiveFovLH(XMConvertToRadians(90), 16.0f / 9.0f, 0.01f, 100.0f);
 
 
-	//“Š‰es—ñì¬->“§Ž‹“Š‰e‚ðŽg‚¤
+	//æŠ•å½±è¡Œåˆ—ä½œæˆ->é€è¦–æŠ•å½±ã‚’ä½¿ã†
 	XMMATRIX matrixProj = matrixView * matrixProjPerspective;
 	
 
-	//ƒ[ƒ‹ƒh•ÏŠ·s—ñ‚Ìì¬
-	//ˆÚ“®s—ñ
+	//ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—ã®ä½œæˆ
+	//ç§»å‹•è¡Œåˆ—
 	XMMATRIX matrixMove = XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
-	//Šg‘åk¬s—ñ
+	//æ‹¡å¤§ç¸®å°è¡Œåˆ—
 	XMMATRIX matrixScale = XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
 
-	//‰ñ“]s—ñ
+	//å›žè»¢è¡Œåˆ—
 	XMMATRIX matrixRotateX = XMMatrixRotationX(XMConvertToRadians(m_rotation.x));
 	XMMATRIX matrixRotateY = XMMatrixRotationY(XMConvertToRadians(m_rotation.y));
 	XMMATRIX matrixRotateZ = XMMatrixRotationZ(XMConvertToRadians(m_rotation.z));
 	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
 	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
 
-	//UVƒAƒjƒ[ƒVƒ‡ƒ“s—ñì¬
+	//UVã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³è¡Œåˆ—ä½œæˆ
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 
 	cb.matrixProj = XMMatrixTranspose(matrixProj);
 	cb.matrixTex = XMMatrixTranspose(matrixTex);
 	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
-	//ƒ}ƒeƒŠƒAƒ‹F‚ð’è”ƒoƒbƒtƒ@ƒf[ƒ^‚É‘ã“ü
+	//ãƒžãƒ†ãƒªã‚¢ãƒ«è‰²ã‚’å®šæ•°ãƒãƒƒãƒ•ã‚¡ãƒ‡ãƒ¼ã‚¿ã«ä»£å…¥
 	cb.materialDiffuse = m_materialDiffuse;
 }
 
@@ -121,20 +121,20 @@ void Sprite::Draw(void)
 	UINT strides = sizeof(VERTEX);
 	UINT offsets = 0;
 
-	//s—ñì¬
+	//è¡Œåˆ—ä½œæˆ
 	CONSTBUFFER cb;
 	GenerateMatrix(cb);
 
-	//s—ñ‚ðƒVƒF[ƒ_[‚É“n‚·
+	//è¡Œåˆ—ã‚’ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«æ¸¡ã™
 	GetD3D_Context()->UpdateSubresource(g_ConstantBuffer, 0, NULL, &cb, 0, 0);
 
-	//•`‰æ‚·‚é’¸“_ƒoƒbƒtƒ@(ƒ‚ƒfƒ‹)‚ðŽw’è‚·‚é
+	//æç”»ã™ã‚‹é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡(ãƒ¢ãƒ‡ãƒ«)ã‚’æŒ‡å®šã™ã‚‹
 	GetD3D_Context()->IASetVertexBuffers(0, 1, &Material::m_modelData.vertexBuffer, &strides, &offsets);
 
-	//ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ÉƒeƒNƒXƒ`ƒƒ‚ð“n‚·
+	//ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’æ¸¡ã™
 	GetD3D_Context()->PSSetShaderResources(0, 1, &Material::m_modelData.texture);
 
-	//vertexCount:•`‰æ‚·‚é’¸“_”
+	//vertexCount:æç”»ã™ã‚‹é ‚ç‚¹æ•°
 	GetD3D_Context()->Draw(6, 0);
 
 

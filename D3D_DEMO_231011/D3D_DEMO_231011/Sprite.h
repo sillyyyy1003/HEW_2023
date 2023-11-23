@@ -5,12 +5,12 @@
 
 
 /// <summary>
-/// ’¸“_ƒf[ƒ^‚ğ•\‚·\‘¢‘Ì
+/// é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’è¡¨ã™æ§‹é€ ä½“
 /// </summary>
 struct VERTEX
 {
-	float x, y, z;		//’¸“_‚ÌˆÊ’uÀ•W
-	float u, v;			//ƒeƒNƒXƒ`ƒƒ‚ÌUVÀ•W
+	float x, y, z;		//é ‚ç‚¹ã®ä½ç½®åº§æ¨™
+	float u, v;			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®UVåº§æ¨™
 
 };
 
@@ -19,97 +19,97 @@ struct BOX
 	float fLeft, fTop, fRight, fBottom;
 };
 
-//’è”ƒoƒbƒtƒ@—p\‘¢‘Ì
+//å®šæ•°ãƒãƒƒãƒ•ã‚¡ç”¨æ§‹é€ ä½“
 struct CONSTBUFFER
 {
-	DirectX::XMMATRIX matrixTex;		//UVÀ•WˆÚ“®s—ñ
-	DirectX::XMMATRIX matrixProj;		//“Š‰es—ñ
-	DirectX::XMMATRIX matrixWorld;		//ƒ[ƒ‹ƒh•ÏŠ·s—ñ
-	DirectX::XMFLOAT4 materialDiffuse;	//ƒ}ƒeƒŠƒAƒ‹F
+	DirectX::XMMATRIX matrixTex;		//UVåº§æ¨™ç§»å‹•è¡Œåˆ—
+	DirectX::XMMATRIX matrixProj;		//æŠ•å½±è¡Œåˆ—
+	DirectX::XMMATRIX matrixWorld;		//ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
+	DirectX::XMFLOAT4 materialDiffuse;	//ãƒãƒ†ãƒªã‚¢ãƒ«è‰²
 };
 
 /// <summary>
-/// ‰æ‘œ‚Ìˆ—‚Æ•`‰æ
+/// ç”»åƒã®å‡¦ç†ã¨æç”»
 /// </summary>
 class Sprite :public Material
 {
 private:
 
-	//ƒXƒvƒ‰ƒCƒg‚Ì–¼‘O‚ğİ’èAƒGƒ‰[ƒ`ƒFƒbƒN‚Ég‚¤
+	//ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®åå‰ã‚’è¨­å®šã€ã‚¨ãƒ©ãƒ¼ãƒã‚§ãƒƒã‚¯ã«ä½¿ã†
 
 protected:
 
 
 public:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
 
-	//‰¼‘z¢ŠE‚Ìƒ[ƒ‹ƒhÀ•W
+	//ä»®æƒ³ä¸–ç•Œã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™
 	DirectX::XMFLOAT3 m_pos = { 0.0f,0.0f,0.0f };
 
-	//‰ñ“]
+	//å›è»¢
 	DirectX::XMFLOAT3 m_rotation = { 0.0f, 0.0f, 0.0f };
 
-	//‰æ‘œ‚Ì‘å‚«‚³(Default Data:1.0)
+	//ç”»åƒã®å¤§ãã•(Default Data:1.0)
 	DirectX::XMFLOAT3 m_scale = { 1.0, 1.0f, 1.0f };
 
-	//c‰¡•ªŠ„->•`‰æ—p
+	//ç¸¦æ¨ªåˆ†å‰²->æç”»ç”¨
 	DirectX::XMINT2 m_split = { 1,1 };
 
-	//‚±‚ÌƒLƒƒƒ‰ƒNƒ^[‚Ìƒ}ƒeƒŠƒAƒ‹F(DEFAULT COLOR:WHITE)
+	//ã“ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ãƒãƒ†ãƒªã‚¢ãƒ«è‰²(DEFAULT COLOR:WHITE)
 	DirectX::XMFLOAT4 m_materialDiffuse = { 1.0f,1.0f,1.0f,1.0f };
 
-	//ƒJƒƒ‰
+	//ã‚«ãƒ¡ãƒ©
 	Camera* m_camera = nullptr;
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 	Animation* m_anime = nullptr;
 
-	//•½s“Š‰e‚©“§‹“Š‰e‚ğg‚¤‚Ì”»’f
+	//å¹³è¡ŒæŠ•å½±ã‹é€è¦–æŠ•å½±ã‚’ä½¿ã†ã®åˆ¤æ–­
 	bool isPerspective = false;
 public:
 
 	//----------------------------//
-	// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾
+	// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 	//----------------------------//
 
-	// ƒ‚ƒfƒ‹‚Ìì¬->”pŠü
+	// ãƒ¢ãƒ‡ãƒ«ã®ä½œæˆ->å»ƒæ£„
 	//Sprite(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 	
-	///ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	///ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Sprite(void);
 
 	/// <summary>
-	/// ƒ‚ƒfƒ‹‚Ìì¬
+	/// ãƒ¢ãƒ‡ãƒ«ã®ä½œæˆ
 	/// </summary>
-	/// <param name="texture">ƒeƒNƒXƒ`ƒƒ</param>
-	/// <param name="_width">‰æ–Ê‚É•`‰æ‚·‚é•</param>
-	/// <param name="_height">‰æ–Ê‚É•`‰æ‚·‚é‚‚³</param>
-	/// <param name="splitX">‰¡•ªŠ„</param>
-	/// <param name="splitY">c•ªŠ„</param>
+	/// <param name="texture">ãƒ†ã‚¯ã‚¹ãƒãƒ£</param>
+	/// <param name="_width">ç”»é¢ã«æç”»ã™ã‚‹å¹…</param>
+	/// <param name="_height">ç”»é¢ã«æç”»ã™ã‚‹é«˜ã•</param>
+	/// <param name="splitX">æ¨ªåˆ†å‰²</param>
+	/// <param name="splitY">ç¸¦åˆ†å‰²</param>
 	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	/// <summary>
-	/// ˆÊ’u‚Ì‰Šú‰»
+	/// ä½ç½®ã®åˆæœŸåŒ–
 	/// </summary>
 	void InitPos(float x, float y, float z);
 
 	/// <summary>
-	/// ƒVƒF[ƒ_[‚É“n‚·s—ñ‚Ìˆ—‚ğs‚¤ŠÖ”(‰ñ“]/Šg‘åk¬)
-	/// •½s“Š‰e—p
+	/// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«æ¸¡ã™è¡Œåˆ—ã®å‡¦ç†ã‚’è¡Œã†é–¢æ•°(å›è»¢/æ‹¡å¤§ç¸®å°)
+	/// å¹³è¡ŒæŠ•å½±ç”¨
 	/// </summary>
-	/// <param name="cb">ƒVƒF[ƒ_[‚É“n‚·s—ñ</param>
+	/// <param name="cb">ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã«æ¸¡ã™è¡Œåˆ—</param>
 	virtual void GenerateMatrix(CONSTBUFFER& cb);
 
 
 	/// <summary>
-	/// •`‰æ‚ğs‚¤ŠÖ”
+	/// æç”»ã‚’è¡Œã†é–¢æ•°
 	/// </summary>
 	virtual void Draw(void);
 
 	/// <summary>
-	/// Œã•Ğ•t‚¯
+	/// å¾Œç‰‡ä»˜ã‘
 	/// </summary>
 	~Sprite(void);
 

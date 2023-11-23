@@ -87,8 +87,6 @@ void GameObject::Update(DirectX::XMFLOAT3 lightPos)
 	
 	
 
-
-
 	//影情報更新
 	m_shadow->m_obj->m_pos = GenerateShadowPos(lightPos);
 	

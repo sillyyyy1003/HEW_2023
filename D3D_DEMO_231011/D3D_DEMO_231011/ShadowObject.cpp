@@ -16,7 +16,7 @@ void ShadowObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width,
 
 void ShadowObject::Update(void)
 {
-	//アニメーションの更新
+	//繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ譖ｴ譁ｰ
 	m_obj->m_anime->Update();
 }
 
@@ -27,7 +27,7 @@ BOOL ShadowObject::CheckShadow(void)
 
 void ShadowObject::Draw(void)
 {
-	//光があるときだけ描画する
+	//蜈峨′縺ゅｋ縺ｨ縺阪□縺第緒逕ｻ縺吶ｋ
 	m_obj->Draw();
 	
 

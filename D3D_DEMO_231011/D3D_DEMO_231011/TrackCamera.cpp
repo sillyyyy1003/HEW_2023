@@ -6,13 +6,13 @@ extern KBInput* g_KbInput;
 
 void TrackCamera::Update()
 {
-	if (m_targetObject != nullptr) //’ÇÕ‚·‚éê‡
+	if (m_targetObject != nullptr) //è¿½è·¡ã™ã‚‹å ´åˆ
 	{
-		//ƒJƒƒ‰‚ÌˆÊ’u‚ğXV
+		//ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã‚’æ›´æ–°
 		DirectX::XMFLOAT3 camPos;
 		camPos.x = (m_targetObject->m_sprite->m_pos.x);
 		camPos.y = (m_targetObject->m_sprite->m_pos.y);
-		camPos.z = (m_targetObject->m_sprite->m_pos.z - 2.0f);	// ‡BŒã‚ë2.0f‚ÉƒJƒƒ‰‚ğ’u‚­
+		camPos.z = (m_targetObject->m_sprite->m_pos.z - 2.0f);	// â‘¢å¾Œã‚2.0fã«ã‚«ãƒ¡ãƒ©ã‚’ç½®ã
 		this->SetCameraPos(camPos);
 
 		//
@@ -65,9 +65,9 @@ void TrackCamera::Update()
 	//RESET THE CAMERA
 	if (g_KbInput->GetKeyTrigger(VK_RETURN)) 
 	{
-		//ƒJƒƒ‰‚ÌˆÊ’u
+		//ã‚«ãƒ¡ãƒ©ã®ä½ç½®
 		m_CameraPos = XMFLOAT3(0.0f, 0.0f, -7.0f);
-		//’‹“_
+		//æ³¨è¦–ç‚¹
 		m_FocusPos = XMFLOAT3(0.0f, 0.0f, 2.0f);
 	}
 

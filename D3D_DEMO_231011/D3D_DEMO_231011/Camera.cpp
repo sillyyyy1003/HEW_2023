@@ -1,5 +1,5 @@
 #include "Camera.h"
-//Singleton ƒCƒ“ƒXƒ^ƒ“ƒX’è‹`
+//Singleton ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å®šç¾©
 Camera* Camera::m_camera;
 
 
@@ -11,12 +11,12 @@ DirectX::XMMATRIX Camera::GetMatrixView(void)
 
 void Camera::Update()
 {
-    //XMLoadFloat3 -> XMFLOAT3‚ğXMVECTOR‚É“Ç‚İ‚İ
+    //XMLoadFloat3 -> XMFLOAT3ã‚’XMVECTORã«èª­ã¿è¾¼ã¿
     XMVECTOR eye = DirectX::XMLoadFloat3(&m_CameraPos);
     XMVECTOR focus = DirectX::XMLoadFloat3(&m_FocusPos); 
     XMVECTOR up = DirectX::XMLoadFloat3(&m_UpDir);
     
-    //ƒrƒ…[•ÏŠ·s—ñ‚ğŒvZ
+    //ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—ã‚’è¨ˆç®—
     m_MatrixView = XMMatrixLookAtLH(eye, focus, up);
 
 }

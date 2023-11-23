@@ -3,79 +3,79 @@
 #include <windows.h>
 #include <xinput.h>
 
-// ��Retro-Bit ���̃T�^�[���p�b�h�͕����p�b�h�����X�e�B�b�N�Ƃ��Ď�������Ă���̂ŁA
-// �@wButtons ��ǂނ����ł͓��͂�F�����邱�Ƃ��ł��Ȃ��B
-// �@�����ŁAwButtons ��ǂޑO�ɃX�e�B�b�N�̓��͂�����p�b�h�ɕϊ����đΉ����s���B
-// �X�e�B�b�N�̓��͂�����p�b�h�t���O�ɕϊ�
+// ※Retro-Bit 製のサターンパッドは方向パッドが左スティックとして実装されているので、
+// 　wButtons を読むだけでは入力を認識することができない。
+// 　そこで、wButtons を読む前にスティックの入力を方向パッドに変換して対応を行う。
+// スティックの入力を方向パッドフラグに変換
 WORD ThumbToDPad(SHORT sThumbX, SHORT sThumbY, SHORT sDeadZone);
 
 class Input
 {
 public:
-    // �g����p�b�h�̃{�^���̎��
+    // 使えるパッドのボタンの種類
     typedef enum
     {
         NONE,
-        A, // �Q�[���p�b�hA
-        B, // �Q�[���p�b�hB
-        X, // �Q�[���p�b�hX
-        Y, // �Q�[���p�b�hY
-        R, // �Q�[���p�b�hR
-        L, // �Q�[���p�b�hL
-        LEFT, // �Q�[���p�b�h�\���L�[��
-        RIGHT,// �Q�[���p�b�h�\���L�[�E
-        UP,   // �Q�[���p�b�h�\���L�[��
-        DOWN, // �Q�[���p�b�h�\���L�[��
-        START,// �Q�[���p�b�hSTATRT
-        BACK, // �Q�[���p�b�hBACK
-        LEFTTRIGGER, // ���g���K�[
-        RIGHTTRIGGER,// �E�g���K�[
-        LEFTSTICK,   // ���X�e�B�b�N
-        RIGHTSTICK,  // �E�X�e�B�b�N
-        UPSTICK,     // ��X�e�B�b�N
-        DOWNSTICK,   // ���X�e�B�b�N
+        A, // ゲームパッドA
+        B, // ゲームパッドB
+        X, // ゲームパッドX
+        Y, // ゲームパッドY
+        R, // ゲームパッドR
+        L, // ゲームパッドL
+        LEFT, // ゲームパッド十字キー左
+        RIGHT,// ゲームパッド十字キー右
+        UP,   // ゲームパッド十字キー上
+        DOWN, // ゲームパッド十字キー下
+        START,// ゲームパッドSTATRT
+        BACK, // ゲームパッドBACK
+        LEFTTRIGGER, // 左トリガー
+        RIGHTTRIGGER,// 右トリガー
+        LEFTSTICK,   // 左スティック
+        RIGHTSTICK,  // 右スティック
+        UPSTICK,     // 上スティック
+        DOWNSTICK,   // 下スティック
     }PADBUTTON;
 
     PADBUTTON PadButton = NONE;
 
 private:
 
-    // �L�[��Ԃ̋L�^�̈�
+    // キー状態の記録領域
     bool keyState[256] = { false };
 
-    // 1�t���[���O�̃L�[��Ԃ̋L�^�̈�
+    // 1フレーム前のキー状態の記録領域
     bool oldKeyState[256] = { false };
 
-    // �p�b�h�������ꂽ���̏�����ۑ�����֐�
+    // パッドが押された時の処理を保存する関数
     bool SetPADButton(PADBUTTON PadButton);
 
-    // �p�b�h��U�������邽�߂̊֐�
+    // パッドを振動させるための関数
     void Vibration(int pattern);
 
-    // �U���̃p�^�[��������ϐ�
+    // 振動のパターンを入れる変数
     int pattern = 0;
 
-    // �U�����Ԃ��L������ϐ�
+    // 振動時間を記憶する変数
     ULONGLONG Vibrationtime = 0;
 
 public:
 
-    // �{�^���̒��������������Ă��邩��Ԃ��֐�
+    // ボタンの長押しが発生しているかを返す関数
     bool GetPADRepeat(PADBUTTON PadButton);
 
-    // �{�^���̃g���K�[���������Ă��邩��Ԃ��֐�
+    // ボタンのトリガーが発生しているかを返す関数
     bool GetPADTrigger(PADBUTTON PadButton);
 
     void Update();
 
-    //�U���p�^�[����ݒ肷��֐�
+    //振動パターンを設定する関数
     void SetPattern(int pt)
     {
         pattern = pt;
     }
 };
 
-// �B��̎��̕ϐ���extern�錾
+// 唯一の実体変数のextern宣言
 extern Input* gInput;
 
 

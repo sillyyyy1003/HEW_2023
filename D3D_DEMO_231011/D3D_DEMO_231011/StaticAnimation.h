@@ -2,7 +2,7 @@
 #include "Animation.h"
 
 /// <summary>
-/// �Î~�摜�Ɏg����
+/// Ă~ćÉgíęé
 /// </summary>
 class StaticAnimation :public Animation
 {

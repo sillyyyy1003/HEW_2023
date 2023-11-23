@@ -7,58 +7,58 @@ class GameObject
 {
 public:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
-	//ƒIƒuƒWƒFƒNƒg‚Ì}Œ`î•ñ
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å›³å½¢æƒ…å ±
 	Sprite* m_obj;
 	
-	//‰e‚Ì}Œ`î•ñ
+	//å½±ã®å›³å½¢æƒ…å ±
 	//std::vector<Sprite*> m_shadow;
 	ShadowObject* m_shadow;
 
 
-	//Œõ‚ª‚ ‚é‚©‚Ç‚¤‚©
+	//å…‰ãŒã‚ã‚‹ã‹ã©ã†ã‹
 	bool isLit = false;
 	
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	GameObject();
 
 	/// <summary>
-	/// ƒIƒuƒWƒFƒNƒg‚Ìƒ‚ƒfƒ‹‚ğì‚é
+	/// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¢ãƒ‡ãƒ«ã‚’ä½œã‚‹
 	/// </summary>
-	/// <param name="texture">ƒeƒLƒXƒ`ƒƒ[</param>
-	/// <param name="_width">•</param>
-	/// <param name="_height">‚‚³</param>
-	/// <param name="splitX">‰¡•ªŠ„</param>
-	/// <param name="splitY">c•ªŠ„</param>
+	/// <param name="texture">ãƒ†ã‚­ã‚¹ãƒãƒ£ãƒ¼</param>
+	/// <param name="_width">å¹…</param>
+	/// <param name="_height">é«˜ã•</param>
+	/// <param name="splitX">æ¨ªåˆ†å‰²</param>
+	/// <param name="splitY">ç¸¦åˆ†å‰²</param>
 	void CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	/// <summary>
-	/// ‰e‚Ìƒ‚ƒfƒ‹‚ğì‚é
+	/// å½±ã®ãƒ¢ãƒ‡ãƒ«ã‚’ä½œã‚‹
 	/// </summary>
-	/// <param name="texture">ƒeƒLƒXƒ`ƒƒ[</param>
-	/// <param name="_width">•</param>
-	/// <param name="_height">‚‚³</param>
-	/// <param name="splitX">‰¡•ªŠ„</param>
-	/// <param name="splitY">c•ªŠ„</param>
+	/// <param name="texture">ãƒ†ã‚­ã‚¹ãƒãƒ£ãƒ¼</param>
+	/// <param name="_width">å¹…</param>
+	/// <param name="_height">é«˜ã•</param>
+	/// <param name="splitX">æ¨ªåˆ†å‰²</param>
+	/// <param name="splitY">ç¸¦åˆ†å‰²</param>
 	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 
 	/// <summary>
-	/// ‰e‚Ì¶¬ˆÊ’u‚ğŒvZ‚·‚éŠÖ”
+	/// å½±ã®ç”Ÿæˆä½ç½®ã‚’è¨ˆç®—ã™ã‚‹é–¢æ•°
 	/// </summary>
-	/// <param name="lightPos">ŒõŒ¹‚ÌˆÊ’u</param>
-	/// <param name="objPos">ƒIƒuƒWƒFƒNƒg‚ÌˆÊ’u</param>
-	/// <returns>‰e‚ÌˆÊ’u</returns>
+	/// <param name="lightPos">å…‰æºã®ä½ç½®</param>
+	/// <param name="objPos">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®</param>
+	/// <returns>å½±ã®ä½ç½®</returns>
 	DirectX::XMFLOAT3 GenerateShadowPos(DirectX::XMFLOAT3 lightPos);
 
-	//–ˆ‰ñƒQ[ƒ€ƒ‹[ƒv‚ÅŒÄ‚Ño‚¹‚ê‚Ä‚é
+	//æ¯å›ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—ã§å‘¼ã³å‡ºã›ã‚Œã¦ã‚‹
 	void Update(DirectX::XMFLOAT3 lightPos);
 	void Update(void);
 
 
-	//ƒIƒuƒWƒFƒNƒg‚ğ•`‰æ‚·‚é
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æç”»ã™ã‚‹
 	void Draw(void);
 
 	~GameObject();

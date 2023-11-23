@@ -3,7 +3,7 @@
 
 Material::~Material()
 {
-	// このクラスが作ったオブジェクトだけを解放する
+	// 縺薙�ｮ繧ｯ繝ｩ繧ｹ縺御ｽ懊▲縺溘が繝悶ず繧ｧ繧ｯ繝医□縺代ｒ隗｣謾ｾ縺吶ｋ
 	SAFE_RELEASE(m_modelData.vertexBuffer);
 }
 
