@@ -1,6 +1,194 @@
-﻿  GameObject.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(45,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(46,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(54,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(55,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+﻿  Animation.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(26,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Assets.cpp
+  Camera.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Direct3D.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(119,66): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(120,5): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(119,9): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(119,9): message : 引数リスト '(int, const char [25], const char [33])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(120,5): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(138,67): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(139,5): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(138,9): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(138,9): message : 引数リスト '(int, const char [25], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(139,5): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(149,95): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(150,9): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(149,13): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(149,13): message : 引数リスト '(int, const char [40], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(150,9): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(181,51): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(182,5): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(181,9): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(181,9): message : 引数リスト '(int, const char [21], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(182,5): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(196,31): error C3688: リテラル サフィックス '銈ㄣ儵銉' が無効です。リテラル演算子またはリテラル演算子テンプレート 'operator ""銈ㄣ儵銉' が見つかりません
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(196,13): error C2660: 'MessageBoxA': 関数に 2 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(196,13): message : 引数リスト '(int, long)' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(211,27): error C3688: リテラル サフィックス '銈ㄣ儵銉' が無効です。リテラル演算子またはリテラル演算子テンプレート 'operator ""銈ㄣ儵銉' が見つかりません
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(211,9): error C2660: 'MessageBoxA': 関数に 2 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(211,9): message : 引数リスト '(int, long)' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(221,31): error C3688: リテラル サフィックス '銈ㄣ儵銉' が無効です。リテラル演算子またはリテラル演算子テンプレート 'operator ""銈ㄣ儵銉' が見つかりません
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(221,13): error C2660: 'MessageBoxA': 関数に 2 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(221,13): message : 引数リスト '(int, long)' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(242,102): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(243,13): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(242,17): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(242,17): message : 引数リスト '(int, const char [43], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(243,13): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(257,29): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(258,30): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(280,27): error C3688: リテラル サフィックス '銈ㄣ儵銉' が無効です。リテラル演算子またはリテラル演算子テンプレート 'operator ""銈ㄣ儵銉' が見つかりません
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(280,9): error C2660: 'MessageBoxA': 関数に 2 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(280,9): message : 引数リスト '(int, long)' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(301,76): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(302,5): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(301,9): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(301,9): message : 引数リスト '(int, const char [31], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(302,5): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(329,53): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(330,5): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(329,9): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(329,9): message : 引数リスト '(int, const char [23], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(330,5): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(339,57): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(340,5): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(339,9): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(339,9): message : 引数リスト '(int, const char [27], const char [34])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(340,5): error C2143: 構文エラー: ';' が '}' の前にありません。
+  Game.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Object.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\ObjectAnimation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  GameObject.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(45,15): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(46,15): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(54,15): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(55,15): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Input.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Input.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Input.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  KBInput.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Material.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Object.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Object.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Object.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  ObjectAnimation.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\ObjectAnimation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  ShadowObject.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  source.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\source.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  Sprite.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(22,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(22,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(27,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(28,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(29,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(30,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(64,79): error C2001: 定数が 2 行目に続いています。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(65,2): error C2143: 構文エラー: ')' が '}' の前にありません。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(64,3): error C2660: 'MessageBoxA': 関数に 3 個の引数を指定できません。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(9172,1): message : 'MessageBoxA' の宣言を確認してください
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(64,3): message : 引数リスト '(int, const char [37], const char [40])' を一致させようとしているとき
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(65,2): error C2143: 構文エラー: ';' が '}' の前にありません。
+  StaticAnimation.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  TestObject.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(41,17): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(46,36): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(47,36): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(70,25): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(71,25): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(72,34): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(73,34): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+  TrackCamera.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TrackCamera.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Object.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  UiObject.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\UiObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Object.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  WICTextureLoader.cpp
+  WinMain.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Object.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: ファイルは、現在のコード ページ (936) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(216,30): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(220,28): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
