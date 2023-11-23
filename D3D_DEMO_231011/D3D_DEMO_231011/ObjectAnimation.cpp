@@ -36,6 +36,7 @@ void ObjectAnimation::Update(void)
     //表示させるコマのUVを計算
     m_frameX = animeID % m_split.x;
 
+
     //UV座標更新
     Animation::Update();
 

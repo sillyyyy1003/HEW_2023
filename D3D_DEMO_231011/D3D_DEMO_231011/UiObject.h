@@ -2,7 +2,7 @@
 #include"Object.h"
 
 //uiに使われてるオブジェクト
-class UiObject:public Object
+class UiObject: public Object
 {
 public:
 	//初期化

@@ -1,4 +1,6 @@
-﻿Game.obj : error LNK2001: 无法解析的外部符号 "class TrackCamera * g_WorldCamera" (?g_WorldCamera@@3PEAVTrackCamera@@EA)
-    已定义且可能匹配的符号上的提示:
-      "class Camera * g_WorldCamera" (?g_WorldCamera@@3PEAVCamera@@EA)
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe : fatal error LNK1120: 1 个无法解析的外部命令
+﻿  GameObject.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(45,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(46,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(54,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(55,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

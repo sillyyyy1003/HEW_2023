@@ -14,6 +14,11 @@ struct VERTEX
 
 };
 
+struct BOX
+{
+	float fLeft, fTop, fRight, fBottom;
+};
+
 //定数バッファ用構造体
 struct CONSTBUFFER
 {

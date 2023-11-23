@@ -2,6 +2,7 @@
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
 #include "ObjectAnimation.h"
+#include "StaticAnimation.h"
 #include "TrackCamera.h"
 #include "KBInput.h"
 
@@ -15,24 +16,29 @@ Game::Game()
 	//オブジェクト作成
 	testWall = new Object(g_Assets->testWallbg, 1280, 720, 1, 1);
 	testGround = new Object(g_Assets->testGroundbg, 1280, 720, 1, 1);
-	//testChara = new TestObject();
 
 	//オブジェクトの初期設定・テクスチャの読み込み
 	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);
 
-	/*testChara->m_objSprite->CreateModel(g_Assets->testChara01, 200, 200, 1, 1);
-	testChara->m_shadowSprite->CreateModel(g_Assets->testChara01, 200, 200, 1, 1);*/
+	testTree = new GameObject();
+	testTree->CreateObject(g_Assets->testObj, 300, 300, 1, 1);
+	testTree->CreateShadow(g_Assets->testShadow, 300, 300, 1, 1);
 
-	//オブジェクトの投影を変える
+	
+
+	//影の初期設定
+
 
 
 	//アニメーションの設定
-	testWall->m_sprite->m_anime = new ObjectAnimation(1, 1);
+	testWall->m_sprite->m_anime = new StaticAnimation(1, 1);
 	testGround->m_sprite->m_anime = new ObjectAnimation(1, 1);
 	testChara->m_sprite->m_anime = new ObjectAnimation(3, 4);
 	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
-	/*testChara->m_objSprite->m_anime = new ObjectAnimation(1, 1);
-	testChara->m_shadowSprite->m_anime = new ObjectAnimation(1, 1);;*/
+
+	testTree->m_obj->m_anime = new StaticAnimation(1, 1);
+	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);
+
 
 
 	//初期位置設定
@@ -47,7 +53,10 @@ Game::Game()
 	testChara->m_sprite->m_pos.z = -0.5f;
 	testChara->m_sprite->m_scale = { 3.0f,3.0f,3.0f };
 
-	g_WorldCamera->TrackCamera::SetTarget(testChara);
+	//影の位置設定
+	testTree->m_shadow->m_obj->m_pos.z = 1.99f;
+
+	//g_WorldCamera->TrackCamera::SetTarget(testChara);
 
 	
 }
@@ -76,6 +85,7 @@ void Game::GameUpdate(void)
 
 void Game::TitleUpdate(void)
 {	
+
 	
 	
 	
@@ -96,11 +106,14 @@ void Game::TitleUpdate(void)
 		testChara->m_sprite->m_pos.x += 0.02f;
 	}
 
+
 	testWall->Update();
+
+	//背景
 	testGround->Update();
 	testChara->Update();
-	
 
+	testTree->Update(XMFLOAT3{ 0.0f, 0.0f, -2.0f });
 
 }
 
@@ -116,9 +129,10 @@ void Game::ResultUpdate(void)
 
 Game::~Game()
 {
-	
-	
-	
+	delete testChara;
+	delete testWall;
+	delete testGround;
+
 }
 
 void Game::GameDraw()
@@ -161,6 +175,11 @@ void Game::TitleDraw(void)
 	testGround->Draw();
 
 	testChara->Draw();
+
+	testTree->Draw();
+
+
+	
 }
 
 void Game::StageDraw(void)
@@ -175,3 +194,4 @@ void Game::SetGameScene(GAMESCENE scene)
 {
 	m_gameScene = scene;
 }
+

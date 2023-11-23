@@ -92,19 +92,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	//投影行列作成->透視投影を使う
 	XMMATRIX matrixProj = matrixView * matrixProjPerspective;
 	
-	/*
-	//if (isPerspective) 
-	//{
-	//	//透視投影を使う時
-	//	matrixProj = matrixView * matrixProjPerspective;
-	//}
-	//else
-	//{
-	//	//平行投影を使う時
-	//	matrixProj = matrixView * matrixProjParallel;
-	//}
-	*/
-	
 
 	//ワールド変換行列の作成
 	//移動行列
@@ -121,7 +108,7 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 
 	//UVアニメーション行列作成
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
-	
+
 	cb.matrixProj = XMMatrixTranspose(matrixProj);
 	cb.matrixTex = XMMatrixTranspose(matrixTex);
 	cb.matrixWorld = XMMatrixTranspose(matrixWorld);

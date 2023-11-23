@@ -28,9 +28,6 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectAnimation.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
@@ -55,6 +52,17 @@
     <ClCompile Include="TestObject.cpp">
       <Filter>TestObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowObject.cpp" />
+    <ClCompile Include="ObjectAnimation.cpp">
+      <Filter>Animation\ObjectAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticAnimation.cpp">
+      <Filter>Animation\StaticAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -73,9 +81,6 @@
       <Filter>Assets</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="Direct3D\Shader\PixelShader.h">
@@ -108,6 +113,16 @@
     <ClInclude Include="TestObject.h">
       <Filter>TestObject</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowObject.h" />
+    <ClInclude Include="ObjectAnimation.h">
+      <Filter>Animation\ObjectAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticAnimation.h">
+      <Filter>Animation\StaticAnimation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -131,9 +146,6 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{ae88ca4d-50d5-41ae-9e8f-7273dd0176bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseObject">
-      <UniqueIdentifier>{7411a4ef-3e2d-4a21-96f5-5fe4536bc471}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
     </Filter>
@@ -145,6 +157,18 @@
     </Filter>
     <Filter Include="TestObject">
       <UniqueIdentifier>{05ce2e89-4541-4134-bb5d-06214c866565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{af014f85-2d18-43e8-a644-55e5fc0e7fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\ObjectAnimation">
+      <UniqueIdentifier>{d97b9648-d7f1-4be2-8174-82366a74c2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\StaticAnimation">
+      <UniqueIdentifier>{e3ec9626-bdcf-4334-b4e6-6f15e7860f5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseObject">
+      <UniqueIdentifier>{7411a4ef-3e2d-4a21-96f5-5fe4536bc471}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
