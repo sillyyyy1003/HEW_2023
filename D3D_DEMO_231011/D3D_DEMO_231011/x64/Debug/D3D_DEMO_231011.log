@@ -1,6 +1,50 @@
-﻿  GameObject.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(45,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(46,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(54,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(55,15): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+﻿  Direct3D.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(257,29): warning C4244: “=”: 从“UINT”转换到“FLOAT”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(258,30): warning C4244: “=”: 从“UINT”转换到“FLOAT”，可能丢失数据
+  Game.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Object.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectAnimation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\StaticAnimation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\KBInput.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  source.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\source.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  Sprite.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Material.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(22,22): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(22,16): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,22): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,16): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(27,33): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(28,33): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(29,32): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(30,36): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(64,115): error C3688: 文本后缀“繧ｨ繝ｩ繝ｼ逋ｺ逕・”无效；未找到文文本运算符或文本运算符模板“operator """"繧ｨ繝ｩ繝ｼ逋ｺ逕・”
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(64,137): error C2660: “MessageBoxA”: 函数不接受 2 个参数
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winuser.h(9153,1): message : 参见“MessageBoxA”的声明
+  StaticAnimation.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\StaticAnimation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  正在生成代码...
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(249): warning C4715: “D3D_CreateShader”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(345): warning C4715: “D3D_CreateBlendState”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(199): warning C4715: “D3D_CreateDepthStencil”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(282): warning C4715: “D3D_CreateSampler”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(122): warning C4715: “D3D_CreateDevice”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(153): warning C4715: “D3D_CreateRenderTarget”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(304): warning C4715: “D3D_CreateBuffer”: 不是所有的控件路径都返回值
