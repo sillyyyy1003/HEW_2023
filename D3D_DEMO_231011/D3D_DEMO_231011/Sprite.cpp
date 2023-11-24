@@ -1,4 +1,4 @@
-#include "Sprite.h"
+﻿#include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
 
@@ -61,6 +61,7 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 
 	if (FAILED(hr)) {
 		throw hr;
+		
 		MessageBoxA(NULL, "頂点バッファの作成失敗！", "エラー発生", MB_OK | MB_ICONERROR);
 	}
 

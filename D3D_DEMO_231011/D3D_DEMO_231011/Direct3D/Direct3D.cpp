@@ -18,18 +18,13 @@ ID3D11Buffer* g_ConstantBuffer; //定数バッファ用変数
 
 D3D_DATA* GetD3D_DATA(void) { return g_pD3D; }
 
-ID3D11Device* GetD3D_Device(void){ return g_pD3D->Device; }
+ID3D11Device* GetD3D_Device(void) { return g_pD3D->Device; }
 
-ID3D11DeviceContext* GetD3D_Context(void){ return g_pD3D->Context; }
+ID3D11DeviceContext* GetD3D_Context(void) { return g_pD3D->Context; }
 
-ID3D11BlendState* GetBlendAlpha(void){ return g_pD3D->BlendAlpha; }
+ID3D11BlendState* GetBlendAlpha(void) { return g_pD3D->BlendAlpha; }
 
-ID3D11BlendState* GetBlendAdd(void){ return g_pD3D->BlendAdd;}
-
-void SetBlendState(ID3D11BlendState* _blendState)
-{
-     GetD3D_Context()->OMSetBlendState(_blendState,NULL, 0xffffffff);
-}
+ID3D11BlendState* GetBlendAdd(void) { return g_pD3D->BlendAdd; }
 
 
 
@@ -70,7 +65,7 @@ void DirectXInit(HWND hWnd)
 
 BOOL D3D_CreateDevice(HWND hwnd)
 {
-	//HRESULT型・・・Windowsプログラムで関数実行の成功/失敗を受け取る
+    //HRESULT型・・・Windowsプログラムで関数実行の成功/失敗を受け取る
     HRESULT  hr;
 
 
@@ -79,11 +74,11 @@ BOOL D3D_CreateDevice(HWND hwnd)
     CRect                rect;
     //ウインドウのクライアント領域（実際に描画できる範囲）のサイズを取得
     GetClientRect(hwnd, &rect);
-    g_ScreenWidth  = rect.Width();
+    g_ScreenWidth = rect.Width();
     g_ScreenHeight = rect.Height();
 
     D3D_FEATURE_LEVEL pLevels[] = { D3D_FEATURE_LEVEL_11_0 };
-    D3D_FEATURE_LEVEL level;    
+    D3D_FEATURE_LEVEL level;
 
     DXGI_SWAP_CHAIN_DESC scDesc;
     ZeroMemory(&scDesc, sizeof(scDesc));
@@ -116,10 +111,11 @@ BOOL D3D_CreateDevice(HWND hwnd)
     {
         return FALSE;
         //エラー表示
-        MessageBoxA(NULL,"デバイス作成失敗", "エラー",MB_OK | MB_ICONERROR);
+        MessageBoxA(NULL, "デバイス作成失敗", "エラー", MB_OK | MB_ICONERROR);
     }
 
 }
+
 
 BOOL D3D_CreateRenderTarget(void)
 {
@@ -134,7 +130,7 @@ BOOL D3D_CreateRenderTarget(void)
     {
         //取得失敗した場合
         return FALSE;
-        //エラー表示//error
+        //エラー表示
         MessageBoxA(NULL, "バッファ取得失敗", "エラー", MB_OK | MB_ICONERROR);
     }
     else
@@ -151,6 +147,7 @@ BOOL D3D_CreateRenderTarget(void)
     }
 
 }
+
 
 BOOL D3D_CreateDepthStencil(void)
 {
@@ -173,14 +170,14 @@ BOOL D3D_CreateDepthStencil(void)
     txDesc.CPUAccessFlags = 0;
     txDesc.MiscFlags = 0;
     hr = g_pD3D->Device->CreateTexture2D(&txDesc, NULL, &(g_pD3D->DepthStencilTexture));
-    
-    if (FAILED(hr)) 
-    {   
+
+    if (FAILED(hr))
+    {
         //エラー表示
         return FALSE;
         MessageBoxA(NULL, "CreateTexture2d Fail", "エラー", MB_OK | MB_ICONERROR);
     }
-    else 
+    else
     {
 
         D3D11_DEPTH_STENCIL_VIEW_DESC dsDesc;
@@ -195,8 +192,9 @@ BOOL D3D_CreateDepthStencil(void)
             //エラー表示
             MessageBoxA(NULL, "深度ステンシルバッファ作成失敗", "エラー", MB_OK | MB_ICONERROR);
         }
-    }   
+    }
 }
+
 
 
 BOOL D3D_CreateShader(void)
@@ -229,7 +227,7 @@ BOOL D3D_CreateShader(void)
 
                 // UV座標があるということを伝える
                 { "TEX",    0, DXGI_FORMAT_R32G32_FLOAT, 0,D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-                
+
                 //追加情報ここに↓
             };
 
@@ -244,20 +242,21 @@ BOOL D3D_CreateShader(void)
 
         }
     }
-   
+
 
 }
 
+
 void D3D_SetViewPort(void)
 {
-   
-   //画面分割などに使う、描画領域の指定のこと
-   g_pD3D->Viewport.TopLeftX = 0;
-   g_pD3D->Viewport.TopLeftY = 0;
-   g_pD3D->Viewport.Width = g_ScreenWidth;
-   g_pD3D->Viewport.Height = g_ScreenHeight;
-   g_pD3D->Viewport.MinDepth = 0.0f;
-   g_pD3D->Viewport.MaxDepth = 1.0f;
+
+    //画面分割などに使う、描画領域の指定のこと
+    g_pD3D->Viewport.TopLeftX = 0;
+    g_pD3D->Viewport.TopLeftY = 0;
+    g_pD3D->Viewport.Width = g_ScreenWidth;
+    g_pD3D->Viewport.Height = g_ScreenHeight;
+    g_pD3D->Viewport.MinDepth = 0.0f;
+    g_pD3D->Viewport.MaxDepth = 1.0f;
 }
 
 BOOL D3D_CreateSampler(void)
@@ -273,7 +272,7 @@ BOOL D3D_CreateSampler(void)
     smpDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
     smpDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
     smpDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-    hr =g_pD3D->Device->CreateSamplerState(&smpDesc, &(g_pD3D->Sampler));
+    hr = g_pD3D->Device->CreateSamplerState(&smpDesc, &(g_pD3D->Sampler));
     if (FAILED(hr)) {
         return FALSE;
         //エラー表示
@@ -300,7 +299,7 @@ BOOL D3D_CreateBuffer(void)
         //エラー表示
         MessageBoxA(NULL, "定数バッファ作成失敗", "エラー", MB_OK | MB_ICONERROR);
     }
-    
+
 }
 
 BOOL D3D_CreateBlendState(void)
@@ -320,7 +319,7 @@ BOOL D3D_CreateBlendState(void)
     BlendState.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
     BlendState.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
     BlendState.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-    
+
     //透過処理の設定を作る
     hr = g_pD3D->Device->CreateBlendState(&BlendState, &(g_pD3D->BlendAlpha));
     if (FAILED(hr)) {
@@ -338,7 +337,7 @@ BOOL D3D_CreateBlendState(void)
         //エラー表示
         MessageBoxA(NULL, "BlendStateAddictive Failed", "エラー", MB_OK | MB_ICONERROR);
     }
-    
+
     //ブレンドステートの設定
     g_pD3D->Context->OMSetBlendState(g_pD3D->BlendAlpha, NULL, 0xffffffff);
 
@@ -379,7 +378,7 @@ void D3D_ClearScreen(void)
 
 void D3D_Release(void)
 {
-	//POINTERメモリを解放
+    //POINTERメモリを解放
     SAFE_RELEASE(g_pD3D->Device);
     SAFE_RELEASE(g_pD3D->Context);
     SAFE_RELEASE(g_pD3D->SwapChain);
@@ -397,13 +396,11 @@ void D3D_Release(void)
 
 
 
-	//malloc関数で確保したメモリを解放
-	if (g_pD3D != NULL)
-	{
-		free(g_pD3D); //mallocで確保したメモリを解放する関数
-		g_pD3D = NULL;
-	}
+    //malloc関数で確保したメモリを解放
+    if (g_pD3D != NULL)
+    {
+        free(g_pD3D); //mallocで確保したメモリを解放する関数
+        g_pD3D = NULL;
+    }
 
 }
-
-
