@@ -2,18 +2,64 @@
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"
 #include "ObjectAnimation.h"
+#include "StaticAnimation.h"
 #include "TrackCamera.h"
+#include "KBInput.h"
 
 extern Assets* g_Assets;
+extern KBInput* g_KbInput;
+extern TrackCamera* g_WorldCamera;
+
 
 Game::Game()
 {
-	//ƒIƒuƒWƒFƒNƒg‰Šú‰»
-	testObject = new Object(g_Assets->textureTest, 1, 1, 3, 4);
-	//ƒAƒjƒ[ƒVƒ‡ƒ“‘¬“x‚ðÝ’è
-	testObject->m_sprite->m_anime->SetAnimeSpeed(0.01f);
-	//ƒAƒjƒ[ƒVƒ‡ƒ“ƒpƒ^[ƒ“‚ðÝ’è
-	testObject->m_anime->SetAnimePattern(1);
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆä½œæˆ
+	testWall = new Object(g_Assets->testWallbg, 1280, 720, 1, 1);
+	testGround = new Object(g_Assets->testGroundbg, 1280, 720, 1, 1);
+	testWall->m_sprite->m_scale = { 1.0, 1.0, 1.0 };
+
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åˆæœŸè¨­å®šãƒ»ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®èª­ã¿è¾¼ã¿
+	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);
+
+	testTree = new GameObject();
+	testTree->CreateObject(g_Assets->testObj, 300, 300, 1, 1);
+	testTree->CreateShadow(g_Assets->testShadow, 300, 300, 1, 1);
+
+	
+
+	//å½±ã®åˆæœŸè¨­å®š
+
+
+
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®è¨­å®š
+	testWall->m_sprite->m_anime = new StaticAnimation(1, 1);
+	testGround->m_sprite->m_anime = new ObjectAnimation(1, 1);
+	testChara->m_sprite->m_anime = new ObjectAnimation(3, 4);
+	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
+
+	testTree->m_obj->m_anime = new StaticAnimation(1, 1);
+	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);
+
+
+
+	//åˆæœŸä½ç½®è¨­å®š
+	testWall->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
+
+	testGround->m_sprite->m_pos = { 0.0f, 1.5f,2.0f};
+
+	testGround->m_sprite->m_rotation.x = 90;
+	testGround->m_sprite->m_pos.y = -360 * 1.25 / 96 + 1.5f;
+
+	testChara->m_sprite->m_pos.y = (-360 + 96) * 1.25 / 96 + 1.5f;
+	testChara->m_sprite->m_pos.z = -0.5f;
+	testChara->m_sprite->m_scale = { 3.0f,3.0f,3.0f };
+
+	//å½±ã®ä½ç½®è¨­å®š
+	testTree->m_shadow->m_obj->m_pos.z = 1.99f;
+
+	//g_WorldCamera->TrackCamera::SetTarget(testChara);
+
+	
 }
 
 void Game::GameUpdate(void)
@@ -39,13 +85,43 @@ void Game::GameUpdate(void)
 }
 
 void Game::TitleUpdate(void)
-{
-	testObject->Update();
+{	
+
+	
+	
+	
+	if (g_KbInput->GetKeyPress(VK_UP))
+	{
+		testChara->m_sprite->m_pos.z += 0.02f;
+
+	}
+	if (g_KbInput->GetKeyPress(VK_DOWN)) {
+		testChara->m_sprite->m_pos.z -= 0.02f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_LEFT)) {
+		testChara->m_sprite->m_pos.x -= 0.02f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_RIGHT)) {
+		testChara->m_sprite->m_pos.x += 0.02f;
+	}
+
+
+	testWall->Update();
+
+	//èƒŒæ™¯
+	testGround->Update();
+	testChara->Update();
+
+	testTree->Update(XMFLOAT3{ 0.0f, 0.0f, -2.0f });
+
 }
 
 void Game::StageUpdate(void)
 {
 }
+
 
 void Game::ResultUpdate(void)
 {
@@ -54,7 +130,10 @@ void Game::ResultUpdate(void)
 
 Game::~Game()
 {
-	delete testObject;
+	delete testChara;
+	delete testWall;
+	delete testGround;
+
 }
 
 void Game::GameDraw()
@@ -62,11 +141,10 @@ void Game::GameDraw()
 
 	D3D_ClearScreen();
 
-	//============ ‚±‚±‚©‚ç•`‰æˆ— ============//
+	//============ ã“ã“ã‹ã‚‰æç”»å‡¦ç† ============//
 	
-	switch (m_gameScene) 
-	{
-		switch (m_gameScene)
+	
+	switch (m_gameScene)
 		{
 		case TITLE:
 
@@ -85,17 +163,24 @@ void Game::GameDraw()
 
 		}
 
-	}
-
-	//============ ‚±‚±‚Ü‚Å•`‰æˆ— ============//
+	//============ ã“ã“ã¾ã§æç”»å‡¦ç† ============//
 	 
-	//ƒ_ƒuƒ‹ƒoƒbƒtƒ@‚ÌØ‚è‘Ö‚¦‚ðs‚¢‰æ–Ê‚ðXV‚·‚é
+	//ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ã®åˆ‡ã‚Šæ›¿ãˆã‚’è¡Œã„ç”»é¢ã‚’æ›´æ–°ã™ã‚‹
 	GetD3D_DATA()->SwapChain->Present(0, 0);
 }
 
 void Game::TitleDraw(void)
 {
-	testObject->m_sprite->Draw();
+	testWall->Draw();
+
+	testGround->Draw();
+
+	testChara->Draw();
+
+	testTree->Draw();
+
+
+	
 }
 
 void Game::StageDraw(void)
@@ -110,3 +195,4 @@ void Game::SetGameScene(GAMESCENE scene)
 {
 	m_gameScene = scene;
 }
+

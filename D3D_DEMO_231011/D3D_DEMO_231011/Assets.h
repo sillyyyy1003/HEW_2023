@@ -6,10 +6,22 @@
 class Assets
 {
 public:
+
 	//----------------------------//
 	// 変数
 	//----------------------------//
-	ID3D11ShaderResourceView* textureTest;
+	
+	//テスト用 Using Shadow
+	ID3D11ShaderResourceView* testObj;		//オブジェクト用テクスチャ(木）
+	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ(木の影)
+
+	ID3D11ShaderResourceView* testWallbg;	//壁用テクスチャ
+	ID3D11ShaderResourceView* testGroundbg;	//地面用テクスチャ
+
+	ID3D11ShaderResourceView* testChara01;	//キャラ用テクスチャ
+
+
+
 
 
 public:

@@ -1,7 +1,7 @@
 #include "Animation.h"
 
 //----------------------------//
-// グローバル変数定義
+// ﾂグﾂδ債ーﾂバﾂδ仰米篠青板墜債義
 //----------------------------//
 
 Animation::Animation(int splitX, int splitY)

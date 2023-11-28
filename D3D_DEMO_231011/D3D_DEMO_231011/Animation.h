@@ -7,75 +7,75 @@ class Animation
 {
 protected:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
-	// UVƒAƒjƒ[ƒVƒ‡ƒ“—pƒIƒtƒZƒbƒg
+	// UVã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ç”¨ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 	DirectX::XMFLOAT2 m_offsetUV = { 0.0f,0.0f };
 
-	//‰¡EcƒtƒŒ[ƒ€‰½”Ô–Ú
-	int m_frameX = 0;	//‰¡‰½”Ô–Ú
-	int m_frameY = 0;	//c‰½”Ô–Ú¨ƒAƒjƒƒpƒ^[ƒ“
+	//æ¨ªãƒ»ç¸¦ãƒ•ãƒ¬ãƒ¼ãƒ ä½•ç•ªç›®
+	int m_frameX = 0;	//æ¨ªä½•ç•ªç›®
+	int m_frameY = 0;	//ç¸¦ä½•ç•ªç›®â†’ã‚¢ãƒ‹ãƒ¡ãƒ‘ã‚¿ãƒ¼ãƒ³
 
-	//ƒeƒNƒXƒ`ƒƒ‚Ìc‰¡•ªŠ„
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç¸¦æ¨ªåˆ†å‰²
 	DirectX::XMINT2 m_split = { 1,1 };
 
-	//‰¡ƒtƒŒ[ƒ€‚Ì‰½”Ô–Ú‚©‚çƒXƒ^[ƒg
+	//æ¨ªãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½•ç•ªç›®ã‹ã‚‰ã‚¹ã‚¿ãƒ¼ãƒˆ
 	int m_StartFrame = 0;
 
-	//‰¡ƒtƒŒ[ƒ€‚Ì‰½”Ô–Ú‚Ü‚ÅI‚í‚é
+	//æ¨ªãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½•ç•ªç›®ã¾ã§çµ‚ã‚ã‚‹
 	int m_endFrame = 0;
 
-	// ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒJƒEƒ“ƒ^[
+	// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
 	float m_animeCounter = 0.0f;
 
-	//Ä¶‘¬“x
+	//å†ç”Ÿé€Ÿåº¦
 	float m_animeSpeed = 0.0f;
 
 public:
 
-	//Œ»ÝÄ¶’†‚©‚ð•\‚·•Ï”
+	//ç¾åœ¨å†ç”Ÿä¸­ã‹ã‚’è¡¨ã™å¤‰æ•°
 	bool isPlaying = true;
 
 
 public:
 	/// <summary>
-	/// ‰Šú‰»@c‰¡•ªŠ„‚ðÝ’è‚·‚é
+	/// åˆæœŸåŒ–ã€€ç¸¦æ¨ªåˆ†å‰²ã‚’è¨­å®šã™ã‚‹
 	/// </summary>
-	/// <param name="splitX">‰¡•ªŠ„”</param>
-	/// <param name="splitY">c•ªŠ„”</param>
+	/// <param name="splitX">æ¨ªåˆ†å‰²æ•°</param>
+	/// <param name="splitY">ç¸¦åˆ†å‰²æ•°</param>
 	Animation(int splitX,int splitY);
 
 	/// <summary>
-	/// c‰¡•ªŠ„‚Ì‰ŠúÝ’è
+	/// ç¸¦æ¨ªåˆ†å‰²ã®åˆæœŸè¨­å®š
 	/// </summary>
-	/// <param name="_split">c‰¡•ªŠ„ SPRITE‚Æˆê’v‚·‚é</param>
+	/// <param name="_split">ç¸¦æ¨ªåˆ†å‰² SPRITEã¨ä¸€è‡´ã™ã‚‹</param>
 	void SetSplit(XMINT2 _split);
 
 
 	DirectX::XMINT2 GetSplit(void);
 		
 	/// <summary>
-	/// UVÀ•W‚ÌXV‚ðs‚¤ŠÖ”
+	/// UVåº§æ¨™ã®æ›´æ–°ã‚’è¡Œã†é–¢æ•°
 	/// </summary>
-	/// NOTE:Œp³ƒNƒ‰ƒX‚ÅƒAƒjƒƒe[ƒuƒ‹‚ÌÝ’è‚Æc‰¡‚ÌƒAƒjƒXV‚ðs‚¤
+	/// NOTE:ç¶™æ‰¿ã‚¯ãƒ©ã‚¹ã§ã‚¢ãƒ‹ãƒ¡ãƒ†ãƒ¼ãƒ–ãƒ«ã®è¨­å®šã¨ç¸¦æ¨ªã®ã‚¢ãƒ‹ãƒ¡æ›´æ–°ã‚’è¡Œã†
 	virtual void Update(void);
 
 	/// <summary>
-	/// Ä¶‘¬“x‚ðÝ’è‚·‚éŠÖ”
+	/// å†ç”Ÿé€Ÿåº¦ã‚’è¨­å®šã™ã‚‹é–¢æ•°
 	/// </summary>
-	/// <param name="_speed">Ä¶‘¬“x</param>
+	/// <param name="_speed">å†ç”Ÿé€Ÿåº¦</param>
 	void SetAnimeSpeed(float _speed);
 
 	/// <summary>
-	/// ƒAƒjƒ[ƒVƒ‡ƒ“ƒpƒ^[ƒ“‚ðÝ’è‚·‚éŠÖ”
+	/// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’è¨­å®šã™ã‚‹é–¢æ•°
 	/// </summary>
-	/// <param name="_animePattern">cƒtƒŒ[ƒ€‰½”Ô–Ú ƒAƒjƒ[ƒVƒ‡ƒ“‚Ìƒpƒ^[ƒ“</param>
+	/// <param name="_animePattern">ç¸¦ãƒ•ãƒ¬ãƒ¼ãƒ ä½•ç•ªç›® ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒ‘ã‚¿ãƒ¼ãƒ³</param>
 	void SetAnimePattern(int _animePattern);
 
 	/// <summary>
-	/// UVÀ•W‚ð•Ô‚·ŠÖ”
+	/// UVåº§æ¨™ã‚’è¿”ã™é–¢æ•°
 	/// </summary>
-	/// <returns>XV‚³‚ê‚½UVÀ•W</returns>
+	/// <returns>æ›´æ–°ã•ã‚ŒãŸUVåº§æ¨™</returns>
 	DirectX::XMFLOAT2 GetUVOffset(void);
 
 };

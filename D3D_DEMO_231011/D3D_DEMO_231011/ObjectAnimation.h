@@ -8,9 +8,8 @@ public:
 
 	ObjectAnimation(int splitX, int splitY);
 
-
 	/// <summary>
-	/// ‚±‚Ì’†‚ÉanimeTable‚ğ•ÏX
+	/// ã“ã®ä¸­ã«animeTableã‚’å¤‰æ›´
 	/// </summary>
 	void Update(void) override;
 

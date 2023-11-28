@@ -1,4 +1,4 @@
-#include "ObjectAnimation.h"
+ï»¿#include "ObjectAnimation.h"
 
 ObjectAnimation::ObjectAnimation(int splitX, int splitY):Animation(splitX,splitY)
 {
@@ -7,38 +7,37 @@ ObjectAnimation::ObjectAnimation(int splitX, int splitY):Animation(splitX,splitY
 
 void ObjectAnimation::Update(void)
 {
-    //‚±‚±‚ÅƒAƒjƒ[ƒVƒ‡ƒ“ƒpƒ^[ƒ“‚ğ•ÏX
-    int animeTable[][32] =
+    //ã“ã“ã§ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‘ã‚¿ãƒ¼ãƒ³ã‚’å¤‰æ›´
+    int animeTable[32] = { 0, 0, 1, 2, 2, 1, -1 };
+
+    // è¡¨ç¤ºã•ã›ã‚‹ã‚³ãƒIDã‚’å–å¾—
+    int animeID = animeTable[(int)Animation::m_animeCounter];
+
+ 
+    if (Animation::isPlaying)
     {
-        // 0 ‰½‚àƒAƒjƒ[ƒVƒ‡ƒ“‚µ‚È‚¢ƒpƒ^[ƒ“
-       {0,-1},// -1‚ª—ˆ‚½‚çÅ‰‚É–ß‚é
-        // 1 ‰ºŒü‚«
-       { 0, 0, 1, 2, 2, 1, -1 },
-       // 2 ¶Œü‚«
-       { 3, 3, 4, 5, 5, 4, -1 },
-       // 3 ‰EŒü‚«
-       { 6, 6, 7, 8, 8, 7, -1 },
-       // 4 ãŒü‚«
-       { 9, 9, 10, 11, 11, 10, -1 },
-
-    };
-
-    int animeID = animeTable[Animation::m_frameY][(int)Animation::m_animeCounter];
-
-    if (Animation::isPlaying) 
-    {
+        // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ã‚’é€²ã‚ã‚‹
         Animation::m_animeCounter += Animation::m_animeSpeed;
 
-        if (animeID == -1) {
-
+        //ãƒ«ãƒ¼ãƒ—ã™ã‚‹å ´åˆ
+        if (animeTable[(int)Animation::m_animeCounter] == -1) 
+        {
+            Animation::m_animeCounter = 0.0f;
+        }
+        
+        //ãƒ«ãƒ¼ãƒ—ã—ãªã„å ´åˆ
+        if (animeTable[(int)Animation::m_animeCounter] == -2) {
+            isPlaying = false;
             Animation::m_animeCounter = 0.0f;
         }
 
     }
 
-    //c‰¡ƒ}ƒXXV
+    //è¡¨ç¤ºã•ã›ã‚‹ã‚³ãƒã®UVã‚’è¨ˆç®—
     m_frameX = animeID % m_split.x;
 
+
+    //UVåº§æ¨™æ›´æ–°
     Animation::Update();
 
 

@@ -4,41 +4,41 @@
 
 
 /// <summary>
-/// ’¸“_ƒoƒbƒtƒ@‚ÆƒeƒNƒXƒ`ƒƒ‚ğ•Û‘¶‚·‚é\‘¢‘Ì
+/// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä¿å­˜ã™ã‚‹æ§‹é€ ä½“
 /// </summary>
 struct MODELDATA 
 {
-	ID3D11Buffer*				vertexBuffer;			//’¸“_ƒoƒbƒtƒ@
-	ID3D11ShaderResourceView*	texture;				//ƒeƒNƒXƒ`ƒƒ
+	ID3D11Buffer*				vertexBuffer;			//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	ID3D11ShaderResourceView*	texture;				//ãƒ†ã‚¯ã‚¹ãƒãƒ£
 
 };
 
 /// <summary>
-/// ƒ}ƒeƒŠƒAƒ‹‚ğ•Û‘¶‚·‚éŠÖ”
+/// ãƒãƒ†ãƒªã‚¢ãƒ«ã‚’ä¿å­˜ã™ã‚‹é–¢æ•°
 /// </summary>
 class Material
 {
 
 protected:
 	
-	//ƒ‚ƒfƒ‹î•ñ
+	//ãƒ¢ãƒ‡ãƒ«æƒ…å ±
 	MODELDATA m_modelData = {};
 
 public:
 
 	//----------------------------//
-	// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾
+	// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 	//----------------------------//
 
 	/*
-		ƒfƒXƒgƒ‰ƒNƒ^	
+		ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿	
 	*/
 	~Material();
 
 	/*
-		@brief	“Ç‚İ‚İÏ‚İ‚ÌƒeƒNƒXƒ`ƒƒ‚ğó‚¯æ‚é
-		@param	“Ç‚İ‚İÏ‚İ‚ÌƒeƒNƒXƒ`ƒƒƒ|ƒCƒ“ƒ^[
-		@return	–³‚µ
+		@brief	èª­ã¿è¾¼ã¿æ¸ˆã¿ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’å—ã‘å–ã‚‹
+		@param	èª­ã¿è¾¼ã¿æ¸ˆã¿ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒã‚¤ãƒ³ã‚¿ãƒ¼
+		@return	ç„¡ã—
 	*/
 	void SetTexture(ID3D11ShaderResourceView* _texture);
 
