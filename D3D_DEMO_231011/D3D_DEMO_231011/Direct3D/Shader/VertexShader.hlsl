@@ -1,17 +1,16 @@
 // 頂点シェーダー
-
 // 頂点のデータを表す構造体（受け取り用）
 struct VS_IN
 {
-        float4 pos : POSITION0; // 位置座標が入る
-        float2 tex : TEX;       // UV座標が入る
+    float4 pos : POSITION0; // 位置座標が入る
+    float2 tex : TEX; // UV座標が入る
 };
 
 // 頂点のデータを表す構造体（送信用） 
 struct VS_OUT
 {
-        float4 pos : SV_POSITION;
-        float2 tex : TEXCOORD;
+    float4 pos : SV_POSITION;
+    float2 tex : TEXCOORD;
 };
 
 // グローバル変数の宣言
@@ -31,7 +30,7 @@ cbuffer ConstBuffer : register(b0)
  
 
 // 頂点シェーダーのエントリポイント 
-VS_OUT vs_main( VS_IN input )
+VS_OUT vs_main(VS_IN input)
 {
     VS_OUT output;
  
