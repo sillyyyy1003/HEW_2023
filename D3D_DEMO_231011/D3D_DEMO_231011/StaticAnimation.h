@@ -1,8 +1,9 @@
-#pragma once
+﻿#pragma once
 #include "Animation.h"
 
 /// <summary>
-/// Ă~ćÉgíęé
+/// アニメーションがない
+/// uv座標の更新を行う
 /// </summary>
 class StaticAnimation :public Animation
 {

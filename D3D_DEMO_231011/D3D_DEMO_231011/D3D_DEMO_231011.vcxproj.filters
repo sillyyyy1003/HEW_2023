@@ -46,9 +46,6 @@
     <ClCompile Include="KBInput.cpp">
       <Filter>KeyboardInput</Filter>
     </ClCompile>
-    <ClCompile Include="UiObject.cpp">
-      <Filter>UIObject</Filter>
-    </ClCompile>
     <ClCompile Include="TestObject.cpp">
       <Filter>TestObject</Filter>
     </ClCompile>
@@ -63,6 +60,10 @@
       <Filter>Animation\StaticAnimation</Filter>
     </ClCompile>
     <ClCompile Include="source.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
+    <ClCompile Include="CanvasUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -107,9 +108,6 @@
     <ClInclude Include="KBInput.h">
       <Filter>KeyboardInput</Filter>
     </ClInclude>
-    <ClInclude Include="UiObject.h">
-      <Filter>UIObject</Filter>
-    </ClInclude>
     <ClInclude Include="TestObject.h">
       <Filter>TestObject</Filter>
     </ClInclude>
@@ -123,6 +121,10 @@
     <ClInclude Include="StaticAnimation.h">
       <Filter>Animation\StaticAnimation</Filter>
     </ClInclude>
+    <ClInclude Include="ColliderManager.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="DebugManager.h" />
+    <ClInclude Include="CanvasUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -149,9 +151,6 @@
     <Filter Include="Input">
       <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UIObject">
-      <UniqueIdentifier>{8938aaf3-6261-4777-bb2e-d481a2cd730c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="KeyboardInput">
       <UniqueIdentifier>{ddead9df-1d02-40a5-9189-4b62502369d4}</UniqueIdentifier>
     </Filter>
@@ -169,6 +168,9 @@
     </Filter>
     <Filter Include="BaseObject">
       <UniqueIdentifier>{7411a4ef-3e2d-4a21-96f5-5fe4536bc471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{94bb60dd-4e35-4e1a-805c-4cd122fda45c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

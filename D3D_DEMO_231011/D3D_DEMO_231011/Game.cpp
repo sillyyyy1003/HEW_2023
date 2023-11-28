@@ -16,6 +16,7 @@ Game::Game()
 	//オブジェクト作成
 	testWall = new Object(g_Assets->testWallbg, 1280, 720, 1, 1);
 	testGround = new Object(g_Assets->testGroundbg, 1280, 720, 1, 1);
+	testWall->m_sprite->m_scale = { 1.0, 1.0, 1.0 };
 
 	//オブジェクトの初期設定・テクスチャの読み込み
 	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);

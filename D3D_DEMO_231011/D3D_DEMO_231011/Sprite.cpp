@@ -62,7 +62,7 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	if (FAILED(hr)) {
 		throw hr;
 		
-		MessageBoxA(NULL, "頂点バッファの作成失敗！", "エラー発生", MB_OK | MB_ICONERROR);
+		MessageBoxA(NULL, "Create Model Failed!", "ERROR!", MB_OK | MB_ICONERROR);
 	}
 
 	//テクスチャを実装
@@ -79,20 +79,29 @@ void Sprite::InitPos(float x, float y, float z)
 
 void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 {
-
 	//カメラの行列作成
-	XMMATRIX matrixView = m_camera->GetMatrixView();
+	XMMATRIX matrixView;
+	//透視投影の行列
+	XMMATRIX matrixProjPerspective;
+	XMMATRIX matrixProj;
+
+	if(isUseCamera){//カメラを使う場合
+
+		//カメラの行列作成
+		matrixView = m_camera->GetMatrixView();
+		//透視投影の行列作成
+		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(90), RATIO_W / RATIO_H, 0.01f, 100.0f);
 	
-	//平行投影の行列作成
-	XMMATRIX matrixProjParallel = XMMatrixOrthographicLH(RATIO_W, RATIO_H, 0.0f, 3.0f);
+	}
+	else {//カメラを使わない→uiなどに使われている
+				
+		matrixView = XMMatrixIdentity();
+		matrixProjPerspective= XMMatrixIdentity();
+	}
 
-	//透視投影の行列作成
-	XMMATRIX matrixProjPerspective= XMMatrixPerspectiveFovLH(XMConvertToRadians(90), 16.0f / 9.0f, 0.01f, 100.0f);
 
-
-	//投影行列作成->透視投影を使う
-	XMMATRIX matrixProj = matrixView * matrixProjPerspective;
-	
+	//投影行列作成
+	matrixProj = matrixView * matrixProjPerspective;
 
 	//ワールド変換行列の作成
 	//移動行列
@@ -134,16 +143,16 @@ void Sprite::Draw(void)
 
 	//ピクセルシェーダーにテクスチャを渡す
 	GetD3D_Context()->PSSetShaderResources(0, 1, &Material::m_modelData.texture);
-
+	
+	//GetD3D_Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	
 	//vertexCount:描画する頂点数
 	GetD3D_Context()->Draw(6, 0);
-
 
 }
 
 Sprite::~Sprite(void)
 {
-	//
 	delete m_anime;
 }
 

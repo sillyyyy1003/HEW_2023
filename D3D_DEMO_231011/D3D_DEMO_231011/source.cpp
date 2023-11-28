@@ -1,4 +1,4 @@
-//void Game::TestCollision()
+﻿//void Game::TestCollision()
 //{
 //	BOUNDING_CIRCLE circle1 = testObj->GetBoundingCircle();// 操作しているオブジェクト
 //	BOUNDING_CIRCLE circle2 = testObj2->GetBoundingCircle();// 操作していないオブジェクト 

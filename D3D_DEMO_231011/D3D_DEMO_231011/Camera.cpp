@@ -2,7 +2,6 @@
 //Singleton インスタンス定義
 Camera* Camera::m_camera;
 
-
 DirectX::XMMATRIX Camera::GetMatrixView(void)
 {
     return m_MatrixView;

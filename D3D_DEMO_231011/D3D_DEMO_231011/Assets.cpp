@@ -14,6 +14,8 @@ Assets::Assets()
     testGroundbg = LoadTexture("assets/groundbg.png");
     testChara01 = LoadTexture("assets/char01.png");
 
+    debugFont = LoadTexture("assets/img/ASCIILib.png");
+
 }
 
 Assets::~Assets()
@@ -25,6 +27,7 @@ Assets::~Assets()
    SAFE_RELEASE(testGroundbg);	
    SAFE_RELEASE(testChara01);	
 
+   SAFE_RELEASE(debugFont);
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)

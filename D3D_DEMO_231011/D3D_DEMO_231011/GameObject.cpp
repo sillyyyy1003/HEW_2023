@@ -68,20 +68,25 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 	//return shadowPos;
 	*/
 
+
+	//ベクトル計算用の型に入れる
 	XMVECTOR objVector = XMLoadFloat3(&objPos);
 	XMVECTOR lightVector = XMLoadFloat3(&lightPos);
+	//	////光からオブジェクトのベクトルを計算する
 	XMVECTOR directionVector = XMVectorSubtract(objVector, lightVector);
 
-	// 假设墙壁垂直于地面，沿Z轴
+
+	// 壁と地面の角度が90度(假设墙壁垂直于地面，沿Z轴)
 	float wallZ = m_shadow->m_obj->m_pos.z;  // 墙壁的Z坐标
 
-	// 计算交点的Z值等于墙壁的Z值时的t
+	// 距離比率を計算する(计算交点的Z值等于墙壁的Z值时的t)
 	float t = (wallZ - lightPos.z) / XMVectorGetZ(directionVector);
 
+	//影の位置を計算する
 	XMFLOAT3 shadowPosition;
 	shadowPosition.x = lightPos.x + t * XMVectorGetX(directionVector);
 	shadowPosition.y = lightPos.y + t * XMVectorGetY(directionVector);
-	shadowPosition.z = wallZ;  // 墙面的Z值
+	shadowPosition.z = wallZ;  //影のｚ軸
 
 	return shadowPosition;
 }

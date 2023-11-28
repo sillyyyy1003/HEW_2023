@@ -62,12 +62,11 @@ public:
 
 	//カメラ
 	Camera* m_camera = nullptr;
+	bool isUseCamera = true;	//カメラを使うかどうか？
 
 	//アニメーション
 	Animation* m_anime = nullptr;
 
-	//平行投影か透視投影を使うの判断
-	bool isPerspective = false;
 public:
 
 	//----------------------------//
@@ -88,7 +87,7 @@ public:
 	/// <param name="_height">画面に描画する高さ</param>
 	/// <param name="splitX">横分割</param>
 	/// <param name="splitY">縦分割</param>
-	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	virtual void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	/// <summary>
 	/// 位置の初期化

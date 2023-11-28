@@ -134,6 +134,10 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CanvasUI.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="Direct3D\Direct3D.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -148,7 +152,6 @@
     <ClCompile Include="StaticAnimation.cpp" />
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="TrackCamera.cpp" />
-    <ClCompile Include="UiObject.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -156,6 +159,10 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Assets.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CanvasUI.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderManager.h" />
+    <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Direct3D\Direct3D.h" />
     <ClInclude Include="Direct3D\Shader\PixelShader.h" />
     <ClInclude Include="Direct3D\Shader\VertexShader.h" />
@@ -171,7 +178,6 @@
     <ClInclude Include="StaticAnimation.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="TrackCamera.h" />
-    <ClInclude Include="UiObject.h" />
     <ClInclude Include="WICTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
