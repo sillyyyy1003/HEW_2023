@@ -4,15 +4,15 @@
 struct BASEDATA 
 {
 
-	float x, y, z;		//ˆÊ’uÀ•W
-	float u, v;			//ƒeƒNƒXƒ`ƒƒ‚ÌUVÀ•W
+	float x, y, z;		//ä½ç½®åº§æ¨™
+	float u, v;			//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®UVåº§æ¨™
 
 };
 
 struct MODELDATA 
 {
-	ID3D11Buffer* m_VertexBuffer;			//’¸“_ƒoƒbƒtƒ@
-	ID3D11ShaderResourceView* m_Texture;	//ƒeƒNƒXƒ`ƒƒ
+	ID3D11Buffer* m_VertexBuffer;			//é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡
+	ID3D11ShaderResourceView* m_Texture;	//ãƒ†ã‚¯ã‚¹ãƒãƒ£
 
 };
 class Graphics
@@ -25,10 +25,10 @@ protected:
 public:
 
 	//----------------------------//
-	// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾
+	// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€
 	//----------------------------//
 	/*
-		ƒfƒXƒgƒ‰ƒNƒ^	
+		ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿	
 	*/
 	~Graphics();
 
@@ -40,9 +40,9 @@ public:
 	void SetTexture(ID3D11ShaderResourceView* _texture);
 
 	/*
-		@brief	•`‰æ‚Ìİ’è‚Æ•`‰æ
-		@param	–³‚µ
-		@return	–³‚µ
+		@brief	æç”»ã®è¨­å®šã¨æç”»
+		@param	ç„¡ã—
+		@return	ç„¡ã—
 	*/
 	virtual void Draw(void);
 

@@ -1,17 +1,18 @@
-#include "TrackCamera.h"
+Ôªø#include "TrackCamera.h"
+#include "KBInput.h"
 
 
-
+extern KBInput* g_KbInput;
 
 void TrackCamera::Update()
 {
-	if (m_targetObject != nullptr) //í«ê’Ç∑ÇÈèÍçá
+	if (m_targetObject != nullptr) //ËøΩË∑°„Åô„ÇãÂ†¥Âêà
 	{
-		//ÉJÉÅÉâÇÃà íuÇçXêV
+		//„Ç´„É°„É©„ÅÆ‰ΩçÁΩÆ„ÇíÊõ¥Êñ∞
 		DirectX::XMFLOAT3 camPos;
 		camPos.x = (m_targetObject->m_sprite->m_pos.x);
 		camPos.y = (m_targetObject->m_sprite->m_pos.y);
-		camPos.z = (m_targetObject->m_sprite->m_pos.z - 2.0f);	// áBå„ÇÎ2.0fÇ…ÉJÉÅÉâÇíuÇ≠
+		camPos.z = (m_targetObject->m_sprite->m_pos.z - 2.0f);	// ‚ë¢Âæå„Çç2.0f„Å´„Ç´„É°„É©„ÇíÁΩÆ„Åè
 		this->SetCameraPos(camPos);
 
 		//
@@ -20,7 +21,57 @@ void TrackCamera::Update()
 		this->SetFocusPos(camFocus);
 	}
 	
+	
 
+	/*
+	*if (g_KbInput->GetKeyPress(VK_UP)) 
+	{
+		m_CameraPos.z += 0.05f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_DOWN)) {
+
+		m_CameraPos.z -= 0.05f;
+	}
+	if (g_KbInput->GetKeyPress(VK_LEFT))
+	{
+		m_CameraPos.y += 0.01f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_RIGHT)) {
+		m_CameraPos.y -= 0.01f;
+	}
+
+
+	if (g_KbInput->GetKeyPress(VK_F1)) {
+		m_FocusPos.y += 0.01f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_F2)) {
+		m_FocusPos.y -= 0.01f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_F3)) {
+		m_FocusPos.z += 0.01f;
+	}
+
+	if (g_KbInput->GetKeyPress(VK_F4)) {
+		m_FocusPos.z -= 0.01f;
+	}
+
+*/
+
+
+	//RESET THE CAMERA
+	if (g_KbInput->GetKeyTrigger(VK_RETURN)) 
+	{
+		//„Ç´„É°„É©„ÅÆ‰ΩçÁΩÆ
+		m_CameraPos = XMFLOAT3(0.0f, 0.0f, -7.0f);
+		//Ê≥®Ë¶ñÁÇπ
+		m_FocusPos = XMFLOAT3(0.0f, 0.0f, 2.0f);
+	}
+
+	
 	Camera::Update();
 
 }

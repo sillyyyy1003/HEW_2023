@@ -1,53 +1,55 @@
-// ���_�V�F�[�_�[
-// ���_�̃f�[�^��\���\���́i�󂯎��p�j
+﻿// 頂点シェーダー
+
+// 頂点のデータを表す構造体（受け取り用）
 struct VS_IN
 {
-    float4 pos : POSITION0; // �ʒu���W������
-    float2 tex : TEX; // UV���W������
+        float4 pos : POSITION0; // 位置座標が入る
+        float2 tex : TEX;       // UV座標が入る
 };
 
-// ���_�̃f�[�^��\���\���́i���M�p�j 
+// 頂点のデータを表す構造体（送信用） 
 struct VS_OUT
 {
-    float4 pos : SV_POSITION;
-    float2 tex : TEXCOORD;
+        float4 pos : SV_POSITION;
+        float2 tex : TEXCOORD;
 };
 
-// �O���[�o���ϐ��̐錾
-// �萔�o�b�t�@�󂯎��p
+// グローバル変数の宣言
+// 定数バッファ受け取り用
 cbuffer ConstBuffer : register(b0)
 {
-    // UV���W�ړ��s��
+    // UV座標移動行列
     matrix matrixTex;
-    // ���e�s��
+    // 投影行列
     matrix matrixProj;
-    // ���[���h�ϊ��s��
+    // ワールド変換行列
     matrix matrixWorld;
-    //�}�e���A���F
+    //マテリアル色
     float4 materiaLDiffuse;
     
 }
  
 
-// ���_�V�F�[�_�[�̃G���g���|�C���g 
-VS_OUT vs_main(VS_IN input)
+// 頂点シェーダーのエントリポイント 
+VS_OUT vs_main( VS_IN input )
 {
     VS_OUT output;
  
-    // ���[���h�ϊ��s��𒸓_�Ɋ|����
+    // ワールド変換行列を頂点に掛ける
     input.pos = mul(input.pos, matrixWorld);
     
-    // ���s���e�̂��ߍs��𒸓_�Ɋ|����
+    // 平行投影のため行列を頂点に掛ける
     output.pos = mul(input.pos, matrixProj);
     
-    // UV���W���ړ�������
+    
+    // UV座標を移動させる
     float4 uv;
-    uv.xy = input.tex; // �s��|���Z�̂���float4�^�Ɉڂ�
+    uv.xy = input.tex; // 行列掛け算のためfloat4型に移す
     uv.z = 0.0f;
     uv.w = 1.0f;
-    uv = mul(uv, matrixTex); // UV���W�ƈړ��s����|���Z
+    uv = mul(uv, matrixTex); // UV座標と移動行列を掛け算
     
-    output.tex = uv.xy; // �|���Z�̌��ʂ𑗐M�p�ϐ��ɃZ�b�g
+    output.tex = uv.xy; // 掛け算の結果を送信用変数にセット
     
     return output;
 }

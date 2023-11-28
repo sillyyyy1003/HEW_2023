@@ -1,39 +1,39 @@
-// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+ï»¿// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 
-// ƒsƒNƒZƒ‹‚Ìî•ñ‚Ì\‘¢‘ÌiŽó‚¯Žæ‚è—pj
+// ãƒ”ã‚¯ã‚»ãƒ«ã®æƒ…å ±ã®æ§‹é€ ä½“ï¼ˆå—ã‘å–ã‚Šç”¨ï¼‰
 struct PS_IN
 {
-    // float4Œ^@¨@floatŒ^‚ª‚S‚Â‚Ì\‘¢‘Ì
-    float4 pos : SV_POSITION; // ƒsƒNƒZƒ‹‚Ì‰æ–Êã‚ÌÀ•W
-    float2 tex : TEXCOORD;  // ƒsƒNƒZƒ‹‚É‘Î‰ž‚·‚éƒeƒNƒXƒ`ƒƒÀ•W
+    // float4åž‹ã€€â†’ã€€floatåž‹ãŒï¼”ã¤ã®æ§‹é€ ä½“
+    float4 pos : SV_POSITION; // ãƒ”ã‚¯ã‚»ãƒ«ã®ç”»é¢ä¸Šã®åº§æ¨™
+    float2 tex : TEXCOORD;  // ãƒ”ã‚¯ã‚»ãƒ«ã«å¯¾å¿œã™ã‚‹ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
     
 };
 
-// ƒOƒ[ƒoƒ‹•Ï”‚ÌéŒ¾
-// ¦ƒVƒF[ƒ_[‚ÌƒOƒ[ƒoƒ‹•Ï”‚ÍACŒ¾ŒêƒvƒƒOƒ‰ƒ€‚©‚ç“n‚³‚ê‚½
-// @ƒf[ƒ^‚ðŽó‚¯Žæ‚é‚½‚ß‚ÉŽg‚¤B
-Texture2D myTexture : register(t0); //ƒeƒNƒXƒ`ƒƒ[
-SamplerState mySampler : register(s0); //ƒTƒ“ƒvƒ‰[
+// ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã®å®£è¨€
+// â€»ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°ã¯ã€Cè¨€èªžãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‹ã‚‰æ¸¡ã•ã‚ŒãŸ
+// ã€€ãƒ‡ãƒ¼ã‚¿ã‚’å—ã‘å–ã‚‹ãŸã‚ã«ä½¿ã†ã€‚
+Texture2D myTexture : register(t0); //ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¼
+SamplerState mySampler : register(s0); //ã‚µãƒ³ãƒ—ãƒ©ãƒ¼
 
 cbuffer ConstBuffer : register(b0)
 {
-    // UVÀ•WˆÚ“®s—ñ
+    // UVåº§æ¨™ç§»å‹•è¡Œåˆ—
     matrix matrixTex;
-    // “Š‰es—ñ
+    // æŠ•å½±è¡Œåˆ—
     matrix matrixProj;
-    // ƒ[ƒ‹ƒh•ÏŠ·s—ñ
+    // ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
     matrix matrixWorld;
-    //ƒ}ƒeƒŠƒAƒ‹F
+    //ãƒžãƒ†ãƒªã‚¢ãƒ«è‰²
     float4 materiaLDiffuse;
 
 }
 
-// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ÌƒGƒ“ƒgƒŠƒ|ƒCƒ“ƒg
+// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚¨ãƒ³ãƒˆãƒªãƒã‚¤ãƒ³ãƒˆ
 float4 ps_main(PS_IN input) : SV_Target
 {
-    // SampleŠÖ”¨ƒeƒNƒXƒ`ƒƒ‚©‚çŽw’è‚µ‚½UV‚ðŒ³‚ÉƒsƒNƒZƒ‹F‚ðŽæ‚Á‚Ä—ˆ‚é
+    // Sampleé–¢æ•°â†’ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‹ã‚‰æŒ‡å®šã—ãŸUVã‚’å…ƒã«ãƒ”ã‚¯ã‚»ãƒ«è‰²ã‚’å–ã£ã¦æ¥ã‚‹
     float4 color = myTexture.Sample(mySampler, input.tex);    
-    //ƒeƒNƒXƒ`ƒƒF‚Æƒ}ƒeƒŠƒAƒ‹F‚ð¬‚º‚é
+    //ãƒ†ã‚¯ã‚¹ãƒãƒ£è‰²ã¨ãƒžãƒ†ãƒªã‚¢ãƒ«è‰²ã‚’æ··ãœã‚‹
     return color * materiaLDiffuse;
     
     
