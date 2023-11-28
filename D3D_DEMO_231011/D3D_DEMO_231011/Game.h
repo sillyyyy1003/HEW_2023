@@ -1,50 +1,71 @@
-#pragma once
+﻿#pragma once
 #include "Object.h"
-#include"TestObject.h"
+#include "TestObject.h"
+#include "GameObject.h"
 
 
-
-extern Camera* g_WorldCamera;
 class Game
 {
 private:
 	enum GAMESCENE 
 	{
-		TITLE,		//�^�C�g��
-		STAGE1,		//�Q�[���V�[��
-		RESULT,		//���U���g�V�[��
+		TITLE,		//タイトル
+		STAGE1,		//ゲームシーン
+		RESULT,		//リザルトシーン
 	};
 
 	GAMESCENE m_gameScene = TITLE;
 
 private:
+	Object* testWall;
+	Object* testGround;
+	Object* testChara;	//プレイヤー
 
-	//Object* testObject;		//test�p�L����
-	TestObject* testObj;		//test�p�L����
-	Object* testBg;				//test�p�w�i
-	
+	GameObject* testTree;	//木
+
 
 public:
-	//�R���X�g���N�^
+	//コンストラクタ
 	Game();
 
-	//�Q�[���{��
+	//ゲーム本体
 	void GameUpdate(void);
 	void TitleUpdate(void);
 	void StageUpdate(void);
 	void ResultUpdate(void);
 
 
-	//��Еt��
+	//後片付け
 	~Game();
 
-	//�`��
+	//描画
 	void GameDraw(void);
 	void TitleDraw(void);
 	void StageDraw(void);
 	void ResultDraw(void);
 
-	//�V�[����ݒ肷��
+	// 当たり判定
+	// 円と円同士の当たり判定
+	int CircleHit(BOUNDING_CIRCLE bc1, BOUNDING_CIRCLE bc2);
+
+	// 四角形と円の当たり判定
+	int SqureandCircle(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj);
+	// 四角形と円の当たり判定に使う関数
+	bool CheckHit(const BOX& t_box, const BOUNDING_CIRCLE bc1);
+
+	// 四角形同士の当たり判定
+	int SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2);
+
+	// オブジェクト同士を合体させる関数
+	void CombineObjects(int HitNum, BOUNDING_CIRCLE Combine, BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj);
+
+	// 上下左右で別の当たり判定をとるための関数
+	int SideCollision(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2);
+
+	//　すべての当たり判定を管理する
+	void TestCollision();
+
+	//シーンを設定する
 	void SetGameScene(GAMESCENE scene);
 
 	

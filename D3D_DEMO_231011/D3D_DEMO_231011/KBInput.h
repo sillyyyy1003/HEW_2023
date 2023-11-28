@@ -1,38 +1,38 @@
-#pragma once
+﻿#pragma once
 
-//�L�[���͂��Ǘ�����N���X
-//�d�g�݁FWndProc�֐��ŃL�[�������ꂽ/�����ꂽ�C�x���g���ɂ�����L�^���Ă����B
-//�L�[�̏�Ԃ𔻒肷��֐����Ă΂ꂽ��A���̋L�^��Ԃ�Ԃ��B
+//キー入力を管理するクラス
+//仕組み：WndProc関数でキーが押された/離されたイベント時にそれを記録していく。
+//キーの状態を判定する関数が呼ばれたら、その記録状態を返す。
 
 class KBInput
 {
 private:
-	// �L�[��Ԃ̋L�^�̈�
+	// キー状態の記録領域
 	bool keyState[256] = { false };
 
-	// 1�t���[���O�̃L�[��Ԃ̋L�^�̈�
+	// 1フレーム前のキー状態の記録領域
 	bool oldKeyState[256] = { false };
 
 public:
 
 
 	//----------------------------//
-	// �֐��̃v���g�^�C�v�錾
+	// 関数のプロトタイプ宣言
 	//----------------------------//
 
-	// �L�[�������ꂽ�̂��L�^����֐�
+	// キーが押されたのを記録する関数
 	void SetKeyDownState(int key);
 
-	// �L�[�������ꂽ�̂��L�^����֐�
+	// キーが離されたのを記録する関数
 	void SetKeyUpState(int key);
 
-	// �L�[�v���X���������Ă��邩�Ԃ��֐�
+	// キープレスが発生しているか返す関数
 	bool GetKeyPress(int key);
 
-	// �L�[�g���K�[���������Ă��邩�Ԃ��֐�
+	// キートリガーが発生しているか返す関数
 	bool GetKeyTrigger(int key);
 
-	// �Q�[�����[�v�̍Ō�ŃL�[��Ԃ�oldKeyState�ɕۑ�����֐�
+	// ゲームループの最後でキー状態をoldKeyStateに保存する関数
 	void Update();
 
 
