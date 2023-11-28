@@ -3,10 +3,9 @@
 #include "Assets.h"
 #include "ObjectAnimation.h"
 #include "TrackCamera.h"
-#include "KBInput.h"
 
 extern Assets* g_Assets;
-extern KBInput* g_KbInput;
+//extern CdInput* g_dInput;
 
 
 Game::Game()
@@ -132,7 +131,7 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
-	testBg->m_sprite->Draw();
+	//testBg->m_sprite->Draw();
 
 	testObj->Draw();
 

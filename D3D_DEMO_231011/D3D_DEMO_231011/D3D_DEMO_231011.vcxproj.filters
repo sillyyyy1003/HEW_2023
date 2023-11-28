@@ -43,16 +43,13 @@
     <ClCompile Include="WICTextureLoader.cpp">
       <Filter>Assets</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="KBInput.cpp">
-      <Filter>KeyboardInput</Filter>
-    </ClCompile>
     <ClCompile Include="UiObject.cpp">
       <Filter>UIObject</Filter>
     </ClCompile>
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="CDInput.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -94,16 +91,13 @@
     <ClInclude Include="WICTextureLoader.h">
       <Filter>Assets</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="KBInput.h">
-      <Filter>KeyboardInput</Filter>
-    </ClInclude>
     <ClInclude Include="UiObject.h">
       <Filter>UIObject</Filter>
     </ClInclude>
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="CDInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">

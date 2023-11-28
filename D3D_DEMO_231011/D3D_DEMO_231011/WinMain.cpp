@@ -4,11 +4,9 @@
 #include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
-<<<<<<< HEAD
-#include"Input.h"
-=======
-#include "KBInput.h"
->>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
+
+#include"CDInput.h"
+
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -28,12 +26,6 @@ Camera* g_WorldCamera;
 
 Game* g_Game;
 
-<<<<<<< HEAD
-Input* g_Input;
-=======
-KBInput* g_KbInput = new KBInput();
-
->>>>>>> bce30b2a0f792ca953bc5860332ce4bd7480af82
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -78,12 +70,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	// ウィンドウの状態を直ちに反映(ウィンドウのクライアント領域を更新)
 	UpdateWindow(hWnd);
 	
+
 	//----------------------------//
 	// 	ゲームループに入る前に
 	//----------------------------//
 
 	// DirectXの初期化処理
 	DirectXInit(hWnd);
+
+	//DirectInputのデバイス作成
+	CdInput::Get()->Initialize(hWnd, hInstance);
 
 	//アセットの初期化
 	g_Assets = new Assets();
@@ -147,8 +143,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 				g_Game->GameDraw();
 
-				g_KbInput->Update();
+				CdInput::Get()->Update();
 
+
+				
 				//----------------------------//
 				// 	FPSブラッシュアップ
 				//----------------------------//
@@ -189,7 +187,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	//Direct3D解放処理
 	D3D_Release();
 	//入力解放処理
-	delete g_KbInput;
+	CdInput::Get()->~CdInput();
+
 
 
 	//----------------------------//
@@ -216,11 +215,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_LBUTTONDOWN:	// 左クリックされた時
-
+		CdInput::Get()->SetMouseDownState(wParam);
 		break;
 
 	case WM_RBUTTONDOWN:	// 右クリックされた時
-		
+		CdInput::Get()->SetMouseDownState(wParam);
+		break;
+
+	case WM_LBUTTONUP:	// 左クリックが離された時
+		CdInput::Get()->SetMouseUpState(wParam);
+		break;
+
+	case WM_RBUTTONUP:	// 右クリックが離された時
+		CdInput::Get()->SetMouseUpState(wParam);
 		break;
 
 	case WM_MOUSEMOVE:		// マウスカーソルが動いた時
@@ -228,11 +235,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 
 	case WM_KEYDOWN:		// キーが押された時
-		g_KbInput->SetKeyDownState(wParam);
+		CdInput::Get()->SetKeyDownState(wParam);
 		break;
 
 	case WM_KEYUP:			// キーが離された時
-		g_KbInput->SetKeyUpState(wParam);
+		CdInput::Get()->SetKeyUpState(wParam);
 		break;
 
 	default:				// 上のcase以外の場合の処理を実行

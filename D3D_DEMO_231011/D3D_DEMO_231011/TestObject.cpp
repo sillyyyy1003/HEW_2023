@@ -1,8 +1,9 @@
 #include "TestObject.h"
-#include "KBInput.h"
+#include "CDInput.h"
+
 
 extern Camera* g_WorldCamera;
-extern KBInput* g_KbInput;
+//extern CDInput* g_dInput;
 
 TestObject::TestObject()
 {
@@ -31,7 +32,8 @@ void TestObject::Update(void)
 	XMFLOAT3 dir = { 0,0,0 };
 	float moveSpeed = 0.0f;
 
-	if (g_KbInput->GetKeyPress(VK_DOWN))
+	//下キー
+	if ((CdInput::Get()->GetKeyPress(DIK_DOWN))/* || (CdInput::Get()->GetMouseTrigger(DIK_SIDEBUTTON1))*/)
 	{
 		//オブジェクトの移動
 		dir.y = -1;
@@ -45,6 +47,20 @@ void TestObject::Update(void)
 		//
 	}
 
+	//上キー
+	if ((CdInput::Get()->GetKeyPress(DIK_UP)) /* || (CdInput::Get()->GetMouseTrigger(DIK_SIDEBUTTON2))*/)
+	{
+		//オブジェクトの移動
+		dir.y = +1;
+		dir.x = dir.y / tan(XMConvertToRadians(30));
+		moveSpeed = 0.01f;
+
+		//影の変化
+		//大きさの変化
+		m_shadowSprite->m_scale.x -= 0.01;
+		m_shadowSprite->m_scale.y -= 0.01;
+		//
+	}
 
 	if (dir.x != 0.0f || dir.y != 0.0f) 
 	{
