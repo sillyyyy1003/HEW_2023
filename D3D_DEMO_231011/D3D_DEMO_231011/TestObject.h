@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Sprite.h"
 
 // 円の当たり判定領域を表す構造体

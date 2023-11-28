@@ -1,4 +1,4 @@
-#include "KBInput.h"
+﻿#include "KBInput.h"
 #include <memory.h>
 
 void KBInput::SetKeyDownState(int key)

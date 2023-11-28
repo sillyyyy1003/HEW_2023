@@ -1,4 +1,4 @@
-#include "Camera.h"
+﻿#include "Camera.h"
 //Singleton インスタンス定義
 Camera* Camera::m_camera;
 

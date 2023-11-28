@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Sprite.h"
 
 class CanvasUI :public Sprite
@@ -9,10 +9,10 @@ public:
 
 	~CanvasUI();
 
-	//ƒ‚ƒfƒ‹ì¬EƒAƒjƒ[ƒVƒ‡ƒ“”z’uEƒJƒƒ‰g—p
+	//ãƒ¢ãƒ‡ãƒ«ä½œæˆãƒ»ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é…ç½®ãƒ»ã‚«ãƒ¡ãƒ©ä½¿ç”¨
 	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY) override;
 
-	//UVÀ•WXV
+	//UVåº§æ¨™æ›´æ–°
 	void Update(void);
 
 };

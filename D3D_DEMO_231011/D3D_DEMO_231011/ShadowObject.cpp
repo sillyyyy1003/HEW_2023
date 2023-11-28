@@ -1,4 +1,4 @@
-#include "ShadowObject.h"
+﻿#include "ShadowObject.h"
 #include "Camera.h"
 
 extern Camera* g_WorldCamera;

@@ -1,4 +1,4 @@
-#include "StaticAnimation.h"
+﻿#include "StaticAnimation.h"
 
 StaticAnimation::StaticAnimation(int splitX, int splitY) :Animation(splitX, splitY)
 {

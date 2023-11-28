@@ -1,4 +1,4 @@
-#undef UNICODE  //Unicodeではなく、マルチバイト文字を使う
+﻿#undef UNICODE  //Unicodeではなく、マルチバイト文字を使う
 #include <Windows.h>
 #include "Direct3D/Direct3D.h"
 #include "Assets.h"

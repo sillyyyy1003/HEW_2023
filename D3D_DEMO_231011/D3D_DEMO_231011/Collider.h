@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include <DirectXCollision.h>
 
 class Collider
 {
 private:
 	enum COLLISION_TYPE {
-		SPHERE,			//‹…‘Ì
+		SPHERE,			//çƒä½“
 		SQUARE,			//BOX
 
 	};
