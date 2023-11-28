@@ -1,0 +1,9 @@
+diff a/D3D_DEMO_231011/D3D_DEMO_231011/Sprite.cpp b/D3D_DEMO_231011/D3D_DEMO_231011/Sprite.cpp	(rejected hunks)
+@@ -83,6 +83,7 @@
+ 	m_anime->Update();
+ 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
+ 	
++	//�쐬�����s���n��
+ 	cb.matrixProj = XMMatrixTranspose(matrixProj);
+ 	cb.matrixTex = XMMatrixTranspose(matrixTex);
+ 	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
