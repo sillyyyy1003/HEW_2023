@@ -4,8 +4,8 @@
 #include "CDInput.h"
 
 
-#define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
-#define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
+#define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
+#define WINDOW_NAME		L"GAME_TITLE"	//ウィンドウの名前
 #define SCREEN_WIDTH	(1280)	// ウインドウの幅
 #define SCREEN_HEIGHT	(720)	// ウインドウの高さ
 #define FPS_DATA		(60)
@@ -13,9 +13,7 @@
 // グローバル変数定義
 //----------------------------//
 Assets* g_Assets;
-
 Camera* g_WorldCamera;
-
 Game* g_Game;
 
 
@@ -41,6 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	wc.hIconSm = NULL;
 
 	RegisterClassEx(&wc);
+
 
 	HWND hWnd;
 	hWnd = CreateWindowEx(0,// 拡張ウィンドウスタイル

@@ -1,67 +1,56 @@
-﻿  compilation object save succeeded; see C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\PixelShader.cso
-  compilation object save succeeded; see C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\VertexShader.cso
-  Animation.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(26,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+﻿  Animation.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(26,36): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
   Assets.cpp
   Camera.cpp
   CDInput.cpp
   Direct3D.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(257,29): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(258,30): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(257,29): warning C4244: “=”: 从“UINT”转换到“FLOAT”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(258,30): warning C4244: “=”: 从“UINT”转换到“FLOAT”，可能丢失数据
   Game.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(28,37): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(36,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(36,35): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(41,30): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(28,37): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(36,40): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(36,35): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(41,30): warning C4305: “=”: 从“double”到“float”截断
   Material.cpp
   Object.cpp
   ObjectAnimation.cpp
   Sprite.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(76,45): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(76,19): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(77,45): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(77,20): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(78,44): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(78,18): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(79,48): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(79,21): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(83,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(83,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(84,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(84,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(76,45): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(76,19): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(77,45): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(77,20): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(78,44): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(78,18): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(79,48): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(79,21): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(83,22): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(83,16): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(84,22): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(84,16): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
   TestObject.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(40,17): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(45,36): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(46,36): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(55,17): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(60,36): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(61,36): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(40,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(45,36): warning C4305: “+=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(46,36): warning C4305: “+=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(55,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(60,36): warning C4305: “-=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\TestObject.cpp(61,36): warning C4305: “-=”: 从“double”到“float”截断
   TrackCamera.cpp
   UiObject.cpp
   WICTextureLoader.cpp
   WinMain.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(40,21): error C2440: '=': 'const char [9]' から 'LPCWSTR' に変換できません。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(40,21): message : 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたはかっこで囲まれた関数スタイル キャストが必要です。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(46,9): error C2664: 'HWND CreateWindowExW(DWORD,LPCWSTR,LPCWSTR,DWORD,int,int,int,int,HWND,HMENU,HINSTANCE,LPVOID)': 引数 2 を 'const char [9]' から 'LPCWSTR' へ変換できません。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(47,3): message : 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたはかっこで囲まれた関数スタイル キャストが必要です。
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(4437,1): message : 'CreateWindowExW' の宣言を確認してください
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(46,9): message : 引数リスト '(int, const char [9], const char [11], long, int, int, int, int, int, int, HINSTANCE, int)' を一致させようとしているとき
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(168,2): error C2664: 'BOOL UnregisterClassW(LPCWSTR,HINSTANCE)': 引数 1 を 'const char [9]' から 'LPCWSTR' へ変換できません。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(168,18): message : 指示された型は関連がありません。変換には reinterpret_cast、C スタイル キャストまたはかっこで囲まれた関数スタイル キャストが必要です。
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winuser.h(4311,1): message : 'UnregisterClassW' の宣言を確認してください
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(168,2): message : 引数リスト '(const char [9], HINSTANCE)' を一致させようとしているとき
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(183,37): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(187,37): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(191,35): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(195,35): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(203,35): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(207,33): warning C4244: '引数': 'WPARAM' から 'int' への変換です。データが失われる可能性があります。
-  コードを生成中...
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(122): warning C4715: 'D3D_CreateDevice': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(282): warning C4715: 'D3D_CreateSampler': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(153): warning C4715: 'D3D_CreateRenderTarget': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(199): warning C4715: 'D3D_CreateDepthStencil': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(249): warning C4715: 'D3D_CreateShader': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(304): warning C4715: 'D3D_CreateBuffer': 値を返さないコントロール パスがあります。
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(345): warning C4715: 'D3D_CreateBlendState': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(182,37): warning C4244: “参数”: 从“WPARAM”转换到“int”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(186,37): warning C4244: “参数”: 从“WPARAM”转换到“int”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(190,35): warning C4244: “参数”: 从“WPARAM”转换到“int”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(194,35): warning C4244: “参数”: 从“WPARAM”转换到“int”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(202,35): warning C4244: “参数”: 从“WPARAM”转换到“int”，可能丢失数据
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(206,33): warning C4244: “参数”: 从“WPARAM”转换到“int”，可能丢失数据
+  正在生成代码...
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(122): warning C4715: “D3D_CreateDevice”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(282): warning C4715: “D3D_CreateSampler”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(153): warning C4715: “D3D_CreateRenderTarget”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(249): warning C4715: “D3D_CreateShader”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(199): warning C4715: “D3D_CreateDepthStencil”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(345): warning C4715: “D3D_CreateBlendState”: 不是所有的控件路径都返回值
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(304): warning C4715: “D3D_CreateBuffer”: 不是所有的控件路径都返回值
+  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
