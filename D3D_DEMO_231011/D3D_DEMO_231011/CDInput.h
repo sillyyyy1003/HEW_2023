@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
-//DirectInput‚ðŽg‚Á‚½ƒL[‚Æƒ}ƒEƒX‘€ìŽæ“¾ƒNƒ‰ƒX
+//DirectInputã‚’ä½¿ã£ãŸã‚­ãƒ¼ã¨ãƒžã‚¦ã‚¹æ“ä½œå–å¾—ã‚¯ãƒ©ã‚¹
 #define DIRECTINPUT_VERSION 0x0800
 #include	<dinput.h>
 
 enum KeyCode
 {
-	DIK_LBUTTON = 0x00,//¶ƒ}ƒEƒXƒ{ƒ^ƒ“
-	DIK_RBUTTON = 0x01,//‰Eƒ}ƒEƒXƒ{ƒ^ƒ“
-	DIK_MBUTTON = 0x02,//’†ƒ}ƒEƒXƒ{ƒ^ƒ“
-	DIK_SIDEBUTTON1 = 0x03,//ƒTƒCƒhƒ}ƒEƒXƒ{ƒ^ƒ“1
-	DIK_SIDEBUTTON2 = 0x04,//ƒTƒCƒhƒ}ƒEƒXƒ{ƒ^ƒ“2
+	DIK_LBUTTON = 0x00,//å·¦ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³
+	DIK_RBUTTON = 0x01,//å³ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³
+	DIK_MBUTTON = 0x02,//ä¸­ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³
+	DIK_SIDEBUTTON1 = 0x03,//ã‚µã‚¤ãƒ‰ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³1
+	DIK_SIDEBUTTON2 = 0x04,//ã‚µã‚¤ãƒ‰ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³2
 };
 
 
@@ -34,42 +34,41 @@ private:
 	
 
 public:
+	~CdInput();//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 
-	~CdInput();//ƒfƒXƒgƒ‰ƒNƒ^
-
-	// ƒVƒ“ƒOƒ‹ƒgƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ðŽæ“¾‚·‚éŠÖ”
+	// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹é–¢æ•°
 	static CdInput* Get();
 
-	// DirectInput‚Ì‰Šú‰»‚ðs‚¤ŠÖ”
-	// ƒQ[ƒ€ƒ‹[ƒv‚ªŽn‚Ü‚é‘O‚ÉŒÄ‚Ño‚·
+	// DirectInputã®åˆæœŸåŒ–ã‚’è¡Œã†é–¢æ•°
+	// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—ãŒå§‹ã¾ã‚‹å‰ã«å‘¼ã³å‡ºã™
 	void Initialize(HWND hWnd, HINSTANCE hInstance);
-	
-	// ƒQ[ƒ€ƒ‹[ƒv‚Å–ˆ‰ñŒÄ‚Ño‚·ŠÖ”
+
+	// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—ã§æ¯Žå›žå‘¼ã³å‡ºã™é–¢æ•°
 	void Update();
 
-	//ƒL[‚ª‰Ÿ‚³‚ê‚½ó‘Ô
+	//ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸçŠ¶æ…‹
 	void SetKeyDownState(int key);
 
-	//ƒL[‚ª—£‚³‚ê‚½ó‘Ô
+	//ã‚­ãƒ¼ãŒé›¢ã•ã‚ŒãŸçŠ¶æ…‹
 	void SetKeyUpState(int key);
 
-	//ƒ}ƒEƒXƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½ó‘Ô
+	//ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸçŠ¶æ…‹
 	void SetMouseDownState(int key);
 
-	//ƒ}ƒEƒXƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½ó‘Ô
+	//ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸçŠ¶æ…‹
 	void SetMouseUpState(int key);
 
-	// ƒL[‚ÍDIK‚ÅŽn‚Ü‚é’è”
-	//ƒL[ƒvƒŒƒX
+	// ã‚­ãƒ¼ã¯DIKã§å§‹ã¾ã‚‹å®šæ•°
+	//ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹
 	bool GetKeyPress(int key);
 
-	//ƒL[ƒgƒŠƒK[
+	//ã‚­ãƒ¼ãƒˆãƒªã‚¬ãƒ¼
 	bool GetKeyTrigger(int key);
 
-	//ƒ}ƒEƒXƒ{ƒ^ƒ“ƒvƒŒƒX
+	//ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³ãƒ—ãƒ¬ã‚¹
 	bool GetMousePress(int key);
 
-	//ƒ}ƒEƒXƒ{ƒ^ƒ“ƒgƒŠƒK[
+	//ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³ãƒˆãƒªã‚¬ãƒ¼
 	bool GetMouseTrigger(int key);
 };
 
