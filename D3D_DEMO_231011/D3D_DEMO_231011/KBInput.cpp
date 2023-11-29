@@ -1,4 +1,4 @@
-#include "KBInput.h"
+ï»¿#include "KBInput.h"
 #include <memory.h>
 
 void KBInput::SetKeyDownState(int key)
@@ -18,7 +18,7 @@ bool KBInput::GetKeyPress(int key)
 
 bool KBInput::GetKeyTrigger(int key)
 {
-	// 1ƒtƒŒ[ƒ€‘O‚Ì‰Ÿ‰ºó‘Ô‚ªfalse‚Å‚©‚ÂŒ»İƒtƒŒ[ƒ€‚Ì‰Ÿ‰ºó‘Ô‚ªtrue
+	// 1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®æŠ¼ä¸‹çŠ¶æ…‹ãŒfalseã§ã‹ã¤ç¾åœ¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®æŠ¼ä¸‹çŠ¶æ…‹ãŒtrue
 	if (oldKeyState[key] == false && keyState[key] == true)
 	{
 		return true;

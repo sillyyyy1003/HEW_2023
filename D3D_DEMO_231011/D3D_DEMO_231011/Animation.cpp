@@ -1,7 +1,7 @@
-#include "Animation.h"
+ï»¿#include "Animation.h"
 
 //----------------------------//
-// ƒOƒ[ƒoƒ‹•Ï”’è‹`
+// ÂƒOÂƒÂÂ[ÂƒoÂƒÂ‹Â•ÄÂÂ”Â’ÄÂ‹`
 //----------------------------//
 
 Animation::Animation(int splitX, int splitY)
