@@ -1,10 +1,10 @@
-ï»¿#include "DebugManager.h"
+#include "DebugManager.h"
 #include "Assets.h"
 
 DebugManager::DebugManager()
 {
 	for (auto& pASCII : m_debugASCII) {
-		//åˆæœŸåŒ–
+		//‰Šú‰»
 		pASCII = new CanvasUI();
 		pASCII->CreateModel(Assets::debugFont, 16.2f, 32.0f, 12, 8);
 	}

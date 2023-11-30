@@ -1,4 +1,4 @@
-ï»¿#include "CanvasUI.h"
+#include "CanvasUI.h"
 #include "StaticAnimation.h"
 
 CanvasUI::CanvasUI()
@@ -11,20 +11,20 @@ CanvasUI::~CanvasUI()
 
 void CanvasUI::CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	//ã‚«ãƒ¡ãƒ©ã®ä½¿ç”¨ã‚’ç¦ã˜ã‚‹
+	//ƒJƒƒ‰‚ÌŽg—p‚ð‹Ö‚¶‚é
 	isUseCamera = false;
 
-	//ãƒ¢ãƒ‡ãƒ«ä½œæˆ
+	//ƒ‚ƒfƒ‹ì¬
 	Sprite::CreateModel(texture, _width, _height, splitX, splitY);
 
-	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é…ç½®
+	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ð”z’u
 	m_anime = new StaticAnimation(splitX,splitY);
 
 }
 
 void CanvasUI::Update(void)
 {
-	//UVåº§æ¨™ã®æ›´æ–°
+	//UVÀ•W‚ÌXV
 	m_anime->Update();
 
 }

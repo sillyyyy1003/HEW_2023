@@ -1,16 +1,16 @@
-ï»¿#pragma once
+#pragma once
 #include "CanvasUI.h"
 #include "GameObject.h"
 
 class DebugManager
 {
 private:
-	//æœ€å¤§è¡¨ç¤ºå¯èƒ½æ–‡å­—æ•°
+	//Å‘å•\¦‰Â”\•¶š”
 	static const int maxChars = 256;
 
 	CanvasUI* m_debugASCII[maxChars];
 
-	//åˆæœŸä½ç½®(é ­ã®æ–‡å­—ã®ä½ç½®)
+	//‰ŠúˆÊ’u(“ª‚Ì•¶š‚ÌˆÊ’u)
 	float SposX, SposY;
 
 

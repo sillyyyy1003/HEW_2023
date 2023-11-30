@@ -1,36 +1,26 @@
-﻿#undef UNICODE  //Unicodeではなく、マルチバイト文字を使う
-#include <Windows.h>
-#include "Direct3D/Direct3D.h"
-#include "Assets.h"
+﻿#include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
-#include "KBInput.h"
+#include "CDInput.h"
 
-#define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
-#define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
 
+#define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
+#define WINDOW_NAME		L"GAME_TITLE"	//ウィンドウの名前
 #define SCREEN_WIDTH	(1280)	// ウインドウの幅
 #define SCREEN_HEIGHT	(720)	// ウインドウの高さ
-
 #define FPS_DATA		(60)
-
-
 //----------------------------//
 // グローバル変数定義
 //----------------------------//
 Assets* g_Assets;
-
 Camera* g_WorldCamera;
-
 Game* g_Game;
-
-KBInput* g_KbInput = new KBInput();
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 // エントリポイント＝一番最初に実行される関数
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	WNDCLASSEX wc;
 
@@ -49,6 +39,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	wc.hIconSm = NULL;
 
 	RegisterClassEx(&wc);
+
 
 	HWND hWnd;
 	hWnd = CreateWindowEx(0,// 拡張ウィンドウスタイル
@@ -69,7 +60,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 
 	// ウィンドウの状態を直ちに反映(ウィンドウのクライアント領域を更新)
 	UpdateWindow(hWnd);
-	
+
+
 	//----------------------------//
 	// 	ゲームループに入る前に
 	//----------------------------//
@@ -77,21 +69,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	// DirectXの初期化処理
 	DirectXInit(hWnd);
 
+	//DirectInputのデバイス作成
+	CdInput::Get()->Initialize(hWnd, hInstance);
+
 	//アセットの初期化
 	g_Assets = new Assets();
 
 	//カメラの初期化
 	g_WorldCamera = new TrackCamera();
-	
+
 	//ゲームクラスの初期化処理
 	g_Game = new Game();
-
 	//ブラッシュアップ頻度(fps処理)
 	// FPS表示用変数
 	int fpsCounter = 0;
 	long long oldTick = GetTickCount64();//現在時間を保存
 	long long nowTick = oldTick; // 現在時間取得用
-
 	// FPS固定用変数
 	LARGE_INTEGER liWork; // 関数から値を受け取る用
 	long long frequency; // 計測精度
@@ -104,18 +97,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	QueryPerformanceCounter(&liWork);
 	long long oldCount = liWork.QuadPart;
 	long long nowCount = oldCount;
-
 	MSG msg;
-
 	// ゲームループ
 	for (;;)
 	{
 		BOOL isAnyMessage = PeekMessage(&msg, NULL, 0, 0, PM_REMOVE);
-
 		if (isAnyMessage)// 何かメッセージがあるか判定
 		{
 			DispatchMessage(&msg);
-
 			if (msg.message == WM_QUIT) {
 				break;
 			}
@@ -124,22 +113,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 		{
 			//現在時間を取得（単位：カウント）
 			QueryPerformanceCounter(&liWork);
-			nowCount = liWork.QuadPart; 
-
+			nowCount = liWork.QuadPart;
 			//1/60秒経過したか？
 			if (nowCount >= oldCount + numCount_1frame)
 			{
-
 				//----------------------------//
 				// 	ゲームループ 
 				//----------------------------//
 				g_WorldCamera->Update();
-
 				g_Game->GameUpdate();
 
 				g_Game->GameDraw();
 
-				g_KbInput->Update();
+				CdInput::Get()->Update();
 
 				//----------------------------//
 				// 	FPSブラッシュアップ
@@ -149,7 +135,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 			}
 
 			//現在時間取得
-			nowTick = GetTickCount64(); 
+			nowTick = GetTickCount64();
 
 			//１秒経過したか？
 			if (nowTick >= oldTick + 1000)
@@ -157,14 +143,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 				fpsCounter = 0;
 				oldTick = nowTick;
 			}
-
 		}
-	} 
-
+	}
 	//----------------------------//
 	// ゲームクラスの終了処理
 	//----------------------------//
-
 	//アセット解放処理
 	delete g_Assets;
 	//カメラ解放処理
@@ -174,58 +157,58 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	//Direct3D解放処理
 	D3D_Release();
 	//入力解放処理
-	delete g_KbInput;
+	CdInput::Get()->~CdInput();
+
 
 
 	//----------------------------//
 	// ウィンドウズの終了処理
 	//----------------------------//
-
 	UnregisterClass(CLASS_NAME, hInstance);
-
 	return (int)msg.wParam;
 }
-
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-
-	switch (uMsg) 
+	switch (uMsg)
 	{
 	case WM_DESTROY:		//ウィンドウ破棄のメッセージ
 		PostQuitMessage(0);	//アプリ終了
 		break;
-
 	case WM_CLOSE:			//ｘボタンが押されたら
 		DestroyWindow(hWnd);//
 		break;
 
 	case WM_LBUTTONDOWN:	// 左クリックされた時
-
+		CdInput::Get()->SetMouseDownState(wParam);
 		break;
 
 	case WM_RBUTTONDOWN:	// 右クリックされた時
-		
+		CdInput::Get()->SetMouseDownState(wParam);
+		break;
+
+	case WM_LBUTTONUP:	// 左クリックが離された時
+		CdInput::Get()->SetMouseUpState(wParam);
+		break;
+
+	case WM_RBUTTONUP:	// 右クリックが離された時
+		CdInput::Get()->SetMouseUpState(wParam);
 		break;
 
 	case WM_MOUSEMOVE:		// マウスカーソルが動いた時
-		
+
 		break;
 
 	case WM_KEYDOWN:		// キーが押された時
-		g_KbInput->SetKeyDownState(wParam);
+		CdInput::Get()->SetKeyDownState(wParam);
 		break;
 
 	case WM_KEYUP:			// キーが離された時
-		g_KbInput->SetKeyUpState(wParam);
+		CdInput::Get()->SetKeyUpState(wParam);
 		break;
 
 	default:				// 上のcase以外の場合の処理を実行
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		break;
-
 	}
-
 	return 0;
 }
-

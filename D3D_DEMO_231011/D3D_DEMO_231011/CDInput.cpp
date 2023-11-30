@@ -1,4 +1,4 @@
-#include "CDInput.h"
+ï»¿#include "CDInput.h"
 
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
@@ -36,37 +36,37 @@ void CdInput::Initialize(HWND hWnd, HINSTANCE hInstance)
 		return;
 	}
 
-	// ƒL[ƒ{[ƒhƒfƒoƒCƒX¶¬
+	// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ãƒ‡ãƒã‚¤ã‚¹ç”Ÿæˆ
 	mDInput->CreateDevice(GUID_SysKeyboard, &mDevKeyboad, NULL);
 	if (FAILED(hr)) {
 		return;
 	}
 
-	// ƒf[ƒ^ƒtƒH[ƒ}ƒbƒg‚Ìİ’è
+	// ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®š
 	hr = mDevKeyboad->SetDataFormat(&c_dfDIKeyboard);
 	if (FAILED(hr)) {
 		return;
 	}
 
-	// ‹¦’²ƒŒƒxƒ‹‚Ìİ’è
+	// å”èª¿ãƒ¬ãƒ™ãƒ«ã®è¨­å®š
 	hr = mDevKeyboad->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	if (FAILED(hr)) {
 		return;
 	}
 
-	// ƒ}ƒEƒXƒfƒoƒCƒX¶¬
+	// ãƒã‚¦ã‚¹ãƒ‡ãƒã‚¤ã‚¹ç”Ÿæˆ
 	mDInput->CreateDevice(GUID_SysMouse, &mDevMouse, NULL);
 	if (FAILED(hr)) {
 		return;
 	}
 
-	// ƒf[ƒ^ƒtƒH[ƒ}ƒbƒg‚Ìİ’è
+	// ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®è¨­å®š
 	hr = mDevMouse->SetDataFormat(&c_dfDIMouse2);
 	if (FAILED(hr)) {
 		return;
 	}
 
-	// ‹¦’²ƒŒƒxƒ‹‚Ìİ’è
+	// å”èª¿ãƒ¬ãƒ™ãƒ«ã®è¨­å®š
 	hr = mDevMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	if (FAILED(hr)) {
 		return;
@@ -78,7 +78,8 @@ void CdInput::Initialize(HWND hWnd, HINSTANCE hInstance)
 
 void CdInput::Update()
 {
-	// ‚PƒtƒŒ[ƒ€‘O‚Ìƒf[ƒ^‚ğ•Û‘¶
+
+	// ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
 	memcpy_s(mOldKeyBuffer, sizeof(mOldKeyBuffer), mKeyBuffer, sizeof(mKeyBuffer));
 
 	HRESULT hr;
@@ -156,5 +157,4 @@ bool CdInput::GetMouseTrigger(int key)
 		return false;
 	}
 }
-
 
