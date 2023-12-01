@@ -11,6 +11,7 @@ using namespace DirectX;
 //縦横比
 #define RATIO_H		(9.0f)		//アスペクト比(縦)
 #define RATIO_W		(16.0f)		//アスペクト比(横)
+#define	SCREEN_PARA	(96/1.25)	//実際の表現サイズに入力パラメータを等しくする定数
 
 //Direct3D関連変数をまとめる構造体
 struct D3D_DATA

@@ -4,11 +4,12 @@
 #include "ObjectAnimation.h"
 #include "StaticAnimation.h"
 #include "TrackCamera.h"
-#include "KBInput.h"
+#include "DebugManager.h"
+#include "DInput.h"
 
 extern Assets* g_Assets;
-extern KBInput* g_KbInput;
 extern TrackCamera* g_WorldCamera;
+extern DebugManager* g_DebugManager;
 
 
 Game::Game()
@@ -20,13 +21,15 @@ Game::Game()
 
 	//オブジェクトの初期設定・テクスチャの読み込み
 	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);
-
 	testTree = new GameObject();
 	testTree->CreateObject(g_Assets->testObj, 300, 300, 1, 1);
 	testTree->CreateShadow(g_Assets->testShadow, 300, 300, 1, 1);
 
-	
+	uitest = new CanvasUI();
+	uitest->CreateModel(g_Assets->testWallbg, 128, 72, 1, 1);
 
+	uitest->m_pos.z = 0.2f;
+	
 	//影の初期設定
 
 
@@ -57,7 +60,6 @@ Game::Game()
 	//影の位置設定
 	testTree->m_shadow->m_obj->m_pos.z = 1.99f;
 
-	//g_WorldCamera->TrackCamera::SetTarget(testChara);
 
 	
 }
@@ -87,26 +89,18 @@ void Game::GameUpdate(void)
 void Game::TitleUpdate(void)
 {	
 
-	
-	
-	
-	if (g_KbInput->GetKeyPress(VK_UP))
-	{
-		testChara->m_sprite->m_pos.z += 0.02f;
-
+	if (Input::Get()->GetKeyPress(DIK_UPARROW)) {
+		testChara->m_sprite->m_pos.z -= 0.1f;
 	}
-	if (g_KbInput->GetKeyPress(VK_DOWN)) {
-		testChara->m_sprite->m_pos.z -= 0.02f;
+	if (Input::Get()->GetKeyPress(DIK_LEFTARROW)) {
+		testChara->m_sprite->m_pos.x -= 0.1f;
 	}
-
-	if (g_KbInput->GetKeyPress(VK_LEFT)) {
-		testChara->m_sprite->m_pos.x -= 0.02f;
+	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW)) {
+		testChara->m_sprite->m_pos.x += 0.1f;
 	}
-
-	if (g_KbInput->GetKeyPress(VK_RIGHT)) {
-		testChara->m_sprite->m_pos.x += 0.02f;
+	if (Input::Get()->GetKeyPress(DIK_DOWNARROW)) {
+		testChara->m_sprite->m_pos.z += 0.1f;
 	}
-
 
 	testWall->Update();
 
@@ -115,6 +109,12 @@ void Game::TitleUpdate(void)
 	testChara->Update();
 
 	testTree->Update(XMFLOAT3{ 0.0f, 0.0f, -2.0f });
+
+	uitest->Update();
+
+
+
+	
 
 }
 
@@ -134,6 +134,8 @@ Game::~Game()
 	delete testWall;
 	delete testGround;
 
+	delete testTree;
+	delete uitest;
 }
 
 void Game::GameDraw()
@@ -171,6 +173,9 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
+
+	uitest->Draw();
+
 	testWall->Draw();
 
 	testGround->Draw();
@@ -179,6 +184,11 @@ void Game::TitleDraw(void)
 
 	testTree->Draw();
 
+	
+
+
+	//デバッグ表示
+	g_DebugManager->PrintDebugLog(0.0f, 0.0f, testChara->m_sprite->m_pos.x);
 
 	
 }

@@ -1,7 +1,8 @@
 ﻿#include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
-#include "CDInput.h"
+#include "DInput.h"
+#include "DebugManager.h"
 
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
@@ -12,9 +13,11 @@
 //----------------------------//
 // グローバル変数定義
 //----------------------------//
-Assets* g_Assets;
-Camera* g_WorldCamera;
-Game* g_Game;
+Assets*		g_Assets;			//ASSETS
+Camera*		g_WorldCamera;		//CAMERA
+Game*		g_Game;				//ゲーム
+DebugManager* g_DebugManager;	//デバッグ用ツール
+
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -70,7 +73,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	DirectXInit(hWnd);
 
 	//DirectInputのデバイス作成
-	CdInput::Get()->Initialize(hWnd, hInstance);
 
 	//アセットの初期化
 	g_Assets = new Assets();
@@ -80,6 +82,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//ゲームクラスの初期化処理
 	g_Game = new Game();
+
+	g_DebugManager = new DebugManager();
+
+	Input::Get()->Initialize(hWnd, hInstance);
+
 	//ブラッシュアップ頻度(fps処理)
 	// FPS表示用変数
 	int fpsCounter = 0;
@@ -120,12 +127,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//----------------------------//
 				// 	ゲームループ 
 				//----------------------------//
+				Input::Get()->Update();
 				g_WorldCamera->Update();
 				g_Game->GameUpdate();
 
 				g_Game->GameDraw();
 
-				CdInput::Get()->Update();
+			
 
 				//----------------------------//
 				// 	FPSブラッシュアップ
@@ -156,8 +164,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	delete g_Game;
 	//Direct3D解放処理
 	D3D_Release();
-	//入力解放処理
-	CdInput::Get()->~CdInput();
 
 
 
@@ -171,44 +177,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
-	case WM_DESTROY:		//ウィンドウ破棄のメッセージ
-		PostQuitMessage(0);	//アプリ終了
-		break;
-	case WM_CLOSE:			//ｘボタンが押されたら
-		DestroyWindow(hWnd);//
+	case WM_DESTROY:// ウィンドウ破棄のメッセージ
+		PostQuitMessage(0);// “WM_QUIT”メッセージを送る　→　アプリ終了
 		break;
 
-	case WM_LBUTTONDOWN:	// 左クリックされた時
-		CdInput::Get()->SetMouseDownState(wParam);
+	case WM_CLOSE:  // xボタンが押されたら
+		DestroyWindow(hWnd);  // “WM_DESTROY”メッセージを送る
 		break;
 
-	case WM_RBUTTONDOWN:	// 右クリックされた時
-		CdInput::Get()->SetMouseDownState(wParam);
+		// キーが押されたイベント
+	case WM_KEYDOWN:
 		break;
 
-	case WM_LBUTTONUP:	// 左クリックが離された時
-		CdInput::Get()->SetMouseUpState(wParam);
+		// キーが離されたイベント
+	case WM_KEYUP:
 		break;
 
-	case WM_RBUTTONUP:	// 右クリックが離された時
-		CdInput::Get()->SetMouseUpState(wParam);
-		break;
-
-	case WM_MOUSEMOVE:		// マウスカーソルが動いた時
-
-		break;
-
-	case WM_KEYDOWN:		// キーが押された時
-		CdInput::Get()->SetKeyDownState(wParam);
-		break;
-
-	case WM_KEYUP:			// キーが離された時
-		CdInput::Get()->SetKeyUpState(wParam);
-		break;
-
-	default:				// 上のcase以外の場合の処理を実行
+	default:
+		// 上のcase以外の場合の処理を実行
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 		break;
 	}
+
 	return 0;
 }

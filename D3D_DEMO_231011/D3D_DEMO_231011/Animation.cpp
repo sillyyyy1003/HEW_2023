@@ -41,4 +41,9 @@ DirectX::XMFLOAT2 Animation::GetUVOffset(void)
     return m_offsetUV;
 }
 
+void Animation::SetFrameX(int _frameX)
+{
+    m_frameX = _frameX;
+}
+
 

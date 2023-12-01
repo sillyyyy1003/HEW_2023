@@ -1,8 +1,6 @@
 ﻿#include "GameObject.h"
-#include "KBInput.h"
 #include <math.h>
 
-extern KBInput* g_KbInput;
 extern Camera* g_WorldCamera;
 
 GameObject::GameObject()
@@ -94,21 +92,6 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 void GameObject::Update(DirectX::XMFLOAT3 lightPos)
 {	
 	//オブジェクト情報更新
-	
-	//テスト
-	if (g_KbInput->GetKeyPress(VK_UP)) {
-		//キャラクター移動
-		m_obj->m_pos.z += 0.03f;
-
-	}
-	if (g_KbInput->GetKeyPress(VK_DOWN)) {
-		m_obj->m_pos.z -= 0.03f;
-	}
-
-	if (g_KbInput->GetKeyPress(VK_LEFT)) {
-		m_obj->m_pos.x -= 0.03f;
-	}
-
 	
 	
 
