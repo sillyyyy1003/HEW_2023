@@ -71,5 +71,8 @@ public:
 
 	//マウスボタントリガー
 	bool GetMouseTrigger(int key);
+
+	// マウスの移動量を取得する
+	POINT GetMouseMove();
 };
 

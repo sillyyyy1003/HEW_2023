@@ -4,6 +4,7 @@
 #include "Animation.h"
 
 
+
 /// <summary>
 /// 頂点データを表す構造体
 /// </summary>
@@ -87,6 +88,14 @@ public:
 	/// </summary>
 	/// <param name="cb">シェーダーに渡す行列</param>
 	void GenerateMatrix(CONSTBUFFER& cb);
+
+
+	/// <summary>
+	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）
+	/// </summary>
+	/// <param name="rot">オブジェクトの回転</param>
+	void RotateObj(XMFLOAT3& rot);
+
 
 
 	/// <summary>

@@ -27,6 +27,9 @@ public:
 	//影用のテクスチャのセッティング
 	void SetShadowTex(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
+	
+
+
 	virtual void Update(void);
 
 	void Draw(void);

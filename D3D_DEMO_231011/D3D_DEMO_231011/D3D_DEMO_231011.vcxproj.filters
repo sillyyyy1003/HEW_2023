@@ -46,9 +46,11 @@
     <ClCompile Include="UiObject.cpp">
       <Filter>UIObject</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="CDInput.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObject.cpp">
+      <Filter>TestObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +96,11 @@
     <ClInclude Include="UiObject.h">
       <Filter>UIObject</Filter>
     </ClInclude>
-    <ClInclude Include="TestObject.h" />
     <ClInclude Include="CDInput.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObject.h">
+      <Filter>TestObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

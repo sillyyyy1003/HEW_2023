@@ -1,6 +1,7 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
+#include "CDInput.h"
 
 extern Assets* g_Assets;
 
@@ -156,6 +157,27 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	//マテリアル色を定数バッファデータに代入
 	cb.materialDiffuse = m_materialDiffuse;
 }
+
+void Sprite::RotateObj(XMFLOAT3& rot)
+{
+
+	enum VALUE
+	{
+		val = 1,//テストの値
+	};
+	
+	float fval = 0.2;//テストの値
+
+
+	POINT mouseMovePos = CdInput::Get()->GetMouseMove();
+
+
+	/*rot.x += mouseMovePos.y * val;*/
+	rot.x = m_rotation.x += mouseMovePos.y * val*fval;
+	rot.y = m_rotation.y += mouseMovePos.x * val*fval;
+}
+
+
 
 
 
