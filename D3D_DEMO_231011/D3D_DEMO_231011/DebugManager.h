@@ -1,6 +1,5 @@
 #pragma once
 #include "CanvasUI.h"
-#include "GameObject.h"
 
 class DebugManager
 {

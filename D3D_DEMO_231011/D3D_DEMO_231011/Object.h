@@ -1,14 +1,14 @@
 ﻿#pragma once
 #include "Sprite.h"
 
-//ﾂオﾂブﾂジﾂェﾂクﾂトﾂ甘ｮﾂ墜�
+//基本オブジェクト
 class Object
 {
 public:
 	//----------------------------//
-	// ﾂ米篠青�
+	// 変数
 	//----------------------------//
-	//ﾂ図ﾂ形ﾂ湘ｮﾂ頁�ﾂて堕案ｾﾂづｭﾂて卍づ�ﾂね伉づｩ
+	//図形情報を扱う
 	Sprite* m_sprite;
 
 
@@ -16,7 +16,7 @@ public:
 public:
 	
 	/// <summary>
-	/// ﾂコﾂδ督スﾂトﾂδ可クﾂタﾂ�ﾂ�ﾂ渉可甘ｺﾂ嫁･ﾂ行ﾂつ､
+	/// 初期化を行う関数
 	/// </summary>
 	/// <param name="texture"></param>
 	/// <param name="_width">width</param>
@@ -25,12 +25,13 @@ public:
 	/// <param name="splitY"></param>
 	Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
-	//ﾂアﾂニﾂδ�ﾂーﾂシﾂδ�ﾂδ督て堋更ﾂ新ﾂて堕行ﾂつ､
+	//毎ループ呼び出される
 	virtual void Update(void);
 
+	//描画
 	void Draw(void);
 	
-	// ﾂ米青付ﾂでｻﾂ渉按猟�
+	//Constructor
 	~Object(void);
 };
 

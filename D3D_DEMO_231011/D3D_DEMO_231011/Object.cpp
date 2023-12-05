@@ -17,9 +17,6 @@ Object::Object(ID3D11ShaderResourceView* texture, float _width, float _height, i
 void Object::Update(void)
 {
 	//入力
-
-
-
 	
 	//アニメーション更新
 	m_sprite->m_anime->Update();

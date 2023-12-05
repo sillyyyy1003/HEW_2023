@@ -4,6 +4,8 @@
 
 class ObjectAnimation :public Animation
 {
+
+
 public:
 
 	ObjectAnimation(int splitX, int splitY);

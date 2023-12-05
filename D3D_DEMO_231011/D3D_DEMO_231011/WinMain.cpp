@@ -7,8 +7,6 @@
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		L"GAME_TITLE"	//ウィンドウの名前
-#define SCREEN_WIDTH	(1280)	// ウインドウの幅
-#define SCREEN_HEIGHT	(720)	// ウインドウの高さ
 #define FPS_DATA		(60)
 //----------------------------//
 // グローバル変数定義
@@ -83,8 +81,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//ゲームクラスの初期化処理
 	g_Game = new Game();
 
+	//デバッグ機能の実装
 	g_DebugManager = new DebugManager();
 
+	//入力初期化
 	Input::Get()->Initialize(hWnd, hInstance);
 
 	//ブラッシュアップ頻度(fps処理)
@@ -127,13 +127,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				//----------------------------//
 				// 	ゲームループ 
 				//----------------------------//
+				//入力
 				Input::Get()->Update();
+				//カメラ
 				g_WorldCamera->Update();
+				//ゲームループ
 				g_Game->GameUpdate();
-
+				//描画
 				g_Game->GameDraw();
 
-			
 
 				//----------------------------//
 				// 	FPSブラッシュアップ
@@ -164,7 +166,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	delete g_Game;
 	//Direct3D解放処理
 	D3D_Release();
-
 
 
 	//----------------------------//

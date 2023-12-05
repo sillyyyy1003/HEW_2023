@@ -18,7 +18,7 @@ void CanvasUI::CreateModel(ID3D11ShaderResourceView* texture, float _width, floa
 	Sprite::CreateModel(texture, _width, _height, splitX, splitY);
 
 	//アニメーションを配置
-	m_anime = new StaticAnimation(splitX,splitY);
+	m_anime = new Animation(splitX,splitY);
 
 }
 

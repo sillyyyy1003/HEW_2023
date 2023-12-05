@@ -1,5 +1,6 @@
 #include "DebugManager.h"
 #include "Assets.h"
+#include <stdio.h>
 
 
 
@@ -40,7 +41,6 @@ void DebugManager::UpdateChar(char* outputChar)
 
 		//UVOFFSET更新
 		m_debugASCII[i]->m_anime->Update();
-
 
 		//描画
 		m_debugASCII[i]->Draw();
@@ -89,3 +89,4 @@ void DebugManager::PrintDebugLog(float _posX, float _posY, const int _num)
 	//更新と描画
 	UpdateChar(str);
 }
+
