@@ -1,5 +1,6 @@
 #pragma once
 #include "Sprite.h"
+#include "SAT.h"
 
 // 円の当たり判定領域を表す構造体
 struct BOUNDING_CIRCLE
@@ -24,6 +25,11 @@ public:
 	DirectX::XMFLOAT3 m_dir = { 0.0f,0.0f,0.0f };
 
 
+	// 図形の頂点座標
+	std::vector<Vector2> vertices;
+
+
+	float rotation = 0;
 public:
 
 	TestObject();
@@ -39,6 +45,8 @@ public:
 	BOUNDING_CIRCLE GetBoundingCircle();
 	// 円の座標と半径を設定
 	void SetBoundingCircle(BOUNDING_CIRCLE bc);
+
+	void SetRotation(DirectX::XMFLOAT3 m_rotation);
 
 	// 操作するオブジェクトかどうか
 	bool isPlayer = false;

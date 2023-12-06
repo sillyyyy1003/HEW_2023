@@ -14,6 +14,7 @@ Assets::Assets()
     //testShadow = LoadTexture("assets/testShadow.png");
 
     square = LoadTexture("assets/polygon.png");
+    triangle = LoadTexture("assets/Triangle.png");//Triangle
 
 
 

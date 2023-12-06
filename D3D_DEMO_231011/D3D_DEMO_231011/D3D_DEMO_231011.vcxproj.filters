@@ -53,6 +53,7 @@
       <Filter>UIObject</Filter>
     </ClCompile>
     <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -104,6 +105,7 @@
       <Filter>UIObject</Filter>
     </ClInclude>
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">

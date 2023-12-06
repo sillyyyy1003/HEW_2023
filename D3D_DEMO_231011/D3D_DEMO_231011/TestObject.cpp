@@ -69,6 +69,13 @@ void TestObject::Update(void)
 
 		m_objSprite->m_pos.x = m_objSprite->m_pos.x + m_dir.x * moveSpeed;
 		m_objSprite->m_pos.y = m_objSprite->m_pos.y + m_dir.y * moveSpeed;
+
+		int count = 0;
+		for (auto it = vertices.begin(); it != vertices.end(); ++it) {
+			vertices[count].x = vertices[count].x + m_dir.x * moveSpeed;
+			vertices[count].y = vertices[count].y + m_dir.y * moveSpeed;
+			count++;
+		};
 	}
 	else
 	{
@@ -100,7 +107,7 @@ BOUNDING_CIRCLE TestObject::GetBoundingCircle()
 	{
 		// 操作していないオブジェクト 
 		// オブジェクトと同じように当たり判定も大きくする
-		bc.radius = 1.30f + Scale_countX; // 判定円の半径を設定
+		bc.radius = 1.30f; // 判定円の半径を設定//+ Scale_countX
 	}
 	else
 	{
@@ -114,6 +121,12 @@ void TestObject::SetBoundingCircle(BOUNDING_CIRCLE bc)
 {
 	m_objSprite->m_pos = bc.center;
 }
+
+void TestObject::SetRotation(DirectX::XMFLOAT3 rotation)
+{
+	m_objSprite->m_rotation = rotation;
+}
+
 
 TestObject::~TestObject()
 {

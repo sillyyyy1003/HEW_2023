@@ -20,7 +20,7 @@ public:
 	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ
 
 	ID3D11ShaderResourceView* square;
-	
+	ID3D11ShaderResourceView* triangle;
 
 
 

@@ -5,9 +5,16 @@
 #include "TrackCamera.h"
 #include "KBInput.h"
 
+#include "SAT.h"
+#include <algorithm> // 必要なヘッダーファイル
+#define SQUREWIDTH 1.2
+#define TRIANGLEWIDTH 0.8
+#define M_PI 3.14159265358979323846
+#define M_PIX 0.1//1.5
+#define M_PIY 0.0333333333// 0.5
+
 extern Assets* g_Assets;
 extern KBInput* g_KbInput;
-
 
 Game::Game()
 {
@@ -20,16 +27,18 @@ Game::Game()
 	////アニメーションパターンを設定
 	//testObject->m_sprite->m_anime->SetAnimePattern(0);
 
-
 	// オブジェクト1
 	testObj = new TestObject();
 	//オブジェクトの初期設定
-	testObj->SetObjTex(g_Assets->square, 200, 200, 1, 1);
+	testObj->SetObjTex(g_Assets->triangle, 200, 200, 1, 1);
 	testObj->m_objSprite->m_anime = new ObjectAnimation(1, 1);
 	testObj->m_objSprite->m_anime->SetAnimeSpeed(0.0f);
 	testObj->m_objSprite->m_anime->SetAnimePattern(0);
 	testObj->m_objSprite->InitPos(-4, -1.16, 0.2f);
+	DirectX::XMFLOAT3 rotation = testObj->m_objSprite->m_rotation;
 	testObj->isPlayer = true;// キーボードで操作可能
+	BOUNDING_CIRCLE circle1 = testObj->GetBoundingCircle();// 操作していないオブジェクト 
+	testObj->vertices = SetTriangle(circle1, testObj);
 
 	// オブジェクト2
 	testObj2 = new TestObject();
@@ -40,6 +49,10 @@ Game::Game()
 	testObj2->m_objSprite->m_anime->SetAnimeSpeed(0.0f);
 	testObj2->m_objSprite->m_anime->SetAnimePattern(0);
 	testObj2->m_objSprite->InitPos(5, 0, 0.1f);
+	rotation.z = 60;
+	testObj2->SetRotation(rotation);
+	testObj2->rotation = M_PI / 6;// 45
+	testObj2->vertices = SetSqureWithTriangle(testObj2->GetBoundingCircle(), testObj2, SQUREWIDTH);
 
 	// オブジェクト3
 	testObj3 = new TestObject();
@@ -49,8 +62,19 @@ Game::Game()
 	testObj3->m_objSprite->m_anime = new ObjectAnimation(1, 1);
 	testObj3->m_objSprite->m_anime->SetAnimeSpeed(0.0f);
 	testObj3->m_objSprite->m_anime->SetAnimePattern(0);
-	testObj3->m_objSprite->InitPos(2, 3, 0.1f);
-	
+	testObj3->m_objSprite->InitPos(6, 6, 0.1f);
+
+	testObj4 = new TestObject();
+	testObj4->SetObjTex(g_Assets->triangle, 200, 200, 1, 1);//square
+	testObj4->m_objSprite->m_anime = new ObjectAnimation(1, 1);
+	testObj4->m_objSprite->m_anime->SetAnimeSpeed(0.0f);
+	testObj4->m_objSprite->m_anime->SetAnimePattern(0);
+	testObj4->m_objSprite->InitPos(0, 0, 0.1f);
+	rotation.z = 0;
+	testObj4->SetRotation(rotation);
+	testObj4->rotation = 0;// 45 M_PI / 8
+	testObj4->vertices = SetTriangle(testObj4->GetBoundingCircle(), testObj4);
+
 
 	//影の初期設定
 	//testObj->SetShadowTex(g_Assets->testShadow, 200, 200, 1, 1);
@@ -69,10 +93,6 @@ Game::Game()
 	testBg->m_sprite->m_anime->SetAnimeSpeed(0.0f);
 	//アニメーションパターンを設定
 	testBg->m_sprite->m_anime->SetAnimePattern(0);
-
-	
-
-
 }
 
 void Game::GameUpdate(void)
@@ -83,7 +103,7 @@ void Game::GameUpdate(void)
 
 		TitleUpdate();
 		break;
-		
+
 	case STAGE1:
 
 		StageUpdate();
@@ -98,7 +118,7 @@ void Game::GameUpdate(void)
 }
 
 void Game::TitleUpdate(void)
-{	
+{
 	// 当たり判定処理
 	TestCollision();
 
@@ -106,6 +126,7 @@ void Game::TitleUpdate(void)
 	testObj->Update();
 	testObj2->Update();
 	testObj3->Update();
+	testObj4->Update();
 	//testObject->Update();
 }
 
@@ -124,6 +145,7 @@ Game::~Game()
 	delete testObj;
 	delete testObj2;
 	delete testObj3;
+	delete testObj4;
 	delete testBg;
 }
 
@@ -133,29 +155,29 @@ void Game::GameDraw()
 	D3D_ClearScreen();
 
 	//============ ここから描画処理 ============//
-	
-	
+
+
 	switch (m_gameScene)
-		{
-		case TITLE:
+	{
+	case TITLE:
 
-			TitleDraw();
-			break;
+		TitleDraw();
+		break;
 
-		case STAGE1:
+	case STAGE1:
 
-			StageDraw();
-			break;
+		StageDraw();
+		break;
 
-		case RESULT:
+	case RESULT:
 
-			ResultDraw();
-			break;
+		ResultDraw();
+		break;
 
-		}
+	}
 
 	//============ ここまで描画処理 ============//
-	 
+
 	//ダブルバッファの切り替えを行い画面を更新する
 	GetD3D_DATA()->SwapChain->Present(0, 0);
 }
@@ -167,7 +189,7 @@ void Game::TitleDraw(void)
 	testObj->Draw();
 	testObj2->Draw();
 	testObj3->Draw();
-
+	testObj4->Draw();
 
 	//testBg->m_sprite->Draw();
 	//testObject->m_sprite->Draw();
@@ -191,7 +213,9 @@ void Game::TestCollision()
 	BOUNDING_CIRCLE circle1 = testObj->GetBoundingCircle();// 操作しているオブジェクト
 	BOUNDING_CIRCLE circle2 = testObj2->GetBoundingCircle();// 操作していないオブジェクト 
 	BOUNDING_CIRCLE circle3 = testObj3->GetBoundingCircle();// 操作していないオブジェクト 
-	BOUNDING_CIRCLE Combine = circle1;// 円の座標を記録する
+	BOUNDING_CIRCLE circle4 = testObj4->GetBoundingCircle();// 操作していないオブジェクト 
+	//Triangle triangle, triangle2;
+	//std::vector<Vector2> verticesA,verticesB;
 
 	// ここで当たり判定を切り替える
 	//円同士
@@ -199,19 +223,42 @@ void Game::TestCollision()
 
 	if (!testObj3->isPlayer)// オブジェクト同士が触れたら当たり判定を消す
 	{
-		// 円と四角
+		// 円と四角 1四角　２四角　３円
 		// SqureandCircle関数　引数１：円　２：四角 3:四角のテクスチャが入っている方を入れる
 		// MoveObjects関数　引数１：オブジェクトがどこに当たったのかの戻り値　引数２：合体させる元のオブジェクトの座標
 		// 　　　　　　     引数３,４,５：MoveObjects関数の引数と同じ
-		CombineObjects(SqureandCircle(circle1, circle3, testObj3), Combine, circle1, circle3, testObj3);
-	}
+		//CombineObjects(SqureandCircle(circle1, circle3, testObj3),circle1, circle3, testObj3);
 
+		//CombineObjects(SqureandCircle(circle2, circle3, testObj3), circle2, circle3, testObj3);
+
+		// 三角と円
+		//CombineTriangleObjects(CheckTriangleAndCircleHit(circle1, circle3, testObj, testObj3), circle1, circle3, testObj,testObj3);
+	}
 
 	if (!testObj2->isPlayer)// オブジェクト同士が触れたら当たり判定を消す
 	{
-		// 四角と四角
-		CombineObjects(SqureHit(circle1, circle2), Combine, circle1, circle2, testObj2);
+		// 四角と四角 引数１：操作しているオブジェクト　引数２：操作していないオブジェクト
+		//CombineObjects(SqureHit(circle1, circle2, testObj, testObj2),circle1, circle2, testObj2);
+
+		//CombineObjects(SqureandCircle(circle3, circle2, testObj2), circle3, circle2, testObj2);
+
+		// 三角と四角　１三角　４三角　２四角
+		CombineTriangleObjects(CheckTriangleAndSqureHit(circle1, circle2, testObj, testObj2), circle1, circle2, testObj, testObj2);
+
+		//CombineTriangleObjects(CheckTriangleAndSqureHit(circle4, circle2, testObj4, testObj2), circle4, circle2, testObj4, testObj2);
 	}
+
+	if (!testObj4->isPlayer)
+	{
+		// 三角同士
+		//CombineObjects(CheckTriangleHit(circle1, circle4, testObj, testObj4), circle1, circle4, testObj, testObj4);
+
+		//CombineObjects(CheckTriangleAndSqureHit(circle2, circle4, testObj2, testObj4), circle2, circle4, testObj4);
+
+		CombineTriangleObjects(CheckTriangleHit(circle1, circle4, testObj, testObj4), circle1, circle4, testObj, testObj4);
+
+	}
+
 }
 
 int Game::CircleHit(BOUNDING_CIRCLE bc1, BOUNDING_CIRCLE bc2)
@@ -290,7 +337,7 @@ int Game::SqureandCircle(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestO
 	return 0;
 }
 
-int Game::SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2)
+int Game::SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
 {
 	// 四角形同士の当たり判定
 	if ((circle1.center.x + circle1.radius >= circle2.center.x - circle2.radius) &&
@@ -299,13 +346,22 @@ int Game::SqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2)
 		(circle2.center.y + circle2.radius >= circle1.center.y - circle1.radius))
 	{
 		// 上下左右の当たり判定で別の戻り値を返す
-		return SideCollision(circle1, circle2);
+		return SqureCollision(circle1, circle2, testObj, testObj2);
+	}
+	else
+	{
+		p_center = circle1.center;
 	}
 	return 0;
 }
 
-void Game::CombineObjects(int HitNum, BOUNDING_CIRCLE Combine, BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj)
+void Game::CombineObjects(int HitNum, BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj2)
 {
+	BOUNDING_CIRCLE Combine = circle1;// 円の座標を記録する
+	DirectX::XMFLOAT3 rotation = testObj->m_objSprite->m_rotation;
+	DirectX::XMFLOAT3 rotation2 = testObj2->m_objSprite->m_rotation;
+
+
 	switch (HitNum)
 	{
 	case 1:
@@ -313,39 +369,164 @@ void Game::CombineObjects(int HitNum, BOUNDING_CIRCLE Combine, BOUNDING_CIRCLE c
 		// 操作しているオブジェクトの横の座標を計算する
 		Combine.center.x = circle1.center.x + circle1.radius + circle2.radius;
 		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
-		testObj->SetBoundingCircle(Combine);
+		testObj2->SetBoundingCircle(Combine);
 		// 操作しているオブジェクトと同じように移動する
-		testObj->isPlayer = true;
+		testObj2->isPlayer = true;
 		break;
 	case 2:
 		// 下
 		// 操作しているオブジェクトの横の座標を計算する
 		Combine.center.y = circle1.center.y + circle1.radius + circle2.radius;
 		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
-		testObj->SetBoundingCircle(Combine);
+		testObj2->SetBoundingCircle(Combine);
 		// 操作しているオブジェクトと同じように移動する
-		testObj->isPlayer = true;
+		testObj2->isPlayer = true;
 		break;
 	case 3:
 		// 上
 		// 操作しているオブジェクトの横の座標を計算する
 		Combine.center.y = circle1.center.y - circle1.radius - circle2.radius;
 		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
-		testObj->SetBoundingCircle(Combine);
+		testObj2->SetBoundingCircle(Combine);
 		// 操作しているオブジェクトと同じように移動する
-		testObj->isPlayer = true;
+		testObj2->isPlayer = true;
 		break;
 	case 4:
 		// 右
 		// 操作しているオブジェクトの横の座標を計算する
 		Combine.center.x = circle1.center.x - circle1.radius - circle2.radius;
 		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
-		testObj->SetBoundingCircle(Combine);
+		testObj2->SetBoundingCircle(Combine);
 		// 操作しているオブジェクトと同じように移動する
-		testObj->isPlayer = true;
+		testObj2->isPlayer = true;
 		break;
+
 	default:
 		// 当たっていない
+		break;
+	}
+}
+
+void Game::CombineTriangleObjects(int HitNum, BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	std::vector<Vector2> Combineobj = testObj2->vertices;// 円の座標を記録する
+	BOUNDING_CIRCLE Combine2 = circle2;// 円の座標を記録する
+	DirectX::XMFLOAT3 rotation = testObj->m_objSprite->m_rotation;
+	DirectX::XMFLOAT3 rotation2 = testObj2->m_objSprite->m_rotation;
+	// 三角形の頂点座標とテスト対象の点を設定
+	switch (HitNum)
+	{
+		//ーーー三角形のオブジェクトの合体ーーー
+
+	case 5:
+		// 左
+		// 操作しているオブジェクトの横の座標を計算する
+		// 図形が移動していた場合初期値にする
+		testObj2->m_objSprite->InitPos(0, 0, 0.1f);
+		testObj2->vertices = SetTriangle(testObj2->GetBoundingCircle(), testObj2);
+		// 図形の角度が変わっていた場合初期値にする
+		testObj2->rotation = 0;
+		// 図形の移動をした後に図形の回転をする
+		Combineobj = testObj2->vertices;
+		Combineobj = InitialPolygonSATvertices(testObj2->GetBoundingCircle(), Combineobj, M_PI / 6.0f - testObj2->rotation);
+		circle2.center.x = -Combineobj[1].x / 1.6 + circle1.center.x;
+		circle2.center.y = -Combineobj[2].y / 2.9 + circle1.center.y;
+		InitialPolygonSAT(circle2, testObj2, -M_PI / 6.0f - testObj2->rotation);//32
+		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
+		testObj2->m_objSprite->InitPos(circle2.center.x, circle2.center.y, 0.1f);
+		rotation2.z = -60 + rotation.z;
+		testObj2->SetRotation(rotation2);
+		// 操作しているオブジェクトと同じように移動する
+		testObj2->isPlayer = true;
+		break;
+	case 6:
+		// 右
+		// 操作しているオブジェクトの横の座標を計算する
+		testObj2->m_objSprite->InitPos(0, 0, 0.1f);
+		testObj2->vertices = SetTriangle(testObj2->GetBoundingCircle(), testObj2);
+		testObj2->rotation = 0;
+		Combineobj = testObj2->vertices;
+		Combineobj = InitialPolygonSATvertices(testObj2->GetBoundingCircle(), Combineobj, M_PI / 6.0f - testObj2->rotation);
+		circle2.center.x = Combineobj[1].x / 1.6 + circle1.center.x;
+		circle2.center.y = -Combineobj[2].y / 2.9 + circle1.center.y;
+		InitialPolygonSAT(circle2, testObj2, M_PI / 6.0f - testObj2->rotation);
+		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
+		testObj2->m_objSprite->InitPos(circle2.center.x, circle2.center.y, 0.1f);
+		rotation2.z = 60 + rotation.z;
+		testObj2->SetRotation(rotation2);
+		// 操作しているオブジェクトと同じように移動する
+		testObj2->isPlayer = true;
+		break;
+	case 7:
+		// 下
+		// 操作しているオブジェクトの横の座標を計算する
+		testObj2->m_objSprite->InitPos(0, 0, 0.1f);
+		testObj2->vertices = SetTriangle(testObj2->GetBoundingCircle(), testObj2);
+		testObj2->rotation = 0;
+		Combineobj = testObj2->vertices;
+		Combineobj = InitialPolygonSATvertices(testObj2->GetBoundingCircle(), Combineobj, M_PI / 2.0f - testObj2->rotation);
+		circle2.center.x = circle1.center.x;
+		circle2.center.y = -Combineobj[2].y * 2.15 + circle1.center.y;
+		InitialPolygonSAT(circle2, testObj2, M_PI / 2.0f - testObj2->rotation);
+		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
+		testObj2->m_objSprite->InitPos(circle2.center.x, circle2.center.y, 0.1f);
+		rotation2.z = 180 + rotation.z;
+		testObj2->SetRotation(rotation2);
+		// 操作しているオブジェクトと同じように移動する
+		testObj2->isPlayer = true;
+		break;
+
+		//	// ーーー四角と三角ーーー
+
+	case 8:
+		// 左
+		// 操作しているオブジェクトの横の座標を計算する
+		// 図形が移動していた場合初期値にする
+		testObj2->m_objSprite->InitPos(0, 0, 0.1f);
+		testObj2->vertices = SetSqureWithTriangle(testObj2->GetBoundingCircle(), testObj2, SQUREWIDTH);
+		// 図形の角度が変わっていた場合初期値にする
+		testObj2->rotation = 0;
+		// 図形の移動をした後に図形の回転をする
+		Combineobj = testObj2->vertices;
+		Combineobj = InitialPolygonSATvertices(testObj2->GetBoundingCircle(), Combineobj, M_PI / 12.0f - testObj2->rotation);
+		circle2.center.x = -Combineobj[1].x * 0.98 + circle1.center.x;
+		circle2.center.y = -Combineobj[2].y / 2.5 + circle1.center.y;
+		InitialPolygonSAT(circle2, testObj2, -M_PI / 12.0f - testObj2->rotation);//32
+		// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
+		testObj2->m_objSprite->InitPos(circle2.center.x, circle2.center.y, 0.1f);
+		rotation2.z = -30 + rotation.z;
+		testObj2->SetRotation(rotation2);
+		// 操作しているオブジェクトと同じように移動する
+		testObj2->isPlayer = true;
+	case 9:
+		//// 右
+		//// 操作しているオブジェクトの横の座標を計算する
+		//float X1, Y2;
+		//deaseX = 0.05 + 0.005 * rotation.z, deaseY = -0.15 - 0.03 * rotation.z;
+		//X1 = (triangle.B.x + triangle.C.x) / 2;
+		//Y2 = (triangle.B.y + triangle.C.y) / 2;
+		//Combine.center.x = X1 + (X1 - triangle.A.x) + deaseX;//+ (X1 - triangle.A.x)+0.3
+		//Combine.center.y = Y2 + (Y2 - triangle.A.y) + deaseY;// (Y2 - triangle.A.y)-1.9
+		//// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
+		//testObj2->m_objSprite->InitPos(Combine.center.x, Combine.center.y, 0.1f);
+		//rotation2.z = 30 - rotation.z;
+		//testObj2->SetRotation(rotation2);
+		// 操作しているオブジェクトと同じように移動する
+		//testObj2->isPlayer = true;
+		break;
+	case 10:
+		//// 下
+		//// 操作しているオブジェクトの横の座標を計算する
+		//Combine.center.x = circle1.center.x;
+		//Combine.center.y = circle1.center.y - circle1.radius - circle1.radius / 2 - testObj2->Scale_countX;
+		//// ぶつかったオブジェクトを操作しているオブジェクトの真横に移動させる
+		//testObj2->m_objSprite->InitPos(Combine.center.x, Combine.center.y, 0.1f);
+		////rotation.z = 60;
+		//testObj2->SetRotation(rotation2);
+		//// 操作しているオブジェクトと同じように移動する
+		//testObj2->isPlayer = true;
+		break;
+	case 11:
 		break;
 	}
 }
@@ -368,4 +549,358 @@ int Game::SideCollision(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2)
 	{
 		return 3;
 	}
+}
+
+int Game::SqureCollision(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	SQUREBOX squre1, squre2; // 四角形の四辺を入れる変数を取得する
+
+	// 四角形の四辺を取得
+	squre1 = Squre(circle1, testObj2);//(!(p_center.x < circle1.center.x || p_center.x > circle1.center.x)&& !(p_center.y > circle1.center.y || p_center.y < circle1.center.y))
+	squre2 = Squre(circle2, testObj);// circle1.center.y - circle1.radius < circle2.center.y + circle2.radius&& circle1.center.y + circle1.radius > circle2.center.y - circle2.radius
+
+	// 四角形が上下のどちらかからぶつかった時に左右の当たり判定が機能しないようにするための処理
+	if (p_center.y - circle1.radius < circle2.center.y + circle2.radius
+		&& p_center.y + circle1.radius > circle2.center.y - circle2.radius)
+	{
+		// 左右
+		// 四角形に当たる直前に右方向に入力されているか
+		if (circle1.center.x < circle2.center.x && p_center.x < circle1.center.x)
+		{
+			// 四角形の左側に円が触れた場合の当たり判定
+			if (CheckSqureHit(squre1.Left, squre2.Right))// 左
+			{
+				return 1;
+			}
+		}
+		// 四角形に当たる直前に左方向に入力されているか
+		else if (circle1.center.x > circle2.center.x && p_center.x > circle1.center.x)
+		{
+			// 四角形の右側に円が触れた場合の当たり判定
+			if (CheckSqureHit(squre1.Right, squre2.Left))// 右
+			{
+				return 4;
+			}
+		}
+	}
+
+	// 上下
+	// 四角形に当たる直前に下方向に入力されているか
+	if (circle1.center.y > circle2.center.y && p_center.y > circle1.center.y)
+	{
+		// 四角形の上側に円が触れた場合の当たり判定
+		if (CheckSqureHit(squre1.Top, squre2.Bottom))// 上
+		{
+			return 3;
+		}
+	}
+	// 四角形に当たる直前に上方向に入力されているか
+	else if (circle1.center.y < circle2.center.y && p_center.y < circle1.center.y)
+	{
+		// 四角形の下側に円が触れた場合の当たり判定
+		if (CheckSqureHit(squre1.Bottom, squre2.Top))// 下
+		{
+			return 2;
+		}
+	}
+
+	return 0;
+}
+
+bool Game::CheckSqureHit(const BOX& t_box, const BOX& t_box2)
+{
+	// 四角形の左右どちらかの辺が重なっている
+	if ((t_box.fRight > t_box2.fLeft) ||
+		(t_box.fLeft < t_box2.fRight))
+	{
+		// 四角形の上下どちらかの辺が重なっている
+		if ((t_box.fBottom > t_box2.fTop) ||
+			(t_box.fTop < t_box2.fBottom))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+SQUREBOX Game::Squre(BOUNDING_CIRCLE circle2, TestObject* testObj)
+{
+	SQUREBOX squre; // 四角形の四辺を入れる変数を取得する
+
+	// 四角形の左右に触れた場合の四辺の座標
+	float X_posx1 = 1.4 + circle2.center.x + testObj->Scale_countX;
+	float X_posx2 = -1.4 + circle2.center.x - testObj->Scale_countX;
+	float X_posy1 = 1 + circle2.center.y + testObj->Scale_countY;
+	float X_posy2 = -1 + circle2.center.y - testObj->Scale_countY;
+
+	// 四角形の上下に触れた場合の四辺の座標
+	float Y_posx1 = 1.4 + circle2.center.y + testObj->Scale_countX;
+	float Y_posx2 = -1.4 + circle2.center.y - testObj->Scale_countX;
+	float Y_posy1 = 1 + circle2.center.x + testObj->Scale_countX;
+	float Y_posy2 = -1 + circle2.center.x - testObj->Scale_countX;
+
+	// 四角形の辺にそれぞれ四つの座標をいれる
+	squre.Left = { X_posx2, X_posy2, X_posx2, X_posy1 };   // 左
+	squre.Right = { X_posx1, X_posy2, X_posx1, X_posy1 };  // 右
+	squre.Bottom = { Y_posy2, Y_posx2, Y_posy1, Y_posx2 }; // 下
+	squre.Top = { Y_posy2, Y_posx1, Y_posy1, Y_posx1 };    // 上
+
+	// 四角形の四辺を返す
+	return squre;
+}
+
+std::vector<Vector2> Game::SetTriangle(BOUNDING_CIRCLE circle1, TestObject* testObj2)
+{
+	Triangle triangle;
+	triangle.A = { 0                                , 0.9f + testObj2->Scale_countY };
+	triangle.B = { 1.1f + testObj2->Scale_countX, -0.9f - testObj2->Scale_countY };
+	triangle.C = { -1.1f - testObj2->Scale_countX, -0.9f - testObj2->Scale_countY };
+
+
+	// 1つ目の凸多角形の頂点座標を定義
+	std::vector<Vector2> vertices = {
+		Vector2(triangle.A.x, triangle.A.y),
+		Vector2(triangle.B.x, triangle.B.y),
+		Vector2(triangle.C.x, triangle.C.y),
+	};
+
+	return vertices;
+}
+
+std::vector<Vector2> Game::SetSqureWithTriangle(BOUNDING_CIRCLE circle1, TestObject* testObj2, float width)
+{
+	SQURE squre;
+	// 四角の下の三角
+	squre.A = { width + testObj2->Scale_countX,
+				width + testObj2->Scale_countY };
+	squre.B = { width + testObj2->Scale_countX,
+				-width + -testObj2->Scale_countY };
+	squre.C = { -width - testObj2->Scale_countX,
+				-width + -testObj2->Scale_countY };
+	squre.D = { -width - testObj2->Scale_countX,
+				 width + testObj2->Scale_countY };
+
+	// 1つ目の凸多角形の頂点座標を定義
+	std::vector<Vector2> vertices = {
+		Vector2(squre.A.x, squre.A.y),
+		Vector2(squre.B.x, squre.B.y),
+		Vector2(squre.C.x, squre.C.y),
+		Vector2(squre.D.x, squre.D.y),
+	};
+
+	return vertices;
+}
+
+SQURE Game::SetCircleWithTriangle(BOUNDING_CIRCLE circle1, TestObject* testObj2, float width)
+{
+	SQURE circle;
+	// 四角の下の三角
+	circle.A = { circle1.center.x , width + circle1.center.y + testObj2->Scale_countY };
+	circle.B = { -width + circle1.center.x - testObj2->Scale_countX,circle1.center.y };
+	circle.C = { circle1.center.x , -width + circle1.center.y - testObj2->Scale_countY };
+	circle.D = { width + circle1.center.x + testObj2->Scale_countX,circle1.center.y };
+	return circle;
+}
+
+bool Game::isPointInTriangle(Point A, Point B, Point C, Point P)
+{
+	// バリア座標の計算
+	float denominator = (B.y - C.y) * (A.x - C.x) + (C.x - B.x) * (A.y - C.y);
+	float alpha = ((B.y - C.y) * (P.x - C.x) + (C.x - B.x) * (P.y - C.y)) / denominator;
+	float beta = ((C.y - A.y) * (P.x - C.x) + (A.x - C.x) * (P.y - C.y)) / denominator;
+	float gamma = 1.0 - alpha - beta;
+
+	// 座標内包性の確認
+	return alpha >= 0.0 && alpha <= 1.0 && beta >= 0.0 && beta <= 1.0 && gamma >= 0.0 && gamma <= 1.0;
+}
+
+int Game::CheckTriangleHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	// 三角形の頂点座標とテスト対象の点を設定
+	// 操作している三角形
+	testObj->vertices = SetTriangle(circle1, testObj);
+	// 操作していない三角形
+	testObj2->vertices = SetTriangle(circle2, testObj2);
+
+	// 三角同士が触れている時
+	if (TriangleHit(testObj, testObj2))
+	{
+		if (testObj2->vertices[0].y > circle1.center.y)
+		{
+			// 右上にあるとき
+			if (testObj->vertices[0].x < circle2.center.x)
+			{
+				// 右
+				return 6;
+			}
+			// 左上にあるとき
+			else if (testObj->vertices[0].x > circle2.center.x)
+			{
+				// 左
+				return 5;
+			}
+		}
+		// 上にあるとき
+		else
+		{
+			// 上
+			return 7;
+		}
+	}
+
+	return 0;
+}
+
+bool Game::TriangleHit(TestObject* testObj, TestObject* testObj2)
+{
+	PolygonSAT Triangle1(testObj->vertices, 0);
+	PolygonSAT Triangle2(testObj2->vertices, testObj2->rotation);
+
+	testObj2->vertices = Triangle2.GetRotatedVertices();
+
+	BOUNDING_CIRCLE circle1 = testObj2->GetBoundingCircle();
+	BOUNDING_CIRCLE circle2 = testObj2->GetBoundingCircle();
+	// 四角
+	for (auto& vertex : testObj2->vertices) {
+		vertex.x += circle1.center.x;
+		vertex.y += circle1.center.y;
+	}
+
+	Triangle2.vertices = testObj2->vertices;
+
+	bool collisionResult = Collide(Triangle1, Triangle2);
+
+	// 結果を表示
+	if (collisionResult)
+	{
+		return true;
+	}
+	return false;
+}
+
+void Game::InitialPolygonSAT(BOUNDING_CIRCLE circle1, TestObject* testObj, float rotation)
+{
+	//BOUNDING_CIRCLE circle4 = testObj->GetBoundingCircle();// 操作していないオブジェクト 
+	//testObj->vertices = SetTriangle(circle4, testObj);
+	PolygonSAT Triangle3(testObj->vertices, rotation);
+	testObj->vertices = Triangle3.GetRotatedVertices();
+	for (auto& vertex : testObj->vertices) {
+		vertex.x = vertex.x + circle1.center.x;
+		vertex.y = vertex.y + circle1.center.y;
+	}
+}
+
+std::vector<Vector2> Game::InitialPolygonSATvertices(BOUNDING_CIRCLE circle1, std::vector<Vector2> vertices, float rotation)
+{
+	PolygonSAT Triangle3(vertices, rotation);
+	vertices = Triangle3.GetRotatedVertices();
+	for (auto& vertex : vertices) {
+		vertex.x = vertex.x + circle1.center.x;
+		vertex.y = vertex.y + circle1.center.y;
+	}
+
+	return vertices;
+}
+
+int Game::CheckTriangleAndSqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	// 三角形の頂点座標とテスト対象の点を設定
+	// 操作している三角形
+	testObj->vertices = SetTriangle(circle1, testObj);
+	// 操作していない四角形
+	testObj2->vertices = SetSqureWithTriangle(circle2, testObj2, SQUREWIDTH);
+
+	// 三角同士が触れている時
+	if (TriangleHit(testObj, testObj2))
+	{
+		if (testObj2->vertices[0].y > circle1.center.y)
+		{
+			// 右上にあるとき
+			if (testObj->vertices[0].x < circle2.center.x)
+			{
+				// 右
+				return 9;
+			}
+			// 左上にあるとき
+			else if (testObj->vertices[0].x > circle2.center.x)
+			{
+				// 左
+				return 8;
+			}
+		}
+		// 上にあるとき
+		else
+		{
+			// 上
+			return 10;
+		}
+	}
+
+	return 0;
+}
+
+int Game::CheckTriangleAndCircleHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	// 三角形の頂点座標とテスト対象の点を設定
+	std::vector<Vector2> triangle;
+	SQURE circle;
+	std::vector<Vector2> squre;
+
+	// 操作している三角形
+	triangle = SetTriangle(circle1, testObj);
+	squre = SetSqureWithTriangle(circle2, testObj2, TRIANGLEWIDTH);
+	circle = SetCircleWithTriangle(circle2, testObj2, SQUREWIDTH);
+
+	// 中心点
+	Point squrecenter = { circle2.center.x ,circle2.center.y };
+
+	////// 当たり判定を行う
+	//if     (isPointInTriangle(squrecenter, circle.D, squre.C, triangle.A)
+	//	||  isPointInTriangle(squrecenter, squre.C, circle.C, triangle.A)
+	//	|| (isPointInTriangle(triangle.A, triangle.B, triangle.C, squre.C)))
+	//{
+	//	// 右
+	//	return 8;
+	//}
+	//else if (isPointInTriangle(squrecenter, circle.B, squre.A, triangle.B)
+	//	  || isPointInTriangle(squrecenter, squre.A, circle.C, triangle.B)
+	//	  || isPointInTriangle(triangle.A, triangle.B, triangle.C, squre.A))
+	//{
+	//	// 左
+	//	return 9;
+	//}
+	//// 下
+	//else if (isPointInTriangle(circle.B, squre.A, squrecenter, triangle.C)
+	//	  || isPointInTriangle(squre.A, circle.C, squrecenter, triangle.C))
+	//{
+	//	// 左
+	//	return 9;
+	//}
+	//else if (isPointInTriangle(circle.D, squre.C, squrecenter, triangle.C)
+	//	  || isPointInTriangle(squre.C, circle.C, squrecenter, triangle.C))
+	//{
+	//	// 右
+	//	return 8;
+	//}
+	//else if ((isPointInTriangle(circle.B, squre.D, squrecenter, triangle.B)
+	//	   || isPointInTriangle(squre.D, circle.A, squrecenter, triangle.B)
+	//	   || isPointInTriangle(circle.A, squrecenter, squre.B, triangle.A)
+	//	   || isPointInTriangle(squre.B, squrecenter, circle.D, triangle.A)))
+	//{
+	//	// 上
+	//	return 10;
+	//}
+
+	return 0;
+}
+
+bool Game::TriangleAndCircleHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	return 0;
+}
+
+bool Game::TriangleAndSqureHit(BOUNDING_CIRCLE circle1, BOUNDING_CIRCLE circle2, TestObject* testObj, TestObject* testObj2)
+{
+	return 0;
 }
