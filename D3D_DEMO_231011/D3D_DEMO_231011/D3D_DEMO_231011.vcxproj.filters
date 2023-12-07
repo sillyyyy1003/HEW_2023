@@ -1,20 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
+    <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
       <Filter>Direct3D\ShaderFile</Filter>
     </FxCompile>
-    <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
+    <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
       <Filter>Direct3D\ShaderFile</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source.cpp" />
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="Direct3D\Direct3D.cpp">
-      <Filter>Direct3D</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="ObjectAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticAnimation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Assets.cpp">
+      <Filter>Assets</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
@@ -22,11 +29,35 @@
     <ClCompile Include="TrackCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Assets.cpp">
-      <Filter>Assets</Filter>
+    <ClCompile Include="CanvasUI.cpp">
+      <Filter>CanvasUI</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Animation</Filter>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>DebugManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="DInput.cpp">
+      <Filter>KeyBoradInput</Filter>
+    </ClCompile>
+    <ClCompile Include="Direct3D\Direct3D.cpp">
+      <Filter>Direct3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>BaseObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowObject.cpp">
+      <Filter>BaseObject</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>Graphic</Filter>
@@ -34,49 +65,25 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>BaseObject</Filter>
-    </ClCompile>
     <ClCompile Include="WICTextureLoader.cpp">
-      <Filter>Assets</Filter>
+      <Filter>Direct3D</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Input.cpp">
       <Filter>ControllerInput</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowObject.cpp" />
-    <ClCompile Include="ObjectAnimation.cpp">
-      <Filter>Animation\ObjectAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticAnimation.cpp">
-      <Filter>Animation\StaticAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="source.cpp" />
-    <ClCompile Include="Collider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="CanvasUI.cpp">
-      <Filter>CanvasUI</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderManager.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugManager.cpp">
-      <Filter>DebugManager</Filter>
-    </ClCompile>
-    <ClCompile Include="DInput.cpp">
-      <Filter>KeyboardInput</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Direct3D\Direct3D.h">
-      <Filter>Direct3D</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="ObjectAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets.h">
+      <Filter>Assets</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
@@ -84,17 +91,41 @@
     <ClInclude Include="TrackCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Assets.h">
-      <Filter>Assets</Filter>
+    <ClInclude Include="CanvasUI.h">
+      <Filter>CanvasUI</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Animation</Filter>
+    <ClInclude Include="DebugManager.h">
+      <Filter>DebugManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderManager.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="DInput.h">
+      <Filter>KeyBoradInput</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\Direct3D.h">
+      <Filter>Direct3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\Shader\VertexShader.h">
+      <Filter>Direct3D\ShaderFile</Filter>
     </ClInclude>
     <ClInclude Include="Direct3D\Shader\PixelShader.h">
       <Filter>Direct3D\ShaderFile</Filter>
     </ClInclude>
-    <ClInclude Include="Direct3D\Shader\VertexShader.h">
-      <Filter>Direct3D\ShaderFile</Filter>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowObject.h">
+      <Filter>BaseObject</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Graphic</Filter>
@@ -102,90 +133,55 @@
     <ClInclude Include="Sprite.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>BaseObject</Filter>
-    </ClInclude>
     <ClInclude Include="WICTextureLoader.h">
-      <Filter>Assets</Filter>
+      <Filter>Direct3D</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Input.h">
       <Filter>ControllerInput</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowObject.h" />
-    <ClInclude Include="ObjectAnimation.h">
-      <Filter>Animation\ObjectAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticAnimation.h">
-      <Filter>Animation\StaticAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="CanvasUI.h">
-      <Filter>CanvasUI</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderManager.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugManager.h">
-      <Filter>DebugManager</Filter>
-    </ClInclude>
-    <ClInclude Include="DInput.h">
-      <Filter>KeyboardInput</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Direct3D">
-      <UniqueIdentifier>{982c99ce-9f4a-4f0c-9c96-255e74c4a5b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{fa19575d-48c1-499e-b01f-78629fa68fe2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{5781a4bd-2c30-46b5-91ff-0110ad3aa239}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Animation">
-      <UniqueIdentifier>{9eccba5c-c06b-4bdf-a315-67a19e5d1f2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphic">
-      <UniqueIdentifier>{c4808cbb-417a-446c-a5b0-0d994cb7810b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets">
-      <UniqueIdentifier>{ae88ca4d-50d5-41ae-9e8f-7273dd0176bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="KeyboardInput">
-      <UniqueIdentifier>{ddead9df-1d02-40a5-9189-4b62502369d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{af014f85-2d18-43e8-a644-55e5fc0e7fbf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation\ObjectAnimation">
-      <UniqueIdentifier>{d97b9648-d7f1-4be2-8174-82366a74c2ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Animation\StaticAnimation">
-      <UniqueIdentifier>{e3ec9626-bdcf-4334-b4e6-6f15e7860f5a}</UniqueIdentifier>
+      <UniqueIdentifier>{89e46f4a-5c4c-472b-afbd-df835e26aa8f}</UniqueIdentifier>
     </Filter>
     <Filter Include="BaseObject">
-      <UniqueIdentifier>{7411a4ef-3e2d-4a21-96f5-5fe4536bc471}</UniqueIdentifier>
+      <UniqueIdentifier>{c11274e2-c295-4bbd-9a65-46629295bce9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Collider">
-      <UniqueIdentifier>{94bb60dd-4e35-4e1a-805c-4cd122fda45c}</UniqueIdentifier>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{ec2f0331-a12a-49ee-8c10-9b204544eb39}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Direct3D\ShaderFile">
-      <UniqueIdentifier>{26bd6f8c-8e41-4be1-8c0a-5fb51c29de81}</UniqueIdentifier>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{5b3d9755-a54b-4c68-9822-0ee3668d89e3}</UniqueIdentifier>
     </Filter>
     <Filter Include="CanvasUI">
-      <UniqueIdentifier>{7f5b5dc6-261b-482f-95e4-52925c6953c3}</UniqueIdentifier>
+      <UniqueIdentifier>{de8b9c68-5d3b-46d5-ad58-393fb47ab9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{dadf1870-af58-4d0b-8be0-1a353d2e9ef1}</UniqueIdentifier>
     </Filter>
     <Filter Include="DebugManager">
-      <UniqueIdentifier>{abb66bdc-8323-4d84-8e3a-20855b231344}</UniqueIdentifier>
+      <UniqueIdentifier>{11b7ac2f-b2eb-402a-9f0b-5fe194f5042f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{2ccd10f4-d672-405d-a557-a19cab3afaaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="KeyBoradInput">
+      <UniqueIdentifier>{b9695c35-f833-4a95-a02a-bd1d37b458ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct3D">
+      <UniqueIdentifier>{7736c0f6-b701-4426-b6f2-ec273e379364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct3D\ShaderFile">
+      <UniqueIdentifier>{6509bcd9-bfea-4ae7-94ec-909d08801b55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2ed79dbb-9c98-48bc-8901-d11834b39eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{258e2de5-8990-4bb1-80ed-7d855966037f}</UniqueIdentifier>
     </Filter>
     <Filter Include="ControllerInput">
-      <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
+      <UniqueIdentifier>{950959dc-c3aa-4dee-a305-786d4decd0cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
