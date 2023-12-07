@@ -1,5 +1,49 @@
-﻿  Game.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectAnimation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(193,58): warning C4305: “初始化”: 从“double”到“float”截断
+﻿  Animation.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(26,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Assets.cpp
+  Camera.cpp
+  CanvasUI.cpp
+  Collider.cpp
+  ColliderManager.cpp
+  DebugManager.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(39,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(40,56): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  DInput.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\DInput.cpp(112,56): warning C4805: '==': 演算中の 'unsigned char' 型と 'bool' 型の混用は安全ではありません
+  Direct3D.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(257,30): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(258,31): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Game.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(199,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  GameObject.cpp
+  Input.cpp
+  Material.cpp
+  Object.cpp
+  ObjectAnimation.cpp
+  ShadowObject.cpp
+  source.cpp
+  Sprite.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(22,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(22,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(27,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(28,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(29,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(30,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  StaticAnimation.cpp
+  TrackCamera.cpp
+  コードを生成中...
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(150): warning C4715: 'D3D_CreateRenderTarget': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(118): warning C4715: 'D3D_CreateDevice': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(282): warning C4715: 'D3D_CreateSampler': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(304): warning C4715: 'D3D_CreateBuffer': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(197): warning C4715: 'D3D_CreateDepthStencil': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(248): warning C4715: 'D3D_CreateShader': 値を返さないコントロール パスがあります。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp(345): warning C4715: 'D3D_CreateBlendState': 値を返さないコントロール パスがあります。
+  コンパイル中...
+  WICTextureLoader.cpp
+  WinMain.cpp
+  コードを生成中...
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

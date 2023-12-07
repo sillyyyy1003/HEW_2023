@@ -22,23 +22,26 @@ private:
 	Object* testChara;	//プレイヤー
 
 	GameObject* testTree;	//木
-
 	CanvasUI* uitest;
 
 
+private:
+	//コンストラクタ&デストラクタ
+	Game() {};
+	~Game();
+
 public:
-	//コンストラクタ
-	Game();
+	//唯一のインスタンスを返す関数
+	static Game* Get();
+
+	//初期化を行う関数
+	void Init();
 
 	//ゲーム本体
 	void GameUpdate(void);
 	void TitleUpdate(void);
 	void StageUpdate(void);
 	void ResultUpdate(void);
-
-
-	//後片付け
-	~Game();
 
 	//描画
 	void GameDraw(void);

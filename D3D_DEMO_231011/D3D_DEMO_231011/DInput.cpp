@@ -107,6 +107,16 @@ bool Input::GetKeyPress(int key)
 	return (mKeyBuffer[key] & 0x80) != 0;
 }
 
+bool Input::GetKeyTrigger(int key)
+{
+	if (mOldKeyBuffer[key] == false && mKeyBuffer[key] == true) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 bool Input::GetMousePress(int key)
 {
 	return (mMouseState.rgbButtons[key] & 0x80) != 0;

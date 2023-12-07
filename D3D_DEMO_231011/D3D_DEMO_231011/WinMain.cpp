@@ -70,8 +70,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// DirectXの初期化処理
 	DirectXInit(hWnd);
 
-	//DirectInputのデバイス作成
-
 	//アセットの初期化
 	g_Assets = new Assets();
 
@@ -79,7 +77,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	g_WorldCamera = new TrackCamera();
 
 	//ゲームクラスの初期化処理
-	g_Game = new Game();
+	g_Game = Game::Get();
+	g_Game->Game::Init();
+
 
 	//デバッグ機能の実装
 	g_DebugManager = new DebugManager();
@@ -158,12 +158,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//----------------------------//
 	// ゲームクラスの終了処理
 	//----------------------------//
+	
 	//アセット解放処理
 	delete g_Assets;
+	
 	//カメラ解放処理
 	delete g_WorldCamera;
-	//ゲームの解放処理
-	delete g_Game;
+	
+	//ゲーム/Inputの解放処理->Singleton
+
 	//Direct3D解放処理
 	D3D_Release();
 

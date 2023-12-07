@@ -12,7 +12,7 @@ extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
 
 
-Game::Game()
+void Game::Init()
 {
 	//オブジェクト作成
 	testWall = new Object(g_Assets->testWallbg, 1280, 720, 1, 1);
@@ -141,6 +141,12 @@ Game::~Game()
 
 	delete testTree;
 	delete uitest;
+}
+
+Game* Game::Get()
+{
+	static Game instance;
+	return &instance;
 }
 
 void Game::GameDraw()
