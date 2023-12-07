@@ -10,6 +10,8 @@ void ObjectAnimation::Update(void)
     //ここでアニメーションパターンを変更
     int animeTable[32] = { 0, 0, 1, 2, 2, 1, -1 };
 
+
+
     // 表示させるコマIDを取得
     int animeID = animeTable[(int)Animation::m_animeCounter];
 
@@ -42,3 +44,4 @@ void ObjectAnimation::Update(void)
 
 
 }
+

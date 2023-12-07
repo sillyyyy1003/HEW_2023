@@ -97,7 +97,9 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	else {//カメラを使わない→uiなどに使われている
 				
 		matrixView = XMMatrixIdentity();
-		matrixProjPerspective= XMMatrixIdentity();
+		matrixProjPerspective = XMMatrixOrthographicLH(
+			RATIO_W, RATIO_H, 0.0f, 3.0f);
+		matrixProjPerspective = XMMatrixTranspose(matrixProjPerspective);
 	}
 
 

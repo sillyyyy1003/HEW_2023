@@ -1,6 +1,7 @@
 ﻿#include "Assets.h"
 #include <locale.h>
 
+ID3D11ShaderResourceView* Assets::debugFont;
 
 Assets::Assets()
 {

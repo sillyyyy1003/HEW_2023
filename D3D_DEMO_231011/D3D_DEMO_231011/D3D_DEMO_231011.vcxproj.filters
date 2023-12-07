@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
-      <Filter>ShaderFile</Filter>
+      <Filter>Direct3D\ShaderFile</Filter>
     </FxCompile>
     <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
-      <Filter>ShaderFile</Filter>
+      <Filter>Direct3D\ShaderFile</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -42,13 +42,7 @@
     </ClCompile>
 <<<<<<< HEAD
     <ClCompile Include="Input.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="KBInput.cpp">
-      <Filter>KeyboardInput</Filter>
-    </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>TestObject</Filter>
+      <Filter>ControllerInput</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
@@ -61,21 +55,21 @@
       <Filter>Animation\StaticAnimation</Filter>
     </ClCompile>
     <ClCompile Include="source.cpp" />
-    <ClCompile Include="ColliderManager.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="DebugManager.cpp" />
-    <ClCompile Include="CanvasUI.cpp" />
-=======
-    <ClCompile Include="UiObject.cpp">
-      <Filter>UIObject</Filter>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="CDInput.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="CanvasUI.cpp">
+      <Filter>CanvasUI</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.cpp">
-      <Filter>TestObject</Filter>
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
->>>>>>> １１１
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>DebugManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DInput.cpp">
+      <Filter>KeyboardInput</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -97,10 +91,10 @@
       <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="Direct3D\Shader\PixelShader.h">
-      <Filter>ShaderFile</Filter>
+      <Filter>Direct3D\ShaderFile</Filter>
     </ClInclude>
     <ClInclude Include="Direct3D\Shader\VertexShader.h">
-      <Filter>ShaderFile</Filter>
+      <Filter>Direct3D\ShaderFile</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>Graphic</Filter>
@@ -116,13 +110,7 @@
     </ClInclude>
 <<<<<<< HEAD
     <ClInclude Include="Input.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="KBInput.h">
-      <Filter>KeyboardInput</Filter>
-    </ClInclude>
-    <ClInclude Include="TestObject.h">
-      <Filter>TestObject</Filter>
+      <Filter>ControllerInput</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
@@ -134,21 +122,21 @@
     <ClInclude Include="StaticAnimation.h">
       <Filter>Animation\StaticAnimation</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderManager.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="DebugManager.h" />
-    <ClInclude Include="CanvasUI.h" />
-=======
-    <ClInclude Include="UiObject.h">
-      <Filter>UIObject</Filter>
+    <ClInclude Include="Collider.h">
+      <Filter>Collider</Filter>
     </ClInclude>
-    <ClInclude Include="CDInput.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="CanvasUI.h">
+      <Filter>CanvasUI</Filter>
     </ClInclude>
-    <ClInclude Include="TestObject.h">
-      <Filter>TestObject</Filter>
+    <ClInclude Include="ColliderManager.h">
+      <Filter>Collider</Filter>
     </ClInclude>
->>>>>>> １１１
+    <ClInclude Include="DebugManager.h">
+      <Filter>DebugManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DInput.h">
+      <Filter>KeyboardInput</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -160,9 +148,6 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{5781a4bd-2c30-46b5-91ff-0110ad3aa239}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShaderFile">
-      <UniqueIdentifier>{26bd6f8c-8e41-4be1-8c0a-5fb51c29de81}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{9eccba5c-c06b-4bdf-a315-67a19e5d1f2d}</UniqueIdentifier>
     </Filter>
@@ -172,14 +157,8 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{ae88ca4d-50d5-41ae-9e8f-7273dd0176bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="KeyboardInput">
       <UniqueIdentifier>{ddead9df-1d02-40a5-9189-4b62502369d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TestObject">
-      <UniqueIdentifier>{05ce2e89-4541-4134-bb5d-06214c866565}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{af014f85-2d18-43e8-a644-55e5fc0e7fbf}</UniqueIdentifier>
@@ -195,6 +174,18 @@
     </Filter>
     <Filter Include="Collider">
       <UniqueIdentifier>{94bb60dd-4e35-4e1a-805c-4cd122fda45c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Direct3D\ShaderFile">
+      <UniqueIdentifier>{26bd6f8c-8e41-4be1-8c0a-5fb51c29de81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CanvasUI">
+      <UniqueIdentifier>{7f5b5dc6-261b-482f-95e4-52925c6953c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DebugManager">
+      <UniqueIdentifier>{abb66bdc-8323-4d84-8e3a-20855b231344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControllerInput">
+      <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -78,5 +78,10 @@ public:
 	/// <returns>更新されたUV座標</returns>
 	DirectX::XMFLOAT2 GetUVOffset(void);
 
+	/// <summary>
+	/// 横何番目を設定する
+	/// </summary>
+	void SetFrameX(int _frameX);
+
 };
 

@@ -34,6 +34,7 @@ void DirectXInit(HWND hWnd)
     //メモリ確保
     g_pD3D = (D3D_DATA*)malloc(sizeof(D3D_DATA));
 
+    //初期化
     ZeroMemory(g_pD3D, sizeof(D3D_DATA));
 
     //デバイス作成関数を呼び出す
