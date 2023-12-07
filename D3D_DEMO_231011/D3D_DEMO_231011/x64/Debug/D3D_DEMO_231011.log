@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  Animation.cpp
 <<<<<<< HEAD
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
@@ -186,3 +187,20 @@ C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\WinMain.cpp(220,
   正在生成代码...
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
 >>>>>>> feature/Sakamoto
+=======
+﻿  Sprite.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(77,45): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(77,19): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(78,45): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(78,20): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(79,44): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(79,18): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(80,48): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(80,21): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(84,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(84,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(85,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(85,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(168,13): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  D3D_DEMO_231011.vcxproj -> C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+>>>>>>> １１１

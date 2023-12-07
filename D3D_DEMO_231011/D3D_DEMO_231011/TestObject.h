@@ -37,14 +37,8 @@ public:
 	//影用のテクスチャのセッティング
 	void SetShadowTex(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
-	// 当たり判定
-	// 円の座標と半径を取得
-	BOUNDING_CIRCLE GetBoundingCircle();
-	// 円の座標と半径を設定
-	void SetBoundingCircle(BOUNDING_CIRCLE bc);
+	
 
-	// 操作するオブジェクトかどうか
-	bool isPlayer = false;
 
 	virtual void Update(void);
 

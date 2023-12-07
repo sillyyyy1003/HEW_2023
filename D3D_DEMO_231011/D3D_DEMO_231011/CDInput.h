@@ -70,5 +70,8 @@ public:
 
 	//ãƒžã‚¦ã‚¹ãƒœã‚¿ãƒ³ãƒˆãƒªã‚¬ãƒ¼
 	bool GetMouseTrigger(int key);
+
+	// ƒ}ƒEƒX‚ÌˆÚ“®—Ê‚ðŽæ“¾‚·‚é
+	POINT GetMouseMove();
 };
 

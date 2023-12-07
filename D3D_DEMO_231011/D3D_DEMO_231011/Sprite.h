@@ -1,7 +1,8 @@
-﻿#pragma once
+#pragma once
 #include "Material.h"
 #include "Camera.h"
 #include "Animation.h"
+
 
 
 /// <summary>
@@ -99,7 +100,23 @@ public:
 	/// 平行投影用
 	/// </summary>
 	/// <param name="cb">シェーダーに渡す行列</param>
-	virtual void GenerateMatrix(CONSTBUFFER& cb);
+	void GenerateMatrix(CONSTBUFFER& cb);
+
+
+	/// <summary>
+	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）
+	/// </summary>
+	/// <param name="rot">オブジェクトの回転</param>
+	void RotateObj(XMFLOAT3& rot);
+
+
+
+	/// <summary>
+	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）
+	/// </summary>
+	/// <param name="rot">オブジェクトの回転</param>
+	void RotateObj(XMFLOAT3& rot);
+
 
 
 	/// <summary>

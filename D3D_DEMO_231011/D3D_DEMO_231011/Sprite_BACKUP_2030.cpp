@@ -1,4 +1,4 @@
-#include "Sprite.h"
+﻿#include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
 #include "CDInput.h"
@@ -127,15 +127,17 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	cb.materialDiffuse = m_materialDiffuse;
 }
 
+<<<<<<< HEAD
+=======
 void Sprite::RotateObj(XMFLOAT3& rot)
 {
 
 	enum VALUE
 	{
-		val = 1,//テストの値
+		val = 1,//�e�X�g�̒l
 	};
 	
-	float fval = 0.2;//テストの値
+	float fval = 0.2;//�e�X�g�̒l
 
 
 	POINT mouseMovePos = CdInput::Get()->GetMouseMove();
@@ -150,6 +152,7 @@ void Sprite::RotateObj(XMFLOAT3& rot)
 
 
 
+>>>>>>> １１１
 void Sprite::Draw(void)
 {
 	UINT strides = sizeof(VERTEX);

@@ -158,6 +158,8 @@ bool CdInput::GetMouseTrigger(int key)
 	}
 }
 
+<<<<<<< HEAD
+=======
 POINT CdInput::GetMouseMove()
 {
 	POINT pt;
@@ -167,3 +169,4 @@ POINT CdInput::GetMouseMove()
 }
 
 
+>>>>>>> １１１
