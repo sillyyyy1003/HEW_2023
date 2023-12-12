@@ -18,7 +18,7 @@ public:
 	ID3D11ShaderResourceView* testWallbg;	//壁用テクスチャ
 	ID3D11ShaderResourceView* testGroundbg;	//地面用テクスチャ
 	ID3D11ShaderResourceView* testChara01;	//キャラ用テクスチャ
-
+ID3D11ShaderResourceView* triangle;
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		
 

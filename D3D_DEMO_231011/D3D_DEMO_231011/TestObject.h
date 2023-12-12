@@ -1,5 +1,6 @@
 ï»¿#pragma once
 #include "Sprite.h"
+#include "SAT.h"
 
 // å††ã®å½“ãŸã‚Šåˆ¤å®šé ˜åŸŸã‚’è¡¨ã™æ§‹é€ ä½“
 struct BOUNDING_CIRCLE
@@ -27,6 +28,11 @@ public:
 	bool isActive = false;
 
 
+	// }Œ`‚Ì’¸“_À•W
+	std::vector<Vector2> vertices;
+
+
+	float rotation = 0;
 public:
 
 	TestObject();
@@ -43,7 +49,13 @@ public:
 	// å††ã®åº§æ¨™ã¨åŠå¾„ã‚’è¨­å®š
 	void SetBoundingCircle(BOUNDING_CIRCLE bc);
 
+<<<<<<< HEAD
 	// æ“ä½œã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã©ã†ã‹
+=======
+	void SetRotation(DirectX::XMFLOAT3 m_rotation);
+
+	// ‘€ì‚·‚éƒIƒuƒWƒFƒNƒg‚©‚Ç‚¤‚©
+>>>>>>> feature/Sakai
 	bool isPlayer = false;
 
 	virtual void Update(void);

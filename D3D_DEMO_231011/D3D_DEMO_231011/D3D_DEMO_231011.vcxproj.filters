@@ -49,6 +49,7 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="ShadowObject.cpp" />
     <ClCompile Include="ObjectAnimation.cpp">
       <Filter>Animation\ObjectAnimation</Filter>
@@ -70,6 +71,10 @@
       <Filter>DebugManager</Filter>
     </ClCompile>
     <ClCompile Include="DInput.cpp" />
+=======
+    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.cpp" />
+>>>>>>> feature/Sakai
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -117,6 +122,7 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ShadowObject.h" />
     <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation\ObjectAnimation</Filter>
@@ -137,6 +143,10 @@
       <Filter>DebugManager</Filter>
     </ClInclude>
     <ClInclude Include="DInput.h" />
+=======
+    <ClInclude Include="TestObject.h" />
+    <ClInclude Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.h" />
+>>>>>>> feature/Sakai
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">

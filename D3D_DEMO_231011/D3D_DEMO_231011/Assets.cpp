@@ -14,6 +14,7 @@ Assets::Assets()
     testWallbg = LoadTexture("assets/wallbg.png");
     testGroundbg = LoadTexture("assets/groundbg.png");
     testChara01 = LoadTexture("assets/char01.png");
+    triangle = LoadTexture("assets/Triangle.png");//Triangle
 
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 

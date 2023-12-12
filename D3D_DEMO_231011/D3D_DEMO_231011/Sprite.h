@@ -14,9 +14,27 @@ struct VERTEX
 
 };
 
+
 struct BOX
 {
 	float fLeft, fTop, fRight, fBottom;
+};
+
+struct SQUREBOX
+{
+	BOX Left, Top, Right, Bottom;
+};
+
+struct Point {
+	float x, y;
+};
+
+struct Triangle {
+	Point A, B, C;
+};
+
+struct SQURE {
+	Point A, B, C, D;
 };
 
 //定数バッファ用構造体
