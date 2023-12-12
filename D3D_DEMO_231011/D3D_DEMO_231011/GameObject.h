@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "Sprite.h"
-#include <vector>
 #include "ShadowObject.h"
 
 class GameObject

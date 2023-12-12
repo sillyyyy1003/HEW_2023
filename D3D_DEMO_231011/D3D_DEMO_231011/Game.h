@@ -1,8 +1,11 @@
 ﻿#pragma once
-#include "Object.h"
-#include "TestObject.h"
-#include "GameObject.h"
-#include "CanvasUI.h"
+
+
+class GameObject;
+class TestObject;
+class Object;
+class CanvasUI;
+class StaticObject;
 
 class Game
 {
@@ -17,13 +20,17 @@ private:
 	GAMESCENE m_gameScene = TITLE;
 
 private:
-	Object* testWall;
-	Object* testGround;
-	Object* testChara;	//プレイヤー
+	//ui
+	CanvasUI*		uitest;
 
-	GameObject* testTree;	//木
-	CanvasUI* uitest;
+	//動けないオブジェクト
+	StaticObject*	testGround;
 
+	//移動できるオブジェクト
+	Object*			testWall;
+
+
+	
 
 private:
 	//コンストラクタ&デストラクタ

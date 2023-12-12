@@ -69,6 +69,7 @@
     <ClCompile Include="DInput.cpp">
       <Filter>KeyboardInput</Filter>
     </ClCompile>
+    <ClCompile Include="StaticObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -135,6 +136,7 @@
     <ClInclude Include="DInput.h">
       <Filter>KeyboardInput</Filter>
     </ClInclude>
+    <ClInclude Include="StaticObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">

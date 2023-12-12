@@ -2,11 +2,17 @@
 #include "Camera.h"
 
 extern Camera* g_WorldCamera;
+
 ShadowObject::ShadowObject(void)
 {
+	//図形作成
 	m_obj = new Sprite();
 
+	//カメラ設置
 	m_obj->m_camera = g_WorldCamera;
+
+	//アニメーション配置
+
 }
 
 void ShadowObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)

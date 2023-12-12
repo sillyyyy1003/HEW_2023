@@ -94,10 +94,9 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	
 	}
 	else {//カメラを使わない→uiなどに使われている
-				
-		matrixView = XMMatrixIdentity();
-		matrixProjPerspective = XMMatrixOrthographicLH(
-			RATIO_W, RATIO_H, 0.0f, 3.0f);
+		
+		matrixView = XMMatrixIdentity();//カメラの行列を単位行列
+		matrixProjPerspective = XMMatrixOrthographicLH(RATIO_W, RATIO_H, 0.0f, 3.0f);//平行投影行列を作成
 		matrixProjPerspective = XMMatrixTranspose(matrixProjPerspective);
 	}
 
