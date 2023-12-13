@@ -23,13 +23,17 @@ public:
 
 	//現在の向きを表すベクトル変数
 	DirectX::XMFLOAT3 m_dir = { 0.0f,0.0f,0.0f };
-
-
 	// 図形の頂点座標
 	std::vector<Vector2> vertices;
-
-
+	// 図形の角度
 	float rotation = 0;
+	// 図形の種類
+	int object = 0;
+	// 図形の頂点座標を入れる
+	std::vector<Vector2> jodgevertices;
+	// 図形の座標を入れる
+	BOUNDING_CIRCLE p_center2;
+	BOUNDING_CIRCLE p_center;
 public:
 
 	TestObject();
@@ -50,6 +54,8 @@ public:
 
 	// 操作するオブジェクトかどうか
 	bool isPlayer = false;
+	// 三角形かどうか
+	bool isTriangle = false;
 
 	virtual void Update(void);
 
@@ -60,5 +66,8 @@ public:
 	// オブジェクトのスケールが大きくなったときの当たり判定用の変数
 	float Scale_countX = 0;
 	float Scale_countY = 0;
+
+	std::vector<Vector2> p_verticies2; // 中心点の座標
+	std::vector<Vector2> p_verticies;
 };
 

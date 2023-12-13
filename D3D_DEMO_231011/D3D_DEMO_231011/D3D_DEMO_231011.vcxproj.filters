@@ -54,6 +54,7 @@
     </ClCompile>
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.cpp" />
+    <ClCompile Include="ObjectCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -106,6 +107,7 @@
     </ClInclude>
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.h" />
+    <ClInclude Include="ObjectCollision.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">

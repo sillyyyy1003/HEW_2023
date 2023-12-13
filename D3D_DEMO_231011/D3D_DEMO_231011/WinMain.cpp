@@ -5,6 +5,7 @@
 #include "TrackCamera.h"
 #include "Game.h"
 #include "KBInput.h"
+#include "ObjectCollision.h"
 
 #define CLASS_NAME		"HEW_DEMO"		//ウインドウクラスの名前
 #define WINDOW_NAME		"GAME_TITLE"	//ウィンドウの名前
@@ -26,6 +27,7 @@ Game* g_Game;
 
 KBInput* g_KbInput = new KBInput();
 
+ObjectCollision* g_objectCollision;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -85,6 +87,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,LPSTR lpCmdLine,
 	
 	//ゲームクラスの初期化処理
 	g_Game = new Game();
+
+	//当たり判定の初期化
+	g_objectCollision = new ObjectCollision();
 
 	//ブラッシュアップ頻度(fps処理)
 	// FPS表示用変数

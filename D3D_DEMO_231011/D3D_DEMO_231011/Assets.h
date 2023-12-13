@@ -19,10 +19,12 @@ public:
 	ID3D11ShaderResourceView* testObj;		//オブジェクト用テクスチャ
 	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ
 
+	// 図形
+	ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
 
-
+	ID3D11ShaderResourceView* ex;
 
 public:
 	//----------------------------//

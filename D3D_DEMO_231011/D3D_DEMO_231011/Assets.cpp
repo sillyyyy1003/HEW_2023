@@ -13,8 +13,11 @@ Assets::Assets()
     testObj = LoadTexture("assets/circle.png");
     //testShadow = LoadTexture("assets/testShadow.png");
 
+    circle = LoadTexture("assets/circle.png");
     square = LoadTexture("assets/polygon.png");
-    triangle = LoadTexture("assets/Triangle.png");//Triangle
+    triangle = LoadTexture("assets/Triangle.png");
+
+    ex = LoadTexture("assets/ex.png");
 
 
 

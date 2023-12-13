@@ -103,11 +103,11 @@ BOUNDING_CIRCLE TestObject::GetBoundingCircle()
 {
 	BOUNDING_CIRCLE bc;
 	bc.center = m_objSprite->m_pos; // 判定円の中心
-	if (!isPlayer)
+	if (isTriangle)
 	{
 		// 操作していないオブジェクト 
 		// オブジェクトと同じように当たり判定も大きくする
-		bc.radius = 1.30f; // 判定円の半径を設定//+ Scale_countX
+		bc.radius = 0.48f; // 判定円の半径を設定//+ Scale_countX
 	}
 	else
 	{
