@@ -16,6 +16,7 @@ void TrackCamera::Update()
 		//camFocus = (m_targetObject->m_sprite->m_pos);
 		//this->SetFocusPos(camFocus);
 
+		
 		float angle = m_targetObject->m_sprite->m_rotation.x;
 
 

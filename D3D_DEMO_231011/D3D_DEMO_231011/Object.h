@@ -11,8 +11,6 @@ public:
 	//図形情報を扱う
 	Sprite* m_sprite;
 
-
-
 public:
 	
 	/// <summary>

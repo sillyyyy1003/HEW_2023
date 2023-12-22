@@ -78,7 +78,7 @@ public:
 	//このキャラクターのマテリアル色(DEFAULT COLOR:WHITE)
 	DirectX::XMFLOAT4 m_materialDiffuse = { 1.0f,1.0f,1.0f,1.0f };
 
-	//カメラ
+	//カメラに関する変数
 	Camera* m_camera = nullptr;
 	bool isUseCamera = true;	//カメラを使うかどうか？
 

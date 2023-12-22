@@ -2,11 +2,18 @@
 #include "Camera.h"
 
 extern Camera* g_WorldCamera;
+
 ShadowObject::ShadowObject(void)
 {
+	//図形作成
 	m_obj = new Sprite();
 
+	//カメラ設置
 	m_obj->m_camera = g_WorldCamera;
+
+	//アニメーション配置
+	
+
 }
 
 void ShadowObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
@@ -18,19 +25,21 @@ void ShadowObject::Update(void)
 {
 	//アニメーションの更新
 	m_obj->m_anime->Update();
+
+
 }
 
-BOOL ShadowObject::CheckShadow(void)
-{
-	return 0;
-}
 
 void ShadowObject::Draw(void)
 {
-	//光があるときだけ描画する
-	m_obj->Draw();
 	
+	if (isLight) 
+	{
+		//光があるときだけ描画する
+		m_obj->Draw();
+	}
 
+	
 }
 
 ShadowObject::~ShadowObject(void)

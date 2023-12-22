@@ -1,8 +1,6 @@
 ﻿#include "Object.h"
-#include "KBInput.h"
 
 extern Camera* g_WorldCamera;
-extern KBInput* g_KbInput;
 
 Object::Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {

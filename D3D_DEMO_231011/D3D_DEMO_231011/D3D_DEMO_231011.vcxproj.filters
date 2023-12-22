@@ -41,15 +41,11 @@
       <Filter>Assets</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="KBInput.cpp">
-      <Filter>KeyboardInput</Filter>
+      <Filter>ControllerInput</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="ShadowObject.cpp" />
     <ClCompile Include="ObjectAnimation.cpp">
       <Filter>Animation\ObjectAnimation</Filter>
@@ -70,11 +66,13 @@
     <ClCompile Include="DebugManager.cpp">
       <Filter>DebugManager</Filter>
     </ClCompile>
+    <ClCompile Include="DInput.cpp">
+      <Filter>KeyboardInput</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="DInput.cpp" />
-=======
     <ClCompile Include="TestObject.cpp" />
     <ClCompile Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.cpp" />
->>>>>>> feature/Sakai
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -114,15 +112,10 @@
       <Filter>Assets</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="KBInput.h">
-      <Filter>KeyboardInput</Filter>
+      <Filter>ControllerInput</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="ShadowObject.h" />
     <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation\ObjectAnimation</Filter>
@@ -142,11 +135,12 @@
     <ClInclude Include="DebugManager.h">
       <Filter>DebugManager</Filter>
     </ClInclude>
-    <ClInclude Include="DInput.h" />
-=======
+    <ClInclude Include="DInput.h">
+      <Filter>KeyboardInput</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TestObject.h" />
     <ClInclude Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.h" />
->>>>>>> feature/Sakai
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -166,9 +160,6 @@
     </Filter>
     <Filter Include="Assets">
       <UniqueIdentifier>{ae88ca4d-50d5-41ae-9e8f-7273dd0176bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeyboardInput">
       <UniqueIdentifier>{ddead9df-1d02-40a5-9189-4b62502369d4}</UniqueIdentifier>
@@ -196,6 +187,9 @@
     </Filter>
     <Filter Include="DebugManager">
       <UniqueIdentifier>{abb66bdc-8323-4d84-8e3a-20855b231344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControllerInput">
+      <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,7 +1,11 @@
 ﻿#pragma once
-#include "Object.h"
-#include"TestObject.h"
-#include "SAT.h"
+
+
+class GameObject;
+class TestObject;
+class Object;
+class CanvasUI;
+class StaticObject;
 
 class Game
 {
@@ -18,40 +22,25 @@ private:
 	//const double M_PI = 3.14159265358979323846;
 private:
 
-	//Object* testObject;		//test用キャラ
-	TestObject* testObj;		//test用キャラ
-	TestObject* testObj2;		//test用キャラ
-	TestObject* testObj3;		//test用キャラ
-	TestObject* testObj4;		//test用キャラ
-	TestObject* ex;		//test用キャラ
-	TestObject* ex1;		//test用キャラ
-	TestObject* ex2;		//test用キャラ
-	TestObject* ex3;		//test用キャラ
-	Object* testBg;				//test用背景
-	PolygonSAT* a;
+	GameObject* testTree;
 
-	Object* testWall;
-	Object* testGround;
-	Object* testChara;	//プレイヤー
-
-	GameObject* testTree;	//木
-
-	CanvasUI* uitest;
-
+private:
+	//コンストラクタ&デストラクタ
+	Game() {};
+	~Game();
 
 public:
-	//コンストラクタ
-	Game();
+	//唯一のインスタンスを返す関数
+	static Game* Get();
+
+	//初期化を行う関数
+	void Init();
 
 	//ゲーム本体
 	void GameUpdate(void);
 	void TitleUpdate(void);
 	void StageUpdate(void);
 	void ResultUpdate(void);
-
-
-	//後片付け
-	~Game();
 
 	//描画
 	void GameDraw(void);

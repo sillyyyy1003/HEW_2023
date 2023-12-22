@@ -8,12 +8,12 @@ public:
 	// 変数
 	//----------------------------//
 	
+	//図形情報を扱う
 	Sprite* m_obj;
 
-	bool isActive = false;
+	//光に当てられたか
+	bool isLight = true;
 
-	
-	
 	
 public:
 	//Constructor
@@ -24,8 +24,6 @@ public:
 
 	//
 	void Update(void);
-
-	BOOL CheckShadow(void);
 
 	//描画関数
 	void Draw(void);

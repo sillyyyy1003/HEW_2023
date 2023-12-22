@@ -144,7 +144,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="KBInput.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectAnimation.cpp" />
@@ -152,6 +151,7 @@
     <ClCompile Include="source.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticAnimation.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="TrackCamera.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -172,13 +172,13 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="KBInput.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
     <ClInclude Include="ShadowObject.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StaticAnimation.h" />
+    <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />
     <ClInclude Include="WICTextureLoader.h" />
   </ItemGroup>
