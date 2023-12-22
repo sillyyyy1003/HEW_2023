@@ -20,17 +20,8 @@ private:
 	GAMESCENE m_gameScene = TITLE;
 
 private:
-	//ui
-	CanvasUI*		uitest;
 
-	//動けないオブジェクト
-	StaticObject*	testGround;
-
-	//移動できるオブジェクト
-	Object*			testWall;
-
-
-	
+	GameObject* testTree;
 
 private:
 	//コンストラクタ&デストラクタ

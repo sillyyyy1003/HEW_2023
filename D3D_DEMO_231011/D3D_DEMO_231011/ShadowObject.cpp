@@ -12,6 +12,7 @@ ShadowObject::ShadowObject(void)
 	m_obj->m_camera = g_WorldCamera;
 
 	//アニメーション配置
+	
 
 }
 
@@ -24,19 +25,21 @@ void ShadowObject::Update(void)
 {
 	//アニメーションの更新
 	m_obj->m_anime->Update();
+
+
 }
 
-BOOL ShadowObject::CheckShadow(void)
-{
-	return 0;
-}
 
 void ShadowObject::Draw(void)
 {
-	//光があるときだけ描画する
-	m_obj->Draw();
 	
+	if (isLight) 
+	{
+		//光があるときだけ描画する
+		m_obj->Draw();
+	}
 
+	
 }
 
 ShadowObject::~ShadowObject(void)

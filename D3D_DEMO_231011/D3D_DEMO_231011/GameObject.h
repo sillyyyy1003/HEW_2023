@@ -12,7 +12,6 @@ public:
 	Sprite* m_obj;
 	
 	//影の図形情報
-	//std::vector<Sprite*> m_shadow;
 	ShadowObject* m_shadow;
 
 
@@ -54,6 +53,7 @@ public:
 
 	//毎回ゲームループで呼び出せれてる
 	void Update(DirectX::XMFLOAT3 lightPos);
+
 	void Update(void);
 
 

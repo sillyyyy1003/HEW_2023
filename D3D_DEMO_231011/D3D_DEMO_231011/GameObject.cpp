@@ -5,10 +5,14 @@ extern Camera* g_WorldCamera;
 
 GameObject::GameObject()
 {
+	//オブジェクトの初期化
 	m_obj = new Sprite();
+	//影の初期化
 	m_shadow = new ShadowObject();
-
+	
+	//カメラの初期化
 	m_obj->m_camera = g_WorldCamera;
+	m_shadow->m_obj->m_camera = g_WorldCamera;
 }
 
 void GameObject::CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
@@ -93,27 +97,28 @@ void GameObject::Update(DirectX::XMFLOAT3 lightPos)
 {	
 	//オブジェクト情報更新
 	
-	
-
-	//影情報更新
+	//影位置情報更新
 	m_shadow->m_obj->m_pos = GenerateShadowPos(lightPos);
 	
 	//アニメーション更新
-	Update();//オブジェクト本体
-	m_shadow->Update();//影
-
+	Update();
 
 }
 
 void GameObject::Update(void)
 {
+	//オブジェクト本体
 	m_obj->m_anime->Update();
+	//影
+	m_shadow->Update();
 }
 
 void GameObject::Draw(void)
 {
+	//影を描画する
 	m_shadow->Draw();
 
+	//オブジェクトを描画する
 	m_obj->Draw();
 }
 

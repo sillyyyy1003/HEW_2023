@@ -17,13 +17,20 @@ extern DebugManager* g_DebugManager;
 
 void Game::Init()
 {
+
+	//カメラの追跡ターゲットを設定する
+	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+
+	testTree = new GameObject();
 	
-	
-
-
-
-
-	dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+	//モデルを作る
+	testTree->CreateObject(g_Assets->testObj, 200, 200, 1, 1);
+	testTree->CreateShadow(g_Assets->testShadow, 200, 200, 1, 1);
+	//アニメションを配置
+	testTree->m_obj->m_anime = new StaticAnimation(1,1);
+	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);
+	//オブジェクトを位置を配置する
+	testTree->m_obj->m_pos = { 2, 2, -1 };
 
 	
 }
@@ -52,13 +59,9 @@ void Game::GameUpdate(void)
 
 void Game::TitleUpdate(void)
 {	
+	//光源の位置をリアルタイムで更新する
+	testTree->Update({ 0, 0, -2 });
 
-	
-	uitest->Update();
-
-
-
-	
 
 }
 
@@ -75,8 +78,7 @@ void Game::ResultUpdate(void)
 Game::~Game()
 {
 	
-	delete testWall;
-	delete testGround;
+	delete testTree;
 
 }
 
@@ -121,20 +123,16 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
-	//testWall->Draw();
 
-	//testGround->Draw();
-
+	//オブジェクトを描画する
 	testTree->Draw();
-
-	testChara->Draw();
-
-
+	
 	//デバッグ表示 
 	//40->一文字の幅/高さの二倍
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;//デバッグ表示の横座標設定
 	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, testChara->m_sprite->m_pos.x);//パラメーター表示
+	//位置を出力する
+	g_DebugManager->PrintDebugLog(posX, posY, testTree->m_obj->m_pos.z);
 
 	
 }
