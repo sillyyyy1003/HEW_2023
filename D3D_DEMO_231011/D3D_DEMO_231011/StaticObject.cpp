@@ -1,4 +1,4 @@
-#include "StaticObject.h"
+ï»¿#include "StaticObject.h"
 #include "Sprite.h"
 #include "StaticAnimation.h"
 #include "TrackCamera.h"
@@ -7,21 +7,21 @@ extern Camera* g_WorldCamera;
 
 StaticObject::StaticObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	//}Œ`‰Šú‰»
+	//å›³å½¢åˆæœŸåŒ–
 	m_sprite = new Sprite();
 	m_sprite->CreateModel(texture, _width, _height, splitX, splitY);
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“”z’u
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é…ç½®
 	m_sprite->m_anime = new StaticAnimation(splitX, splitY);
 
-	//ƒJƒƒ‰”z’u
+	//ã‚«ãƒ¡ãƒ©é…ç½®
 	m_sprite->m_camera = g_WorldCamera;
 
 }
 
 void StaticObject::Update(void)
 {
-	//ƒAƒjƒ[ƒVƒ‡ƒ“XV
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ›´æ–°
 	m_sprite->m_anime->Update();
 
 }
