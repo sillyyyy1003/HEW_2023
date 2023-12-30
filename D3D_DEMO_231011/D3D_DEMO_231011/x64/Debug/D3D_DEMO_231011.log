@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+﻿  Game.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(131,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+=======
 ﻿  compilation object save succeeded; see C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\PixelShader.cso
   compilation object save succeeded; see C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\VertexShader.cso
   Animation.cpp
@@ -51,3 +56,4 @@ C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Direct3D.cpp
   WinMain.cpp
   正在生成代码...
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+>>>>>>> 6e604731b826b1b5ea341f1c8a8d2e40b5100cd1
