@@ -13,6 +13,8 @@ public:
 
 public:
 	
+	Object(void);
+	
 	/// <summary>
 	/// 初期化を行う関数
 	/// </summary>
@@ -21,7 +23,7 @@ public:
 	/// <param name="_height">height</param>
 	/// <param name="splitX"></param>
 	/// <param name="splitY"></param>
-	Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	void CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	//毎ループ呼び出される
 	virtual void Update(void);

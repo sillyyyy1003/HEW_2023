@@ -3,7 +3,6 @@
 #include <stdio.h>
 
 
-
 DebugManager::DebugManager()
 {
 	for (auto& pASCII : m_debugASCII) {

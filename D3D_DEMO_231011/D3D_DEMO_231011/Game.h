@@ -1,11 +1,8 @@
 ﻿#pragma once
 
-
 class GameObject;
-class TestObject;
-class Object;
-class CanvasUI;
 class StaticObject;
+class CanvasUI;
 
 class Game
 {
@@ -20,8 +17,13 @@ private:
 	GAMESCENE m_gameScene = TITLE;
 
 private:
+	
+	//テスト用
+	GameObject*		testTree;	//移動用オブジェクト	
+	StaticObject*	testWall;	//壁
+	StaticObject*	testGround;	//地面
+	GameObject*		testChara;	//テストキャラ
 
-	GameObject* testTree;
 
 private:
 	//コンストラクタ&デストラクタ
@@ -40,6 +42,11 @@ public:
 	void TitleUpdate(void);
 	void StageUpdate(void);
 	void ResultUpdate(void);
+
+	//テスト用
+	void TestUpdate(void);
+	void TestDraw(void);
+
 
 	//描画
 	void GameDraw(void);

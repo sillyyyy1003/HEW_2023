@@ -1,3 +1,4 @@
-﻿C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Shader\PixelShader.hlsl(1,1): error X3000: Illegal character in shader file
-  
-  compilation failed; no code produced
+﻿  Game.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(133,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(136,52): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

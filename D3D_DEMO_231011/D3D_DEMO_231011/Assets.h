@@ -11,13 +11,21 @@ public:
 	// 変数
 	//----------------------------//
 	
-	//テスト用 Using Shadow
+	//================//テスト用//================//
 	ID3D11ShaderResourceView* testObj;		//オブジェクト用テクスチャ(木）
 	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ(木の影)
 
 	ID3D11ShaderResourceView* testWallbg;	//壁用テクスチャ
 	ID3D11ShaderResourceView* testGroundbg;	//地面用テクスチャ
+	ID3D11ShaderResourceView* testWall;		//大きい壁
+	ID3D11ShaderResourceView* testGround;	//大きい地面
+
 	ID3D11ShaderResourceView* testChara01;	//キャラ用テクスチャ
+	
+	
+	//================//テスト用//================//
+
+
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

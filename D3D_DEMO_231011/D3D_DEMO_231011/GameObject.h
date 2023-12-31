@@ -1,15 +1,18 @@
 ﻿#pragma once
-#include "Sprite.h"
-#include "ShadowObject.h"
+#include "Direct3D/Direct3D.h"
+
+class Object;
+class ShadowObject;
 
 class GameObject
 {
+
 public:
 	//----------------------------//
 	// 変数
 	//----------------------------//
 	//オブジェクトの図形情報
-	Sprite* m_obj;
+	Object* m_obj;
 	
 	//影の図形情報
 	ShadowObject* m_shadow;

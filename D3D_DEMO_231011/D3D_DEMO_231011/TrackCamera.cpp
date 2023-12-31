@@ -1,4 +1,5 @@
 ﻿#include "TrackCamera.h"
+#include "StaticObject.h"
 
 void TrackCamera::Update()
 {
@@ -30,7 +31,12 @@ void TrackCamera::Update()
 
 }
 
-void TrackCamera::SetTarget(Object* _targetObejct)
+void TrackCamera::SetTarget(Object* _targetObject)
 {
-	m_targetObject = _targetObejct;
+	//m_targetObject = _targetObject;
+}
+
+void TrackCamera::SetTarget(StaticObject* _targetObject)
+{
+	m_targetObject = _targetObject;
 }

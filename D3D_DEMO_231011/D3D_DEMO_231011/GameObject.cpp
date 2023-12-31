@@ -1,4 +1,6 @@
 ﻿#include "GameObject.h"
+#include "Object.h"
+#include "ShadowObject.h"
 #include <math.h>
 
 extern Camera* g_WorldCamera;
@@ -6,18 +8,15 @@ extern Camera* g_WorldCamera;
 GameObject::GameObject()
 {
 	//オブジェクトの初期化
-	m_obj = new Sprite();
+	m_obj = new Object();
 	//影の初期化
 	m_shadow = new ShadowObject();
 	
-	//カメラの初期化
-	m_obj->m_camera = g_WorldCamera;
-	m_shadow->m_obj->m_camera = g_WorldCamera;
 }
 
 void GameObject::CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	m_obj->CreateModel(texture, _width, _height, splitX, splitY);
+	m_obj->CreateObject(texture, _width, _height, splitX, splitY);
 }
 
 void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
@@ -30,7 +29,7 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 {
 	// 単位ベクトル化する
 	//オブジェクトの位置取得
-	const XMFLOAT3 objPos = m_obj->m_pos; 
+	const XMFLOAT3 objPos = m_obj->m_sprite->m_pos; 
 
 	/*
 	////ベクトル計算用の型に入れる
@@ -108,13 +107,14 @@ void GameObject::Update(DirectX::XMFLOAT3 lightPos)
 void GameObject::Update(void)
 {
 	//オブジェクト本体
-	m_obj->m_anime->Update();
+	m_obj->Update();
 	//影
-	m_shadow->Update();
+	m_obj->Update();
 }
 
 void GameObject::Draw(void)
 {
+
 	//影を描画する
 	m_shadow->Draw();
 

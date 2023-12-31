@@ -10,8 +10,6 @@ ShadowObject::ShadowObject(void)
 
 	//カメラ設置
 	m_obj->m_camera = g_WorldCamera;
-
-	//アニメーション配置
 	
 
 }
