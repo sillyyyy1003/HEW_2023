@@ -83,6 +83,7 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixView;
 	//透視投影の行列
 	XMMATRIX matrixProjPerspective;
+	
 	XMMATRIX matrixProj;
 
 	if(isUseCamera){//カメラを使う場合
@@ -96,13 +97,14 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	else {//カメラを使わない→uiなどに使われている
 		
 		matrixView = XMMatrixIdentity();//カメラの行列を単位行列
+		
 		matrixProjPerspective = XMMatrixOrthographicLH(RATIO_W, RATIO_H, 0.0f, 3.0f);//平行投影行列を作成
 		matrixProjPerspective = XMMatrixTranspose(matrixProjPerspective);
 	}
-
+	
 
 	//投影行列作成
-	matrixProj = matrixView * matrixProjPerspective;
+	matrixProj = matrixView *matrixProjPerspective ;
 
 	//ワールド変換行列の作成
 	//移動行列
@@ -121,10 +123,41 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 
 	cb.matrixProj = XMMatrixTranspose(matrixProj);
-	cb.matrixTex = XMMatrixTranspose(matrixTex);
+	cb.matrixUV  = XMMatrixTranspose(matrixTex);
 	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
+	cb.matrixRotate = XMMatrixTranspose(matrixRotate);
+
 	//マテリアル色を定数バッファデータに代入
 	cb.materialDiffuse = m_materialDiffuse;
+
+	
+	/*
+	//ワールド変換行列の作成
+	//移動行列
+	XMMATRIX matrixMove = XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
+	//拡大縮小行列
+	XMMATRIX matrixScale = XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
+
+	//回転行列
+	XMMATRIX matrixRotateX = XMMatrixRotationX(XMConvertToRadians(m_rotation.x));
+	XMMATRIX matrixRotateY = XMMatrixRotationY(XMConvertToRadians(m_rotation.y));
+	XMMATRIX matrixRotateZ = XMMatrixRotationZ(XMConvertToRadians(m_rotation.z));
+	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
+	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
+	
+	matrixWorld = matrixWorld * matrixView * matrixProj;
+
+	//UVアニメーション行列作成
+	XMMATRIX matrixUV = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
+
+
+	cb.matrixRotate = XMMatrixTranspose(matrixRotate);
+	cb.matrixUV = XMMatrixTranspose(matrixUV);
+	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
+
+	//マテリアル色を定数バッファデータに代入
+	cb.materialDiffuse = m_materialDiffuse;
+*/
 }
 
 void Sprite::Draw(void)
@@ -144,10 +177,8 @@ void Sprite::Draw(void)
 
 	//ピクセルシェーダーにテクスチャを渡す
 	GetD3D_Context()->PSSetShaderResources(0, 1, &Material::m_modelData.texture);
-	
-	//GetD3D_Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
-	
-	//vertexCount:描画する頂点数
+
+	//描画命令
 	GetD3D_Context()->Draw(6, 0);
 
 }

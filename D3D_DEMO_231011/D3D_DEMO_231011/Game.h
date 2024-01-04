@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
+#include <DirectXMath.h>
 
 class GameObject;
 class StaticObject;
@@ -15,6 +17,21 @@ private:
 	};
 
 	GAMESCENE m_gameScene = TITLE;
+
+	//ここからの部分はテスト用
+private:
+
+	DirectX::XMFLOAT3 m_lightPos = { 0.0f,0.0f,-2.0f };//光の位置を扱る変数
+
+
+	enum MOVETARGET {
+		WALL,
+		GROUND,
+		LIGHT,
+		OBJECT,
+	};
+
+	MOVETARGET m_moveTarget = WALL;
 
 private:
 	
@@ -46,6 +63,10 @@ public:
 	//テスト用
 	void TestUpdate(void);
 	void TestDraw(void);
+	void TestMove(GameObject* _target);
+	void TestMove(StaticObject* _target);
+	void TestMove(DirectX::XMFLOAT3& _target);
+
 
 
 	//描画
