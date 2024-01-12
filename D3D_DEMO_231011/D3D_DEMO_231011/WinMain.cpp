@@ -141,6 +141,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				// 	FPSブラッシュアップ
 				//----------------------------//
 				fpsCounter++; // ゲームループ実行回数をカウント＋１
+
 				oldCount = nowCount;
 			}
 

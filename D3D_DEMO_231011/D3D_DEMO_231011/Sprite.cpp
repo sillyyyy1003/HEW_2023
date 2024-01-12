@@ -170,7 +170,7 @@ void Sprite::Draw(void)
 	GenerateMatrix(cb);
 
 	//行列をシェーダーに渡す
-	GetD3D_Context()->UpdateSubresource(g_ConstantBuffer, 0, NULL, &cb, 0, 0);
+	GetD3D_Context()->UpdateSubresource(g_ConstBuffer, 0, NULL, &cb, 0, 0);
 
 	//描画する頂点バッファ(モデル)を指定する
 	GetD3D_Context()->IASetVertexBuffers(0, 1, &Material::m_modelData.vertexBuffer, &strides, &offsets);

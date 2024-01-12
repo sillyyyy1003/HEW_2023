@@ -24,7 +24,7 @@ cbuffer ConstBuffer : register(b0)
     matrix matrixUV;
     // 投影行列
     matrix matrixProj;
-    // ワールド変換行列
+    // ワールド変換行列(移動・スケール・回転)
     matrix matrixWorld;
     // 回転行列
     matrix matrixRotate;

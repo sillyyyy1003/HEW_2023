@@ -117,11 +117,10 @@ void Game::TestUpdate(void)
 	if (Input::Get()->GetKeyTrigger(DIK_TAB)) {
 		
 		switch (m_moveTarget) {
+		
 		case WALL:
 
 			m_moveTarget = GROUND;
-			//カメラの追跡ターゲットを設定する
-			//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
 			break;
 
@@ -141,8 +140,6 @@ void Game::TestUpdate(void)
 		case OBJECT:
 
 			m_moveTarget = WALL;
-			//カメラの追跡ターゲットを設定する
-			//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testTree->m_obj);
 
 			break;
 
@@ -158,22 +155,23 @@ void Game::TestUpdate(void)
 	//位置更新
 	switch (m_moveTarget) {
 
+	case WALL:
+
+		TestMove(testWall);
+		//カメラの追跡ターゲットを設定する
+		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+		break;
+
 	case GROUND:
 
 		TestMove(testGround);
 
 		break;
 
-	case WALL:
-
-		TestMove(testWall);
-
-		break;
-
 	case OBJECT:
 
 		TestMove(testTree);
-
+		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testTree->m_obj);
 		break;
 
 	case LIGHT:
@@ -183,8 +181,6 @@ void Game::TestUpdate(void)
 
 		break;
 	}
-
-	dynamic_cast<TrackCamera*>(g_WorldCamera)->SetCameraPos({ m_lightPos.x,m_lightPos.y,m_lightPos.z - 2.0f });
 
 	//光源の位置をリアルタイムで更新する
 	testTree->Update(m_lightPos);

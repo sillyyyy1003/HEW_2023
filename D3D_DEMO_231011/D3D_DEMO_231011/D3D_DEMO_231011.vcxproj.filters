@@ -45,7 +45,6 @@
     <ClCompile Include="StaticAnimation.cpp">
       <Filter>Animation\StaticAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="source.cpp" />
     <ClCompile Include="Collider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>

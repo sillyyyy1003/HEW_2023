@@ -147,7 +147,6 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectAnimation.cpp" />
     <ClCompile Include="ShadowObject.cpp" />
-    <ClCompile Include="source.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticAnimation.cpp" />
     <ClCompile Include="StaticObject.cpp" />
