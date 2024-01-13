@@ -10,6 +10,7 @@ struct MODELDATA
 {
 	ID3D11Buffer*				vertexBuffer;			//頂点バッファ
 	ID3D11ShaderResourceView*	texture;				//テクスチャ
+	DirectX::XMFLOAT3			extents;				//当たり判定用データ
 
 };
 

@@ -10,6 +10,7 @@ Object::Object(void)
 	//カメラ初期化
 	m_sprite->m_camera = g_WorldCamera;
 
+
 }
 
 void Object::CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY) 
@@ -24,6 +25,12 @@ void Object::Update(void)
 {
 	//アニメーション更新
 	m_sprite->m_anime->Update();
+	
+	if (m_collider != nullptr) {
+
+		//コライダーの位置と大きさ更新
+		m_collider->Update();
+	}
 
 }
 
@@ -35,4 +42,5 @@ void Object::Draw(void)
 Object::~Object(void)
 {
 	delete m_sprite;
+	delete m_collider;
 }

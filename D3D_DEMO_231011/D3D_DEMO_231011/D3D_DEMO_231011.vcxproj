@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CanvasUI.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectAnimation.cpp" />
     <ClCompile Include="ShadowObject.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticAnimation.cpp" />
     <ClCompile Include="StaticObject.cpp" />
@@ -157,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CanvasUI.h" />
     <ClInclude Include="Collider.h" />
@@ -173,6 +176,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
     <ClInclude Include="ShadowObject.h" />
+    <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StaticAnimation.h" />
     <ClInclude Include="StaticObject.h" />

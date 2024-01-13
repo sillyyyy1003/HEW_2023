@@ -1,4 +1,2 @@
-﻿  TrackCamera.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\TrackCamera.cpp(103,27): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\TrackCamera.cpp(105,27): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+﻿  GameObject.cpp
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

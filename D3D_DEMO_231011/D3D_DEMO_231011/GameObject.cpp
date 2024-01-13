@@ -1,6 +1,6 @@
 ﻿#include "GameObject.h"
-#include "Object.h"
 #include "ShadowObject.h"
+#include "SphereCollider.h"
 #include <math.h>
 
 extern Camera* g_WorldCamera;
@@ -21,7 +21,8 @@ void GameObject::CreateObject(ID3D11ShaderResourceView* texture, float _width, f
 
 void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	m_shadow->CreateShadow(texture, _width, _height, splitX, splitY);
+	/*m_shadow->CreateShadow(texture, _width, _height, splitX, splitY);*/
+	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
 }
 
 
@@ -78,7 +79,7 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 
 
 	// 壁と地面の角度が90度(假设墙壁垂直于地面，沿Z轴)
-	float wallZ = m_shadow->m_obj->m_pos.z;  // 墙壁的Z坐标
+	float wallZ = m_shadow->m_sprite->m_pos.z;  // 墙壁的Z坐标
 
 	// 距離比率を計算する(计算交点的Z值等于墙壁的Z值时的t)
 	float t = (wallZ - lightPos.z) / XMVectorGetZ(directionVector);
@@ -92,25 +93,106 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 	return shadowPosition;
 }
 
-void GameObject::Update(DirectX::XMFLOAT3 lightPos)
-{	
-	//オブジェクト情報更新
-	
-	//影位置情報更新
-	m_shadow->m_obj->m_pos = GenerateShadowPos(lightPos);
-	
-	//アニメーション更新
-	Update();
-
+void GameObject::SetLightPos(DirectX::XMFLOAT3 _lightPos)
+{
+	m_lightPos = _lightPos;
 }
+
 
 void GameObject::Update(void)
 {
+	//ここで入力操作
+
+	
+	
+	
+	
+	//オブジェクトと影の更新
+	
+
+	m_shadow->m_sprite->m_pos = GenerateShadowPos(m_lightPos);
+	
+	
+	
+	
+	//本体更新した後
+	if (m_obj->m_collider != nullptr) {
+		
+		UpdateObjectColliderData();
+
+	}
+
+	//影更新した後
+	if (m_shadow->m_collider != nullptr) {
+
+		UpdateShadowColliderData();
+
+	}
+
+	
+
 	//オブジェクト本体
 	m_obj->Update();
 	//影
 	m_obj->Update();
 }
+
+void GameObject::UpdateObjectColliderData(void)
+{
+	////dynamic_castを使って、コライダーのデータを更新する
+	//switch (m_obj->m_collider->GetColliderType()) {
+	//case SPHERE:
+	//	//Object
+	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_center = { 0.0f,0.0f,0.0f };
+	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_radius = 1.0f;
+	//	break;
+
+	//case POLYGON:
+
+	//	break;
+
+	//case SQUARE:
+
+	//	break;
+
+	//default:
+
+	//}
+
+
+
+
+
+
+}
+
+void GameObject::UpdateShadowColliderData(void)
+{
+	////dynamic_castを使って、コライダーのデータを更新する
+	//switch (m_shadow->m_collider->GetColliderType()) {
+	//case SPHERE:
+	//	//Object
+	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_center = { 0.0f,0.0f,0.0f };
+	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_radius = 1.0f;
+	//	break;
+
+	//case POLYGON:
+
+	//	break;
+
+	//case SQUARE:
+
+	//	break;
+
+	//default:
+
+	//}
+
+
+
+
+}
+
 
 void GameObject::Draw(void)
 {
@@ -128,3 +210,4 @@ GameObject::~GameObject()
 	delete m_shadow;
 
 }
+

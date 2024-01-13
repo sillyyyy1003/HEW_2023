@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Sprite.h"
+#include "Collider.h"
 
 //基本オブジェクト
 class Object
@@ -10,6 +11,8 @@ public:
 	//----------------------------//
 	//図形情報を扱う
 	Sprite* m_sprite;
+
+	Collider* m_collider = nullptr;
 
 public:
 	
@@ -29,7 +32,7 @@ public:
 	virtual void Update(void);
 
 	//描画
-	void Draw(void);
+	virtual void Draw(void);
 	
 	//Constructor
 	~Object(void);

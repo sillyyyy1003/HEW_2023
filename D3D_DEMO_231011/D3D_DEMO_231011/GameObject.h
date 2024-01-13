@@ -6,6 +6,9 @@ class ShadowObject;
 
 class GameObject
 {
+private:
+
+	DirectX::XMFLOAT3 m_lightPos = {};
 
 public:
 	//----------------------------//
@@ -13,14 +16,12 @@ public:
 	//----------------------------//
 	//オブジェクトの図形情報
 	Object* m_obj;
-	
+		
 	//影の図形情報
 	ShadowObject* m_shadow;
 
 
-	//光があるかどうか
-	bool isLit = false;
-	
+
 public:
 	//コンストラクタ
 	GameObject();
@@ -54,11 +55,16 @@ public:
 	/// <returns>影の位置</returns>
 	DirectX::XMFLOAT3 GenerateShadowPos(DirectX::XMFLOAT3 lightPos);
 
-	//毎回ゲームループで呼び出せれてる
-	void Update(DirectX::XMFLOAT3 lightPos);
+	void SetLightPos(DirectX::XMFLOAT3 _lightPos);
 
+	//毎回ゲームループで呼び出せれてる
 	void Update(void);
 
+	//コライダーのデータを更新する
+	
+	void UpdateObjectColliderData(void);
+
+	void UpdateShadowColliderData(void);
 
 	//オブジェクトを描画する
 	void Draw(void);

@@ -36,9 +36,12 @@ void Game::Init()
 	testTree->CreateShadow(g_Assets->testShadow, 200, 200, 1, 1);
 	//アニメションを配置
 	testTree->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//オブジェクト
-	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);	//影
+	testTree->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
 	//オブジェクトの位置を配置
 	testTree->m_obj->m_sprite->m_pos = { 2, 2, 0 };
+	//オブジェクトのコライダーを配置(To Do)
+	//testTree->collider=new Collider();//形によってsphereCollider、polygonColliderなどに変える
+
 
 	testWall = new StaticObject();
 	//モデルを作る/アニメション配置
@@ -46,19 +49,14 @@ void Game::Init()
 	//オブジェクトの位置を配置
 	testWall->m_sprite->m_pos = { 0.0f,0.0f,2.0 };
 	//影の位置を壁の前に設定
-	testTree->m_shadow->m_obj->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
+	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
 
 	testGround = new StaticObject();
 	//モデルを作る/アニメション配置
 	testGround->CreateObject(g_Assets->testGround, 1920, 1080, 1, 1);
 	//オブジェクトの位置を配置
 	testGround->m_sprite->m_pos = { 0.0f,-3.0f,0.0f };
-	
 	testGround->m_sprite->m_rotation.x = 90;
-
-	
-
-
 
 	//----------------------------//
 	// ここまではテスト用の初期化
@@ -183,14 +181,17 @@ void Game::TestUpdate(void)
 	}
 
 	//光源の位置をリアルタイムで更新する
-	testTree->Update(m_lightPos);
+
+	testTree->SetLightPos(m_lightPos);
+
+	testTree->Update();
 
 	testWall->Update();
 	
 	testGround->Update();
 
 	//影のｚ軸の数値を更新
-	testTree->m_shadow->m_obj->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
+	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
 
 
 }

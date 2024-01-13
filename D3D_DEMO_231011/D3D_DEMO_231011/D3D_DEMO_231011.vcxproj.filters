@@ -38,7 +38,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="ShadowObject.cpp" />
     <ClCompile Include="ObjectAnimation.cpp">
       <Filter>Animation\ObjectAnimation</Filter>
     </ClCompile>
@@ -60,7 +59,16 @@
     <ClCompile Include="DInput.cpp">
       <Filter>KeyboardInput</Filter>
     </ClCompile>
-    <ClCompile Include="StaticObject.cpp" />
+    <ClCompile Include="ShadowObject.cpp">
+      <Filter>ShadowObject</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticObject.cpp">
+      <Filter>StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Collider\SphereCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -105,7 +113,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowObject.h" />
     <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation\ObjectAnimation</Filter>
     </ClInclude>
@@ -127,7 +134,16 @@
     <ClInclude Include="DInput.h">
       <Filter>KeyboardInput</Filter>
     </ClInclude>
-    <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="ShadowObject.h">
+      <Filter>ShadowObject</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticObject.h">
+      <Filter>StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Collider\SphereCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -177,6 +193,18 @@
     </Filter>
     <Filter Include="ControllerInput">
       <UniqueIdentifier>{7540cec1-0d0f-419e-8c9e-977daad1e6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadowObject">
+      <UniqueIdentifier>{bd0531ee-23f3-4e76-bc66-0896e2f320e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticObject">
+      <UniqueIdentifier>{e469cc6d-7560-4fd2-8515-9c0d529e5d18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\SphereCollider">
+      <UniqueIdentifier>{7dca5548-0bef-4954-92e3-ca6c09e8b9e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\BoxOreintedCollider">
+      <UniqueIdentifier>{094a9a79-ebf5-4321-b475-6e16363adf86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

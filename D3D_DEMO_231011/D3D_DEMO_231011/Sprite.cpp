@@ -65,6 +65,11 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 		MessageBoxA(NULL, "Create Model Failed!", "ERROR!", MB_OK | MB_ICONERROR);
 	}
 
+	//当たり判定のデータを入力
+	m_modelData.extents.x = _width / 2;
+	m_modelData.extents.y = _height / 2;
+	m_modelData.extents.z = 0.01f;	//ｚ軸の大きさをロックする
+
 	//テクスチャを実装
 	SetTexture(texture);
 }
