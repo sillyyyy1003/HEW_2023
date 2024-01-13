@@ -12,8 +12,8 @@ private:
 public:
 
 	DirectX::XMFLOAT3 m_center = {};
-	DirectX::XMFLOAT3 extents = {};
-	DirectX::XMFLOAT3 rotation = {};
+	DirectX::XMFLOAT3 m_extents = {};
+	DirectX::XMFLOAT3 m_orientation = {};
 
 
 public:
