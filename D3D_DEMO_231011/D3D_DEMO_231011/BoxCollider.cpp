@@ -8,23 +8,39 @@ void BoxCollider::InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 exten
 {
     m_boxOrientedCollider.Center = center;
     m_boxOrientedCollider.Extents = extents;
+    //修正必要
     m_boxOrientedCollider.Orientation = { orientation.x,orientation.y,orientation.z,0.0f };
 }
 
 void BoxCollider::UpdateExtents()
 {
+    m_boxOrientedCollider.Extents = m_extents;
 }
 
 void BoxCollider::UpdatePos()
 {
+    m_boxOrientedCollider.Center = m_center;
 }
 
-void BoxCollider::UpdateRotation()
+void BoxCollider::UpdateOrientation()
 {
+    //修正必要
+    m_boxOrientedCollider.Orientation = m_boxOrientedCollider.Orientation = { m_orientation.x,m_orientation.y,m_orientation.z,0.0f };
 }
 
 void BoxCollider::Update()
 {
+    if (!isActive) 
+    { 
+        return;
+    }
+    else 
+    {
+        UpdateExtents();
+        UpdatePos();
+        UpdateOrientation();
+    }
+
 }
 
 bool BoxCollider::isCollision(const SphereCollider& sphereCollider)
