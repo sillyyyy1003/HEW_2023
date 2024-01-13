@@ -12,8 +12,8 @@ private:
 public:
 
 	DirectX::XMFLOAT3 m_center = {};
-	DirectX::XMFLOAT3 extents = {};
-	DirectX::XMFLOAT3 rotation = {};
+	DirectX::XMFLOAT3 m_extents = {};
+	DirectX::XMFLOAT3 m_orientation = {};
 
 
 public:
@@ -26,7 +26,7 @@ public:
 
 	void UpdatePos();
 
-	void UpdateRotation();
+	void UpdateOrientation();
 
 	/// <summary>
 	/// 毎回呼び出される、状態を更新する関数
