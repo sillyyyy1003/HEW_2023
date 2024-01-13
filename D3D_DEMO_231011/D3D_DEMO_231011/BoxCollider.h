@@ -26,7 +26,8 @@ public:
 
 	void UpdatePos();
 
-	void UpdateRotation();
+	void UpdateOrientation();
+
 
 	/// <summary>
 	/// 毎回呼び出される、状態を更新する関数
