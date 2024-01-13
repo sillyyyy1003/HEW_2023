@@ -1,16 +1,12 @@
 ﻿#pragma once
-#include "Sprite.h"
+#include "Object.h"
 
-class ShadowObject
+class ShadowObject :public Object
 {
 public:
 	//----------------------------//
 	// 変数
 	//----------------------------//
-	
-	//図形情報を扱う
-	Sprite* m_obj;
-
 	//光に当てられたか
 	bool isLight = true;
 
@@ -19,14 +15,14 @@ public:
 	//Constructor
 	ShadowObject(void);
 
-	//影のモデル作成
-	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	//影のモデル作成->基底クラスで行う
+	/*void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)*/;
 
-	//
-	void Update(void);
+	//game loopで毎回呼び出される関数
+	void Update(void) override;
 
 	//描画関数
-	void Draw(void);
+	void Draw(void) override;
 
 	~ShadowObject(void);
 

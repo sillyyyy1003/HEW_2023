@@ -16,6 +16,9 @@ Assets::Assets()
     testChara01 = LoadTexture("assets/char01.png");
     triangle = LoadTexture("assets/Triangle.png");//Triangle
 
+    testWall = LoadTexture("assets/img/Background.png");
+    testGround = LoadTexture("assets/img/Ground.png");
+
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 
 }
@@ -28,6 +31,9 @@ Assets::~Assets()
    SAFE_RELEASE(testWallbg);	
    SAFE_RELEASE(testGroundbg);	
    SAFE_RELEASE(testChara01);	
+
+   SAFE_RELEASE(testWall);
+   SAFE_RELEASE(testGround);
 
    SAFE_RELEASE(debugFont);
 }

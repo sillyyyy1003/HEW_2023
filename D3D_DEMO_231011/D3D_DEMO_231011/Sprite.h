@@ -11,39 +11,21 @@ struct VERTEX
 {
 	float x, y, z;		//頂点の位置座標
 	float u, v;			//テクスチャのUV座標
-
+	float nx, ny, nz;	//法線ベクトルの座標
+	
 };
 
-
-struct BOX
-{
-	float fLeft, fTop, fRight, fBottom;
-};
-
-struct SQUREBOX
-{
-	BOX Left, Top, Right, Bottom;
-};
-
-struct Point {
-	float x, y;
-};
-
-struct Triangle {
-	Point A, B, C;
-};
-
-struct SQURE {
-	Point A, B, C, D;
-};
 
 //定数バッファ用構造体
 struct CONSTBUFFER
 {
-	DirectX::XMMATRIX matrixTex;		//UV座標移動行列
+
+	DirectX::XMMATRIX matrixUV;		//UV座標移動行列
 	DirectX::XMMATRIX matrixProj;		//投影行列
 	DirectX::XMMATRIX matrixWorld;		//ワールド変換行列
+	DirectX::XMMATRIX matrixRotate;
 	DirectX::XMFLOAT4 materialDiffuse;	//マテリアル色
+	
 };
 
 /// <summary>

@@ -2,22 +2,35 @@
 
 extern Camera* g_WorldCamera;
 
-Object::Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
+Object::Object(void)
 {
 	//図形初期化
 	m_sprite = new Sprite();
-	m_sprite->CreateModel(texture, _width, _height, splitX, splitY);
 
 	//カメラ初期化
 	m_sprite->m_camera = g_WorldCamera;
+
+
 }
+
+void Object::CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY) 
+{
+	//モデル作成
+	m_sprite->CreateModel(texture, _width, _height, splitX, splitY);
+}
+
+
 
 void Object::Update(void)
 {
-	//入力
-	
 	//アニメーション更新
 	m_sprite->m_anime->Update();
+	
+	if (m_collider != nullptr) {
+
+		//コライダーの位置と大きさ更新
+		m_collider->Update();
+	}
 
 }
 
@@ -29,4 +42,5 @@ void Object::Draw(void)
 Object::~Object(void)
 {
 	delete m_sprite;
+	delete m_collider;
 }

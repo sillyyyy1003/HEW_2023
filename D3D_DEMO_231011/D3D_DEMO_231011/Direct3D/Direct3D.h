@@ -163,4 +163,4 @@ ID3D11BlendState* GetBlendAdd(void);
 void SetBlendState(ID3D11BlendState* _blendState);
 
 // グローバル変数のextern宣言
-extern ID3D11Buffer* g_ConstantBuffer;
+extern ID3D11Buffer* g_ConstBuffer;

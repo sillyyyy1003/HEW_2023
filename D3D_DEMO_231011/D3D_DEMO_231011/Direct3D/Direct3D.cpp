@@ -13,7 +13,7 @@
 static D3D_DATA* g_pD3D;        //DirectXの機能を含めた構造体
 static UINT g_ScreenWidth;      //画面の幅
 static UINT g_ScreenHeight;     //画面の高さ
-ID3D11Buffer* g_ConstantBuffer; //定数バッファ用変数
+ID3D11Buffer* g_ConstBuffer; //定数バッファ用変数
 
 
 D3D_DATA* GetD3D_DATA(void) { return g_pD3D; }
@@ -229,7 +229,8 @@ BOOL D3D_CreateShader(void)
                 // UV座標があるということを伝える
                 { "TEX",    0, DXGI_FORMAT_R32G32_FLOAT, 0,D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 
-                //追加情報ここに↓
+                // 法線ベクトルがあるということを伝える
+                { "NORMAL",    0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
             };
 
             //インプットレイアウト作成
@@ -293,7 +294,7 @@ BOOL D3D_CreateBuffer(void)
     cbDesc.MiscFlags = 0;
     cbDesc.StructureByteStride = 0;
 
-    hr = g_pD3D->Device->CreateBuffer(&cbDesc, NULL, &g_ConstantBuffer);
+    hr = g_pD3D->Device->CreateBuffer(&cbDesc, NULL, &g_ConstBuffer);
 
     if (FAILED(hr)) {
         return FALSE;
@@ -370,9 +371,9 @@ void D3D_ClearScreen(void)
     GetD3D_Context()->PSSetSamplers(0, 1, &GetD3D_DATA()->Sampler);
 
     // 定数バッファを頂点シェーダーにセットする
-    GetD3D_Context()->VSSetConstantBuffers(0, 1, &g_ConstantBuffer);
+    GetD3D_Context()->VSSetConstantBuffers(0, 1, &g_ConstBuffer);
     //定数バッファをピクセルシェーダーににセットする
-    GetD3D_Context()->PSSetConstantBuffers(0, 1, &g_ConstantBuffer);
+    GetD3D_Context()->PSSetConstantBuffers(0, 1, &g_ConstBuffer);
 
 
 }

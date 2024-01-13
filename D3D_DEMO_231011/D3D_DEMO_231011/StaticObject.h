@@ -1,20 +1,24 @@
-#pragma once
+ï»¿#pragma once
 #include "Direct3D/Direct3D.h"
+#include "Object.h"
+
 class Sprite;
 
-//“®‚¯‚È‚¢ƒIƒuƒWƒFƒNƒg
-class StaticObject
+//å‹•ã‘ãªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+class StaticObject :public Object 
 {
 private:
-	//}Œ`î•ñ‚ğˆµ‚¤
-	Sprite* m_sprite;
+	
 	
 public:
 
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	StaticObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	StaticObject(void);
 
-	//game loop‚Å–ˆ‰ñŒÄ‚Ño‚³‚ê‚éŠÖ”
+	//ãƒ¢ãƒ‡ãƒ«ä½œæˆ
+	void CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+
+	//game loopã§æ¯å›å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°
 	void Update(void);
 	
 	void Draw(void);

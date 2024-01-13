@@ -1,22 +1,21 @@
 ﻿#include "Game.h"
-#include "Direct3D/Direct3D.h"
+
 #include "Assets.h"
 #include "TrackCamera.h"
+
+#include "Object.h"
 #include "GameObject.h"
+#include "ShadowObject.h"
 #include "StaticObject.h"
+
 #include "DebugManager.h"
+
 #include "Animation.h"
 #include "StaticAnimation.h"
 #include "ObjectAnimation.h"
-#include "DInput.h"
 
-#include "SAT.h"
-#include <algorithm> // 必要なヘッダーファイル
-#define SQUREWIDTH 1.2
-#define TRIANGLEWIDTH 0.8
-#define M_PI 3.14159265358979323846
-#define M_PIX 0.1//1.5
-#define M_PIY 0.0333333333// 0.5
+#include "DInput.h"
+#include <stdio.h>
 
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
@@ -25,20 +24,48 @@ extern DebugManager* g_DebugManager;
 
 void Game::Init()
 {
-
+	//----------------------------//
+	// ここからはテスト用の初期化
+	//----------------------------//
 	//カメラの追跡ターゲットを設定する
 	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
-	testTree = new GameObject();
-	
+	testTree = new GameObject();	
 	//モデルを作る
 	testTree->CreateObject(g_Assets->testObj, 200, 200, 1, 1);
 	testTree->CreateShadow(g_Assets->testShadow, 200, 200, 1, 1);
 	//アニメションを配置
-	testTree->m_obj->m_anime = new StaticAnimation(1,1);
-	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);
-	//オブジェクトを位置を配置する
-	testTree->m_obj->m_pos = { 2, 2, -1 };
+	testTree->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//オブジェクト
+	testTree->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	testTree->m_obj->m_sprite->m_pos = { 2, 2, 0 };
+	//オブジェクトのコライダーを配置(To Do)
+	//testTree->collider=new Collider();//形によってsphereCollider、polygonColliderなどに変える
+
+
+	testWall = new StaticObject();
+	//モデルを作る/アニメション配置
+	testWall->CreateObject(g_Assets->testWall, 1920, 1080, 1, 1);
+	//オブジェクトの位置を配置
+	testWall->m_sprite->m_pos = { 0.0f,0.0f,2.0 };
+	//影の位置を壁の前に設定
+	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
+
+	testGround = new StaticObject();
+	//モデルを作る/アニメション配置
+	testGround->CreateObject(g_Assets->testGround, 1920, 1080, 1, 1);
+	//オブジェクトの位置を配置
+	testGround->m_sprite->m_pos = { 0.0f,-3.0f,0.0f };
+	testGround->m_sprite->m_rotation.x = 90;
+
+	//----------------------------//
+	// ここまではテスト用の初期化
+	//----------------------------//
+
+
+
+
+
 
 	
 }
@@ -51,7 +78,7 @@ void Game::GameUpdate(void)
 
 		TitleUpdate();
 		break;
-
+		
 	case STAGE1:
 
 		StageUpdate();
@@ -67,9 +94,8 @@ void Game::GameUpdate(void)
 
 void Game::TitleUpdate(void)
 {	
-	//光源の位置をリアルタイムで更新する
-	testTree->Update({ 0, 0, -2 });
-
+	//プロトタイプ用
+	TestUpdate();
 
 }
 
@@ -83,10 +109,336 @@ void Game::ResultUpdate(void)
 
 }
 
+void Game::TestUpdate(void)
+{
+	//tabキー押して　移動対象を変更
+	if (Input::Get()->GetKeyTrigger(DIK_TAB)) {
+		
+		switch (m_moveTarget) {
+		
+		case WALL:
+
+			m_moveTarget = GROUND;
+
+			break;
+
+		case GROUND:
+
+			m_moveTarget = LIGHT;
+
+
+			break;
+
+		case LIGHT:
+
+			m_moveTarget = OBJECT;
+
+			break;
+
+		case OBJECT:
+
+			m_moveTarget = WALL;
+
+			break;
+
+		default:
+
+			break;
+
+		}
+
+
+	}
+
+	//位置更新
+	switch (m_moveTarget) {
+
+	case WALL:
+
+		TestMove(testWall);
+		//カメラの追跡ターゲットを設定する
+		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+		break;
+
+	case GROUND:
+
+		TestMove(testGround);
+
+		break;
+
+	case OBJECT:
+
+		TestMove(testTree);
+		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testTree->m_obj);
+		break;
+
+	case LIGHT:
+		TestMove(m_lightPos);
+
+	default:
+
+		break;
+	}
+
+	//光源の位置をリアルタイムで更新する
+
+	testTree->SetLightPos(m_lightPos);
+
+	testTree->Update();
+
+	testWall->Update();
+	
+	testGround->Update();
+
+	//影のｚ軸の数値を更新
+	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
+
+
+}
+
+void Game::TestDraw(void)
+{
+	//壁の描画
+	testWall->Draw();
+
+	//地面の描画
+	testGround->Draw();
+
+
+	//オブジェクトを描画する
+	testTree->Draw();
+
+
+
+
+	//デバッグ表示 
+	//40->一文字の幅/高さの二倍
+	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;//デバッグ表示の横座標設定
+	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	
+	
+	char targetName[16];	//移動対象の名前
+	DirectX::XMFLOAT3 targetPos = {};	//移動対象の位置
+	float targetRotate = 0.0f;		//移動対象の角度
+	
+	switch (m_moveTarget) {
+	case WALL:
+		strcpy_s(targetName, "WALL");
+		targetPos = testWall->m_sprite->m_pos;
+		targetRotate = testWall->m_sprite->m_rotation.x;
+		break;
+	case GROUND:
+		strcpy_s(targetName, "GROUND");
+		targetPos = testGround->m_sprite->m_pos;
+		targetRotate = testGround->m_sprite->m_rotation.x;
+		break;
+	case OBJECT:
+		strcpy_s(targetName, "OBJECT");
+		targetPos = testTree->m_obj->m_sprite->m_pos;
+		targetRotate = testTree->m_obj->m_sprite->m_rotation.x;
+		break;
+	case LIGHT:
+		strcpy_s(targetName, "LIGHT");
+		targetPos = m_lightPos;
+		break;
+	}
+	
+	g_DebugManager->PrintDebugLog(posX, posY, targetName);//名前表示
+	
+	//回転角度
+	strcpy_s(targetName, "Rotation");
+	posY = ((SCREEN_HEIGHT / 2) - 40 * 2) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	g_DebugManager->PrintDebugLog(posX, posY, targetName);//名前表示
+
+	posY = ((SCREEN_HEIGHT / 2) - 40 * 3) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	g_DebugManager->PrintDebugLog(posX, posY, targetRotate);
+
+	//位置を出力する x,y,z
+	strcpy_s(targetName, "Position");
+	posY = ((SCREEN_HEIGHT / 2) - 40 * 4) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	g_DebugManager->PrintDebugLog(posX, posY, targetName);//名前表示
+
+	posY = ((SCREEN_HEIGHT / 2) - 40 * 5) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	g_DebugManager->PrintDebugLog(posX, posY, targetPos.x);
+	
+	posY = ((SCREEN_HEIGHT / 2) - 40 * 6) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	g_DebugManager->PrintDebugLog(posX, posY, targetPos.y);
+
+	posY = ((SCREEN_HEIGHT / 2) - 40 * 7) / SCREEN_PARA;//デバッグ表示の縦座標設定
+	g_DebugManager->PrintDebugLog(posX, posY, targetPos.z);
+
+}
+
+void Game::TestMove(GameObject* _target)
+{
+	//移動入力
+	//WASD上下左右移動
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+
+		_target->m_obj->m_sprite->m_pos.y += 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+
+		_target->m_obj->m_sprite->m_pos.x -= 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+
+		_target->m_obj->m_sprite->m_pos.x += 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+
+		_target->m_obj->m_sprite->m_pos.y -= 0.1f;
+
+	}
+	//↑キー/↓キーで前後移動
+
+	if (Input::Get()->GetKeyPress(DIK_UPARROW))
+	{
+		_target->m_obj->m_sprite->m_pos.z += 0.1f;
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	{
+		_target->m_obj->m_sprite->m_pos.z -= 0.1f;
+	}
+
+
+	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
+	{
+		_target->m_obj->m_sprite->m_rotation.x += 1.0f;
+	}
+
+	//←キー/→キーで角度の調整
+	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
+	{
+		_target->m_obj->m_sprite->m_rotation.x -= 1.0f;
+	}
+
+
+	//RESET
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		
+		_target->m_obj->m_sprite->m_rotation.x = 0.0f;
+		_target->m_obj->m_sprite->m_pos.x = 0.0f;
+	}
+}
+
+void Game::TestMove(StaticObject* _target)
+{
+
+	//移動入力
+	//WASD上下左右移動
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+
+		_target->m_sprite->m_pos.y += 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+
+		_target->m_sprite->m_pos.x -= 0.1f;
+
+	}
+	//↑キー/↓キーで上下移動
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+
+		_target->m_sprite->m_pos.x += 0.1f;
+
+	}
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+
+		_target->m_sprite->m_pos.y -= 0.1f;
+		
+	}
+
+	//↑キー/↓キーで前後移動
+	if (Input::Get()->GetKeyPress(DIK_UPARROW))
+	{
+		_target->m_sprite->m_pos.z += 0.1f;
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	{
+		_target->m_sprite->m_pos.z -= 0.1f;
+	}
+
+	//←キー/→キーで角度の調整
+	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
+	{
+		_target->m_sprite->m_rotation.x += 1.0f;
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
+	{
+		_target->m_sprite->m_rotation.x -= 1.0f;
+	}
+
+
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		_target->m_sprite->m_rotation.x = 0.0f;
+		_target->m_sprite->m_pos.x = 0.0f;
+	}
+}
+
+void Game::TestMove(DirectX::XMFLOAT3& _target)
+{
+	
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+
+		_target.y += 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+
+		_target.x -= 0.1f;
+
+	}
+	//↑キー/↓キーで上下移動
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+
+		_target.x += 0.1f;
+
+	}
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+
+		_target.y -= 0.1f;
+	}
+
+	//↑キー/↓キーで前後移動
+	if (Input::Get()->GetKeyPress(DIK_UPARROW))
+	{
+		_target.z += 0.1f;
+	
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	{
+		_target.z -= 0.1f;
+	}
+
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		_target = { 0.0f,0.0f,-2.0f };
+		m_lightPos = { 0.0f,0.0f,-2.0f };
+	}
+
+}
+
 Game::~Game()
 {
 	
 	delete testTree;
+	delete testWall;
+	delete testGround;
+	delete testChara;
 
 }
 
@@ -102,50 +454,36 @@ void Game::GameDraw()
 	D3D_ClearScreen();
 
 	//============ ここから描画処理 ============//
-
-
+	
+	
 	switch (m_gameScene)
-	{
-	case TITLE:
+		{
+		case TITLE:
 
-		TitleDraw();
-		break;
+			TitleDraw();
+			break;
 
-	case STAGE1:
+		case STAGE1:
 
-		StageDraw();
-		break;
+			StageDraw();
+			break;
 
-	case RESULT:
+		case RESULT:
 
-		ResultDraw();
-		break;
+			ResultDraw();
+			break;
 
-	}
+		}
 
 	//============ ここまで描画処理 ============//
-
+	 
 	//ダブルバッファの切り替えを行い画面を更新する
 	GetD3D_DATA()->SwapChain->Present(0, 0);
 }
 
 void Game::TitleDraw(void)
 {
-
-	//オブジェクトを描画する
-	testTree->Draw();
-
-	// testChara->Draw();
-	// testObj4->Draw();
-
-	//デバッグ表示 
-	//40->一文字の幅/高さの二倍
-	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;//デバッグ表示の横座標設定
-	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	//位置を出力する
-	g_DebugManager->PrintDebugLog(posX, posY, testTree->m_obj->m_pos.z);
-
-	
+	TestDraw();
 }
 
 void Game::StageDraw(void)
@@ -160,5 +498,4 @@ void Game::SetGameScene(GAMESCENE scene)
 {
 	m_gameScene = scene;
 }
-
 
