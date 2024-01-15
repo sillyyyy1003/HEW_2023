@@ -112,13 +112,6 @@ void TrackCamera::Update()
 
 		}
 
-		
-
-
-
-		
-	
-
 	}
 	
 	
