@@ -1,32 +1,26 @@
 #include "BoxCollider.h"
+#include "SphereCollider.h"
 
 BoxCollider::BoxCollider()
 {
 }
 
-void BoxCollider::InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents, DirectX::XMFLOAT3 orientation,COLLISION_TYPE _type)
+void BoxCollider::InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents, COLLISION_TYPE _type)
 {
-    m_boxOrientedCollider.Center = center;
-    m_boxOrientedCollider.Extents = extents;
-    //C³•K—v
-    m_boxOrientedCollider.Orientation = { orientation.x,orientation.y,orientation.z,0.0f };
+    m_boxCollider.Center = center;
+    m_boxCollider.Extents = extents;
 }
 
 void BoxCollider::UpdateExtents()
 {
-    m_boxOrientedCollider.Extents = m_extents;
+    m_boxCollider.Extents = m_extents;
 }
 
 void BoxCollider::UpdatePos()
 {
-    m_boxOrientedCollider.Center = m_center;
+    m_boxCollider.Center = m_center;
 }
 
-void BoxCollider::UpdateOrientation()
-{
-    //C³•K—v
-    m_boxOrientedCollider.Orientation = m_boxOrientedCollider.Orientation = { m_orientation.x,m_orientation.y,m_orientation.z,0.0f };
-}
 
 void BoxCollider::Update()
 {
@@ -38,17 +32,34 @@ void BoxCollider::Update()
     {
         UpdateExtents();
         UpdatePos();
-        UpdateOrientation();
     }
 
 }
 
-bool BoxCollider::isCollision(const SphereCollider& sphereCollider)
+bool BoxCollider::isCollision(SphereCollider* sphereCollider)
 {
-    return false;
+    if (m_boxCollider.Intersects(sphereCollider->SphereCollider::GetCollider())) 
+    {
+        return true;
+    }
+    else {
+        return false;
+    }
+  
 }
 
-bool BoxCollider::isCollision(const BoxCollider& boxCollider)
+bool BoxCollider::isCollision(BoxCollider* boxCollider)
+{
+    if (m_boxCollider.Intersects(boxCollider->BoxCollider::GetCollider()))
+    {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool BoxCollider::isCollision(PolygonCollider* polygonCollider)
 {
     return false;
 }
