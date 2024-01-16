@@ -40,6 +40,7 @@ void Game::Init()
 	testGround->m_sprite->m_anime = new ObjectAnimation(1, 1);
 	testChara->m_sprite->m_anime = new ObjectAnimation(3, 4);
 	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
+	
 
 	testTree->m_obj->m_anime = new StaticAnimation(1, 1);
 	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);
@@ -91,12 +92,12 @@ void Game::TitleUpdate(void)
 {	
 
 	if (Input::Get()->GetKeyPress(DIK_UPARROW)) {
-		//testChara->m_sprite->m_pos.z += 0.1f;
-		testChara->m_sprite->m_rotation.x += 0.8f;
+		testChara->m_sprite->m_pos.z += 0.1f;
+		//testChara->m_sprite->m_rotation.x += 0.8f;
 	}
 	if (Input::Get()->GetKeyPress(DIK_LEFTARROW)) {
 		testChara->m_sprite->m_pos.x -= 0.1f;
-		testChara->m_sprite->m_rotation.x -= 0.8f;
+		//testChara->m_sprite->m_rotation.x -= 0.8f;
 	}
 	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW)) {
 		testChara->m_sprite->m_pos.x += 0.1f;
@@ -104,6 +105,17 @@ void Game::TitleUpdate(void)
 	if (Input::Get()->GetKeyPress(DIK_DOWNARROW)) {
 		testChara->m_sprite->m_pos.z -= 0.1f;
 	}
+
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		/*testChara->m_sprite->m_pos.x += 0.1f;*/
+		testChara->m_sprite->SetMoveSpeed(0.05f);// 今後STOPできるようにする
+	}
+
+	
+
+	//マウスでキャラを回転テスト
+	testChara->m_sprite->RotateObj(testChara->m_sprite->m_rotation);
+	
 
 	testWall->Update();
 
@@ -118,8 +130,6 @@ void Game::TitleUpdate(void)
 	uitest->Update();
 
 
-
-	
 
 }
 

@@ -19,6 +19,9 @@ public:
 
 	//光があるかどうか
 	bool isLit = false;
+
+
+
 	
 public:
 	//コンストラクタ
@@ -52,6 +55,9 @@ public:
 	/// <param name="objPos">オブジェクトの位置</param>
 	/// <returns>影の位置</returns>
 	DirectX::XMFLOAT3 GenerateShadowPos(DirectX::XMFLOAT3 lightPos);
+
+
+
 
 	//毎回ゲームループで呼び出せれてる
 	void Update(DirectX::XMFLOAT3 lightPos);
