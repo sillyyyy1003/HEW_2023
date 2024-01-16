@@ -22,25 +22,29 @@ private:
 private:
 
 	DirectX::XMFLOAT3 m_lightPos = { 0.0f,0.0f,-2.0f };//光の位置を扱る変数
-
+	DirectX::XMFLOAT3 m_cameraPos = { 0.0f, 0.0f, -7.0f };
 
 	enum MOVETARGET {
 		WALL,
 		GROUND,
 		LIGHT,
 		OBJECT,
+		CAMERA,
 	};
 
 	MOVETARGET m_moveTarget = WALL;
+
+
 
 private:
 	
 	//テスト用
 	GameObject*		testTree;	//移動用オブジェクト	
-	StaticObject*	testWall;	//壁
-	StaticObject*	testGround;	//地面
 	GameObject*		testChara;	//テストキャラ
 
+
+	StaticObject*	testWall;	//壁
+	StaticObject*	testGround;	//地面
 
 private:
 	//コンストラクタ&デストラクタ

@@ -43,6 +43,19 @@ void Game::Init()
 	//testTree->collider=new Collider();//形によってsphereCollider、polygonColliderなどに変える
 
 
+	testChara = new GameObject();
+	//モデルを作る
+	testChara->CreateObject(g_Assets->testChara01, 200, 200, 3, 4);
+	testChara->CreateShadow(g_Assets->testChara01, 200, 200, 1, 1);
+	
+	//アニメションを配置
+	testChara->m_obj->m_sprite->m_anime = new ObjectAnimation(3, 4);	//オブジェクト
+	testChara->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	testChara->m_obj->m_sprite->m_pos = { 1, 1, 0 };
+	testChara->m_shadow->isLight = false;
+
+
 	testWall = new StaticObject();
 	//モデルを作る/アニメション配置
 	testWall->CreateObject(g_Assets->testWall, 1920, 1080, 1, 1);
@@ -137,6 +150,12 @@ void Game::TestUpdate(void)
 
 		case OBJECT:
 
+			m_moveTarget = CAMERA;
+
+			break;
+
+		case CAMERA:
+
 			m_moveTarget = WALL;
 
 			break;
@@ -157,7 +176,7 @@ void Game::TestUpdate(void)
 
 		TestMove(testWall);
 		//カメラの追跡ターゲットを設定する
-		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+		//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 		break;
 
 	case GROUND:
@@ -169,26 +188,40 @@ void Game::TestUpdate(void)
 	case OBJECT:
 
 		TestMove(testTree);
-		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testTree->m_obj);
+		//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testTree->m_obj);
 		break;
 
 	case LIGHT:
-		TestMove(m_lightPos);
+		
+		TestMove(testChara);
+		break;
+
+	case CAMERA:
+
+		TestMove(m_cameraPos);
+		g_WorldCamera->SetCameraPos(m_cameraPos);
+		break;
 
 	default:
 
 		break;
 	}
 
+
+
 	//光源の位置をリアルタイムで更新する
 
-	testTree->SetLightPos(m_lightPos);
+	testTree->SetLightPos(testChara->m_obj->m_sprite->m_pos);
 
 	testTree->Update();
+
+	testChara->Update();
 
 	testWall->Update();
 	
 	testGround->Update();
+
+
 
 	//影のｚ軸の数値を更新
 	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
@@ -205,8 +238,11 @@ void Game::TestDraw(void)
 	testGround->Draw();
 
 
+	testChara->Draw();
+
 	//オブジェクトを描画する
 	testTree->Draw();
+
 
 
 
@@ -239,7 +275,11 @@ void Game::TestDraw(void)
 		break;
 	case LIGHT:
 		strcpy_s(targetName, "LIGHT");
-		targetPos = m_lightPos;
+		targetPos = testChara->m_obj->m_sprite->m_pos;
+		break;
+	case CAMERA:
+		strcpy_s(targetName, "CAMERA");
+		targetPos = m_cameraPos;
 		break;
 	}
 	

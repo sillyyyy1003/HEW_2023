@@ -1,2 +1,7 @@
-﻿  GameObject.cpp
+﻿  Game.cpp
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(253,58): warning C4305: “初始化”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(290,53): warning C4305: “=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(298,53): warning C4305: “=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(301,53): warning C4305: “=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(307,53): warning C4305: “=”: 从“double”到“float”截断
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

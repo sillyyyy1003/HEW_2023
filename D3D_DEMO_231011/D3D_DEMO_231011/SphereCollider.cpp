@@ -1,4 +1,5 @@
 ﻿#include "SphereCollider.h"
+#include "BoxCollider.h"
 
 SphereCollider::SphereCollider()
 {
@@ -25,16 +26,29 @@ void SphereCollider::UpdatePos()
 
 
 
-bool SphereCollider::isCollision(const SphereCollider& sphereCollider)
+bool SphereCollider::isCollision(SphereCollider* sphereCollider)
 {
-    if (m_sphereCollider.Intersects(sphereCollider.m_sphereCollider))
+    if (this->GetCollider().Intersects(sphereCollider->SphereCollider::GetCollider()))
     {
         return true;
     }
     else {
         return false;
     }
+
     
+}
+
+bool SphereCollider::isCollision(BoxCollider* boxCollider)
+{
+    if (this->GetCollider().Intersects(boxCollider->BoxCollider::GetCollider()))
+    {
+        return true;
+    }
+    else {
+        return false;
+    }
+   
 }
 
 void SphereCollider::Update()

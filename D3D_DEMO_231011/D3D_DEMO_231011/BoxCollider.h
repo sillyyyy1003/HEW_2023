@@ -2,32 +2,29 @@
 #include "Collider.h"
 
 class SphereCollider;
+class PolygonCollider;
 
 class BoxCollider : public Collider
 {
 private:
 
-	DirectX::BoundingOrientedBox m_boxOrientedCollider;
+	DirectX::BoundingBox m_boxCollider;
 
 public:
 
 	DirectX::XMFLOAT3 m_center = {};
 	DirectX::XMFLOAT3 m_extents = {};
-	DirectX::XMFLOAT3 m_orientation = {};
 
 
 public:
 
 	BoxCollider();
 
-	void InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents,DirectX::XMFLOAT3 orientation, COLLISION_TYPE _type);
+	void InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents, COLLISION_TYPE _type);
 
 	void UpdateExtents();
 
 	void UpdatePos();
-
-	void UpdateOrientation();
-
 
 	/// <summary>
 	/// 毎回呼び出される、状態を更新する関数
@@ -39,10 +36,11 @@ public:
 	/// 当たり判定
 	/// </summary>
 	/// <param name="sphereCollider">球体</param>
-	bool isCollision(const SphereCollider& sphereCollider);
-	bool isCollision(const BoxCollider& boxCollider);
+	bool isCollision(SphereCollider* sphereCollider);
+	bool isCollision(BoxCollider* boxCollider);
+	bool isCollision(PolygonCollider* polygonCollider);
 
-	DirectX::BoundingOrientedBox GetCollider(void) { return m_boxOrientedCollider; };
+	DirectX::BoundingBox GetCollider(void) { return m_boxCollider; };
 
 
 

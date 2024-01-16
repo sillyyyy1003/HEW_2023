@@ -2,6 +2,8 @@
 #include "Collider.h"
 #include "Sprite.h"
 
+class BoxCollider;
+
 /// <summary>
 /// 球体コライダー
 /// </summary>
@@ -9,6 +11,7 @@ class SphereCollider :public Collider
 {
 private:
 	
+
 	DirectX::BoundingSphere m_sphereCollider;
 	
 
@@ -37,7 +40,8 @@ public:
 	/// 当たり判定
 	/// </summary>
 	/// <param name="sphereCollider">球体</param>
-	bool isCollision(const SphereCollider& sphereCollider);
+	bool isCollision(SphereCollider* sphereCollider);
+	bool isCollision(BoxCollider* boxCollider);
 
 
 	DirectX::BoundingSphere GetCollider(void) { return m_sphereCollider; };

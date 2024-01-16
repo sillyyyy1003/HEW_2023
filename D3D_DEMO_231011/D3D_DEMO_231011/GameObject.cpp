@@ -28,7 +28,7 @@ void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, f
 
 DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 {
-	// 単位ベクトル化する
+	//単位ベクトル化する
 	//オブジェクトの位置取得
 	const XMFLOAT3 objPos = m_obj->m_sprite->m_pos; 
 
@@ -74,7 +74,7 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 	//ベクトル計算用の型に入れる
 	XMVECTOR objVector = XMLoadFloat3(&objPos);
 	XMVECTOR lightVector = XMLoadFloat3(&lightPos);
-	//	////光からオブジェクトのベクトルを計算する
+	//光からオブジェクトのベクトルを計算する
 	XMVECTOR directionVector = XMVectorSubtract(objVector, lightVector);
 
 
@@ -118,13 +118,15 @@ void GameObject::Update(void)
 	//本体更新した後
 	if (m_obj->m_collider != nullptr) {
 		
+		//ここで具体的なCollisionのセンターやスケールを更新する
 		UpdateObjectColliderData();
 
 	}
 
 	//影更新した後
 	if (m_shadow->m_collider != nullptr) {
-
+		
+		//ここで具体的なCollisionのセンターやスケールを更新する
 		UpdateShadowColliderData();
 
 	}
