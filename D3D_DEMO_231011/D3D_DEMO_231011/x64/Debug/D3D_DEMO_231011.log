@@ -1,4 +1,26 @@
-﻿  Game.cpp
+﻿  Assets.cpp
+  DebugManager.cpp
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
-C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(226,13): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(39,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(40,53): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Game.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(241,13): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  Sprite.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(23,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(24,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(24,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(28,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(29,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(30,32): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(31,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(155,37): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+  StageManager.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  WinMain.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+  コードを生成中...
   D3D_DEMO_231011.vcxproj -> C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

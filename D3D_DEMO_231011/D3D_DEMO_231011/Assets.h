@@ -16,6 +16,7 @@ public:
 	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ(木の影)
 
 	ID3D11ShaderResourceView* testWallbg;	//壁用テクスチャ
+	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* testGroundbg;	//地面用テクスチャ
 	ID3D11ShaderResourceView* testChara01;	//キャラ用テクスチャ
 

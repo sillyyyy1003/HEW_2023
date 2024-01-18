@@ -19,6 +19,10 @@ void Game::Init()
 	testGround = new Object(g_Assets->testGroundbg, 1280, 720, 1, 1);
 	testWall->m_sprite->m_scale = { 1.0, 1.0, 1.0 };
 
+	testPause = new Object(g_Assets->testPause, 1280, 720, 1, 1);
+	testPause->m_sprite->m_scale = { 1.0, 1.0, 1.0 };
+
+
 	//オブジェクトの初期設定・テクスチャの読み込み
 	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);
 	
@@ -27,9 +31,9 @@ void Game::Init()
 	testTree->CreateShadow(g_Assets->testShadow, 300, 300, 1, 1);
 
 	uitest = new CanvasUI();
-	uitest->CreateModel(g_Assets->testWallbg, 128, 72, 1, 1);
+	uitest->CreateModel(g_Assets->testPause, 128, 72, 1, 1);
 
-	uitest->m_pos.z = 0.2f;
+	uitest->m_pos.z = 2.0f;
 	
 	//影の初期設定
 
@@ -37,6 +41,7 @@ void Game::Init()
 
 	//アニメーションの設定
 	testWall->m_sprite->m_anime = new StaticAnimation(1, 1);
+	testPause->m_sprite->m_anime = new StaticAnimation(1, 1);// 追加
 	testGround->m_sprite->m_anime = new ObjectAnimation(1, 1);
 	testChara->m_sprite->m_anime = new ObjectAnimation(3, 4);
 	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
@@ -49,8 +54,12 @@ void Game::Init()
 
 	//初期位置設定
 	testWall->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
-	testGround->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
+	testWall->m_sprite->m_scale = { 0.3f,0.3f,0.3f };
 
+	testPause->m_sprite->m_pos = { 0.0f, 1.5f, -2.0f };
+	testPause->m_sprite->m_scale = { 0.3f,0.3f,0.3f };
+
+	testGround->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
 	testGround->m_sprite->m_rotation.x = 90;
 	testGround->m_sprite->m_pos.y = -360 / SCREEN_PARA + 1.5f;
 
@@ -128,7 +137,7 @@ void Game::TitleUpdate(void)
 	testChara->m_sprite->RotateObj(testChara->m_sprite->m_rotation);
 	
 
-	testWall->Update();
+	
 
 	//背景
 	testGround->Update();
@@ -137,7 +146,8 @@ void Game::TitleUpdate(void)
 	testTree->Update(testChara->m_sprite->m_pos);
 
 	testChara->Update();
-
+	testPause->Update();
+	testWall->Update();
 	uitest->Update();
 
 
@@ -207,12 +217,17 @@ void Game::TitleDraw(void)
 {
 	if (isPause)
 	{
-		testWall->Draw();
+
+
+		testTree->Draw();
+		testChara->Draw();
+		testChara->m_sprite->m_anime->SetAnimeSpeed(0.0f);
+		testPause->Draw();
 		return;
 	}
-
+	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
 	
-
+	//testWall->Draw();
 	//testGround->Draw();
 
 	testTree->Draw();
@@ -227,6 +242,9 @@ void Game::TitleDraw(void)
 	g_DebugManager->PrintDebugLog(posX, posY, testChara->m_sprite->m_pos.x);
 
 	
+
+
+
 }
 
 void Game::StageDraw(void)

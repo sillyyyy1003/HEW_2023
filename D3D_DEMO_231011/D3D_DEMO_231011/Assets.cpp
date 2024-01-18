@@ -12,6 +12,7 @@ Assets::Assets()
     testShadow = LoadTexture("assets/treeshadow.png");
 
     testWallbg = LoadTexture("assets/wallbg.png");
+    testPause= LoadTexture("assets/pause.png");
     testGroundbg = LoadTexture("assets/groundbg.png");
     testChara01 = LoadTexture("assets/char01.png");
 
@@ -24,7 +25,8 @@ Assets::~Assets()
    SAFE_RELEASE(testObj);
    SAFE_RELEASE(testShadow);
 
-   SAFE_RELEASE(testWallbg);	
+   SAFE_RELEASE(testWallbg);
+   SAFE_RELEASE(testPause);
    SAFE_RELEASE(testGroundbg);	
    SAFE_RELEASE(testChara01);	
 
