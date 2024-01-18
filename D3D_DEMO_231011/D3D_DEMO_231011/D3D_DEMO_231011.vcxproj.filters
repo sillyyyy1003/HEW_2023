@@ -71,6 +71,8 @@
     <ClCompile Include="Input.cpp">
       <Filter>ControllerInput</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StageManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -139,6 +141,8 @@
     <ClInclude Include="Input.h">
       <Filter>ControllerInput</Filter>
     </ClInclude>
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="StageManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">
