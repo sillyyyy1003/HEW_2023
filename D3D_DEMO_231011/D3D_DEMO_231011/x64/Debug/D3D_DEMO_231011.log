@@ -1,6 +1,7 @@
 ﻿  Assets.cpp
   DebugManager.cpp
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
+<<<<<<< HEAD
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(39,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(40,53): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
   Game.cpp
@@ -23,4 +24,7 @@ C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: フ
   WinMain.cpp
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.h(1,1): warning C4819: ファイルは、現在のコード ページ (932) で表示できない文字を含んでいます。データの損失を防ぐために、ファイルを Unicode 形式で保存してください。
   コードを生成中...
+=======
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(209,13): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+>>>>>>> parent of ddf0f96 (240118:仮のPause機能を作成)
   D3D_DEMO_231011.vcxproj -> C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

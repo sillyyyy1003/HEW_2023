@@ -25,7 +25,6 @@ private:
 	GameObject* testTree;	//木
 	CanvasUI* uitest;
 
-	bool isPause = false;
 
 private:
 	//コンストラクタ&デストラクタ
