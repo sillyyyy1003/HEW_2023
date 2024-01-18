@@ -100,6 +100,17 @@ void Game::GameUpdate(void)
 void Game::TitleUpdate(void)
 {	
 
+	if (isPause == false)
+	{
+		testTree->Update(testChara->m_sprite->m_pos);
+
+		testChara->Update();
+		testPause->Update();
+		testWall->Update();
+		uitest->Update();
+	
+
+
 	if (Input::Get()->GetKeyPress(DIK_UPARROW)) {
 		testChara->m_sprite->m_pos.z += 0.1f;
 		//testChara->m_sprite->m_rotation.x += 0.8f;
@@ -119,11 +130,23 @@ void Game::TitleUpdate(void)
 		/*testChara->m_sprite->m_pos.x += 0.1f;*/
 		testChara->m_sprite->SetMoveSpeed(0.05f);// 今後STOPできるようにする
 	}
+}
 
-	
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+	{
+		if (isPause)
+		{
+			isPause = false;
+		}
+		else
+		{
+			isPause = true;
+		}
+	}
+
 
 	//マウスでキャラを回転テスト
-	testChara->m_sprite->RotateObj(testChara->m_sprite->m_rotation);
+	//testChara->m_sprite->RotateObj(testChara->m_sprite->m_rotation);
 	
 
 	
@@ -132,12 +155,7 @@ void Game::TitleUpdate(void)
 	testGround->Update();
 	
 
-	testTree->Update(testChara->m_sprite->m_pos);
 
-	testChara->Update();
-	testPause->Update();
-	testWall->Update();
-	uitest->Update();
 
 
 
@@ -204,7 +222,7 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
-<<<<<<< HEAD
+
 	if (isPause)
 	{
 
@@ -218,10 +236,9 @@ void Game::TitleDraw(void)
 	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
 	
 	//testWall->Draw();
-=======
+
 	//testWall->Draw();
 
->>>>>>> parent of ddf0f96 (240118:仮のPause機能を作成)
 	//testGround->Draw();
 
 	testTree->Draw();
