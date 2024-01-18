@@ -71,6 +71,11 @@ void Game::Init()
 	testGround->m_sprite->m_pos = { 0.0f,-3.0f,0.0f };
 	testGround->m_sprite->m_rotation.x = 90;
 
+	testSide = new StaticObject();
+	testSide->CreateObject(g_Assets->testSideBg, 1920, 1080, 1, 1);
+	testSide->m_sprite->m_pos = { (float)-1920 / SCREEN_PARA,0.0f,0.0f };
+	testSide->m_sprite->m_rotation = {0,-90,0};
+
 	//----------------------------//
 	// ここまではテスト用の初期化
 	//----------------------------//
@@ -175,14 +180,17 @@ void Game::TestUpdate(void)
 	case WALL:
 
 		TestMove(testWall);
+
 		//カメラの追跡ターゲットを設定する
-		//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+		if (Input::Get()->GetKeyTrigger(DIK_RETURN)) 
+			dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+
 		break;
 
 	case GROUND:
 
-		TestMove(testGround);
-
+		//TestMove(testGround);
+		TestMove(testSide);
 		break;
 
 	case OBJECT:
@@ -198,8 +206,12 @@ void Game::TestUpdate(void)
 
 	case CAMERA:
 
-		TestMove(m_cameraPos);
+		dynamic_cast<TrackCamera*>(g_WorldCamera)->RomoveTarget();
+		//TestMove(m_cameraPos);
+		TestMoveCamera();
 		g_WorldCamera->SetCameraPos(m_cameraPos);
+		g_WorldCamera->SetFocusPos(m_focusPos);
+		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetDistance(m_distance);
 		break;
 
 	default:
@@ -219,13 +231,18 @@ void Game::TestUpdate(void)
 
 	testWall->Update();
 	
-	testGround->Update();
+	//testGround->Update();
+
+	testSide->Update();
 
 
 
 	//影のｚ軸の数値を更新
 	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
 
+	m_cameraPos = g_WorldCamera->GetCameraPos();
+	m_focusPos = g_WorldCamera->GetFocusPos();
+	
 
 }
 
@@ -235,14 +252,16 @@ void Game::TestDraw(void)
 	testWall->Draw();
 
 	//地面の描画
-	testGround->Draw();
+	//testGround->Draw();
 
+	testSide->Draw();
 
 	testChara->Draw();
 
 	//オブジェクトを描画する
 	testTree->Draw();
 
+	
 
 
 
@@ -472,6 +491,57 @@ void Game::TestMove(DirectX::XMFLOAT3& _target)
 
 }
 
+void Game::TestMoveCamera()
+{
+
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+
+		m_cameraPos.z += 0.1f;
+
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+
+		m_cameraPos.x -= 0.1f;
+		m_focusPos.x -= 0.1f;
+
+	}
+	//↑キー/↓キーで上下移動
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+
+		m_cameraPos.x += 0.1f;
+		m_focusPos.x += 0.1f;
+	}
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+
+		m_cameraPos.z -= 0.1f;
+	}
+
+	//↑キー/↓キーで回転
+	if (Input::Get()->GetKeyPress(DIK_UPARROW))
+	{
+		m_cameraPos.y += 0.1f;
+		m_focusPos.y -= 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	{
+		m_cameraPos.y -= 0.1f;
+		m_focusPos.y += 0.1f;
+	}
+
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		//reset
+		m_cameraPos = { 0.0f, 0.0f, -9.0f };
+		m_focusPos = { 0.0f,0.0f,2.0f };
+	}
+
+	m_distance = 0 - m_cameraPos.z;
+}
+
 Game::~Game()
 {
 	
@@ -479,7 +549,7 @@ Game::~Game()
 	delete testWall;
 	delete testGround;
 	delete testChara;
-
+	delete testSide;
 }
 
 Game* Game::Get()

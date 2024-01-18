@@ -23,6 +23,8 @@ private:
 
 	DirectX::XMFLOAT3 m_lightPos = { 0.0f,0.0f,-2.0f };//光の位置を扱る変数
 	DirectX::XMFLOAT3 m_cameraPos = { 0.0f, 0.0f, -7.0f };
+	DirectX::XMFLOAT3 m_focusPos = { 0.0,0.0,2.0f };
+	float m_distance = 10.0f;
 
 	enum MOVETARGET {
 		WALL,
@@ -45,6 +47,8 @@ private:
 
 	StaticObject*	testWall;	//壁
 	StaticObject*	testGround;	//地面
+	StaticObject*	testSide;	//両端
+
 
 private:
 	//コンストラクタ&デストラクタ
@@ -70,7 +74,7 @@ public:
 	void TestMove(GameObject* _target);
 	void TestMove(StaticObject* _target);
 	void TestMove(DirectX::XMFLOAT3& _target);
-
+	void TestMoveCamera();
 
 
 	//描画

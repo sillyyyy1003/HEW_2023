@@ -21,7 +21,7 @@ public:
 	ID3D11ShaderResourceView* testGround;	//大きい地面
 
 	ID3D11ShaderResourceView* testChara01;	//キャラ用テクスチャ
-	
+	ID3D11ShaderResourceView* testSideBg;	//両端の背景用テクスチャ
 	
 	//================//テスト用//================//
 

@@ -15,8 +15,10 @@ Assets::Assets()
     testGroundbg = LoadTexture("assets/groundbg.png");
     testChara01 = LoadTexture("assets/char01.png");
 
+    //testWall = LoadTexture("assets/img/testGround.jpg");
     testWall = LoadTexture("assets/img/Background.png");
     testGround = LoadTexture("assets/img/Ground.png");
+    testSideBg = LoadTexture("assets/sideBg.png");
 
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 
@@ -33,7 +35,8 @@ Assets::~Assets()
 
    SAFE_RELEASE(testWall);
    SAFE_RELEASE(testGround);
-
+   SAFE_RELEASE(testSideBg);
+   
    SAFE_RELEASE(debugFont);
 }
 
