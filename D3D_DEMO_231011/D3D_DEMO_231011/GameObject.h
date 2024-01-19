@@ -20,6 +20,27 @@ public:
 	//影の図形情報
 	ShadowObject* m_shadow;
 
+	//前後の位置を表す
+	//enum VERTICAL_POS {
+	//	IDLE,		//void
+	//	FRONT,		//手前の位置
+	//	MID,		//中間の位置
+	//	BACK,		//後の位置
+	//	
+	//};
+
+	//VERTICAL_POS m_verPos = VERTICAL_POS::IDLE;
+
+	//enum HORIZON_POS {
+	//	IDLE,
+	//	L1,
+	//	L2,
+	//	MID,
+	//	R1,
+	//	R2,
+	//};
+
+	//HORIZON_POS m_horPos = HORIZON_POS::IDLE;
 
 
 public:

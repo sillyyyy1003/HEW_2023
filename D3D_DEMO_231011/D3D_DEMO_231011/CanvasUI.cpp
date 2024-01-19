@@ -1,6 +1,8 @@
 #include "CanvasUI.h"
 #include "StaticAnimation.h"
 
+extern Camera* g_WorldCamera;
+
 CanvasUI::CanvasUI()
 {
 }
@@ -19,6 +21,8 @@ void CanvasUI::CreateModel(ID3D11ShaderResourceView* texture, float _width, floa
 
 	//アニメーションを配置
 	m_anime = new Animation(splitX,splitY);
+
+	m_camera = g_WorldCamera;
 
 }
 

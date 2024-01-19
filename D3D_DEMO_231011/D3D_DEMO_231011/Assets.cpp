@@ -11,7 +11,8 @@ Assets::Assets()
     testObj = LoadTexture("assets/Tree.png");
     testShadow = LoadTexture("assets/treeshadow.png");
 
-    testWallbg = LoadTexture("assets/wallbg.png");
+    //testWallbg = LoadTexture("assets/wallbg.png");
+    testWallbg = LoadTexture("assets/img/testGround.jpg");
     testGroundbg = LoadTexture("assets/groundbg.png");
     testChara01 = LoadTexture("assets/char01.png");
 

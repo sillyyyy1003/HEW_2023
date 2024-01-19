@@ -3,7 +3,6 @@
 #include "Assets.h"
 #include "TrackCamera.h"
 
-#include "Object.h"
 #include "GameObject.h"
 #include "ShadowObject.h"
 #include "StaticObject.h"
@@ -16,6 +15,8 @@
 
 #include "DInput.h"
 #include <stdio.h>
+
+#include "SceneManager.h"
 
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
@@ -30,59 +31,10 @@ void Game::Init()
 	//カメラの追跡ターゲットを設定する
 	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
-	testTree = new GameObject();	
-	//モデルを作る
-	testTree->CreateObject(g_Assets->testObj, 200, 200, 1, 1);
-	testTree->CreateShadow(g_Assets->testShadow, 200, 200, 1, 1);
-	//アニメションを配置
-	testTree->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//オブジェクト
-	testTree->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
-	//オブジェクトの位置を配置
-	testTree->m_obj->m_sprite->m_pos = { 2, 2, 0 };
-	//オブジェクトのコライダーを配置(To Do)
-	//testTree->collider=new Collider();//形によってsphereCollider、polygonColliderなどに変える
-
-
-	testChara = new GameObject();
-	//モデルを作る
-	testChara->CreateObject(g_Assets->testChara01, 200, 200, 3, 4);
-	testChara->CreateShadow(g_Assets->testChara01, 200, 200, 1, 1);
 	
-	//アニメションを配置
-	testChara->m_obj->m_sprite->m_anime = new ObjectAnimation(3, 4);	//オブジェクト
-	testChara->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
-	//オブジェクトの位置を配置
-	testChara->m_obj->m_sprite->m_pos = { 1, 1, 0 };
-	testChara->m_shadow->isLight = false;
-
-
-	testWall = new StaticObject();
-	//モデルを作る/アニメション配置
-	testWall->CreateObject(g_Assets->testWall, 1920, 1080, 1, 1);
-	//オブジェクトの位置を配置
-	testWall->m_sprite->m_pos = { 0.0f,0.0f,2.0 };
-	//影の位置を壁の前に設定
-	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
-
-	testGround = new StaticObject();
-	//モデルを作る/アニメション配置
-	testGround->CreateObject(g_Assets->testGround, 1920, 1080, 1, 1);
-	//オブジェクトの位置を配置
-	testGround->m_sprite->m_pos = { 0.0f,-3.0f,0.0f };
-	testGround->m_sprite->m_rotation.x = 90;
-
-	testSide = new StaticObject();
-	testSide->CreateObject(g_Assets->testSideBg, 1920, 1080, 1, 1);
-	testSide->m_sprite->m_pos = { (float)-1920 / SCREEN_PARA,0.0f,0.0f };
-	testSide->m_sprite->m_rotation = {0,-90,0};
-
 	//----------------------------//
 	// ここまではテスト用の初期化
 	//----------------------------//
-
-
-
-
 
 
 	
@@ -90,6 +42,7 @@ void Game::Init()
 
 void Game::GameUpdate(void)
 {
+	/*
 	switch (m_gameScene)
 	{
 	case TITLE:
@@ -108,17 +61,25 @@ void Game::GameUpdate(void)
 		break;
 
 	}
+	*/
+
+
 }
 
 void Game::TitleUpdate(void)
 {	
 	//プロトタイプ用
-	TestUpdate();
-
+	
 }
 
 void Game::StageUpdate(void)
 {
+	
+	SceneManager::Get()->Update();
+
+
+
+
 }
 
 
@@ -129,6 +90,7 @@ void Game::ResultUpdate(void)
 
 void Game::TestUpdate(void)
 {
+	/*
 	//tabキー押して　移動対象を変更
 	if (Input::Get()->GetKeyTrigger(DIK_TAB)) {
 		
@@ -173,7 +135,7 @@ void Game::TestUpdate(void)
 
 
 	}
-
+	/*
 	//位置更新
 	switch (m_moveTarget) {
 
@@ -219,55 +181,16 @@ void Game::TestUpdate(void)
 		break;
 	}
 
-
-
-	//光源の位置をリアルタイムで更新する
-
-	testTree->SetLightPos(testChara->m_obj->m_sprite->m_pos);
-
-	testTree->Update();
-
-	testChara->Update();
-
-	testWall->Update();
-	
-	//testGround->Update();
-
-	testSide->Update();
-
-
-
-	//影のｚ軸の数値を更新
-	testTree->m_shadow->m_sprite->m_pos.z = testWall->m_sprite->m_pos.z - 0.1f;
-
-	m_cameraPos = g_WorldCamera->GetCameraPos();
-	m_focusPos = g_WorldCamera->GetFocusPos();
+	*/
 	
 
 }
 
 void Game::TestDraw(void)
 {
-	//壁の描画
-	testWall->Draw();
-
-	//地面の描画
-	//testGround->Draw();
-
-	testSide->Draw();
-
-	testChara->Draw();
-
-	//オブジェクトを描画する
-	testTree->Draw();
-
-	
 
 
 
-
-	//デバッグ表示 
-	//40->一文字の幅/高さの二倍
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;//デバッグ表示の横座標設定
 	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;//デバッグ表示の縦座標設定
 	
@@ -276,6 +199,7 @@ void Game::TestDraw(void)
 	DirectX::XMFLOAT3 targetPos = {};	//移動対象の位置
 	float targetRotate = 0.0f;		//移動対象の角度
 	
+	/*
 	switch (m_moveTarget) {
 	case WALL:
 		strcpy_s(targetName, "WALL");
@@ -326,6 +250,7 @@ void Game::TestDraw(void)
 	posY = ((SCREEN_HEIGHT / 2) - 40 * 7) / SCREEN_PARA;//デバッグ表示の縦座標設定
 	g_DebugManager->PrintDebugLog(posX, posY, targetPos.z);
 
+	*/
 }
 
 void Game::TestMove(GameObject* _target)
@@ -544,12 +469,8 @@ void Game::TestMoveCamera()
 
 Game::~Game()
 {
-	
-	delete testTree;
-	delete testWall;
-	delete testGround;
-	delete testChara;
-	delete testSide;
+
+
 }
 
 Game* Game::Get()
@@ -565,7 +486,7 @@ void Game::GameDraw()
 
 	//============ ここから描画処理 ============//
 	
-	
+	/*
 	switch (m_gameScene)
 		{
 		case TITLE:
@@ -584,6 +505,7 @@ void Game::GameDraw()
 			break;
 
 		}
+		*/
 
 	//============ ここまで描画処理 ============//
 	 
@@ -593,7 +515,7 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
-	TestDraw();
+	//TestDraw();
 }
 
 void Game::StageDraw(void)
@@ -604,8 +526,8 @@ void Game::ResultDraw(void)
 {
 }
 
-void Game::SetGameScene(GAMESCENE scene)
-{
-	m_gameScene = scene;
-}
+//void Game::SetGameScene(GAMESCENE scene)
+//{
+//	m_gameScene = scene;
+//}
 

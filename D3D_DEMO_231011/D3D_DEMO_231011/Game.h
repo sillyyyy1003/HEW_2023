@@ -1,24 +1,18 @@
 ﻿#pragma once
 #include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
 #include <DirectXMath.h>
+#include <map>
 
 class GameObject;
 class StaticObject;
 class CanvasUI;
+class Stage;
+class SceneManager;
 
 class Game
 {
-private:
-	enum GAMESCENE 
-	{
-		TITLE,		//タイトル
-		STAGE1,		//ゲームシーン
-		RESULT,		//リザルトシーン
-	};
 
-	GAMESCENE m_gameScene = TITLE;
-
-	//ここからの部分はテスト用
+//ここからの部分はテスト用
 private:
 
 	DirectX::XMFLOAT3 m_lightPos = { 0.0f,0.0f,-2.0f };//光の位置を扱る変数
@@ -26,30 +20,9 @@ private:
 	DirectX::XMFLOAT3 m_focusPos = { 0.0,0.0,2.0f };
 	float m_distance = 10.0f;
 
-	enum MOVETARGET {
-		WALL,
-		GROUND,
-		LIGHT,
-		OBJECT,
-		CAMERA,
-	};
+public:
 
-	MOVETARGET m_moveTarget = WALL;
-
-
-
-private:
 	
-	//テスト用
-	GameObject*		testTree;	//移動用オブジェクト	
-	GameObject*		testChara;	//テストキャラ
-
-
-	StaticObject*	testWall;	//壁
-	StaticObject*	testGround;	//地面
-	StaticObject*	testSide;	//両端
-
-
 private:
 	//コンストラクタ&デストラクタ
 	Game() {};
@@ -85,7 +58,7 @@ public:
 
 	
 	//シーンを設定する
-	void SetGameScene(GAMESCENE scene);
+	//void SetGameScene(GAMESCENE scene);
 
 	
 };

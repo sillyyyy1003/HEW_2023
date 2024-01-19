@@ -69,6 +69,13 @@
       <Filter>Collider\SphereCollider</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>StageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>StageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Direct3D\Direct3D.h">
@@ -144,6 +151,13 @@
       <Filter>Collider\SphereCollider</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Stage.h">
+      <Filter>StageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>StageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Direct3D">
@@ -205,6 +219,9 @@
     </Filter>
     <Filter Include="Collider\BoxOreintedCollider">
       <UniqueIdentifier>{094a9a79-ebf5-4321-b475-6e16363adf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StageManager">
+      <UniqueIdentifier>{21582326-7015-4808-b282-96f6b40153a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
