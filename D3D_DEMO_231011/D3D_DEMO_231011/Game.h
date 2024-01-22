@@ -13,12 +13,16 @@ class Game
 {
 
 private:
+	Object* testWall;
+	Object* testGround;
+	Object* testChara;	//プレイヤー
+	Object* testPause; //ポーズ画面
 
+	GameObject* testTree;	//木
+	CanvasUI* uitest;
 
-public:
+	bool isPause = false;
 
-
-	
 private:
 	//コンストラクタ&デストラクタ
 	Game() {};

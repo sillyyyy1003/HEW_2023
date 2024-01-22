@@ -1,15 +1,16 @@
-#pragma once
+ï»¿#pragma once
 #include "CanvasUI.h"
 
+//æ•°å­—ãƒ»æ–‡å­—ãƒ»
 class DebugManager
 {
 private:
-	//Å‘å•\¦‰Â”\•¶š”
+	//æœ€å¤§è¡¨ç¤ºå¯èƒ½æ–‡å­—æ•°
 	static const int maxChars = 256;
 
 	CanvasUI* m_debugASCII[maxChars];
 
-	//‰ŠúˆÊ’u(“ª‚Ì•¶š‚ÌˆÊ’u)
+	//åˆæœŸä½ç½®(é ­ã®æ–‡å­—ã®ä½ç½®)
 	float m_sPosX = 0;
 	float m_sPosY = 0;
 
@@ -19,19 +20,19 @@ public:
 
 	~DebugManager();
 
-	//•¶š‚ğƒZƒbƒg••`‰æ
+	//æ–‡å­—ã‚’ã‚»ãƒƒãƒˆï¼†æç”»
 	void UpdateChar(char* outputChar);
 	
-	//•¶š—ñ‚ÌƒXƒ^[ƒgˆÊ’u‚ğİ’è
+	//æ–‡å­—åˆ—ã®ã‚¹ã‚¿ãƒ¼ãƒˆä½ç½®ã‚’è¨­å®š
 	void SetPosition(float posX, float posY);
 
-	//•¶š‚ğo—Í‚·‚é
+	//æ–‡å­—ã‚’å‡ºåŠ›ã™ã‚‹
 	void PrintDebugLog(float _posX, float _posY, const char* word);
 
-	//floatŒ^”š‚ğo—Í‚·‚é
+	//floatå‹æ•°å­—ã‚’å‡ºåŠ›ã™ã‚‹
 	void PrintDebugLog(float _posX, float _posY, const float _num);
 
-	//intŒ^”š‚ğo—Í‚·‚é
+	//intå‹æ•°å­—ã‚’å‡ºåŠ›ã™ã‚‹
 	void PrintDebugLog(float _posX, float _posY, const int _num);
 
 };

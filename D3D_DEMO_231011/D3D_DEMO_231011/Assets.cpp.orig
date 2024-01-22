@@ -8,21 +8,23 @@ Assets::Assets()
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
 
-<<<<<<< HEAD
     testObj = LoadTexture("assets/Tree.png");
     testShadow = LoadTexture("assets/treeshadow.png");
+
+<<<<<<< HEAD
+    //testWallbg = LoadTexture("assets/wallbg.png");
+    testWallbg = LoadTexture("assets/img/testGround.jpg");
 =======
-    testbgbox = LoadTexture("assets/testBox.png");
-    testObj = LoadTexture("assets/circle.png");
-    //testShadow = LoadTexture("assets/testShadow.png");
-
-    square = LoadTexture("assets/polygon.png");
-    triangle = LoadTexture("assets/Triangle.png");//Triangle
->>>>>>> feature/Sakai
-
     testWallbg = LoadTexture("assets/wallbg.png");
+    testPause= LoadTexture("assets/pause.png");
+>>>>>>> feature/Sakamoto
     testGroundbg = LoadTexture("assets/groundbg.png");
     testChara01 = LoadTexture("assets/char01.png");
+
+    //testWall = LoadTexture("assets/img/testGround.jpg");
+    testWall = LoadTexture("assets/img/Background.png");
+    testGround = LoadTexture("assets/img/Ground.png");
+    testSideBg = LoadTexture("assets/sideBg.png");
 
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 
@@ -33,10 +35,15 @@ Assets::~Assets()
    SAFE_RELEASE(testObj);
    SAFE_RELEASE(testShadow);
 
-   SAFE_RELEASE(testWallbg);	
+   SAFE_RELEASE(testWallbg);
+   SAFE_RELEASE(testPause);
    SAFE_RELEASE(testGroundbg);	
    SAFE_RELEASE(testChara01);	
 
+   SAFE_RELEASE(testWall);
+   SAFE_RELEASE(testGround);
+   SAFE_RELEASE(testSideBg);
+   
    SAFE_RELEASE(debugFont);
 }
 

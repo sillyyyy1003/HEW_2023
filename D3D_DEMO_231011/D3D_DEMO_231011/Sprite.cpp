@@ -1,6 +1,7 @@
-﻿#include "Sprite.h"
+#include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
+#include "DInput.h"
 
 extern Assets* g_Assets;
 
@@ -108,6 +109,10 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	}
 	
 
+	// TEST右向きベクトル
+	XMVECTOR iniRight = XMVectorSet(1, 0, 0, 0);
+
+
 	//投影行列作成
 	matrixProj = matrixView *matrixProjPerspective ;
 
@@ -123,6 +128,22 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixRotateZ = XMMatrixRotationZ(XMConvertToRadians(m_rotation.z));
 	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
 	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
+
+
+	// *TEST* 右向きベクトル
+	XMVECTOR newRight = XMVector3TransformCoord(iniRight, matrixRotate);
+	// 変換
+	right.x = XMVectorGetX(newRight);
+	right.y = XMVectorGetY(newRight);
+	right.z = XMVectorGetZ(newRight);
+	// 右に行く
+	XMFLOAT3 right = GetRight();
+	float moveSpeed = GetMoveSpeed();
+	m_pos.x += right.x * moveSpeed;
+	m_pos.y += right.y * moveSpeed;
+	m_pos.z += right.z * moveSpeed;
+
+
 
 	//UVアニメーション行列作成
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
@@ -165,6 +186,39 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 */
 }
 
+void Sprite::RotateObj(XMFLOAT3& rot)
+{
+
+	enum VALUE {val = 1,};  float fval = 0.2;//テストの値
+	
+	POINT mouseMovePos = Input::Get()->GetMouseMove();
+
+	//回転する条件（回転制限）
+	if (m_rotation.x/* == 0 || m_rotation.x <= 90*/) { rot.x = m_rotation.x += mouseMovePos.y * val * fval; };
+	if (m_rotation.y/* == 0 || m_rotation.y <= 90*/) { rot.y = m_rotation.y += mouseMovePos.x * val * fval; };
+	//rot.x = m_rotation.x += mouseMovePos.y * val * fval;
+	//rot.y = m_rotation.y += mouseMovePos.x * val * fval;
+}
+
+
+
+void Sprite::SetMoveSpeed(float speed)
+{
+	moveSpeed = speed;
+}
+
+float Sprite::GetMoveSpeed()
+{
+	return moveSpeed;
+}
+
+DirectX::XMFLOAT3 Sprite::GetRight()
+{
+	return right;
+}
+
+
+
 void Sprite::Draw(void)
 {
 	UINT strides = sizeof(VERTEX);
@@ -192,7 +246,3 @@ Sprite::~Sprite(void)
 {
 	delete m_anime;
 }
-
-
-
-

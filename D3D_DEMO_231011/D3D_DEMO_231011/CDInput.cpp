@@ -158,3 +158,12 @@ bool CdInput::GetMouseTrigger(int key)
 	}
 }
 
+POINT CdInput::GetMouseMove()
+{
+	POINT pt;
+	pt.x = mMouseState.lX;
+	pt.y = mMouseState.lY;
+	return pt;
+}
+
+

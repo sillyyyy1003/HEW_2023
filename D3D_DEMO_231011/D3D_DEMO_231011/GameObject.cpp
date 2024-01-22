@@ -53,22 +53,10 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 	return shadowPosition;
 }
 
-void GameObject::SetLightPos(DirectX::XMFLOAT3 _lightPos)
-{
-	m_lightPos = _lightPos;
-}
-
-
-void GameObject::Update(void)
-{
-	//ここで入力操作
-
+void GameObject::Update(DirectX::XMFLOAT3 lightPos)
+{	
+	//オブジェクト情報更新
 	
-	
-	
-	
-	//オブジェクトと影の更新
-
 	
 
 	//影

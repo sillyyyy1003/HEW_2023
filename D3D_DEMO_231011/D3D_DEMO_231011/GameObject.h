@@ -52,6 +52,14 @@ public:
 	HORIZON_POS m_horPos = HORIZON_POS::IDLE;
 
 
+
+
+	//光があるかどうか
+	bool isLit = false;
+
+
+
+	
 public:
 	//コンストラクタ
 	GameObject();

@@ -1,4 +1,4 @@
-#include "DebugManager.h"
+ï»¿#include "DebugManager.h"
 #include "Assets.h"
 #include <stdio.h>
 
@@ -6,9 +6,9 @@
 DebugManager::DebugManager()
 {
 	for (auto& pASCII : m_debugASCII) {
-		//‰Šú‰»
+		//åˆæœŸåŒ–
 		pASCII = new CanvasUI();
-		//ƒ‚ƒfƒ‹ì¬
+		//ãƒ¢ãƒ‡ãƒ«ä½œæˆ
 		pASCII->CreateModel(Assets::debugFont,20.0f, 20.0f, 12, 8);
 	}
 }
@@ -25,23 +25,23 @@ void DebugManager::UpdateChar(char* outputChar)
 {
 	for (int i = 0; i < strlen(outputChar); i++) 
 	{
-		//•¶š‚Ì‰¡”Ô–Ú‚ğæ“¾ SPACE ASCII->32
+		//æ–‡å­—ã®æ¨ªç•ªç›®ã‚’å–å¾— SPACE ASCII->32
 		int frameX = ((int)outputChar[i] - 32) % 12;
-		//ƒIƒuƒWƒFƒNƒg‚ÉƒZƒbƒg‚·‚é
+		//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚»ãƒƒãƒˆã™ã‚‹
 		m_debugASCII[i]->m_anime->SetFrameX(frameX);
 
-		//•¶š‚Ìc”Ô–Ú‚ğæ“¾
+		//æ–‡å­—ã®ç¸¦ç•ªç›®ã‚’å–å¾—
 		int frameY = ((int)outputChar[i] - 32) / 12;
 		m_debugASCII[i]->m_anime->SetAnimePattern(frameY);
 
-		//•¶š‚ÌˆÊ’u‚ğİ’è‚·‚é
+		//æ–‡å­—ã®ä½ç½®ã‚’è¨­å®šã™ã‚‹
 		float posX = 20.0f / SCREEN_PARA * i;
 		m_debugASCII[i]->InitPos(m_sPosX + posX, m_sPosY, 0.1);
 
-		//UVOFFSETXV
+		//UVOFFSETæ›´æ–°
 		m_debugASCII[i]->m_anime->Update();
 
-		//•`‰æ
+		//æç”»
 		m_debugASCII[i]->Draw();
 
 	}
@@ -58,34 +58,34 @@ void DebugManager::SetPosition(float posX, float posY)
 
 void DebugManager::PrintDebugLog(float _posX, float _posY, const char* word)
 {
-	//•¶š—ñ‚É“]Š·
+	//æ–‡å­—åˆ—ã«è»¢æ›
 	char str[256];
 	snprintf(str, 255, "%s", word);
-	//ƒXƒ^[ƒgˆÊ’u‚ğİ’è
+	//ã‚¹ã‚¿ãƒ¼ãƒˆä½ç½®ã‚’è¨­å®š
 	SetPosition(_posX, _posY);
-	//XV‚Æ•`‰æ
+	//æ›´æ–°ã¨æç”»
 	UpdateChar(str);
 }
 
 void DebugManager::PrintDebugLog(float _posX, float _posY, const float _num)
 {
-	//•¶š—ñ‚É“]Š·
+	//æ–‡å­—åˆ—ã«è»¢æ›
 	char str[32];
 	snprintf(str, 31, "%f", _num);
-	//ƒXƒ^[ƒgˆÊ’u‚ğİ’è
+	//ã‚¹ã‚¿ãƒ¼ãƒˆä½ç½®ã‚’è¨­å®š
 	SetPosition(_posX, _posY);
-	//XV‚Æ•`‰æ
+	//æ›´æ–°ã¨æç”»
 	UpdateChar(str);
 }
 
 void DebugManager::PrintDebugLog(float _posX, float _posY, const int _num)
 {
-	//•¶š—ñ‚É“]Š·
+	//æ–‡å­—åˆ—ã«è»¢æ›
 	char str[32];
 	snprintf(str, 31, "%d", _num);
-	//ƒXƒ^[ƒgˆÊ’u‚ğİ’è
+	//ã‚¹ã‚¿ãƒ¼ãƒˆä½ç½®ã‚’è¨­å®š
 	SetPosition(_posX, _posY);
-	//XV‚Æ•`‰æ
+	//æ›´æ–°ã¨æç”»
 	UpdateChar(str);
 }
 

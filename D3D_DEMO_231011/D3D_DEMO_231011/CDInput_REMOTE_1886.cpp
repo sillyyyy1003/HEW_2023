@@ -1,0 +1,168 @@
+#include "CDInput.h"
+
+#pragma comment(lib, "dinput8.lib")
+#pragma comment(lib, "dxguid.lib")
+
+CdInput::~CdInput()
+{
+	if (mDevMouse != nullptr)
+	{
+		mDevMouse->Release();
+		mDevMouse = nullptr;
+	}
+	if (mDevKeyboad != nullptr)
+	{
+		mDevKeyboad->Release();
+		mDevKeyboad = nullptr;
+	}
+	if (mDInput != nullptr)
+	{
+		mDInput->Release();
+		mDInput = nullptr;
+	}
+}
+
+CdInput* CdInput::Get()
+{
+    static CdInput instance;
+    return &instance;
+}
+
+void CdInput::Initialize(HWND hWnd, HINSTANCE hInstance)
+{
+	HRESULT	hr;
+	hr = DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&mDInput, NULL);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	// キーボードデバイス生成
+	mDInput->CreateDevice(GUID_SysKeyboard, &mDevKeyboad, NULL);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	// データフォーマットの設定
+	hr = mDevKeyboad->SetDataFormat(&c_dfDIKeyboard);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	// 協調レベルの設定
+	hr = mDevKeyboad->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	// マウスデバイス生成
+	mDInput->CreateDevice(GUID_SysMouse, &mDevMouse, NULL);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	// データフォーマットの設定
+	hr = mDevMouse->SetDataFormat(&c_dfDIMouse2);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	// 協調レベルの設定
+	hr = mDevMouse->SetCooperativeLevel(hWnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	if (FAILED(hr)) {
+		return;
+	}
+
+	mDevKeyboad->Acquire();
+	mDevMouse->Acquire();
+}
+
+void CdInput::Update()
+{
+	// １フレーム前のデータを保存
+	memcpy_s(mOldKeyBuffer, sizeof(mOldKeyBuffer), mKeyBuffer, sizeof(mKeyBuffer));
+
+	HRESULT hr;
+
+	hr = mDevKeyboad->GetDeviceState(sizeof(mKeyBuffer), &mKeyBuffer);
+
+	if (FAILED(hr))
+	{
+		mDevKeyboad->Acquire();
+		mDevKeyboad->GetDeviceState(sizeof(mKeyBuffer), &mKeyBuffer);
+	}
+
+	mOldMouseState = mMouseState;
+
+	hr = mDevMouse->GetDeviceState(sizeof(mMouseState), &mMouseState);
+
+	if (FAILED(hr))
+	{
+		mDevMouse->Acquire();
+		mDevMouse->GetDeviceState(sizeof(mMouseState), &mMouseState);
+	}
+}
+
+void CdInput::SetKeyDownState(int key)
+{
+	mKeyBuffer[key] = true;
+}
+
+void CdInput::SetKeyUpState(int key)
+{
+	mKeyBuffer[key] = false;
+}
+
+void CdInput::SetMouseDownState(int key)
+{
+	mMouseState.rgbButtons[key] = true;
+}
+
+void CdInput::SetMouseUpState(int key)
+{
+	mMouseState.rgbButtons[key] = false;
+}
+
+bool CdInput::GetKeyPress(int key)
+{
+	return (mKeyBuffer[key] & 0x80) != 0;
+}
+
+
+bool CdInput::GetKeyTrigger(int key)
+{
+	if ((mOldKeyBuffer[key] & 0x80) == 0 && (mKeyBuffer[key] & 0x80) != 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool CdInput::GetMousePress(int key)
+{
+	return (mMouseState.rgbButtons[key] & 0x80) != 0;
+}
+
+bool CdInput::GetMouseTrigger(int key)
+{
+	if ((mOldMouseState.rgbButtons[key] & 0x80) == 0 && (mMouseState.rgbButtons[key] & 0x80) != 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+POINT CdInput::GetMouseMove()
+{
+	POINT pt;
+	pt.x = mMouseState.lX;
+	pt.y = mMouseState.lY;
+	return pt;
+}
+
+
