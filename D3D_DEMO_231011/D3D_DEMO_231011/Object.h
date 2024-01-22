@@ -12,7 +12,7 @@ public:
 	//図形情報を扱う
 	Sprite* m_sprite;
 
-	Collider* m_collider = nullptr;
+	//Collider* m_collider = nullptr;
 
 public:
 	

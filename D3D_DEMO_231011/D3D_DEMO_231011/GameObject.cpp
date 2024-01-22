@@ -21,7 +21,6 @@ void GameObject::CreateObject(ID3D11ShaderResourceView* texture, float _width, f
 
 void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	/*m_shadow->CreateShadow(texture, _width, _height, splitX, splitY);*/
 	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
 }
 
@@ -69,45 +68,52 @@ void GameObject::Update(void)
 	
 	
 	//オブジェクトと影の更新
+
 	
 
+	//影
+	//位置を更新
 	m_shadow->m_sprite->m_pos = GenerateShadowPos(m_lightPos);
+	//大きさを更新
 	
 	
 	
-	
-	//本体更新した後
-	if (m_obj->m_collider != nullptr) {
-		
-		//ここで具体的なCollisionのセンターやスケールを更新する
-		UpdateObjectColliderData();
+	////本体更新した後
+	//if (m_obj->m_collider != nullptr) {
+	//	
+	//	//ここで具体的なCollisionのセンターやスケールを更新する
+	//	UpdateObjectColliderData();
 
-	}
+	//}
 
-	//影更新した後
-	if (m_shadow->m_collider != nullptr) {
-		
-		//ここで具体的なCollisionのセンターやスケールを更新する
-		UpdateShadowColliderData();
+	////影更新した後
+	//if (m_shadow->m_collider != nullptr) {
+	//	
+	//	//ここで具体的なCollisionのセンターやスケールを更新する
+	//	UpdateShadowColliderData();
 
-	}
+	//}
 
 	
 
 	//オブジェクト本体
 	m_obj->Update();
+
 	//影
 	m_obj->Update();
 }
 
 void GameObject::UpdateObjectColliderData(void)
 {
-	////dynamic_castを使って、コライダーのデータを更新する
+	//dynamic_castを使って、コライダーのデータを更新する
+	
 	//switch (m_obj->m_collider->GetColliderType()) {
 	//case SPHERE:
-	//	//Object
-	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_center = { 0.0f,0.0f,0.0f };
-	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_radius = 1.0f;
+	//	//位置と半径をリアルタイムで更新する
+	//	//dynamic_cast<SphereCollider*>(m_objCollider)->m_center = { 0.0f,0.0f,0.0f };
+	//	//dynamic_cast<SphereCollider*>(m_objCollider)->m_radius = 1.0f;
+	// //更新したデータを本体のColliderに更新する
+	// m_objCollider->Update();
 	//	break;
 
 	//case POLYGON:
@@ -131,12 +137,18 @@ void GameObject::UpdateObjectColliderData(void)
 
 void GameObject::UpdateShadowColliderData(void)
 {
-	////dynamic_castを使って、コライダーのデータを更新する
+	//dynamic_castを使って、コライダーのデータを更新する
+	
 	//switch (m_shadow->m_collider->GetColliderType()) {
 	//case SPHERE:
-	//	//Object
-	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_center = { 0.0f,0.0f,0.0f };
-	//	//dynamic_cast<SphereCollider*>(m_obj->m_collider)->m_radius = 1.0f;
+	
+	//	
+	//	//dynamic_cast<SphereCollider*>(m_shadowCollider)->m_center = { 0.0f,0.0f,0.0f };
+	//	//dynamic_cast<SphereCollider*>(m_shadowCollider)->m_radius = 1.0f;
+	
+	
+	////更新したデータを本体のColliderに更新する
+	// 	m_shadowCollider->Update();
 	//	break;
 
 	//case POLYGON:

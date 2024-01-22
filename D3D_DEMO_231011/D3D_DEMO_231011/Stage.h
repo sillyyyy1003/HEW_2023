@@ -24,7 +24,6 @@ private:
 	bool isClear = false;
 	
 	//Reward Gold
-	//float m_gold=0;
 	float m_rewardGold = 0;
 	 
 	//ˆÚ“®‚Ì”

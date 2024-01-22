@@ -33,12 +33,6 @@ struct CONSTBUFFER
 /// </summary>
 class Sprite :public Material
 {
-private:
-
-	//スプライトの名前を設定、エラーチェックに使う
-
-protected:
-
 
 public:
 	//----------------------------//

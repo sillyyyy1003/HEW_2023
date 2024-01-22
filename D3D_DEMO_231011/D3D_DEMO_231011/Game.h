@@ -12,15 +12,11 @@ class SceneManager;
 class Game
 {
 
-//ここからの部分はテスト用
 private:
 
-	DirectX::XMFLOAT3 m_lightPos = { 0.0f,0.0f,-2.0f };//光の位置を扱る変数
-	DirectX::XMFLOAT3 m_cameraPos = { 0.0f, 0.0f, -7.0f };
-	DirectX::XMFLOAT3 m_focusPos = { 0.0,0.0,2.0f };
-	float m_distance = 10.0f;
 
 public:
+
 
 	
 private:
@@ -32,15 +28,64 @@ public:
 	//唯一のインスタンスを返す関数
 	static Game* Get();
 
-	//初期化を行う関数
+	//初期化を行う関数 
 	void Init();
+
+	void InitStage();
+	//ステージの初期化を行う関数
+	void InitStage1_1(void);
+	void InitStage1_2(void);
+	void InitStage1_3(void);
+	void InitStage2_1(void);
+	void InitStage2_2(void);
+	void InitStage2_3(void);
+	void InitStage3_1(void);
+	void InitStage3_2(void);
+	void InitStage3_3(void);
 
 	//ゲーム本体
 	void GameUpdate(void);
 	void TitleUpdate(void);
-	void StageUpdate(void);
-	void ResultUpdate(void);
 
+	//STAGEUPDATE
+	void UpdateStage1_1(void);
+	void UpdateStage1_2(void);
+	void UpdateStage1_3(void);
+	void UpdateStage2_1(void);
+	void UpdateStage2_2(void);
+	void UpdateStage2_3(void);
+	void UpdateStage3_1(void);
+	void UpdateStage3_2(void);
+	void UpdateStage3_3(void);
+
+	//result Update
+
+
+	//ui Update
+
+
+
+	//描画
+	void GameDraw(void);
+	void TitleDraw(void);
+	//ステージ描画
+	void DrawStage1_1();
+	void DrawStage1_2();
+	void DrawStage1_3();
+	void DrawStage2_1();
+	void DrawStage2_2();
+	void DrawStage2_3();
+	void DrawStage3_1();
+	void DrawStage3_2();
+	void DrawStage3_3();
+	
+	//リザルト描画
+	void ResultDraw(void);
+
+	//うい描画
+
+
+	/*
 	//テスト用
 	void TestUpdate(void);
 	void TestDraw(void);
@@ -50,16 +95,8 @@ public:
 	void TestMoveCamera();
 
 
-	//描画
-	void GameDraw(void);
-	void TitleDraw(void);
-	void StageDraw(void);
-	void ResultDraw(void);
-
-	
 	//シーンを設定する
 	//void SetGameScene(GAMESCENE scene);
-
-	
+	*/
 };
 

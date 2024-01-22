@@ -20,7 +20,7 @@ public:
 
 	BoxCollider();
 
-	void InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents, COLLISION_TYPE _type);
+	void InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents);
 
 	void UpdateExtents();
 

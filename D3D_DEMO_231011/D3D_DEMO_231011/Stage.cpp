@@ -6,7 +6,7 @@ void Stage::Init(void)
 	isClear = false;
 
 	//ご褒美の金額をリセット
-	//m_rewardGold=0;
+	m_rewardGold=0;
 
 	//移動数をリセットする
 	m_moveStep = 0;

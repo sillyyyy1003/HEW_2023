@@ -25,12 +25,7 @@ void Object::Update(void)
 {
 	//アニメーション更新
 	m_sprite->m_anime->Update();
-	
-	if (m_collider != nullptr) {
 
-		//コライダーの位置と大きさ更新
-		m_collider->Update();
-	}
 
 }
 
@@ -42,5 +37,5 @@ void Object::Draw(void)
 Object::~Object(void)
 {
 	delete m_sprite;
-	delete m_collider;
+	//delete m_collider;
 }
