@@ -86,6 +86,8 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
+    <ClCompile Include="SatCollider.cpp" />
+    <ClCompile Include="PolygonCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShadowObject.h" />
@@ -170,6 +172,8 @@
     <ClInclude Include="Sprite.h">
       <Filter>BaseObject</Filter>
     </ClInclude>
+    <ClInclude Include="SatCollider.h" />
+    <ClInclude Include="PolygonCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">
