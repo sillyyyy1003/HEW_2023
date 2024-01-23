@@ -53,7 +53,7 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 	return shadowPosition;
 }
 
-void GameObject::Update(DirectX::XMFLOAT3 lightPos)
+void GameObject::Update()
 {	
 	//オブジェクト情報更新
 	

@@ -3,6 +3,8 @@
 #include "Assets.h"
 #include "DInput.h"
 
+#define VIEWANGLE	 (54.43)
+
 extern Assets* g_Assets;
 
 Sprite::Sprite(void)
@@ -97,7 +99,7 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 		//カメラの行列作成
 		matrixView = m_camera->GetMatrixView();
 		//透視投影の行列作成
-		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(90), RATIO_W / RATIO_H, 0.01f, 100.0f);
+		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(54.43), RATIO_W / RATIO_H, 0.01f, 100.0f);
 	
 	}
 	else {//カメラを使わない→uiなどに使われている
@@ -143,8 +145,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	m_pos.y += right.y * moveSpeed;
 	m_pos.z += right.z * moveSpeed;
 
-
-
 	//UVアニメーション行列作成
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 
@@ -156,34 +156,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	//マテリアル色を定数バッファデータに代入
 	cb.materialDiffuse = m_materialDiffuse;
 
-	
-	/*
-	//ワールド変換行列の作成
-	//移動行列
-	XMMATRIX matrixMove = XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
-	//拡大縮小行列
-	XMMATRIX matrixScale = XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
-
-	//回転行列
-	XMMATRIX matrixRotateX = XMMatrixRotationX(XMConvertToRadians(m_rotation.x));
-	XMMATRIX matrixRotateY = XMMatrixRotationY(XMConvertToRadians(m_rotation.y));
-	XMMATRIX matrixRotateZ = XMMatrixRotationZ(XMConvertToRadians(m_rotation.z));
-	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
-	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
-	
-	matrixWorld = matrixWorld * matrixView * matrixProj;
-
-	//UVアニメーション行列作成
-	XMMATRIX matrixUV = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
-
-
-	cb.matrixRotate = XMMatrixTranspose(matrixRotate);
-	cb.matrixUV = XMMatrixTranspose(matrixUV);
-	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
-
-	//マテリアル色を定数バッファデータに代入
-	cb.materialDiffuse = m_materialDiffuse;
-*/
 }
 
 void Sprite::RotateObj(XMFLOAT3& rot)

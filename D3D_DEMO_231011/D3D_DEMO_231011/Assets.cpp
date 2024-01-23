@@ -7,40 +7,40 @@ Assets::Assets()
 {
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
-
-    testObj = LoadTexture("assets/Tree.png");
-    testShadow = LoadTexture("assets/treeshadow.png");
-
-    //testWallbg = LoadTexture("assets/wallbg.png");
     testPause= LoadTexture("assets/pause.png");
-    testWallbg = LoadTexture("assets/img/testGround.jpg");
-    testGroundbg = LoadTexture("assets/groundbg.png");
-    testChara01 = LoadTexture("assets/char01.png");
-
-    //testWall = LoadTexture("assets/img/testGround.jpg");
-    testWall = LoadTexture("assets/img/Background.png");
-    testGround = LoadTexture("assets/img/Ground.png");
-    testSideBg = LoadTexture("assets/sideBg.png");
-
     debugFont = LoadTexture("assets/img/ASCIILib.png");
+
+    uiTitle = LoadTexture("assets/title/uiTitle.png");
+    uiTitleBg = LoadTexture("assets/title/titleBg.png");
+    uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
+
+    stageBg = LoadTexture("assets/bg2d.jpg");
+
+    uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
+    uiResume = LoadTexture("assets/ui/resume.png");
+    uiRestart = LoadTexture("assets/ui/restart.png");
 
 }
 
 Assets::~Assets()
 {
-   SAFE_RELEASE(testObj);
-   SAFE_RELEASE(testShadow);
+    //title
+    SAFE_RELEASE(uiTitleBg);
+    SAFE_RELEASE(uiTitle);
+    SAFE_RELEASE(uiPressEnter);
 
-   SAFE_RELEASE(testWallbg);
-   SAFE_RELEASE(testPause);
-   SAFE_RELEASE(testGroundbg);	
-   SAFE_RELEASE(testChara01);	
+    //stage
+    SAFE_RELEASE(stageBg);
 
-   SAFE_RELEASE(testWall);
-   SAFE_RELEASE(testGround);
-   SAFE_RELEASE(testSideBg);
+    //ui
    
-   SAFE_RELEASE(debugFont);
+    SAFE_RELEASE(uiPauseBg);
+    SAFE_RELEASE(uiResume);
+    SAFE_RELEASE(uiRestart);
+
+
+    SAFE_RELEASE(testPause);
+    SAFE_RELEASE(debugFont);
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)

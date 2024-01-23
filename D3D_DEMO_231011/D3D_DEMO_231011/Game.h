@@ -8,19 +8,31 @@ class StaticObject;
 class CanvasUI;
 class Stage;
 class SceneManager;
+class Object;
 
 class Game
 {
 
 private:
-	Object* testWall;
-	Object* testGround;
-	Object* testChara;	//プレイヤー
-	Object* testPause; //ポーズ画面
+	
+	//ここでGameObject追加する
+	CanvasUI*	uiTitle;		//タイトル文字
+	CanvasUI*	uiTitleBg;		//タイトル背景
+	CanvasUI*	uiPressEnter;	//タイトルエンターキー
 
-	GameObject* testTree;	//木
-	CanvasUI* uitest;
+	StaticObject* stageBg;		//ステージ背景
+	
 
+	CanvasUI*	uiPauseBg;		//PAUSEの背景
+	CanvasUI*	uiResume;		//PAUSEのボタン
+	CanvasUI*	uiRestart;	//ステージのボタン
+
+	GameObject* circle;			//circle
+
+
+private:
+	
+	//PAUSE
 	bool isPause = false;
 
 private:
@@ -32,11 +44,14 @@ public:
 	//唯一のインスタンスを返す関数
 	static Game* Get();
 
+
+
 	//初期化を行う関数 
-	void Init();
+	void Init();//
 
 	void InitStage();
-	//ステージの初期化を行う関数
+
+	//ステージの初期化を行う関数：キャラの位置、大きさなど
 	void InitStage1_1(void);
 	void InitStage1_2(void);
 	void InitStage1_3(void);
@@ -49,9 +64,15 @@ public:
 
 	//ゲーム本体
 	void GameUpdate(void);
+
+	//Title Update
 	void TitleUpdate(void);
 
-	//STAGEUPDATE
+	//Select Update
+	void SelectUpdate(void);
+
+	//Stage Update
+	void StageUpdate(void);
 	void UpdateStage1_1(void);
 	void UpdateStage1_2(void);
 	void UpdateStage1_3(void);
@@ -66,12 +87,17 @@ public:
 
 
 	//ui Update
-
+	void UiUpdate();
 
 
 	//描画
 	void GameDraw(void);
+
+	//タイトル描画
 	void TitleDraw(void);
+
+	void StageDraw(void);
+
 	//ステージ描画
 	void DrawStage1_1();
 	void DrawStage1_2();
@@ -86,9 +112,9 @@ public:
 	//リザルト描画
 	void ResultDraw(void);
 
-	//うい描画
+	//ui描画
 
-
+	void UiDraw(void);
 	/*
 	//テスト用
 	void TestUpdate(void);

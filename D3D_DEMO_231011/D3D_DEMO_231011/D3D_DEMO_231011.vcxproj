@@ -152,11 +152,7 @@
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="SceneManager.cpp" />
-=======
-    <ClCompile Include="StageManager.cpp" />
->>>>>>> feature/Sakamoto
     <ClCompile Include="StaticAnimation.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="TrackCamera.cpp" />
@@ -187,11 +183,7 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
-<<<<<<< HEAD
     <ClInclude Include="SceneManager.h" />
-=======
-    <ClInclude Include="StageManager.h" />
->>>>>>> feature/Sakamoto
     <ClInclude Include="StaticAnimation.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />

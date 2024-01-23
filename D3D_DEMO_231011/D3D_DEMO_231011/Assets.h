@@ -12,19 +12,26 @@ public:
 	//----------------------------//
 	
 	//================//テスト用//================//
-	ID3D11ShaderResourceView* testObj;		//オブジェクト用テクスチャ(木）
-	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ(木の影)
 
-	ID3D11ShaderResourceView* testWallbg;	//壁用テクスチャ
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
-	ID3D11ShaderResourceView* testGroundbg;	//地面用テクスチャ
-	ID3D11ShaderResourceView* testWall;		//大きい壁
-	ID3D11ShaderResourceView* testGround;	//大きい地面
-
-	ID3D11ShaderResourceView* testChara01;	//キャラ用テクスチャ
-	ID3D11ShaderResourceView* testSideBg;	//両端の背景用テクスチャ
-	
+	ID3D11ShaderResourceView* circle;
+	ID3D11ShaderResourceView* square;
+	ID3D11ShaderResourceView* triangle;
 	//================//テスト用//================//
+
+	//タイトル用のリソース
+	ID3D11ShaderResourceView* uiTitleBg;	
+	ID3D11ShaderResourceView* uiTitle;
+	ID3D11ShaderResourceView* uiPressEnter;
+
+	ID3D11ShaderResourceView* stageBg;
+
+	ID3D11ShaderResourceView* uiPauseBg;
+	ID3D11ShaderResourceView* uiResume;
+	ID3D11ShaderResourceView* uiRestart;
+
+
+
 
 
 

@@ -8,6 +8,7 @@
 #include "StaticObject.h"
 
 #include "DebugManager.h"
+#include "SceneManager.h"
 
 #include "Animation.h"
 #include "StaticAnimation.h"
@@ -16,70 +17,47 @@
 #include "DInput.h"
 #include <stdio.h>
 
-#include "SceneManager.h"
+#define INITROTATE	(19.8)
 
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
 
 
+
+
 void Game::Init()
 {
 	//オブジェクト作成
-	testWall = new Object(g_Assets->testWallbg, 1280, 720, 1, 1);
-	testGround = new Object(g_Assets->testGroundbg, 1280, 720, 1, 1);
-	testWall->m_sprite->m_scale = { 1.0, 1.0, 1.0 };
+	uiTitle = new CanvasUI();
+	uiTitleBg = new CanvasUI();
+	uiPressEnter = new CanvasUI();
+	uiRestart = new CanvasUI();
+	uiResume = new CanvasUI();
+	uiPauseBg = new CanvasUI();
 
-	testPause = new Object(g_Assets->testPause, 1280, 720, 1, 1);
-	testPause->m_sprite->m_scale = { 1.0, 1.0, 1.0 };
 
+	stageBg = new StaticObject();
+	circle = new GameObject();
 
-	//オブジェクトの初期設定・テクスチャの読み込み
-	testChara = new Object(g_Assets->testChara01, 32, 32, 3, 4);
+	//テクスチャ読み込み・モデル作成
+	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
+	uiTitleBg->CreateModel(g_Assets->uiTitleBg, 1280, 720, 1, 1);
+	uiPressEnter->CreateModel(g_Assets->uiPressEnter, 1280, 300, 1, 1);
+
+	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 600, 720, 1, 1);
+
 	
-	testTree = new GameObject();
-	testTree->CreateObject(g_Assets->testObj, 300, 300, 1, 1);
-	testTree->CreateShadow(g_Assets->testShadow, 300, 300, 1, 1);
-
-	uitest = new CanvasUI();
-	uitest->CreateModel(g_Assets->testPause, 128, 72, 1, 1);
-
-	uitest->m_pos.z = 2.0f;
-	
-	//影の初期設定
-
-
+	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
 
 	//アニメーションの設定
-	testWall->m_sprite->m_anime = new StaticAnimation(1, 1);
-	testPause->m_sprite->m_anime = new StaticAnimation(1, 1);// 追加
-	testGround->m_sprite->m_anime = new ObjectAnimation(1, 1);
-	testChara->m_sprite->m_anime = new ObjectAnimation(3, 4);
-	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
-	
-
-	testTree->m_obj->m_anime = new StaticAnimation(1, 1);
-	testTree->m_shadow->m_obj->m_anime = new StaticAnimation(1, 1);
-
 
 
 	//初期位置設定
-	testWall->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
-	testWall->m_sprite->m_scale = { 0.3f,0.3f,0.3f };
 
-	testPause->m_sprite->m_pos = { 0.0f, 1.5f, -2.0f };
-	testPause->m_sprite->m_scale = { 0.3f,0.3f,0.3f };
-
-	testGround->m_sprite->m_pos = { 0.0f, 1.5f, 2.0f };
-	testGround->m_sprite->m_rotation.x = 90;
-	testGround->m_sprite->m_pos.y = -360 / SCREEN_PARA + 1.5f;
-
-	testChara->m_sprite->m_pos.y = (-360 + 96) / SCREEN_PARA + 1.5f;
-	testChara->m_sprite->m_pos.z = -0.5f;
-	testChara->m_sprite->m_scale = { 3.0f,3.0f,3.0f };
 
 	//影の位置設定
-	testTree->m_shadow->m_obj->m_pos.z = 1.99f;
+
 
 	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
@@ -93,12 +71,28 @@ void Game::Init()
 	// ここからはシーンの初期化
 	//----------------------------//
 	
+	//Title の初期化
+	//位置設定
+	uiTitleBg->m_pos = { 0.0f,0.0f,0.2f };
+	uiTitle->m_pos = { 0.0f,1.5f,0.1f };
+	uiPressEnter->m_pos = { 0.0f,-1.5f,0.0f };
+
+	//大きさの設定
+	uiTitle->m_scale = { 0.8,0.8,1.0 };
+	uiPressEnter->m_scale = { 0.3,0.3,1.0 };
+	
+
+	//uiPause
+	uiPauseBg->m_pos={ - 300 / SCREEN_PARA, 0.0, 0.9f };
+
+	SceneManager::Get()->SetScene(SCENENAME::TITLE);
+	
 }
 
 void Game::InitStage()
 {
 	//ステージの初期化
-	switch (SceneManager::Get()->GetScene()) {
+	switch (SceneManager::Get()->GetStage()) {
 
 	case STAGE1_1:
 
@@ -156,44 +150,91 @@ void Game::InitStage()
 	}
 }
 
-void Game::TitleUpdate(void)
-{	
+void Game::InitStage1_1(void)
+{
+	//位置設定
+	stageBg->m_sprite->m_rotation.x = 19.8;
 
-	if (isPause == false)
-	{
-		testTree->Update(testChara->m_sprite->m_pos);
-
-		testChara->Update();
-		testPause->Update();
-		testWall->Update();
-		uitest->Update();
+	stageBg->m_sprite->m_scale = { 2.6,2.6,1.0 };
 	
+	
+	//大きさ設定
 
 
-	if (Input::Get()->GetKeyPress(DIK_UPARROW)) {
-		testChara->m_sprite->m_pos.z += 0.1f;
-		//testChara->m_sprite->m_rotation.x += 0.8f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_LEFTARROW)) {
-		testChara->m_sprite->m_pos.x -= 0.1f;
-		//testChara->m_sprite->m_rotation.x -= 0.8f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW)) {
-		testChara->m_sprite->m_pos.x += 0.1f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW)) {
-		testChara->m_sprite->m_pos.z -= 0.1f;
-	}
+	//回転設定
 
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-		/*testChara->m_sprite->m_pos.x += 0.1f;*/
-		testChara->m_sprite->SetMoveSpeed(0.05f);// 今後STOPできるようにする
-	}
 }
 
-	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
-	{
-		if (isPause)
+void Game::InitStage1_2(void)
+{
+}
+
+void Game::InitStage1_3(void)
+{
+}
+
+void Game::InitStage2_1(void)
+{
+}
+
+void Game::InitStage2_2(void)
+{
+}
+
+void Game::InitStage2_3(void)
+{
+}
+
+void Game::InitStage3_1(void)
+{
+}
+
+void Game::InitStage3_2(void)
+{
+}
+
+void Game::InitStage3_3(void)
+{
+}
+
+void Game::TitleUpdate(void)
+{	
+	//エンターキーを押すと　ステージセレクト画面に遷移
+	if (Input::Get()->GetKeyTrigger(DIK_RETURN)) {
+
+		//SceneManager::Get()->SetScene(STAGESELECT);
+
+		//Init SelectScene Data
+		
+		//シーン遷移を行う
+		SceneManager::Get()->SetScene(SCENENAME::STAGE);
+
+		//次のシーンを設定する
+		SceneManager::Get()->SetNextScene(SCENENAME::STAGE);
+
+
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE1_1);
+		
+		//ステージ内のオブジェクトを配置
+		InitStage();
+
+	}
+
+	uiPressEnter->Update();
+	uiTitle->Update();
+	uiTitleBg->Update();
+
+}
+
+void Game::SelectUpdate(void)
+{
+}
+
+void Game::StageUpdate(void)
+{
+	//Input
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
+		if (isPause) 
 		{
 			isPause = false;
 		}
@@ -204,20 +245,103 @@ void Game::TitleUpdate(void)
 	}
 
 
-	//マウスでキャラを回転テスト
-	//testChara->m_sprite->RotateObj(testChara->m_sprite->m_rotation);
-	
+	if (!isPause) {
+		switch (SceneManager::Get()->GetStage()) {
 
-	
+		case STAGE1_1:
 
-	//背景
-	testGround->Update();
-	
+			UpdateStage1_1();
 
+			break;
 
-
+		case STAGE1_2:
 
 
+			break;
+
+		case STAGE1_3:
+
+
+			break;
+
+		case STAGE2_1:
+
+
+			break;
+
+		case STAGE2_2:
+
+
+
+			break;
+
+		case STAGE2_3:
+
+
+
+			break;
+
+		case STAGE3_1:
+
+
+
+			break;
+		case STAGE3_2:
+
+
+
+			break;
+
+		case STAGE3_3:
+
+
+
+			break;
+
+		}
+
+	}
+	else {
+		UiUpdate();
+	}
+
+}
+
+void Game::UpdateStage1_1(void)
+{
+	stageBg->Update();
+}
+
+void Game::UpdateStage1_2(void)
+{
+}
+
+void Game::UpdateStage1_3(void)
+{
+}
+
+void Game::UpdateStage2_1(void)
+{
+}
+
+void Game::UpdateStage2_2(void)
+{
+}
+
+void Game::UpdateStage2_3(void)
+{
+}
+
+void Game::UpdateStage3_1(void)
+{
+}
+
+void Game::UpdateStage3_2(void)
+{
+}
+
+void Game::UpdateStage3_3(void)
+{
 }
 
 void Game::GameUpdate(void)
@@ -226,18 +350,40 @@ void Game::GameUpdate(void)
 
 	//オブジェクトUpdate
 
+	switch (SceneManager::Get()->GetScene()) {
+	case SCENENAME::TITLE:
+		TitleUpdate();
+		break;
+
+	case SCENENAME::STAGESELECT:
+		SelectUpdate();
+		break;
+
+	case SCENENAME::STAGE:
+		StageUpdate();
+		break;
+	}
+
 
 }
 
-void Game::TitleUpdate(void)
-{	
-	//プロトタイプ用
-	
-}
 
 
 Game::~Game()
 {
+	delete uiTitle;		//タイトル文字
+	delete uiTitleBg;		//タイトル背景
+	delete uiPressEnter;	//タイトルエンターキー
+
+	delete uiResume;
+	delete uiPauseBg;
+	delete uiRestart;	//ステージのボタン
+
+	delete stageBg;		//ステージ背景
+
+
+	//delete circle;			//circle
+
 
 
 }
@@ -248,6 +394,18 @@ Game* Game::Get()
 	return &instance;
 }
 
+void Game::UiUpdate()
+{
+	//入力操作
+
+
+
+	uiPauseBg->Update();
+	//uiRestart->Update();
+	//uiResume->Update();
+
+}
+
 void Game::GameDraw()
 {
 
@@ -255,9 +413,19 @@ void Game::GameDraw()
 
 	//============ ここから描画処理 ============//
 	
-	
+	switch (SceneManager::Get()->GetScene()) {
+	case SCENENAME::TITLE:
+		TitleDraw();
+		break;
 
-	
+	case SCENENAME::STAGE:
+		StageDraw();
+		break;
+
+	default:
+		break;
+	}
+
 
 	//============ ここまで描画処理 ============//
 	 
@@ -267,431 +435,99 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
+	uiTitleBg->Draw();
 
-	if (isPause)
-	{
+	uiTitle->Draw();
 
+	uiPressEnter->Draw();	
 
-		testTree->Draw();
-		testChara->Draw();
-		testChara->m_sprite->m_anime->SetAnimeSpeed(0.0f);
-		testPause->Draw();
-		return;
-	}
-	testChara->m_sprite->m_anime->SetAnimeSpeed(0.2f);
-	
-	//testWall->Draw();
-
-	//testWall->Draw();
-
-	//testGround->Draw();
-
-	testTree->Draw();
-
-	testChara->Draw();
-
-
+	//===================Debug=====================//
+	/*
 	//デバッグ表示 
 	//40->一文字の幅/高さの二倍
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
 	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
 	g_DebugManager->PrintDebugLog(posX, posY, testChara->m_sprite->m_pos.x);
-
-	
-
-
+	*/
 
 }
 
 void Game::StageDraw(void)
 {
+
+	switch (SceneManager::Get()->GetStage()) {
+
+	case STAGE1_1:
+
+		DrawStage1_1();
+
+		break;
+
+	case STAGE1_2:
+
+
+		break;
+
+	case STAGE1_3:
+
+
+		break;
+
+	case STAGE2_1:
+
+
+		break;
+
+	case STAGE2_2:
+
+
+
+		break;
+
+	case STAGE2_3:
+
+
+
+		break;
+
+	case STAGE3_1:
+
+
+
+		break;
+	case STAGE3_2:
+
+
+
+		break;
+
+	case STAGE3_3:
+
+
+
+		break;
+
+	}
+
+	if (isPause) {
+		UiDraw();
+	}
 }
+
+void Game::DrawStage1_1()
+{
+	stageBg->Draw();
+}
+
+
 
 void Game::ResultDraw(void)
 {
 }
 
-//void Game::SetGameScene(GAMESCENE scene)
-//{
-//	m_gameScene = scene;
-//}
-
-/*
-void Game::TestUpdate(void)
+void Game::UiDraw(void)
 {
-	/*
-	//tabキー押して　移動対象を変更
-	if (Input::Get()->GetKeyTrigger(DIK_TAB)) {
-
-		switch (m_moveTarget) {
-
-		case WALL:
-
-			m_moveTarget = GROUND;
-
-			break;
-
-		case GROUND:
-
-			m_moveTarget = LIGHT;
-
-
-			break;
-
-		case LIGHT:
-
-			m_moveTarget = OBJECT;
-
-			break;
-
-		case OBJECT:
-
-			m_moveTarget = CAMERA;
-
-			break;
-
-		case CAMERA:
-
-			m_moveTarget = WALL;
-
-			break;
-
-		default:
-
-			break;
-
-		}
-
-
-	}
-	/*
-	//位置更新
-	switch (m_moveTarget) {
-
-	case WALL:
-
-		TestMove(testWall);
-
-		//カメラの追跡ターゲットを設定する
-		if (Input::Get()->GetKeyTrigger(DIK_RETURN))
-			dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
-
-		break;
-
-	case GROUND:
-
-		//TestMove(testGround);
-		TestMove(testSide);
-		break;
-
-	case OBJECT:
-
-		TestMove(testTree);
-		//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testTree->m_obj);
-		break;
-
-	case LIGHT:
-
-		TestMove(testChara);
-		break;
-
-	case CAMERA:
-
-		dynamic_cast<TrackCamera*>(g_WorldCamera)->RomoveTarget();
-		//TestMove(m_cameraPos);
-		TestMoveCamera();
-		g_WorldCamera->SetCameraPos(m_cameraPos);
-		g_WorldCamera->SetFocusPos(m_focusPos);
-		dynamic_cast<TrackCamera*>(g_WorldCamera)->SetDistance(m_distance);
-		break;
-
-	default:
-
-		break;
-	}
-
-
-
+	uiPauseBg->Draw();
+	//uiResume->Draw();
+	//uiRestart->Draw();
 }
-
-void Game::TestDraw(void)
-{
-
-
-
-	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;//デバッグ表示の横座標設定
-	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;//デバッグ表示の縦座標設定
-
-
-	char targetName[16];	//移動対象の名前
-	DirectX::XMFLOAT3 targetPos = {};	//移動対象の位置
-	float targetRotate = 0.0f;		//移動対象の角度
-
-	/*
-	switch (m_moveTarget) {
-	case WALL:
-		strcpy_s(targetName, "WALL");
-		targetPos = testWall->m_sprite->m_pos;
-		targetRotate = testWall->m_sprite->m_rotation.x;
-		break;
-	case GROUND:
-		strcpy_s(targetName, "GROUND");
-		targetPos = testGround->m_sprite->m_pos;
-		targetRotate = testGround->m_sprite->m_rotation.x;
-		break;
-	case OBJECT:
-		strcpy_s(targetName, "OBJECT");
-		targetPos = testTree->m_obj->m_sprite->m_pos;
-		targetRotate = testTree->m_obj->m_sprite->m_rotation.x;
-		break;
-	case LIGHT:
-		strcpy_s(targetName, "LIGHT");
-		targetPos = testChara->m_obj->m_sprite->m_pos;
-		break;
-	case CAMERA:
-		strcpy_s(targetName, "CAMERA");
-		targetPos = m_cameraPos;
-		break;
-	}
-
-	g_DebugManager->PrintDebugLog(posX, posY, targetName);//名前表示
-
-	//回転角度
-	strcpy_s(targetName, "Rotation");
-	posY = ((SCREEN_HEIGHT / 2) - 40 * 2) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, targetName);//名前表示
-
-	posY = ((SCREEN_HEIGHT / 2) - 40 * 3) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, targetRotate);
-
-	//位置を出力する x,y,z
-	strcpy_s(targetName, "Position");
-	posY = ((SCREEN_HEIGHT / 2) - 40 * 4) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, targetName);//名前表示
-
-	posY = ((SCREEN_HEIGHT / 2) - 40 * 5) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, targetPos.x);
-
-	posY = ((SCREEN_HEIGHT / 2) - 40 * 6) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, targetPos.y);
-
-	posY = ((SCREEN_HEIGHT / 2) - 40 * 7) / SCREEN_PARA;//デバッグ表示の縦座標設定
-	g_DebugManager->PrintDebugLog(posX, posY, targetPos.z);
-
-
-}
-
-void Game::TestMove(GameObject* _target)
-{
-	//移動入力
-	//WASD上下左右移動
-	if (Input::Get()->GetKeyPress(DIK_W)) {
-
-		_target->m_obj->m_sprite->m_pos.y += 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_A)) {
-
-		_target->m_obj->m_sprite->m_pos.x -= 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-
-		_target->m_obj->m_sprite->m_pos.x += 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_S)) {
-
-		_target->m_obj->m_sprite->m_pos.y -= 0.1f;
-
-	}
-	//↑キー/↓キーで前後移動
-
-	if (Input::Get()->GetKeyPress(DIK_UPARROW))
-	{
-		_target->m_obj->m_sprite->m_pos.z += 0.1f;
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
-	{
-		_target->m_obj->m_sprite->m_pos.z -= 0.1f;
-	}
-
-
-	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
-	{
-		_target->m_obj->m_sprite->m_rotation.x += 1.0f;
-	}
-
-	//←キー/→キーで角度の調整
-	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
-	{
-		_target->m_obj->m_sprite->m_rotation.x -= 1.0f;
-	}
-
-
-	//RESET
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		_target->m_obj->m_sprite->m_rotation.x = 0.0f;
-		_target->m_obj->m_sprite->m_pos.x = 0.0f;
-	}
-}
-
-void Game::TestMove(StaticObject* _target)
-{
-
-	//移動入力
-	//WASD上下左右移動
-	if (Input::Get()->GetKeyPress(DIK_W)) {
-
-		_target->m_sprite->m_pos.y += 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_A)) {
-
-		_target->m_sprite->m_pos.x -= 0.1f;
-
-	}
-	//↑キー/↓キーで上下移動
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-
-		_target->m_sprite->m_pos.x += 0.1f;
-
-	}
-	if (Input::Get()->GetKeyPress(DIK_S)) {
-
-		_target->m_sprite->m_pos.y -= 0.1f;
-
-	}
-
-	//↑キー/↓キーで前後移動
-	if (Input::Get()->GetKeyPress(DIK_UPARROW))
-	{
-		_target->m_sprite->m_pos.z += 0.1f;
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
-	{
-		_target->m_sprite->m_pos.z -= 0.1f;
-	}
-
-	//←キー/→キーで角度の調整
-	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
-	{
-		_target->m_sprite->m_rotation.x += 1.0f;
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
-	{
-		_target->m_sprite->m_rotation.x -= 1.0f;
-	}
-
-
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		_target->m_sprite->m_rotation.x = 0.0f;
-		_target->m_sprite->m_pos.x = 0.0f;
-	}
-}
-
-void Game::TestMove(DirectX::XMFLOAT3& _target)
-{
-
-	if (Input::Get()->GetKeyPress(DIK_W)) {
-
-		_target.y += 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_A)) {
-
-		_target.x -= 0.1f;
-
-	}
-	//↑キー/↓キーで上下移動
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-
-		_target.x += 0.1f;
-
-	}
-	if (Input::Get()->GetKeyPress(DIK_S)) {
-
-		_target.y -= 0.1f;
-	}
-
-	//↑キー/↓キーで前後移動
-	if (Input::Get()->GetKeyPress(DIK_UPARROW))
-	{
-		_target.z += 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
-	{
-		_target.z -= 0.1f;
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		_target = { 0.0f,0.0f,-2.0f };
-		m_lightPos = { 0.0f,0.0f,-2.0f };
-	}
-
-}
-
-void Game::TestMoveCamera()
-{
-
-	if (Input::Get()->GetKeyPress(DIK_W)) {
-
-		m_cameraPos.z += 0.1f;
-
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_A)) {
-
-		m_cameraPos.x -= 0.1f;
-		m_focusPos.x -= 0.1f;
-
-	}
-	//↑キー/↓キーで上下移動
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-
-		m_cameraPos.x += 0.1f;
-		m_focusPos.x += 0.1f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_S)) {
-
-		m_cameraPos.z -= 0.1f;
-	}
-
-	//↑キー/↓キーで回転
-	if (Input::Get()->GetKeyPress(DIK_UPARROW))
-	{
-		m_cameraPos.y += 0.1f;
-		m_focusPos.y -= 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
-	{
-		m_cameraPos.y -= 0.1f;
-		m_focusPos.y += 0.1f;
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		//reset
-		m_cameraPos = { 0.0f, 0.0f, -9.0f };
-		m_focusPos = { 0.0f,0.0f,2.0f };
-	}
-
-	m_distance = 0 - m_cameraPos.z;
-}
-*/

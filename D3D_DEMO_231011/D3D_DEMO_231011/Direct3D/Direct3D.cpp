@@ -348,7 +348,7 @@ BOOL D3D_CreateBlendState(void)
 void D3D_ClearScreen(void)
 {
     // 画面塗りつぶし色
-    float clearColor[4] = { 0.0f, 0.0f, 1.0f, 1.0f }; //red,green,blue,alpha
+    float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; //red,green,blue,alpha
 
     // 描画先のキャンバスと使用する深度バッファを指定する
     GetD3D_Context()->OMSetRenderTargets(1, &GetD3D_DATA()->RenderTarget, GetD3D_DATA()->DepthStencilView);

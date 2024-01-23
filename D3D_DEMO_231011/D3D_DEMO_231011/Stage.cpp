@@ -1,5 +1,5 @@
 #include "Stage.h"
-<<<<<<< HEAD
+
 
 void Stage::Init(void)
 {
@@ -23,5 +23,4 @@ void Stage::StepCount(void)
 {
 	m_moveStep++;
 }
-=======
->>>>>>> feature/Sakamoto
+
