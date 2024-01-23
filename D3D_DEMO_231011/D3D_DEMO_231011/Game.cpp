@@ -15,16 +15,14 @@
 #include "ObjectAnimation.h"
 
 #include "DInput.h"
-#include <stdio.h>
+#include <stdio.h> 
+#include "ColliderManager.h"
 
 #define INITROTATE	(19.8)
 
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
-
-
-
 
 void Game::Init()
 {
@@ -49,6 +47,21 @@ void Game::Init()
 
 	
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
+
+	//モデルを作る
+	circle->CreateObject(g_Assets->circle, 200, 200, 1, 1);
+	circle->CreateShadow(g_Assets->circle, 200, 200, 1, 1);
+	//アニメションを配置
+	circle->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	circle->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	circle->m_shadow->m_sprite->m_pos = { 2, 2, 0 };
+	circle->m_obj->m_sprite->m_pos = { 2, 2, 0 };
+	//オブジェクトのコライダーを配置
+	circle->m_shadowCollider = new PolygonCollider();
+	circle->m_shadowCollider->InitCollider(POLYGON);
+	circle->m_objCollider = new PolygonCollider();
+	circle->m_objCollider->InitCollider(POLYGON);
 
 	//アニメーションの設定
 
@@ -157,6 +170,13 @@ void Game::InitStage1_1(void)
 
 	stageBg->m_sprite->m_scale = { 2.6,2.6,1.0 };
 	
+	circle->m_shadow->m_sprite->m_rotation.x = 19.8;
+
+	circle->m_shadow->m_sprite->m_scale = { 2.6,2.6,1.0 };
+
+	//circle->m_obj->m_sprite->m_rotation.x = 19.8;
+
+	//circle->m_obj->m_sprite->m_scale = { 2.6,2.6,1.0 };
 	
 	//大きさ設定
 
@@ -310,6 +330,7 @@ void Game::StageUpdate(void)
 void Game::UpdateStage1_1(void)
 {
 	stageBg->Update();
+	circle->Update();
 }
 
 void Game::UpdateStage1_2(void)
@@ -380,6 +401,7 @@ Game::~Game()
 	delete uiRestart;	//ステージのボタン
 
 	delete stageBg;		//ステージ背景
+	delete circle;		//円
 
 
 	//delete circle;			//circle
@@ -517,6 +539,7 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
+	circle->Draw();
 }
 
 

@@ -20,6 +20,8 @@ Assets::Assets()
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
 
+    circle = LoadTexture("assets/circle.png");
+
 }
 
 Assets::~Assets()

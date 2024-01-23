@@ -27,7 +27,7 @@ private:
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;	//ステージのボタン
 
-	GameObject* circle;			//circle
+	GameObject* circle;			//円
 
 
 private:

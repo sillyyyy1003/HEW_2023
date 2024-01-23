@@ -86,8 +86,12 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
-    <ClCompile Include="SatCollider.cpp" />
-    <ClCompile Include="PolygonCollider.cpp" />
+    <ClCompile Include="PolygonCollider.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SatCollider.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShadowObject.h" />
@@ -172,8 +176,12 @@
     <ClInclude Include="Sprite.h">
       <Filter>BaseObject</Filter>
     </ClInclude>
-    <ClInclude Include="SatCollider.h" />
-    <ClInclude Include="PolygonCollider.h" />
+    <ClInclude Include="PolygonCollider.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SatCollider.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">

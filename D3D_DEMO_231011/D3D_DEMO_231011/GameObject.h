@@ -108,7 +108,12 @@ public:
 
 	~GameObject();
 
-
+	private:
+		/// <summary>
+		/// オブジェクトの移動をする関数
+		/// </summary>
+		/// <param name="_lightPos"></param>
+		void MoveObject(Object* _target);
 
 };
 

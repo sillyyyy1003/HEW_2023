@@ -2,6 +2,7 @@
 #include "ShadowObject.h"
 #include "SphereCollider.h"
 #include <math.h>
+#include "DInput.h"
 
 extern Camera* g_WorldCamera;
 
@@ -89,6 +90,8 @@ void GameObject::Update()
 
 	//影
 	m_obj->Update();
+
+	MoveObject(m_obj);
 }
 
 void GameObject::UpdateObjectColliderData(void)
@@ -156,6 +159,65 @@ void GameObject::UpdateShadowColliderData(void)
 
 }
 
+void GameObject::MoveObject(Object* _target)
+{
+	//移動入力
+	//WASD上下左右移動
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+
+		_target->m_sprite->m_pos.y += 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+
+		_target->m_sprite->m_pos.x -= 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+
+		_target->m_sprite->m_pos.x += 0.1f;
+
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+
+		_target->m_sprite->m_pos.y -= 0.1f;
+
+	}
+	//↑キー/↓キーで前後移動
+
+	if (Input::Get()->GetKeyPress(DIK_UPARROW))
+	{
+		_target->m_sprite->m_pos.z += 0.1f;
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	{
+		_target->m_sprite->m_pos.z -= 0.1f;
+	}
+
+
+	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
+	{
+		_target->m_sprite->m_rotation.x += 1.0f;
+	}
+
+	//←キー/→キーで角度の調整
+	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
+	{
+		_target->m_sprite->m_rotation.x -= 1.0f;
+	}
+
+
+	//RESET
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		_target->m_sprite->m_rotation.x = 0.0f;
+		_target->m_sprite->m_pos.x = 0.0f;
+	}
+}
 
 void GameObject::Draw(void)
 {
