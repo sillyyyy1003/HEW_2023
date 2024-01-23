@@ -17,10 +17,11 @@
 #include <stdio.h>
 
 #include "TrackCamera.h"
-#include "KBInput.h"
+#include "DInput.h"
 #include "ObjectCollision.h"
 #include "SAT.h"
 #include <algorithm> // 必要なヘッダーファイル
+
 #define SQUREWIDTH 1.2
 #define TRIANGLEWIDTH 0.8
 #define M_PI 3.14159265358979323846
@@ -459,8 +460,8 @@ void Game::TitleDraw(void)
 	g_DebugManager->PrintDebugLog(posX, posY, testChara->m_sprite->m_pos.x);
 	*/
 
-	// testBg->m_sprite->Draw();
-	// g_objectCollision->Draw();
+	//testBg->m_sprite->Draw();
+	//g_objectCollision->Draw();
 	//testBg->m_sprite->Draw();
 	//testObject->m_sprite->Draw();
 }

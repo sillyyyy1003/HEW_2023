@@ -10,8 +10,8 @@ private:
 	TestObject* pObj;		//test用キャラ
 	TestObject* square;		//test用キャラ
 	TestObject* circle;		//test用キャラ
-	TestObject* triangle;		//test用キャラ
-	TestObject* ex;		//test用キャラ
+	TestObject* triangle;	//test用キャラ
+	TestObject* ex;			//test用キャラ
 	TestObject* ex1;		//test用キャラ
 	TestObject* ex2;		//test用キャラ
 	TestObject* ex3;		//test用キャラ

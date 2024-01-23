@@ -24,23 +24,23 @@ public:
 	//ç¾åœ¨ã®å‘ãã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«å¤‰æ•°
 	DirectX::XMFLOAT3 m_dir = { 0.0f,0.0f,0.0f };
 <<<<<<< HEAD
-	// }Œ`‚Ì’¸“_À•W
-=======
+	// ï¿½}ï¿½`ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½W
+
 
 	//æ“ä½œã§ãã‚‹ã‹ã©ã†ã‹ã‚’æ‰±ã†å¤‰æ•°
 	bool isActive = false;
 
 
 	// ï¿½}ï¿½`ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½W
->>>>>>> develop
+
 	std::vector<Vector2> vertices;
-	// }Œ`‚ÌŠp“x
+	// ï¿½}ï¿½`ï¿½ÌŠpï¿½x
 	float rotation = 0;
-	// }Œ`‚Ìí—Ş
+	// ï¿½}ï¿½`ï¿½Ìï¿½ï¿½
 	int object = 0;
-	// }Œ`‚Ì’¸“_À•W‚ğ“ü‚ê‚é
+	// ï¿½}ï¿½`ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	std::vector<Vector2> jodgevertices;
-	// }Œ`‚ÌÀ•W‚ğ“ü‚ê‚é
+	// ï¿½}ï¿½`ï¿½Ìï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	BOUNDING_CIRCLE p_center2;
 	BOUNDING_CIRCLE p_center;
 public:
@@ -61,7 +61,7 @@ public:
 
 	// æ“ä½œã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã©ã†ã‹
 	bool isPlayer = false;
-	// OŠpŒ`‚©‚Ç‚¤‚©
+	// ï¿½Oï¿½pï¿½`ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
 	bool isTriangle = false;
 
 	virtual void Update(void);
@@ -74,7 +74,7 @@ public:
 	float Scale_countX = 0;
 	float Scale_countY = 0;
 
-	std::vector<Vector2> p_verticies2; // ’†S“_‚ÌÀ•W
+	std::vector<Vector2> p_verticies2; // ï¿½ï¿½ï¿½Sï¿½_ï¿½Ìï¿½ï¿½W
 	std::vector<Vector2> p_verticies;
 };
 
