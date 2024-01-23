@@ -23,7 +23,7 @@ public:
 
 	//現在の向きを表すベクトル変数
 	DirectX::XMFLOAT3 m_dir = { 0.0f,0.0f,0.0f };
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	// �}�`�̒��_���W
 
 

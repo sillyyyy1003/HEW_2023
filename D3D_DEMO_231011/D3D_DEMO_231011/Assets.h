@@ -16,7 +16,7 @@ public:
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* circle;
 	// 図形
-	ID3D11ShaderResourceView* circle;
+	//ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
 	
