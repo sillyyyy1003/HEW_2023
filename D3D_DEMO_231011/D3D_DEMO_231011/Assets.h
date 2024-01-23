@@ -29,6 +29,10 @@ public:
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
+	ID3D11ShaderResourceView* uiSelect;
+	ID3D11ShaderResourceView* uiSound;
+	
+	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
 
 
 

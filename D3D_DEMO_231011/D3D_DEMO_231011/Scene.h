@@ -61,7 +61,7 @@ public:
 	SCENENAME GetScene() { return m_scene; };
 
 	void SetNextScene(SCENENAME _next) { m_nextScene = _next; };
-	SCENENAME GetNexScene() { return m_nextScene; };
+	SCENENAME GetNextScene() { return m_nextScene; };
 
 	void SetStage(STAGEINFO _stage) { m_stage = _stage; };
 	STAGEINFO GetStage() { return m_stage; };

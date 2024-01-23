@@ -25,13 +25,24 @@ private:
 
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
-	CanvasUI*	uiRestart;	//ステージのボタン
+	CanvasUI*	uiRestart;		//PAUSEのボタン
+	CanvasUI*	uiSelect;		//PAUSEのボタン
+	CanvasUI*	uiSound;		//PAUSEのボタン
+
+	CanvasUI*	uiSoundBg;		//SOUNDの背景
+
+	
+
+
 
 	GameObject* circle;			//circle
 
 
 private:
 	
+
+	//SOUND
+	bool isSound = false;
 	//PAUSE
 	bool isPause = false;
 
@@ -89,6 +100,11 @@ public:
 	//ui Update
 	void UiUpdate();
 
+
+	//ポーズ関数
+	void PauseSwitch(void);
+	//サウンド関数
+	void SoundSwitch(void);
 
 	//描画
 	void GameDraw(void);

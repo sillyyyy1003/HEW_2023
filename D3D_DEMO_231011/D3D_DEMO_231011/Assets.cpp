@@ -19,6 +19,10 @@ Assets::Assets()
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
+    uiSelect= LoadTexture("assets/ui/select.png");
+    uiSound = LoadTexture("assets/ui/sound.png");
+
+    uiSoundBg = LoadTexture("assets/ui/sound.png");//サウンド背景
 
 }
 
@@ -37,7 +41,10 @@ Assets::~Assets()
     SAFE_RELEASE(uiPauseBg);
     SAFE_RELEASE(uiResume);
     SAFE_RELEASE(uiRestart);
+    SAFE_RELEASE(uiSelect);
+    SAFE_RELEASE(uiSound);
 
+    SAFE_RELEASE(uiSoundBg);
 
     SAFE_RELEASE(testPause);
     SAFE_RELEASE(debugFont);

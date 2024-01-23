@@ -32,9 +32,14 @@ void Game::Init()
 	uiTitle = new CanvasUI();
 	uiTitleBg = new CanvasUI();
 	uiPressEnter = new CanvasUI();
+
 	uiRestart = new CanvasUI();
 	uiResume = new CanvasUI();
+	uiSelect = new CanvasUI();
+	uiSound = new CanvasUI();
+
 	uiPauseBg = new CanvasUI();
+	uiSoundBg = new CanvasUI();
 
 
 	stageBg = new StaticObject();
@@ -46,6 +51,12 @@ void Game::Init()
 	uiPressEnter->CreateModel(g_Assets->uiPressEnter, 1280, 300, 1, 1);
 
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 600, 720, 1, 1);
+	uiResume->CreateModel(g_Assets->uiResume, 300, 100, 1, 1);
+	uiRestart->CreateModel(g_Assets->uiRestart, 300, 100, 1, 1);
+	uiSelect->CreateModel(g_Assets->uiSelect, 300, 100, 1, 1);
+
+	uiSound->CreateModel(g_Assets->uiSound, 300, 100, 1, 1);
+	uiSoundBg->CreateModel(g_Assets->uiSoundBg, 300, 100, 1, 1);//現在:sound.pngで代用中
 
 	
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
@@ -83,7 +94,14 @@ void Game::Init()
 	
 
 	//uiPause
-	uiPauseBg->m_pos={ - 300 / SCREEN_PARA, 0.0, 0.9f };
+	uiPauseBg->m_pos={ - 300 / SCREEN_PARA, 0.0f, 0.9f };
+	uiResume->m_pos= { -4.0f, 3.0f, 0.8f };
+	uiRestart->m_pos= { -4.0f, 1.0f, 0.8f };
+	uiSelect->m_pos = { -4.0f, -1.0f, 0.8f };
+	//uiSound
+	uiSound->m_pos = { -4.0f, -3.0f, 0.8f };
+	uiSoundBg->m_pos = { 0.0f, 0.0f, 0.9f };
+	
 
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
 	
@@ -234,14 +252,7 @@ void Game::StageUpdate(void)
 {
 	//Input
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
-		if (isPause) 
-		{
-			isPause = false;
-		}
-		else
-		{
-			isPause = true;
-		}
+		PauseSwitch();
 	}
 
 
@@ -375,9 +386,11 @@ Game::~Game()
 	delete uiTitleBg;		//タイトル背景
 	delete uiPressEnter;	//タイトルエンターキー
 
+	delete uiPauseBg;	//PAUSEのボタン
 	delete uiResume;
-	delete uiPauseBg;
-	delete uiRestart;	//ステージのボタン
+	delete uiRestart;
+	delete uiSelect;
+	delete uiSound;
 
 	delete stageBg;		//ステージ背景
 
@@ -397,13 +410,56 @@ Game* Game::Get()
 void Game::UiUpdate()
 {
 	//入力操作
+	if (Input::Get()->GetKeyTrigger(DIK_S))
+	{
+		SoundSwitch();// サウンド画面切り替え
+	}
+
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+	{
+		isSound = false;//Sound設定の画面でESCを押すとリセットされる（またESCを押したときにはPAUSE画面からになる）
+	}
 
 
+	//Sound画面
+	if (!isSound)
+	{
+		uiPauseBg->Update();
+		uiRestart->Update();
+		uiResume->Update();
+		uiSelect->Update();
+		uiSound->Update();
+	}
+	else if (isSound)
+	{
+		uiSoundBg->Update();
+	}
 
-	uiPauseBg->Update();
-	//uiRestart->Update();
-	//uiResume->Update();
+}
 
+void Game::PauseSwitch(void)
+{
+	if (isPause)
+	{
+		isPause = false;
+	}
+	else
+	{
+		isPause = true;
+	}
+
+}
+
+void Game::SoundSwitch(void)
+{
+	if (isSound)
+	{
+		isSound = false;
+	}
+	else
+	{
+		isSound = true;
+	}
 }
 
 void Game::GameDraw()
@@ -519,15 +575,24 @@ void Game::DrawStage1_1()
 	stageBg->Draw();
 }
 
-
-
 void Game::ResultDraw(void)
 {
 }
 
 void Game::UiDraw(void)
 {
-	uiPauseBg->Draw();
-	//uiResume->Draw();
-	//uiRestart->Draw();
+	if (!isSound)
+	{
+		uiPauseBg->Draw();
+		uiResume->Draw();
+		uiRestart->Draw();
+		uiSelect->Draw();
+		uiSound->Draw();
+
+	}
+	else if(isSound)
+	{
+		uiSoundBg->Draw();
+	}
+	
 }
