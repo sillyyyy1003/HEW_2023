@@ -1,351 +1,351 @@
-#include "Input.h"
-#pragma warning(push)
-#pragma warning(disable: 26812 )// enum‚ÌƒGƒ‰[‚ð—}§‚·‚é
-
-// ƒQ[ƒ€ƒpƒbƒh‚ÌU“®
-XINPUT_VIBRATION vibration;
-// ƒQ[ƒ€ƒpƒbƒh‚ÌŒ»Ý‚Ìó‘Ô
-XINPUT_STATE state;
-// ƒQ[ƒ€ƒpƒbƒh“ü—ÍƒCƒxƒ“ƒg‚ðŽæ“¾
-XINPUT_KEYSTROKE pkeystroke;
-
-bool Input::SetPADButton(PADBUTTON PadButton)
-{
-    // Ý’è‚³‚ê‚Ä‚¢‚éó‘Ô‚ðŽÀs‚·‚é
-    if (pkeystroke.Flags)
-    {
-        // ƒQ[ƒ€ƒpƒbƒhƒ{ƒ^ƒ“A‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == A)
-        {
-            // ƒ{ƒ^ƒ“A‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)
-            {
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhƒ{ƒ^ƒ“B‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == B)
-        {
-            // ƒ{ƒ^ƒ“B‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
-            {
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhƒ{ƒ^ƒ“X‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == X)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)
-            {
-                // ƒ{ƒ^ƒ“X‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhƒ{ƒ^ƒ“Y‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == Y)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)
-            {
-                // ƒ{ƒ^ƒ“Y‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh\ŽšƒL[¶‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == LEFT)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)
-            {
-                // \ŽšƒL[¶‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh\ŽšƒL[‰E‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == RIGHT)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)
-            {
-                // \ŽšƒL[‰E‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh\ŽšƒL[ã‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == UP)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)
-            {
-                // \ŽšƒL[ã‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh\ŽšƒL[‰º‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == DOWN)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)
-            {
-                // \ŽšƒL[‰º‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhL‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == L)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)
-            {
-                // ƒQ[ƒ€ƒpƒbƒhL‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhR‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == R)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)
-            {
-                // ƒQ[ƒ€ƒpƒbƒhR‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhBACK‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == BACK)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)
-            {
-                // ƒQ[ƒ€ƒpƒbƒhBACK‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhSTART‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == START)
-        {
-            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
-            {
-                //ƒQ[ƒ€ƒpƒbƒhSTART‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh¶ƒgƒŠƒK[‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == LEFTTRIGGER)
-        {
-            if (state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-            {
-                // ¶ƒgƒŠƒK[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh‰EƒgƒŠƒK[‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == RIGHTTRIGGER)
-        {
-            if (state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-            {
-                // ‰EƒgƒŠƒK[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh¶ƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == LEFTSTICK)
-        {
-            if (state.Gamepad.sThumbLX <= -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-            {
-                // ¶ƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh‰EƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == RIGHTSTICK)
-        {
-            if (state.Gamepad.sThumbLX >= XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)
-            {
-                // ‰EƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒhãƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == DOWNSTICK)
-        {
-            if (state.Gamepad.sThumbLY <= -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
-            {
-                // ãƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-
-        // ƒQ[ƒ€ƒpƒbƒh‰ºƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—
-        if (PadButton == UPSTICK)
-        {
-            if (state.Gamepad.sThumbLY >= XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)
-            {
-                // ‰ºƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-void Input::Vibration(int pattern)
-{
-    // ƒpƒ^[ƒ“‚É‚æ‚Á‚Äˆ—‚ð•Ï‚¦‚é
-    switch (pattern)
-    {
-
-    case 0:// ƒpƒ^[ƒ“0 ‰½‚àU“®‚µ‚È‚¢
-        vibration.wLeftMotorSpeed = 0;
-        vibration.wRightMotorSpeed = 0;
-        XInputSetState(0, &vibration);
-        // U“®‚ªŠJŽn‚µ‚½Žž‚ð‹L˜^‚·‚é
-        Vibrationtime = GetTickCount64();
-        break;
-
-    case 1:// ƒpƒ^[ƒ“‚P ¶‘¤‚ªÅ‘åU“®
-        vibration.wLeftMotorSpeed = 65535;
-        XInputSetState(0, &vibration);
-        break;
-
-    case 2:// ƒpƒ^[ƒ“2@‰E‘¤‚ªÅ‘åU“®
-        vibration.wRightMotorSpeed = 65535;
-        XInputSetState(0, &vibration);
-        break;
-
-    case 3:// ƒpƒ^[ƒ“3 ¶‘¤‚Æ‰E‘¤‚ªÅ‘åU“®
-        vibration.wRightMotorSpeed = 65535;
-        vibration.wLeftMotorSpeed = 65535;
-        XInputSetState(0, &vibration);
-        break;
-
-    case 4:// ƒpƒ^[ƒ“‚S ¶‘¤‚Æ‰E‘¤‚ªÅ‘å‚©‚ç”¼•ª‚ÌU“®
-        vibration.wRightMotorSpeed = 65535 / 2;
-        vibration.wLeftMotorSpeed = 65535 / 2;
-        XInputSetState(0, &vibration);
-        break;
-    }
-}
-
-bool Input::GetPADRepeat(PADBUTTON PadButton)
-{
-    // ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔ‚¸‚Á‚Æˆ—‚ðŽÀs‚·‚é‚æ‚¤‚ÉÝ’è
-    pkeystroke.Flags = XINPUT_KEYSTROKE_REPEAT;
-
-    // ”CˆÓ‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½Žž‚Ìˆ—‚ð•Ô‚·
-    return Input::SetPADButton(PadButton);
-}
-
-bool Input::GetPADTrigger(PADBUTTON PadButton)
-{
-    // ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚Éˆ—‚ªŽÀs‚·‚é‚æ‚¤‚ÉÝ’è
-    pkeystroke.Flags = XINPUT_KEYSTROKE_KEYDOWN;
-
-    // ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ŽžAfalse‚Å‚©‚Â”CˆÓ‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½ŽžAtrue
-    if (Input::SetPADButton(PadButton))
-    {
-        keyState[PadButton] = true;
-    }
-    else
-    {
-        keyState[PadButton] = false;
-    }
-
-    // 1ƒtƒŒ[ƒ€‘O‚Ì‰Ÿ‰ºó‘Ô‚ªfalse‚Å‚©‚ÂŒ»ÝƒtƒŒ[ƒ€‚Ì‰Ÿ‰ºó‘Ô‚ªtrue
-    if (oldKeyState[PadButton] == false && keyState[PadButton] == true)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-void Input::Update()
-{
-    // XInputGetStateŠÖ”ŒÄ‚Ño‚µ‘O‚É\‘¢‘Ì‚ÌƒNƒŠƒA
-    ZeroMemory(&state, sizeof(XINPUT_STATE));
-
-    // Žw’è‚³‚ê‚½ƒRƒ“ƒgƒ[ƒ‰[‚ÌŒ»Ý‚Ìó‘Ô‚ðŽæ“¾‚µ‚Ü‚·B
-    XInputGetState(0, &state);
-
-    // XInputGetKeystrokeŠÖ”ŒÄ‚Ño‚µ‘O‚É\‘¢‘Ì‚ÌƒNƒŠƒA
-    ZeroMemory(&pkeystroke, sizeof(PXINPUT_KEYSTROKE));
-
-    // ƒQ[ƒ€ƒpƒbƒh‚Ì“ü—ÍƒCƒxƒ“ƒg‚ðŽæ“¾‚µ‚Ü‚·B
-    XInputGetKeystroke(0, 0, &pkeystroke);
-
-    // ƒpƒbƒh‚ÌU“®‚ð‚³‚¹‚é
-    Input::Vibration(pattern);
-
-    // ƒpƒbƒh‚ÌU“®‚ðŽ~‚ß‚é‚½‚ß‚Ìˆ—
-    if (pattern > 0)
-    {
-        // U“®‚ªŠJŽn‚µ‚Ä0.5•bŒã‚ÅŽ~‚ß‚é
-        if (GetTickCount64() > Vibrationtime + 1 * 500)
-        {
-            pattern = 0;
-        }
-    }
-
-    // @¦ƒfƒbƒhƒ][ƒ“‚ÍAƒAƒiƒƒOƒXƒeƒBƒbƒN‚ÉG‚Á‚Ä‚¢‚È‚¢‚Æ‚«‚âA
-    // @@ƒXƒeƒbƒN‚ª’†‰›‚É‚ ‚éê‡‚Å‚àAƒRƒ“ƒgƒ[ƒ‰[‚ª•ñ‚·‚éu“®ìv’l
-    //@ƒfƒbƒhƒ][ƒ““à‚Ì“ü—Í‚ð 0 ‚ÉŠÛ‚ß‚éƒvƒƒOƒ‰ƒ€B
-    if ((state.Gamepad.sThumbLX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
-        state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
-        (state.Gamepad.sThumbLY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
-            state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
-    {
-        state.Gamepad.sThumbLX = 0;
-        state.Gamepad.sThumbLY = 0;
-    }
-
-    // oldKeyState‚ÉkeyState‚ðƒRƒs[‚·‚é
-    memcpy_s(oldKeyState, sizeof(oldKeyState), keyState, sizeof(keyState));
-
-    // ¶ƒXƒeƒBƒbƒN‚©‚ç‚Ì“ü—Í‚ð•ûŒüƒpƒbƒh‚É•ÏŠ·
-    state.Gamepad.wButtons |= ThumbToDPad(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY, XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
-}
-
-// ƒXƒeƒBƒbƒN‚Ì“ü—Í‚ð•ûŒüƒpƒbƒhƒtƒ‰ƒO‚É•ÏŠ·
-WORD ThumbToDPad(SHORT sThumbX, SHORT sThumbY, SHORT sDeadZone)
-{
-    WORD wButtons = 0;
-
-    if (sThumbY >= sDeadZone)
-    {
-        wButtons |= XINPUT_GAMEPAD_DPAD_UP;
-    }
-    else if (sThumbY <= -sDeadZone)
-    {
-        wButtons |= XINPUT_GAMEPAD_DPAD_DOWN;
-    }
-
-    if (sThumbX <= -sDeadZone)
-    {
-        wButtons |= XINPUT_GAMEPAD_DPAD_LEFT;
-    }
-    else if (sThumbX >= sDeadZone)
-    {
-        wButtons |= XINPUT_GAMEPAD_DPAD_RIGHT;
-    }
-
-    return wButtons;
-}
-
-// enum‚ÌƒGƒ‰[‚ð—}§‚·‚é
-#pragma warning(pop)
+ï»¿//#include "Input.h"
+//#pragma warning(push)
+//#pragma warning(disable: 26812 )// enumã®ã‚¨ãƒ©ãƒ¼ã‚’æŠ‘åˆ¶ã™ã‚‹
+//
+//// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•
+//XINPUT_VIBRATION vibration;
+//// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã®ç¾åœ¨ã®çŠ¶æ…‹
+//XINPUT_STATE state;
+//// ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰å…¥åŠ›ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—
+//XINPUT_KEYSTROKE pkeystroke;
+//
+//bool Input::SetPADButton(PADBUTTON PadButton)
+//{
+//    // è¨­å®šã•ã‚Œã¦ã„ã‚‹çŠ¶æ…‹ã‚’å®Ÿè¡Œã™ã‚‹
+//    if (pkeystroke.Flags)
+//    {
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ãƒœã‚¿ãƒ³AãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == A)
+//        {
+//            // ãƒœã‚¿ãƒ³AãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)
+//            {
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ãƒœã‚¿ãƒ³BãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == B)
+//        {
+//            // ãƒœã‚¿ãƒ³BãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
+//            {
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ãƒœã‚¿ãƒ³XãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == X)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)
+//            {
+//                // ãƒœã‚¿ãƒ³XãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ãƒœã‚¿ãƒ³YãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == Y)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)
+//            {
+//                // ãƒœã‚¿ãƒ³YãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰åå­—ã‚­ãƒ¼å·¦ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == LEFT)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)
+//            {
+//                // åå­—ã‚­ãƒ¼å·¦ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰åå­—ã‚­ãƒ¼å³ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == RIGHT)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)
+//            {
+//                // åå­—ã‚­ãƒ¼å³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰åå­—ã‚­ãƒ¼ä¸ŠãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == UP)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)
+//            {
+//                // åå­—ã‚­ãƒ¼ä¸ŠãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰åå­—ã‚­ãƒ¼ä¸‹ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == DOWN)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)
+//            {
+//                // åå­—ã‚­ãƒ¼ä¸‹ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//            else
+//            {
+//                return false;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰LãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == L)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER)
+//            {
+//                // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰LãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰RãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == R)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER)
+//            {
+//                // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰RãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰BACKãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == BACK)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK)
+//            {
+//                // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰BACKãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰STARTãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == START)
+//        {
+//            if (state.Gamepad.wButtons & XINPUT_GAMEPAD_START)
+//            {
+//                //ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰STARTãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰å·¦ãƒˆãƒªã‚¬ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == LEFTTRIGGER)
+//        {
+//            if (state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+//            {
+//                // å·¦ãƒˆãƒªã‚¬ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰å³ãƒˆãƒªã‚¬ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == RIGHTTRIGGER)
+//        {
+//            if (state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+//            {
+//                // å³ãƒˆãƒªã‚¬ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == LEFTSTICK)
+//        {
+//            if (state.Gamepad.sThumbLX <= -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+//            {
+//                // å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == RIGHTSTICK)
+//        {
+//            if (state.Gamepad.sThumbLX >= XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)
+//            {
+//                // å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ä¸Šã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == DOWNSTICK)
+//        {
+//            if (state.Gamepad.sThumbLY <= -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+//            {
+//                // ä¸Šã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//
+//        // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ä¸‹ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†
+//        if (PadButton == UPSTICK)
+//        {
+//            if (state.Gamepad.sThumbLY >= XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE)
+//            {
+//                // ä¸‹ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
+//                return true;
+//            }
+//        }
+//    }
+//
+//    return false;
+//}
+//
+//void Input::Vibration(int pattern)
+//{
+//    // ãƒ‘ã‚¿ãƒ¼ãƒ³ã«ã‚ˆã£ã¦å‡¦ç†ã‚’å¤‰ãˆã‚‹
+//    switch (pattern)
+//    {
+//
+//    case 0:// ãƒ‘ã‚¿ãƒ¼ãƒ³0 ä½•ã‚‚æŒ¯å‹•ã—ãªã„
+//        vibration.wLeftMotorSpeed = 0;
+//        vibration.wRightMotorSpeed = 0;
+//        XInputSetState(0, &vibration);
+//        // æŒ¯å‹•ãŒé–‹å§‹ã—ãŸæ™‚åˆ»ã‚’è¨˜éŒ²ã™ã‚‹
+//        Vibrationtime = GetTickCount64();
+//        break;
+//
+//    case 1:// ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼‘ å·¦å´ãŒæœ€å¤§æŒ¯å‹•
+//        vibration.wLeftMotorSpeed = 65535;
+//        XInputSetState(0, &vibration);
+//        break;
+//
+//    case 2:// ãƒ‘ã‚¿ãƒ¼ãƒ³2ã€€å³å´ãŒæœ€å¤§æŒ¯å‹•
+//        vibration.wRightMotorSpeed = 65535;
+//        XInputSetState(0, &vibration);
+//        break;
+//
+//    case 3:// ãƒ‘ã‚¿ãƒ¼ãƒ³3 å·¦å´ã¨å³å´ãŒæœ€å¤§æŒ¯å‹•
+//        vibration.wRightMotorSpeed = 65535;
+//        vibration.wLeftMotorSpeed = 65535;
+//        XInputSetState(0, &vibration);
+//        break;
+//
+//    case 4:// ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼” å·¦å´ã¨å³å´ãŒæœ€å¤§ã‹ã‚‰åŠåˆ†ã®æŒ¯å‹•
+//        vibration.wRightMotorSpeed = 65535 / 2;
+//        vibration.wLeftMotorSpeed = 65535 / 2;
+//        XInputSetState(0, &vibration);
+//        break;
+//    }
+//}
+//
+//bool Input::GetPADRepeat(PADBUTTON PadButton)
+//{
+//    // ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹é–“ãšã£ã¨å‡¦ç†ã‚’å®Ÿè¡Œã™ã‚‹ã‚ˆã†ã«è¨­å®š
+//    pkeystroke.Flags = XINPUT_KEYSTROKE_REPEAT;
+//
+//    // ä»»æ„ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã®å‡¦ç†ã‚’è¿”ã™
+//    return Input::SetPADButton(PadButton);
+//}
+//
+//bool Input::GetPADTrigger(PADBUTTON PadButton)
+//{
+//    // ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸçž¬é–“ã«å‡¦ç†ãŒå®Ÿè¡Œã™ã‚‹ã‚ˆã†ã«è¨­å®š
+//    pkeystroke.Flags = XINPUT_KEYSTROKE_KEYDOWN;
+//
+//    // æŠ¼ã•ã‚Œã¦ã„ãªã„æ™‚ã€falseã§ã‹ã¤ä»»æ„ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸæ™‚ã€true
+//    if (Input::SetPADButton(PadButton))
+//    {
+//        keyState[PadButton] = true;
+//    }
+//    else
+//    {
+//        keyState[PadButton] = false;
+//    }
+//
+//    // 1ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®æŠ¼ä¸‹çŠ¶æ…‹ãŒfalseã§ã‹ã¤ç¾åœ¨ãƒ•ãƒ¬ãƒ¼ãƒ ã®æŠ¼ä¸‹çŠ¶æ…‹ãŒtrue
+//    if (oldKeyState[PadButton] == false && keyState[PadButton] == true)
+//    {
+//        return true;
+//    }
+//    else
+//    {
+//        return false;
+//    }
+//}
+//
+//void Input::Update()
+//{
+//    // XInputGetStateé–¢æ•°å‘¼ã³å‡ºã—å‰ã«æ§‹é€ ä½“ã®ã‚¯ãƒªã‚¢
+//    ZeroMemory(&state, sizeof(XINPUT_STATE));
+//
+//    // æŒ‡å®šã•ã‚ŒãŸã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã®ç¾åœ¨ã®çŠ¶æ…‹ã‚’å–å¾—ã—ã¾ã™ã€‚
+//    XInputGetState(0, &state);
+//
+//    // XInputGetKeystrokeé–¢æ•°å‘¼ã³å‡ºã—å‰ã«æ§‹é€ ä½“ã®ã‚¯ãƒªã‚¢
+//    ZeroMemory(&pkeystroke, sizeof(PXINPUT_KEYSTROKE));
+//
+//    // ã‚²ãƒ¼ãƒ ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›ã‚¤ãƒ™ãƒ³ãƒˆã‚’å–å¾—ã—ã¾ã™ã€‚
+//    XInputGetKeystroke(0, 0, &pkeystroke);
+//
+//    // ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•ã‚’ã•ã›ã‚‹
+//    Input::Vibration(pattern);
+//
+//    // ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•ã‚’æ­¢ã‚ã‚‹ãŸã‚ã®å‡¦ç†
+//    if (pattern > 0)
+//    {
+//        // æŒ¯å‹•ãŒé–‹å§‹ã—ã¦0.5ç§’å¾Œã§æ­¢ã‚ã‚‹
+//        if (GetTickCount64() > Vibrationtime + 1 * 500)
+//        {
+//            pattern = 0;
+//        }
+//    }
+//
+//    // ã€€â€»ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã¯ã€ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã«è§¦ã£ã¦ã„ãªã„ã¨ãã‚„ã€
+//    // ã€€ã€€ã‚¹ãƒ†ãƒƒã‚¯ãŒä¸­å¤®ã«ã‚ã‚‹å ´åˆã§ã‚‚ã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ãŒå ±å‘Šã™ã‚‹ã€Œå‹•ä½œã€å€¤
+//    //ã€€ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³å†…ã®å…¥åŠ›ã‚’ 0 ã«ä¸¸ã‚ã‚‹ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã€‚
+//    if ((state.Gamepad.sThumbLX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
+//        state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
+//        (state.Gamepad.sThumbLY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
+//            state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
+//    {
+//        state.Gamepad.sThumbLX = 0;
+//        state.Gamepad.sThumbLY = 0;
+//    }
+//
+//    // oldKeyStateã«keyStateã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+//    memcpy_s(oldKeyState, sizeof(oldKeyState), keyState, sizeof(keyState));
+//
+//    // å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‹ã‚‰ã®å…¥åŠ›ã‚’æ–¹å‘ãƒ‘ãƒƒãƒ‰ã«å¤‰æ›
+//    state.Gamepad.wButtons |= ThumbToDPad(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY, XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE);
+//}
+//
+//// ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›ã‚’æ–¹å‘ãƒ‘ãƒƒãƒ‰ãƒ•ãƒ©ã‚°ã«å¤‰æ›
+//WORD ThumbToDPad(SHORT sThumbX, SHORT sThumbY, SHORT sDeadZone)
+//{
+//    WORD wButtons = 0;
+//
+//    if (sThumbY >= sDeadZone)
+//    {
+//        wButtons |= XINPUT_GAMEPAD_DPAD_UP;
+//    }
+//    else if (sThumbY <= -sDeadZone)
+//    {
+//        wButtons |= XINPUT_GAMEPAD_DPAD_DOWN;
+//    }
+//
+//    if (sThumbX <= -sDeadZone)
+//    {
+//        wButtons |= XINPUT_GAMEPAD_DPAD_LEFT;
+//    }
+//    else if (sThumbX >= sDeadZone)
+//    {
+//        wButtons |= XINPUT_GAMEPAD_DPAD_RIGHT;
+//    }
+//
+//    return wButtons;
+//}
+//
+//// enumã®ã‚¨ãƒ©ãƒ¼ã‚’æŠ‘åˆ¶ã™ã‚‹
+//#pragma warning(pop)

@@ -1,29 +1,38 @@
-#pragma once
+ï»¿#pragma once
 #include "Sprite.h"
 #include "SAT.h"
 
-// ‰~‚Ì“–‚½‚è”»’è—Ìˆæ‚ğ•\‚·\‘¢‘Ì
+// å††ã®å½“ãŸã‚Šåˆ¤å®šé ˜åŸŸã‚’è¡¨ã™æ§‹é€ ä½“
 struct BOUNDING_CIRCLE
 {
-	DirectX::XMFLOAT3 center; // ’†S“_‚ÌÀ•W
-	float radius; // ”¼Œa‚Ì’·‚³
+	DirectX::XMFLOAT3 center; // ä¸­å¿ƒç‚¹ã®åº§æ¨™
+	float radius; // åŠå¾„ã®é•·ã•
 };
 
-//ì
+
+//è©¦ä½œ
 class TestObject :public Sprite
 {
 public:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
-	//}Œ`î•ñ‚ğˆµ‚í‚ê‚Ä‚¢‚é
+	//å›³å½¢æƒ…å ±ã‚’æ‰±ã‚ã‚Œã¦ã„ã‚‹
 	Sprite* m_objSprite;
 	Sprite* m_shadowSprite;
 
-
-	//Œ»İ‚ÌŒü‚«‚ğ•\‚·ƒxƒNƒgƒ‹•Ï”
+	//ç¾åœ¨ã®å‘ãã‚’è¡¨ã™ãƒ™ã‚¯ãƒˆãƒ«å¤‰æ•°
 	DirectX::XMFLOAT3 m_dir = { 0.0f,0.0f,0.0f };
+<<<<<<< HEAD
 	// }Œ`‚Ì’¸“_À•W
+=======
+
+	//æ“ä½œã§ãã‚‹ã‹ã©ã†ã‹ã‚’æ‰±ã†å¤‰æ•°
+	bool isActive = false;
+
+
+	// ï¿½}ï¿½`ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½W
+>>>>>>> develop
 	std::vector<Vector2> vertices;
 	// }Œ`‚ÌŠp“x
 	float rotation = 0;
@@ -38,21 +47,19 @@ public:
 
 	TestObject();
 
-	//ƒIƒuƒWƒFƒNƒg—pƒeƒNƒXƒ`ƒƒ‚ÌƒZƒbƒeƒBƒ“ƒO
+	//ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”¨ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚»ãƒƒãƒ†ã‚£ãƒ³ã‚°
 	void SetObjTex(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
-	//‰e—p‚ÌƒeƒNƒXƒ`ƒƒ‚ÌƒZƒbƒeƒBƒ“ƒO
+	//å½±ç”¨ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚»ãƒƒãƒ†ã‚£ãƒ³ã‚°
 	void SetShadowTex(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
-	// “–‚½‚è”»’è
-	// ‰~‚ÌÀ•W‚Æ”¼Œa‚ğæ“¾
+	// å½“ãŸã‚Šåˆ¤å®š
+	// å††ã®åº§æ¨™ã¨åŠå¾„ã‚’å–å¾—
 	BOUNDING_CIRCLE GetBoundingCircle();
-	// ‰~‚ÌÀ•W‚Æ”¼Œa‚ğİ’è
+	// å††ã®åº§æ¨™ã¨åŠå¾„ã‚’è¨­å®š
 	void SetBoundingCircle(BOUNDING_CIRCLE bc);
 
-	void SetRotation(DirectX::XMFLOAT3 m_rotation);
-
-	// ‘€ì‚·‚éƒIƒuƒWƒFƒNƒg‚©‚Ç‚¤‚©
+	// æ“ä½œã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã©ã†ã‹
 	bool isPlayer = false;
 	// OŠpŒ`‚©‚Ç‚¤‚©
 	bool isTriangle = false;
@@ -63,7 +70,7 @@ public:
 
 	~TestObject();
 
-	// ƒIƒuƒWƒFƒNƒg‚ÌƒXƒP[ƒ‹‚ª‘å‚«‚­‚È‚Á‚½‚Æ‚«‚Ì“–‚½‚è”»’è—p‚Ì•Ï”
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¹ã‚±ãƒ¼ãƒ«ãŒå¤§ãããªã£ãŸã¨ãã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®å¤‰æ•°
 	float Scale_countX = 0;
 	float Scale_countY = 0;
 

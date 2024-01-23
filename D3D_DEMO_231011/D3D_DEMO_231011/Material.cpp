@@ -1,9 +1,9 @@
-#include "Material.h"
+ï»¿#include "Material.h"
 
 
 Material::~Material()
 {
-	// ‚±‚ÌƒNƒ‰ƒX‚ªì‚Á‚½ƒIƒuƒWƒFƒNƒg‚¾‚¯‚ğ‰ğ•ú‚·‚é
+	// ã“ã®ã‚¯ãƒ©ã‚¹ãŒä½œã£ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã ã‘ã‚’è§£æ”¾ã™ã‚‹
 	SAFE_RELEASE(m_modelData.vertexBuffer);
 }
 

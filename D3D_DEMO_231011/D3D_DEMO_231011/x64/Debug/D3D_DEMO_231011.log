@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  ObjectCollision.cpp
 C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectCollision.cpp(24,44): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectCollision.cpp(40,49): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
@@ -69,3 +70,6 @@ C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectCollisio
 C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectCollision.cpp(718): warning C4715: 'ObjectCollision::SquareHit': 値を返さないコントロール パスがあります。
 C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectCollision.cpp(674): warning C4715: 'ObjectCollision::CircleHit': 値を返さないコントロール パスがあります。
   D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+=======
+
+>>>>>>> develop

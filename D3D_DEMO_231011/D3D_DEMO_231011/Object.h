@@ -1,27 +1,42 @@
-#pragma once
+ï»¿#pragma once
 #include "Sprite.h"
+#include "Collider.h"
 
-//ƒIƒuƒWƒFƒNƒgŠî’ê
+//åŸºæœ¬ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 class Object
 {
 public:
 	//----------------------------//
-	// •Ï”
+	// å¤‰æ•°
 	//----------------------------//
-	//}Œ`î•ñ‚ğˆµ‚í‚ê‚Ä‚¢‚é
+	//å›³å½¢æƒ…å ±ã‚’æ‰±ã†
 	Sprite* m_sprite;
 
-
+	//Collider* m_collider = nullptr;
 
 public:
 	
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^‰Šú‰»s‚¤
-	Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
-
-	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌXV‚ğs‚¤
-	virtual void Update(void);
+	Object(void);
 	
-	// •Ğ•t‚¯ˆ—
+	/// <summary>
+	/// åˆæœŸåŒ–ã‚’è¡Œã†é–¢æ•°
+	/// </summary>
+	/// <param name="texture"></param>
+	/// <param name="_width">width</param>
+	/// <param name="_height">height</param>
+	/// <param name="splitX"></param>
+	/// <param name="splitY"></param>
+	void CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+
+
+
+	//æ¯ãƒ«ãƒ¼ãƒ—å‘¼ã³å‡ºã•ã‚Œã‚‹
+	virtual void Update(void);
+
+	//æç”»
+	virtual void Draw(void);
+	
+	//Constructor
 	~Object(void);
 };
 

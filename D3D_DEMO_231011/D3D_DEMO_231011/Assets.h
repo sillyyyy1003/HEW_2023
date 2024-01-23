@@ -6,24 +6,31 @@
 class Assets
 {
 public:
+
 	//----------------------------//
 	// 変数
 	//----------------------------//
 	
-	//テスト用
-	ID3D11ShaderResourceView* testchar01;	//キャラ用テクスチャ
-	ID3D11ShaderResourceView* testbg01;		//背景用テクスチャ
+	//================//テスト用//================//
 
-	//テスト用 Using Shadow
-	ID3D11ShaderResourceView* testbgbox;	//箱型用テクスチャ
-	ID3D11ShaderResourceView* testObj;		//オブジェクト用テクスチャ
-	ID3D11ShaderResourceView* testShadow;	//影用テクスチャ
-
+	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
+	ID3D11ShaderResourceView* circle;
 	// 図形
 	ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
+	
+	//タイトル用のリソース
+	ID3D11ShaderResourceView* uiTitleBg;	
+	ID3D11ShaderResourceView* uiTitle;
+	ID3D11ShaderResourceView* uiPressEnter;
 
+	ID3D11ShaderResourceView* stageBg;
+
+	ID3D11ShaderResourceView* uiPauseBg;
+	ID3D11ShaderResourceView* uiResume;
+	ID3D11ShaderResourceView* uiRestart;
+	
 	ID3D11ShaderResourceView* ex;
 
 public:

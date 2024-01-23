@@ -1,28 +1,41 @@
-#include "Object.h"
-#include "KBInput.h"
+ï»¿#include "Object.h"
 
 extern Camera* g_WorldCamera;
-extern KBInput* g_KbInput;
 
-Object::Object(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
+Object::Object(void)
 {
-	//}Œ`‰Šú‰»
-	//m_sprite = new Sprite(texture, _width, _height, splitX, splitY);
+	//å›³å½¢åˆæœŸåŒ–
 	m_sprite = new Sprite();
-	m_sprite->CreateModel(texture, _width, _height, splitX, splitY);
 
-	//ƒJƒƒ‰‰Šú‰»
+	//ã‚«ãƒ¡ãƒ©åˆæœŸåŒ–
 	m_sprite->m_camera = g_WorldCamera;
+
+
 }
+
+void Object::CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY) 
+{
+	//ãƒ¢ãƒ‡ãƒ«ä½œæˆ
+	m_sprite->CreateModel(texture, _width, _height, splitX, splitY);
+}
+
+
 
 void Object::Update(void)
 {
-	//ƒL[‘€ì
+
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ›´æ–°
 	m_sprite->m_anime->Update();
 
+}
+
+void Object::Draw(void)
+{
+	m_sprite->Draw();
 }
 
 Object::~Object(void)
 {
 	delete m_sprite;
+	//delete m_collider;
 }

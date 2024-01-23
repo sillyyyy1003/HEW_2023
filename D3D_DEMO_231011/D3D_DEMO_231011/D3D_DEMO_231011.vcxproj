@@ -134,19 +134,33 @@
     <ClCompile Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CanvasUI.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderManager.cpp" />
+    <ClCompile Include="DebugManager.cpp" />
+    <ClCompile Include="DInput.cpp" />
     <ClCompile Include="Direct3D\Direct3D.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="KBInput.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectAnimation.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="ObjectCollision.cpp" />
+=======
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="ShadowObject.cpp" />
+    <ClCompile Include="SphereCollider.cpp" />
+>>>>>>> develop
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TestObject.cpp" />
+    <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="StaticAnimation.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="TrackCamera.cpp" />
-    <ClCompile Include="UiObject.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -154,39 +168,49 @@
     <ClInclude Include="..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CanvasUI.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderManager.h" />
+    <ClInclude Include="DebugManager.h" />
+    <ClInclude Include="DInput.h" />
     <ClInclude Include="Direct3D\Direct3D.h" />
     <ClInclude Include="Direct3D\Shader\PixelShader.h" />
     <ClInclude Include="Direct3D\Shader\VertexShader.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="KBInput.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
+<<<<<<< HEAD
     <ClInclude Include="ObjectCollision.h" />
+=======
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="ShadowObject.h" />
+    <ClInclude Include="SphereCollider.h" />
+>>>>>>> develop
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="TestObject.h" />
+    <ClInclude Include="Stage.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="StaticAnimation.h" />
+    <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />
-    <ClInclude Include="UiObject.h" />
     <ClInclude Include="WICTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ps_main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ps_main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vs_main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vs_main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,37 +1,55 @@
 ﻿#include "Assets.h"
 #include <locale.h>
 
+ID3D11ShaderResourceView* Assets::debugFont;
 
 Assets::Assets()
 {
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
-    testchar01 = LoadTexture("assets/char01.png");
-    testbg01 = LoadTexture("assets/testbg.png");
+    testPause= LoadTexture("assets/pause.png");
+    debugFont = LoadTexture("assets/img/ASCIILib.png");
 
-    testbgbox = LoadTexture("assets/testBox.png");
-    testObj = LoadTexture("assets/circle.png");
-    //testShadow = LoadTexture("assets/testShadow.png");
+    uiTitle = LoadTexture("assets/title/uiTitle.png");
+    uiTitleBg = LoadTexture("assets/title/titleBg.png");
+    uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
     circle = LoadTexture("assets/circle.png");
     square = LoadTexture("assets/polygon.png");
     triangle = LoadTexture("assets/Triangle.png");
 
-    ex = LoadTexture("assets/ex.png");
+    uiTitle = LoadTexture("assets/title/uiTitle.png");
+    uiTitleBg = LoadTexture("assets/title/titleBg.png");
+    uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
+    stageBg = LoadTexture("assets/bg2d.jpg");
 
+    uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
+    uiResume = LoadTexture("assets/ui/resume.png");
+    uiRestart = LoadTexture("assets/ui/restart.png");
 
+     ex = LoadTexture("assets/ex.png");
 }
 
 Assets::~Assets()
 {
-   SAFE_RELEASE(testchar01);
-   SAFE_RELEASE(testbg01);
+    //title
+    SAFE_RELEASE(uiTitleBg);
+    SAFE_RELEASE(uiTitle);
+    SAFE_RELEASE(uiPressEnter);
 
-   SAFE_RELEASE(testbgbox);
-   SAFE_RELEASE(testObj);
-   SAFE_RELEASE(testShadow);
+    //stage
+    SAFE_RELEASE(stageBg);
 
+    //ui
+   
+    SAFE_RELEASE(uiPauseBg);
+    SAFE_RELEASE(uiResume);
+    SAFE_RELEASE(uiRestart);
+
+
+    SAFE_RELEASE(testPause);
+    SAFE_RELEASE(debugFont);
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)
