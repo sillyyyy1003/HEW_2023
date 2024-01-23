@@ -5,9 +5,9 @@ SphereCollider::SphereCollider()
 {
 }
 
-void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius, COLLISION_TYPE _type)
+void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius)
 {
-    Collider::InitCollider(_type);
+    Collider::InitCollider(COLLISION_TYPE::SPHERE);
 
     m_sphereCollider.Center = center;
     m_sphereCollider.Radius = Radius;

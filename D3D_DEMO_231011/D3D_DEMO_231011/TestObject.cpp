@@ -1,17 +1,20 @@
-﻿#include "TestObject.h"
-#include "KBInput.h"
+#include "TestObject.h"
+#include "CDInput.h"
 
 extern Camera* g_WorldCamera;
-extern KBInput* g_KbInput;
+
+
+
+
 
 TestObject::TestObject()
 {
-	//図形初期化
+	//?????
 	m_objSprite = new Sprite();
 	//m_shadowSprite = new Sprite();
 
 
-	//カメラ初期化
+	//??????
 	m_objSprite->m_camera = g_WorldCamera;
 	//m_shadowSprite->m_camera = g_WorldCamera;
 }
@@ -30,19 +33,19 @@ void TestObject::Update(void)
 {
 	//if (isPlayer)
 	//{
-	//	//操作で設定する用のベクトル変数
+	//	//???????????????
 	//	XMFLOAT3 dir = { 0,0,0 };
 	//	float moveSpeed = 0.0f;
 
 	//if (g_KbInput->GetKeyPress(VK_DOWN))
 	//{
-	//	//オブジェクトの移動
+	//	//?????????
 	//	dir.y = -1;
 	//	dir.x = dir.y / tan(XMConvertToRadians(30));
 	//	moveSpeed = 0.01f;
 
-	//	//影の変化
-	//	//大きさの変化
+	//	//????
+	//	//??????
 	//	m_shadowSprite->m_scale.x += 0.01;
 	//	m_shadowSprite->m_scale.y += 0.01;
 	//	//
@@ -70,11 +73,11 @@ void TestObject::Update(void)
 	//}
 	//else
 	//{
-	//	// 操作しないオブジェクトを大きくする処理
+	//	// ???????????????????
 	//	if (g_KbInput->GetKeyPress(VK_SPACE))
 	//	{
-	//		//大きさの変化
-	//		Scale_countX += 0.013;// 当たり判定も大きくする
+	//		//??????
+	//		Scale_countX += 0.013;// ???????????
 	//		Scale_countY += 0.013;
 	//		m_objSprite->m_scale.x += 0.01;
 	//		m_objSprite->m_scale.y += 0.01;
@@ -82,6 +85,9 @@ void TestObject::Update(void)
 	//}
 	m_anime->Update();
 }
+
+
+
 
 void TestObject::Draw(void)
 {
@@ -94,17 +100,17 @@ void TestObject::Draw(void)
 BOUNDING_CIRCLE TestObject::GetBoundingCircle()
 {
 	BOUNDING_CIRCLE bc;
-	bc.center = m_objSprite->m_pos; // 判定円の中心
+	bc.center = m_objSprite->m_pos; // ??????
 	if (!isPlayer)
 	{
 		// 操作していないオブジェクト 
 		// オブジェクトと同じように当たり判定も大きくする
-		bc.radius = 1.30f; // 判定円の半径を設定//+ Scale_countX
+		bc.radius = 1.30f + Scale_countX; // 判定円の半径を設定
 	}
 	else
 	{
-		// 操作しているオブジェクト
-		bc.radius = 1.30f; // 判定円の半径を設定
+		// ????????????
+		bc.radius = 1.30f; // ?????????
 	}
 	return bc;
 }

@@ -24,7 +24,7 @@ public:
 
 	SphereCollider();
 
-	void InitCollider(DirectX::XMFLOAT3 center, float Radius, COLLISION_TYPE _type);
+	void InitCollider(DirectX::XMFLOAT3 center, float Radius);
 
 	void UpdateRadius();
 

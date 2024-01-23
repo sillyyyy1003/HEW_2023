@@ -4,6 +4,7 @@
 #include "Animation.h"
 
 
+
 /// <summary>
 /// 頂点データを表す構造体
 /// </summary>
@@ -33,12 +34,6 @@ struct CONSTBUFFER
 /// </summary>
 class Sprite :public Material
 {
-private:
-
-	//スプライトの名前を設定、エラーチェックに使う
-
-protected:
-
 
 public:
 	//----------------------------//
@@ -66,6 +61,11 @@ public:
 
 	//アニメーション
 	Animation* m_anime = nullptr;
+
+//TEST
+	// 右ベクトル
+	DirectX::XMFLOAT3 right = {1,0,0};
+	float moveSpeed = 0.0f;
 
 public:
 
@@ -99,8 +99,20 @@ public:
 	/// 平行投影用
 	/// </summary>
 	/// <param name="cb">シェーダーに渡す行列</param>
-	virtual void GenerateMatrix(CONSTBUFFER& cb);
+	void GenerateMatrix(CONSTBUFFER& cb);
 
+
+	/// <summary>
+	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）
+	/// </summary>
+	/// <param name="rot">オブジェクトの回転</param>
+	void RotateObj(XMFLOAT3& rot);
+
+	// *TEST* 移動の関数
+	void SetMoveSpeed(float speed);
+	float GetMoveSpeed();
+	// 右ベクトル
+	DirectX::XMFLOAT3 GetRight();
 
 	/// <summary>
 	/// 描画を行う関数

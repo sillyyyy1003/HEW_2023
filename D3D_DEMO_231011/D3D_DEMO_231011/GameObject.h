@@ -1,8 +1,10 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 
+
 class Object;
 class ShadowObject;
+class Collider;
 
 class GameObject
 {
@@ -16,12 +18,48 @@ public:
 	//----------------------------//
 	//オブジェクトの図形情報
 	Object* m_obj;
+	//本体の当たり判定を扱う
+	Collider* m_objCollider = nullptr;
 		
 	//影の図形情報
 	ShadowObject* m_shadow;
+	//影の当たり判定を扱う
+	Collider* m_shadowCollider = nullptr;
+	
+
+
+	////前後の位置を表す
+	//enum VERTICAL_POS {
+	//	IDLE,		//void
+	//	FRONT,		//手前の位置
+	//	MID,		//中間の位置
+	//	BACK,		//後の位置
+	//	
+	//};
+
+	//VERTICAL_POS m_verPos = VERTICAL_POS::IDLE;
+
+	////左右の位置を表す
+	//enum HORIZON_POS {
+	//	IDLE,
+	//	L1,
+	//	L2,
+	//	MID,
+	//	R1,
+	//	R2,
+	//};
+
+	//HORIZON_POS m_horPos = HORIZON_POS::IDLE;
 
 
 
+
+	//光があるかどうか
+	bool isLit = false;
+
+
+
+	
 public:
 	//コンストラクタ
 	GameObject();
@@ -61,7 +99,6 @@ public:
 	void Update(void);
 
 	//コライダーのデータを更新する
-	
 	void UpdateObjectColliderData(void);
 
 	void UpdateShadowColliderData(void);

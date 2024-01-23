@@ -28,7 +28,7 @@ public:
 	bool isActive = false;
 
 
-	// }Œ`‚Ì’¸“_À•W
+	// ï¿½}ï¿½`ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½W
 	std::vector<Vector2> vertices;
 
 
@@ -49,13 +49,7 @@ public:
 	// å††ã®åº§æ¨™ã¨åŠå¾„ã‚’è¨­å®š
 	void SetBoundingCircle(BOUNDING_CIRCLE bc);
 
-<<<<<<< HEAD
 	// æ“ä½œã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã©ã†ã‹
-=======
-	void SetRotation(DirectX::XMFLOAT3 m_rotation);
-
-	// ‘€ì‚·‚éƒIƒuƒWƒFƒNƒg‚©‚Ç‚¤‚©
->>>>>>> feature/Sakai
 	bool isPlayer = false;
 
 	virtual void Update(void);

@@ -5,8 +5,9 @@ BoxCollider::BoxCollider()
 {
 }
 
-void BoxCollider::InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents, COLLISION_TYPE _type)
+void BoxCollider::InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents)
 {
+    Collider::InitCollider(COLLISION_TYPE::SQUARE);
     m_boxCollider.Center = center;
     m_boxCollider.Extents = extents;
 }

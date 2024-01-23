@@ -1,5 +1,1 @@
-﻿  SAT.cpp
-c1xx : fatal  error C1083: 无法打开源文件: “..\..\..\..\Desktop\合体したときの当たり判定\当たり判定　三角の当たり判定sat\D3D_DEMO_231011\SAT.cpp”: No such file or directory
-  Assets.cpp
-C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Assets.cpp(17,5): error C2065: “triangle”: 未声明的标识符
-  正在生成代码...
+

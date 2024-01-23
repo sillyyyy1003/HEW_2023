@@ -8,43 +8,7 @@ void TrackCamera::Update()
 
 	if (m_targetObject != nullptr) //追跡する場合
 	{
-		/*
-		//オブジェクトが回転した場合
 
-		//float m_Pi = 3.1415926;
-		////回転の角度を獲得する
-		//float degree = m_targetObject->m_sprite->m_rotation.x;
-		////角度をラジアンに変換する
-		//float radians = degree *  m_Pi/ 180.0;
-		////カメラをオブジェクトと同じ横位置に設定
-		//this->m_CameraPos.x = m_targetObject->m_sprite->m_pos.x;
-
-		////ｚ軸の距離を計算する
-		//float distanceZ = m_targetObject->m_sprite->m_pos.z - this->m_CameraPos.z;
-
-		////カメラ位置と注視点の位置を更新する
-		//this->m_CameraPos.y = distanceZ * sin(radians);
-		//this->m_CameraPos.z = distanceZ * cos(radians);
-
-
-		//this->SetFocusPos(m_targetObject->m_sprite->m_pos);
-
-		VERTEX
-
-		//カメラの方向ベクトルを計算する
-
-
-		//ターゲットオブジェクトの法線ベクトルを計算する
-
-
-		//垂直状態かどうかを判定
-		
-
-		//垂直状態ではない場合
-
-
-		//カメラを
-		*/
 		
 		//平面との垂直ベクトルを計算する
 		DirectX::XMFLOAT3 planeNormal = GenerateTargetNormal();
@@ -57,9 +21,7 @@ void TrackCamera::Update()
 		DirectX::XMFLOAT3 newCameraFocus;
 
 		//カメラから平面の中心の距離を計算する
-		float distance = 0.0f;//変数に変えてほしい
-		
-
+		//float distance = 0.0f;//変数に変えてほしい
 
 		//回転がない時
 		if (m_targetObject->m_sprite->m_rotation.x == 0) {
@@ -67,7 +29,7 @@ void TrackCamera::Update()
 			//カメラの位置を設定する
 			newCameraPos.x = m_targetObject->m_sprite->m_pos.x;
 			newCameraPos.y = m_targetObject->m_sprite->m_pos.y;
-			newCameraPos.z = m_targetObject->m_sprite->m_pos.z - 9.0f;
+			newCameraPos.z = m_targetObject->m_sprite->m_pos.z - distance;
 			//カメラの注視点を設定する
 			newCameraFocus.x = m_targetObject->m_sprite->m_pos.x;
 			newCameraFocus.y = m_targetObject->m_sprite->m_pos.y;
@@ -114,8 +76,7 @@ void TrackCamera::Update()
 
 	}
 	
-	
-	
+
 	Camera::Update();
 
 }
@@ -128,6 +89,16 @@ void TrackCamera::SetTarget(Object* _targetObject)
 void TrackCamera::SetTarget(StaticObject* _targetObject)
 {
 	m_targetObject = _targetObject;
+}
+
+void TrackCamera::RomoveTarget(void)
+{
+	m_targetObject = nullptr;
+}
+
+void TrackCamera::SetDistance(float _distance)
+{
+	distance = _distance;
 }
 
 DirectX::XMFLOAT3 TrackCamera::GenerateTargetNormal(void)

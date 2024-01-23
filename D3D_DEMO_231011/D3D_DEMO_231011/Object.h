@@ -12,7 +12,7 @@ public:
 	//図形情報を扱う
 	Sprite* m_sprite;
 
-	Collider* m_collider = nullptr;
+	//Collider* m_collider = nullptr;
 
 public:
 	
@@ -27,6 +27,8 @@ public:
 	/// <param name="splitX"></param>
 	/// <param name="splitY"></param>
 	void CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+
+
 
 	//毎ループ呼び出される
 	virtual void Update(void);

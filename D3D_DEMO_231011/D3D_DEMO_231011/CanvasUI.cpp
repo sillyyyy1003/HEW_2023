@@ -1,5 +1,7 @@
-#include "CanvasUI.h"
+ï»¿#include "CanvasUI.h"
 #include "StaticAnimation.h"
+
+extern Camera* g_WorldCamera;
 
 CanvasUI::CanvasUI()
 {
@@ -11,20 +13,22 @@ CanvasUI::~CanvasUI()
 
 void CanvasUI::CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
-	//ƒJƒƒ‰‚ÌŽg—p‚ð‹Ö‚¶‚é
+	//ã‚«ãƒ¡ãƒ©ã®ä½¿ç”¨ã‚’ç¦ã˜ã‚‹
 	isUseCamera = false;
 
-	//ƒ‚ƒfƒ‹ì¬
+	//ãƒ¢ãƒ‡ãƒ«ä½œæˆ
 	Sprite::CreateModel(texture, _width, _height, splitX, splitY);
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ð”z’u
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é…ç½®
 	m_anime = new Animation(splitX,splitY);
+
+	m_camera = g_WorldCamera;
 
 }
 
 void CanvasUI::Update(void)
 {
-	//UVÀ•W‚ÌXV
+	//UVåº§æ¨™ã®æ›´æ–°
 	m_anime->Update();
 
 }

@@ -1,6 +1,9 @@
-﻿#include "Sprite.h"
+#include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
+#include "DInput.h"
+
+#define VIEWANGLE	 (54.43)
 
 extern Assets* g_Assets;
 
@@ -96,17 +99,21 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 		//カメラの行列作成
 		matrixView = m_camera->GetMatrixView();
 		//透視投影の行列作成
-		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(90), RATIO_W / RATIO_H, 0.01f, 100.0f);
+		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(54.43), RATIO_W / RATIO_H, 0.01f, 100.0f);
 	
 	}
 	else {//カメラを使わない→uiなどに使われている
 		
 		matrixView = XMMatrixIdentity();//カメラの行列を単位行列
-		
+		//matrixView = m_camera->GetMatrixView();
 		matrixProjPerspective = XMMatrixOrthographicLH(RATIO_W, RATIO_H, 0.0f, 3.0f);//平行投影行列を作成
 		matrixProjPerspective = XMMatrixTranspose(matrixProjPerspective);
 	}
 	
+
+	// TEST右向きベクトル
+	XMVECTOR iniRight = XMVectorSet(1, 0, 0, 0);
+
 
 	//投影行列作成
 	matrixProj = matrixView *matrixProjPerspective ;
@@ -124,6 +131,20 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
 	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
 
+
+	// *TEST* 右向きベクトル
+	XMVECTOR newRight = XMVector3TransformCoord(iniRight, matrixRotate);
+	// 変換
+	right.x = XMVectorGetX(newRight);
+	right.y = XMVectorGetY(newRight);
+	right.z = XMVectorGetZ(newRight);
+	// 右に行く
+	XMFLOAT3 right = GetRight();
+	float moveSpeed = GetMoveSpeed();
+	m_pos.x += right.x * moveSpeed;
+	m_pos.y += right.y * moveSpeed;
+	m_pos.z += right.z * moveSpeed;
+
 	//UVアニメーション行列作成
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 
@@ -135,35 +156,40 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	//マテリアル色を定数バッファデータに代入
 	cb.materialDiffuse = m_materialDiffuse;
 
-	
-	/*
-	//ワールド変換行列の作成
-	//移動行列
-	XMMATRIX matrixMove = XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
-	//拡大縮小行列
-	XMMATRIX matrixScale = XMMatrixScaling(m_scale.x, m_scale.y, m_scale.z);
-
-	//回転行列
-	XMMATRIX matrixRotateX = XMMatrixRotationX(XMConvertToRadians(m_rotation.x));
-	XMMATRIX matrixRotateY = XMMatrixRotationY(XMConvertToRadians(m_rotation.y));
-	XMMATRIX matrixRotateZ = XMMatrixRotationZ(XMConvertToRadians(m_rotation.z));
-	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
-	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
-	
-	matrixWorld = matrixWorld * matrixView * matrixProj;
-
-	//UVアニメーション行列作成
-	XMMATRIX matrixUV = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
-
-
-	cb.matrixRotate = XMMatrixTranspose(matrixRotate);
-	cb.matrixUV = XMMatrixTranspose(matrixUV);
-	cb.matrixWorld = XMMatrixTranspose(matrixWorld);
-
-	//マテリアル色を定数バッファデータに代入
-	cb.materialDiffuse = m_materialDiffuse;
-*/
 }
+
+void Sprite::RotateObj(XMFLOAT3& rot)
+{
+
+	enum VALUE {val = 1,};  float fval = 0.2;//テストの値
+	
+	POINT mouseMovePos = Input::Get()->GetMouseMove();
+
+	//回転する条件（回転制限）
+	if (m_rotation.x/* == 0 || m_rotation.x <= 90*/) { rot.x = m_rotation.x += mouseMovePos.y * val * fval; };
+	if (m_rotation.y/* == 0 || m_rotation.y <= 90*/) { rot.y = m_rotation.y += mouseMovePos.x * val * fval; };
+	//rot.x = m_rotation.x += mouseMovePos.y * val * fval;
+	//rot.y = m_rotation.y += mouseMovePos.x * val * fval;
+}
+
+
+
+void Sprite::SetMoveSpeed(float speed)
+{
+	moveSpeed = speed;
+}
+
+float Sprite::GetMoveSpeed()
+{
+	return moveSpeed;
+}
+
+DirectX::XMFLOAT3 Sprite::GetRight()
+{
+	return right;
+}
+
+
 
 void Sprite::Draw(void)
 {
@@ -192,7 +218,3 @@ Sprite::~Sprite(void)
 {
 	delete m_anime;
 }
-
-
-
-
