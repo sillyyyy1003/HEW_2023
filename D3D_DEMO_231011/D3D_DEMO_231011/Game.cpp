@@ -37,6 +37,8 @@ void Game::Init()
 
 	stageBg = new StaticObject();
 	circle = new GameObject();
+	triangle = new GameObject();
+	square = new GameObject();
 
 	//テクスチャ読み込み・モデル作成
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
@@ -55,13 +57,97 @@ void Game::Init()
 	circle->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
 	circle->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
 	//オブジェクトの位置を配置
-	circle->m_shadow->m_sprite->m_pos = { 2, 2, 0 };
-	circle->m_obj->m_sprite->m_pos = { 2, 2, 0 };
+	//circle->m_shadow->m_sprite->m_pos = { 0, 0, 0 };
+	circle->m_obj->m_sprite->m_pos = { 8, 0, -2 };
 	//オブジェクトのコライダーを配置
-	circle->m_shadowCollider = new PolygonCollider();
-	circle->m_shadowCollider->InitCollider(POLYGON);
-	circle->m_objCollider = new PolygonCollider();
-	circle->m_objCollider->InitCollider(POLYGON);
+	circle->m_shadowCollider = new SphereCollider({},3.0f);
+	circle->m_objCollider = new SphereCollider({}, 3.0f);
+	//circle->isPlayer = true;
+
+	//モデルを作る
+	triangle->CreateObject(g_Assets->triangle, 200, 200, 1, 1);
+	triangle->CreateShadow(g_Assets->triangle, 200, 200, 1, 1);
+	//アニメションを配置
+	triangle->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	triangle->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	triangle->m_obj->m_sprite->m_pos = { 0, 0, -2 };
+	//オブジェクトのコライダーを配置
+	triangle->m_shadowCollider = new PolygonCollider({},2.3f);
+	triangle->m_objCollider = new PolygonCollider({}, 2.3f);
+	triangle->isPlayer = true;
+
+	//モデルを作る
+	square->CreateObject(g_Assets->square, 200, 200, 1, 1);
+	square->CreateShadow(g_Assets->square, 200, 200, 1, 1);
+	//アニメションを配置
+	square->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	square->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	square->m_obj->m_sprite->m_pos = { -8, 2, -2 };
+	//オブジェクトのコライダーを配置
+	square->m_shadowCollider = new BoxCollider({}, { 3,3,3 });
+	square->m_objCollider = new BoxCollider({}, { 3,3,3 });
+	//square->isPlayer = true;
+
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i] = new GameObject();
+
+		//モデルを作る
+		ex[i]->CreateObject(g_Assets->ex, 100, 100, 1, 1);
+		ex[i]->CreateShadow(g_Assets->ex, 100, 100, 1, 1);
+		//アニメションを配置
+		ex[i]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+		ex[i]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+		//オブジェクトの位置を配置
+		ex[i]->m_obj->m_sprite->m_pos = { 0, 0, -4 };
+		ex[i]->isEx = true;
+		ex[i]->isPlayer = true;
+	}
+
+	object[POLYGON] = new GameObject();
+	//モデルを作る
+	object[POLYGON]->CreateObject(g_Assets->triangle, 200, 200, 1, 1);
+	object[POLYGON]->CreateShadow(g_Assets->triangle, 200, 200, 1, 1);
+	//アニメションを配置
+	object[POLYGON]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	object[POLYGON]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	object[POLYGON]->m_obj->m_sprite->m_pos = { 0, 0, -2 };
+	//オブジェクトのコライダーを配置
+	object[POLYGON]->m_shadowCollider = new PolygonCollider({}, 2.3f);
+	object[POLYGON]->m_objCollider = new PolygonCollider({}, 2.3f);
+	object[POLYGON]->isPlayer = true;
+
+	object[SQUARE] = new GameObject();
+
+	object[SQUARE]->CreateObject(g_Assets->square, 200, 200, 1, 1);
+	object[SQUARE]->CreateShadow(g_Assets->square, 200, 200, 1, 1);
+	//アニメションを配置
+	object[SQUARE]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	object[SQUARE]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	object[SQUARE]->m_obj->m_sprite->m_pos = { -8, 2, -2 };
+	//オブジェクトのコライダーを配置
+	object[SQUARE]->m_shadowCollider = new BoxCollider({}, { 3,3,3 });
+	object[SQUARE]->m_objCollider = new BoxCollider({}, { 3,3,3 });
+	//object[SQUARE]->isPlayer = true;
+
+	object[SPHERE] = new GameObject();
+
+	object[SPHERE]->CreateObject(g_Assets->circle, 200, 200, 1, 1);
+	object[SPHERE]->CreateShadow(g_Assets->circle, 200, 200, 1, 1);
+	//アニメションを配置
+	object[SPHERE]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	object[SPHERE]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	//circle->m_shadow->m_sprite->m_pos = { 0, 0, 0 };
+	object[SPHERE]->m_obj->m_sprite->m_pos = { 8, 0, -2 };
+	//オブジェクトのコライダーを配置
+	object[SPHERE]->m_shadowCollider = new SphereCollider({}, 3.0f);
+	object[SPHERE]->m_objCollider = new SphereCollider({}, 3.0f);
+	//object[SPHERE]->isPlayer = true;
 
 	//アニメーションの設定
 
@@ -170,14 +256,17 @@ void Game::InitStage1_1(void)
 
 	stageBg->m_sprite->m_scale = { 2.6,2.6,1.0 };
 	
-	circle->m_shadow->m_sprite->m_rotation.x = 19.8;
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i]->m_obj->m_sprite->m_rotation.x = 19.8;
+	}
 
-	circle->m_shadow->m_sprite->m_scale = { 2.6,2.6,1.0 };
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		object[i]->m_obj->m_sprite->m_scale = { 2.6,2.6,1.0 };
+		object[i]->m_obj->m_sprite->m_rotation.x = 19.8;
+	}
 
-	//circle->m_obj->m_sprite->m_rotation.x = 19.8;
-
-	//circle->m_obj->m_sprite->m_scale = { 2.6,2.6,1.0 };
-	
 	//大きさ設定
 
 
@@ -330,7 +419,69 @@ void Game::StageUpdate(void)
 void Game::UpdateStage1_1(void)
 {
 	stageBg->Update();
-	circle->Update();
+
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		object[i]->Update();
+	}
+
+	for (int j = 0; j < sizeof(object) / sizeof(object[0]); ++j)
+	{
+		for (int i = 1+j; i < sizeof(object) / sizeof(object[0]); ++i)
+		{
+			if (object[i]->m_objCollider->GetColliderType() == SQUARE)
+			{
+				if (object[j]->m_objCollider->isBoxCollision(object[i]->m_objCollider))
+				{
+					if (object[i]->isPlayer)
+					{
+						object[j]->m_objCollider->isActive = false;
+					}
+					else
+					{
+						object[i]->m_objCollider->isActive = false;
+					}
+				}
+			}
+			else if (object[i]->m_objCollider->GetColliderType() == SPHERE)
+			{
+				if (object[j]->m_objCollider->isSphereCollision(object[i]->m_objCollider))
+				{
+					if (object[i]->isPlayer)
+					{
+						object[j]->m_objCollider->isActive = false;
+					}
+					else
+					{
+						object[i]->m_objCollider->isActive = false;
+					}
+				}
+			}
+			else if (object[i]->m_objCollider->GetColliderType() == POLYGON)
+			{
+				if (object[j]->m_objCollider->isPolygonCollision(object[i]->m_objCollider))
+				{
+					if (object[i]->isPlayer)
+					{
+						object[j]->m_objCollider->isActive = false;
+					}
+					else
+					{
+						object[i]->m_objCollider->isActive = false;
+					}
+				}
+			}
+		}
+	}
+	
+
+	//std::vector<Vector3> verticies = triangle->m_objCollider->GetVerticies();
+	//for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	//{
+	//	ex[i]->m_obj->m_sprite->m_pos.x = verticies[i].x;
+	//	ex[i]->m_obj->m_sprite->m_pos.y = verticies[i].y;
+	//	ex[i]->Update();
+	//}
 }
 
 void Game::UpdateStage1_2(void)
@@ -402,6 +553,16 @@ Game::~Game()
 
 	delete stageBg;		//ステージ背景
 	delete circle;		//円
+	delete triangle;	//三角
+	delete square;		//四角
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		delete ex[i];
+	}
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		delete object[i];
+	}
 
 
 	//delete circle;			//circle
@@ -539,7 +700,17 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
-	circle->Draw();
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i]->Draw();
+	}
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		if (object[i]->m_objCollider->isActive)
+		{
+			object[i]->Draw();
+		}
+	}
 }
 
 

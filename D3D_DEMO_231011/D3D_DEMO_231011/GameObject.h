@@ -57,7 +57,9 @@ public:
 	//光があるかどうか
 	bool isLit = false;
 
+	bool isPlayer = false;
 
+	bool isEx = false;
 
 	
 public:

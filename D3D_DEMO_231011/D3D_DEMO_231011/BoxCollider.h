@@ -8,41 +8,39 @@ class BoxCollider : public Collider
 {
 private:
 
-	DirectX::BoundingBox m_boxCollider;
-
 public:
 
-	DirectX::XMFLOAT3 m_center = {};
+	//DirectX::XMFLOAT3 m_center = {};
 	DirectX::XMFLOAT3 m_extents = {};
 
-
 public:
 
-	BoxCollider();
+	/// <summary>
+	/// 引数１：座標　引数２：四角形の幅
+	/// </summary>
+	/// <param name="center"></param>
+	/// <param name="extents"></param>
+	BoxCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents);
 
 	void InitCollider(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 extents);
 
 	void UpdateExtents();
 
-	void UpdatePos();
+	void UpdatePos(DirectX::XMFLOAT3 m_center);
 
 	/// <summary>
 	/// 毎回呼び出される、状態を更新する関数
 	/// </summary>
 	/// <param name="radius">半径</param>
-	void Update() override;
+	void Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation) override;
 
 	/// <summary>
 	/// 当たり判定
 	/// </summary>
 	/// <param name="sphereCollider">球体</param>
-	bool isCollision(SphereCollider* sphereCollider);
-	bool isCollision(BoxCollider* boxCollider);
-	bool isCollision(PolygonCollider* polygonCollider);
+	bool isSphereCollision(Collider* sphereCollider) override;
+	bool isBoxCollision(Collider* boxCollider) override;
 
-	DirectX::BoundingBox GetCollider(void) { return m_boxCollider; };
-
-
-
+	//DirectX::BoundingBox GetCollider(void) { return m_boxCollider; };
 };
 

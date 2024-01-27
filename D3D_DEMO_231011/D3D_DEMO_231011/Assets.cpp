@@ -21,6 +21,10 @@ Assets::Assets()
     uiRestart = LoadTexture("assets/ui/restart.png");
 
     circle = LoadTexture("assets/circle.png");
+    triangle = LoadTexture("assets/triangle.png");
+    square = LoadTexture("assets/polygon.png");
+
+    ex = LoadTexture("assets/ex.png");
 
 }
 

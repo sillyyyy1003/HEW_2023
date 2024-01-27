@@ -4,6 +4,11 @@
 #include <math.h>
 #include "DInput.h"
 
+//#define MOVEDISTANCEZ 2.5
+#define MOVEDISTANCEZ 1
+//#define MOVEDISTANCEX 4.4
+#define MOVEDISTANCEX 1
+
 extern Camera* g_WorldCamera;
 
 GameObject::GameObject()
@@ -89,9 +94,44 @@ void GameObject::Update()
 	m_obj->Update();
 
 	//影
-	m_obj->Update();
 
-	MoveObject(m_obj);
+
+	if (isPlayer)
+	{
+		MoveObject(m_obj);
+	}
+
+	if (!isEx)
+	{
+		m_objCollider->Update(m_obj->m_sprite->m_pos, m_obj->m_sprite->m_rotation);
+	}
+
+
+	//if (m_obj->m_sprite->m_pos.x > 11)
+	//{
+	//	m_obj->m_sprite->m_pos.x = 11;
+	//}
+	//if (m_obj->m_sprite->m_pos.x < -11)
+	//{
+	//	m_obj->m_sprite->m_pos.x = -11;
+	//}
+	//if (m_obj->m_sprite->m_pos.z > -1)
+	//{
+	//	m_obj->m_sprite->m_pos.z = -1;
+	//}
+	//if (m_obj->m_sprite->m_pos.z < -6)
+	//{
+	//	m_obj->m_sprite->m_pos.z = -6;
+	//}
+	//if (m_obj->m_sprite->m_pos.y > -2)
+	//{
+	//	m_obj->m_sprite->m_pos.y = -2;
+	//}
+	//if (m_obj->m_sprite->m_pos.y < -4)
+	//{
+	//	m_obj->m_sprite->m_pos.y = -4;
+	//}
+	//m_obj->m_sprite->m_pos.y = 0;
 }
 
 void GameObject::UpdateObjectColliderData(void)
@@ -163,39 +203,40 @@ void GameObject::MoveObject(Object* _target)
 {
 	//移動入力
 	//WASD上下左右移動
-	if (Input::Get()->GetKeyPress(DIK_W)) {
+	if (Input::Get()->GetKeyTrigger(DIK_W)) {
 
-		_target->m_sprite->m_pos.y += 0.1f;
+		//_target->m_sprite->m_pos.y += MOVEDISTANCEZ /2;
+		_target->m_sprite->m_pos.z += MOVEDISTANCEZ;
+	}
+
+	if (Input::Get()->GetKeyTrigger(DIK_A)) {
+
+		_target->m_sprite->m_pos.x -= MOVEDISTANCEX;
 
 	}
 
-	if (Input::Get()->GetKeyPress(DIK_A)) {
+	if (Input::Get()->GetKeyTrigger(DIK_D)) {
 
-		_target->m_sprite->m_pos.x -= 0.1f;
-
-	}
-
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-
-		_target->m_sprite->m_pos.x += 0.1f;
+		_target->m_sprite->m_pos.x += MOVEDISTANCEX;
 
 	}
 
-	if (Input::Get()->GetKeyPress(DIK_S)) {
+	if (Input::Get()->GetKeyTrigger(DIK_S)) {
 
-		_target->m_sprite->m_pos.y -= 0.1f;
+		//_target->m_sprite->m_pos.y -= MOVEDISTANCEZ / 2;
+		_target->m_sprite->m_pos.z -= MOVEDISTANCEZ;
 
 	}
 	//↑キー/↓キーで前後移動
 
-	if (Input::Get()->GetKeyPress(DIK_UPARROW))
+	if (Input::Get()->GetKeyTrigger(DIK_UPARROW))
 	{
-		_target->m_sprite->m_pos.z += 0.1f;
+		_target->m_sprite->m_pos.y += MOVEDISTANCEZ;
 	}
 
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
 	{
-		_target->m_sprite->m_pos.z -= 0.1f;
+		_target->m_sprite->m_pos.y -= MOVEDISTANCEZ;
 	}
 
 

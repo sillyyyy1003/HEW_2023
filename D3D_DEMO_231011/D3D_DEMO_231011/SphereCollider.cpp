@@ -1,8 +1,10 @@
 ﻿#include "SphereCollider.h"
 #include "BoxCollider.h"
 
-SphereCollider::SphereCollider()
+SphereCollider::SphereCollider(DirectX::XMFLOAT3 center, float Radius)
 {
+    //Collider 
+    InitCollider(center, Radius);
 }
 
 void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius)
@@ -14,21 +16,19 @@ void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius)
 
 }
 
-void SphereCollider::UpdateRadius()
+void SphereCollider::UpdateRadius(float Radius)
 {
     m_sphereCollider.Radius = m_radius;
 }
 
-void SphereCollider::UpdatePos()
+void SphereCollider::UpdatePos(DirectX::XMFLOAT3 m_center)
 {
     m_sphereCollider.Center = m_center;
 }
 
-
-
-bool SphereCollider::isCollision(SphereCollider* sphereCollider)
+bool SphereCollider::isSphereCollision(Collider* sphereCollider)
 {
-    if (this->GetCollider().Intersects(sphereCollider->SphereCollider::GetCollider()))
+    if (m_sphereCollider.Intersects(sphereCollider->GetSphereCollider()))
     {
         return true;
     }
@@ -39,9 +39,9 @@ bool SphereCollider::isCollision(SphereCollider* sphereCollider)
     
 }
 
-bool SphereCollider::isCollision(BoxCollider* boxCollider)
+bool SphereCollider::isBoxCollision(Collider* boxCollider)
 {
-    if (this->GetCollider().Intersects(boxCollider->BoxCollider::GetCollider()))
+    if (m_sphereCollider.Intersects(boxCollider->GetBoxCollider()))
     {
         return true;
     }
@@ -51,7 +51,7 @@ bool SphereCollider::isCollision(BoxCollider* boxCollider)
    
 }
 
-void SphereCollider::Update()
+void SphereCollider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation)
 {
     if (!isActive) 
     {
@@ -59,10 +59,9 @@ void SphereCollider::Update()
     }
     else {
 
-        UpdatePos();
+        UpdatePos(m_center);
 
-        UpdateRadius();
-        
+        //UpdateRadius();
     }
 
 }
