@@ -15,6 +15,9 @@ private:
 	//移動の数
 	int m_moveStep=0;
 
+	//ステージは作動中かどうか？
+	bool isActive = false;
+
 public:
 
 	//ここでステージの初期配置を行う
@@ -23,12 +26,14 @@ public:
 	//毎ループで行う関数
 	void Update(void);
 
+	//ステージを作動しているかどうか
+	void SetActive(bool isActive) { this->isActive = isActive; };
+	bool GetActive(void) { return this->isActive; };
+
+
 	//ステップ数を加算していく
 	void StepCount(void);
-
 	int GetStep(void) { return m_moveStep; };
-
-	
 
 public:
 

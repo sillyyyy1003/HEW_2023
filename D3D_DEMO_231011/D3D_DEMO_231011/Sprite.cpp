@@ -27,10 +27,35 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 
 	//モデル頂点データ作成
 	//Notion:*1.25/96 -> 入力した画像の大きさをそのまま表示するため
-	left = -(_width / 2.0f) * 1.25 / 96;
-	right = (_width / 2.0f) * 1.25 / 96;
-	top = (_height / 2.0f) * 1.25 / 96;
-	bottom = -(_height / 2.0f) * 1.25 / 96;
+
+	switch (m_spriteType) {
+	
+	case SHADOW:
+		left = -(_width / 2.0f) * 1.25 / 96;
+		right = (_width / 2.0f) * 1.25 / 96;
+		top = (_height / 2.0f) * 1.25 / 96;
+		bottom = -(_height / 2.0f) * 1.25 / 96;
+
+		break;
+
+	case OBJECT:
+
+		left = -(_width / 2.0f) * 1.25 / 96;
+		right = (_width / 2.0f) * 1.25 / 96;
+		bottom = 0;
+		top = (_height) * 1.25 / 96;
+		break;
+
+	case STATIC_OBJECT:
+
+		left = -(_width / 2.0f) * 1.25 / 96;
+		right = (_width / 2.0f) * 1.25 / 96;
+		top = (_height / 2.0f) * 1.25 / 96;
+		bottom = -(_height / 2.0f) * 1.25 / 96;
+
+		break;
+	}
+
 	z = 0.0f;	
 
 

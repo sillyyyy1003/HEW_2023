@@ -9,7 +9,7 @@ private:
 	
 	SceneManager() {}// コンストラクタ
 	
-	~SceneManager() {}// デストラクタ
+	~SceneManager();// デストラクタ
 
 	//コピーとかを禁止にする
 	SceneManager(const SceneManager&) = delete;// オブジェクトのコピー
@@ -17,9 +17,11 @@ private:
 	SceneManager(SceneManager&&) = delete;// オブジェクトのムーブ
 	SceneManager& operator=(SceneManager&&) = delete;// オブジェクトのムーブ代入
 
+public:
+
 	//ステージの情報扱う
 	Stage** m_stageHolder;
-		
+
 public:
 	
 	//シングルトン
@@ -31,6 +33,9 @@ public:
 
 	/*Update*/
 	void Update();
+
+	//今作動中のステージを返す
+	int GetActiveStage(void);
 
 };
 

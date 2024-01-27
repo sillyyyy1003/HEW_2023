@@ -14,20 +14,29 @@ class Game
 {
 
 private:
+
+	DirectX::XMFLOAT3 m_lightPos = { 0,0,0 };
 	
 	//ここでGameObject追加する
 	CanvasUI*	uiTitle;		//タイトル文字
 	CanvasUI*	uiTitleBg;		//タイトル背景
 	CanvasUI*	uiPressEnter;	//タイトルエンターキー
 
-	StaticObject* stageBg;		//ステージ背景
-	
+
 
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
-	CanvasUI*	uiRestart;	//ステージのボタン
+	CanvasUI*	uiRestart;		//ステージのボタン
+
+	//stage1-1
+	StaticObject* stageBg;		//ステージ背景
+	GameObject* testObj;		//移動テスト用のオブジェクト
+	GameObject* coconut;		//円
+	GameObject* lamp;			//長細の棒
+	GameObject* housePlate;			//長方形
 
 	GameObject* circle;			//circle
+
 
 
 private:
@@ -61,6 +70,9 @@ public:
 	void InitStage3_1(void);
 	void InitStage3_2(void);
 	void InitStage3_3(void);
+
+	void RailInit1_1(void);
+	void RailInit1_2(void);
 
 	//ゲーム本体
 	void GameUpdate(void);

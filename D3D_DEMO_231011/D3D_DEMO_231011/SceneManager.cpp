@@ -5,6 +5,15 @@
 #define STAGE_NUM	(9)
 
 
+SceneManager::~SceneManager()
+{
+	for (int i = 0; i < STAGE_NUM; i++) {
+		delete m_stageHolder[i];
+	}
+
+	delete[] m_stageHolder;
+}
+
 SceneManager* SceneManager::Get()
 {
 	static SceneManager IniInstance;
@@ -14,8 +23,10 @@ SceneManager* SceneManager::Get()
 void SceneManager::Init()
 {
 	//ここで全部のゲームオブジェクトの初期化を完成する
-	Game::Get()->Init();
+	//Game::Get()->Init();
 	
+	m_stageHolder = new Stage * [STAGE_NUM];
+
 	//ステージを初期化
 	for (int i = 0; i < STAGE_NUM; i++)
 	{
@@ -29,6 +40,21 @@ void SceneManager::Init()
 void SceneManager::Update()
 {
 
+}
+
+int SceneManager::GetActiveStage(void)
+{
+	for (int i = 0; i < STAGE_NUM; i++) {
+
+		if (m_stageHolder[i]->GetActive()) {
+
+			return i;
+		}
+
+		else {
+			return 0;
+		}
+	}
 }
 
 

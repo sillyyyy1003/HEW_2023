@@ -12,6 +12,8 @@ void Stage::Init(void)
 	//ˆÚ“®”‚ğƒŠƒZƒbƒg‚·‚é
 	m_moveStep = 0;
 
+	isActive = false;
+
 }
 
 void Stage::Update(void)

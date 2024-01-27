@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "DInput.h"
 #include "DebugManager.h"
+#include "SceneManager.h"
 
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
@@ -15,7 +16,7 @@ Assets*		g_Assets;			//ASSETS
 Camera*		g_WorldCamera;		//CAMERA
 Game*		g_Game;				//ゲーム
 DebugManager* g_DebugManager;	//デバッグ用ツール
-
+SceneManager* g_SceneManager;
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -76,8 +77,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//カメラの初期化
 	g_WorldCamera = new TrackCamera();
 
+	//シーンマネージャーの初期化処理
+	g_SceneManager=SceneManager::Get();
+
+	g_SceneManager->SceneManager::Init();
+
 	//ゲームクラスの初期化処理
 	g_Game = Game::Get();
+	
 	g_Game->Game::Init();
 
 

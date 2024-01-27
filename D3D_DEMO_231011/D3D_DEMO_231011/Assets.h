@@ -15,6 +15,7 @@ public:
 
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* circle;
+	ID3D11ShaderResourceView* shadow;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
 	//================//テスト用//================//
@@ -24,7 +25,16 @@ public:
 	ID3D11ShaderResourceView* uiTitle;
 	ID3D11ShaderResourceView* uiPressEnter;
 
+	//stage1-1用リソース
 	ID3D11ShaderResourceView* stageBg;
+
+	ID3D11ShaderResourceView* coconut;
+	ID3D11ShaderResourceView* coconutShadow;
+	ID3D11ShaderResourceView* lamp;
+	ID3D11ShaderResourceView* lampShadow;
+	ID3D11ShaderResourceView* housePlate;
+	ID3D11ShaderResourceView* housePlateShadow;
+
 
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;

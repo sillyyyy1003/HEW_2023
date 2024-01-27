@@ -14,8 +14,10 @@
 #include "StaticAnimation.h"
 #include "ObjectAnimation.h"
 
+#include "RailManager.h"
 #include "DInput.h"
 #include <stdio.h>
+
 
 #define INITROTATE	(19.8)
 
@@ -37,27 +39,45 @@ void Game::Init()
 	uiPauseBg = new CanvasUI();
 
 
-	stageBg = new StaticObject();
 	circle = new GameObject();
+
+	//stage1-1
+	stageBg = new StaticObject();
+	coconut = new GameObject();
+	lamp = new GameObject();
+	housePlate = new GameObject();
+
+	testObj = new GameObject();
+
+
+
+	//stage1に使われてる
 
 	//テクスチャ読み込み・モデル作成
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
 	uiTitleBg->CreateModel(g_Assets->uiTitleBg, 1280, 720, 1, 1);
 	uiPressEnter->CreateModel(g_Assets->uiPressEnter, 1280, 300, 1, 1);
-
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 600, 720, 1, 1);
 
-	
+
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
+	testObj->CreateObject(g_Assets->circle, 200, 200, 1, 1);
+	testObj->CreateShadow(g_Assets->shadow, 200, 200, 1, 1);
+
+	coconut->CreateObject(g_Assets->coconut, 190, 190, 1, 1);
+	coconut->CreateShadow(g_Assets->coconutShadow, 190, 190, 1, 1);
+	
+	lamp->CreateObject(g_Assets->lamp, 163, 569, 1, 1);
+	lamp->CreateShadow(g_Assets->lampShadow, 163, 569, 1, 1);
+	housePlate->CreateObject(g_Assets->housePlate, 216, 110, 1, 1);
+	housePlate->CreateShadow(g_Assets->housePlateShadow, 216, 110, 1, 1);
+
 
 	//アニメーションの設定
-
-
-	//初期位置設定
-
-
-	//影の位置設定
-
+	testObj->InitAnimation();
+	coconut->InitAnimation();
+	lamp->InitAnimation();
+	housePlate->InitAnimation();
 
 	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
@@ -153,15 +173,43 @@ void Game::InitStage()
 void Game::InitStage1_1(void)
 {
 	//位置設定
-	stageBg->m_sprite->m_rotation.x = 19.8;
+	//光源の位置を設定する
+	m_lightPos = { 0,0,-10 };
+	testObj->SetLightPos(m_lightPos);
 
-	stageBg->m_sprite->m_scale = { 2.6,2.6,1.0 };
+	//オブジェクトを設定する
+	stageBg->m_sprite->m_pos = { 0,-0.36,1 };//固定!!
+
+	testObj->m_obj->m_sprite->m_pos = { 0,-3,-2 };//y軸固定!!
+	testObj->m_shadow->m_sprite->m_pos.z = -1.0f;//影のY/Z軸を固定!!
+
+	coconut->m_obj->m_sprite->m_pos = { -5,-3,-8 };
+	coconut->m_shadow->m_sprite->m_pos.z = 0.0f;
 	
-	
+	lamp->m_obj->m_sprite->m_pos = { 5,-3,-4};
+	lamp->m_shadow->m_sprite->m_pos.z = 0.0f;
+
+	housePlate->m_obj->m_sprite->m_pos = { -5,-3,-4 };
+	housePlate->m_shadow->m_sprite->m_pos.z = 0.0f;
+
+
 	//大きさ設定
-
+	stageBg->m_sprite->m_scale = { 2.725,2.725,1.0 };//固定値
 
 	//回転設定
+	stageBg->m_sprite->m_rotation.x = 19.8;//カメラと垂直状態を保持するため
+
+	//レールの設定
+	RailInit1_1();
+
+	//ステージ情報を初期化
+	for (int i = 0; i < 9; i++) {
+		//全部のステージを無効かにする
+		SceneManager::Get()->m_stageHolder[i]->Init();
+
+	}
+	//使うステージだけ起動
+	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_1]->SetActive(true);
 
 }
 
@@ -194,6 +242,80 @@ void Game::InitStage3_2(void)
 }
 
 void Game::InitStage3_3(void)
+{
+}
+
+void Game::RailInit1_1(void)
+{
+	//空いてるかどうかを設定する
+	int posData[15] =
+	{
+		0,0,1,1,0,
+		0,0,1,0,0,
+		0,0,0,0,0
+	};
+
+	for (int i = 0; i < 15; i++) {
+
+		if (posData[i] == 1) {
+
+			RailManager::Get()->m_info[i].isVacant = true;
+		}
+		else {
+
+			RailManager::Get()->m_info[i].isVacant = 0;
+		}
+
+	}
+
+
+	bool railData[15][8]{
+		//back row
+		//up	ru  r	rd d	ld l	lu
+		{	0,	0,	0,	0,	0,	0,	0,	0},//0
+		{	0,	0,	1,	0,	0,	0,	0,	0},//1
+		{	0,	0,	1,	0,	1,	0,	1,	0},//2
+		{	0,	0,	1,	0,	0,	0,	1,	0},//3
+		{	0,	0,	0,	0,	0,	0,	1,	0},//4
+
+		//mid row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	1,	0,	0,	0,	1,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+
+		//front row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	1,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+	};
+
+	//道を設定する
+	for (int i = 0; i < 15; i++) {
+
+		for (int j = 0; j < 8; j++) {
+
+			if (railData[i][j] == 0) {
+			
+				RailManager::Get()->m_info[i].isMoveable[j] = false;
+			
+			}
+			else {
+				RailManager::Get()->m_info[i].isMoveable[j] = true;
+
+			}
+			
+		}
+
+
+	}
+
+}
+
+void Game::RailInit1_2(void)
 {
 }
 
@@ -236,7 +358,7 @@ void Game::StageUpdate(void)
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
 		if (isPause) 
 		{
-			isPause = false;
+			isPause = 0;
 		}
 		else
 		{
@@ -309,7 +431,64 @@ void Game::StageUpdate(void)
 
 void Game::UpdateStage1_1(void)
 {
+	
+	
+	//moveTest
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+		testObj->m_obj->m_sprite->m_pos.z += 0.05f;
+	}	
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+		testObj->m_obj->m_sprite->m_pos.x -= 0.05f;
+	}
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+		testObj->m_obj->m_sprite->m_pos.x += 0.05f;
+	}
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+		testObj->m_obj->m_sprite->m_pos.z -= 0.05f;
+	}
+	if (Input::Get()->GetKeyPress(DIK_R)) {
+		testObj->m_obj->m_sprite->m_pos.y += 0.05f;
+	}
+	if (Input::Get()->GetKeyPress(DIK_F)) {
+		testObj->m_obj->m_sprite->m_pos.y -= 0.05f;
+	}
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		testObj->m_obj->m_sprite->m_pos = { 0,0,-2 };
+	}
+
+	
+	//移動させる目標を設定する
+	if (Input::Get()->GetKeyTrigger(DIK_TAB)) {
+		
+		if (coconut->GetActive()) {
+			coconut->SetActive(false);
+			lamp->SetActive(true);
+		}
+		if (lamp->GetActive()) {
+			lamp->SetActive(false);
+			housePlate->SetActive(true);
+		}
+		if (housePlate->GetActive()) {
+			housePlate->SetActive(false);
+			coconut->SetActive(true);
+		}
+		
+	}
+
+	
+
+
+	//moveTest
+	testObj->Update();
+
+	coconut->Update();
+	lamp->Update();
+	housePlate->Update();
+
 	stageBg->Update();
+
+	
+
 }
 
 void Game::UpdateStage1_2(void)
@@ -380,12 +559,11 @@ Game::~Game()
 	delete uiRestart;	//ステージのボタン
 
 	delete stageBg;		//ステージ背景
+	delete coconut;
+	delete lamp;
+	delete housePlate;
 
-
-	//delete circle;			//circle
-
-
-
+	delete circle;			//circle
 }
 
 Game* Game::Get()
@@ -517,6 +695,30 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
+	testObj->Draw();
+
+	coconut->m_shadow->Draw();
+	lamp->m_shadow->Draw();
+	housePlate->m_shadow->Draw();
+	
+	coconut->m_obj->Draw();
+	lamp->m_obj->Draw();
+	housePlate->m_obj->Draw();
+
+
+	//描画の順番を並び変え
+
+
+	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
+
+	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.x);
+
+	posY = ((SCREEN_HEIGHT / 2) - 80.0f) / SCREEN_PARA;
+	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.y);
+
+	posY = ((SCREEN_HEIGHT / 2) - 120.0f) / SCREEN_PARA;
+	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.z);
 }
 
 
