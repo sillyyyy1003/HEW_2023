@@ -8,9 +8,4 @@ C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(93,28): warning C4305: '
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(174,36): warning C4305: '=': 'double' から 'float' へ切り詰めます。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(176,37): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(176,33): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-  SceneManager.cpp
-  WinMain.cpp
-C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,59): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,46): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-  コードを生成中...
   D3D_DEMO_231011.vcxproj -> C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
