@@ -123,6 +123,8 @@ public:
 
 	void StageDraw(void);
 
+	void SelectDraw(void);
+
 	//ステージ描画
 	void DrawStage1_1();
 	void DrawStage1_2();

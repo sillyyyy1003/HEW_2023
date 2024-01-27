@@ -374,18 +374,8 @@ void Game::StageUpdate(void)
 {
 	//Input
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
-<<<<<<< HEAD
+
 		PauseSwitch();
-=======
-		if (isPause) 
-		{
-			isPause = 0;
-		}
-		else
-		{
-			isPause = true;
-		}
->>>>>>> feature/Kaku
 	}
 
 
