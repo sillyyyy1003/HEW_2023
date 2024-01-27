@@ -17,14 +17,14 @@ c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\input.
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\material.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\object.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\objectanimation.sbr
+c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\railmanager.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\scene.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\shadowobject.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\spherecollider.sbr
-c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\sprite.sbr
-c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\sprite.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\spherecollider.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\shadowobject.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\scene.obj
+c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\railmanager.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\objectanimation.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\object.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\material.obj
@@ -41,6 +41,7 @@ c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\camera
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\boxcollider.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\assets.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\animation.obj
+c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\sprite.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\stage.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\scenemanager.sbr
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\staticanimation.sbr
@@ -55,6 +56,7 @@ c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\static
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\staticanimation.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\scenemanager.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\stage.obj
+c:\users\58472\desktop\hew_test\d3d_demo_231011\d3d_demo_231011\x64\debug\sprite.obj
 c:\users\58472\desktop\hew_test\d3d_demo_231011\x64\debug\pixelshader.cso
 c:\users\58472\desktop\hew_test\d3d_demo_231011\x64\debug\vertexshader.cso
 c:\users\58472\desktop\hew_test\d3d_demo_231011\x64\debug\d3d_demo_231011.exe

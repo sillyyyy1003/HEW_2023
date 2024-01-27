@@ -14,8 +14,6 @@ Assets::Assets()
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
-    stageBg = LoadTexture("assets/bg2d.jpg");
-
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
@@ -23,6 +21,22 @@ Assets::Assets()
     uiSound = LoadTexture("assets/ui/sound.png");
 
     uiSoundBg = LoadTexture("assets/ui/sound.png");//サウンド背景
+
+    //test
+    circle = LoadTexture("assets/Tree.png");
+    shadow = LoadTexture("assets/treeshadow.png");
+
+    //stage1_1
+    stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
+    coconut = LoadTexture("assets/stage1/coconut.png");
+    coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
+    lamp = LoadTexture("assets/stage1/lamp.png");
+    lampShadow = LoadTexture("assets/stage1/lamp_s.png");
+    housePlate = LoadTexture("assets/stage1/housePlate.png");
+    housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
+
+
+
 
 }
 
@@ -33,9 +47,17 @@ Assets::~Assets()
     SAFE_RELEASE(uiTitle);
     SAFE_RELEASE(uiPressEnter);
 
-    //stage
+    //stage1_1
     SAFE_RELEASE(stageBg);
+    SAFE_RELEASE(coconut);
+    SAFE_RELEASE(lamp);
+    SAFE_RELEASE(housePlate);
+    SAFE_RELEASE(coconutShadow);
+    SAFE_RELEASE(lampShadow);
+    SAFE_RELEASE(housePlateShadow);
 
+    SAFE_RELEASE(circle);
+    SAFE_RELEASE(shadow);
     //ui
    
     SAFE_RELEASE(uiPauseBg);

@@ -86,6 +86,7 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
+    <ClCompile Include="RailManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShadowObject.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Sprite.h">
       <Filter>BaseObject</Filter>
     </ClInclude>
+    <ClInclude Include="RailManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">

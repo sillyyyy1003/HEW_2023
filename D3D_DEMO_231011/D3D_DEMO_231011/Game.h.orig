@@ -26,12 +26,18 @@ private:
 
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
+<<<<<<< .merge_file_c4ouuR
 	CanvasUI*	uiRestart;		//PAUSEのボタン
 	CanvasUI*	uiSelect;		//PAUSEのボタン
 	CanvasUI*	uiSound;		//PAUSEのボタン
 
 	CanvasUI*	uiSoundBg;		//SOUNDの背景
 
+	
+
+
+=======
+	CanvasUI*	uiRestart;		//ステージのボタン
 
 	//stage1-1
 	StaticObject* stageBg;		//ステージ背景
@@ -39,6 +45,7 @@ private:
 	GameObject* coconut;		//円
 	GameObject* lamp;			//長細の棒
 	GameObject* housePlate;			//長方形
+>>>>>>> .merge_file_jCQi92
 
 	GameObject* circle;			//circle
 

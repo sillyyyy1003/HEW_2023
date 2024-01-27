@@ -1,6 +1,10 @@
 ﻿#include "GameObject.h"
 #include "ShadowObject.h"
 #include "SphereCollider.h"
+#include "StaticAnimation.h"
+#include "DInput.h"
+#include "RailManager.h"
+#include "SceneManager.h"
 #include <math.h>
 
 extern Camera* g_WorldCamera;
@@ -9,6 +13,9 @@ GameObject::GameObject()
 {
 	//オブジェクトの初期化
 	m_obj = new Object();
+	//オブジェクトの原点を設定する
+	m_obj->m_sprite->m_spriteType = Sprite::OBJECT;
+
 	//影の初期化
 	m_shadow = new ShadowObject();
 	
@@ -24,16 +31,23 @@ void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, f
 	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
 }
 
-
-DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
+void GameObject::InitAnimation(void)
 {
+	m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);
+	m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);
+}
+
+
+DirectX::XMFLOAT3 GameObject::GenerateShadowPos()
+{
+	/*
 	//単位ベクトル化する
 	//オブジェクトの位置取得
 	const XMFLOAT3 objPos = m_obj->m_sprite->m_pos; 
 
 	//ベクトル計算用の型に入れる
 	XMVECTOR objVector = XMLoadFloat3(&objPos);
-	XMVECTOR lightVector = XMLoadFloat3(&lightPos);
+	XMVECTOR lightVector = XMLoadFloat3(&m_lightPos);
 	//光からオブジェクトのベクトルを計算する
 	XMVECTOR directionVector = XMVectorSubtract(objVector, lightVector);
 
@@ -42,29 +56,104 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos(DirectX::XMFLOAT3 lightPos)
 	float wallZ = m_shadow->m_sprite->m_pos.z;  // 墙壁的Z坐标
 
 	// 距離比率を計算する(计算交点的Z值等于墙壁的Z值时的t)
-	float t = (wallZ - lightPos.z) / XMVectorGetZ(directionVector);
+	float t = (wallZ - m_lightPos.z) / XMVectorGetZ(directionVector);
 
 	//影の位置を計算する
 	XMFLOAT3 shadowPosition;
-	shadowPosition.x = lightPos.x + t * XMVectorGetX(directionVector);
-	shadowPosition.y = lightPos.y + t * XMVectorGetY(directionVector);
+	shadowPosition.x = m_lightPos.x + t * XMVectorGetX(directionVector);
+	shadowPosition.y = m_lightPos.y + t * XMVectorGetY(directionVector);
 	shadowPosition.z = wallZ;  //影のｚ軸
+	*/
 
+	DirectX::XMFLOAT3 shadowPosition = m_shadow->m_sprite->m_pos;
+
+	//
+	switch (m_railPos.horizontalPos) {
+
+	case 0:
+		//m_shadow->m_sprite->m_pos.x
+		break;
+
+	case 1:
+
+		break;
+
+	case 2:
+		break;
+
+
+	case 3:
+		break;
+
+	case 4:
+
+		break;
+
+	}
 	return shadowPosition;
 }
 
+void GameObject::SetRailPos(int horPos, int verPos)
+{
+	m_railPos.verticalPos = verPos; m_railPos.horizontalPos = horPos;
+}
+
+void GameObject::SetLightPos(DirectX::XMFLOAT3 _lightPos)
+{
+	m_lightPos = _lightPos;
+}
+
 void GameObject::Update()
-{	
+{
+	//入力処理
+	if (isActive) {
+		//八方向の入力処理
+		if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+		
+			if (isMoveable(UP))//前に移動できるかを判断
+			{
+				m_moveDir = UP;//return UP signal
+
+			}
+	
+		}
+
+		if (m_moveDir == UP) {
+
+		}
+
+		//移動完成後
+		int stageInfo = SceneManager::Get()->GetActiveStage();
+		SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
+
+	}
 	//オブジェクト情報更新
 	
+
+	//影情報更新
+
+
+
+
+	//位置を更新
+	m_shadow->m_sprite->m_pos = GenerateShadowPos();
+	
+	//大きさを更新
+	switch (m_railPos.verticalPos)
+	{
+	case 0:	//back
+		m_shadow->m_size = ShadowObject::SIZE::SMALL;
+		break;
+	case 1:
+		m_shadow->m_size = ShadowObject::SIZE::MEDIUM;
+		break;
+	case 2:
+		m_shadow->m_size = ShadowObject::SIZE::LARGE;
+		break;
+	}
 	
 
-	//影
-	//位置を更新
-	m_shadow->m_sprite->m_pos = GenerateShadowPos(m_lightPos);
-	//大きさを更新
-	
-	
+
 	
 	////本体更新した後
 	//if (m_obj->m_collider != nullptr) {
@@ -88,7 +177,73 @@ void GameObject::Update()
 	m_obj->Update();
 
 	//影
-	m_obj->Update();
+	m_shadow->Update();
+}
+
+bool GameObject::isMoveable(DIR dir)
+{
+		int num = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
+		PointInfo info = RailManager::Get()->m_info[num];
+
+		int pos = 0;
+		//移動先の位置を計算
+		switch (dir) {
+		case UP:
+			pos = (m_railPos.verticalPos - 1) * 5 + m_railPos.horizontalPos;
+			break;
+
+		case UPRIGHT:
+			pos = (m_railPos.verticalPos - 1) * 5 + m_railPos.horizontalPos + 1;
+			break;
+
+		case RIGHT:
+			pos = m_railPos.horizontalPos + 1;
+			break;
+
+		case DOWNRIGHT:
+			pos = (m_railPos.verticalPos + 1) * 5 + m_railPos.horizontalPos + 1;
+			break;
+
+		case DOWN:
+			pos = (m_railPos.verticalPos + 1) * 5 + m_railPos.horizontalPos;
+			break;
+
+		case DOWNLEFT:
+			pos = (m_railPos.verticalPos + 1) * 5 + m_railPos.horizontalPos - 1;
+			break;
+
+		case LEFT:
+			pos = m_railPos.horizontalPos - 1;
+			break;
+
+		case UPLEFT:
+			pos = (m_railPos.verticalPos - 1) * 5 + m_railPos.horizontalPos - 1;
+			break;
+		}
+
+		//There may be some bugs,So Limit the boundary
+		if (pos < 0 || pos>14) {
+
+			MessageBoxA(NULL, "point計算エラー！", "エラー", MB_OK | MB_ICONERROR);
+			return false;
+		}
+
+		//その方向に移動できるか
+		if (info.isMoveable[dir]) {
+						
+			//目標位置は空いてるか？
+			if (RailManager::Get()->m_info[pos].isVacant) {
+
+					return true;
+
+				}
+				else {
+					return false;
+				}
+		}
+		else {
+			return false;
+		}
 }
 
 void GameObject::UpdateObjectColliderData(void)

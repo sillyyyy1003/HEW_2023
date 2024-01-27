@@ -59,12 +59,24 @@ public:
 	Camera* m_camera = nullptr;
 	bool isUseCamera = true;	//カメラを使うかどうか？
 
+	//座標点の位置を決める。
+	//shadow の場合：原点が中心点　
+	//オブジェクトの場合：原点が>bottomの中心
+	enum SPRITE_TYPE {
+		OBJECT,
+		STATIC_OBJECT,
+		SHADOW
+	};
+	
+	SPRITE_TYPE m_spriteType = STATIC_OBJECT;
+
 	//アニメーション
 	Animation* m_anime = nullptr;
 
-//TEST
+	//TEST
 	// 右ベクトル
 	DirectX::XMFLOAT3 right = {1,0,0};
+
 	float moveSpeed = 0.0f;
 
 public:
