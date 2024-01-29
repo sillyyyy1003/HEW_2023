@@ -32,6 +32,9 @@ private:
 
 	CanvasUI*	uiSoundBg;		//SOUNDの背景
 
+	CanvasUI*	uiSoundOp_BGM[6];	//SOUNDのBGM設定
+	CanvasUI*	uiSoundOp_SE[6];	//SOUNDのSE設定
+
 
 	//stage1-1
 	StaticObject* stageBg;		//ステージ背景
@@ -51,6 +54,22 @@ private:
 	bool isSound = false;
 	//PAUSE
 	bool isPause = false;
+	
+	//SOUNDOP
+	enum SOUNDOP
+	{
+		MUTE=0,
+		ONE,
+		TWO,
+		THREE,
+		FOUR,
+		FIVE,
+
+		BGM,
+		SE,
+
+	};
+	SOUNDOP soundOp = THREE;
 
 private:
 	//コンストラクタ&デストラクタ
@@ -114,6 +133,9 @@ public:
 	void PauseSwitch(void);
 	//サウンド関数
 	void SoundSwitch(void);
+
+	void SoundOption(void);
+
 
 	//描画
 	void GameDraw(void);

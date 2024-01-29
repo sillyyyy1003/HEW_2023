@@ -21,6 +21,9 @@ Assets::Assets()
     uiSound = LoadTexture("assets/ui/sound.png");
 
     uiSoundBg = LoadTexture("assets/ui/sound.png");//サウンド背景
+    uiSoundOp_BGM = LoadTexture("assets/Tree.png");
+    uiSoundOp_SE = LoadTexture("assets/Tree.png");
+
 
     //test
     circle = LoadTexture("assets/Tree.png");

@@ -39,10 +39,17 @@ void Game::Init()
 	uiResume = new CanvasUI();
 	uiSelect = new CanvasUI();
 	uiSound = new CanvasUI();
-
 	uiPauseBg = new CanvasUI();
+
 	uiSoundBg = new CanvasUI();
 
+
+	for (int i = 0; i < 6; i++)
+	{
+		uiSoundOp_BGM[i] = new CanvasUI;
+		uiSoundOp_SE[i] = new CanvasUI;
+	}
+	
 
 	circle = new GameObject();
 
@@ -69,6 +76,14 @@ void Game::Init()
 
 	uiSound->CreateModel(g_Assets->uiSound, 300, 100, 1, 1);
 	uiSoundBg->CreateModel(g_Assets->uiSoundBg, 300, 100, 1, 1);//現在:sound.pngで代用中
+
+
+	for (int i = 0; i < 6; i++)
+	{
+		uiSoundOp_BGM[i]->CreateModel(g_Assets->uiSoundOp_BGM, 300, 100, 1, 1);
+		uiSoundOp_SE[i]->CreateModel(g_Assets->uiSoundOp_SE, 300, 100, 1, 1);
+	}
+
 
 
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
@@ -121,6 +136,38 @@ void Game::Init()
 	//uiSound
 	uiSound->m_pos = { -4.0f, -3.0f, 0.8f };
 	uiSoundBg->m_pos = { 0.0f, 0.0f, 0.9f };
+
+	for (int i = 0; i < 6; i++)
+	{
+		switch (i)
+		{
+		case 0:
+			//uiSoundOp_BGM[0]->m_pos = { -2.0f, 1.0f, 0.8f }; 
+			break;
+				
+		case 1:
+			uiSoundOp_BGM[1]->m_pos = { -2.0f, 1.0f, 0.8f };
+			
+			break;
+
+		case 2:
+			uiSoundOp_BGM[2]->m_pos = { -1.0f, 1.0f, 0.8f }; 
+			break;
+
+		case 3:
+			uiSoundOp_BGM[3]->m_pos = { 0.0f, 1.0f, 0.8f }; 
+			break;
+
+		case 4:
+			uiSoundOp_BGM[4]->m_pos = { 1.0f, 1.0f, 0.8f }; 
+			break;
+
+		case 5:
+			uiSoundOp_BGM[4]->m_pos = { 2.0f, 1.0f, 0.8f };
+			break;
+
+		}
+	}
 	
 
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
@@ -592,7 +639,14 @@ void Game::UiUpdate()
 	if (Input::Get()->GetKeyTrigger(DIK_S))
 	{
 		SoundSwitch();// サウンド画面切り替え
+
+		SoundOption();//BGMとSEを独立
+		//BGM,SE音量設定
+		
 	}
+
+
+
 
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
 	{
@@ -612,6 +666,16 @@ void Game::UiUpdate()
 	else if (isSound)
 	{
 		uiSoundBg->Update();
+		
+		//Sound調節
+		for (int i = 0; i < 6; i++)
+		{
+			uiSoundOp_BGM[i]->Update();
+			uiSoundOp_SE[i]->Update();
+		}
+
+
+
 	}
 
 }
@@ -640,6 +704,38 @@ void Game::SoundSwitch(void)
 		isSound = true;
 	}
 }
+
+void Game::SoundOption(void)
+{
+	if (Input::Get()->GetKeyTrigger(DIK_UP))
+	{
+		soundOp = BGM;	
+	}
+	if (Input::Get()->GetKeyTrigger(DIK_DOWN))
+	{
+		soundOp = SE;
+	}
+
+
+	if (soundOp==BGM)
+	{
+		if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+		{
+
+		}
+		if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+		{
+
+		}
+		//BGM音量調節
+	}
+	else if (soundOp==SE)
+	{
+		//SE音量調節
+	}
+
+}
+
 
 void Game::GameDraw()
 {
@@ -796,6 +892,13 @@ void Game::UiDraw(void)
 	else if(isSound)
 	{
 		uiSoundBg->Draw();
+
+		//Sound調節
+
+
+
+
+
 	}
 	
 }
