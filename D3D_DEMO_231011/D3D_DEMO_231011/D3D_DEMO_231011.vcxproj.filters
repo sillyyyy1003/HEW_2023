@@ -32,10 +32,7 @@
     <ClCompile Include="TrackCamera.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="SAT.cpp" />
     <ClCompile Include="RailManager.cpp" />
-=======
     <ClCompile Include="Assets.cpp">
       <Filter>Assets</Filter>
     </ClCompile>
@@ -117,7 +114,6 @@
     <ClCompile Include="SatCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
->>>>>>> develop
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
