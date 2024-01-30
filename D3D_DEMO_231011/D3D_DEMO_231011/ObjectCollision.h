@@ -1,4 +1,6 @@
 #pragma once
+#include"TestObject.h"
+#include "SAT.h"
 #include "Object.h"
 
 class ObjectCollision

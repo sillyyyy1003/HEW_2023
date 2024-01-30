@@ -1,8 +1,8 @@
 #include "Assets.h"
 #include "ObjectAnimation.h"
+
 #include "ObjectCollision.h"
 #include <algorithm> // 必要なヘッダーファイル
-
 #define SQUREWIDTH 1.2
 #define CIRCLEWIDTH 0.8
 #define TRIANGLEWIDTH 0.8
