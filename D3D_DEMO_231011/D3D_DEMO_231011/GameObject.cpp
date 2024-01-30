@@ -106,16 +106,19 @@ void GameObject::SetLightPos(DirectX::XMFLOAT3 _lightPos)
 
 void GameObject::Update()
 {
+	
 	//入力処理
 	if (isActive) {
 		//八方向の入力処理
-		//上
+			
 		if (m_moveDir == STILL)
 		{
+			m_inputCount++;
 
+			//上
 			if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
 
-				if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) {
+				if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
 
 					if (isMoveable(UPRIGHT))//移動先に移動できるかを判断
 					{
@@ -145,6 +148,20 @@ void GameObject::Update()
 				}
 
 			}
+
+			//if (Input::Get()->GetKeyPress(DIK_UPARROW)&&Input::Get()->GetKeyPress(DIK_RIGHT)) {
+
+			//	if (isMoveable(UPRIGHT))//移動先に移動できるかを判断
+			//	{
+			//		m_moveDir = UPRIGHT;//移動方向を変える
+
+			//	}
+			//	else {
+			//		//移動できないの表示
+			//		ObjectVibration();
+			//	}
+			//}
+		
 			//下
 			if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
 
@@ -320,7 +337,7 @@ bool GameObject::isMoveable(DIR dir)
 			break;
 
 		case RIGHT:
-			pos = m_railPos.horizontalPos + 1;
+			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos + 1;
 			break;
 
 		case DOWNRIGHT:
@@ -336,7 +353,7 @@ bool GameObject::isMoveable(DIR dir)
 			break;
 
 		case LEFT:
-			pos = m_railPos.horizontalPos - 1;
+			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos - 1;
 			break;
 
 		case UPLEFT:

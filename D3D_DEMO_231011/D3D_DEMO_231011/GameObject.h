@@ -28,9 +28,16 @@ private:
 	//操作中かどうか？
 	bool isActive = false;
 
+	//移動用deltaTime
 	int m_count = 0;
 
+	//入力待ちのdeltaTime
+	int m_inputCount = 0;
+
+	//名前
 	std::string m_Name;
+
+	
 
 public:
 	//----------------------------//
