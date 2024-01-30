@@ -156,20 +156,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixRotate = matrixRotateX * matrixRotateY * matrixRotateZ;
 	XMMATRIX matrixWorld = matrixScale * matrixRotate * matrixMove;
 
-
-	// *TEST* 右向きベクトル
-	XMVECTOR newRight = XMVector3TransformCoord(iniRight, matrixRotate);
-	// 変換
-	right.x = XMVectorGetX(newRight);
-	right.y = XMVectorGetY(newRight);
-	right.z = XMVectorGetZ(newRight);
-	// 右に行く
-	XMFLOAT3 right = GetRight();
-	float moveSpeed = GetMoveSpeed();
-	m_pos.x += right.x * moveSpeed;
-	m_pos.y += right.y * moveSpeed;
-	m_pos.z += right.z * moveSpeed;
-
 	//UVアニメーション行列作成
 	XMMATRIX matrixTex = XMMatrixTranslation(m_anime->GetUVOffset().x, m_anime->GetUVOffset().y, 0.0f);
 
