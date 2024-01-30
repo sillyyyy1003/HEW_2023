@@ -139,33 +139,37 @@ void Game::Init()
 
 	for (int i = 0; i < 6; i++)
 	{
+		uiSoundOp_BGM[i]->m_scale = { 0.3f,0.3f,0.3f };
+		uiSoundOp_SE[i]->m_scale = { 0.3f,0.3f,0.3f };
 		switch (i)
-		{
-		case 0:
-			//uiSoundOp_BGM[0]->m_pos = { -2.0f, 1.0f, 0.8f }; 
-			break;
-				
+		{		
 		case 1:
-			uiSoundOp_BGM[1]->m_pos = { -2.0f, 1.0f, 0.8f };
-			
+			uiSoundOp_BGM[1]->m_pos = { -4.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[1]->m_pos = { -4.0f,-1.0f,0.8f };
 			break;
 
 		case 2:
-			uiSoundOp_BGM[2]->m_pos = { -1.0f, 1.0f, 0.8f }; 
+			uiSoundOp_BGM[2]->m_pos = { -2.0f, 1.0f, 0.8f }; 
+			uiSoundOp_SE[2]->m_pos = { -2.0f,-1.0f,0.8f };
 			break;
 
 		case 3:
 			uiSoundOp_BGM[3]->m_pos = { 0.0f, 1.0f, 0.8f }; 
+			uiSoundOp_SE[3]->m_pos = { 0.0f,-1.0f,0.8f };
 			break;
 
 		case 4:
-			uiSoundOp_BGM[4]->m_pos = { 1.0f, 1.0f, 0.8f }; 
+			uiSoundOp_BGM[4]->m_pos = { 2.0f, 1.0f, 0.8f }; 
+			uiSoundOp_SE[4]->m_pos = { 2.0f,-1.0f,0.8f };
 			break;
 
 		case 5:
-			uiSoundOp_BGM[4]->m_pos = { 2.0f, 1.0f, 0.8f };
+			uiSoundOp_BGM[5]->m_pos = { 4.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[5]->m_pos = { 4.0f,-1.0f,0.8f };
 			break;
 
+		default:
+			break;
 		}
 	}
 	
@@ -639,13 +643,7 @@ void Game::UiUpdate()
 	if (Input::Get()->GetKeyTrigger(DIK_S))
 	{
 		SoundSwitch();// サウンド画面切り替え
-
-		SoundOption();//BGMとSEを独立
-		//BGM,SE音量設定
-		
 	}
-
-
 
 
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
@@ -667,13 +665,13 @@ void Game::UiUpdate()
 	{
 		uiSoundBg->Update();
 		
+		SoundVolume();//BGM,SE音量設定
 		//Sound調節
 		for (int i = 0; i < 6; i++)
 		{
 			uiSoundOp_BGM[i]->Update();
 			uiSoundOp_SE[i]->Update();
 		}
-
 
 
 	}
@@ -705,33 +703,72 @@ void Game::SoundSwitch(void)
 	}
 }
 
-void Game::SoundOption(void)
+void Game::SoundVolume(void)
 {
 	if (Input::Get()->GetKeyTrigger(DIK_UP))
 	{
-		soundOp = BGM;	
+		soundOp = BGM;
 	}
 	if (Input::Get()->GetKeyTrigger(DIK_DOWN))
 	{
 		soundOp = SE;
 	}
 
-
-	if (soundOp==BGM)
+	switch (soundOp)
 	{
-		if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+	case Game::BGM:
+		if (m_soundVolume_BGM >= 0)
+		{
+			if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+			{
+				m_soundVolume_BGM--;
+			}
+		}
+
+		if (m_soundVolume_BGM <= 5)
+		{
+			if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+			{
+				m_soundVolume_BGM++;
+			}
+		}
+		else if (m_soundVolume_BGM >= 5)
+		{
+			m_soundVolume_BGM = 5;
+		}
+
+		break;
+
+	case Game::SE:
+		if (m_soundVolume_SE >= 0)
+		{
+			if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+			{
+				m_soundVolume_SE--;
+			}
+		}
+
+		if (m_soundVolume_SE <= 5)
 		{
 
-		}
-		if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
-		{
+			if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+			{
+				m_soundVolume_SE++;
+			}
+
 
 		}
-		//BGM音量調節
-	}
-	else if (soundOp==SE)
-	{
-		//SE音量調節
+		else if (m_soundVolume_SE>=5)
+		{
+			m_soundVolume_SE = 5;
+		}
+		
+		break;
+
+	case Game::NOSELECT:
+
+		break;
+
 	}
 
 }
@@ -845,6 +882,98 @@ void Game::StageDraw(void)
 	}
 }
 
+void Game::SoundVolumeDraw(void)
+{
+	if (soundOp == BGM)
+	{
+		switch (m_soundVolume_BGM)
+		{
+		case 0:
+			break;
+		case 1:
+			uiSoundOp_BGM[1]->Draw();
+			break;
+		case 2:
+			uiSoundOp_BGM[1]->Draw();
+			uiSoundOp_BGM[2]->Draw();
+			break;
+		case 3:
+			uiSoundOp_BGM[1]->Draw();
+			uiSoundOp_BGM[2]->Draw();
+			uiSoundOp_BGM[3]->Draw();
+			break;
+		case 4:
+			uiSoundOp_BGM[1]->Draw();
+			uiSoundOp_BGM[2]->Draw();
+			uiSoundOp_BGM[3]->Draw();
+			uiSoundOp_BGM[4]->Draw();
+			break;
+		case 5:
+			uiSoundOp_BGM[1]->Draw();
+			uiSoundOp_BGM[2]->Draw();
+			uiSoundOp_BGM[3]->Draw();
+			uiSoundOp_BGM[4]->Draw();
+			uiSoundOp_BGM[5]->Draw();
+			break;
+		default:
+			//uiSoundOp_BGM[1]->Draw();
+			//uiSoundOp_BGM[2]->Draw();
+			//uiSoundOp_BGM[3]->Draw();
+			//uiSoundOp_BGM[4]->Draw();
+			//uiSoundOp_BGM[5]->Draw();
+			break;
+		}
+	}
+
+	if (soundOp == SE)
+	{
+		switch (m_soundVolume_SE)
+		{
+		case 0:
+			
+			break;
+		case 1:
+			uiSoundOp_SE[1]->Draw();
+			break;
+
+		case 2:
+			uiSoundOp_SE[1]->Draw();
+			uiSoundOp_SE[2]->Draw();
+			break;
+
+		case 3:
+			uiSoundOp_SE[1]->Draw();
+			uiSoundOp_SE[2]->Draw();
+			uiSoundOp_SE[3]->Draw();
+			break;
+
+		case 4:
+			uiSoundOp_SE[1]->Draw();
+			uiSoundOp_SE[2]->Draw();
+			uiSoundOp_SE[3]->Draw();
+			uiSoundOp_SE[4]->Draw();
+			break;
+
+		case 5:
+			uiSoundOp_SE[1]->Draw();
+			uiSoundOp_SE[2]->Draw();
+			uiSoundOp_SE[3]->Draw();
+			uiSoundOp_SE[4]->Draw();
+			uiSoundOp_SE[5]->Draw();
+			break;
+
+		default:
+			//uiSoundOp_SE[1]->Draw();
+			//uiSoundOp_SE[2]->Draw();
+			//uiSoundOp_SE[3]->Draw();
+			//uiSoundOp_SE[4]->Draw();
+			//uiSoundOp_SE[5]->Draw();
+			break;
+		}
+	}
+
+}
+
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
@@ -894,10 +1023,7 @@ void Game::UiDraw(void)
 		uiSoundBg->Draw();
 
 		//Sound調節
-
-
-
-
+		SoundVolumeDraw();
 
 	}
 	

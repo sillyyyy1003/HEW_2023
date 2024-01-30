@@ -58,18 +58,17 @@ private:
 	//SOUNDOP
 	enum SOUNDOP
 	{
-		MUTE=0,
-		ONE,
-		TWO,
-		THREE,
-		FOUR,
-		FIVE,
 
 		BGM,
 		SE,
 
+		NOSELECT,
 	};
-	SOUNDOP soundOp = THREE;
+
+	SOUNDOP soundOp = NOSELECT;
+	
+	int m_soundVolume_BGM = 3;
+	int m_soundVolume_SE = 3;
 
 private:
 	//コンストラクタ&デストラクタ
@@ -134,7 +133,7 @@ public:
 	//サウンド関数
 	void SoundSwitch(void);
 
-	void SoundOption(void);
+	void SoundVolume(void);
 
 
 	//描画
@@ -146,6 +145,8 @@ public:
 	void StageDraw(void);
 
 	void SelectDraw(void);
+
+	void SoundVolumeDraw(void);
 
 	//ステージ描画
 	void DrawStage1_1();

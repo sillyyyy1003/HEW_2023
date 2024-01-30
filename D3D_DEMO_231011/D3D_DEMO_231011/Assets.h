@@ -43,8 +43,8 @@ public:
 	ID3D11ShaderResourceView* uiSound;
 	
 	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
-	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド画面
-	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド画面
+	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド調節
+	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
 
 
 
