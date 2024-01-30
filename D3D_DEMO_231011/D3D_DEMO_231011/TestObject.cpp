@@ -63,6 +63,13 @@ void TestObject::Update(void)
 
 	//	m_objSprite->m_pos.x = m_objSprite->m_pos.x + m_dir.x * moveSpeed;
 	//	m_objSprite->m_pos.y = m_objSprite->m_pos.y + m_dir.y * moveSpeed;
+
+		int count = 0;
+		for (auto it = vertices.begin(); it != vertices.end(); ++it) {
+			vertices[count].x = vertices[count].x + m_dir.x * moveSpeed;
+			vertices[count].y = vertices[count].y + m_dir.y * moveSpeed;
+			count++;
+		};
 	//}
 	//else
 	//{
@@ -93,12 +100,21 @@ void TestObject::Draw(void)
 BOUNDING_CIRCLE TestObject::GetBoundingCircle()
 {
 	BOUNDING_CIRCLE bc;
+<<<<<<< HEAD
+	bc.center = m_objSprite->m_pos; // ”»’è‰~‚Ì’†S
+	if (isTriangle)
+	{
+		// ‘€ì‚µ‚Ä‚¢‚È‚¢ƒIƒuƒWƒFƒNƒg 
+		// ƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚æ‚¤‚É“–‚½‚è”»’è‚à‘å‚«‚­‚·‚é
+		bc.radius = 0.48f; // ”»’è‰~‚Ì”¼Œa‚ðÝ’è//+ Scale_countX
+=======
 	bc.center = m_objSprite->m_pos; // ??????
 	if (!isPlayer)
 	{
-		// ????????????? 
-		// ???????????????????????
-		bc.radius = 1.30f + Scale_countX; // ?????????
+		// æ“ä½œã—ã¦ã„ãªã„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ 
+		// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨åŒã˜ã‚ˆã†ã«å½“ãŸã‚Šåˆ¤å®šã‚‚å¤§ããã™ã‚‹
+		bc.radius = 1.30f + Scale_countX; // åˆ¤å®šå††ã®åŠå¾„ã‚’è¨­å®š
+>>>>>>> develop
 	}
 	else
 	{
@@ -112,6 +128,12 @@ void TestObject::SetBoundingCircle(BOUNDING_CIRCLE bc)
 {
 	m_objSprite->m_pos = bc.center;
 }
+
+void TestObject::SetRotation(DirectX::XMFLOAT3 rotation)
+{
+	m_objSprite->m_rotation = rotation;
+}
+
 
 TestObject::~TestObject()
 {

@@ -1,10 +1,18 @@
 ﻿#include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
+<<<<<<< HEAD
+#include "KBInput.h"
+#include "ObjectCollision.h"
+=======
 #include "DInput.h"
 #include "DebugManager.h"
+<<<<<<< HEAD
 #include "SceneManager.h"
 #include "RailManager.h"
+=======
+>>>>>>> develop
+>>>>>>> feature/Sakai
 
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
@@ -17,7 +25,13 @@ Assets*		g_Assets;			//ASSETS
 Camera*		g_WorldCamera;		//CAMERA
 Game*		g_Game;				//ゲーム
 DebugManager* g_DebugManager;	//デバッグ用ツール
+<<<<<<< HEAD
 SceneManager* g_SceneManager;
+=======
+
+
+ObjectCollision* g_objectCollision;
+>>>>>>> feature/Sakai
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -77,12 +91,22 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//カメラの初期化
 	g_WorldCamera = new TrackCamera();
 
+<<<<<<< HEAD
 	//シーンマネージャーの初期化処理
 	g_SceneManager=SceneManager::Get();
 
 	g_SceneManager->SceneManager::Init();
 
 
+=======
+<<<<<<< HEAD
+	//�����蔻��̏�����
+	g_objectCollision = new ObjectCollision();
+
+	//�u���b�V���A�b�v�p�x(fps����)
+	// FPS�\���p�ϐ�
+=======
+>>>>>>> feature/Sakai
 	//ゲームクラスの初期化処理
 	g_Game = Game::Get();
 	
@@ -97,6 +121,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//ブラッシュアップ頻度(fps処理)
 	// FPS表示用変数
+>>>>>>> develop
 	int fpsCounter = 0;
 	long long oldTick = GetTickCount64();//現在時間を保存
 	long long nowTick = oldTick; // 現在時間取得用

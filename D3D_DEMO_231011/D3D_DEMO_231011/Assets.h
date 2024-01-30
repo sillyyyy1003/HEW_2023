@@ -16,10 +16,11 @@ public:
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* shadow;
+	// 図形
+	//ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
-	//================//テスト用//================//
-
+	
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
 	ID3D11ShaderResourceView* uiTitle;
@@ -43,7 +44,7 @@ public:
 
 
 
-
+	ID3D11ShaderResourceView* ex;
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

@@ -14,13 +14,15 @@ Assets::Assets()
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
+    circle = LoadTexture("assets/circle.png");
+    square = LoadTexture("assets/polygon.png");
+    triangle = LoadTexture("assets/Triangle.png");
+
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
 
-    //test
-    circle = LoadTexture("assets/Tree.png");
-    shadow = LoadTexture("assets/treeshadow.png");
+
 
     //stage1_1
     stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
@@ -32,8 +34,7 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
 
-
-
+     ex = LoadTexture("assets/ex.png");
 }
 
 Assets::~Assets()

@@ -13,22 +13,28 @@
 #include "Animation.h"
 #include "StaticAnimation.h"
 #include "ObjectAnimation.h"
-
 #include "RailManager.h"
 #include "DInput.h"
 #include <stdio.h>
 
 #include <algorithm>
 
+#include "TrackCamera.h"
+#include "DInput.h"
+#include "ObjectCollision.h"
+#include "SAT.h"
+#include <algorithm> // 必要なヘッダーファイル
 
+#define SQUREWIDTH 1.2
+#define TRIANGLEWIDTH 0.8
+#define M_PI 3.14159265358979323846
+#define M_PIX 0.1//1.5
+#define M_PIY 0.0333333333// 0.5
 #define INITROTATE	(19.8)
 
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
-
-
-
 
 void Game::Init()
 {
@@ -120,6 +126,7 @@ void Game::Init()
 	RailManager::Get()->InitRail();
 	
 }
+
 
 void Game::InitStage()
 {
@@ -396,6 +403,10 @@ void Game::TitleUpdate(void)
 	uiTitle->Update();
 	uiTitleBg->Update();
 
+	// g_objectCollision->Update();
+	// testBg->Update();
+	//testObject->Update();
+
 }
 
 void Game::SelectUpdate(void)
@@ -407,6 +418,7 @@ void Game::SelectUpdate(void)
 
 	//オブジェクト更新
 
+	
 }
 
 void Game::StageUpdate(void)
@@ -637,9 +649,6 @@ Game* Game::Get()
 void Game::UiUpdate()
 {
 	//入力操作
-
-
-
 	uiPauseBg->Update();
 	//uiRestart->Update();
 	//uiResume->Update();
@@ -690,6 +699,10 @@ void Game::TitleDraw(void)
 	g_DebugManager->PrintDebugLog(posX, posY, testChara->m_sprite->m_pos.x);
 	*/
 
+	//testBg->m_sprite->Draw();
+	//g_objectCollision->Draw();
+	//testBg->m_sprite->Draw();
+	//testObject->m_sprite->Draw();
 }
 
 void Game::StageDraw(void)
