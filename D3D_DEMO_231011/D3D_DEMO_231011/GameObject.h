@@ -47,12 +47,8 @@ public:
 	//影の当たり判定を扱う
 	Collider* m_shadowCollider = nullptr;
 	
-
 	//光があるかどうか
 	bool isLit = false;
-
-	bool isPlayer = false;
-	bool isEx = false;
 
 	
 public:

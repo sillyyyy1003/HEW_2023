@@ -6,8 +6,7 @@ class BoxCollider;
 class SphereCollider;
 class SAT;
 
-class PolygonCollider :
-    public Collider
+class PolygonCollider :public Collider
 {
 private:
 

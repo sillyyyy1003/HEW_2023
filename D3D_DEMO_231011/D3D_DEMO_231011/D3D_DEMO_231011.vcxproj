@@ -148,7 +148,6 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectAnimation.cpp" />
     <ClCompile Include="RailManager.cpp" />
-    <ClCompile Include="SAT.cpp" />
     <ClCompile Include="PolygonCollider.cpp" />
     <ClCompile Include="SatCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -183,6 +182,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
     <ClInclude Include="PolygonCollider.h" />
+    <ClInclude Include="RailManager.h" />
     <ClInclude Include="SatCollider.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShadowObject.h" />

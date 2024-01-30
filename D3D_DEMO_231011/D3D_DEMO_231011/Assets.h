@@ -43,10 +43,6 @@ public:
 	ID3D11ShaderResourceView* uiRestart;
 
 
-
-
-	ID3D11ShaderResourceView* ex;
-
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		
 

@@ -14,27 +14,16 @@ Assets::Assets()
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
-<<<<<<< HEAD
-=======
     circle = LoadTexture("assets/circle.png");
     square = LoadTexture("assets/polygon.png");
     triangle = LoadTexture("assets/Triangle.png");
 
-    uiTitle = LoadTexture("assets/title/uiTitle.png");
-    uiTitleBg = LoadTexture("assets/title/titleBg.png");
-    uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
-
-    stageBg = LoadTexture("assets/bg2d.jpg");
-
->>>>>>> feature/Sakai
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
 
 <<<<<<< HEAD
-    //test
-    circle = LoadTexture("assets/Tree.png");
-    shadow = LoadTexture("assets/treeshadow.png");
+
 
     //stage1_1
     stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
@@ -46,11 +35,15 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
 
-
-
-=======
      ex = LoadTexture("assets/ex.png");
->>>>>>> feature/Sakai
+=======
+    circle = LoadTexture("assets/circle.png");
+    triangle = LoadTexture("assets/triangle.png");
+    square = LoadTexture("assets/polygon.png");
+
+    ex = LoadTexture("assets/ex.png");
+
+>>>>>>> develop
 }
 
 Assets::~Assets()

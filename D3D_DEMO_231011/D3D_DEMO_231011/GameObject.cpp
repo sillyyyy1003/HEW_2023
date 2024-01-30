@@ -305,47 +305,9 @@ void GameObject::Update()
 	//オブジェクト本体
 	m_obj->Update();
 
-	//影
+	//Collider データ更新
+	m_shadowCollider->Update(m_obj->m_sprite->m_pos, m_obj->m_sprite->m_rotation);
 
-
-	if (isPlayer)
-	{
-		MoveObject(m_obj);
-	}
-
-	if (!isEx)
-	{
-		m_objCollider->Update(m_obj->m_sprite->m_pos, m_obj->m_sprite->m_rotation);
-	}
-
-
-	//if (m_obj->m_sprite->m_pos.x > 11)
-	//{
-	//	m_obj->m_sprite->m_pos.x = 11;
-	//}
-	//if (m_obj->m_sprite->m_pos.x < -11)
-	//{
-	//	m_obj->m_sprite->m_pos.x = -11;
-	//}
-	//if (m_obj->m_sprite->m_pos.z > -1)
-	//{
-	//	m_obj->m_sprite->m_pos.z = -1;
-	//}
-	//if (m_obj->m_sprite->m_pos.z < -6)
-	//{
-	//	m_obj->m_sprite->m_pos.z = -6;
-	//}
-	//if (m_obj->m_sprite->m_pos.y > -2)
-	//{
-	//	m_obj->m_sprite->m_pos.y = -2;
-	//}
-	//if (m_obj->m_sprite->m_pos.y < -4)
-	//{
-	//	m_obj->m_sprite->m_pos.y = -4;
-	//}
-	//m_obj->m_sprite->m_pos.y = 0;
-
-	
 	m_shadow->Update();
 }
 
@@ -420,14 +382,14 @@ bool GameObject::isMoveable(DIR dir)
 void GameObject::UpdateObjectColliderData(void)
 {
 	//dynamic_castを使って、コライダーのデータを更新する
-	
-	//switch (m_obj->m_collider->GetColliderType()) {
+	//
+	//switch (m_shadowCollider->GetColliderType()) {
 	//case SPHERE:
 	//	//位置と半径をリアルタイムで更新する
-	//	//dynamic_cast<SphereCollider*>(m_objCollider)->m_center = { 0.0f,0.0f,0.0f };
-	//	//dynamic_cast<SphereCollider*>(m_objCollider)->m_radius = 1.0f;
-	// //更新したデータを本体のColliderに更新する
-	// m_objCollider->Update();
+	//	dynamic_cast<SphereCollider*>(m_shadowCollider)->m_center = { 0.0f,0.0f,0.0f };
+	//	dynamic_cast<SphereCollider*>(m_shadowCollider)->m_radius = 1.0f;
+	//	//更新したデータを本体のColliderに更新する
+	//	m_shadowCollider->Update()
 	//	break;
 
 	//case POLYGON:

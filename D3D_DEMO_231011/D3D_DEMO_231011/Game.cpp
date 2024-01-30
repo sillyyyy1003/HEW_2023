@@ -21,7 +21,6 @@
 #include "TrackCamera.h"
 #include "DInput.h"
 #include "ObjectCollision.h"
-#include "SAT.h"
 #include <algorithm> // 必要なヘッダーファイル
 
 #define SQUREWIDTH 1.2
@@ -100,8 +99,7 @@ void Game::Init()
 	//circle->m_shadow->m_sprite->m_pos = { 0, 0, 0 };
 	circle->m_obj->m_sprite->m_pos = { 8, 0, -2 };
 	//オブジェクトのコライダーを配置
-	circle->m_shadowCollider = new SphereCollider({},3.0f);
-	circle->m_objCollider = new SphereCollider({}, 3.0f);
+	circle->m_shadowCollider = new SphereCollider({}, 3.0f);
 	//circle->isPlayer = true;
 
 	//モデルを作る
@@ -114,8 +112,6 @@ void Game::Init()
 	triangle->m_obj->m_sprite->m_pos = { 0, 0, -2 };
 	//オブジェクトのコライダーを配置
 	triangle->m_shadowCollider = new PolygonCollider({},2.3f);
-	triangle->m_objCollider = new PolygonCollider({}, 2.3f);
-	triangle->isPlayer = true;
 
 	//モデルを作る
 	square->CreateObject(g_Assets->square, 200, 200, 1, 1);
@@ -127,8 +123,6 @@ void Game::Init()
 	square->m_obj->m_sprite->m_pos = { -8, 2, -2 };
 	//オブジェクトのコライダーを配置
 	square->m_shadowCollider = new BoxCollider({}, { 3,3,3 });
-	square->m_objCollider = new BoxCollider({}, { 3,3,3 });
-	//square->isPlayer = true;
 
 	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
 	{
@@ -142,8 +136,7 @@ void Game::Init()
 		ex[i]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
 		//オブジェクトの位置を配置
 		ex[i]->m_obj->m_sprite->m_pos = { 0, 0, -4 };
-		ex[i]->isEx = true;
-		ex[i]->isPlayer = true;
+
 	}
 
 	object[POLYGON] = new GameObject();
@@ -157,8 +150,6 @@ void Game::Init()
 	object[POLYGON]->m_obj->m_sprite->m_pos = { 0, 0, -2 };
 	//オブジェクトのコライダーを配置
 	object[POLYGON]->m_shadowCollider = new PolygonCollider({}, 2.3f);
-	object[POLYGON]->m_objCollider = new PolygonCollider({}, 2.3f);
-	object[POLYGON]->isPlayer = true;
 
 	object[SQUARE] = new GameObject();
 
@@ -171,7 +162,6 @@ void Game::Init()
 	object[SQUARE]->m_obj->m_sprite->m_pos = { -8, 2, -2 };
 	//オブジェクトのコライダーを配置
 	object[SQUARE]->m_shadowCollider = new BoxCollider({}, { 3,3,3 });
-	object[SQUARE]->m_objCollider = new BoxCollider({}, { 3,3,3 });
 	//object[SQUARE]->isPlayer = true;
 
 	object[SPHERE] = new GameObject();
@@ -186,8 +176,6 @@ void Game::Init()
 	object[SPHERE]->m_obj->m_sprite->m_pos = { 8, 0, -2 };
 	//オブジェクトのコライダーを配置
 	object[SPHERE]->m_shadowCollider = new SphereCollider({}, 3.0f);
-	object[SPHERE]->m_objCollider = new SphereCollider({}, 3.0f);
-	//object[SPHERE]->isPlayer = true;
 
 	//アニメーションの設定
 	testObj->InitAnimation();

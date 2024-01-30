@@ -32,7 +32,7 @@ void BoxCollider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotatio
     }
     else 
     {
-        //UpdateExtents();
+        
         UpdatePos(m_center);
     }
 
