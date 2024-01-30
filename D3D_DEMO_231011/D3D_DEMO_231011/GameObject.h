@@ -51,6 +51,8 @@ public:
 	//光があるかどうか
 	bool isLit = false;
 
+	bool isPlayer = false;
+	bool isEx = false;
 
 	
 public:
@@ -131,7 +133,12 @@ public:
 
 	~GameObject();
 
-
+	private:
+		/// <summary>
+		/// オブジェクトの移動をする関数
+		/// </summary>
+		/// <param name="_lightPos"></param>
+		void MoveObject(Object* _target);
 
 };
 

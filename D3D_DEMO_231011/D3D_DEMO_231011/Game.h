@@ -35,7 +35,12 @@ private:
 	GameObject* lamp;			//長細の棒
 	GameObject* housePlate;			//長方形
 	
-	GameObject* circle;			//circle
+	GameObject* circle;			//円
+	GameObject* triangle;		//三角
+	GameObject* square;		    //四角
+	GameObject* object[3];		//四角
+
+	GameObject* ex[1];		//頂点確認用
 
 	std::vector<GameObject*> objectList;
 	

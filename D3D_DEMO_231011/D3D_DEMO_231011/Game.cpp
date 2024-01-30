@@ -15,9 +15,8 @@
 #include "ObjectAnimation.h"
 #include "RailManager.h"
 #include "DInput.h"
-#include <stdio.h>
-
-#include <algorithm>
+#include <stdio.h> 
+#include "ColliderManager.h"
 
 #include "TrackCamera.h"
 #include "DInput.h"
@@ -46,16 +45,17 @@ void Game::Init()
 	uiResume = new CanvasUI();
 	uiPauseBg = new CanvasUI();
 
-
+	triangle = new GameObject();
+	square = new GameObject();
 	circle = new GameObject();
-
+	
+	
 	//stage1-1
 	stageBg = new StaticObject();
 
 	coconut = new GameObject();
 	lamp = new GameObject();
 	housePlate = new GameObject();
-	
 
 	testObj = new GameObject();
 
@@ -67,6 +67,7 @@ void Game::Init()
 	coconut->SetName("coconut");
 	lamp->SetName("lamp");
 	housePlate->SetName("housePlate");
+
 
 
 	//テクスチャ読み込み・モデル作成
@@ -88,6 +89,105 @@ void Game::Init()
 	housePlate->CreateObject(g_Assets->housePlate, 216, 110, 1, 1);
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 216, 110, 1, 1);
 
+
+	//モデルを作る
+	circle->CreateObject(g_Assets->circle, 200, 200, 1, 1);
+	circle->CreateShadow(g_Assets->circle, 200, 200, 1, 1);
+	//アニメションを配置
+	circle->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	circle->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	//circle->m_shadow->m_sprite->m_pos = { 0, 0, 0 };
+	circle->m_obj->m_sprite->m_pos = { 8, 0, -2 };
+	//オブジェクトのコライダーを配置
+	circle->m_shadowCollider = new SphereCollider({},3.0f);
+	circle->m_objCollider = new SphereCollider({}, 3.0f);
+	//circle->isPlayer = true;
+
+	//モデルを作る
+	triangle->CreateObject(g_Assets->triangle, 200, 200, 1, 1);
+	triangle->CreateShadow(g_Assets->triangle, 200, 200, 1, 1);
+	//アニメションを配置
+	triangle->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	triangle->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	triangle->m_obj->m_sprite->m_pos = { 0, 0, -2 };
+	//オブジェクトのコライダーを配置
+	triangle->m_shadowCollider = new PolygonCollider({},2.3f);
+	triangle->m_objCollider = new PolygonCollider({}, 2.3f);
+	triangle->isPlayer = true;
+
+	//モデルを作る
+	square->CreateObject(g_Assets->square, 200, 200, 1, 1);
+	square->CreateShadow(g_Assets->square, 200, 200, 1, 1);
+	//アニメションを配置
+	square->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	square->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	square->m_obj->m_sprite->m_pos = { -8, 2, -2 };
+	//オブジェクトのコライダーを配置
+	square->m_shadowCollider = new BoxCollider({}, { 3,3,3 });
+	square->m_objCollider = new BoxCollider({}, { 3,3,3 });
+	//square->isPlayer = true;
+
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i] = new GameObject();
+
+		//モデルを作る
+		ex[i]->CreateObject(g_Assets->ex, 100, 100, 1, 1);
+		ex[i]->CreateShadow(g_Assets->ex, 100, 100, 1, 1);
+		//アニメションを配置
+		ex[i]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+		ex[i]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+		//オブジェクトの位置を配置
+		ex[i]->m_obj->m_sprite->m_pos = { 0, 0, -4 };
+		ex[i]->isEx = true;
+		ex[i]->isPlayer = true;
+	}
+
+	object[POLYGON] = new GameObject();
+	//モデルを作る
+	object[POLYGON]->CreateObject(g_Assets->triangle, 200, 200, 1, 1);
+	object[POLYGON]->CreateShadow(g_Assets->triangle, 200, 200, 1, 1);
+	//アニメションを配置
+	object[POLYGON]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	object[POLYGON]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	object[POLYGON]->m_obj->m_sprite->m_pos = { 0, 0, -2 };
+	//オブジェクトのコライダーを配置
+	object[POLYGON]->m_shadowCollider = new PolygonCollider({}, 2.3f);
+	object[POLYGON]->m_objCollider = new PolygonCollider({}, 2.3f);
+	object[POLYGON]->isPlayer = true;
+
+	object[SQUARE] = new GameObject();
+
+	object[SQUARE]->CreateObject(g_Assets->square, 200, 200, 1, 1);
+	object[SQUARE]->CreateShadow(g_Assets->square, 200, 200, 1, 1);
+	//アニメションを配置
+	object[SQUARE]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	object[SQUARE]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	object[SQUARE]->m_obj->m_sprite->m_pos = { -8, 2, -2 };
+	//オブジェクトのコライダーを配置
+	object[SQUARE]->m_shadowCollider = new BoxCollider({}, { 3,3,3 });
+	object[SQUARE]->m_objCollider = new BoxCollider({}, { 3,3,3 });
+	//object[SQUARE]->isPlayer = true;
+
+	object[SPHERE] = new GameObject();
+
+	object[SPHERE]->CreateObject(g_Assets->circle, 200, 200, 1, 1);
+	object[SPHERE]->CreateShadow(g_Assets->circle, 200, 200, 1, 1);
+	//アニメションを配置
+	object[SPHERE]->m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	object[SPHERE]->m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);	//影
+	//オブジェクトの位置を配置
+	//circle->m_shadow->m_sprite->m_pos = { 0, 0, 0 };
+	object[SPHERE]->m_obj->m_sprite->m_pos = { 8, 0, -2 };
+	//オブジェクトのコライダーを配置
+	object[SPHERE]->m_shadowCollider = new SphereCollider({}, 3.0f);
+	object[SPHERE]->m_objCollider = new SphereCollider({}, 3.0f);
+	//object[SPHERE]->isPlayer = true;
 
 	//アニメーションの設定
 	testObj->InitAnimation();
@@ -192,28 +292,8 @@ void Game::InitStage()
 void Game::InitStage1_1(void)
 {
 	//位置設定
-	//光源の位置を設定する
-	m_lightPos = { 0,0,-10 };
-	testObj->SetLightPos(m_lightPos);
-
-	//オブジェクトを設定する
-	stageBg->m_sprite->m_pos = { 0,-0.36,1 };//固定!!
-
-	testObj->m_obj->m_sprite->m_pos = { 0,-3,-2 };//y軸固定!!
-	testObj->m_shadow->m_sprite->m_pos.z = -1.0f;
-
-	coconut->m_obj->m_sprite->m_pos = { -5,-3,-4 };
-	coconut->m_shadow->m_sprite->m_pos.z = 0.02f;//影のY軸固定 Z軸は0.01ずつずらす
-	coconut->SetRailPos(1, 0);
+	stageBg->m_sprite->m_rotation.x = 19.8;
 	
-	lamp->m_obj->m_sprite->m_pos = { 0,-3,-4};
-	lamp->m_shadow->m_sprite->m_pos.z = 0.01f;
-	lamp->SetRailPos(2, 0);
-
-	housePlate->m_obj->m_sprite->m_pos = { -5,-3,-8 };
-	housePlate->m_shadow->m_sprite->m_pos.z = 0.0f;
-	housePlate->SetRailPos(1, 1);
-
 	//大きさ設定
 	stageBg->m_sprite->m_scale = { 2.725,2.725,1.0 };//固定値
 	
@@ -561,6 +641,69 @@ void Game::UpdateStage1_1(void)
 
 	stageBg->Update();
 
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		object[i]->Update();
+	}
+
+	for (int j = 0; j < sizeof(object) / sizeof(object[0]); ++j)
+	{
+		for (int i = 1+j; i < sizeof(object) / sizeof(object[0]); ++i)
+		{
+			if (object[i]->m_objCollider->GetColliderType() == SQUARE)
+			{
+				if (object[j]->m_objCollider->isBoxCollision(object[i]->m_objCollider))
+				{
+					if (object[i]->isPlayer)
+					{
+						object[j]->m_objCollider->isActive = false;
+					}
+					else
+					{
+						object[i]->m_objCollider->isActive = false;
+					}
+				}
+			}
+			else if (object[i]->m_objCollider->GetColliderType() == SPHERE)
+			{
+				if (object[j]->m_objCollider->isSphereCollision(object[i]->m_objCollider))
+				{
+					if (object[i]->isPlayer)
+					{
+						object[j]->m_objCollider->isActive = false;
+					}
+					else
+					{
+						object[i]->m_objCollider->isActive = false;
+					}
+				}
+			}
+			else if (object[i]->m_objCollider->GetColliderType() == POLYGON)
+			{
+				if (object[j]->m_objCollider->isPolygonCollision(object[i]->m_objCollider))
+				{
+					if (object[i]->isPlayer)
+					{
+						object[j]->m_objCollider->isActive = false;
+					}
+					else
+					{
+						object[i]->m_objCollider->isActive = false;
+					}
+				}
+			}
+		}
+	}
+	
+
+	//std::vector<Vector3> verticies = triangle->m_objCollider->GetVerticies();
+	//for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	//{
+	//	ex[i]->m_obj->m_sprite->m_pos.x = verticies[i].x;
+	//	ex[i]->m_obj->m_sprite->m_pos.y = verticies[i].y;
+	//	ex[i]->Update();
+	//}
+
 	
 
 }
@@ -633,6 +776,17 @@ Game::~Game()
 	delete uiRestart;	//ステージのボタン
 
 	delete stageBg;		//ステージ背景
+	delete circle;		//円
+	delete triangle;	//三角
+	delete square;		//四角
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		delete ex[i];
+	}
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		delete object[i];
+	}
 	delete coconut;
 	delete lamp;
 	delete housePlate;
@@ -770,6 +924,17 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i]->Draw();
+	}
+	for (int i = 0; i < sizeof(object) / sizeof(object[0]); ++i)
+	{
+		if (object[i]->m_objCollider->isActive)
+		{
+			object[i]->Draw();
+		}
+	}
 	//testObj->Draw();
 
 	//描画の順番を並び変え

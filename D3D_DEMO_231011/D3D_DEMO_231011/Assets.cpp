@@ -33,8 +33,8 @@ Assets::Assets()
     housePlate = LoadTexture("assets/stage1/housePlate.png");
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
+    ex = LoadTexture("assets/ex.png");
 
-     ex = LoadTexture("assets/ex.png");
 }
 
 Assets::~Assets()
