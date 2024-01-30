@@ -4,6 +4,7 @@
 #include "DInput.h"
 #include "DebugManager.h"
 #include "SceneManager.h"
+#include "RailManager.h"
 
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
@@ -17,7 +18,6 @@ Camera*		g_WorldCamera;		//CAMERA
 Game*		g_Game;				//ゲーム
 DebugManager* g_DebugManager;	//デバッグ用ツール
 SceneManager* g_SceneManager;
-
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -82,6 +82,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	g_SceneManager->SceneManager::Init();
 
+
 	//ゲームクラスの初期化処理
 	g_Game = Game::Get();
 	
@@ -128,6 +129,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//現在時間を取得（単位：カウント）
 			QueryPerformanceCounter(&liWork);
 			nowCount = liWork.QuadPart;
+
 			//1/60秒経過したか？
 			if (nowCount >= oldCount + numCount_1frame)
 			{

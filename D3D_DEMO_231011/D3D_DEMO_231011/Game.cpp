@@ -18,6 +18,8 @@
 #include "DInput.h"
 #include <stdio.h>
 
+#include <algorithm>
+
 
 #define INITROTATE	(19.8)
 
@@ -43,15 +45,23 @@ void Game::Init()
 
 	//stage1-1
 	stageBg = new StaticObject();
+
 	coconut = new GameObject();
 	lamp = new GameObject();
 	housePlate = new GameObject();
+	
 
 	testObj = new GameObject();
 
 
 
 	//stage1に使われてる
+
+	//移動のオブジェクトの名前を設定する
+	coconut->SetName("coconut");
+	lamp->SetName("lamp");
+	housePlate->SetName("housePlate");
+
 
 	//テクスチャ読み込み・モデル作成
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
@@ -106,6 +116,8 @@ void Game::Init()
 	uiPauseBg->m_pos={ - 300 / SCREEN_PARA, 0.0, 0.9f };
 
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
+
+	RailManager::Get()->InitRail();
 	
 }
 
@@ -181,23 +193,33 @@ void Game::InitStage1_1(void)
 	stageBg->m_sprite->m_pos = { 0,-0.36,1 };//固定!!
 
 	testObj->m_obj->m_sprite->m_pos = { 0,-3,-2 };//y軸固定!!
-	testObj->m_shadow->m_sprite->m_pos.z = -1.0f;//影のY/Z軸を固定!!
+	testObj->m_shadow->m_sprite->m_pos.z = -1.0f;
 
-	coconut->m_obj->m_sprite->m_pos = { -5,-3,-8 };
-	coconut->m_shadow->m_sprite->m_pos.z = 0.0f;
+	coconut->m_obj->m_sprite->m_pos = { -5,-3,-4 };
+	coconut->m_shadow->m_sprite->m_pos.z = 0.02f;//影のY軸固定 Z軸は0.01ずつずらす
+	coconut->SetRailPos(1, 0);
 	
-	lamp->m_obj->m_sprite->m_pos = { 5,-3,-4};
-	lamp->m_shadow->m_sprite->m_pos.z = 0.0f;
+	lamp->m_obj->m_sprite->m_pos = { 0,-3,-4};
+	lamp->m_shadow->m_sprite->m_pos.z = 0.01f;
+	lamp->SetRailPos(2, 0);
 
-	housePlate->m_obj->m_sprite->m_pos = { -5,-3,-4 };
+	housePlate->m_obj->m_sprite->m_pos = { -5,-3,-8 };
 	housePlate->m_shadow->m_sprite->m_pos.z = 0.0f;
-
+	housePlate->SetRailPos(1, 1);
 
 	//大きさ設定
 	stageBg->m_sprite->m_scale = { 2.725,2.725,1.0 };//固定値
+	
 
 	//回転設定
 	stageBg->m_sprite->m_rotation.x = 19.8;//カメラと垂直状態を保持するため
+
+	//objectListを初期化
+	objectList.clear();
+	objectList.shrink_to_fit();
+	objectList.push_back(coconut);
+	objectList.push_back(lamp);
+	objectList.push_back(housePlate);
 
 	//レールの設定
 	RailInit1_1();
@@ -211,6 +233,8 @@ void Game::InitStage1_1(void)
 	//使うステージだけ起動
 	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_1]->SetActive(true);
 
+	//移動ターゲットを設定
+	coconut->SetActive(true);
 }
 
 void Game::InitStage1_2(void)
@@ -248,31 +272,23 @@ void Game::InitStage3_3(void)
 void Game::RailInit1_1(void)
 {
 	//空いてるかどうかを設定する
-	int posData[15] =
-	{
-		0,0,1,1,0,
-		0,0,1,0,0,
-		0,0,0,0,0
-	};
+	//int posData[15] =
+	//{
+	//	/*0,0,1,1,0,
+	//	0,0,1,0,0,
+	//	0,0,0,0,0*/
+	//	1,1,1,1,1,
+	//	0,0,1,0,0,
+	//	0,0,0,0,0
+	//};
 
-	for (int i = 0; i < 15; i++) {
-
-		if (posData[i] == 1) {
-
-			RailManager::Get()->m_info[i].isVacant = true;
-		}
-		else {
-
-			RailManager::Get()->m_info[i].isVacant = 0;
-		}
-
-	}
-
-
+	
+	////1-1用
+	/*
 	bool railData[15][8]{
 		//back row
 		//up	ru  r	rd d	ld l	lu
-		{	0,	0,	0,	0,	0,	0,	0,	0},//0
+		{	0,	0,	1,	0,	0,	0,	0,	0},//0
 		{	0,	0,	1,	0,	0,	0,	0,	0},//1
 		{	0,	0,	1,	0,	1,	0,	1,	0},//2
 		{	0,	0,	1,	0,	0,	0,	1,	0},//3
@@ -292,6 +308,32 @@ void Game::RailInit1_1(void)
 		{	0,	0,	0,	0,	0,	0,	0,	0},
 		{	0,	0,	0,	0,	0,	0,	0,	0},
 	};
+	*/
+
+	//テスト用
+	bool railData[15][8]{
+		//up	ru  r	rd d	ld l	lu
+		{	0,	0,	1,	1,	1,	0,	0,	0},
+		{	0,	0,	1,	1,	1,	1,	1,	0},
+		{	0,	0,	1,	1,	1,	1,	1,	0},
+		{	0,	0,	1,	1,	1,	1,	1,	0},
+		{	0,	0,	0,	0,	1,	1,	1,	0},
+
+		{	1,	1,	1,	1,	1,	0,	0,	0},
+		{	1,	1,	1,	1,	1,	1,	1,	1},
+		{	1,	1,	1,	1,	1,	1,	1,	1},
+		{	1,	1,	1,	1,	1,	1,	1,	1},
+		{	1,	0,	0,	0,	1,	1,	1,	1},
+
+		{	1,	1,	1,	0,	0,	0,	0,	0},
+		{	1,	1,	1,	0,	0,	0,	1,	1},
+		{	1,	1,	1,	0,	0,	0,	1,	1},
+		{	1,	1,	1,	0,	0,	0,	1,	1},
+		{	1,	0,	0,	0,	0,	0,	1,	1},
+
+
+
+	};
 
 	//道を設定する
 	for (int i = 0; i < 15; i++) {
@@ -310,7 +352,15 @@ void Game::RailInit1_1(void)
 			
 		}
 
+	}
 
+	//オブジェクトいるところの位置情報更新
+	for (auto& it :objectList) {
+		
+		//位置を獲得
+		int pos = it->GetRailPos().verticalPos * 5 + it->GetRailPos().horizontalPos;
+		//情報更新
+		RailManager::Get()->m_info[pos].isVacant = false;
 	}
 
 }
@@ -350,6 +400,13 @@ void Game::TitleUpdate(void)
 
 void Game::SelectUpdate(void)
 {
+	//入力処理
+
+
+
+
+	//オブジェクト更新
+
 }
 
 void Game::StageUpdate(void)
@@ -452,27 +509,32 @@ void Game::UpdateStage1_1(void)
 	if (Input::Get()->GetKeyPress(DIK_F)) {
 		testObj->m_obj->m_sprite->m_pos.y -= 0.05f;
 	}
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-		testObj->m_obj->m_sprite->m_pos = { 0,0,-2 };
-	}
+
 
 	
 	//移動させる目標を設定する
-	if (Input::Get()->GetKeyTrigger(DIK_TAB)) {
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		
-		if (coconut->GetActive()) {
-			coconut->SetActive(false);
-			lamp->SetActive(true);
-		}
-		if (lamp->GetActive()) {
-			lamp->SetActive(false);
-			housePlate->SetActive(true);
-		}
-		if (housePlate->GetActive()) {
-			housePlate->SetActive(false);
-			coconut->SetActive(true);
-		}
+	/*	for (auto& element : objectList) {
+
+			if (element->GetActive()) {
+				element->SetActive(false);
+				element + 1;
+			}
 		
+		}
+		*/
+
+		for (auto it = objectList.begin(); it != objectList.end(); it++) {
+			if ((*it)->GetActive()) 
+			{
+				(*it)->SetActive(false);
+
+				auto nextIt = std::next(it) != objectList.end() ? std::next(it) : objectList.begin();
+				(*nextIt)->SetActive(true);
+				break;
+			}
+		}
 	}
 
 	
@@ -695,30 +757,85 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
-	testObj->Draw();
-
-	coconut->m_shadow->Draw();
-	lamp->m_shadow->Draw();
-	housePlate->m_shadow->Draw();
-	
-	coconut->m_obj->Draw();
-	lamp->m_obj->Draw();
-	housePlate->m_obj->Draw();
-
+	//testObj->Draw();
 
 	//描画の順番を並び変え
 
+	//影
+	SortShadowDraw();
 
+	//オブジェクト
+	SortObjectDraw();
+
+	//レール上どこが空いてるのを可視化
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
 	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
+	char pointInfo1[20] = {};
+	for (int i = 0; i < 5; i++) {
+		if (RailManager::Get()->m_info[i].isVacant) {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
+			strcat_s(pointInfo1, tempStr);
+		
+		}
+		else {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
+			strcat_s(pointInfo1, tempStr);
+		}
 
-	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.x);
+	}
+	char pointInfo2[20] = {};
+	for (int i = 5; i < 10; i++) {
+		if (RailManager::Get()->m_info[i].isVacant) {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
+			strcat_s(pointInfo2, tempStr);
 
+		}
+		else {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
+			strcat_s(pointInfo2, tempStr);
+		}
+
+	}
+	char pointInfo3[20] = {};
+	for (int i = 10; i < 15; i++) {
+		if (RailManager::Get()->m_info[i].isVacant) {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
+			strcat_s(pointInfo3, tempStr);
+
+		}
+		else {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
+			strcat_s(pointInfo3, tempStr);
+		}
+
+	}
+	g_DebugManager->PrintDebugLog(posX, posY, pointInfo1);
 	posY = ((SCREEN_HEIGHT / 2) - 80.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.y);
-
+	g_DebugManager->PrintDebugLog(posX, posY, pointInfo2);
 	posY = ((SCREEN_HEIGHT / 2) - 120.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.z);
+	g_DebugManager->PrintDebugLog(posX, posY, pointInfo3);
+
+	//今移動しているオブジェクト
+	for (auto& element : objectList) {
+		
+		if (element->GetActive()) {
+			posX= 0.0f;
+			posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
+			char name[32] = {};
+			strcpy_s(name, element->GetName().c_str());
+			g_DebugManager->PrintDebugLog(posX, posY, name);
+			
+		}
+
+	}
+
+
 }
 
 
@@ -732,4 +849,35 @@ void Game::UiDraw(void)
 	uiPauseBg->Draw();
 	//uiResume->Draw();
 	//uiRestart->Draw();
+}
+
+void Game::SortObjectDraw(void)
+{
+	std::sort(objectList.begin(), objectList.end(), [](GameObject* obj1, GameObject* obj2) {
+		if (obj1->GetRailPos().verticalPos == obj2->GetRailPos().verticalPos) {
+			return obj1->GetRailPos().horizontalPos > obj2->GetRailPos().horizontalPos;
+		}
+		return obj1->GetRailPos().verticalPos < obj2->GetRailPos().verticalPos;
+		});
+
+	for (auto& element : objectList) {
+		element->m_obj->Draw();
+	}
+}
+
+void Game::SortShadowDraw(void)
+{
+
+	std::sort(objectList.begin(), objectList.end(), [](GameObject* obj1, GameObject* obj2) {
+		
+		return obj1->m_shadow->m_sprite->m_pos.z > obj2->m_shadow->m_sprite->m_pos.z;
+
+
+	});
+
+	for (auto& element : objectList) {
+		
+		element->m_shadow->Draw();
+	}
+
 }

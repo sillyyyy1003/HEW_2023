@@ -15,7 +15,7 @@ void RailManager::InitRail()
 	for (int i = 0; i < 15; i++) {
 	
 		//1全部をオープンにする
-		m_info[i].isVacant = false;
+		m_info[i].isVacant = true;
 
 		//2
 		for (int j = 0; j < 8; j++) 

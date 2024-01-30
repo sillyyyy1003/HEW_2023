@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
+#include <string>
 
 class Object;
 class ShadowObject;
@@ -26,6 +27,10 @@ private:
 
 	//操作中かどうか？
 	bool isActive = false;
+
+	int m_count = 0;
+
+	std::string m_Name;
 
 public:
 	//----------------------------//
@@ -84,12 +89,21 @@ public:
 	DirectX::XMFLOAT3 GenerateShadowPos();
 
 	//レールの位置
+	
+	/// <summary>
+	/// レール上も位置を設定する
+	/// </summary>
+	/// <param name="horPos">横　0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2</param>
+	/// <param name="verPos">縦　0:BACK 1:MIDDLE 2:FRONT</param>
 	void SetRailPos(int horPos, int verPos);
 	RailPos GetRailPos() { return m_railPos; };
 
 	//オブジェクトの操作状態
 	void SetActive(bool isActive) { this->isActive = isActive; };
 	bool GetActive() { return isActive; };
+
+	void SetName(std::string Name) { m_Name = Name; };
+	std::string GetName(void) { return m_Name; };
 
 	void SetLightPos(DirectX::XMFLOAT3 _lightPos);
 
@@ -103,6 +117,14 @@ public:
 	void UpdateObjectColliderData(void);
 
 	void UpdateShadowColliderData(void);
+
+
+	//一定距離の移動
+	void ObjectMove(void);
+
+	//移動できないのエフェクト
+	void ObjectVibration();
+	
 
 	//オブジェクトを描画する
 	void Draw(void);

@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+class GameObject;
 
 // ステージクラス （ステージ数だけ）
 class Stage
@@ -17,6 +19,8 @@ private:
 
 	//ステージは作動中かどうか？
 	bool isActive = false;
+
+	std::vector<GameObject*> m_objectList;
 
 public:
 

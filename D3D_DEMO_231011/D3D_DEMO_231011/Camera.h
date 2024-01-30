@@ -19,9 +19,9 @@ protected:
 	//rotation X= 19.8°
 	
 	//カメラの位置
-	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 7.119 + 1, -21.626 - (1 / ROTATEX));
+	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 7.119 + 1, -21.626);
 	//注視点
-	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0f, 0.0f, 0.0f);
+	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0f, 0.0f, (1 / ROTATEX));
 	//カメラの上方向
 	XMFLOAT3 m_UpDir = XMFLOAT3(0.0,1.0f,0.0f);
 

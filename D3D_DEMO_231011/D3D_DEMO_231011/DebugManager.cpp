@@ -1,5 +1,6 @@
 ﻿#include "DebugManager.h"
 #include "Assets.h"
+#include "RailManager.h"
 #include <stdio.h>
 
 
@@ -88,4 +89,7 @@ void DebugManager::PrintDebugLog(float _posX, float _posY, const int _num)
 	//更新と描画
 	UpdateChar(str);
 }
+
+
+
 

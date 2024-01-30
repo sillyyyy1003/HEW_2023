@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
 #include <DirectXMath.h>
-#include <map>
+#include <vector>
 
 class GameObject;
 class StaticObject;
@@ -34,11 +34,11 @@ private:
 	GameObject* coconut;		//円
 	GameObject* lamp;			//長細の棒
 	GameObject* housePlate;			//長方形
-
+	
 	GameObject* circle;			//circle
 
-
-
+	std::vector<GameObject*> objectList;
+	
 private:
 	
 	//PAUSE
@@ -125,8 +125,14 @@ public:
 	void ResultDraw(void);
 
 	//ui描画
-
 	void UiDraw(void);
+	
+	//オブジェクトを並び変え描画する
+	void SortObjectDraw(void);
+
+	//影の位置によって並び替え描画する
+	void SortShadowDraw(void);
+	
 	/*
 	//テスト用
 	void TestUpdate(void);

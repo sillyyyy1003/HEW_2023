@@ -95,7 +95,8 @@ DirectX::XMFLOAT3 GameObject::GenerateShadowPos()
 
 void GameObject::SetRailPos(int horPos, int verPos)
 {
-	m_railPos.verticalPos = verPos; m_railPos.horizontalPos = horPos;
+	m_railPos.horizontalPos = horPos;
+	m_railPos.verticalPos = verPos;
 }
 
 void GameObject::SetLightPos(DirectX::XMFLOAT3 _lightPos)
@@ -108,24 +109,146 @@ void GameObject::Update()
 	//入力処理
 	if (isActive) {
 		//八方向の入力処理
-		if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
-		
-			if (isMoveable(UP))//前に移動できるかを判断
-			{
-				m_moveDir = UP;//return UP signal
+		//上
+		if (m_moveDir == STILL)
+		{
+
+			if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+
+				if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) {
+
+					if (isMoveable(UPRIGHT))//移動先に移動できるかを判断
+					{
+						m_moveDir = UPRIGHT;//移動方向を変える
+
+					}
+					else {
+						//移動できないの表示
+						ObjectVibration();
+					}
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW)) {
+
+					if (isMoveable(UPLEFT)) {
+						m_moveDir = UPLEFT;
+					}
+
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+
+					m_moveDir = STILL;
+				}
+				else {
+					if (isMoveable(UP)) {
+						m_moveDir = UP;
+					}
+				}
 
 			}
-	
-		}
+			//下
+			if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
 
-		if (m_moveDir == UP) {
+				if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) {
 
+					if (isMoveable(DOWNRIGHT))//移動先に移動できるかを判断
+					{
+						m_moveDir = DOWNRIGHT;//移動方向を変える
+
+					}
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW)) {
+
+					if (isMoveable(DOWNLEFT)) {
+						m_moveDir = DOWNLEFT;
+					}
+
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+
+					m_moveDir = STILL;
+				}
+				else {
+					if (isMoveable(DOWN)) {
+						m_moveDir = DOWN;
+					}
+				}
+
+			}
+
+			//右
+			if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) {
+
+				if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+
+					if (isMoveable(UPRIGHT))//移動先に移動できるかを判断
+					{
+						m_moveDir = UPRIGHT;//移動方向を変える
+
+					}
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW)) {
+
+					m_moveDir = STILL;
+
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+
+
+					if (isMoveable(DOWNRIGHT))//移動先に移動できるかを判断
+					{
+						m_moveDir = DOWNRIGHT;//移動方向を変える
+
+					}
+				}
+				else {
+
+					if (isMoveable(RIGHT)) {
+						m_moveDir = RIGHT;
+					}
+				}
+			}
+
+			//左
+			if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW)) {
+
+				if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+
+					if (isMoveable(UPLEFT))//移動先に移動できるかを判断
+					{
+						m_moveDir = UPLEFT;//移動方向を変える
+
+					}
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) {
+
+					m_moveDir = STILL;
+
+				}
+				else if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+
+
+					if (isMoveable(DOWNLEFT))//移動先に移動できるかを判断
+					{
+						m_moveDir = DOWNLEFT;//移動方向を変える
+
+					}
+				}
+				else {
+					if (isMoveable(LEFT)) {
+						m_moveDir = LEFT;
+					}
+				}
+			}
+
+		}else 
+		{
+			ObjectMove();
 		}
+		
 
 		//移動完成後
 		int stageInfo = SceneManager::Get()->GetActiveStage();
 		SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
-
 	}
 	//オブジェクト情報更新
 	
@@ -219,6 +342,8 @@ bool GameObject::isMoveable(DIR dir)
 		case UPLEFT:
 			pos = (m_railPos.verticalPos - 1) * 5 + m_railPos.horizontalPos - 1;
 			break;
+		case STILL:
+			break;
 		}
 
 		//There may be some bugs,So Limit the boundary
@@ -309,6 +434,171 @@ void GameObject::UpdateShadowColliderData(void)
 
 
 
+}
+
+void GameObject::ObjectMove()
+{
+	float moveSpeed = 0;
+
+	switch (m_moveDir) {
+	case UP:
+
+
+		break;
+
+	case UPRIGHT:
+
+		break;
+
+	case RIGHT:
+
+		moveSpeed = 0.05f;
+		m_count++;
+
+		if (m_count * moveSpeed <= 5.0f) {
+
+			m_obj->m_sprite->m_pos.x += moveSpeed;
+		}
+		else {
+			//移動終了
+			m_moveDir = STILL;
+			m_count = 0;//カウンターをリセット
+			//Pointの情報を更新する
+
+
+			if (m_railPos.horizontalPos <= 3) {//制限を加えて
+				m_railPos.horizontalPos += 1;
+			}
+
+			//
+			int pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
+			//移動したの情報更新する
+			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動前の情報更新
+			RailManager::Get()->m_info[(pos - 1)].isVacant = true;
+		}
+
+
+		break;
+
+	case DOWNRIGHT:
+
+		break;
+
+	case DOWN:
+		moveSpeed = 0.04f;
+		m_count++;
+		if (this->m_railPos.verticalPos == 0) {
+		
+			if (m_count * moveSpeed <= 4.0f) {
+				
+				m_obj->m_sprite->m_pos.z -= moveSpeed;
+			}
+			else {
+				//移動終了
+				m_moveDir = STILL;
+				m_count = 0;//カウンターをリセット
+				//Pointの情報を更新する
+
+				if (m_railPos.verticalPos < 2) {//制限を加えて
+					m_railPos.verticalPos += 1;
+				}
+
+				//
+				int pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
+				//移動したの情報更新する
+				RailManager::Get()->m_info[pos].isVacant = false;
+				//移動前の情報更新
+				RailManager::Get()->m_info[(pos - 5)].isVacant = true;
+			}
+		
+		
+		}
+		else if (this->m_railPos.verticalPos == 1) {
+			moveSpeed = 0.03f;
+			if (m_count * moveSpeed <= 3.0f) {
+				
+				m_obj->m_sprite->m_pos.z -= moveSpeed;
+			}
+			else {
+				//移動終了
+				m_moveDir = STILL;
+				m_count = 0;//カウンターをリセット
+				//Pointの情報を更新する
+
+
+				if (m_railPos.verticalPos < 2) {//制限を加えて
+					m_railPos.verticalPos += 1;
+				}
+
+				//
+				int pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
+				//移動したの情報更新する
+				RailManager::Get()->m_info[pos].isVacant = false;
+				//移動前の情報更新
+				RailManager::Get()->m_info[(pos - 5)].isVacant = true;
+			}
+		}
+
+
+
+
+		break;
+
+	case DOWNLEFT:
+
+		break;
+
+	case LEFT:
+
+		moveSpeed = 0.05f;
+		m_count++;
+
+		if (m_count * moveSpeed <= 5.0f) {
+
+			m_obj->m_sprite->m_pos.x -= moveSpeed;
+		}
+		else {
+			//移動終了
+			m_moveDir = STILL;
+			m_count = 0;//カウンターをリセット
+			//Pointの情報を更新する
+
+
+			if (m_railPos.horizontalPos >0 ) {//制限を加えて
+				m_railPos.horizontalPos -= 1;
+			}
+
+			//いち
+			int pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
+			//移動したの情報更新する
+			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動前の情報更新
+			RailManager::Get()->m_info[(pos + 1)].isVacant = true;
+		}
+
+		break;
+
+	case UPLEFT:
+
+		break;
+
+	case STILL:
+
+		break;
+	}
+
+
+
+
+
+
+
+
+}
+
+void GameObject::ObjectVibration()
+{
 }
 
 
