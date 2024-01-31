@@ -27,6 +27,8 @@ private:
 	//操作中かどうか？
 	bool isActive = false;
 
+	int m_size = 0;
+
 public:
 	//----------------------------//
 	// 変数
@@ -46,7 +48,7 @@ public:
 	//光があるかどうか
 	bool isLit = false;
 
-
+	bool isPlayer = false;
 	
 public:
 	//コンストラクタ
@@ -90,6 +92,9 @@ public:
 	//オブジェクトの操作状態
 	void SetActive(bool isActive) { this->isActive = isActive; };
 	bool GetActive() { return isActive; };
+
+	int GetSize() { return m_size; };
+	void SetSize(int size) { m_size = size; };
 
 	void SetLightPos(DirectX::XMFLOAT3 _lightPos);
 

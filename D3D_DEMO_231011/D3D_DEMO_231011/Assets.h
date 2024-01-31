@@ -15,6 +15,7 @@ public:
 
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* circle;
+	ID3D11ShaderResourceView* tree;
 	ID3D11ShaderResourceView* shadow;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
@@ -39,6 +40,8 @@ public:
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
+
+	ID3D11ShaderResourceView* ex;
 
 
 

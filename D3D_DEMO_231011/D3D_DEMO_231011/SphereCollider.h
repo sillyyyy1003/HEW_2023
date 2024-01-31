@@ -10,42 +10,44 @@ class BoxCollider;
 class SphereCollider :public Collider
 {
 private:
-	
-
-	DirectX::BoundingSphere m_sphereCollider;
-	
-
+	std::vector<Vector3> verticies;
+	std::vector<Vector3> m_verticies;
 public:
 
 	DirectX::XMFLOAT3 m_center = {};
-	float m_radius = 0.0f;
+	//float m_radius = 0.0f;
 
 public:
 
-	SphereCollider();
+	/// <summary>
+	/// 引数１：座標　引数２：半径
+	/// </summary>
+	/// <param name="center"></param>
+	/// <param name="Radius"></param>
+	SphereCollider(DirectX::XMFLOAT3 center, float Radius);
 
 	void InitCollider(DirectX::XMFLOAT3 center, float Radius);
 
-	void UpdateRadius();
+	//void UpdateRadius();
+	void UpdateRadius(float Radius);
 
-	void UpdatePos();
+	void UpdatePos(DirectX::XMFLOAT3 m_center);
 
 	/// <summary>
 	/// 毎回呼び出される、状態を更新する関数
 	/// </summary>
 	/// <param name="radius">半径</param>
-	void Update() override; 
+	void Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation) override;
 
 	/// <summary>
 	/// 当たり判定
 	/// </summary>
 	/// <param name="sphereCollider">球体</param>
-	bool isCollision(SphereCollider* sphereCollider);
-	bool isCollision(BoxCollider* boxCollider);
+	bool isSphereCollision(Collider* sphereCollider) override;
+	bool isBoxCollision(Collider* boxCollider) override;
+	bool isClearCollision(Collider* polygoncollider, float verNum) override;
 
-
-	DirectX::BoundingSphere GetCollider(void) { return m_sphereCollider; };
-
-	
+	void SetVerticies(std::vector<Vector3> ver) { m_verticies = ver; };
+	std::vector<Vector3> GetVerticies() override { return m_verticies; };
 };
 
