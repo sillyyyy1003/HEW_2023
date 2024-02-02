@@ -23,7 +23,7 @@ private:
 	CanvasUI*	uiPressEnter;	//タイトルエンターキー
 
 
-
+	//pause
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//PAUSEのボタン
@@ -32,8 +32,18 @@ private:
 
 	CanvasUI*	uiSoundBg;		//SOUNDの背景
 
-	CanvasUI*	uiSoundOp_BGM[6];	//SOUNDのBGM設定
-	CanvasUI*	uiSoundOp_SE[6];	//SOUNDのSE設定
+	CanvasUI*	uiSoundOp_BGM[6];	//BGM設定
+	CanvasUI*	uiSoundOp_SE[6];	//SE設定
+
+	//stage select
+	CanvasUI* uiSelectBg;
+	CanvasUI* uiStageSelect;
+	CanvasUI* uiSelectCursor;
+
+	CanvasUI* uiSelectStage[3];
+	CanvasUI* uiSelectChapter[3];
+
+
 
 
 	//stage1-1
@@ -41,7 +51,7 @@ private:
 	GameObject* testObj;		//移動テスト用のオブジェクト
 	GameObject* coconut;		//円
 	GameObject* lamp;			//長細の棒
-	GameObject* housePlate;			//長方形
+	GameObject* housePlate;		//長方形
 
 	GameObject* circle;			//circle
 
@@ -50,25 +60,45 @@ private:
 private:
 	
 
-	//SOUND
+	//sound
 	bool isSound = false;
-	//PAUSE
+	//pause
 	bool isPause = false;
-	
-	//SOUNDOP
+	//clear
+	//bool isClear = false;
+	//stageFocus
+	bool isFocus = false;
+
 	enum SOUNDOP
 	{
-
 		BGM,
 		SE,
-
-		NOSELECT,
 	};
 
-	SOUNDOP soundOp = NOSELECT;
+	SOUNDOP soundOp = BGM;
 	
 	int m_soundVolume_BGM = 3;
 	int m_soundVolume_SE = 3;
+
+
+	enum SELECTSTAGE
+	{
+		NONE,
+		STAGE1,
+		STAGE2,
+		STAGE3,
+	};
+	SELECTSTAGE selectStage = NONE;
+
+	const float brightenFactor = 0.8f;
+
+	enum SELECTCHAPTER
+	{
+		CHAPTER1,
+		CHAPTER2,
+		CHAPTER3,
+	};
+	SELECTCHAPTER selectChapter = CHAPTER1;
 
 private:
 	//コンストラクタ&デストラクタ
@@ -86,6 +116,8 @@ public:
 
 	void InitStage();
 
+
+
 	//ステージの初期化を行う関数：キャラの位置、大きさなど
 	void InitStage1_1(void);
 	void InitStage1_2(void);
@@ -100,6 +132,13 @@ public:
 	void RailInit1_1(void);
 	void RailInit1_2(void);
 
+
+	//サウンド配列Init
+	void InitSoundArray();
+
+	//セレクトステージ配列Init
+	void InitSelectArray();
+
 	//ゲーム本体
 	void GameUpdate(void);
 
@@ -108,6 +147,7 @@ public:
 
 	//Select Update
 	void SelectUpdate(void);
+	void SelectChapter(void);
 
 	//Stage Update
 	void StageUpdate(void);
@@ -135,6 +175,9 @@ public:
 
 	void SoundVolume(void);
 
+	void FocusSwitch(void);
+
+
 
 	//描画
 	void GameDraw(void);
@@ -146,6 +189,7 @@ public:
 
 	void SelectDraw(void);
 
+	//音量調節
 	void SoundVolumeDraw(void);
 
 	//ステージ描画

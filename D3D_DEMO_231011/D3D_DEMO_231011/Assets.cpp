@@ -14,16 +14,18 @@ Assets::Assets()
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
-    uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
-    uiResume = LoadTexture("assets/ui/resume.png");
-    uiRestart = LoadTexture("assets/ui/restart.png");
-    uiSelect= LoadTexture("assets/ui/select.png");
-    uiSound = LoadTexture("assets/ui/sound.png");
 
-    uiSoundBg = LoadTexture("assets/ui/sound.png");//サウンド背景
-    uiSoundOp_BGM = LoadTexture("assets/Tree.png");
-    uiSoundOp_SE = LoadTexture("assets/Tree.png");
+    uiSelectBg = LoadTexture("assets/ui/select/selectbg.png");
+    uiStageSelect = LoadTexture("assets/ui/select/stageselect.png");
 
+    uiSelectCursor = LoadTexture("assets/ui/select/hane.png");
+    uiSelectStage1 = LoadTexture("assets/ui/select/stage1.png");
+    uiSelectStage2 = LoadTexture("assets/ui/select/stage2.png");
+    uiSelectStage3 = LoadTexture("assets/ui/select/stage3.png");
+
+    uiSelectChapter1 = LoadTexture("assets/ui/select/chapter1.png");
+    uiSelectChapter2 = LoadTexture("assets/ui/select/chapter2.png");
+    uiSelectChapter3 = LoadTexture("assets/ui/select/chapter3.png");
 
     //test
     circle = LoadTexture("assets/Tree.png");
@@ -38,7 +40,15 @@ Assets::Assets()
     housePlate = LoadTexture("assets/stage1/housePlate.png");
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
+    uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
+    uiResume = LoadTexture("assets/ui/resume.png");
+    uiRestart = LoadTexture("assets/ui/restart.png");
+    uiSelect= LoadTexture("assets/ui/select.png");
+    uiSound = LoadTexture("assets/ui/sound.png");
 
+    uiSoundBg = LoadTexture("assets/ui/soundBg.png");//サウンド背景
+    uiSoundOp_BGM = LoadTexture("assets/Tree.png");
+    uiSoundOp_SE = LoadTexture("assets/Tree.png");
 
 
 }
