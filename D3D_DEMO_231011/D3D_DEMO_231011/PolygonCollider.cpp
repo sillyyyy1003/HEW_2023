@@ -213,7 +213,7 @@ bool PolygonCollider::isClearCollision(Collider* polygoncollider,float verNum)
     BoundingSphere SCollider;
     BoundingBox BCollider;
 
-    Polygon->vertices = SetSquare(0.5f,0.5f);
+    Polygon->vertices = SetSquare(0.3f,0.3f);
     
     if (polygoncollider->GetColliderType() == POLYGON)
     {
@@ -270,7 +270,7 @@ bool PolygonCollider::isClearCollision(Collider* polygoncollider,float verNum)
     Polygon->vertices = Polygonverticies;
 
     EPolygon->vertices = EPolygonverticies;
-    SetVerticies(Polygonverticies);
+    //SetVerticies(Polygonverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
 

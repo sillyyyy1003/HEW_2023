@@ -9,6 +9,15 @@
 
 extern Camera* g_WorldCamera;
 
+#define BOXMEDIUM 1.5f
+#define BOXLARGE 2.1f
+
+#define SPHEREMEDIUM 1.8f
+#define SPHERELARGE 2.5f
+
+#define POLYGONMEDIUM 1.5f
+#define POLYGONLARGE 2.1f
+
 GameObject::GameObject()
 {
 	//オブジェクトの初期化
@@ -18,7 +27,6 @@ GameObject::GameObject()
 
 	//影の初期化
 	m_shadow = new ShadowObject();
-	
 }
 
 void GameObject::CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
@@ -35,6 +43,22 @@ void GameObject::InitAnimation(void)
 {
 	m_obj->m_sprite->m_anime = new StaticAnimation(1, 1);
 	m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);
+}
+
+void GameObject::InitCollision(void)
+{
+	switch (m_shadowCollider->GetColliderType())
+	{
+	case POLYGON:
+		SpolygonCollider = m_shadowCollider->GetPolygonCollider();
+		break;
+	case SPHERE:
+		SsphereCollider = m_shadowCollider->GetSphereCollider();
+		break;
+	case SQUARE:
+		SboxCollider = m_shadowCollider->GetBoxCollider();
+		break;
+	}
 }
 
 
@@ -179,27 +203,28 @@ void GameObject::Update()
 		{
 		case ShadowObject::SIZE::SMALL:
 			// 円の半径（小）
-			m_shadowCollider->SetSphereCollider(1.2f);
+			m_shadowCollider->SetSphereCollider(SsphereCollider.Radius);
 			// 三角の半径（小）
-			m_shadowCollider->SetPolygonCollider(0.9f);
+			m_shadowCollider->SetPolygonCollider(SpolygonCollider.Radius);
 			// 四角の幅（小）
-			m_shadowCollider->SetBoxCollider({ 1,1,1 });
+			m_shadowCollider->SetBoxCollider({ SboxCollider.Extents.x,SboxCollider.Extents.y,SboxCollider.Extents.z });
 			break;
 		case ShadowObject::SIZE::MEDIUM:
 			// 円の半径（中）
-			m_shadowCollider->SetSphereCollider(1.7f);
+			m_shadowCollider->SetSphereCollider(SsphereCollider.Radius* SPHEREMEDIUM);
 			// 三角の半径（中）
-			m_shadowCollider->SetPolygonCollider(1.4f);
+			m_shadowCollider->SetPolygonCollider(SpolygonCollider.Radius*POLYGONMEDIUM);//1.5
 			// 四角の幅（中）
-			m_shadowCollider->SetBoxCollider({ 1.5f,1.5f,1.5f });
+			//DirectX::XMFLOAT3 medium = { SboxCollider.Extents.x * SCALEMEDIUM,0,0 };
+			m_shadowCollider->SetBoxCollider({ SboxCollider.Extents.x* BOXMEDIUM,SboxCollider.Extents.y * BOXMEDIUM,SboxCollider.Extents.z * BOXMEDIUM });
 			break;
 		case ShadowObject::SIZE::LARGE:
 			// 円の半径（大）
-			m_shadowCollider->SetSphereCollider(2.2f);
+			m_shadowCollider->SetSphereCollider(SsphereCollider.Radius* SPHERELARGE);
 			// 三角の半径（大）
-			m_shadowCollider->SetPolygonCollider(1.9f);
+			m_shadowCollider->SetPolygonCollider(SpolygonCollider.Radius* POLYGONLARGE);//2.1
 			// 四角の幅（大）
-			m_shadowCollider->SetBoxCollider({ 2.1f,2.1f,2.1f });
+			m_shadowCollider->SetBoxCollider({ SboxCollider.Extents.x * BOXLARGE,SboxCollider.Extents.y * BOXLARGE,SboxCollider.Extents.z * BOXLARGE });
 			break;
 		}
 	}
@@ -229,7 +254,7 @@ void GameObject::Update()
 	if (GetActive())
 	{
 		m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
-		m_shadow->m_sprite->m_pos.y = m_obj->m_sprite->m_pos.y;
+		//m_shadow->m_sprite->m_pos.y = m_obj->m_sprite->m_pos.y;
 
 		SetSize(m_shadow->m_size);
 	}

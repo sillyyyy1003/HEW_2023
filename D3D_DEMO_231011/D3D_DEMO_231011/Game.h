@@ -71,7 +71,8 @@ public:
 
 	void InitStage();
 
-	void CreateGameobject(int TYPE, bool Move);
+	void CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width, float height,
+						  float radius, DirectX::XMFLOAT3 extens);
 
 	void SortGameobject();
 

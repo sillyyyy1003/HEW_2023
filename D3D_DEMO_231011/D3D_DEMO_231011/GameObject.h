@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
+#include <DirectXCollision.h>
 
 class Object;
 class ShadowObject;
@@ -28,6 +29,10 @@ private:
 	bool isActive = false;
 
 	int m_size = 0;
+
+	DirectX::BoundingSphere SsphereCollider;
+	DirectX::BoundingSphere SpolygonCollider;
+	DirectX::BoundingBox SboxCollider;
 
 public:
 	//----------------------------//
@@ -76,6 +81,9 @@ public:
 
 	// アニメーションの初期化処理
 	void InitAnimation(void);
+
+	// Collisionの初期化(スケールの変化に対応するために必要)
+	void InitCollision(void);
 
 	/// <summary>
 	/// 影の生成位置を計算する関数
