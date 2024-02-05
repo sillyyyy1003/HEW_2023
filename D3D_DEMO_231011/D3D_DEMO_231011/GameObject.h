@@ -57,6 +57,8 @@ private:
 
 	bool isAutoMove = false;//自動移動しているかどうか
 
+	int m_size = 0;
+
 public:
 	//----------------------------//
 	// 変数
@@ -80,7 +82,7 @@ private:
 
 	void DoKeyInput(void);
 
-
+	bool isPlayer = false;
 	
 public:
 	//コンストラクタ
@@ -131,6 +133,12 @@ public:
 	//オブジェクトの操作状態
 	void SetActive(bool isActive) { this->isActive = isActive; };
 	bool GetActive() { return isActive; };
+
+	int GetSize() { return m_size; };
+	void SetSize(int size) { m_size = size; };
+
+	int GetSize() { return m_size; };
+	void SetSize(int size) { m_size = size; };
 
 	void SetName(std::string Name) { m_Name = Name; };
 	std::string GetName(void) { return m_Name; };

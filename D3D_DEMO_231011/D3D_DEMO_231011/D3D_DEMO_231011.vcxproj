@@ -147,7 +147,9 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectAnimation.cpp" />
+    <ClCompile Include="PolygonCollider.cpp" />
     <ClCompile Include="RailManager.cpp" />
+    <ClCompile Include="SatCollider.cpp" />
     <ClCompile Include="PolygonCollider.cpp" />
     <ClCompile Include="SatCollider.cpp" />
     <ClCompile Include="Scene.cpp" />

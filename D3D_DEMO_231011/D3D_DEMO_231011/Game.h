@@ -2,6 +2,8 @@
 #include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
 #include <DirectXMath.h>
 #include <vector>
+#include <vector>
+#include <list>
 
 class GameObject;
 class StaticObject;
@@ -36,7 +38,16 @@ private:
 	GameObject* housePlate;			//長方形
 	
 
+	std::vector<GameObject*> Vobject;		//四角
+
+	GameObject* ex[4];		//頂点確認用
+
+	int objectNum[2];
 	std::vector<GameObject*> objectList;
+	//円に該当する配列の数字
+	int Sphere = 0;
+	//四角に該当する配列の数字
+	int Square = 0;
 	
 private:
 	
@@ -59,6 +70,10 @@ public:
 	void Init();//
 
 	void InitStage();
+
+	void CreateGameobject(int TYPE, bool Move);
+
+	void SortGameobject();
 
 	//ステージの初期化を行う関数：キャラの位置、大きさなど
 	void InitStage1_1(void);
@@ -134,6 +149,8 @@ public:
 	//影の位置によって並び替え描画する
 	void SortShadowDraw(void);
 	
+
+	void TestMove(GameObject* _target);
 	/*
 	//テスト用
 	void TestUpdate(void);

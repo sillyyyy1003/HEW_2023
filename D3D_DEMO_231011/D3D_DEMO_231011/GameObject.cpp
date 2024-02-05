@@ -277,22 +277,93 @@ void GameObject::Update()
 	
 
 	//影情報更新
-	// 
+
+	if (m_shadowCollider)
+	{
+		m_shadowCollider->Update(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->m_rotation);
+	}
+
+
 	//位置を更新
 	GenerateShadowPos();
-	
+
+	// オブジェクトの位置によって影の大きさを調整
+	if (m_obj->m_sprite->m_pos.z <= -2)
+	{
+		// SMALL
+		m_railPos.verticalPos = 0;
+	}
+	if (m_obj->m_sprite->m_pos.z <= -4)
+	{
+		// MIDDLE
+		m_railPos.verticalPos = 1;
+	}
+	if (m_obj->m_sprite->m_pos.z <= -8)
+	{
+		// LARGE
+		m_railPos.verticalPos = 2;
+	}
+
 	//大きさを更新
-	//switch (m_railPos.verticalPos)
-	//{
-	//case 0:	//back
-	//	m_shadow->m_size = ShadowObject::SIZE::SMALL;
-	//	break;
-	//case 1:
-	//	m_shadow->m_size = ShadowObject::SIZE::MEDIUM;
-	//	break;
-	//case 2:
-	//	m_shadow->m_size = ShadowObject::SIZE::LARGE;
-	//	break;
+	switch (m_railPos.verticalPos)
+	{
+	case 0:	//back
+		m_shadow->m_size = ShadowObject::SIZE::SMALL;
+		break;
+	case 1:
+		m_shadow->m_size = ShadowObject::SIZE::MEDIUM;
+		break;
+	case 2:
+		m_shadow->m_size = ShadowObject::SIZE::LARGE;
+		break;
+	}
+
+	if (GetActive())
+	{
+		// 影の大きさによって当たり判定の調整
+		switch (m_shadow->m_size)
+		{
+		case ShadowObject::SIZE::SMALL:
+			// 円の半径（小）
+			m_shadowCollider->SetSphereCollider(1.2f);
+			// 三角の半径（小）
+			m_shadowCollider->SetPolygonCollider(0.9f);
+			// 四角の幅（小）
+			m_shadowCollider->SetBoxCollider({ 1,1,1 });
+			break;
+		case ShadowObject::SIZE::MEDIUM:
+			// 円の半径（中）
+			m_shadowCollider->SetSphereCollider(1.7f);
+			// 三角の半径（中）
+			m_shadowCollider->SetPolygonCollider(1.4f);
+			// 四角の幅（中）
+			m_shadowCollider->SetBoxCollider({ 1.5f,1.5f,1.5f });
+			break;
+		case ShadowObject::SIZE::LARGE:
+			// 円の半径（大）
+			m_shadowCollider->SetSphereCollider(2.2f);
+			// 三角の半径（大）
+			m_shadowCollider->SetPolygonCollider(1.9f);
+			// 四角の幅（大）
+			m_shadowCollider->SetBoxCollider({ 2.1f,2.1f,2.1f });
+			break;
+		}
+	}
+	
+	////本体更新した後
+	//if (m_obj->m_collider != nullptr) {
+	//	
+	//	//ここで具体的なCollisionのセンターやスケールを更新する
+	//	UpdateObjectColliderData();
+
+	//}
+
+	////影更新した後
+	//if (m_shadow->m_collider != nullptr) {
+	//	
+	//	//ここで具体的なCollisionのセンターやスケールを更新する
+	//	UpdateShadowColliderData();
+
 	//}
 
 	//オブジェクト本体
@@ -302,6 +373,14 @@ void GameObject::Update()
 	//m_shadowCollider->Update(m_obj->m_sprite->m_pos, m_obj->m_sprite->m_rotation);
 
 	m_shadow->Update();
+
+	if (GetActive())
+	{
+		m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
+		m_shadow->m_sprite->m_pos.y = m_obj->m_sprite->m_pos.y;
+
+		SetSize(m_shadow->m_size);
+	}
 }
 
 bool GameObject::isMoveable(DIR dir)

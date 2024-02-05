@@ -15,6 +15,7 @@ public:
 
 	DirectX::XMFLOAT3 m_center = {};
 	//float m_radius = 0.0f;
+	//float m_radius = 0.0f;
 
 public:
 
@@ -27,7 +28,8 @@ public:
 
 	void InitCollider(DirectX::XMFLOAT3 center, float Radius);
 
-	//void UpdateRadius();
+	////void UpdateRadius();
+	void UpdateRadius(float Radius);
 	void UpdateRadius(float Radius);
 
 	void UpdatePos(DirectX::XMFLOAT3 m_center);
