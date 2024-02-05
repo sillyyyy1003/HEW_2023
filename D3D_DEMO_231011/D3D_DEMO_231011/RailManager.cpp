@@ -1,4 +1,6 @@
 #include "RailManager.h"
+#include "Game.h"
+#include "GameObject.h"
 
 RailManager::~RailManager()
 {
@@ -23,6 +25,20 @@ void RailManager::InitRail()
 			m_info[i].isMoveable[j] = false;
 		}
 		
+	}
+
+}
+
+void RailManager::InitRailPos(void)
+{
+
+
+	for (auto& element : Game::Get()->GetObjectList()) {
+		//ˆÊ’u‚ðŠl“¾
+		int pos = element->GetRailPos().verticalPos * 5 + element->GetRailPos().horizontalPos;
+
+		//î•ñXV
+		RailManager::Get()->m_info[pos].isVacant = false;
 	}
 
 }

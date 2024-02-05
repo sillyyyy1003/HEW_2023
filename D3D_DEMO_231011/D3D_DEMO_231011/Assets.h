@@ -21,6 +21,8 @@ public:
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
 	ID3D11ShaderResourceView* ex;
+	//ID3D11ShaderResourceView* railLine;	//デバッグ用
+
 	
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
@@ -36,6 +38,8 @@ public:
 	ID3D11ShaderResourceView* lampShadow;
 	ID3D11ShaderResourceView* housePlate;
 	ID3D11ShaderResourceView* housePlateShadow;
+	
+
 
 
 	ID3D11ShaderResourceView* uiPauseBg;

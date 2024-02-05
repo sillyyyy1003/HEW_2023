@@ -1,7 +1,7 @@
 ﻿#include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
-#include "ObjectCollision.h"
+//#include "ObjectCollision.h"
 #include "DInput.h"
 #include "DebugManager.h"
 #include "SceneManager.h"
@@ -20,7 +20,7 @@ Camera*		g_WorldCamera;		//CAMERA
 Game*		g_Game;				//ゲーム
 DebugManager* g_DebugManager;	//デバッグ用ツール
 SceneManager* g_SceneManager;
-ObjectCollision* g_objectCollision;
+//ObjectCollision* g_objectCollision;
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -88,7 +88,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	g_SceneManager->SceneManager::Init();
 
 	//ColliderManagerの初期化処理
-	g_objectCollision = new ObjectCollision();
+	//g_objectCollision = new ObjectCollision();
 
 	//ゲームクラスの初期化処理
 	g_Game = Game::Get();

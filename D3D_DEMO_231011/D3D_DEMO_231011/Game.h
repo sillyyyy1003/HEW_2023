@@ -18,12 +18,12 @@ private:
 	DirectX::XMFLOAT3 m_lightPos = { 0,0,0 };
 	
 	//ここでGameObject追加する
+	//debug用アウトライン
+
+	//ui
 	CanvasUI*	uiTitle;		//タイトル文字
 	CanvasUI*	uiTitleBg;		//タイトル背景
 	CanvasUI*	uiPressEnter;	//タイトルエンターキー
-
-
-
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
@@ -35,12 +35,6 @@ private:
 	GameObject* lamp;			//長細の棒
 	GameObject* housePlate;			//長方形
 	
-	GameObject* circle;			//円
-	GameObject* triangle;		//三角
-	GameObject* square;		    //四角
-	GameObject* object[3];		//四角
-
-	GameObject* ex[1];		//頂点確認用
 
 	std::vector<GameObject*> objectList;
 	
@@ -58,6 +52,7 @@ public:
 	//唯一のインスタンスを返す関数
 	static Game* Get();
 
+	std::vector<GameObject*> GetObjectList() { return objectList; };
 
 
 	//初期化を行う関数 
@@ -76,6 +71,7 @@ public:
 	void InitStage3_2(void);
 	void InitStage3_3(void);
 
+	//レールの情報を初期化->使用方法：railDataの配列だけ更新する
 	void RailInit1_1(void);
 	void RailInit1_2(void);
 

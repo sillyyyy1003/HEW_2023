@@ -14,18 +14,20 @@ Assets::Assets()
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
-    circle = LoadTexture("assets/circle.png");
+    circle = LoadTexture("assets/Tree.png");
+    shadow = LoadTexture("assets/treeshadow.png");
     square = LoadTexture("assets/polygon.png");
     triangle = LoadTexture("assets/Triangle.png");
 
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
-
+    //debug
+    //railLine = LoadTexture("assets/stage1/railLine.png");
 
 
     //stage1_1
-    stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
+    stageBg = LoadTexture("assets/stage1/stage1_1Bg1.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
@@ -56,7 +58,7 @@ Assets::~Assets()
     SAFE_RELEASE(circle);
     SAFE_RELEASE(shadow);
     //ui
-   
+    /*SAFE_RELEASE(railLine);*/
     SAFE_RELEASE(uiPauseBg);
     SAFE_RELEASE(uiResume);
     SAFE_RELEASE(uiRestart);

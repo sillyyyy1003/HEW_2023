@@ -9,8 +9,8 @@ class Collider;
 
 struct RailPos {
 
-	int verticalPos = 0;	//縦	 0:BACK 1:MIDDLE 2:FRONT
-	int horizontalPos = 0;	//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
+	int verticalPos=0;	//縦	 0:BACK 1:MIDDLE 2:FRONT
+	int horizontalPos=0;	//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
 };
 
 class GameObject
@@ -20,7 +20,7 @@ private:
 	DirectX::XMFLOAT3 m_lightPos = {};
 
 	//レールにいる位置
-	RailPos m_railPos = { 0,0 };
+	RailPos m_railPos;
 
 	//移動の方向
 	DIR	m_moveDir = STILL;
@@ -28,9 +28,34 @@ private:
 	//操作中かどうか？
 	bool isActive = false;
 
-	int m_count = 0;
+	//移動用のカウンター
+	int m_moveCount = 0;
 
-	std::string m_Name;
+	std::string m_Name;//名前　デバッグ用
+
+	int m_inputCount = 0;//入力待ちカウンター
+	int m_lastPressTime = 0;//入力
+	bool isInputCount = false;//時間測定開始
+	bool isGetInput = false;//方向を受ける
+
+	enum INPUT {
+		INPUT_UP,
+		INPUT_RIGHT,
+		INPUT_DOWN,
+		INPUT_LEFT,
+		INPUT_NONE
+	};
+
+	struct InputCom {
+		INPUT verInput;
+		INPUT horInput;
+	};
+	bool isInit = true; //前回の記録スタートしたかどうか？
+
+	InputCom m_nowInput = { INPUT_NONE,INPUT_NONE };
+	int m_countTime = 0;
+
+	bool isAutoMove = false;//自動移動しているかどうか
 
 public:
 	//----------------------------//
@@ -49,6 +74,12 @@ public:
 	
 	//光があるかどうか
 	bool isLit = false;
+
+	
+private:
+
+	void DoKeyInput(void);
+
 
 	
 public:
@@ -84,9 +115,10 @@ public:
 	/// <param name="lightPos">光源の位置</param>
 	/// <param name="objPos">オブジェクトの位置</param>
 	/// <returns>影の位置</returns>
-	DirectX::XMFLOAT3 GenerateShadowPos();
-
-	//レールの位置
+	//DirectX::XMFLOAT3 GenerateShadowPos();
+	void GenerateShadowPos();
+	
+	void GenerateShadowSize();
 	
 	/// <summary>
 	/// レール上も位置を設定する
@@ -103,10 +135,9 @@ public:
 	void SetName(std::string Name) { m_Name = Name; };
 	std::string GetName(void) { return m_Name; };
 
-	void SetLightPos(DirectX::XMFLOAT3 _lightPos);
-
 	//毎回ゲームループで呼び出せれてる
 	void Update(void);
+
 
 	//移動先に移動できるかどうかの判定を行う
 	bool isMoveable(DIR dir);
@@ -116,6 +147,8 @@ public:
 
 	void UpdateShadowColliderData(void);
 
+	//自動移動かどうかの設定を行う
+	void SetAutoMove(bool isAutoMove) { this->isAutoMove = isAutoMove; };
 
 	//一定距離の移動
 	void ObjectMove(void);

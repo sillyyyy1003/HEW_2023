@@ -28,6 +28,8 @@ public:
 	//std::vector<PointInfo> m_info[15];
 	PointInfo m_info [15];
 
+	//std::vector <RailPos> m_autoMove;
+
 private:
 
 	RailManager() {};
@@ -39,6 +41,8 @@ public:
 	static RailManager* Get();
 
 	void InitRail();
-	
+
+	void InitRailPos(void);
+
 };
 
