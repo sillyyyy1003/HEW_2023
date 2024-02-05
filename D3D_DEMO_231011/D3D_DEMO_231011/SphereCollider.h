@@ -10,7 +10,12 @@ class BoxCollider;
 class SphereCollider :public Collider
 {
 private:
+<<<<<<< HEAD
 
+=======
+	std::vector<Vector3> verticies;
+	std::vector<Vector3> m_verticies;
+>>>>>>> feature/Kkaku
 public:
 
 	DirectX::XMFLOAT3 m_center = {};
@@ -46,5 +51,12 @@ public:
 	/// <param name="sphereCollider">‹…‘Ì</param>
 	bool isSphereCollision(Collider* sphereCollider) override;
 	bool isBoxCollision(Collider* boxCollider) override;
+<<<<<<< HEAD
+=======
+	bool isClearCollision(Collider* polygoncollider, float verNum) override;
+
+	void SetVerticies(std::vector<Vector3> ver) { m_verticies = ver; };
+	std::vector<Vector3> GetVerticies() override { return m_verticies; };
+>>>>>>> feature/Kkaku
 };
 

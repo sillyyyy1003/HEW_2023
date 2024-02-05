@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
 #include <DirectXMath.h>
-#include <vector>
+#include <map>
 #include <vector>
 #include <list>
 
@@ -48,7 +48,6 @@ private:
 	int Sphere = 0;
 	//四角に該当する配列の数字
 	int Square = 0;
-	
 private:
 	
 	//PAUSE
@@ -71,7 +70,8 @@ public:
 
 	void InitStage();
 
-	void CreateGameobject(int TYPE, bool Move);
+	void CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width, float height,
+						  float radius, DirectX::XMFLOAT3 extens);
 
 	void SortGameobject();
 
@@ -142,6 +142,7 @@ public:
 
 	//ui描画
 	void UiDraw(void);
+<<<<<<< HEAD
 	
 	//オブジェクトを並び変え描画する
 	void SortObjectDraw(void);
@@ -151,6 +152,11 @@ public:
 	
 
 	void TestMove(GameObject* _target);
+=======
+
+	void TestMove(GameObject* _target);
+	
+>>>>>>> feature/Kkaku
 	/*
 	//テスト用
 	void TestUpdate(void);

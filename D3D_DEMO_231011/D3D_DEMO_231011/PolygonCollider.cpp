@@ -2,7 +2,10 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 
+<<<<<<< HEAD
 #define SQUAREWIDTH 0.8
+=======
+>>>>>>> feature/Kkaku
 
 PolygonCollider::PolygonCollider(DirectX::XMFLOAT3 center, float Radius)
 {
@@ -55,6 +58,7 @@ void PolygonCollider::SetVerticies(std::vector<Vector3> ver)
     m_verticies = ver;
 }
 
+<<<<<<< HEAD
 std::vector<Vector3> PolygonCollider::SetTriangle(float _radius)
 {
     Triangle triangle;
@@ -124,6 +128,8 @@ std::vector<Vector3> PolygonCollider::SetCircle(float radius)
     return vertices;
 }
 
+=======
+>>>>>>> feature/Kkaku
 void PolygonCollider::Update(DirectX::XMFLOAT3 m_center,DirectX::XMFLOAT3 m_rotation)
 {
     if (!isActive)
@@ -175,7 +181,11 @@ bool PolygonCollider::isBoxCollision(Collider* boxCollider)
     Polygon->vertices = Polygonverticies;
 
     Box->vertices = Boxverticies;
+<<<<<<< HEAD
     //SetVerticies(Polygon->vertices);
+=======
+    //SetVerticies(Boxverticies);
+>>>>>>> feature/Kkaku
 
     bool collisionResult = SAT::Collide3D(*Polygon, *Box);
 
@@ -219,7 +229,11 @@ bool PolygonCollider::isSphereCollision(Collider* sphereCollider)
     Polygon->vertices = Polygonverticies;
 
     Sphere->vertices = Sphereverticies;
+<<<<<<< HEAD
     SetVerticies(Sphereverticies);
+=======
+    //SetVerticies(Polygonverticies);
+>>>>>>> feature/Kkaku
 
     bool collisionResult = SAT::Collide3D(*Polygon, *Sphere);
 
@@ -263,6 +277,7 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
     Polygon->vertices = Polygonverticies;
 
     EPolygon->vertices = EPolygonverticies;
+<<<<<<< HEAD
     //SetVerticies(EPolygonverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
@@ -469,6 +484,8 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
     Polygon->vertices = Polygonverticies;
 
     EPolygon->vertices = EPolygonverticies;
+=======
+>>>>>>> feature/Kkaku
     //SetVerticies(Polygonverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
@@ -489,7 +506,7 @@ bool PolygonCollider::isClearCollision(Collider* polygoncollider,float verNum)
     BoundingSphere SCollider;
     BoundingBox BCollider;
 
-    Polygon->vertices = SetSquare(0.5f,0.5f);
+    Polygon->vertices = SetSquare(0.3f,0.3f);
     
     if (polygoncollider->GetColliderType() == POLYGON)
     {
@@ -546,7 +563,11 @@ bool PolygonCollider::isClearCollision(Collider* polygoncollider,float verNum)
     Polygon->vertices = Polygonverticies;
 
     EPolygon->vertices = EPolygonverticies;
+<<<<<<< HEAD
     SetVerticies(Polygonverticies);
+=======
+    //SetVerticies(Polygonverticies);
+>>>>>>> feature/Kkaku
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
 

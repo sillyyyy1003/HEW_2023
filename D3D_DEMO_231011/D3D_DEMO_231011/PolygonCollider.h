@@ -6,7 +6,12 @@ class BoxCollider;
 class SphereCollider;
 class SAT;
 
+<<<<<<< HEAD
 class PolygonCollider :public Collider
+=======
+class PolygonCollider :
+    public Collider
+>>>>>>> feature/Kkaku
 {
 private:
 
@@ -15,6 +20,10 @@ private:
 	DirectX::BoundingSphere Lm_polygonCollider;
 	DirectX::XMFLOAT3 center = {};
 	std::vector<Vector3> verticies;
+<<<<<<< HEAD
+=======
+	std::vector<Vector3> Clearverticies;
+>>>>>>> feature/Kkaku
 	DirectX::XMFLOAT3 rotation;
 	std::vector<Vector3> m_verticies;
 	float radius = 0.0f;
@@ -63,6 +72,7 @@ public:
 	bool isSphereCollision(Collider* sphereCollider) override;
 	bool isPolygonCollision(Collider* polygoncollider) override;
 
+<<<<<<< HEAD
 	std::vector<Vector3> SetTriangle(float radius);
 	std::vector<Vector3> SetSquare(float _widthX, float _widthY);
 	std::vector<Vector3> SetCircle(float radius);
@@ -147,6 +157,8 @@ public:
 	bool isSphereCollision(Collider* sphereCollider) override;
 	bool isPolygonCollision(Collider* polygoncollider) override;
 
+=======
+>>>>>>> feature/Kkaku
 	bool isClearCollision(Collider* polygoncollider, float verNum) override;
 
 	//std::vector<Vector3> SetTriangle(float radius);

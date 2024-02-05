@@ -73,6 +73,10 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> feature/Kkaku
     <ClCompile Include="PolygonCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
@@ -89,11 +93,19 @@
       <Filter>Collider</Filter>
     </ClCompile>
     <ClCompile Include="ColliderManager.cpp">
+=======
+    <ClCompile Include="RailManager.cpp" />
+    <ClCompile Include="SatCollider.cpp">
+      <Filter>Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="PolygonCollider.cpp">
+>>>>>>> feature/Sakai02
       <Filter>Collider</Filter>
     </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="DebugManager.cpp">
       <Filter>DebugManager</Filter>
     </ClCompile>
@@ -144,10 +156,15 @@
     </ClCompile>
     <ClCompile Include="RailManager.cpp">
       <Filter>RailManager</Filter>
+=======
+    <ClCompile Include="Collider.cpp">
+      <Filter>Collider</Filter>
+>>>>>>> feature/Sakai02
     </ClCompile>
     <ClCompile Include="SphereCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="StaticObject.cpp">
       <Filter>StaticObject</Filter>
     </ClCompile>
@@ -159,7 +176,12 @@
     </ClCompile>
     <ClCompile Include="TrackCamera.cpp">
       <Filter>Camera</Filter>
+=======
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>Collider</Filter>
+>>>>>>> feature/Sakai02
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="SatCollider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
@@ -178,6 +200,8 @@
     <ClCompile Include="ColliderManager.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
+=======
+>>>>>>> feature/Kkaku
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assets.h">
@@ -246,18 +270,39 @@
     <ClInclude Include="Sprite.h">
       <Filter>BaseObject</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    <ClInclude Include="RailManager.h" />
+>>>>>>> feature/Sakai02
+>>>>>>> feature/Kkaku
     <ClInclude Include="PolygonCollider.h">
       <Filter>Collider</Filter>
     </ClInclude>
     <ClInclude Include="SatCollider.h">
       <Filter>Collider</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Animation.h">
       <Filter>Animation</Filter>
+=======
+<<<<<<< HEAD
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+=======
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Collider</Filter>
+>>>>>>> feature/Sakai02
+>>>>>>> feature/Kkaku
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Collider</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> feature/Kkaku
     <ClInclude Include="ColliderManager.h">
       <Filter>Collider</Filter>
     </ClInclude>
@@ -315,6 +360,7 @@
     <ClInclude Include="Direct3D\Shader\VertexShader.h">
       <Filter>Direct3d\ShaderFile</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="PolygonCollider.h">
       <Filter>Collider</Filter>
     </ClInclude>
@@ -327,6 +373,9 @@
     <ClInclude Include="Collider.h">
       <Filter>Collider</Filter>
     </ClInclude>
+=======
+=======
+>>>>>>> feature/Kkaku
     <ClInclude Include="SphereCollider.h">
       <Filter>Collider</Filter>
     </ClInclude>
@@ -336,6 +385,10 @@
     <ClInclude Include="GameObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+>>>>>>> feature/Sakai02
+>>>>>>> feature/Kkaku
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">

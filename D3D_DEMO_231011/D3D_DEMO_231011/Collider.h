@@ -1,7 +1,8 @@
 #pragma once
 #include <DirectXCollision.h>
 #include "SatCollider.h"
-#include "GameObject.h"#include "SatCollider.h"
+#include "GameObject.h"
+#include "SatCollider.h"
 
 enum COLLISION_TYPE {
 	POLYGON,		//ポリゴン
@@ -18,7 +19,6 @@ protected:
 
 	COLLISION_TYPE m_collisionType = IDLE;
 
-public:
 	DirectX::BoundingSphere m_sphereCollider;
 
 	DirectX::BoundingSphere m_polygonCollider;
@@ -26,11 +26,14 @@ public:
 	DirectX::BoundingBox m_boxCollider;
 	//DirectX::XMFLOAT3 m_extents = {};
 
+	std::vector<Vector3> SetTriangle(float radius);
+	std::vector<Vector3> SetSquare(float _widthX, float _widthY);
+	std::vector<Vector3> SetCircle(float radius);
+
 public:
 
 	//コライダーは起動しているか
 	bool isActive = false;
-
 	float m_radius = 0.0f;
 public:
 
@@ -40,15 +43,6 @@ public:
 
 	//コライダーの初期化処理を行う関数
 	virtual void InitCollider(COLLISION_TYPE _type);
-
-	//コライダーの更新を行う
-	virtual void Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation);
-
-	virtual bool isSphereCollision(Collider* collider) { return false; };
-
-	virtual bool isBoxCollision(Collider* collider) { return false; };
-
-	virtual bool isPolygonCollision(Collider* collider) { return false; };
 
 	COLLISION_TYPE GetColliderType(void) { return m_collisionType; };
 
@@ -73,12 +67,6 @@ public:
 
 	DirectX::BoundingBox GetBoxCollider(void) { return m_boxCollider; };
 	void SetBoxCollider(DirectX::XMFLOAT3 extens) { m_boxCollider.Extents = extens; };
-
-	DirectX::BoundingSphere GetSphereCollider(void) { return m_sphereCollider; };
-
-	DirectX::BoundingSphere GetPolygonCollider(void) { return m_polygonCollider; };
-	//DirectX::BoundingSphere GetCollider(void) { return m_sphereCollider; };
-	DirectX::BoundingBox GetBoxCollider(void) { return m_boxCollider; };
 
 	~Collider(void);
 

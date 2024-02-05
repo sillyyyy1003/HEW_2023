@@ -3,8 +3,11 @@
 
 SphereCollider::SphereCollider(DirectX::XMFLOAT3 center, float RadiusDirectX::XMFLOAT3 center, float Radius)
 {
+<<<<<<< HEAD
     //Collider 
     InitCollider(center, Radius);
+=======
+>>>>>>> feature/Kkaku
     InitCollider(center, Radius);
 }
 
@@ -62,7 +65,7 @@ bool SphereCollider::isClearCollision(Collider* polygoncollider, float verNum)
     BoundingSphere SCollider;
     BoundingBox BCollider;
 
-    Polygon->vertices = SetSquare(0.5f, 0.5f);
+    Polygon->vertices = SetSquare(0.3f, 0.3f);
 
     if (polygoncollider->GetColliderType() == POLYGON)
     {
@@ -119,7 +122,7 @@ bool SphereCollider::isClearCollision(Collider* polygoncollider, float verNum)
     Polygon->vertices = Polygonverticies;
 
     EPolygon->vertices = EPolygonverticies;
-    //SetVerticies(EPolygonverticies);
+    //SetVerticies(Polygonverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
 
@@ -131,7 +134,11 @@ bool SphereCollider::isClearCollision(Collider* polygoncollider, float verNum)
     return false;
 }
 
+<<<<<<< HEAD
 void SphereCollider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotationDirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation)
+=======
+void SphereCollider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation)
+>>>>>>> feature/Kkaku
 {
     if (!isActive) 
     {

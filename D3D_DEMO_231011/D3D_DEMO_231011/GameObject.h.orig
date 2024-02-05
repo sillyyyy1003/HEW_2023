@@ -1,7 +1,11 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
+<<<<<<< HEAD
+#include <string>
+=======
 #include <DirectXCollision.h>
+>>>>>>> feature/Sakai02
 
 class Object;
 class ShadowObject;
@@ -58,13 +62,10 @@ private:
 	bool isAutoMove = false;//自動移動しているかどうか
 
 	int m_size = 0;
-<<<<<<< HEAD
-=======
 
 	DirectX::BoundingSphere SsphereCollider;
 	DirectX::BoundingSphere SpolygonCollider;
 	DirectX::BoundingBox SboxCollider;
->>>>>>> feature/Kkaku
 
 public:
 	//----------------------------//
@@ -147,9 +148,7 @@ public:
 	int GetSize() { return m_size; };
 	void SetSize(int size) { m_size = size; };
 
-	int GetSize() { return m_size; };
-	void SetSize(int size) { m_size = size; };
-
+	
 	void SetName(std::string Name) { m_Name = Name; };
 	std::string GetName(void) { return m_Name; };
 
