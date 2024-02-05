@@ -6,7 +6,8 @@ class BoxCollider;
 class SphereCollider;
 class SAT;
 
-class PolygonCollider :public Collider
+class PolygonCollider :
+    public Collider
 {
 private:
 
@@ -15,6 +16,7 @@ private:
 	DirectX::BoundingSphere Lm_polygonCollider;
 	DirectX::XMFLOAT3 center = {};
 	std::vector<Vector3> verticies;
+	std::vector<Vector3> Clearverticies;
 	DirectX::XMFLOAT3 rotation;
 	std::vector<Vector3> m_verticies;
 	float radius = 0.0f;
@@ -63,20 +65,22 @@ public:
 	bool isSphereCollision(Collider* sphereCollider) override;
 	bool isPolygonCollision(Collider* polygoncollider) override;
 
-	std::vector<Vector3> SetTriangle(float radius);
-	std::vector<Vector3> SetSquare(float _widthX, float _widthY);
-	std::vector<Vector3> SetCircle(float radius);
+	bool isClearCollision(Collider* polygoncollider, float verNum) override;
 
-	struct Point {
-		float x, y;
-	};
+	//std::vector<Vector3> SetTriangle(float radius);
+	//std::vector<Vector3> SetSquare(float _widthX, float _widthY);
+	//std::vector<Vector3> SetCircle(float radius);
 
-	struct Triangle {
-		Point A, B, C;
-	};
+	//struct Point {
+	//	float x, y;
+	//};
 
-	struct SQURE {
-		Point A, B, C, D;
-	};
+	//struct Triangle {
+	//	Point A, B, C;
+	//};
+
+	//struct SQURE {
+	//	Point A, B, C, D;
+	//};
 };
 

@@ -25,6 +25,19 @@ Assets::Assets()
     //debug
     //railLine = LoadTexture("assets/stage1/railLine.png");
 
+    //test
+    //circle = LoadTexture("assets/Tree.png");
+    
+    tree = LoadTexture("assets/Tree.png");
+    circle = LoadTexture("assets/circle.png");
+
+    square = LoadTexture("assets/polygon.png");
+
+    triangle = LoadTexture("assets/triangle.png");
+
+    ex = LoadTexture("assets/ex.png");
+
+    shadow = LoadTexture("assets/treeshadow.png");
 
     //stage1_1
     stageBg = LoadTexture("assets/stage1/stage1_1Bg1.png");

@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
-#include <string>
+#include <DirectXCollision.h>
 
 class Object;
 class ShadowObject;
@@ -57,6 +57,12 @@ private:
 
 	bool isAutoMove = false;//自動移動しているかどうか
 
+	int m_size = 0;
+
+	DirectX::BoundingSphere SsphereCollider;
+	DirectX::BoundingSphere SpolygonCollider;
+	DirectX::BoundingBox SboxCollider;
+
 public:
 	//----------------------------//
 	// 変数
@@ -80,7 +86,7 @@ private:
 
 	void DoKeyInput(void);
 
-
+	bool isPlayer = false;
 	
 public:
 	//コンストラクタ
@@ -109,6 +115,9 @@ public:
 	// アニメーションの初期化処理
 	void InitAnimation(void);
 
+	// Collisionの初期化(スケールの変化に対応するために必要)
+	void InitCollision(void);
+
 	/// <summary>
 	/// 影の生成位置を計算する関数
 	/// </summary>
@@ -131,6 +140,12 @@ public:
 	//オブジェクトの操作状態
 	void SetActive(bool isActive) { this->isActive = isActive; };
 	bool GetActive() { return isActive; };
+
+	int GetSize() { return m_size; };
+	void SetSize(int size) { m_size = size; };
+
+	int GetSize() { return m_size; };
+	void SetSize(int size) { m_size = size; };
 
 	void SetName(std::string Name) { m_Name = Name; };
 	std::string GetName(void) { return m_Name; };

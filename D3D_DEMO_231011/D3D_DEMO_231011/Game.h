@@ -1,7 +1,9 @@
 ﻿#pragma once
 #include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
 #include <DirectXMath.h>
+#include <map>
 #include <vector>
+#include <list>
 
 class GameObject;
 class StaticObject;
@@ -36,8 +38,17 @@ private:
 	GameObject* housePlate;			//長方形
 	
 
-	std::vector<GameObject*> objectList;
-	
+	std::vector<GameObject*> Vobject;		//四角
+
+	GameObject* ex[4];		//頂点確認用
+
+	int objectNum[2];
+
+	//円に該当する配列の数字
+	int Sphere = 0;
+	//四角に該当する配列の数字
+	int Square = 0;
+
 private:
 	
 	//PAUSE
@@ -59,6 +70,11 @@ public:
 	void Init();//
 
 	void InitStage();
+
+	void CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width, float height,
+						  float radius, DirectX::XMFLOAT3 extens);
+
+	void SortGameobject();
 
 	//ステージの初期化を行う関数：キャラの位置、大きさなど
 	void InitStage1_1(void);
@@ -127,12 +143,8 @@ public:
 
 	//ui描画
 	void UiDraw(void);
-	
-	//オブジェクトを並び変え描画する
-	void SortObjectDraw(void);
 
-	//影の位置によって並び替え描画する
-	void SortShadowDraw(void);
+	void TestMove(GameObject* _target);
 	
 	/*
 	//テスト用

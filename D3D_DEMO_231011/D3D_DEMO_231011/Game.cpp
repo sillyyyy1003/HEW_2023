@@ -12,18 +12,10 @@
 #include "RailManager.h"
 #include "DInput.h"
 #include <stdio.h> 
+#include <algorithm> // 必要なヘッダーファイル
 #include "ColliderManager.h"
 
-#include "TrackCamera.h"
-#include "DInput.h"
-//#include "ObjectCollision.h"
-#include <algorithm> // 必要なヘッダーファイル
-
-#define SQUREWIDTH 1.2
-#define TRIANGLEWIDTH 0.8
-#define M_PI 3.14159265358979323846
-#define M_PIX 0.1//1.5
-#define M_PIY 0.0333333333// 0.5
+#define MOVE 0.3f
 #define INITROTATE	(19.8)
 
 extern Assets* g_Assets;
@@ -62,6 +54,9 @@ void Game::Init()
 
 
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
+	testObj->CreateObject(g_Assets->tree, 200, 200, 1, 1);
+	testObj->CreateShadow(g_Assets->shadow, 200, 200, 1, 1);
+
 	coconut->CreateObject(g_Assets->coconut, 190, 190, 1, 1);
 	coconut->CreateShadow(g_Assets->coconutShadow, 158, 159, 1, 1);
 	lamp->CreateObject(g_Assets->lamp, 163, 569, 1, 1);
@@ -73,6 +68,36 @@ void Game::Init()
 	coconut->InitAnimation();
 	lamp->InitAnimation();
 	housePlate->InitAnimation();
+
+	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
+
+	// 追加
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i] = new GameObject();
+
+		//モデルを作る
+		ex[i]->CreateObject(g_Assets->ex, 70, 70, 1, 1);
+		ex[i]->CreateShadow(g_Assets->ex, 70, 70, 1, 1);
+		//アニメションを配置
+		ex[i]->InitAnimation();	
+	}
+
+	// 引数１：オブジェクトの型　引数２：操作するかどうか
+	
+	// 三角
+	//CreateGameobject(POLYGON,true);
+	// 円
+	CreateGameobject(SPHERE, false, g_Assets->coconut, g_Assets->coconutShadow, 190, 190, 0.8f, {} );
+	// 四角
+	CreateGameobject(SQUARE, true, g_Assets->lamp, g_Assets->lampShadow, 163, 569, 0, {0.8,3.7,1} );
+	CreateGameobject(SQUARE, false, g_Assets->housePlate, g_Assets->housePlateShadow, 216, 110, 0, {1.0f,0.5f,1.0f} );
+
+	//CreateGameobject(POLYGON, false);
+
+	// １：三角２：円３：四角の順に並べる
+	SortGameobject();
+	
 	//----------------------------//
 	// ここからはエフェクトの初期化
 	//----------------------------//
@@ -163,6 +188,92 @@ void Game::InitStage()
 	}
 }
 
+void Game::CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width,float height,float radius, DirectX::XMFLOAT3 extens)
+{
+	GameObject* object;
+
+	object = new GameObject();
+	//アニメションを配置
+	object->InitAnimation();
+	//オブジェクトのコライダーを配置
+	if (TYPE == POLYGON)
+	{
+		//三角を作る
+		object->CreateObject(asset, width, height, 1, 1);
+		object->CreateShadow(shadowasset, width, height, 1, 1);
+		object->m_shadowCollider = new PolygonCollider({}, radius);
+	}
+	else if (TYPE == SQUARE)
+	{
+		//四角を作る
+		object->CreateObject(asset, width, height, 1, 1);
+		object->CreateShadow(shadowasset, width, height, 1, 1);
+		object->m_shadowCollider = new BoxCollider({}, extens);
+
+	}
+	else if (TYPE == SPHERE)
+	{
+		//円を作る
+		object->CreateObject(asset, width, height, 1, 1);
+		object->CreateShadow(shadowasset, width, height, 1, 1);
+		object->m_shadowCollider = new SphereCollider({}, radius);
+	}
+	// Collisionを配置
+	object->InitCollision();
+
+	object->SetActive(Move);
+	
+	Vobject.push_back(object);
+}
+
+void Game::SortGameobject()
+{
+	// 並べ替え用にリストを作る
+	std::list<GameObject*> object[3];
+	// 元のリストのIDを並べ替え用にリストに入れる
+	for (GameObject* game : Vobject)
+	{
+		if (POLYGON == game->m_shadowCollider->GetColliderType())
+		{
+			object[0].push_back(game);
+			objectNum[POLYGON]++;
+		}
+		else if (SPHERE == game->m_shadowCollider->GetColliderType())
+		{
+			object[1].push_back(game);
+			objectNum[SPHERE]++;
+		}
+		else
+		{
+			object[2].push_back(game);
+		}
+	}
+	objectNum[POLYGON] = objectNum[POLYGON] - 1;
+	objectNum[SPHERE] = objectNum[POLYGON] + objectNum[SPHERE]-1;
+
+	for (GameObject* game : object[1])
+	{
+		object[0].push_back(game);
+	}
+
+	for (GameObject* game : object[2])
+	{
+		object[0].push_back(game);
+	}
+
+	Vobject.clear();
+	// 並べ替えたIDを元のリストに入れる
+	for (GameObject* game : object[0])
+	{
+		Vobject.push_back(game);
+	}
+
+	// 円
+	Sphere = SPHERE + objectNum[POLYGON];
+	// 四角
+	Square = SQUARE + objectNum[SPHERE];
+}
+
 void Game::InitStage1_1(void)
 {
 	//背景設定->関数化処理
@@ -175,9 +286,12 @@ void Game::InitStage1_1(void)
 	//y座標の導入
 	stageBg->m_sprite->m_pos = { 0.0f,- y,1.0f };
 
-	
-
 	//位置設定
+	//光源の位置を設定する
+	m_lightPos = { 0,0,-10 };
+	testObj->SetLightPos(m_lightPos);
+
+	//オブジェクトを設定する
 	//CAUTION! 
 	//本体y軸固定->-1
 	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
@@ -186,11 +300,15 @@ void Game::InitStage1_1(void)
 	coconut->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
 	lamp->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
 	housePlate->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-7.5f};
-	//影
-	//影を被らないように
+
+	testObj->m_obj->m_sprite->m_pos = { 0,-3,-2 };//y軸固定!!
+	testObj->m_shadow->m_sprite->m_pos.z = -1.0f;//影のY/Z軸を固定!!
+	
 	coconut->m_shadow->m_sprite->m_pos.z = 0.0f;
 	lamp->m_shadow->m_sprite->m_pos.z = -0.1f;
 	housePlate->m_shadow->m_sprite->m_pos.z = -0.2f;
+	
+	
 	//影のy軸
 	coconut->m_shadow->m_sprite->m_pos.y = 3.4;
 	lamp->m_shadow->m_sprite->m_pos.y = coconut->m_shadow->m_sprite->m_pos.y - 1.7;
@@ -203,6 +321,25 @@ void Game::InitStage1_1(void)
 	lamp->SetRailPos(2, 0);
 	housePlate->SetRailPos(1, 1);
 
+	//Vobject[POLYGON]->m_shadow->m_sprite->m_pos = { 0, 3, -1 };
+	//Vobject[POLYGON]->m_obj->m_sprite->m_pos = { 0, -5, -2 };
+
+	Vobject[Sphere]->m_shadow->m_sprite->m_pos = { -10, 3, -1 };
+	Vobject[Sphere]->m_obj->m_sprite->m_pos = { -10, -5, -2 };
+
+	Vobject[Square]->m_shadow->m_sprite->m_pos = { 10, 3, -1 };
+	Vobject[Square]->m_obj->m_sprite->m_pos = { 10, -5, -2 };
+
+	Vobject[Square+1]->m_shadow->m_sprite->m_pos = { 0, 3, -1 };
+	Vobject[Square+1]->m_obj->m_sprite->m_pos = { 0, -5, -2 };
+
+	//Vobject[POLYGON+1]->m_shadow->m_sprite->m_pos = { 0, 8, -1 };
+	//Vobject[POLYGON+1]->m_obj->m_sprite->m_pos = { 0, 8, -2 };
+
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i]->m_shadow->m_sprite->m_pos.z = -1;
+	}
 
 	//回転設定
 
@@ -464,29 +601,13 @@ void Game::StageUpdate(void)
 
 void Game::UpdateStage1_1(void)
 {
-	
-	
-	//moveTest
-	if (Input::Get()->GetKeyPress(DIK_W)) {
-		testObj->m_obj->m_sprite->m_pos.z += 0.02f;
-	}	
-	if (Input::Get()->GetKeyPress(DIK_A)) {
-		testObj->m_obj->m_sprite->m_pos.x -= 0.02f;
+	for (GameObject* game : Vobject)
+	{
+		if (game->GetActive())
+		{
+			TestMove(game);
+		}
 	}
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-		testObj->m_obj->m_sprite->m_pos.x += 0.02f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_S)) {
-		testObj->m_obj->m_sprite->m_pos.z -= 0.02f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_R)) {
-		testObj->m_obj->m_sprite->m_pos.y += 0.02f;
-	}
-	if (Input::Get()->GetKeyPress(DIK_F)) {
-		testObj->m_obj->m_sprite->m_pos.y -= 0.05f;
-	}
-
-
 	
 	//移動させる目標を設定する
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
@@ -502,18 +623,35 @@ void Game::UpdateStage1_1(void)
 		}
 	}
 
-	
-
-
-	//moveTest
-	//testObj->Update();
-
 	coconut->Update();
 	lamp->Update();
 	housePlate->Update();
 
 	stageBg->Update();
 
+	for (GameObject* game : Vobject)
+	{
+		game->Update();
+	}
+
+	// 当たり判定
+	ColliderManager::Collision(Vobject);
+
+	// クリアの判定
+	if (ColliderManager::ClearCollision(Vobject, Square+1, Square, 0, ShadowObject::SIZE::MEDIUM))
+	{
+		isPause = 1;
+		//SceneManager::Get()->SetScene(SCENENAME::RESULT);
+	}
+
+	// 頂点確認用
+	std::vector<Vector3> verticies = Vobject[Square+1]->m_shadowCollider->GetVerticies();
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i]->m_shadow->m_sprite->m_pos.x = verticies[i].x;
+		ex[i]->m_shadow->m_sprite->m_pos.y = verticies[i].y;
+		ex[i]->Update();
+	}
 }
 
 void Game::UpdateStage1_2(void)
@@ -588,6 +726,17 @@ Game::~Game()
 	delete lamp;
 	delete housePlate;
 
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		delete ex[i];
+	}
+	Vobject.clear();
+	for (GameObject* game : Vobject)
+	{
+		delete game;
+	}
+
+	delete circle;
 }
 
 Game* Game::Get()
@@ -716,6 +865,23 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
+
+	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
+	{
+		ex[i]->m_shadow->Draw();
+	}
+	//testObj->Draw();
+
+	for (GameObject* game : Vobject)
+	{
+		if (game->m_shadowCollider->isActive)
+		{
+			game->Draw();
+		}
+	}
+
+
+
 
 	//描画の順番を並び変え
 
@@ -849,4 +1015,29 @@ void Game::SortShadowDraw(void)
 		element->m_shadow->Draw();
 	}
 
+}
+
+void Game::TestMove(GameObject* _target)
+{
+	if (Input::Get()->GetKeyPress(DIK_E)) {
+		_target->m_obj->m_sprite->m_pos.z += MOVE;
+	}
+	if (Input::Get()->GetKeyPress(DIK_A)) {
+		_target->m_obj->m_sprite->m_pos.x -= MOVE;
+	}
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+		_target->m_obj->m_sprite->m_pos.x += MOVE;
+	}
+	if (Input::Get()->GetKeyPress(DIK_Q)) {
+		_target->m_obj->m_sprite->m_pos.z -= MOVE;
+	}
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+		_target->m_obj->m_sprite->m_pos.y += MOVE;
+	}
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+		_target->m_obj->m_sprite->m_pos.y -= MOVE;
+	}
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		_target->m_obj->m_sprite->m_pos = { 0,0,-2 };
+	}
 }

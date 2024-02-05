@@ -16,54 +16,76 @@ void ColliderManager::Update(Collider* collider)
 {
 }
 
-void ColliderManager::Collision(GameObject* object)
+void ColliderManager::Collision(std::vector<GameObject*> Vobject)
 {
-	//for (int j = 0; j < sizeof(object) / sizeof(object[0]); ++j)
-	//{
-	//	for (int i = 1 + j; i < sizeof(object) / sizeof(object[0]); ++i)
-	//	{
-	//		if (object[i]->m_objCollider->GetColliderType() == SQUARE)
-	//		{
-	//			if (object[j]->m_objCollider->isBoxCollision(object[i]->m_objCollider))
-	//			{
-	//				if (object[i]->isPlayer)
-	//				{
-	//					object[j]->m_objCollider->isActive = false;
-	//				}
-	//				else
-	//				{
-	//					object[i]->m_objCollider->isActive = false;
-	//				}
-	//			}
-	//		}
-	//		else if (object[i]->m_objCollider->GetColliderType() == SPHERE)
-	//		{
-	//			if (object[j]->m_objCollider->isSphereCollision(object[i]->m_objCollider))
-	//			{
-	//				if (object[i]->isPlayer)
-	//				{
-	//					object[j]->m_objCollider->isActive = false;
-	//				}
-	//				else
-	//				{
-	//					object[i]->m_objCollider->isActive = false;
-	//				}
-	//			}
-	//		}
-	//		else if (object[i]->m_objCollider->GetColliderType() == POLYGON)
-	//		{
-	//			if (object[j]->m_objCollider->isPolygonCollision(object[i]->m_objCollider))
-	//			{
-	//				if (object[i]->isPlayer)
-	//				{
-	//					object[j]->m_objCollider->isActive = false;
-	//				}
-	//				else
-	//				{
-	//					object[i]->m_objCollider->isActive = false;
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
+	int i = 0;
+	int j = 0;
+	for (auto it = Vobject.begin(); it != Vobject.end(); it++)
+	{
+		i = j + 1;
+		for (auto it = Vobject.begin(); it != Vobject.end(); it++)
+		{
+			if (i == Vobject.size())
+			{
+				break;
+			}
+			if (Vobject[i]->m_shadowCollider->GetColliderType() == SQUARE)
+			{
+				if (Vobject[j]->m_shadowCollider->isBoxCollision(Vobject[i]->m_shadowCollider))
+				{
+					if (Vobject[i]->GetActive())
+					{
+						Vobject[j]->m_shadowCollider->isActive = false;
+					}
+					else
+					{
+						Vobject[i]->m_shadowCollider->isActive = false;
+					}
+				}
+			}
+			else if (Vobject[i]->m_shadowCollider->GetColliderType() == SPHERE)
+			{
+				if (Vobject[j]->m_shadowCollider->isSphereCollision(Vobject[i]->m_shadowCollider))
+				{
+					if (Vobject[i]->GetActive())
+					{
+						Vobject[j]->m_shadowCollider->isActive = false;
+					}
+					else
+					{
+						Vobject[i]->m_shadowCollider->isActive = false;
+					}
+				}
+			}
+			else if (Vobject[i]->m_shadowCollider->GetColliderType() == POLYGON)
+			{
+				if (Vobject[j]->m_shadowCollider->isPolygonCollision(Vobject[i]->m_shadowCollider))
+				{
+					if (Vobject[i]->GetActive())
+					{
+						Vobject[j]->m_shadowCollider->isActive = false;
+					}
+					else
+					{
+						Vobject[i]->m_shadowCollider->isActive = false;
+					}
+				}
+			}
+			i++;
+		}
+		j++;
+	}
+}
+
+bool ColliderManager::ClearCollision(std::vector<GameObject*> Vobject, float Pobj,float Eobj, float verNum,int sizeJodge)
+{
+	if (Vobject[Pobj]->m_shadowCollider->isClearCollision(Vobject[Eobj]->m_shadowCollider, verNum))
+	{
+		if (Vobject[Eobj]->GetSize() == sizeJodge)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

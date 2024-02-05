@@ -2,7 +2,6 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 
-#define SQUAREWIDTH 0.8
 
 PolygonCollider::PolygonCollider(DirectX::XMFLOAT3 center, float Radius)
 {
@@ -53,75 +52,6 @@ std::vector<Vector3> PolygonCollider::GetVerticies()
 void PolygonCollider::SetVerticies(std::vector<Vector3> ver)
 {
     m_verticies = ver;
-}
-
-std::vector<Vector3> PolygonCollider::SetTriangle(float _radius)
-{
-    Triangle triangle;
-    triangle.A = { 0 , _radius };
-    triangle.B = { _radius , -_radius };
-    triangle.C = { -_radius , -_radius };
-
-    // 1つ目の凸多角形の頂点座標を定義
-    std::vector<Vector3> vertices = {
-        Vector3(triangle.A.x, triangle.A.y,0),
-        Vector3(triangle.B.x, triangle.B.y,0),
-        Vector3(triangle.C.x, triangle.C.y,0),
-    };
-
-    return vertices;
-}
-
-std::vector<Vector3> PolygonCollider::SetSquare(float _widthX, float _widthY)
-{
-    SQURE squre;
-    // 四角の下の三角
-    squre.A = { _widthX,_widthY };
-    squre.B = { _widthX,-_widthY };
-    squre.C = { -_widthX,-_widthY };
-    squre.D = { -_widthX,_widthY };
-
-    // 1つ目の凸多角形の頂点座標を定義
-    std::vector<Vector3> vertices = {
-        Vector3(squre.A.x, squre.A.y,0),
-        Vector3(squre.B.x, squre.B.y,0),
-        Vector3(squre.C.x, squre.C.y,0),
-        Vector3(squre.D.x, squre.D.y,0),
-    };
-
-    return vertices;
-}
-
-std::vector<Vector3> PolygonCollider::SetCircle(float radius)
-{
-    SQURE squre;
-    float squarewidth = SQUAREWIDTH;
-    // 四角の下の三角
-    squre.A = { radius* squarewidth,radius * squarewidth };
-    squre.B = { radius * squarewidth,-radius * squarewidth };
-    squre.C = { -radius * squarewidth,-radius * squarewidth };
-    squre.D = { -radius * squarewidth,radius * squarewidth };
-
-    SQURE circle;
-    // 四角の下の三角
-    circle.A = { 0, radius};
-    circle.B = { radius,0 };
-    circle.C = { 0 , -radius};
-    circle.D = { -radius,0 };
-
-
-    // 1つ目の凸多角形の頂点座標を定義
-    std::vector<Vector3> vertices = {
-        Vector3(circle.A.x, circle.A.y,0),
-        Vector3(squre.A.x, squre.A.y,0),
-        Vector3(circle.B.x, circle.B.y,0),
-        Vector3(squre.B.x, squre.B.y,0),
-        Vector3(circle.C.x, circle.C.y,0),
-        Vector3(squre.C.x, squre.C.y,0),
-        Vector3(circle.D.x, circle.D.y,0),
-        Vector3(squre.D.x, squre.D.y,0),
-    };
-    return vertices;
 }
 
 void PolygonCollider::Update(DirectX::XMFLOAT3 m_center,DirectX::XMFLOAT3 m_rotation)
@@ -175,7 +105,7 @@ bool PolygonCollider::isBoxCollision(Collider* boxCollider)
     Polygon->vertices = Polygonverticies;
 
     Box->vertices = Boxverticies;
-    //SetVerticies(Polygon->vertices);
+    //SetVerticies(Boxverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *Box);
 
@@ -219,7 +149,7 @@ bool PolygonCollider::isSphereCollision(Collider* sphereCollider)
     Polygon->vertices = Polygonverticies;
 
     Sphere->vertices = Sphereverticies;
-    SetVerticies(Sphereverticies);
+    //SetVerticies(Polygonverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *Sphere);
 
@@ -263,7 +193,84 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
     Polygon->vertices = Polygonverticies;
 
     EPolygon->vertices = EPolygonverticies;
-    //SetVerticies(EPolygonverticies);
+    //SetVerticies(Polygonverticies);
+
+    bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
+
+    // 結果を表示
+    if (collisionResult)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool PolygonCollider::isClearCollision(Collider* polygoncollider,float verNum)
+{
+    PolygonSAT3D* Polygon = new PolygonSAT3D;
+    PolygonSAT3D* EPolygon = new PolygonSAT3D;
+    Clearverticies = SetTriangle(m_polygonCollider.Radius);
+    BoundingSphere SCollider;
+    BoundingBox BCollider;
+
+    Polygon->vertices = SetSquare(0.3f,0.3f);
+    
+    if (polygoncollider->GetColliderType() == POLYGON)
+    {
+        SCollider = polygoncollider->GetPolygonCollider();
+        EPolygon->vertices = SetTriangle(SCollider.Radius);
+    }
+    else if (polygoncollider->GetColliderType() == SQUARE)
+    {
+        BCollider = polygoncollider->GetBoxCollider();
+        EPolygon->vertices = SetSquare(BCollider.Extents.x, BCollider.Extents.y);
+    }
+    else if (polygoncollider->GetColliderType() == SPHERE)
+    {
+        SCollider = polygoncollider->GetSphereCollider();
+        EPolygon->vertices = SetCircle(SCollider.Radius);
+    }
+
+    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // 回転なし
+    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45度回転
+
+    std::vector<Vector3> Polygonverticies = Polygon->GetRotatedVertices();
+    std::vector<Vector3> EPolygonverticies = EPolygon->GetRotatedVertices();
+
+    for (auto& vertex : Clearverticies) {
+        vertex.x += m_polygonCollider.Center.x;
+        vertex.y += m_polygonCollider.Center.y;
+        //vertex.z += center.z;
+    }
+
+    // 四角
+    for (auto& vertex : Polygonverticies) {
+        vertex.x += Clearverticies[verNum].x;
+        vertex.y += Clearverticies[verNum].y;
+        //vertex.z += center.z;
+    }
+
+    if (SCollider.Center.y)
+    {
+        for (auto& vertex : EPolygonverticies) {
+            vertex.x += SCollider.Center.x;
+            vertex.y += SCollider.Center.y;
+            //vertex.z += Lm_polygonCollider.Center.z;
+        }
+    }
+    if(BCollider.Center.y)
+    {
+        for (auto& vertex : EPolygonverticies) {
+            vertex.x += BCollider.Center.x;
+            vertex.y += BCollider.Center.y;
+            //vertex.z += Lm_polygonCollider.Center.z;
+        }
+    }
+
+    Polygon->vertices = Polygonverticies;
+
+    EPolygon->vertices = EPolygonverticies;
+    //SetVerticies(Polygonverticies);
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
 
