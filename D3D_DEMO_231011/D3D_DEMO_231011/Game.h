@@ -43,6 +43,8 @@ private:
 	CanvasUI* uiSelectStage[3];
 	CanvasUI* uiSelectChapter[3];
 
+	CanvasUI* uiClearMark[3];
+
 
 
 
@@ -65,22 +67,27 @@ private:
 	//pause
 	bool isPause = false;
 	//clear
-	//bool isClear = false;
+	bool isClearStage1 = false;
+	bool isClearStage2 = false;
+	bool isClearStage3 = false;
+
+
 	//stageFocus
 	bool isFocus = false;
 
+	//soundSelect
 	enum SOUNDOP
 	{
 		BGM,
 		SE,
 	};
-
 	SOUNDOP soundOp = BGM;
 	
+	//初期設定
 	int m_soundVolume_BGM = 3;
 	int m_soundVolume_SE = 3;
 
-
+	//ステージ選択
 	enum SELECTSTAGE
 	{
 		NONE,
@@ -90,8 +97,7 @@ private:
 	};
 	SELECTSTAGE selectStage = NONE;
 
-	const float brightenFactor = 0.8f;
-
+	//チャプター選択
 	enum SELECTCHAPTER
 	{
 		CHAPTER1,
@@ -148,6 +154,18 @@ public:
 	//Select Update
 	void SelectUpdate(void);
 	void SelectChapter(void);
+	void SelectStageNone(void);
+
+	void SelectStage1(void);
+	void SelectStage2(void);
+	void SelectStage3(void);
+
+	void SelectChapter1(void);
+	void SelectChapter2(void);
+	void SelectChapter3(void);
+	void ClearSwitch1(void);
+	void ClearSwitch2(void);
+	void ClearSwitch3(void);
 
 	//Stage Update
 	void StageUpdate(void);
@@ -170,10 +188,13 @@ public:
 
 	//ポーズ関数
 	void PauseSwitch(void);
+
 	//サウンド関数
 	void SoundSwitch(void);
-
 	void SoundVolume(void);
+	void SoundOp_BGM(void);	//BGM調節
+	void SoundOp_SE(void);	//SE調節
+	
 
 	void FocusSwitch(void);
 
@@ -188,6 +209,8 @@ public:
 	void StageDraw(void);
 
 	void SelectDraw(void);
+
+	void uiSelectDraw(void);
 
 	//音量調節
 	void SoundVolumeDraw(void);

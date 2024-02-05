@@ -13,18 +13,17 @@ typedef struct
 	bool bLoop;			// trueでループ。通常BGMはture、SEはfalse。
 } PARAM;
 
-PARAM g_param[SOUND_MAX] =
+PARAM g_param[SOUND_LABEL_MAX] =
 {
-	{"asset/bgm/testbgm01.wav", true},	// サンプルBGM
-	{"asset/bgm/testbgm02.wav", true},	// サンプルBGM
-	{"asset/bgm/testbgm03.wav", false},	// サンプルBGM
-	{"asset/bgm/testbgm04.wav", false},	// サンプルBGM
-	{"asset/SE/testse01.wav", false},	// サンプルSE
-	{"asset/SE/testse02.wav", false},	// サンプルSE
-	{"asset/SE/testse03.wav", false},	// サンプルSE
-	{"asset/SE/testse04.wav", false},	// サンプルSE
-	{"asset/SE/testse05.wav", false},	// サンプルSE
-	{"asset/SE/testse06.wav", false},	// サンプルSE
+	{"asset/sound/bgm/stage1.wav", true},	// サンプルBGM（ループさせるのでtrue設定）
+	{"asset/sound/bgm/stage2.wav", true},	// サンプルBGM
+	{"asset/sound/bgm/stage3.wav", true},  // サンプルBGM
+	//{"asset/sound/se/defend0.wav", false},	// サンプルSE（ループしないのでfalse設定）
+	//{"asset/sound/se/defend1.wav", false},	// サンプルSE
+	//{"asset/sound/se/hit0.wav", false},		// サンプルSE
+	//{"asset/sound/se/laser0.wav", false},	// サンプルSE
+	//{"asset/sound/se/lockon0.wav", false},	// サンプルSE
+	//{"asset/sound/se/shot0.wav", false},	// サンプルSE
 };
 
 #ifdef _XBOX //Big-Endian
@@ -50,11 +49,11 @@ PARAM g_param[SOUND_MAX] =
 //-----------------------------------------------------------------
 IXAudio2               *g_pXAudio2        = NULL;
 IXAudio2MasteringVoice *g_pMasteringVoice = NULL;
-IXAudio2SourceVoice    *g_pSourceVoice[SOUND_MAX];
+IXAudio2SourceVoice    *g_pSourceVoice[SOUND_LABEL_MAX];
 
-WAVEFORMATEXTENSIBLE	g_wfx[SOUND_MAX];			// WAVフォーマット
-XAUDIO2_BUFFER			g_buffer[SOUND_MAX];
-BYTE					*g_DataBuffer[SOUND_MAX];
+WAVEFORMATEXTENSIBLE	g_wfx[SOUND_LABEL_MAX];			// WAVフォーマット
+XAUDIO2_BUFFER			g_buffer[SOUND_LABEL_MAX];
+BYTE					*g_DataBuffer[SOUND_LABEL_MAX];
 
 //-----------------------------------------------------------------
 //    プロトタイプ宣言
@@ -95,7 +94,7 @@ HRESULT XA_Initialize()
 	}
 
 	/**** Initalize Sound ****/
-	for(int i=0; i<SOUND_MAX; i++)
+	for(int i=0; i<SOUND_LABEL_MAX; i++)
 	{
 		memset( &g_wfx[i] , 0 , sizeof( WAVEFORMATEXTENSIBLE ) );
 		memset( &g_buffer[i] , 0 , sizeof( XAUDIO2_BUFFER ) );
@@ -144,7 +143,7 @@ HRESULT XA_Initialize()
 //=============================================================================
 void XA_Release(void)
 {
-	for(int i=0; i<SOUND_MAX; i++)
+	for(int i=0; i<SOUND_LABEL_MAX; i++)
 	{
 		if(g_pSourceVoice[i])
 		{
@@ -168,12 +167,6 @@ void XA_Release(void)
 //=============================================================================
 void XA_Play(SOUND_LABEL label)
 {
-	//ソースボイスが正しく初期化されていない:
-	//ソースボイス(pSV) が正しく初期化されていることを確認してください。
-	// CreateSourceVoice メソッドで正しいパラメータが渡され、
-	// ソースボイスが適切に設定されているか確認してください。
-	//	
-
 	IXAudio2SourceVoice*& pSV = g_pSourceVoice[(int)label];
 
 	if (pSV != nullptr)

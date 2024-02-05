@@ -3,7 +3,7 @@
 // サウンド処理 [xa2.h]
 //
 //=============================================================================
-
+#ifndef _XAUDIO2_H_
 #define _XAUDIO2_H_
 
 #include <xaudio2.h>
@@ -11,18 +11,17 @@
 // サウンドファイル
 typedef enum
 {
-	BGM001 = 0,		// サンプルBGM
-	BGM002,			// サンプルBGM
-	BGM003,			// サンプルBGM
-	BGM004,			// サンプルBGM
-
-	SE001,			// サンプルSE
-	SE002,			// サンプルSE
-	SE003,			// サンプルSE
-	SE004,			// サンプルSE
-	SE005,			// サンプルSE
-	SE006,			// サンプルSE
-	SOUND_MAX,
+	SOUND_LABEL_BGM001 = 0,		// サンプルBGM
+	SOUND_LABEL_BGM002,			// サンプルBGM
+	SOUND_LABEL_BGM003,			// サンプルBGM
+	//SOUND_LABEL_SE001,			// サンプルSE
+	//SOUND_LABEL_SE002,			// サンプルSE
+	//SOUND_LABEL_SE003,			// サンプルSE
+	//SOUND_LABEL_SE004,			// サンプルSE
+	//SOUND_LABEL_SE005,			// サンプルSE
+	//SOUND_LABEL_SE006,			// サンプルSE
+	//SOUND_LABEL_SE007,			// サンプルSE
+	SOUND_LABEL_MAX,
 } SOUND_LABEL;
 
 //*****************************************************************************
@@ -44,3 +43,4 @@ void XA_Stop(SOUND_LABEL label);
 // 引数で指定したサウンドの再生を再開する
 void XA_Resume(SOUND_LABEL label);
 
+#endif

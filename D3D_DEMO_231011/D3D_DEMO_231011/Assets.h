@@ -37,6 +37,9 @@ public:
 	ID3D11ShaderResourceView* uiSelectChapter1;
 	ID3D11ShaderResourceView* uiSelectChapter2;
 	ID3D11ShaderResourceView* uiSelectChapter3;
+	
+	ID3D11ShaderResourceView* uiClear;
+
 
 	//stage1-1用リソース
 	ID3D11ShaderResourceView* stageBg;
