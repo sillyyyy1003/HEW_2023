@@ -20,6 +20,7 @@ void ColliderManager::Update(Collider* collider)
 {
 }
 
+/*
 void ColliderManager::Collision(std::vector<GameObject*> Vobject)
 {
 	int i = 0;
@@ -80,16 +81,17 @@ void ColliderManager::Collision(std::vector<GameObject*> Vobject)
 		j++;
 	}
 }
+*/
 
 bool ColliderManager::ClearCollision(std::vector<GameObject*> Vobject, float Pobj,float Eobj, float verNum,int sizeJodge)
 {
-	if (Vobject[Pobj]->m_shadowCollider->isClearCollision(Vobject[Eobj]->m_shadowCollider, verNum))
+	/*if (Vobject[Pobj]->m_shadowCollider->isClearCollision(Vobject[Eobj]->m_shadowCollider, verNum))
 	{
 		if (Vobject[Eobj]->GetSize() == sizeJodge)
 		{
 			return true;
 		}
-	}
+	}*/
 
 	return false;
 }

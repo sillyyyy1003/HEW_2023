@@ -2,121 +2,29 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
-      <Filter>Direct3d\ShaderFile</Filter>
+      <Filter>DirectFile\ShaderFile</Filter>
     </FxCompile>
     <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
-      <Filter>Direct3d\ShaderFile</Filter>
+      <Filter>DirectFile\ShaderFile</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
-    <ClCompile Include="Assets.cpp">
-      <Filter>Assets</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="CanvasUI.cpp">
-      <Filter>CanvasUI</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugManager.cpp">
-      <Filter>DebugManager</Filter>
-    </ClCompile>
-    <ClCompile Include="DInput.cpp">
-      <Filter>Input\KBInput</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Input\ControllerInput</Filter>
-    </ClCompile>
-    <ClCompile Include="Direct3D\Direct3D.cpp">
-      <Filter>Direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>SceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>SceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectAnimation.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>BaseObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>BaseObject\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="WICTextureLoader.cpp">
-      <Filter>Direct3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="StaticAnimation.cpp">
-      <Filter>Animation</Filter>
+      <Filter>Animation\StaticAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="StaticObject.cpp">
-      <Filter>StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TrackCamera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>BaseObject</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feature/Kkaku
-    <ClCompile Include="PolygonCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="SatCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Assets.cpp">
-      <Filter>Assets</Filter>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Collider\BoxCollider</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Collider</Filter>
     </ClCompile>
-    <ClCompile Include="ColliderManager.cpp">
-=======
-    <ClCompile Include="RailManager.cpp" />
-    <ClCompile Include="SatCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="PolygonCollider.cpp">
->>>>>>> feature/Sakai02
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="DebugManager.cpp">
-      <Filter>DebugManager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="DInput.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="Assets.cpp">
+      <Filter>Assets</Filter>
     </ClCompile>
     <ClCompile Include="CanvasUI.cpp">
       <Filter>CanvasUI</Filter>
@@ -124,112 +32,137 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="ColliderManager.cpp">
+      <Filter>ColliderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>DebugManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DInput.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
     <ClCompile Include="Direct3D\Direct3D.cpp">
-      <Filter>Direct3d</Filter>
+      <Filter>DirectFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
       <Filter>BaseObject</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>BaseObject\Object</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="ObjectAnimation.cpp">
-      <Filter>Animation</Filter>
+      <Filter>Animation\ObjectAnimation</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>SceneManager</Filter>
+    <ClCompile Include="PolygonCollider.cpp">
+      <Filter>Collider\PolygonCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Collider\SphereCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="RailManager.cpp">
+      <Filter>RailManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SatCollider.cpp">
+      <Filter>Collider\PolygonCollider</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
+    <ClCompile Include="SceneManager.cpp">
       <Filter>SceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>BaseObject</Filter>
     </ClCompile>
     <ClCompile Include="ShadowObject.cpp">
       <Filter>ShadowObject</Filter>
     </ClCompile>
-    <ClCompile Include="RailManager.cpp">
-      <Filter>RailManager</Filter>
-=======
-    <ClCompile Include="Collider.cpp">
-      <Filter>Collider</Filter>
->>>>>>> feature/Sakai02
-    </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="StaticObject.cpp">
-      <Filter>StaticObject</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticAnimation.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="WICTextureLoader.cpp">
-      <Filter>Direct3d</Filter>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>BaseObject</Filter>
     </ClCompile>
     <ClCompile Include="TrackCamera.cpp">
       <Filter>Camera</Filter>
-=======
-    <ClCompile Include="ColliderManager.cpp">
-      <Filter>Collider</Filter>
->>>>>>> feature/Sakai02
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="SatCollider.cpp">
-      <Filter>Collider</Filter>
+    <ClCompile Include="Stage.cpp">
+      <Filter>SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="PolygonCollider.cpp">
-      <Filter>Collider</Filter>
+    <ClCompile Include="StaticObject.cpp">
+      <Filter>StaticObject</Filter>
     </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderManager.cpp">
-      <Filter>Collider</Filter>
-    </ClCompile>
-=======
->>>>>>> feature/Kkaku
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WICTextureLoader.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticAnimation.h">
+      <Filter>Animation\StaticAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Collider\BoxCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Collider</Filter>
+    </ClInclude>
     <ClInclude Include="Assets.h">
       <Filter>Assets</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Animation</Filter>
+    <ClInclude Include="CanvasUI.h">
+      <Filter>CanvasUI</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CanvasUI.h">
-      <Filter>CanvasUI</Filter>
+    <ClInclude Include="ColliderManager.h">
+      <Filter>ColliderManager</Filter>
     </ClInclude>
     <ClInclude Include="DebugManager.h">
       <Filter>DebugManager</Filter>
     </ClInclude>
     <ClInclude Include="DInput.h">
-      <Filter>Input\KBInput</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Input\ControllerInput</Filter>
+      <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="Direct3D\Direct3D.h">
-      <Filter>Direct3d</Filter>
+      <Filter>DirectFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>BaseObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectAnimation.h">
+      <Filter>Animation\ObjectAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D\Shader\PixelShader.h">
+      <Filter>DirectFile\ShaderFile</Filter>
+    </ClInclude>
+    <ClInclude Include="PolygonCollider.h">
+      <Filter>Collider\PolygonCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Collider\SphereCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="RailManager.h">
+      <Filter>RailManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SatCollider.h">
+      <Filter>Collider\PolygonCollider</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>SceneManager</Filter>
@@ -237,216 +170,94 @@
     <ClInclude Include="SceneManager.h">
       <Filter>SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectAnimation.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>BaseObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>BaseObject\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3D\Shader\PixelShader.h">
-      <Filter>Direct3d\ShaderFile</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3D\Shader\VertexShader.h">
-      <Filter>Direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="WICTextureLoader.h">
-      <Filter>Direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>SceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticAnimation.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticObject.h">
-      <Filter>StaticObject</Filter>
-    </ClInclude>
-    <ClInclude Include="TrackCamera.h">
-      <Filter>Camera</Filter>
+    <ClInclude Include="ShadowObject.h">
+      <Filter>ShadowObject</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>BaseObject</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-    <ClInclude Include="RailManager.h" />
->>>>>>> feature/Sakai02
->>>>>>> feature/Kkaku
-    <ClInclude Include="PolygonCollider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="SatCollider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Animation.h">
-      <Filter>Animation</Filter>
-=======
-<<<<<<< HEAD
-    <ClInclude Include="Animation.h">
-      <Filter>Animation</Filter>
-=======
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Collider</Filter>
->>>>>>> feature/Sakai02
->>>>>>> feature/Kkaku
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> feature/Kkaku
-    <ClInclude Include="ColliderManager.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Assets.h">
-      <Filter>Assets</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugManager.h">
-      <Filter>DebugManager</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="DInput.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="CanvasUI.h">
-      <Filter>CanvasUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="TrackCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Direct3D\Direct3D.h">
-      <Filter>Direct3d</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>BaseObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>BaseObject\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectAnimation.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
+    <ClInclude Include="Stage.h">
       <Filter>SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowObject.h">
-      <Filter>ShadowObject</Filter>
-    </ClInclude>
-    <ClInclude Include="RailManager.h">
-      <Filter>RailManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3D\Shader\PixelShader.h">
-      <Filter>Direct3d\ShaderFile</Filter>
-    </ClInclude>
     <ClInclude Include="Direct3D\Shader\VertexShader.h">
-      <Filter>Direct3d\ShaderFile</Filter>
+      <Filter>DirectFile\ShaderFile</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="PolygonCollider.h">
-      <Filter>Collider</Filter>
+    <ClInclude Include="StaticObject.h">
+      <Filter>StaticObject</Filter>
     </ClInclude>
-    <ClInclude Include="SatCollider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-=======
-=======
->>>>>>> feature/Kkaku
-    <ClInclude Include="SphereCollider.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderManager.h">
-      <Filter>Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-=======
->>>>>>> feature/Sakai02
->>>>>>> feature/Kkaku
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">
-      <UniqueIdentifier>{4b745aec-3a8e-449d-940a-1af6838996b8}</UniqueIdentifier>
+      <UniqueIdentifier>{86eb5db8-beb4-40b8-9aa6-7f98ff69a047}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseObject">
-      <UniqueIdentifier>{d040bdbc-52c6-4085-96e9-f21f0face15f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{f58dcecf-197b-4d36-a4c8-06b5005db9a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="CanvasUI">
-      <UniqueIdentifier>{73cd03bc-0498-42f9-9122-60f35eaaef5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{4dc36dca-4def-4637-aae6-241bb3fc3d81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Assets">
-      <UniqueIdentifier>{43a23f9a-7106-480b-9eec-63fe37e7593f}</UniqueIdentifier>
+    <Filter Include="Animation\StaticAnimation">
+      <UniqueIdentifier>{ca89088a-ec86-448d-bb87-f9cbc0e35841}</UniqueIdentifier>
     </Filter>
     <Filter Include="Collider">
-      <UniqueIdentifier>{bd44c970-c55a-45b7-a119-91450ddc2ff0}</UniqueIdentifier>
+      <UniqueIdentifier>{0c32a18c-45b0-4f08-900c-08d5f5d10420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\BoxCollider">
+      <UniqueIdentifier>{7bff2371-9d02-4328-9930-f12c90466d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\SphereCollider">
+      <UniqueIdentifier>{24ec17a8-1940-4e01-89d0-dee98029ef4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{17e351a6-d7aa-428a-b300-1adbc22d302b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CanvasUI">
+      <UniqueIdentifier>{ec7cd993-b16d-4b40-88f0-dff5c69ae110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{013a20db-b182-4f5c-962d-7f4cf08ace5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ColliderManager">
+      <UniqueIdentifier>{e6593c80-dc82-4f23-9d4b-686519fee4de}</UniqueIdentifier>
     </Filter>
     <Filter Include="DebugManager">
-      <UniqueIdentifier>{26b8c61f-3dc6-49dc-9eb2-8d6ac35d5257}</UniqueIdentifier>
+      <UniqueIdentifier>{8aa6e01a-d76a-4fdd-bf86-42f1b875d00e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Input">
-      <UniqueIdentifier>{be3320d1-cd1b-4692-8428-26147ee75e4c}</UniqueIdentifier>
+      <UniqueIdentifier>{5b1e058d-456d-40e6-9c8a-72a6546457fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input\KBInput">
-      <UniqueIdentifier>{c22c8188-6891-4765-8c4e-6207c25494b4}</UniqueIdentifier>
+    <Filter Include="DirectFile">
+      <UniqueIdentifier>{d3ea4762-509d-4034-84d7-7a5e22a1f6b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input\ControllerInput">
-      <UniqueIdentifier>{bcc0b864-90e9-4ecc-a76e-d37ad7875741}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Direct3d">
-      <UniqueIdentifier>{616d73ee-9ed2-4e8f-8398-d5c0ff0f90e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Direct3d\ShaderFile">
-      <UniqueIdentifier>{7502bd99-a799-4b41-bb8e-5e5b3c6aa612}</UniqueIdentifier>
+    <Filter Include="DirectFile\ShaderFile">
+      <UniqueIdentifier>{c2ff9624-b9c6-42d3-88cb-5446a4ed4528}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
-      <UniqueIdentifier>{b4bf2381-0dc2-493d-8792-dcdf98d697ad}</UniqueIdentifier>
+      <UniqueIdentifier>{3790682b-b13c-48dc-86fe-c5f48845d7cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneManager">
-      <UniqueIdentifier>{0c9dc638-760f-4254-a5a0-e614898c1910}</UniqueIdentifier>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{f33d81c0-a80b-4567-9c69-1fb99d46bae2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BaseObject\Object">
-      <UniqueIdentifier>{41cf73f2-6a88-4b14-94ec-b08025af6ec4}</UniqueIdentifier>
+    <Filter Include="BaseObject">
+      <UniqueIdentifier>{48be8285-fa61-430c-a9c0-a4ae921ef7c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StaticObject">
-      <UniqueIdentifier>{e972e916-1c94-4b0a-9a65-39f389b2024a}</UniqueIdentifier>
+    <Filter Include="Object">
+      <UniqueIdentifier>{6d7f51ee-a179-4a33-a3a6-91f9b9c506ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShadowObject">
-      <UniqueIdentifier>{3d5e06e7-03d8-40f2-8037-954d712edecc}</UniqueIdentifier>
+    <Filter Include="Animation\ObjectAnimation">
+      <UniqueIdentifier>{a48fac5b-fca0-4524-a4e1-6bce43fc9a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\PolygonCollider">
+      <UniqueIdentifier>{5df98a4e-2af3-4903-b679-acb9393ab3df}</UniqueIdentifier>
     </Filter>
     <Filter Include="RailManager">
-      <UniqueIdentifier>{b6e2249b-d1e7-46f8-ac6c-38b39314f487}</UniqueIdentifier>
+      <UniqueIdentifier>{268ef5c8-9f01-40f5-9e5e-4c1ed1d91ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneManager">
+      <UniqueIdentifier>{078cc37e-f0b8-4f6f-aebb-5d6f21ba99b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadowObject">
+      <UniqueIdentifier>{8e801169-b9de-4e10-b118-e0a5c4a49242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticObject">
+      <UniqueIdentifier>{53fbd55a-34d3-4f10-9dca-4ae98c5b1172}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

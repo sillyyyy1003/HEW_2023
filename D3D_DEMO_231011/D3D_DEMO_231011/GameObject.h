@@ -2,6 +2,7 @@
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
 #include <DirectXCollision.h>
+#include <string>
 
 class Object;
 class ShadowObject;
@@ -58,22 +59,14 @@ private:
 	bool isAutoMove = false;//自動移動しているかどうか
 
 	int m_size = 0;
-<<<<<<< HEAD
-=======
-
-	DirectX::BoundingSphere SsphereCollider;
-	DirectX::BoundingSphere SpolygonCollider;
-	DirectX::BoundingBox SboxCollider;
->>>>>>> feature/Kkaku
 
 public:
+
 	//----------------------------//
 	// 変数
 	//----------------------------//
 	//オブジェクトの図形情報
 	Object* m_obj;
-	//本体の当たり判定を扱う
-	//Collider* m_objCollider = nullptr;
 		
 	//影の図形情報
 	ShadowObject* m_shadow;
@@ -121,16 +114,19 @@ public:
 	// Collisionの初期化(スケールの変化に対応するために必要)
 	void InitCollision(void);
 
-	/// <summary>
-	/// 影の生成位置を計算する関数
-	/// </summary>
-	/// <param name="lightPos">光源の位置</param>
-	/// <param name="objPos">オブジェクトの位置</param>
-	/// <returns>影の位置</returns>
-	//DirectX::XMFLOAT3 GenerateShadowPos();
-	void GenerateShadowPos();
 	
-	void GenerateShadowSize();
+	/// <summary>
+	/// 影の位置移動
+	/// </summary>
+	/// <param name="moveSpeed">移動のスビート</param>
+	/// <param name="posX">本体と被らないようにちょっとずれを設定</param>
+	void GenerateShadowPos(float moveSpeed,float posX);
+	
+	//影の大きさの変更
+	void GenerateShadowSize(float speed);
+
+	//影の回転
+	void GenerateShadowRotate();
 	
 	/// <summary>
 	/// レール上も位置を設定する
@@ -147,22 +143,16 @@ public:
 	int GetSize() { return m_size; };
 	void SetSize(int size) { m_size = size; };
 
-	int GetSize() { return m_size; };
-	void SetSize(int size) { m_size = size; };
-
 	void SetName(std::string Name) { m_Name = Name; };
 	std::string GetName(void) { return m_Name; };
 
 	//毎回ゲームループで呼び出せれてる
 	void Update(void);
 
-
 	//移動先に移動できるかどうかの判定を行う
 	bool isMoveable(DIR dir);
 
 	//コライダーのデータを更新する
-	void UpdateObjectColliderData(void);
-
 	void UpdateShadowColliderData(void);
 
 	//自動移動かどうかの設定を行う

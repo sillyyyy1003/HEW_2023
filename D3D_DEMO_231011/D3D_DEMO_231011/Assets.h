@@ -18,13 +18,10 @@ public:
 	ID3D11ShaderResourceView* tree;
 	ID3D11ShaderResourceView* shadow;
 	// 図形
-	//ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
 	ID3D11ShaderResourceView* ex;
-	//ID3D11ShaderResourceView* railLine;	//デバッグ用
 
-	
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
 	ID3D11ShaderResourceView* uiTitle;
@@ -46,9 +43,6 @@ public:
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
-
-	ID3D11ShaderResourceView* ex;
-
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

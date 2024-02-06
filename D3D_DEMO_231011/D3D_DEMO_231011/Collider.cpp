@@ -1,4 +1,5 @@
-#include "Collider.h"
+ï»¿#include "Collider.h"
+#include "Material.h"
 
 #define SQUAREWIDTH 0.8
 
@@ -11,87 +12,58 @@ std::vector<Vector3> Collider::GetVerticies()
 	return std::vector<Vector3>();
 }
 
-void Collider::InitCollider(COLLISION_TYPE _type)
+void Collider::InitColliderType(COLLISION_TYPE _type)
 {
 	m_collisionType = _type;
 	isActive = true;
 }
 
-void Collider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation)
+
+
+void Collider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents)
 {
-	
+    //ç©ºã«ã™ã‚‹
+}
+
+Collider_Dir Collider::GetCollisionDir(Collider* collider)
+{
+    Collider_Dir dir = { INI_STATE,INI_STATE };
+    //å¼•ãç®—ã—ã¦ã€€ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä½ç½®æ±ºã‚ã‚‹
+    float x_Result = this->m_center.x - collider->m_center.x;
+    float y_Result = this->m_center.y - collider->m_center.y;
+
+    if (x_Result > 0)
+    {
+        dir.horizontal = COLLISION_DIR::COL_LEFT;
+    }
+    else if (x_Result < 0)
+    {
+        dir.horizontal = COLLISION_DIR::COL_RIGHT;
+    }
+    else
+    {
+        dir.horizontal = COLLISION_DIR::OVERLAP;
+    }
+
+
+    if (y_Result > 0)
+    {
+        dir.vertical = COLLISION_DIR::COL_DOWN;
+    }
+    else if (y_Result < 0)
+    {
+        dir.vertical = COLLISION_DIR::COL_UP;
+    }
+    else
+    {
+        dir.vertical = COLLISION_DIR::OVERLAP;
+    }
+    return dir;
 
 }
+
 
 Collider::~Collider(void)
 {
 }
 
-std::vector<Vector3> Collider::SetTriangle(float _radius)
-{
-    Triangle triangle;
-    triangle.A = { 0 , _radius };
-    triangle.B = { _radius , -_radius };
-    triangle.C = { -_radius , -_radius };
-
-    // 1‚Â–Ú‚Ì“Ê‘½ŠpŒ`‚Ì’¸“_À•W‚ğ’è‹`
-    std::vector<Vector3> vertices = {
-        Vector3(triangle.A.x, triangle.A.y,0),
-        Vector3(triangle.B.x, triangle.B.y,0),
-        Vector3(triangle.C.x, triangle.C.y,0),
-    };
-
-    return vertices;
-}
-
-std::vector<Vector3> Collider::SetSquare(float _widthX, float _widthY)
-{
-    SQURE squre;
-    // lŠp‚Ì‰º‚ÌOŠp
-    squre.A = { _widthX,_widthY };
-    squre.B = { _widthX,-_widthY };
-    squre.C = { -_widthX,-_widthY };
-    squre.D = { -_widthX,_widthY };
-
-    // 1‚Â–Ú‚Ì“Ê‘½ŠpŒ`‚Ì’¸“_À•W‚ğ’è‹`
-    std::vector<Vector3> vertices = {
-        Vector3(squre.A.x, squre.A.y,0),
-        Vector3(squre.B.x, squre.B.y,0),
-        Vector3(squre.C.x, squre.C.y,0),
-        Vector3(squre.D.x, squre.D.y,0),
-    };
-
-    return vertices;
-}
-
-std::vector<Vector3> Collider::SetCircle(float radius)
-{
-    SQURE squre;
-    float squarewidth = SQUAREWIDTH;
-    // lŠp‚Ì‰º‚ÌOŠp
-    squre.A = { radius * squarewidth,radius * squarewidth };
-    squre.B = { radius * squarewidth,-radius * squarewidth };
-    squre.C = { -radius * squarewidth,-radius * squarewidth };
-    squre.D = { -radius * squarewidth,radius * squarewidth };
-
-    SQURE circle;
-    // lŠp‚Ì‰º‚ÌOŠp
-    circle.A = { 0, radius };
-    circle.B = { radius,0 };
-    circle.C = { 0 , -radius };
-    circle.D = { -radius,0 };
-
-
-    // 1‚Â–Ú‚Ì“Ê‘½ŠpŒ`‚Ì’¸“_À•W‚ğ’è‹`
-    std::vector<Vector3> vertices = {
-        Vector3(circle.A.x, circle.A.y,0),
-        Vector3(squre.A.x, squre.A.y,0),
-        Vector3(circle.B.x, circle.B.y,0),
-        Vector3(squre.B.x, squre.B.y,0),
-        Vector3(circle.C.x, circle.C.y,0),
-        Vector3(squre.C.x, squre.C.y,0),
-        Vector3(circle.D.x, circle.D.y,0),
-        Vector3(squre.D.x, squre.D.y,0),
-    };
-    return vertices;
-}

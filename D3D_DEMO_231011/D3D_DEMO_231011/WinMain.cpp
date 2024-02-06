@@ -164,6 +164,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//現在時間取得
 			nowTick = GetTickCount64();
 
+
+
+
+
+
+
+
 			//１秒経過したか？
 			if (nowTick >= oldTick + 1000)
 			{

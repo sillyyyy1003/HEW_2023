@@ -22,8 +22,6 @@ Assets::Assets()
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
     uiRestart = LoadTexture("assets/ui/restart.png");
-    //debug
-    //railLine = LoadTexture("assets/stage1/railLine.png");
 
     //test
     //circle = LoadTexture("assets/Tree.png");

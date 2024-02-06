@@ -109,6 +109,8 @@ public:
 	/// <param name="cb">シェーダーに渡す行列</param>
 	void GenerateMatrix(CONSTBUFFER& cb);
 
+	DirectX::XMFLOAT3 GetExtents(void) { return m_modelData.collider.extents; };
+	Collide GetCollide(void) { return m_modelData.collider; };
 
 	/// <summary>
 	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）

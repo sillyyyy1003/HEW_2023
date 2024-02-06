@@ -94,10 +94,12 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	}
 
 	//当たり判定のデータを入力
-	m_modelData.extents.x = _width / 2;
-	m_modelData.extents.y = _height / 2;
-	m_modelData.extents.z = 0.01f;	//ｚ軸の大きさをロックする
-
+	m_modelData.collider.extents.x = _width / 2;
+	m_modelData.collider.extents.y = _height / 2;
+	m_modelData.collider.extents.z = 0.01f;	//ｚ軸の大きさをロックする
+	
+	m_modelData.collider.radius = _width / 2;
+	
 	//テクスチャを実装
 	SetTexture(texture);
 }

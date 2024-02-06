@@ -2,6 +2,7 @@
 #include "ShadowObject.h"
 #include "SphereCollider.h"
 #include "StaticAnimation.h"
+#include "BoxCollider.h"
 #include "DInput.h"
 #include "RailManager.h"
 #include "SceneManager.h"
@@ -21,6 +22,15 @@
 
 extern Camera* g_WorldCamera;
 
+#define BOXMEDIUM 1.5f
+#define BOXLARGE 2.1f
+
+#define SPHEREMEDIUM 1.8f
+#define SPHERELARGE 2.5f
+
+#define POLYGONMEDIUM 1.5f
+#define POLYGONLARGE 2.1f
+
 void GameObject::DoKeyInput(void)
 {
 	m_inputCount++;
@@ -31,7 +41,7 @@ void GameObject::DoKeyInput(void)
 			isInputCount = true;
 			m_lastPressTime = m_inputCount;
 		}
-		
+
 	}
 	//カウト開始
 	if (isInputCount) {
@@ -47,15 +57,15 @@ void GameObject::DoKeyInput(void)
 			}
 
 			// 处理水平方向输入
-			if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW) && !Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) 
+			if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW) && !Input::Get()->GetKeyTrigger(DIK_RIGHTARROW))
 			{
 				m_nowInput.horInput = INPUT_LEFT;
 			}
-			if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW) && !Input::Get()->GetKeyTrigger(DIK_LEFTARROW)) 
+			if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW) && !Input::Get()->GetKeyTrigger(DIK_LEFTARROW))
 			{
 				m_nowInput.horInput = INPUT_RIGHT;
 			}
-			
+
 		}
 		else {
 			isGetInput = true;
@@ -69,15 +79,6 @@ void GameObject::DoKeyInput(void)
 	}
 
 }
-
-#define BOXMEDIUM 1.5f
-#define BOXLARGE 2.1f
-
-#define SPHEREMEDIUM 1.8f
-#define SPHERELARGE 2.5f
-
-#define POLYGONMEDIUM 1.5f
-#define POLYGONLARGE 2.1f
 
 GameObject::GameObject()
 {
@@ -107,42 +108,7 @@ void GameObject::InitAnimation(void)
 	m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);
 }
 
-void GameObject::InitCollision(void)
-{
-	switch (m_shadowCollider->GetColliderType())
-	{
-	case POLYGON:
-		SpolygonCollider = m_shadowCollider->GetPolygonCollider();
-		break;
-	case SPHERE:
-		SsphereCollider = m_shadowCollider->GetSphereCollider();
-		break;
-	case SQUARE:
-		SboxCollider = m_shadowCollider->GetBoxCollider();
-		break;
-	}
-}
-
-
-void GameObject::InitCollision(void)
-{
-	switch (m_shadowCollider->GetColliderType())
-	{
-	case POLYGON:
-		SpolygonCollider = m_shadowCollider->GetPolygonCollider();
-		break;
-	case SPHERE:
-		SsphereCollider = m_shadowCollider->GetSphereCollider();
-		break;
-	case SQUARE:
-		SboxCollider = m_shadowCollider->GetBoxCollider();
-		break;
-	}
-}
-
-
-
-void GameObject::GenerateShadowPos()
+void GameObject::GenerateShadowPos(float moveSpeed, float posX)
 {
 	/*
 	//単位ベクトル化する
@@ -173,39 +139,39 @@ void GameObject::GenerateShadowPos()
 	switch (m_moveDir)
 	{
 	case UPRIGHT:
-		m_shadow->m_sprite->m_pos.x += 0.08;
+		m_shadow->m_sprite->m_pos.x += moveSpeed;
 		break;
 	case RIGHT:
-		m_shadow->m_sprite->m_pos.x += 0.08;
+		m_shadow->m_sprite->m_pos.x += moveSpeed;
 		break;
 	case DOWNRIGHT:
-		m_shadow->m_sprite->m_pos.x += 0.08;
+		m_shadow->m_sprite->m_pos.x += moveSpeed;
 		break;
 	case DOWNLEFT:
-		m_shadow->m_sprite->m_pos.x -= 0.08;
+		m_shadow->m_sprite->m_pos.x -= moveSpeed;
 		break;
 	case LEFT:
-		m_shadow->m_sprite->m_pos.x -= 0.08;
+		m_shadow->m_sprite->m_pos.x -= moveSpeed;
 		break;
 	case UPLEFT:
-		m_shadow->m_sprite->m_pos.x -= 0.08;
+		m_shadow->m_sprite->m_pos.x -= moveSpeed;
 		break;
 	case STILL:
 		switch(m_railPos.horizontalPos){
 		case 0:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - 0.2f;
+			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - posX;
 			break;
 		case 1:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - 0.1f;
+			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - posX*2;
 			break;
 		case 2:
 			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
 			break;
 		case 3:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + 0.1f;
+			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + posX;
 			break;
 		case 4:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + 0.2f;
+			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + posX*2;
 			break;
 		}
 		break;
@@ -214,6 +180,12 @@ void GameObject::GenerateShadowPos()
 	}
 
 
+}
+
+
+void GameObject::GenerateShadowRotate()
+{
+	
 }
 
 void GameObject::SetRailPos(int horPos, int verPos)
@@ -321,36 +293,24 @@ void GameObject::Update()
 		int stageInfo = SceneManager::Get()->GetActiveStage();
 		SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 	}
+	
 	//オブジェクト情報更新
+	m_obj->Update();
+	
+	//位置を更新
+	GenerateShadowPos(0.08f, 0.1);
+	//GenerateShadowSize();
+
+	//影の情報更新
+	m_shadow->Update();
+
+	//Collider情報更新
+	if (m_shadowCollider) {
+		UpdateShadowColliderData();
+	}
 	
 
-	//影情報更新
-
-	if (m_shadowCollider)
-	{
-		m_shadowCollider->Update(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->m_rotation);
-	}
-
-
-	//位置を更新
-	GenerateShadowPos();
-
 	// オブジェクトの位置によって影の大きさを調整
-	if (m_obj->m_sprite->m_pos.z <= -2)
-	{
-		// SMALL
-		m_railPos.verticalPos = 0;
-	}
-	if (m_obj->m_sprite->m_pos.z <= -4)
-	{
-		// MIDDLE
-		m_railPos.verticalPos = 1;
-	}
-	if (m_obj->m_sprite->m_pos.z <= -8)
-	{
-		// LARGE
-		m_railPos.verticalPos = 2;
-	}
 
 	//大きさを更新
 	switch (m_railPos.verticalPos)
@@ -364,71 +324,6 @@ void GameObject::Update()
 	case 2:
 		m_shadow->m_size = ShadowObject::SIZE::LARGE;
 		break;
-	}
-
-	if (GetActive())
-	{
-		// 影の大きさによって当たり判定の調整
-		switch (m_shadow->m_size)
-		{
-		case ShadowObject::SIZE::SMALL:
-			// 円の半径（小）
-			m_shadowCollider->SetSphereCollider(SsphereCollider.Radius);
-			// 三角の半径（小）
-			m_shadowCollider->SetPolygonCollider(SpolygonCollider.Radius);
-			// 四角の幅（小）
-			m_shadowCollider->SetBoxCollider({ SboxCollider.Extents.x,SboxCollider.Extents.y,SboxCollider.Extents.z });
-			break;
-		case ShadowObject::SIZE::MEDIUM:
-			// 円の半径（中）
-			m_shadowCollider->SetSphereCollider(SsphereCollider.Radius* SPHEREMEDIUM);
-			// 三角の半径（中）
-			m_shadowCollider->SetPolygonCollider(SpolygonCollider.Radius*POLYGONMEDIUM);//1.5
-			// 四角の幅（中）
-			//DirectX::XMFLOAT3 medium = { SboxCollider.Extents.x * SCALEMEDIUM,0,0 };
-			m_shadowCollider->SetBoxCollider({ SboxCollider.Extents.x* BOXMEDIUM,SboxCollider.Extents.y * BOXMEDIUM,SboxCollider.Extents.z * BOXMEDIUM });
-			break;
-		case ShadowObject::SIZE::LARGE:
-			// 円の半径（大）
-			m_shadowCollider->SetSphereCollider(SsphereCollider.Radius* SPHERELARGE);
-			// 三角の半径（大）
-			m_shadowCollider->SetPolygonCollider(SpolygonCollider.Radius* POLYGONLARGE);//2.1
-			// 四角の幅（大）
-			m_shadowCollider->SetBoxCollider({ SboxCollider.Extents.x * BOXLARGE,SboxCollider.Extents.y * BOXLARGE,SboxCollider.Extents.z * BOXLARGE });
-			break;
-		}
-	}
-	
-	////本体更新した後
-	//if (m_obj->m_collider != nullptr) {
-	//	
-	//	//ここで具体的なCollisionのセンターやスケールを更新する
-	//	UpdateObjectColliderData();
-
-	//}
-
-	////影更新した後
-	//if (m_shadow->m_collider != nullptr) {
-	//	
-	//	//ここで具体的なCollisionのセンターやスケールを更新する
-	//	UpdateShadowColliderData();
-
-	//}
-
-	//オブジェクト本体
-	m_obj->Update();
-
-	//Collider データ更新
-	//m_shadowCollider->Update(m_obj->m_sprite->m_pos, m_obj->m_sprite->m_rotation);
-
-	m_shadow->Update();
-
-	if (GetActive())
-	{
-		m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
-		//m_shadow->m_sprite->m_pos.y = m_obj->m_sprite->m_pos.y;
-
-		SetSize(m_shadow->m_size);
 	}
 }
 
@@ -445,7 +340,6 @@ bool GameObject::isMoveable(DIR dir)
 		case UP:
 			movePos = (m_railPos.verticalPos - 1) * 5 + m_railPos.horizontalPos;
 			moveDir = UP;
-
 			break;
 
 		case UPRIGHT:
@@ -512,65 +406,38 @@ bool GameObject::isMoveable(DIR dir)
 		}
 }
 
-void GameObject::UpdateObjectColliderData(void)
-{
-	//dynamic_castを使って、コライダーのデータを更新する
-	//
-	//switch (m_shadowCollider->GetColliderType()) {
-	//case SPHERE:
-	//	//位置と半径をリアルタイムで更新する
-	//	dynamic_cast<SphereCollider*>(m_shadowCollider)->m_center = { 0.0f,0.0f,0.0f };
-	//	dynamic_cast<SphereCollider*>(m_shadowCollider)->m_radius = 1.0f;
-	//	//更新したデータを本体のColliderに更新する
-	//	m_shadowCollider->Update()
-	//	break;
-
-	//case POLYGON:
-
-	//	break;
-
-	//case SQUARE:
-
-	//	break;
-
-	//default:
-
-	//}
-
-
-
-
-
-
-}
-
 void GameObject::UpdateShadowColliderData(void)
 {
 	//dynamic_castを使って、コライダーのデータを更新する
 	
-	//switch (m_shadow->m_collider->GetColliderType()) {
-	//case SPHERE:
-	
-	//	
-	//	//dynamic_cast<SphereCollider*>(m_shadowCollider)->m_center = { 0.0f,0.0f,0.0f };
-	//	//dynamic_cast<SphereCollider*>(m_shadowCollider)->m_radius = 1.0f;
+	switch (m_shadowCollider->GetColliderType()) {
+	case SPHERE:
 	
 	
-	////更新したデータを本体のColliderに更新する
-	// 	m_shadowCollider->Update();
-	//	break;
+		dynamic_cast<SphereCollider*>(m_shadowCollider)->m_center = m_shadow->m_sprite->m_pos;
+		dynamic_cast<SphereCollider*>(m_shadowCollider)->m_radius = 1.0f;
+		//dynamic_cast<SphereCollider*>(m_shadowCollider)->Update(Collider::m_center, rotation, extents);
 
-	//case POLYGON:
+	//更新したデータを本体のColliderに更新する
+	//m_shadowCollider->Update();
+	break;
 
-	//	break;
 
-	//case SQUARE:
 
-	//	break;
+
+
+	case SQUARE:
+		DirectX::XMFLOAT3 center = m_shadow->m_sprite->m_pos;
+		DirectX::XMFLOAT3 extents = m_shadow->m_sprite->GetExtents();
+		DirectX::XMFLOAT3 rotation = m_shadow->m_sprite->m_rotation;
+		//dynamic_cast<BoxCollider*>(m_shadowCollider)->Update(center, rotation, extents);
+
+	break;
 
 	//default:
 
-	//}
+	break;
+	}
 
 
 
@@ -880,6 +747,7 @@ GameObject::~GameObject()
 {
 	delete m_obj;
 	delete m_shadow;
+	delete m_shadowCollider;
 
 }
 

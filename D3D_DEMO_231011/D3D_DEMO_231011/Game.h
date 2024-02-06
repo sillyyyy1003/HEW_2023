@@ -70,8 +70,7 @@ public:
 
 	void InitStage();
 
-	void CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width, float height,
-						  float radius, DirectX::XMFLOAT3 extens);
+	//void CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width, float height,float radius, DirectX::XMFLOAT3 extens);
 
 	void SortGameobject();
 
@@ -142,7 +141,6 @@ public:
 
 	//ui描画
 	void UiDraw(void);
-<<<<<<< HEAD
 	
 	//オブジェクトを並び変え描画する
 	void SortObjectDraw(void);
@@ -152,11 +150,8 @@ public:
 	
 
 	void TestMove(GameObject* _target);
-=======
 
-	void TestMove(GameObject* _target);
 	
->>>>>>> feature/Kkaku
 	/*
 	//テスト用
 	void TestUpdate(void);

@@ -39,7 +39,8 @@ dcl_temps 1
 //   v1.x <- input.tex.x; v1.y <- input.tex.y; 
 //   o0.x <- <ps_main return value>.x; o0.y <- <ps_main return value>.y; o0.z <- <ps_main return value>.z; o0.w <- <ps_main return value>.w
 //
-#line 21 "C:\Users\58472\Desktop\HEW試作\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Shader\PixelShader.hlsl"
+#line 21 "C:
+Users\58472\Desktop\HEW試作\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Shader\PixelShader.hlsl"
 sample_indexable(texture2d)(float,float,float,float) r0.xyzw, v1.xyxx, t0.xyzw, s0  // r0.x <- color.x; r0.y <- color.y; r0.z <- color.z; r0.w <- color.w
 
 #line 22

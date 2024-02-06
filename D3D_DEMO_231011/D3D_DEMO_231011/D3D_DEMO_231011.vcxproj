@@ -149,15 +149,6 @@
     <ClCompile Include="ObjectAnimation.cpp" />
     <ClCompile Include="PolygonCollider.cpp" />
     <ClCompile Include="RailManager.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="SatCollider.cpp" />
-    <ClCompile Include="PolygonCollider.cpp" />
-=======
-<<<<<<< HEAD
-    <ClCompile Include="PolygonCollider.cpp" />
-=======
->>>>>>> feature/Sakai02
->>>>>>> feature/Kkaku
     <ClCompile Include="SatCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShadowObject.cpp" />

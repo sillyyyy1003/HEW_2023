@@ -1,62 +1,77 @@
 ﻿#include "SphereCollider.h"
 #include "BoxCollider.h"
 
-SphereCollider::SphereCollider(DirectX::XMFLOAT3 center, float RadiusDirectX::XMFLOAT3 center, float Radius)
+SphereCollider::SphereCollider()
 {
-<<<<<<< HEAD
-    //Collider 
-    InitCollider(center, Radius);
-=======
->>>>>>> feature/Kkaku
-    InitCollider(center, Radius);
+    
 }
 
 void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius)
 {
-    Collider::InitCollider(COLLISION_TYPE::SPHERE);
+    Collider::InitColliderType(COLLISION_TYPE::SPHERE);
 
     m_sphereCollider.Center = center;
     m_sphereCollider.Radius = Radius;
 
+
 }
 
-void SphereCollider::UpdateRadius(float Radiusfloat Radius)
+void SphereCollider::UpdateRadius(float radius)
 {
-    m_sphereCollider.Radius = m_radius;
+    m_sphereCollider.Radius = radius;
 }
 
-void SphereCollider::UpdatePos(DirectX::XMFLOAT3 m_centerDirectX::XMFLOAT3 m_center)
+void SphereCollider::UpdatePos(DirectX::XMFLOAT3 m_center)
 {
     m_sphereCollider.Center = m_center;
 }
 
-bool SphereCollider::isSphereCollision(Collider* sphereCollider)
+void SphereCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents)
 {
-    if (m_sphereCollider.Intersects(sphereCollider->GetSphereCollider()))
+    if (!isActive)
+    {
+        return;
+    }
+    else {
+        //位置更新
+        UpdatePos(center);
+        //UpdateRadius(radius);
+    }
+
+
+}
+
+
+
+bool SphereCollider::isCollision(BoxCollider* boxCollider)
+{
+    if (m_sphereCollider.Intersects(boxCollider->GetColldier()))
     {
         return true;
     }
     else {
         return false;
     }
-
-    
 }
 
-bool SphereCollider::isBoxCollision(Collider* boxCollider)
-bool SphereCollider::isBoxCollision(Collider* boxCollider)
+bool SphereCollider::isCollision(SphereCollider* sphereCollider)
 {
-    if (m_sphereCollider.Intersects(boxCollider->GetBoxCollider()))
-    if (m_sphereCollider.Intersects(boxCollider->GetBoxCollider()))
+
+    if (m_sphereCollider.Intersects(sphereCollider->GetCollider()))
     {
         return true;
     }
     else {
         return false;
     }
-   
 }
 
+bool SphereCollider::isCollision(PolygonCollider* polygonCollider)
+{
+    return false;
+}
+
+/*
 bool SphereCollider::isClearCollision(Collider* polygoncollider, float verNum)
 {
     PolygonSAT3D* Polygon = new PolygonSAT3D;
@@ -134,24 +149,4 @@ bool SphereCollider::isClearCollision(Collider* polygoncollider, float verNum)
     return false;
 }
 
-<<<<<<< HEAD
-void SphereCollider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotationDirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation)
-=======
-void SphereCollider::Update(DirectX::XMFLOAT3 m_center, DirectX::XMFLOAT3 m_rotation)
->>>>>>> feature/Kkaku
-{
-    if (!isActive) 
-    {
-        return; 
-    }
-    else {
-
-        UpdatePos(m_center);
-
-        //UpdateRadius();
-        UpdatePos(m_center);
-
-        //UpdateRadius();
-    }
-
-}
+*/
