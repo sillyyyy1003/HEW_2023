@@ -32,7 +32,7 @@ private:
 	//移動用のカウンター
 	int m_moveCount = 0;
 
-	std::string m_Name;//名前　デバッグ用
+	
 
 	int m_inputCount = 0;//入力待ちカウンター
 	int m_lastPressTime = 0;//入力
@@ -77,6 +77,7 @@ public:
 	//光があるかどうか
 	bool isLit = false;
 
+	std::string m_name;//名前　デバッグ用
 	
 private:
 
@@ -114,7 +115,6 @@ public:
 	// Collisionの初期化(スケールの変化に対応するために必要)
 	void InitCollision(void);
 
-	
 	/// <summary>
 	/// 影の位置移動
 	/// </summary>
@@ -143,8 +143,8 @@ public:
 	int GetSize() { return m_size; };
 	void SetSize(int size) { m_size = size; };
 
-	void SetName(std::string Name) { m_Name = Name; };
-	std::string GetName(void) { return m_Name; };
+	void SetName(std::string Name) { m_name = Name; };
+	std::string GetName(void) { return m_name; };
 
 	//毎回ゲームループで呼び出せれてる
 	void Update(void);

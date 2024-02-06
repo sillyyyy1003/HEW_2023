@@ -141,6 +141,7 @@ void PolygonCollider::UpdateExtents(DirectX::XMFLOAT3 extents)
     m_extents = extents;
 }
 
+/*
 void PolygonCollider::UpdateVerticies(DirectX::XMFLOAT3 rotation)
 {
     //Šp“x‚©‚çƒ‰ƒWƒAƒ“‚É•ÏŠ·
@@ -156,7 +157,7 @@ void PolygonCollider::UpdateVerticies(DirectX::XMFLOAT3 rotation)
     //‰ñ“]‚µ‚½Œã‚Ì’¸“_‚ğŠl“¾
     m_verticies = Polygon->GetRotatedVertices();
 
-}
+}*/
 
 std::vector<Vector3> PolygonCollider::GetVerticies()
 {
@@ -180,7 +181,7 @@ void PolygonCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotatio
         UpdatePos(center);
 
         //‘å‚«‚³
-        //UpdateExtents(extents);
+        UpdateExtents(extents);
 
         //’¸“_‚ğŠl“¾
         UpdateRotation(rotation);
@@ -201,13 +202,47 @@ bool PolygonCollider::isCollision(BoxCollider* collider)
     Box->vertices = collider->GetVerticies();
    
     bool isCollide= SAT::Collide3D(*Polygon, *Box);
+    delete Polygon;
+    delete Box;
 
-    if (isCollide)
-    {
-        return true;
-    }
-    return false;
+    return isCollide;
 
+}
+
+bool PolygonCollider::isCollision(SphereCollider* collider)
+{
+    PolygonSAT3D* Polygon = new PolygonSAT3D;
+    PolygonSAT3D* Sphere = new PolygonSAT3D;
+
+
+    //‰ñ“]Œã‚Ì’¸“_‚ğŠl“¾
+    Polygon->vertices = m_verticies;
+    Sphere->vertices = collider->GetVerticies();
+
+    bool isCollide = SAT::Collide3D(*Polygon, *Sphere);
+
+    delete Polygon;
+    delete Sphere;
+    
+    return isCollide;
+}
+
+bool PolygonCollider::isCollision(PolygonCollider* collider)
+{
+    PolygonSAT3D* Polygon1 = new PolygonSAT3D;
+    PolygonSAT3D* Polygon2 = new PolygonSAT3D;
+
+
+    //‰ñ“]Œã‚Ì’¸“_‚ğŠl“¾
+    Polygon1->vertices = m_verticies;
+    Polygon2->vertices = collider->GetVerticies();
+
+    bool isCollide = SAT::Collide3D(*Polygon1, *Polygon2);
+
+    delete Polygon1;
+    delete Polygon2;
+
+    return isCollide;
 }
 
 // ---}Œ`‚Ì“–‚½‚è”»’è‚Ìˆ— ---//

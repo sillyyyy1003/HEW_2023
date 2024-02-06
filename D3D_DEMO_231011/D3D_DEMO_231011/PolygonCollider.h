@@ -44,7 +44,8 @@ public:
 
 	void UpdateExtents(DirectX::XMFLOAT3 extents);
 
-	void UpdateVerticies(DirectX::XMFLOAT3 rotation);
+	//”pŠü
+	//void UpdateVerticies(DirectX::XMFLOAT3 rotation);
 
 	std::vector<Vector3> GetVerticies() override;
 
@@ -56,7 +57,23 @@ public:
 	/// <param name="radius">”¼Œa</param>
 	void Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents) override;
 
-	bool isCollision(BoxCollider* collider);
+	/// <summary>
+	/// ‚ ‚½‚è”»’è
+	/// </summary>
+	/// <param name="collider">OBB</param>
+	bool isCollision(BoxCollider* collider) override;
+
+	/// <summary>
+	///‚ ‚½‚è”»’è
+	///</summary>
+	///<param name="collider">OBB</param>
+	bool isCollision(SphereCollider* collider) override;
+
+	/// <summary>
+	///‚ ‚½‚è”»’è
+	///</summary>
+	///<param name="collider">OBB</param>
+	bool isCollision(PolygonCollider* collider) override;
 
 	/// <summary>
 	/// “–‚½‚è”»’è

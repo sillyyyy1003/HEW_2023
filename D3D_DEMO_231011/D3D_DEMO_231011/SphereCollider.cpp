@@ -1,10 +1,40 @@
 ﻿#include "SphereCollider.h"
 #include "BoxCollider.h"
+#include "PolygonCollider.h"
+#include <cmath>
+
+#define PI (3.14159265358979323846)
 
 SphereCollider::SphereCollider()
 {
     
 }
+
+std::vector<Vector3> SphereCollider::SetCircle()
+{
+    Point point[8] = {};
+
+    for (int i = 0; i < 8; ++i) {
+        double angle = i * (PI / 4.0); // 每个角度为45度的倍数
+        point[i].x = m_center.x + m_radius * cos(angle);
+        point[i].y = m_center.y + m_radius * sin(angle);
+    }
+
+    // 1つ目の凸多角形の頂点座標を定義
+    std::vector<Vector3> vertices = {
+        Vector3(point[0].x, point[0].y,0),
+        Vector3(point[1].x, point[0].y,0),
+        Vector3(point[2].x, point[0].y,0),
+        Vector3(point[3].x, point[0].y,0),
+        Vector3(point[4].x, point[0].y,0),
+        Vector3(point[5].x, point[0].y,0),
+        Vector3(point[6].x, point[0].y,0),
+        Vector3(point[7].x, point[0].y,0),
+    
+    };
+    return vertices;
+}
+
 
 void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius)
 {
@@ -13,7 +43,7 @@ void SphereCollider::InitCollider(DirectX::XMFLOAT3 center, float Radius)
     m_sphereCollider.Center = center;
     m_sphereCollider.Radius = Radius;
 
-
+    m_verticies = SetCircle();
 }
 
 void SphereCollider::UpdateRadius(float radius)
@@ -26,6 +56,11 @@ void SphereCollider::UpdatePos(DirectX::XMFLOAT3 m_center)
     m_sphereCollider.Center = m_center;
 }
 
+void SphereCollider::UpdateVerticies(void)
+{
+    m_verticies = SetCircle();
+}
+
 void SphereCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents)
 {
     if (!isActive)
@@ -36,6 +71,7 @@ void SphereCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation
         //位置更新
         UpdatePos(center);
         //UpdateRadius(radius);
+        UpdateVerticies();
     }
 
 
@@ -68,7 +104,22 @@ bool SphereCollider::isCollision(SphereCollider* sphereCollider)
 
 bool SphereCollider::isCollision(PolygonCollider* polygonCollider)
 {
-    return false;
+    PolygonSAT3D* Sphere = new PolygonSAT3D;
+    PolygonSAT3D* Polygon = new PolygonSAT3D;
+
+
+    //回転後の頂点を獲得
+    Sphere->vertices = m_verticies;
+    Polygon->vertices = polygonCollider->GetVerticies();
+
+    bool isCollide = SAT::Collide3D(*Sphere, *Polygon);
+
+    delete Polygon;
+    delete Sphere;
+
+    return isCollide;
+    
+
 }
 
 /*

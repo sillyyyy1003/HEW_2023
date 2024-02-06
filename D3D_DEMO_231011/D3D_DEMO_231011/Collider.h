@@ -14,17 +14,21 @@ enum COLLISION_TYPE {
 
 enum COLLISION_DIR {
 	INI_STATE,	//初期状態
-	COL_UP,			//上
-	COL_DOWN,		//下
-	COL_LEFT,		//左
-	COL_RIGHT,		//右
+	COL_UP,		//上
+	COL_DOWN,	//下
+	COL_LEFT,	//左
+	COL_RIGHT,	//右
 	OVERLAP,	//重なる
-
+	
 };
 
 struct Collider_Dir {
 	COLLISION_DIR vertical;//上下
 	COLLISION_DIR horizontal;//左右
+
+	bool operator==(const Collider_Dir& other) const {
+		return (vertical == other.vertical) && (horizontal == other.horizontal);
+	}
 };
 
 class BoxCollider;
@@ -37,9 +41,8 @@ protected:
 
 	COLLISION_TYPE m_collisionType = COLLISION_TYPE::IDLE;
 
-
-
 protected:
+
 	struct Point {
 		float x, y;
 	};
@@ -58,16 +61,20 @@ protected:
 		Point D;//左下
 	};
 
+
 public:
 
 	//コライダーは起動しているか
 	bool isActive = false;
 	//中心点の位置
-	DirectX::XMFLOAT3 m_center = {0,0,0};
+	DirectX::XMFLOAT3 m_center = { 0,0,0 };
 	//xyz軸の大きさ
 	DirectX::XMFLOAT3 m_extents = { 0,0,0 };
 	//半径
 	float m_radius = 0.0f;
+
+
+
 
 public:
 
@@ -87,14 +94,16 @@ public:
 	virtual void Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents);
 
 
-	virtual bool isCollision(BoxCollider* boxColliser){return false; };
+	virtual bool isCollision(BoxCollider* boxColliser) { return false; };
 	virtual bool isCollision(SphereCollider* sphereCollider) { return false; };
 	virtual bool isCollision(PolygonCollider* polygonCollider) { return false; };
+	virtual bool isCollision(Collider* collider) { return false; };
 
 	//virtual void Update();
 
-		//対象オブジェクトはこのオブジェクトのどこにあるか
+	//対象オブジェクトはこのオブジェクトのどこにあるか
 	Collider_Dir GetCollisionDir(Collider* collider);
+
 	//virtual bool isClearCollision(Collider* polygoncollider, float verNum) { return false; };
 
 	//DirectX::BoundingSphere GetSphereCollider(void) { return m_sphereCollider; };

@@ -27,10 +27,13 @@ public:
 	/// <param name="Radius"></param>
 	SphereCollider();
 
+	std::vector<Vector3> SetCircle();
+
 	void InitCollider(DirectX::XMFLOAT3 center, float Radius);
 
 	void UpdateRadius(float radius);
 	void UpdatePos(DirectX::XMFLOAT3 m_center);
+	void UpdateVerticies(void);
 
 	/// <summary>
 	/// 毎回呼び出される、状態を更新する関数
@@ -50,6 +53,10 @@ public:
 	/// <param name="sphereCollider">球体</param>
 	bool isCollision(SphereCollider* sphereCollider)override;
 
+	/// <summary>
+	/// 当たり判定
+	/// </summary>
+	/// <param name="sphereCollider">三角形</param>
 	bool isCollision(PolygonCollider* polygonCollider)override;
 
 	//コライダーを返す

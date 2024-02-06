@@ -7,13 +7,14 @@
 #include "DebugManager.h"
 #include "SceneManager.h"
 #include "Animation.h"
+#include "ColliderManager.h"
 #include "StaticAnimation.h"
 #include "ObjectAnimation.h"
 #include "RailManager.h"
 #include "DInput.h"
+
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
-#include "ColliderManager.h"
 
 #define MOVE 0.3f
 #define INITROTATE	(19.8)
@@ -71,33 +72,6 @@ void Game::Init()
 
 	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
-	// 追加
-	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
-	{
-		ex[i] = new GameObject();
-
-		//モデルを作る
-		ex[i]->CreateObject(g_Assets->ex, 70, 70, 1, 1);
-		ex[i]->CreateShadow(g_Assets->ex, 70, 70, 1, 1);
-		//アニメションを配置
-		ex[i]->InitAnimation();	
-	}
-
-	// 引数１：オブジェクトの型　引数２：操作するかどうか
-	
-	// 三角
-	//CreateGameobject(POLYGON,true);
-	// 円
-	//CreateGameobject(SPHERE, false, g_Assets->coconut, g_Assets->coconutShadow, 190, 190, 0.8f, {} );
-	// 四角
-	//CreateGameobject(SQUARE, true, g_Assets->lamp, g_Assets->lampShadow, 163, 569, 0, {0.8,3.7,1} );
-	//CreateGameobject(SQUARE, false, g_Assets->housePlate, g_Assets->housePlateShadow, 216, 110, 0, {1.0f,0.5f,1.0f} );
-
-	//CreateGameobject(POLYGON, false);
-
-	// １：三角２：円３：四角の順に並べる
-	//SortGameobject();
-	
 	//----------------------------//
 	// ここからはエフェクトの初期化
 	//----------------------------//
@@ -187,92 +161,6 @@ void Game::InitStage()
 
 	}
 }
-//
-//void Game::CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width,float height,float radius, DirectX::XMFLOAT3 extens)
-//{
-//	GameObject* object;
-//
-//	object = new GameObject();
-//	//アニメションを配置
-//	object->InitAnimation();
-//	//オブジェクトのコライダーを配置
-//	if (TYPE == POLYGON)
-//	{
-//		//三角を作る
-//		object->CreateObject(asset, width, height, 1, 1);
-//		object->CreateShadow(shadowasset, width, height, 1, 1);
-//		object->m_shadowCollider = new PolygonCollider({}, radius);
-//	}
-//	else if (TYPE == SQUARE)
-//	{
-//		//四角を作る
-//		object->CreateObject(asset, width, height, 1, 1);
-//		object->CreateShadow(shadowasset, width, height, 1, 1);
-//		object->m_shadowCollider = new BoxCollider({}, extens);
-//
-//	}
-//	else if (TYPE == SPHERE)
-//	{
-//		//円を作る
-//		object->CreateObject(asset, width, height, 1, 1);
-//		object->CreateShadow(shadowasset, width, height, 1, 1);
-//		object->m_shadowCollider = new SphereCollider({}, radius);
-//	}
-//	// Collisionを配置
-//	object->InitCollision();
-//
-//	object->SetActive(Move);
-//	
-//	Vobject.push_back(object);
-//}
-
-//void Game::SortGameobject()
-//{
-//	// 並べ替え用にリストを作る
-//	std::list<GameObject*> object[3];
-//	// 元のリストのIDを並べ替え用にリストに入れる
-//	for (GameObject* game : Vobject)
-//	{
-//		if (POLYGON == game->m_shadowCollider->GetColliderType())
-//		{
-//			object[0].push_back(game);
-//			objectNum[POLYGON]++;
-//		}
-//		else if (SPHERE == game->m_shadowCollider->GetColliderType())
-//		{
-//			object[1].push_back(game);
-//			objectNum[SPHERE]++;
-//		}
-//		else
-//		{
-//			object[2].push_back(game);
-//		}
-//	}
-//	objectNum[POLYGON] = objectNum[POLYGON] - 1;
-//	objectNum[SPHERE] = objectNum[POLYGON] + objectNum[SPHERE]-1;
-//
-//	for (GameObject* game : object[1])
-//	{
-//		object[0].push_back(game);
-//	}
-//
-//	for (GameObject* game : object[2])
-//	{
-//		object[0].push_back(game);
-//	}
-//
-//	Vobject.clear();
-//	// 並べ替えたIDを元のリストに入れる
-//	for (GameObject* game : object[0])
-//	{
-//		Vobject.push_back(game);
-//	}
-//
-//	// 円
-//	Sphere = SPHERE + objectNum[POLYGON];
-//	// 四角
-//	Square = SQUARE + objectNum[SPHERE];
-//}
 
 void Game::InitStage1_1(void)
 {
@@ -319,11 +207,6 @@ void Game::InitStage1_1(void)
 	coconut->SetRailPos(1, 0);
 	lamp->SetRailPos(2, 0);
 	housePlate->SetRailPos(1, 1);
-
-	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
-	{
-		ex[i]->m_shadow->m_sprite->m_pos.z = -1;
-	}
 
 	//回転設定
 
@@ -613,6 +496,10 @@ void Game::UpdateStage1_1(void)
 	lamp->Update();
 	housePlate->Update();
 
+	if (ColliderManager::Get()->ClearCollision({ COL_DOWN,COL_RIGHT }, "coconut", "lamp", ShadowObject::MEDIUM)) {
+		isPause = true;
+	}
+
 }
 
 void Game::UpdateStage1_2(void)
@@ -687,15 +574,8 @@ Game::~Game()
 	delete lamp;
 	delete housePlate;
 
-	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
-	{
-		delete ex[i];
-	}
-	Vobject.clear();
-	for (GameObject* game : Vobject)
-	{
-		delete game;
-	}
+
+	
 
 }
 
@@ -825,23 +705,6 @@ void Game::StageDraw(void)
 void Game::DrawStage1_1()
 {
 	stageBg->Draw();
-
-	for (int i = 0; i < sizeof(ex) / sizeof(ex[0]); ++i)
-	{
-		ex[i]->m_shadow->Draw();
-	}
-	//testObj->Draw();
-
-	for (GameObject* game : Vobject)
-	{
-		if (game->m_shadowCollider->isActive)
-		{
-			game->Draw();
-		}
-	}
-
-
-
 
 	//描画の順番を並び変え
 

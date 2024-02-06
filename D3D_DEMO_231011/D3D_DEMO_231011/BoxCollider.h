@@ -64,6 +64,7 @@ public:
 	/// <param name="sphereCollider">Polygon</param>
 	bool isCollision(PolygonCollider* collider) override;
 
+
 	DirectX::BoundingOrientedBox GetColldier(void) { return m_boxCollider; };
 
 	//bool isClearCollision(Collider* polygoncollider, float verNum)override;

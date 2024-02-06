@@ -150,7 +150,20 @@ bool BoxCollider::isCollision(BoxCollider* collider)
 
 bool BoxCollider::isCollision(PolygonCollider* collider)
 {
-    return false;
+    PolygonSAT3D* Polygon = new PolygonSAT3D;
+    PolygonSAT3D* Box = new PolygonSAT3D;
+
+
+    //‰ñ“]Œã‚Ì’¸“_‚ðŠl“¾
+    Box->vertices = m_verticies;
+    Polygon->vertices = collider->GetVerticies();
+
+    bool isCollide = SAT::Collide3D(*Box, *Polygon);
+
+    delete Polygon;
+    delete Box;
+
+    return isCollide;
 }
 
 

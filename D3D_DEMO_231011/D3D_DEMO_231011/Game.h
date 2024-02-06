@@ -37,12 +37,6 @@ private:
 	GameObject* lamp;			//長細の棒
 	GameObject* housePlate;			//長方形
 	
-
-	std::vector<GameObject*> Vobject;		//四角
-
-	GameObject* ex[4];		//頂点確認用
-
-	int objectNum[2];
 	std::vector<GameObject*> objectList;
 	//円に該当する配列の数字
 	int Sphere = 0;
@@ -69,10 +63,6 @@ public:
 	void Init();//
 
 	void InitStage();
-
-	//void CreateGameobject(int TYPE, bool Move, ID3D11ShaderResourceView* asset, ID3D11ShaderResourceView* shadowasset, float width, float height,float radius, DirectX::XMFLOAT3 extens);
-
-	void SortGameobject();
 
 	//ステージの初期化を行う関数：キャラの位置、大きさなど
 	void InitStage1_1(void);
@@ -152,18 +142,6 @@ public:
 	void TestMove(GameObject* _target);
 
 	
-	/*
-	//テスト用
-	void TestUpdate(void);
-	void TestDraw(void);
-	void TestMove(GameObject* _target);
-	void TestMove(StaticObject* _target);
-	void TestMove(DirectX::XMFLOAT3& _target);
-	void TestMoveCamera();
 
-
-	//シーンを設定する
-	//void SetGameScene(GAMESCENE scene);
-	*/
 };
 

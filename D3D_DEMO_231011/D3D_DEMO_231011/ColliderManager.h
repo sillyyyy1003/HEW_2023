@@ -1,27 +1,39 @@
 ﻿#pragma once
-#include "PolygonCollider.h"
-#include "SphereCollider.h"
-#include "BoxCollider.h"
-#include "Game.h"#include "PolygonCollider.h"
-#include "SphereCollider.h"
-#include "BoxCollider.h"
-#include "Game.h"
+#include <vector>
+#include "GameObject.h"
+#include "Collider.h"
+#include "ShadowObject.h"
 
 class ColliderManager
 {
-
-public:
-
-	ColliderManager();
-
+private:
+	//コンストラクタ&デストラクタ
+	ColliderManager() {};
 	~ColliderManager();
 
+public:
+	//唯一のインスタンスを返す関数
+	static ColliderManager* Get();
+
+public:
 	void Update(Collider* collider);
+
+	bool isCollide(Collider* collider1, Collider* collider2);
 
 	static void Collision(std::vector<GameObject*> Vobject);
 
-	// 引数１：図形のGameObjectが入ったVector 引数２：クリアの元の図形　引数３：相手の図形(操作)　引数４：クリア元の図形のどの頂点に当たり判定を付けるか
-	// 引数５：判定する図形の大きさ
-	static bool ClearCollision(std::vector<GameObject*> Vobject, float Pobj, float Eobj, float verNum, int sizeJodge);
+	/// <summary>
+	/// ステージ判定用の関数
+	/// </summary>
+	/// <param name="Vobject">GameObjectを格納するVector</param>
+	/// <param name="dir">対象オブジェクトの相対位置</param>
+	/// <param name="name1">本体のオブジェクト</param>
+	/// <param name="name2">対象オブジェクト</param>
+	/// <param name="size">影のサイズ</param>
+	/// <returns></returns>
+	//bool ClearCollision(Collider_Dir dir, std::string name1, std::string name2, ShadowObject::SIZE size);
+
+	bool ClearCollision(Collider_Dir dir, std::string name1, std::string name12, ShadowObject::SIZE size);
+	
 };
 
