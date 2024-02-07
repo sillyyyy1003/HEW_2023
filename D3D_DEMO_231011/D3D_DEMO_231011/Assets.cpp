@@ -51,6 +51,9 @@ Assets::Assets()
     uiSoundOp_BGM = LoadTexture("assets/Tree.png");
     uiSoundOp_SE = LoadTexture("assets/Tree.png");
 
+    //fade
+    fade = LoadTexture("assets/fade.png");
+
 
 }
 

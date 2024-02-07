@@ -21,6 +21,8 @@
 #include <stdio.h>
 
 
+
+
 #define INITROTATE	(19.8)
 
 extern Assets* g_Assets;
@@ -66,7 +68,7 @@ void Game::Init()
 		uiClearMark[i] = new CanvasUI();
 	}
 
-
+	fade = new CanvasUI();
 
 	circle = new GameObject();
 
@@ -103,6 +105,9 @@ void Game::Init()
 		uiClearMark[i]->CreateModel(g_Assets->uiClear, 300, 300, 1, 1);
 	}
 	
+	
+	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
+
 
 	//stage1に使われてる
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
@@ -151,6 +156,10 @@ void Game::Init()
 	uiStageSelect->m_pos = { -3.5f,3.0f,0.8f };
 	
 	uiSelectCursor->m_pos = { 4.0f,3.6f,0.8f };//Chapterの横に出るように
+
+	//fade
+	fade->m_pos = { 0.0f,0.0f,0.1f };
+	fade->m_scale = { 4.0f,3.0f,1.0f };
 
 
 	for (int i = 0; i < 3; i++)
@@ -488,30 +497,45 @@ void Game::InitSelectArray()
 void Game::GameUpdate(void)
 {
 	//入力処理　XXキー押して、移動させるオブジェクトをスイッチ
+	
+	
 
-
+	//if (SceneManager::Get()->GetNextScene()!=SceneManager::Get()->GetScene())
+	//{
+	//	FadeUpdate();
+	//	SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+	//	fadeState = FADE_OUT;
+	//	isActive = true;
+	//}
+	//else
+	//{
+	//	
+	//	fadeState = FADE_IN;
+	//}
 
 	//オブジェクトUpdate
 
-	switch (SceneManager::Get()->GetScene()) {
-	case SCENENAME::TITLE:
+		switch (SceneManager::Get()->GetScene()) {
+		case SCENENAME::TITLE:
 
-		TitleUpdate();
-		break;
+			TitleUpdate();
+			break;
 
-	case SCENENAME::STAGESELECT:
+		case SCENENAME::STAGESELECT:
 		
-		SelectUpdate();
-		break;
+			SelectUpdate();
+			break;
 
-	case SCENENAME::STAGE:
+		case SCENENAME::STAGE:
 		
-		StageUpdate();
-		break;
-	}
-
+			StageUpdate();
+			break;
+		}
+	
 
 }
+
+
 
 void Game::TitleUpdate(void)
 {	
@@ -555,7 +579,7 @@ void Game::SelectUpdate(void)
 
 	switch (selectStage)
 	{
-	case Game::NONE:
+	case Game::SELECTNONE:
 		SelectStageNone();
 		break;
 	case Game::STAGE1:
@@ -701,7 +725,7 @@ void Game::SelectChapter1(void)
 
 		switch (selectStage)
 		{
-		case Game::NONE:
+		case Game::SELECTNONE:
 			break;
 
 		case Game::STAGE1:
@@ -736,7 +760,7 @@ void Game::SelectChapter2(void)
 
 		switch (selectStage)
 		{
-		case Game::NONE:
+		case Game::SELECTNONE:
 			break;
 
 		case Game::STAGE1:
@@ -771,7 +795,7 @@ void Game::SelectChapter3(void)
 
 		switch (selectStage)
 		{
-		case Game::NONE:
+		case Game::SELECTNONE:
 			break;
 
 		case Game::STAGE1:
@@ -1063,7 +1087,7 @@ void Game::UiUpdate()
 	}
 	if (Input::Get()->GetKeyTrigger(DIK_3))
 	{
-		selectStage = NONE;
+		selectStage = SELECTNONE;
 		uiSelectCursor->m_pos = { 4.0f,3.3f,0.8f };
 		PauseSwitch();
 		SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
@@ -1097,6 +1121,31 @@ void Game::UiUpdate()
 	}
 
 }
+
+void Game::FadeUpdate()
+{
+	if (fadeState == FADE_IN)
+	{
+		fade->m_materialDiffuse.w -= 0.01f;
+
+		if (fade->m_materialDiffuse.w <= 0.0f)
+		{
+			fadeState = NO_FADE;
+			isActive = false;
+		}
+	}
+	else if (fadeState == FADE_OUT)
+	{
+		fade->m_materialDiffuse.w += 0.01f;
+
+		if (fade->m_materialDiffuse.w >= 1.0f)
+		{
+			SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+			fadeState = FADE_IN;
+		}
+	}
+}
+
 
 void Game::PauseSwitch(void)
 {
@@ -1214,6 +1263,12 @@ void Game::GameDraw()
 
 	D3D_ClearScreen();
 
+	if (!isActive)
+	{
+		fade->Draw();
+	}
+
+
 	//============ ここから描画処理 ============//
 	
 	switch (SceneManager::Get()->GetScene()) {
@@ -1240,6 +1295,7 @@ void Game::GameDraw()
 
 void Game::TitleDraw(void)
 {
+
 	uiTitleBg->Draw();
 
 	uiTitle->Draw();

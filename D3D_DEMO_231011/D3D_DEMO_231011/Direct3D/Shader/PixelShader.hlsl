@@ -15,15 +15,14 @@ Texture2D myTexture : register(t0); //テクスチャー
 SamplerState mySampler : register(s0); //サンプラー
 
 // 定数バッファ受け取り用
-cbuffer CONSTBUFFER : register(b0)
+cbuffer ConstBuffer : register(b0)
 {
-    //// UV座標移動行列
-    //matrix matrixTex;
-    //// 投影行列
-    //matrix matrixProj;
-    //// ワールド変換行列
-    //matrix matrixWorld;
-    
+    // UV座標移動行列
+    matrix matrixTex;
+    // 投影行列
+    matrix matrixProj;
+    // ワールド変換行列
+    matrix matrixWorld;
     // マテリアル色
     float4 materialDiffuse;
 }

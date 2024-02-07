@@ -1,15 +1,15 @@
 #pragma once
 
 enum SCENENAME {
-	NONE,
+	NONE,//何もない
 
-	TITLE,
+	TITLE,//タイトル
 
-	STAGESELECT,
+	STAGESELECT,//ステージセレクト
 
-	STAGE,
+	STAGE,//ステージ
 
-	RESULT,
+	RESULT,//リザルト
 
 };
 
@@ -42,12 +42,15 @@ enum RESULTINFO {
 	RESULT3_3,
 };
 
+
+
 class Scene
 {
 private:
 
 	SCENENAME m_scene;
 	SCENENAME m_nextScene;
+
 
 	STAGEINFO m_stage;
 

@@ -64,6 +64,8 @@ public:
 	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
 
 
+	ID3D11ShaderResourceView* fade;//フェード用
+
 
 
 

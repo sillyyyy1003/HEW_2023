@@ -45,7 +45,7 @@ private:
 
 	CanvasUI* uiClearMark[3];
 
-
+	CanvasUI* fade;
 
 
 	//stage1-1
@@ -58,6 +58,39 @@ private:
 	GameObject* circle;			//circle
 
 
+public:
+
+	//soundSetting
+	enum SOUNDOP
+	{
+		BGM,
+		SE,
+	};
+
+	//ステージ選択
+	enum SELECTSTAGE
+	{
+		SELECTNONE,
+		STAGE1,
+		STAGE2,
+		STAGE3,
+	};
+
+	//チャプター選択
+	enum SELECTCHAPTER
+	{
+		CHAPTER1,
+		CHAPTER2,
+		CHAPTER3,
+	};
+
+	//フェード状態
+	enum FADE_STATE
+	{
+		NO_FADE,
+		FADE_IN,
+		FADE_OUT,
+	};
 
 private:
 	
@@ -70,41 +103,21 @@ private:
 	bool isClearStage1 = false;
 	bool isClearStage2 = false;
 	bool isClearStage3 = false;
-
-
 	//stageFocus
 	bool isFocus = false;
+	//Active
+	bool isActive = true;
 
-	//soundSelect
-	enum SOUNDOP
-	{
-		BGM,
-		SE,
-	};
-	SOUNDOP soundOp = BGM;
-	
+
 	//初期設定
 	int m_soundVolume_BGM = 3;
 	int m_soundVolume_SE = 3;
-
-	//ステージ選択
-	enum SELECTSTAGE
-	{
-		NONE,
-		STAGE1,
-		STAGE2,
-		STAGE3,
-	};
-	SELECTSTAGE selectStage = NONE;
-
-	//チャプター選択
-	enum SELECTCHAPTER
-	{
-		CHAPTER1,
-		CHAPTER2,
-		CHAPTER3,
-	};
+	SOUNDOP soundOp = BGM;
+	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
+	
+	
+	FADE_STATE fadeState = NO_FADE;
 
 private:
 	//コンストラクタ&デストラクタ
@@ -148,6 +161,7 @@ public:
 	//ゲーム本体
 	void GameUpdate(void);
 
+
 	//Title Update
 	void TitleUpdate(void);
 
@@ -184,6 +198,8 @@ public:
 
 	//ui Update
 	void UiUpdate();
+
+	void FadeUpdate();
 
 
 	//ポーズ関数
