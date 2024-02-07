@@ -10,6 +10,9 @@ private:
 
 	//ステージクリアしたかどうか？
 	bool isClear = false;
+
+	//一回クリアしたか
+	bool isisCompleted = false;
 	
 	//Reward Gold
 	float m_rewardGold = 0;
@@ -33,6 +36,15 @@ public:
 	//ステージを作動しているかどうか
 	void SetActive(bool isActive) { this->isActive = isActive; };
 	bool GetActive(void) { return this->isActive; };
+	
+	//ゲームクリア下したかどうか？
+	void SetClear(bool isClear) { this->isClear = isClear; };
+	bool GetClear(void) { return isClear; };
+
+	//ゲームステージ一回クリア下かどうか？
+	void SetCompleted(bool isCompleted) { this->isisCompleted = isCompleted; };
+	bool GetCompleted(void) { return isisCompleted; };
+
 
 
 	//ステップ数を加算していく

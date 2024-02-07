@@ -1,0 +1,191 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6387",
+          "message": {
+            "text": "\"g_pD3D\" 可以是 \"0\"。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Direct3D/Direct3D.cpp"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 5,
+                  "endLine": 38,
+                  "endColumn": 5
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DirectXInit",
+                  "decoratedName": "?DirectXInit@@YAXPEAUHWND__@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Direct3D/Direct3D.cpp"
+                          },
+                          "region": {
+                            "startLine": 35,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "“g_pD3D”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Direct3D/Direct3D.cpp"
+                          },
+                          "region": {
+                            "startLine": 38,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "“g_pD3D”是“memset”的输入/输出参数(在 c:\\program files\\microsoft visual studio\\2022\\enterprise\\vc\\tools\\msvc\\14.33.31629\\include\\vcruntime_string.h:63 处声明)"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Direct3D/Direct3D.cpp"
+                          },
+                          "region": {
+                            "startLine": 38,
+                            "startColumn": 5
+                          }
+                        },
+                        "message": {
+                          "text": "“g_pD3D”不应为 NULL，因为这与“memset”上的 SAL 批注不一致"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.33.31630.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Direct3D/Direct3D.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "d2742508d43758b1149c323d6315ad483974003d7c8d2ee1b8afff5b6bee1741"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/direct3d/direct3d.h"
+          },
+          "hashes": {
+            "sha-256": "8883e2afa8bebaa5e9e7c58a83b0a536c98d856c51d5ccc7903e789f049a251b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/direct3d/shader/pixelshader.h"
+          },
+          "hashes": {
+            "sha-256": "51aa5f8c1e3a816d312b9f3f3e3e8966612cf8e1409c01f3227c1c65c68f8858"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/direct3d/shader/vertexshader.h"
+          },
+          "hashes": {
+            "sha-256": "e5471f2e221b2c8bec54ee53afd5c602a22526ede38af44f83266d01f60d0460"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/sprite.h"
+          },
+          "hashes": {
+            "sha-256": "443ce50b7ecb398e760a8e402717046b21bbdb8c26052f04717b0cae73b02a96"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/material.h"
+          },
+          "hashes": {
+            "sha-256": "87f2ced469998725b429a8703b6469b435a4c62ac87dc8e7cab8502b5316f234"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/camera.h"
+          },
+          "hashes": {
+            "sha-256": "4262ea63b8674c325b10882706f337408c1c73bb7b41be04494b2ed118c9bf9e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/animation.h"
+          },
+          "hashes": {
+            "sha-256": "a72141b9759e8a86ae8b7f474e3e2469ac802e661264a19b1c92936b9e3b117e"
+          }
+        }
+      ]
+    }
+  ]
+}

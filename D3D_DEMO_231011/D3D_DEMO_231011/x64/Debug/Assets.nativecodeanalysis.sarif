@@ -1,0 +1,59 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.33.31630.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/assets.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "4649eea8b4a4ef3f6381a37578a441fa0b69d936856aa91e1b3f2debc7ae593a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/assets.h"
+          },
+          "hashes": {
+            "sha-256": "e7d2f3087b1b04ce5cc8c6d3c5a7f952e702b2677ca82cdd2566a1b13ae22734"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/direct3d/direct3d.h"
+          },
+          "hashes": {
+            "sha-256": "8883e2afa8bebaa5e9e7c58a83b0a536c98d856c51d5ccc7903e789f049a251b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/wictextureloader.h"
+          },
+          "hashes": {
+            "sha-256": "01fd1a6d6aae8dedaa139ba7cb6d585c8b0a610b3f21169f132dd17edf96e404"
+          }
+        }
+      ]
+    }
+  ]
+}

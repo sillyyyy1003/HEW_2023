@@ -1,0 +1,118 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 RailManager::m_info。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/RailManager.h"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 2,
+                  "endLine": 35,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RailManager::{ctor}",
+                  "decoratedName": "??0RailManager@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "RailManager::m_info"
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.33.31630.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/RailManager.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "067ac3035450b5271d0d625d5f25a23bcc847661357a381f05158131a1c82b98"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/collider.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "daea942ea3aa780ea9f3e412ff7e76c2f3ad974309849a90c435e2440d874aae"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/collider.h"
+          },
+          "hashes": {
+            "sha-256": "5ef21361b808be3e7a717df22b163bf5b9575474ac3df87c89ea5ad33f779f0e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/satcollider.h"
+          },
+          "hashes": {
+            "sha-256": "8148c67250fa50448800fb6be9a43c1552a56d7b611d35b11398eeb9e98b1c4f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/gameobject.h"
+          },
+          "hashes": {
+            "sha-256": "bd575456b03852a54564bd29b9af665a2495ef006fe02e1a3e47749843f7355f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/direct3d/direct3d.h"
+          },
+          "hashes": {
+            "sha-256": "8883e2afa8bebaa5e9e7c58a83b0a536c98d856c51d5ccc7903e789f049a251b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/material.h"
+          },
+          "hashes": {
+            "sha-256": "87f2ced469998725b429a8703b6469b435a4c62ac87dc8e7cab8502b5316f234"
+          }
+        }
+      ]
+    }
+  ]
+}

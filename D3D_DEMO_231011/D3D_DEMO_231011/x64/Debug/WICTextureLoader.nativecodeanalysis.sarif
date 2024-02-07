@@ -1,0 +1,475 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6385",
+          "message": {
+            "text": "正在从 \"pstrName\" 读取无效数据。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                },
+                "region": {
+                  "startLine": 911,
+                  "startColumn": 47
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DirectX::CreateWICTextureFromFileEx",
+                  "decoratedName": "?CreateWICTextureFromFileEx@DirectX@@YAJPEAUID3D11Device@@PEAUID3D11DeviceContext@@PEB_W_KW4D3D11_USAGE@@IIIIPEAPEAUID3D11Resource@@PEAPEAUID3D11ShaderResourceView@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 851,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 853,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 855,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 857,
+                            "startColumn": 22
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 860,
+                            "startColumn": 33
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 863,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 864,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 868,
+                            "startColumn": 31
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 869,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 870,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 873,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 874,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 875,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 878,
+                            "startColumn": 8
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 883,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 885,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 887,
+                            "startColumn": 18
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 888,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 897,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 899,
+                            "startColumn": 29
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 900,
+                            "startColumn": 21
+                          }
+                        },
+                        "message": {
+                          "text": "“pstrName”可能为 NULL (进入此分支)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 902,
+                            "startColumn": 30
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 909,
+                            "startColumn": 34
+                          }
+                        },
+                        "message": {
+                          "text": "进入此分支(假定“texture!=0&&*texture!=0”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 911,
+                            "startColumn": 47
+                          }
+                        },
+                        "message": {
+                          "text": "“pstrName”是对“strnlen_s”的输入(在 c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\ucrt\\string.h:367 处声明)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 911,
+                            "startColumn": 47
+                          }
+                        },
+                        "message": {
+                          "text": "“<符号>”可能等于 260"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+                          },
+                          "region": {
+                            "startLine": 911,
+                            "startColumn": 47
+                          }
+                        },
+                        "message": {
+                          "text": "从“pstrName”中读取无效(位于其可读范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.33.31630.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WICTextureLoader.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "830d26ce397775798bfe039b2400156a7f8bcc1235e225b8b4e98e18a2805f52"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/wictextureloader.h"
+          },
+          "hashes": {
+            "sha-256": "01fd1a6d6aae8dedaa139ba7cb6d585c8b0a610b3f21169f132dd17edf96e404"
+          }
+        }
+      ]
+    }
+  ]
+}

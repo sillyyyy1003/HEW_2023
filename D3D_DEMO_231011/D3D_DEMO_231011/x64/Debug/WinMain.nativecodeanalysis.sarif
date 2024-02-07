@@ -1,0 +1,1045 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiTitleBg。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiTitleBg"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiTitle。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiTitle"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiPressEnter。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiPressEnter"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiPauseBg。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiPauseBg"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiResume。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiResume"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiRestart。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiRestart"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSelect。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSelect"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSound。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSound"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSoundBg。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSoundBg"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSoundOp_BGM。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSoundOp_BGM"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSoundOp_SE。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSoundOp_SE"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSelectBg。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSelectBg"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiStageSelect。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiStageSelect"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSelectCursor。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSelectCursor"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSelectStage。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSelectStage"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiSelectChapter。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiSelectChapter"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::uiClearMark。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::uiClearMark"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::stageBg。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::stageBg"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::testObj。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::testObj"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::coconut。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::coconut"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::lamp。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::lamp"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::housePlate。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::housePlate"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Game::circle。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+                },
+                "region": {
+                  "startLine": 110,
+                  "startColumn": 2,
+                  "endLine": 110,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Game::{ctor}",
+                  "decoratedName": "??0Game@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Game::circle"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 SceneManager::m_stageHolder。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/SceneManager.h"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 2,
+                  "endLine": 10,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "SceneManager::{ctor}",
+                  "decoratedName": "??0SceneManager@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "SceneManager::m_stageHolder"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 RailManager::m_info。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/RailManager.h"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 2,
+                  "endLine": 35,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RailManager::{ctor}",
+                  "decoratedName": "??0RailManager@@AEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "RailManager::m_info"
+          }
+        },
+        {
+          "ruleId": "C28251",
+          "message": {
+            "text": "“WinMain”的批注不一致: 此实例包含 无批注。请参见 c:\\program files (x86)\\windows kits\\10\\include\\10.0.19041.0\\um\\winbase.h(1006)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WinMain.cpp"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 12,
+                  "endLine": 29,
+                  "endColumn": 12
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "WinMain",
+                  "decoratedName": "WinMain",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 Camera::m_MatrixView。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Camera.h"
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 1,
+                  "endLine": 71,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::m_MatrixView"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 TrackCamera::m_targetObject。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/TrackCamera.h"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 1,
+                  "endLine": 38,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "TrackCamera::{ctor}",
+                  "decoratedName": "??0TrackCamera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TrackCamera::m_targetObject"
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.33.31630.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Game.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "fb5602247ff3ec2f715d0de6e8fcdbd104dc95eaca5663d990506bb1d5fb1b07"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/SceneManager.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "42cc52e6fe28a2a326ba3afd71d4f09585786ea6c65dc19aef5d962d1ae1a4ee"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/RailManager.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "067ac3035450b5271d0d625d5f25a23bcc847661357a381f05158131a1c82b98"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/WinMain.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "365ba5b468d44d82027484ebb21088676d52c59c66666e183872cafd5b680277"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/Camera.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "4262ea63b8674c325b10882706f337408c1c73bb7b41be04494b2ed118c9bf9e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/TrackCamera.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "72a924b7c4e1b63715e8e85a1068fdd35e9931b45060966f7616b6f678ad3810"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/assets.h"
+          },
+          "hashes": {
+            "sha-256": "e7d2f3087b1b04ce5cc8c6d3c5a7f952e702b2677ca82cdd2566a1b13ae22734"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/direct3d/direct3d.h"
+          },
+          "hashes": {
+            "sha-256": "8883e2afa8bebaa5e9e7c58a83b0a536c98d856c51d5ccc7903e789f049a251b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/wictextureloader.h"
+          },
+          "hashes": {
+            "sha-256": "01fd1a6d6aae8dedaa139ba7cb6d585c8b0a610b3f21169f132dd17edf96e404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/dinput.h"
+          },
+          "hashes": {
+            "sha-256": "e4096161241ecbefb6761a9f9fbd820c98c82804aeb9ed2035077ba706c63aa2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/debugmanager.h"
+          },
+          "hashes": {
+            "sha-256": "abf51199e7fcf50f8e5c62e455e5134c3b9e13db3cb4f60d3818b866ba1b183b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/canvasui.h"
+          },
+          "hashes": {
+            "sha-256": "38604a8624a2edb9a00c4182d298afeeeb54d223e7a38efd23804f9d2aa05f3b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/sprite.h"
+          },
+          "hashes": {
+            "sha-256": "443ce50b7ecb398e760a8e402717046b21bbdb8c26052f04717b0cae73b02a96"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/material.h"
+          },
+          "hashes": {
+            "sha-256": "87f2ced469998725b429a8703b6469b435a4c62ac87dc8e7cab8502b5316f234"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/animation.h"
+          },
+          "hashes": {
+            "sha-256": "a72141b9759e8a86ae8b7f474e3e2469ac802e661264a19b1c92936b9e3b117e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/scene.h"
+          },
+          "hashes": {
+            "sha-256": "79f7dd6693999c6dc9c229c6f604adcf11a56b88653630820905057a0a835f99"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/stage.h"
+          },
+          "hashes": {
+            "sha-256": "1fce396094e0b782c54c3f87d9a97d8ca4bedc9f946a33d8f135089469216aef"
+          }
+        }
+      ]
+    }
+  ]
+}

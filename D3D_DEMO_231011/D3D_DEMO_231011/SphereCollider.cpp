@@ -23,13 +23,13 @@ std::vector<Vector3> SphereCollider::SetCircle()
     // 1つ目の凸多角形の頂点座標を定義
     std::vector<Vector3> vertices = {
         Vector3(point[0].x, point[0].y,0),
-        Vector3(point[1].x, point[0].y,0),
-        Vector3(point[2].x, point[0].y,0),
-        Vector3(point[3].x, point[0].y,0),
-        Vector3(point[4].x, point[0].y,0),
-        Vector3(point[5].x, point[0].y,0),
-        Vector3(point[6].x, point[0].y,0),
-        Vector3(point[7].x, point[0].y,0),
+        Vector3(point[1].x, point[1].y,0),
+        Vector3(point[2].x, point[2].y,0),
+        Vector3(point[3].x, point[3].y,0),
+        Vector3(point[4].x, point[4].y,0),
+        Vector3(point[5].x, point[5].y,0),
+        Vector3(point[6].x, point[6].y,0),
+        Vector3(point[7].x, point[7].y,0),
     
     };
     return vertices;

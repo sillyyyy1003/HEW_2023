@@ -161,6 +161,7 @@
     <ClCompile Include="TrackCamera.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="xa2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />
     <ClInclude Include="WICTextureLoader.h" />
+    <ClInclude Include="xa2.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">

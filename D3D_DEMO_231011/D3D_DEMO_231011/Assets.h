@@ -27,6 +27,22 @@ public:
 	ID3D11ShaderResourceView* uiTitle;
 	ID3D11ShaderResourceView* uiPressEnter;
 
+	//ステージセレクト用
+	ID3D11ShaderResourceView* uiSelectBg;
+	ID3D11ShaderResourceView* uiStageSelect;
+
+	ID3D11ShaderResourceView* uiSelectCursor;
+	ID3D11ShaderResourceView* uiSelectStage1;
+	ID3D11ShaderResourceView* uiSelectStage2;
+	ID3D11ShaderResourceView* uiSelectStage3;
+
+	ID3D11ShaderResourceView* uiSelectChapter1;
+	ID3D11ShaderResourceView* uiSelectChapter2;
+	ID3D11ShaderResourceView* uiSelectChapter3;
+	
+	ID3D11ShaderResourceView* uiClear;
+
+
 	//stage1-1用リソース
 	ID3D11ShaderResourceView* stageBg;
 
@@ -39,10 +55,18 @@ public:
 	
 
 
-
+	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
+
+	ID3D11ShaderResourceView* uiSelect;
+	ID3D11ShaderResourceView* uiSound;
+	
+	//サウンド画面用
+	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
+	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド調節
+	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

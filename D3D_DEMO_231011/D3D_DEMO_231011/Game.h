@@ -30,22 +30,89 @@ private:
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
 
+
+	CanvasUI* uiSelect;
+	CanvasUI* uiSound;
+	CanvasUI* uiSoundBg;		//SOUNDの背景
+
+	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
+	CanvasUI* uiSoundOp_SE[6];	//SE設定
+
+	//stage select
+	CanvasUI* uiSelectBg;
+	CanvasUI* uiStageSelect;
+	CanvasUI* uiSelectCursor;
+
+	CanvasUI* uiSelectStage[3];
+	CanvasUI* uiSelectChapter[3];
+	CanvasUI* uiClearMark[3];
+
 	//stage1-1
 	StaticObject* stageBg;		//ステージ背景
 	GameObject* testObj;		//移動テスト用のオブジェクト
 	GameObject* coconut;		//円
 	GameObject* lamp;			//長細の棒
-	GameObject* housePlate;			//長方形
-	
+	GameObject * housePlate;			//長方形
+
 	std::vector<GameObject*> objectList;
-	//円に該当する配列の数字
-	int Sphere = 0;
-	//四角に該当する配列の数字
-	int Square = 0;
+	GameObject* circle;			//circle
+
 private:
 	
-	//PAUSE
+	//sound
+	bool isSound = false;
+	//pause
 	bool isPause = false;
+	//clear
+	bool isClearStage1 = false;
+	bool isClearStage2 = false;
+	bool isClearStage3 = false;
+
+	//stageFocus
+	bool isFocus = false;
+
+	//soundSelect
+	enum SOUNDOP
+	{
+		BGM,
+		SE,
+	};
+	SOUNDOP soundOp = BGM;
+
+	//初期設定
+	int m_soundVolume_BGM = 3;
+	int m_soundVolume_SE = 3;
+
+	//ステージ選択
+	enum SELECTSTAGE
+	{
+		STAGE1,
+		STAGE2,
+		STAGE3,
+		NONE,
+	};
+	SELECTSTAGE selectStage = NONE;
+
+	bool isSelectChapter = false;
+
+	//チャプター選択
+	enum SELECTCHAPTER
+	{
+		CHAPTER1,
+		CHAPTER2,
+		CHAPTER3,
+	};
+
+	SELECTCHAPTER selectChapter = CHAPTER1;
+
+	enum PAUSESELECT {
+		RESUME,			//ゲームに戻る
+		RESTART,		//ゲーム再開
+		SELECTSTAGE,	//ステージセレクトに戻る
+		SOUND,			//サウンドの画面
+	};
+	
+	PAUSESELECT pauseSelect = RESUME;
 
 private:
 	//コンストラクタ&デストラクタ
@@ -54,6 +121,7 @@ private:
 
 public:
 	//唯一のインスタンスを返す関数
+
 	static Game* Get();
 
 	std::vector<GameObject*> GetObjectList() { return objectList; };
@@ -79,6 +147,12 @@ public:
 	void RailInit1_1(void);
 	void RailInit1_2(void);
 
+	//サウンド配列Init
+	void InitSoundArray();
+
+	//セレクトステージ配列Init
+	void InitSelectArray();
+
 	//ゲーム本体
 	void GameUpdate(void);
 
@@ -87,6 +161,19 @@ public:
 
 	//Select Update
 	void SelectUpdate(void);
+	void UpdateSelectAnimation(void);
+	void UpdateCursor(void);
+
+	void SelectChapter(void);
+	void SelectStageNone(void);
+
+	void SelectStage1(void);
+	void SelectStage2(void);
+	void SelectStage3(void);
+
+	void ClearSwitch1(void);
+	void ClearSwitch2(void);
+	void ClearSwitch3(void);
 
 	//Stage Update
 	void StageUpdate(void);
@@ -101,11 +188,33 @@ public:
 	void UpdateStage3_3(void);
 
 	//result Update
+	void ResultUpdate(void);
+	void UpdateResult1_1(void);
+	void UpdateResult1_2(void);
+	void UpdateResult1_3(void);
+	void UpdateResult2_1(void);
+	void UpdateResult2_2(void);
+	void UpdateResult2_3(void);
+	void UpdateResult3_1(void);
+	void UpdateResult3_2(void);
+	void UpdateResult3_3(void);
+
 
 
 	//ui Update
 	void UiUpdate();
 
+
+	//ポーズ関数
+	void PauseSwitch(void);
+
+	//サウンド関数
+	void SoundSwitch(void);
+	void SoundVolume(void);
+	void SoundOp_BGM(void);	//BGM調節
+	void SoundOp_SE(void);	//SE調節
+
+	void FocusSwitch(void);
 
 	//描画
 	void GameDraw(void);
@@ -114,6 +223,13 @@ public:
 	void TitleDraw(void);
 
 	void StageDraw(void);
+
+	void SelectDraw(void);
+
+	void uiSelectDraw(void);
+
+	//音量調節
+	void SoundVolumeDraw(void);
 
 	//ステージ描画
 	void DrawStage1_1();
@@ -125,19 +241,19 @@ public:
 	void DrawStage3_1();
 	void DrawStage3_2();
 	void DrawStage3_3();
-	
+
 	//リザルト描画
 	void ResultDraw(void);
 
 	//ui描画
 	void UiDraw(void);
-	
+
 	//オブジェクトを並び変え描画する
 	void SortObjectDraw(void);
 
 	//影の位置によって並び替え描画する
 	void SortShadowDraw(void);
-	
+
 
 	void TestMove(GameObject* _target);
 

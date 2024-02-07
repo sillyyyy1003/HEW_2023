@@ -50,7 +50,6 @@ private:
 	SCENENAME m_nextScene;
 
 	STAGEINFO m_stage;
-
 	RESULTINFO m_result;
 
 public:

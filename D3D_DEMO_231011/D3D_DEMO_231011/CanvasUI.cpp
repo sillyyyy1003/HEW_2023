@@ -32,3 +32,12 @@ void CanvasUI::Update(void)
 	m_anime->Update();
 
 }
+
+void CanvasUI::Draw(void)
+{
+	if (isActive) {
+		Sprite::Draw();
+	}
+
+
+}

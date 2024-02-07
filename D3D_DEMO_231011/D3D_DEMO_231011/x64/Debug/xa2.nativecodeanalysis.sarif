@@ -1,0 +1,73 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6031",
+          "message": {
+            "text": "返回值被忽略: “CoInitializeEx”。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/xa2.cpp"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 2,
+                  "endLine": 77,
+                  "endColumn": 25
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "XA_Initialize",
+                  "decoratedName": "?XA_Initialize@@YAJXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.33.31630.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/58472/Desktop/HEW/D3D_DEMO_231011/D3D_DEMO_231011/xa2.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ef3685735b9476cb92bdf6cd0b7fe6ecf6b95dbd0b2fba0d25454baefcb98ca8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/58472/desktop/hew/d3d_demo_231011/d3d_demo_231011/xa2.h"
+          },
+          "hashes": {
+            "sha-256": "7c079cccec655cc77f182e2b4e94dda324f2892406b9418934067cbf94554d96"
+          }
+        }
+      ]
+    }
+  ]
+}

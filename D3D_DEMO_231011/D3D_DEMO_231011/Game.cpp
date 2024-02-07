@@ -12,7 +12,7 @@
 #include "ObjectAnimation.h"
 #include "RailManager.h"
 #include "DInput.h"
-
+#include "xa2.h"
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
 
@@ -25,20 +25,43 @@ extern DebugManager* g_DebugManager;
 
 void Game::Init()
 {
+	//=============================
 	//オブジェクト作成
+	//=============================
 	uiTitle = new CanvasUI();
 	uiTitleBg = new CanvasUI();
 	uiPressEnter = new CanvasUI();
+
 	uiRestart = new CanvasUI();
 	uiResume = new CanvasUI();
+	uiSelect = new CanvasUI();
+	uiSound = new CanvasUI();
 	uiPauseBg = new CanvasUI();
-	
+
+	uiSoundBg = new CanvasUI();
+
+	for (int i = 0; i < 6; i++)
+	{
+		uiSoundOp_BGM[i] = new CanvasUI;
+		uiSoundOp_SE[i] = new CanvasUI;
+	}
+
+	uiSelectBg = new CanvasUI();
+	uiStageSelect = new CanvasUI();
+	uiSelectCursor = new CanvasUI();
+
+	for (int i = 0; i < 3; i++)
+	{
+		uiSelectStage[i] = new CanvasUI();
+		uiSelectChapter[i] = new CanvasUI();
+		uiClearMark[i] = new CanvasUI();
+	}
+
 	//stage1-1
 	stageBg = new StaticObject();
 	coconut = new GameObject();
 	lamp = new GameObject();
 	housePlate = new GameObject();
-
 	testObj = new GameObject();
 
 	//stage1に使われてる
@@ -51,7 +74,23 @@ void Game::Init()
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
 	uiTitleBg->CreateModel(g_Assets->uiTitleBg, 1280, 720, 1, 1);
 	uiPressEnter->CreateModel(g_Assets->uiPressEnter, 1280, 300, 1, 1);
+
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 600, 720, 1, 1);
+	uiResume->CreateModel(g_Assets->uiResume, 300, 100, 1, 1);
+	uiRestart->CreateModel(g_Assets->uiRestart, 300, 100, 1, 1);
+	uiSelect->CreateModel(g_Assets->uiSelect, 300, 100, 1, 1);
+
+	uiSound->CreateModel(g_Assets->uiSound, 300, 100, 1, 1);
+	uiSoundBg->CreateModel(g_Assets->uiSoundBg, 1280, 720, 1, 1);//今は薄い灰色
+
+	uiSelectBg->CreateModel(g_Assets->uiSelectBg, 1280, 720, 1, 1);
+	uiStageSelect->CreateModel(g_Assets->uiStageSelect, 394, 100, 1, 1);
+	uiSelectCursor->CreateModel(g_Assets->uiSelectCursor, 76, 84, 1, 1);
+
+	for (int i = 0; i < 3; i++)
+	{
+		uiClearMark[i]->CreateModel(g_Assets->uiClear, 300, 300, 1, 1);
+	}
 
 
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
@@ -86,14 +125,39 @@ void Game::Init()
 	uiTitleBg->m_pos = { 0.0f,0.0f,0.2f };
 	uiTitle->m_pos = { 0.0f,1.5f,0.1f };
 	uiPressEnter->m_pos = { 0.0f,-1.5f,0.0f };
-	
+
 	//大きさの設定
-	uiTitle->m_scale = { 0.8,0.8,1.0 };
-	uiPressEnter->m_scale = { 0.3,0.3,1.0 };
-	
+	uiTitle->m_scale = { 0.8f,0.8f,1.0f };
+	uiPressEnter->m_scale = { 0.3f,0.3f,1.0f };
+
+	//Select画面
+	uiSelectBg->m_pos = { 0.0f,0.0f,0.9f };
+	uiStageSelect->m_pos = { -3.5f,3.0f,0.8f };
+
+	uiSelectCursor->m_pos = { 4.0f,3.6f,0.8f };//Chapterの横に出るように
+
+
+	for (int i = 0; i < 3; i++)
+	{
+		uiClearMark[i]->m_pos = { -2.0f,1.3f,0.7f };
+		uiClearMark[i]->m_scale = { 0.2f,0.2f,1.0f };
+	}
+
 
 	//uiPause
-	uiPauseBg->m_pos={ - 300 / SCREEN_PARA, 0.0, 0.9f };
+	uiPauseBg->m_pos = { -300 / SCREEN_PARA, 0.0f, 0.9f };
+	uiResume->m_pos = { -4.0f, 3.0f, 0.8f };
+	uiRestart->m_pos = { -4.0f, 1.0f, 0.8f };
+	uiSelect->m_pos = { -4.0f, -1.0f, 0.8f };
+
+	//uiSound
+	uiSound->m_pos = { -4.0f, -3.0f, 0.8f };
+	uiSoundBg->m_pos = { 0.0f, 0.0f, 0.9f };
+	uiSoundBg->m_scale = { 0.9f,0.9f,1.0f };
+
+	//配列の初期化と設定
+	InitSoundArray();
+	InitSelectArray();
 
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
 	RailManager::Get()->InitRail();
@@ -103,6 +167,7 @@ void Game::Init()
 
 void Game::InitStage()
 {
+	RailManager::Get()->InitRailPos();
 	//ステージの初期化
 	switch (SceneManager::Get()->GetStage()) {
 
@@ -218,6 +283,7 @@ void Game::InitStage1_1(void)
 	objectList.push_back(housePlate);
 
 	//レールの設定
+	RailManager::Get()->InitRail();
 	RailInit1_1();
 
 	//ステージ情報を初期化
@@ -348,63 +414,387 @@ void Game::RailInit1_2(void)
 {
 }
 
+
+void Game::InitSoundArray()
+{
+
+	for (int i = 0; i < 6; i++)
+	{
+		uiSoundOp_BGM[i]->CreateModel(g_Assets->uiSoundOp_BGM, 300, 100, 1, 1);
+		uiSoundOp_SE[i]->CreateModel(g_Assets->uiSoundOp_SE, 300, 100, 1, 1);
+
+		uiSoundOp_BGM[i]->m_scale = { 0.3f,0.3f,0.3f };
+		uiSoundOp_SE[i]->m_scale = { 0.3f,0.3f,0.3f };
+
+		switch (i)
+		{
+		case 1:
+			uiSoundOp_BGM[1]->m_pos = { -4.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[1]->m_pos = { -4.0f,-1.0f,0.8f };
+			break;
+
+		case 2:
+			uiSoundOp_BGM[2]->m_pos = { -2.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[2]->m_pos = { -2.0f,-1.0f,0.8f };
+			break;
+
+		case 3:
+			uiSoundOp_BGM[3]->m_pos = { 0.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[3]->m_pos = { 0.0f,-1.0f,0.8f };
+			break;
+
+		case 4:
+			uiSoundOp_BGM[4]->m_pos = { 2.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[4]->m_pos = { 2.0f,-1.0f,0.8f };
+			break;
+
+		case 5:
+			uiSoundOp_BGM[5]->m_pos = { 4.0f, 1.0f, 0.8f };
+			uiSoundOp_SE[5]->m_pos = { 4.0f,-1.0f,0.8f };
+			break;
+		}
+	}
+}
+
+
+void Game::InitSelectArray()
+{
+	//テクスチャ割り当て
+	uiSelectStage[STAGE1]->CreateModel(g_Assets->uiSelectStage1, 425, 133, 1, 1);
+	uiSelectStage[STAGE2]->CreateModel(g_Assets->uiSelectStage2, 408, 142, 1, 1);
+	uiSelectStage[STAGE3]->CreateModel(g_Assets->uiSelectStage3, 421, 143, 1, 1);
+
+	uiSelectChapter[CHAPTER1]->CreateModel(g_Assets->uiSelectChapter1, 234, 71, 1, 1);
+	uiSelectChapter[CHAPTER2]->CreateModel(g_Assets->uiSelectChapter2, 225, 69, 1, 1);
+	uiSelectChapter[CHAPTER3]->CreateModel(g_Assets->uiSelectChapter3, 206, 74, 1, 1);
+	
+	//位置設定
+	uiSelectStage[STAGE1]->m_pos = { -3.5f,1.3f,0.8f };
+	uiSelectStage[STAGE2]->m_pos = { -2.7f,-0.8f,0.8f };
+	uiSelectStage[STAGE3]->m_pos = { -3.5f,-3.0f,0.8f };
+
+	uiSelectChapter[CHAPTER1]->m_pos = { 2.0f,3.3f,0.8f };
+	uiSelectChapter[CHAPTER2]->m_pos = { 2.0f,1.0f,0.8f };
+	uiSelectChapter[CHAPTER3]->m_pos = { 2.0f,-1.5f,0.8f };
+
+	//ステージを設定
+	selectStage = STAGE1;
+
+}
 void Game::TitleUpdate(void)
 {	
-	//エンターキーを押すと　ステージセレクト画面に遷移
-	if (Input::Get()->GetKeyTrigger(DIK_RETURN)) {
+	/*
+	////エンターキーを押すと　ステージセレクト画面に遷移
+	//if (Input::Get()->GetKeyTrigger(DIK_RETURN)) {
 
-		//SceneManager::Get()->SetScene(STAGESELECT);
+	//	//SceneManager::Get()->SetScene(STAGESELECT);
 
-		//Init SelectScene Data
-		
-		//シーン遷移を行う
-		SceneManager::Get()->SetScene(SCENENAME::STAGE);
+	//	//Init SelectScene Data
+	//	
+	//	//シーン遷移を行う
+	//	SceneManager::Get()->SetScene(SCENENAME::STAGE);
 
-		//次のシーンを設定する
-		SceneManager::Get()->SetNextScene(SCENENAME::STAGE);
+	//	//次のシーンを設定する
+	//	SceneManager::Get()->SetNextScene(SCENENAME::STAGE);
+	//	SceneManager::Get()->SetStage(STAGEINFO::STAGE1_1);
+	//	
+	//	//ステージ内のオブジェクトを配置
+	//	InitStage();
 
+	//}
+	*/
 
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE1_1);
-		
-		//ステージ内のオブジェクトを配置
-		InitStage();
+	//スペースキーを押すと　ステージセレクト画面に遷移
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		SceneManager::Get()->SetScene(STAGESELECT);
+
+		//タイトルに戻る時全部のクリア判定を無しにする　
+		for (int i = 0; i < 9; i++) {
+			//封蝋の印を無しにする
+			SceneManager::Get()->m_stageHolder[i]->SetCompleted(false);
+			//念のため、ステージのクリア判定をfalseにする
+			SceneManager::Get()->m_stageHolder[i]->SetClear(false);
+		}
 
 	}
 
 	uiPressEnter->Update();
 	uiTitle->Update();
 	uiTitleBg->Update();
-
 }
 
 void Game::SelectUpdate(void)
 {
-	//入力処理
-
-
-
-
-	//オブジェクト更新
-
-	
-}
-
-void Game::StageUpdate(void)
-{
-	//Input
-	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
-		if (isPause) 
-		{
-			isPause = 0;
+	//クリア印の判定->関数化
+	//今のステージを獲得
+	int stageNum = selectStage * 3;
+	for (int i = 0; i < 3; i++) {
+		//完成下かどうか
+		if (SceneManager::Get()->m_stageHolder[stageNum + i]->GetCompleted()) {
+			//クリアしたら描画する
+			uiClearMark[i]->SetActive(true);
 		}
-		else
-		{
-			isPause = true;
+		else {
+			//クリアしなかったら描画しない
+			uiClearMark[i]->SetActive(false);
 		}
+
 	}
 
 
+	//入力処理
+	//
+	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+
+		//ステージをを選択する場合
+		if (isSelectChapter == false) {
+			switch (selectStage)
+			{
+			case Game::NONE:
+
+				break;
+			case Game::STAGE1:
+				selectStage = STAGE2;
+				break;
+			case Game::STAGE2:
+				selectStage = STAGE3;
+				break;
+			case Game::STAGE3:
+				selectStage = STAGE1;
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			switch (selectChapter)
+			{
+			case Game::CHAPTER1:
+				selectChapter = CHAPTER2;
+				break;
+			case Game::CHAPTER2:
+				selectChapter = CHAPTER3;
+				break;
+			case Game::CHAPTER3:
+				selectChapter = CHAPTER1;
+				break;
+			default:
+				break;
+			}
+
+		}
+	}
+
+	if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+		if (isSelectChapter == false) {
+			switch (selectStage)
+			{
+			case Game::NONE:
+				break;
+			case Game::STAGE1:
+				selectStage = STAGE3;
+				break;
+			case Game::STAGE2:
+				selectStage = STAGE1;
+				break;
+			case Game::STAGE3:
+				selectStage = STAGE2;
+				break;
+			default:
+				break;
+			}
+		}
+		else {
+			switch (selectChapter)
+			{
+			case Game::CHAPTER1:
+				selectChapter = CHAPTER3;
+				break;
+			case Game::CHAPTER2:
+				selectChapter = CHAPTER1;
+				break;
+			case Game::CHAPTER3:
+				selectChapter = CHAPTER2;
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	//ESC押して戻る
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
+
+		if (isSelectChapter)
+		{
+			isSelectChapter = false;
+		}
+		else
+		{
+			//chapterを選択する場合
+			SceneManager::Get()->SetScene(SCENENAME::TITLE);
+
+		}
+	}
+
+	//スペースキー押して進む
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		if (!isSelectChapter) {
+			isSelectChapter = true;
+		}
+		else {
+			//Chapterを選択
+			switch (selectStage)
+			{
+			case Game::NONE:
+				break;
+
+			case Game::STAGE1:
+				SelectStage1();
+				break;
+			case Game::STAGE2:
+				SelectStage2();
+				break;
+
+			case Game::STAGE3:
+				SelectStage3();
+				break;
+
+			}
+			//選択した後　初期化を行う
+			InitStage();
+			//シーンの切り替えを行う
+			SceneManager::Get()->SetScene(STAGE);
+		}
+
+	}
+
+
+	//オブジェクト更新
+	//アニメション　状態更新
+	UpdateSelectAnimation();
+
+	//カーソルの位置を更新する
+	UpdateCursor();
+
+	//アニメション更新
+
+	for (int i = 0; i < 3; i++) {
+		uiSelectStage[i]->Update();
+		uiSelectChapter[i]->Update();
+		uiClearMark[i]->Update();
+	}
+
+
+}
+
+void Game::UpdateSelectAnimation(void)
+{
+	for (int i = 0; i < 3; i++) {
+
+		if (i == selectStage) {
+			//ACTIVE
+			uiStageSelect[i].m_anime->SetAnimePattern(CanvasUI::ACTIVE);
+		}
+		else {
+			//INACTIVE
+			//uiStageSelect[i].m_anime->SetAnimePattern(CanvasUI::INACTIVE);
+			//uiStageSelect[i].m_anime->SetAnimePattern(CanvasUI::ACTIVE);
+		}
+
+	}
+	
+}
+
+void Game::UpdateCursor(void)
+{
+
+	switch (selectChapter)
+	{
+	case Game::CHAPTER1:
+
+		uiSelectCursor->m_pos = { 4.0f, 3.6f, 0.8f };
+		break;
+	case Game::CHAPTER2:
+
+		uiSelectCursor->m_pos = { 4.0f, 1.3f, 0.8f };
+
+		break;
+	case Game::CHAPTER3:
+		uiSelectCursor->m_pos = { 4.0f,-1.2f,0.8f };
+		break;
+	}
+
+}
+
+void Game::SelectStage1(void) {
+
+	switch (selectChapter)
+	{
+	case Game::CHAPTER1:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE1_1);
+		break;
+	case Game::CHAPTER2:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE1_2);
+		break;
+	case Game::CHAPTER3:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE1_3);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::SelectStage2(void) {
+	switch (selectChapter)
+	{
+	case Game::CHAPTER1:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE2_1);
+		break;
+	case Game::CHAPTER2:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE2_2);
+		break;
+	case Game::CHAPTER3:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE2_3);
+		break;
+	default:
+		break;
+	}
+}
+
+void Game::SelectStage3(void) {
+
+	switch (selectChapter)
+	{
+	case Game::CHAPTER1:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE3_1);
+		break;
+	case Game::CHAPTER2:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE3_2);
+		break;
+	case Game::CHAPTER3:
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE3_3);
+		break;
+	default:
+		break;
+	}
+
+}
+
+
+void Game::StageUpdate(void)
+{
+
+	//Input
+
 	if (!isPause) {
+
+		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
+			PauseSwitch();
+		}
+
 		switch (SceneManager::Get()->GetStage()) {
 
 		case STAGE1_1:
@@ -534,6 +924,10 @@ void Game::UpdateStage3_3(void)
 {
 }
 
+void Game::ResultUpdate(void)
+{
+}
+
 void Game::GameUpdate(void)
 {
 	//入力処理　XXキー押して、移動させるオブジェクトをスイッチ
@@ -552,6 +946,10 @@ void Game::GameUpdate(void)
 	case SCENENAME::STAGE:
 		StageUpdate();
 		break;
+
+	case SCENENAME::RESULT:
+		ResultUpdate();
+		break;
 	}
 
 
@@ -561,21 +959,42 @@ void Game::GameUpdate(void)
 
 Game::~Game()
 {
-
 	delete uiTitle;		//タイトル文字
 	delete uiTitleBg;		//タイトル背景
 	delete uiPressEnter;	//タイトルエンターキー
 
+	delete uiSelectBg;
+	delete uiStageSelect;
+	delete uiSelectCursor;
+	
+	for (int i = 0; i < 3; i++)
+	{
+		delete uiSelectStage[i];
+		delete uiSelectChapter[i];
+		delete uiClearMark[i];
+	}
+
+
+	delete uiPauseBg;	//PAUSEのボタン
 	delete uiResume;
-	delete uiPauseBg;
-	delete uiRestart;	//ステージのボタン
+	delete uiRestart;
+	delete uiSelect;
+	delete uiSound;
+	delete uiSoundBg;
+
+	//配列の分を解放
+	for (int i = 0; i < 6; i++)
+	{
+		delete uiSoundOp_BGM[i];	//BGM設定
+		delete uiSoundOp_SE[i];	//SE設定
+	}
+
 
 	delete coconut;
 	delete lamp;
 	delete housePlate;
 
-
-	
+	delete circle;			//circle
 
 }
 
@@ -588,11 +1007,208 @@ Game* Game::Get()
 void Game::UiUpdate()
 {
 	//入力操作
+	//移動
+	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+		switch (pauseSelect)
+		{
+		case Game::RESUME:
+			pauseSelect = RESTART;
+			break;
+		case Game::RESTART:
+			pauseSelect = SELECTSTAGE;
+			break;
+		case Game::SELECTSTAGE:
+			pauseSelect = SOUND;
+			break;
+		case Game::SOUND:
+			pauseSelect = RESUME;
+			break;
+		default:
+			break;
+		}
+	}
+	//移動
+	if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+		switch (pauseSelect)
+		{
+		case Game::RESUME:
+			pauseSelect = SOUND;
+			break;
+		case Game::RESTART:
+			pauseSelect = RESUME;
+			break;
+		case Game::SELECTSTAGE:
+			pauseSelect = RESTART;
+			break;
+		case Game::SOUND:
+			pauseSelect = SELECTSTAGE;
+			break;
+		default:
+			break;
+		}
+	}
+	//確認
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		switch (pauseSelect)
+		{
+		case Game::RESUME:
+			PauseSwitch();
+			break;
+		case Game::RESTART:
+			PauseSwitch();
+			//ステージ内のオブジェクトを再配置
+			InitStage();
+			break;
+		case Game::SELECTSTAGE:
+			//全部初期化
+			selectStage = STAGE1;
+			selectChapter = CHAPTER1;
+			pauseSelect = RESUME;
+			PauseSwitch();
+			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
+			break;
+		case Game::SOUND:
+			SoundSwitch();// サウンド画面切り替え
+			break;
+		default:
+			break;
+		}
+	}
+	
+
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+	{
+		if (isSound) {
+			SoundSwitch();
+		}
+		else {
+			PauseSwitch();
+		}
+	}
+
+
+	//Sound画面
+	if (!isSound)
+	{
+		uiPauseBg->Update();
+		uiRestart->Update();
+		uiResume->Update();
+		uiSelect->Update();
+		uiSound->Update();
+	}
+	else if (isSound)
+	{
+		uiSoundBg->Update();
+
+		SoundVolume();//BGM,SE音量設定
+	}
+
 	uiPauseBg->Update();
-	//uiRestart->Update();
-	//uiResume->Update();
 
 }
+
+
+void Game::PauseSwitch(void)
+{
+	if (isPause)
+	{
+		isPause = false;
+	}
+	else
+	{
+		isPause = true;
+	}
+
+}
+
+void Game::SoundSwitch(void)
+{
+	if (isSound)
+	{
+		isSound = false;
+	}
+	else
+	{
+		isSound = true;
+	}
+}
+
+void Game::SoundVolume(void)
+{
+	if (Input::Get()->GetKeyTrigger(DIK_UP))
+	{
+		soundOp = BGM;
+	}
+	if (Input::Get()->GetKeyTrigger(DIK_DOWN))
+	{
+		soundOp = SE;
+	}
+
+	switch (soundOp)
+	{
+	case Game::BGM:
+		SoundOp_BGM();
+		break;
+
+	case Game::SE:
+		SoundOp_SE();
+		break;
+	}
+
+	//Sound調節
+	for (int i = 1; i < 6; i++)
+	{
+		uiSoundOp_BGM[i]->Update();
+		uiSoundOp_SE[i]->Update();
+	}
+}
+
+
+
+void Game::SoundOp_BGM(void)
+{
+	if (m_soundVolume_BGM >= 0)
+	{
+		if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+		{
+			m_soundVolume_BGM--;
+		}
+	}
+	if (m_soundVolume_BGM <= 5)
+	{
+		if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+		{
+			m_soundVolume_BGM++;
+		}
+	}
+	else if (m_soundVolume_BGM >= 5)
+	{
+		m_soundVolume_BGM = 5;
+	}
+}
+
+void Game::SoundOp_SE(void)
+{
+	if (m_soundVolume_SE >= 0)
+	{
+		if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+		{
+			m_soundVolume_SE--;
+		}
+	}
+	if (m_soundVolume_SE <= 5)
+	{
+		if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+		{
+			m_soundVolume_SE++;
+		}
+	}
+	else if (m_soundVolume_SE >= 5)
+	{
+		m_soundVolume_SE = 5;
+	}
+}
+
 
 void Game::GameDraw()
 {
@@ -603,12 +1219,21 @@ void Game::GameDraw()
 	
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
+
 		TitleDraw();
+		break;
+
+	case SCENENAME::STAGESELECT:
+
+		SelectDraw();
 		break;
 
 	case SCENENAME::STAGE:
 		StageDraw();
+
 		break;
+	case SCENENAME::RESULT:
+		ResultDraw();
 
 	default:
 		break;
@@ -639,6 +1264,33 @@ void Game::TitleDraw(void)
 	*/
 
 }
+
+void Game::SelectDraw(void)
+{
+	uiSelectBg->Draw();
+	uiStageSelect->Draw();
+	uiSelectCursor->Draw();
+
+	uiSelectDraw();
+
+}
+
+void Game::uiSelectDraw(void)
+{
+	for (int i = 0; i < 3; i++) {
+	
+		//ステージボタン描画
+		uiSelectStage[i]->Draw();
+
+		//チャプター描画
+		uiSelectChapter[i]->Draw();
+
+		//クリア印の描画
+		uiClearMark[i]->Draw();
+	
+	}
+}
+
 
 void Game::StageDraw(void)
 {
@@ -799,16 +1451,132 @@ void Game::DrawStage1_1()
 }
 
 
-
 void Game::ResultDraw(void)
 {
 }
 
 void Game::UiDraw(void)
 {
-	uiPauseBg->Draw();
-	//uiResume->Draw();
-	//uiRestart->Draw();
+
+	if (!isSound)
+	{
+		uiPauseBg->Draw();
+		uiResume->Draw();
+		uiRestart->Draw();
+		uiSelect->Draw();
+		uiSound->Draw();
+
+	}
+	else//サウンド画面に入る
+	{
+		uiSoundBg->Draw();
+
+		//音量調節の描画
+		SoundVolumeDraw();
+
+	}
+}
+
+void Game::SoundVolumeDraw(void)
+{
+	if (soundOp == BGM || soundOp == SE)
+	{
+
+		//BGM音量調節描画
+		switch (m_soundVolume_BGM)
+		{
+		case 0:
+			//何も描画しない
+			break;
+
+		case 1:
+			uiSoundOp_BGM[1]->Draw();
+			break;
+
+		case 2:
+			for (int i = 1; i < 3; i++)
+			{
+				uiSoundOp_BGM[i]->Draw();
+			}
+			break;
+
+		case 3:
+			for (int i = 1; i < 4; i++)
+			{
+				uiSoundOp_BGM[i]->Draw();
+			}
+			break;
+
+		case 4:
+			for (int i = 1; i < 5; i++)
+			{
+				uiSoundOp_BGM[i]->Draw();
+			}
+			break;
+
+		case 5:
+			for (int i = 1; i < 6; i++)
+			{
+				uiSoundOp_BGM[i]->Draw();
+			}
+			break;
+
+		case 6:
+			for (int i = 1; i < 6; i++)
+			{
+				uiSoundOp_BGM[i]->Draw();
+			}
+			break;
+
+		}
+
+		//SE音量調節描画
+		switch (m_soundVolume_SE)
+		{
+		case 0:
+			//何も描画しない
+			break;
+
+		case 1:
+			uiSoundOp_SE[1]->Draw();
+			break;
+
+		case 2:
+			for (int i = 1; i < 3; i++)
+			{
+				uiSoundOp_SE[i]->Draw();
+			}
+			break;
+
+		case 3:
+			for (int i = 1; i < 4; i++)
+			{
+				uiSoundOp_SE[i]->Draw();
+			}
+			break;
+
+		case 4:
+			for (int i = 1; i < 5; i++)
+			{
+				uiSoundOp_SE[i]->Draw();
+			}
+			break;
+
+		case 5:
+			for (int i = 1; i < 6; i++)
+			{
+				uiSoundOp_SE[i]->Draw();
+			}
+			break;
+
+		case 6:
+			for (int i = 1; i < 6; i++)
+			{
+				uiSoundOp_SE[i]->Draw();
+			}
+			break;
+		}
+	}
 }
 
 void Game::SortObjectDraw(void)
