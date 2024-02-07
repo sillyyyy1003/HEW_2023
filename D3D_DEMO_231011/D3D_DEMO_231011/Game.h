@@ -38,6 +38,8 @@ private:
 	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
 
+	CanvasUI* fade;
+
 	//stage select
 	CanvasUI* uiSelectBg;
 	CanvasUI* uiStageSelect;

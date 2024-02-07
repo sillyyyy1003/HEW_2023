@@ -57,6 +57,8 @@ Assets::Assets()
     uiSoundOp_BGM = LoadTexture("assets/Tree.png");
     uiSoundOp_SE = LoadTexture("assets/Tree.png");
 
+    fade = LoadTexture("assets/fade.png");
+
 
 }
 
@@ -90,6 +92,7 @@ Assets::~Assets()
     SAFE_RELEASE(uiSound);
     SAFE_RELEASE(uiSoundBg);
 
+    SAFE_RELEASE(fade);
     SAFE_RELEASE(testPause);
     SAFE_RELEASE(debugFont);
 }

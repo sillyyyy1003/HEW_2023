@@ -57,6 +57,8 @@ void Game::Init()
 		uiClearMark[i] = new CanvasUI();
 	}
 
+	fade = new CanvasUI();
+
 	//stage1-1
 	stageBg = new StaticObject();
 	coconut = new GameObject();
@@ -91,6 +93,9 @@ void Game::Init()
 	{
 		uiClearMark[i]->CreateModel(g_Assets->uiClear, 300, 300, 1, 1);
 	}
+
+	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
+
 
 
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
@@ -154,6 +159,9 @@ void Game::Init()
 	uiSound->m_pos = { -4.0f, -3.0f, 0.8f };
 	uiSoundBg->m_pos = { 0.0f, 0.0f, 0.9f };
 	uiSoundBg->m_scale = { 0.9f,0.9f,1.0f };
+
+	fade->m_pos = { 0.0,0.0,-0.9 };
+
 
 	//配列の初期化と設定
 	InitSoundArray();
@@ -1612,7 +1620,7 @@ void Game::FadeUpdate()
 {
 	if (fadeState == FADE_IN)
 	{
-		ade->m_materialDiffuse.w -= 0.01f;
+		fade->m_materialDiffuse.w -= 0.01f;
 
 		if (fade->m_materialDiffuse.w <= 0.0f)
 		{
@@ -1626,7 +1634,7 @@ void Game::FadeUpdate()
 
 		if (fade->m_materialDiffuse.w >= 1.0f)
 		{
-			SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+			SceneManager::Get()->SetScene(SceneManager::Get()->Scene::GetNexScene());
 			fadeState = FADE_IN;
 		}
 	}
