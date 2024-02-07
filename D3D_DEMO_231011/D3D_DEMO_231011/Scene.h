@@ -53,7 +53,6 @@ private:
 
 
 	STAGEINFO m_stage;
-
 	RESULTINFO m_result;
 
 public:

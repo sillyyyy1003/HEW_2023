@@ -3,6 +3,16 @@
 
 class CanvasUI :public Sprite
 {
+private:
+	//表示の切り替え
+	bool isActive = true;
+
+public:
+	enum STATUS {
+		ACTIVE,		//起動している時
+		INACTIVE,	//
+	};
+	
 
 public:
 	CanvasUI();
@@ -15,5 +25,11 @@ public:
 	//UV座標更新
 	void Update(void);
 
+	//状態を獲得
+	bool GetActive(void) { return isActive; };
+	//状態の切り替え
+	void SetActive(bool status) { isActive = status; };
+
+	void Draw(void) override;
 };
 

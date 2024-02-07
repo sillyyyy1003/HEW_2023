@@ -1,7 +1,11 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 
+struct Collide {
 
+	DirectX::XMFLOAT3			extents;				//当たり判定用　SQUARE
+	float						radius;					//当たり判定用　SPHERE
+};
 
 /// <summary>
 /// 頂点バッファとテクスチャを保存する構造体
@@ -10,9 +14,7 @@ struct MODELDATA
 {
 	ID3D11Buffer*				vertexBuffer;			//頂点バッファ
 	ID3D11ShaderResourceView*	texture;				//テクスチャ
-	DirectX::XMFLOAT3			extents;				//当たり判定用データ
-
-
+	Collide						collider;				//当たり判定用
 };
 
 /// <summary>

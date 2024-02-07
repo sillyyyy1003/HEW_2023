@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include "CanvasUI.h"
+#include <string>
 
-//数字・文字・
+//数字・文字・string
 class DebugManager
 {
 private:
@@ -34,6 +35,8 @@ public:
 
 	//int型数字を出力する
 	void PrintDebugLog(float _posX, float _posY, const int _num);
+
+
 
 };
 

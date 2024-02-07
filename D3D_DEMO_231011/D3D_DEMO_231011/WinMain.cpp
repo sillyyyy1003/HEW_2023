@@ -1,9 +1,12 @@
 ﻿#include "Assets.h"
 #include "TrackCamera.h"
 #include "Game.h"
+//#include "ObjectCollision.h"
 #include "DInput.h"
 #include "DebugManager.h"
 #include "SceneManager.h"
+#include "RailManager.h"
+
 
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
@@ -17,6 +20,7 @@ Camera*		g_WorldCamera;		//CAMERA
 Game*		g_Game;				//ゲーム
 DebugManager* g_DebugManager;	//デバッグ用ツール
 SceneManager* g_SceneManager;
+//ObjectCollision* g_objectCollision;
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -77,10 +81,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//カメラの初期化
 	g_WorldCamera = new TrackCamera();
 
+
 	//シーンマネージャーの初期化処理
 	g_SceneManager=SceneManager::Get();
 
 	g_SceneManager->SceneManager::Init();
+
+	//ColliderManagerの初期化処理
+	//g_objectCollision = new ObjectCollision();
 
 	//ゲームクラスの初期化処理
 	g_Game = Game::Get();
@@ -128,6 +136,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			//現在時間を取得（単位：カウント）
 			QueryPerformanceCounter(&liWork);
 			nowCount = liWork.QuadPart;
+
 			//1/60秒経過したか？
 			if (nowCount >= oldCount + numCount_1frame)
 			{
@@ -154,6 +163,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			//現在時間取得
 			nowTick = GetTickCount64();
+
+
+
+
+
+
+
 
 			//１秒経過したか？
 			if (nowTick >= oldTick + 1000)

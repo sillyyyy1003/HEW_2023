@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
+#include <DirectXCollision.h>
+#include <string>
 
 class Object;
 class ShadowObject;
@@ -8,8 +10,8 @@ class Collider;
 
 struct RailPos {
 
-	int verticalPos = 0;	//縦	 0:BACK 1:MIDDLE 2:FRONT
-	int horizontalPos = 0;	//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
+	int verticalPos=0;	//縦	 0:BACK 1:MIDDLE 2:FRONT
+	int horizontalPos=0;	//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
 };
 
 class GameObject
@@ -19,7 +21,7 @@ private:
 	DirectX::XMFLOAT3 m_lightPos = {};
 
 	//レールにいる位置
-	RailPos m_railPos = { 0,0 };
+	RailPos m_railPos;
 
 	//移動の方向
 	DIR	m_moveDir = STILL;
@@ -27,14 +29,44 @@ private:
 	//操作中かどうか？
 	bool isActive = false;
 
+	//移動用のカウンター
+	int m_moveCount = 0;
+
+	
+
+	int m_inputCount = 0;//入力待ちカウンター
+	int m_lastPressTime = 0;//入力
+	bool isInputCount = false;//時間測定開始
+	bool isGetInput = false;//方向を受ける
+
+	enum INPUT {
+		INPUT_UP,
+		INPUT_RIGHT,
+		INPUT_DOWN,
+		INPUT_LEFT,
+		INPUT_NONE
+	};
+
+	struct InputCom {
+		INPUT verInput;
+		INPUT horInput;
+	};
+	bool isInit = true; //前回の記録スタートしたかどうか？
+
+	InputCom m_nowInput = { INPUT_NONE,INPUT_NONE };
+	int m_countTime = 0;
+
+	bool isAutoMove = false;//自動移動しているかどうか
+
+	int m_size = 0;
+
 public:
+
 	//----------------------------//
 	// 変数
 	//----------------------------//
 	//オブジェクトの図形情報
 	Object* m_obj;
-	//本体の当たり判定を扱う
-	//Collider* m_objCollider = nullptr;
 		
 	//影の図形情報
 	ShadowObject* m_shadow;
@@ -42,11 +74,16 @@ public:
 	//影の当たり判定を扱う
 	Collider* m_shadowCollider = nullptr;
 	
-
 	//光があるかどうか
 	bool isLit = false;
 
+	std::string m_name;//名前　デバッグ用
+	
+private:
 
+	void DoKeyInput(void);
+
+	bool isPlayer = false;
 	
 public:
 	//コンストラクタ
@@ -75,15 +112,27 @@ public:
 	// アニメーションの初期化処理
 	void InitAnimation(void);
 
-	/// <summary>
-	/// 影の生成位置を計算する関数
-	/// </summary>
-	/// <param name="lightPos">光源の位置</param>
-	/// <param name="objPos">オブジェクトの位置</param>
-	/// <returns>影の位置</returns>
-	DirectX::XMFLOAT3 GenerateShadowPos();
+	// Collisionの初期化(スケールの変化に対応するために必要)
+	void InitCollision(void);
 
-	//レールの位置
+	/// <summary>
+	/// 影の位置移動
+	/// </summary>
+	/// <param name="moveSpeed">移動のスビート</param>
+	/// <param name="posX">本体と被らないようにちょっとずれを設定</param>
+	void GenerateShadowPos(float moveSpeed,float posX);
+	
+	//影の大きさの変更
+	void GenerateShadowSize(float speed);
+
+	//影の回転
+	void GenerateShadowRotate();
+	
+	/// <summary>
+	/// レール上も位置を設定する
+	/// </summary>
+	/// <param name="horPos">横　0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2</param>
+	/// <param name="verPos">縦　0:BACK 1:MIDDLE 2:FRONT</param>
 	void SetRailPos(int horPos, int verPos);
 	RailPos GetRailPos() { return m_railPos; };
 
@@ -91,7 +140,11 @@ public:
 	void SetActive(bool isActive) { this->isActive = isActive; };
 	bool GetActive() { return isActive; };
 
-	void SetLightPos(DirectX::XMFLOAT3 _lightPos);
+	int GetSize() { return m_size; };
+	void SetSize(int size) { m_size = size; };
+
+	void SetName(std::string Name) { m_name = Name; };
+	std::string GetName(void) { return m_name; };
 
 	//毎回ゲームループで呼び出せれてる
 	void Update(void);
@@ -100,16 +153,29 @@ public:
 	bool isMoveable(DIR dir);
 
 	//コライダーのデータを更新する
-	void UpdateObjectColliderData(void);
-
 	void UpdateShadowColliderData(void);
+
+	//自動移動かどうかの設定を行う
+	void SetAutoMove(bool isAutoMove) { this->isAutoMove = isAutoMove; };
+
+	//一定距離の移動
+	void ObjectMove(void);
+
+	//移動できないのエフェクト
+	void ObjectVibration();
+	
 
 	//オブジェクトを描画する
 	void Draw(void);
 
 	~GameObject();
 
-
+	private:
+		/// <summary>
+		/// オブジェクトの移動をする関数
+		/// </summary>
+		/// <param name="_lightPos"></param>
+		void MoveObject(Object* _target);
 
 };
 

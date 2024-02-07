@@ -73,6 +73,7 @@ public:
 	//アニメーション
 	Animation* m_anime = nullptr;
 
+	float moveSpeed = 0.0f;
 
 public:
 
@@ -108,14 +109,14 @@ public:
 	/// <param name="cb">シェーダーに渡す行列</param>
 	void GenerateMatrix(CONSTBUFFER& cb);
 
+	DirectX::XMFLOAT3 GetExtents(void) { return m_modelData.collider.extents; };
+	Collide GetCollide(void) { return m_modelData.collider; };
 
 	/// <summary>
 	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）
 	/// </summary>
 	/// <param name="rot">オブジェクトの回転</param>
 	void RotateObj(XMFLOAT3& rot);
-
-
 
 	/// <summary>
 	/// 描画を行う関数

@@ -61,7 +61,8 @@
     dcl_texcoord v0  // input<0,1,2,3>
     dcl_texcoord1 v1  // input<4,5>
 
-#line 36 "C:\Users\58472\Desktop\HEWì\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Shader\VertexShader.hlsl"
+#line 36 "C:
+        Users\58472\Desktop\HEWì\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D\Shader\VertexShader.hlsl"
         
     dp4 r0.x, v0, c7  // input<0>
     dp4 r0.y, v0, c8  // input<1>

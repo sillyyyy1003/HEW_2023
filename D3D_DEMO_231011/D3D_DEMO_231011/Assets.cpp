@@ -10,6 +10,15 @@ Assets::Assets()
     testPause= LoadTexture("assets/pause.png");
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 
+    //test
+    //circle = LoadTexture("assets/Tree.png");
+    tree = LoadTexture("assets/Tree.png");
+    circle = LoadTexture("assets/circle.png");
+    square = LoadTexture("assets/polygon.png");
+    triangle = LoadTexture("assets/triangle.png");
+    ex = LoadTexture("assets/ex.png");
+    shadow = LoadTexture("assets/treeshadow.png");
+
     //title
     uiTitle = LoadTexture("assets/title/uiTitle.png");
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
@@ -27,12 +36,8 @@ Assets::Assets()
     uiSelectChapter3 = LoadTexture("assets/ui/select/chapter3.png");
     uiClear= LoadTexture("assets/ui/select/clear.png");
 
-    //test
-    circle = LoadTexture("assets/Tree.png");
-    shadow = LoadTexture("assets/treeshadow.png");
-
     //stage1_1
-    stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
+    stageBg = LoadTexture("assets/stage1/stage1_1Bg1.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
@@ -46,12 +51,12 @@ Assets::Assets()
     uiRestart = LoadTexture("assets/ui/restart.png");
     uiSelect= LoadTexture("assets/ui/select.png");
     uiSound = LoadTexture("assets/ui/sound.png");
+
     //sound
     uiSoundBg = LoadTexture("assets/ui/soundBg.png");//サウンド背景
     uiSoundOp_BGM = LoadTexture("assets/Tree.png");
     uiSoundOp_SE = LoadTexture("assets/Tree.png");
 
-    //fade
     fade = LoadTexture("assets/fade.png");
 
 
@@ -75,16 +80,19 @@ Assets::~Assets()
 
     SAFE_RELEASE(circle);
     SAFE_RELEASE(shadow);
-    
+
+    //ui
+    /*SAFE_RELEASE(railLine);*/
+
     //pause
     SAFE_RELEASE(uiPauseBg);
     SAFE_RELEASE(uiResume);
     SAFE_RELEASE(uiRestart);
     SAFE_RELEASE(uiSelect);
     SAFE_RELEASE(uiSound);
-
     SAFE_RELEASE(uiSoundBg);
 
+    SAFE_RELEASE(fade);
     SAFE_RELEASE(testPause);
     SAFE_RELEASE(debugFont);
 }

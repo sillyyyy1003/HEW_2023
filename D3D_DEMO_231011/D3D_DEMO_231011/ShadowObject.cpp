@@ -44,10 +44,6 @@ void ShadowObject::Update(void)
 
 }
 
-void ShadowObject::CheckVacancy(void)
-{
-}
-
 
 void ShadowObject::Draw(void)
 {

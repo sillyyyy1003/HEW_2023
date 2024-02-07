@@ -1,4 +1,52 @@
 <<<<<<< HEAD
+﻿  Game.cpp
+<<<<<<< HEAD
+<<<<<<< HEAD
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\ObjectAnimation.h(1,1): warning C4819: 该文件包含不能在当前代码页(932)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(193,58): warning C4305: “初始化”: 从“double”到“float”截断
+=======
+C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(131,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+>>>>>>> feature/Kaku
+  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+=======
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(37,47): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(54,31): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(55,95): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(89,33): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(302,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(303,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(308,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(309,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(431,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(432,45): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(433,45): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(434,53): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(449,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(450,44): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(451,45): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(452,52): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(467,97): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(469,46): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(470,52): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(486,96): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(491,98): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(492,46): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(493,45): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(494,54): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(632,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(633,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(638,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(639,16): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(712,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(812,73): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(852,63): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(853,62): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(552): warning C4715: 'Game::SideCollision': 値を返さないコントロール パスがあります。
+  D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW_TEST\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+>>>>>>> feature/Sakai
+=======
+<<<<<<< HEAD
 ﻿  Animation.cpp
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(25,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
 C:\Users\58472\Desktop\HEW_TEST\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(26,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
@@ -68,4 +116,5 @@ C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(168,13): warning C4305
   D3D_DEMO_231011.vcxproj -> C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
 >>>>>>> １１１
 =======
+>>>>>>> feature/Kaku
 >>>>>>> feature/Kaku

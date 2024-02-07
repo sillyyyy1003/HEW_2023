@@ -15,10 +15,12 @@ public:
 
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* circle;
+	ID3D11ShaderResourceView* tree;
 	ID3D11ShaderResourceView* shadow;
+	// 図形
 	ID3D11ShaderResourceView* square;
 	ID3D11ShaderResourceView* triangle;
-	//================//テスト用//================//
+	ID3D11ShaderResourceView* ex;
 
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
@@ -50,11 +52,14 @@ public:
 	ID3D11ShaderResourceView* lampShadow;
 	ID3D11ShaderResourceView* housePlate;
 	ID3D11ShaderResourceView* housePlateShadow;
+	
+
 
 	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
+
 	ID3D11ShaderResourceView* uiSelect;
 	ID3D11ShaderResourceView* uiSound;
 	
@@ -64,10 +69,7 @@ public:
 	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
 
 
-	ID3D11ShaderResourceView* fade;//フェード用
-
-
-
+	ID3D11ShaderResourceView* fade;
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

@@ -1,4 +1,4 @@
-#include "Sprite.h"
+﻿#include "Sprite.h"
 #include "Camera.h"
 #include "Assets.h"
 #include "DInput.h"
@@ -94,10 +94,12 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	}
 
 	//当たり判定のデータを入力
-	m_modelData.extents.x = _width / 2;
-	m_modelData.extents.y = _height / 2;
-	m_modelData.extents.z = 0.01f;	//ｚ軸の大きさをロックする
-
+	m_modelData.collider.extents.x = _width / 2;
+	m_modelData.collider.extents.y = _height / 2;
+	m_modelData.collider.extents.z = 0.01f;	//ｚ軸の大きさをロックする
+	
+	m_modelData.collider.radius = _width / 2;
+	
 	//テクスチャを実装
 	SetTexture(texture);
 }
@@ -134,7 +136,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 		matrixProjPerspective = XMMatrixOrthographicLH(RATIO_W, RATIO_H, 0.0f, 3.0f);//平行投影行列を作成
 		matrixProjPerspective = XMMatrixTranspose(matrixProjPerspective);
 	}
-	
 
 
 	//投影行列作成
@@ -176,9 +177,11 @@ void Sprite::RotateObj(XMFLOAT3& rot)
 	//回転する条件（回転制限）
 	if (m_rotation.x/* == 0 || m_rotation.x <= 90*/) { rot.x = m_rotation.x += mouseMovePos.y * val * fval; };
 	if (m_rotation.y/* == 0 || m_rotation.y <= 90*/) { rot.y = m_rotation.y += mouseMovePos.x * val * fval; };
-	//rot.x = m_rotation.x += mouseMovePos.y * val * fval;
-	//rot.y = m_rotation.y += mouseMovePos.x * val * fval;
+
+
 }
+
+
 
 
 

@@ -27,9 +27,6 @@ public:
 	//game loopで毎回呼び出される関数
 	void Update(void) override;
 
-	//行先のポイントが空いてるかどうか
-	void CheckVacancy(void);
-
 	//描画関数
 	void Draw(void) override;
 
