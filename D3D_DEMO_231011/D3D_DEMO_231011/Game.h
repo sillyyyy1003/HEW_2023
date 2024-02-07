@@ -102,8 +102,6 @@ private:
 		SOUND,			//サウンドの画面
 	};
 
-
-
 	//sound
 	bool isSound = false;
 	//pause
