@@ -59,41 +59,22 @@ private:
 
 private:
 	
-	//sound
-	bool isSound = false;
-	//pause
-	bool isPause = false;
-	//clear
-	bool isClearStage1 = false;
-	bool isClearStage2 = false;
-	bool isClearStage3 = false;
-
-	//stageFocus
-	bool isFocus = false;
-
-	//soundSelect
+	//soundSetting
 	enum SOUNDOP
 	{
 		BGM,
 		SE,
 	};
-	SOUNDOP soundOp = BGM;
-
-	//初期設定
-	int m_soundVolume_BGM = 3;
-	int m_soundVolume_SE = 3;
 
 	//ステージ選択
 	enum SELECTSTAGE
 	{
+	
 		STAGE1,
 		STAGE2,
 		STAGE3,
-		NONE,
+		SELECTNONE,
 	};
-	SELECTSTAGE selectStage = NONE;
-
-	bool isSelectChapter = false;
 
 	//チャプター選択
 	enum SELECTCHAPTER
@@ -103,15 +84,40 @@ private:
 		CHAPTER3,
 	};
 
-	SELECTCHAPTER selectChapter = CHAPTER1;
+	//フェード状態
+	enum FADE_STATE
+	{
+		NO_FADE,
+		FADE_IN,
+		FADE_OUT,
+	};
+
 
 	enum PAUSESELECT {
 		RESUME,			//ゲームに戻る
 		RESTART,		//ゲーム再開
-		SELECTSTAGE,	//ステージセレクトに戻る
+		SELECT_STAGE,	//ステージセレクトに戻る
 		SOUND,			//サウンドの画面
 	};
-	
+
+
+
+	//sound
+	bool isSound = false;
+	//pause
+	bool isPause = false;
+	//Active
+	bool isActive = true;
+	bool isSelectChapter = false;
+
+	//初期設定
+	int m_soundVolume_BGM = 3;
+	int m_soundVolume_SE = 3;
+
+	SOUNDOP soundOp = BGM;
+	SELECTSTAGE selectStage = SELECTNONE;
+	SELECTCHAPTER selectChapter = CHAPTER1;
+	FADE_STATE fadeState = NO_FADE;
 	PAUSESELECT pauseSelect = RESUME;
 
 private:
@@ -257,7 +263,7 @@ public:
 
 	void TestMove(GameObject* _target);
 
-	
+	void FadeUpdate(void);
 
 };
 

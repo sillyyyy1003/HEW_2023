@@ -551,7 +551,7 @@ void Game::SelectUpdate(void)
 		if (isSelectChapter == false) {
 			switch (selectStage)
 			{
-			case Game::NONE:
+			case Game::SELECTNONE:
 
 				break;
 			case Game::STAGE1:
@@ -590,7 +590,7 @@ void Game::SelectUpdate(void)
 		if (isSelectChapter == false) {
 			switch (selectStage)
 			{
-			case Game::NONE:
+			case Game::SELECTNONE:
 				break;
 			case Game::STAGE1:
 				selectStage = STAGE3;
@@ -648,7 +648,7 @@ void Game::SelectUpdate(void)
 			//Chapterを選択
 			switch (selectStage)
 			{
-			case Game::NONE:
+			case Game::SELECTNONE:
 				break;
 
 			case Game::STAGE1:
@@ -1015,9 +1015,9 @@ void Game::UiUpdate()
 			pauseSelect = RESTART;
 			break;
 		case Game::RESTART:
-			pauseSelect = SELECTSTAGE;
+			pauseSelect = SELECT_STAGE;
 			break;
-		case Game::SELECTSTAGE:
+		case Game::SELECT_STAGE:
 			pauseSelect = SOUND;
 			break;
 		case Game::SOUND:
@@ -1037,11 +1037,11 @@ void Game::UiUpdate()
 		case Game::RESTART:
 			pauseSelect = RESUME;
 			break;
-		case Game::SELECTSTAGE:
+		case Game::SELECT_STAGE:
 			pauseSelect = RESTART;
 			break;
 		case Game::SOUND:
-			pauseSelect = SELECTSTAGE;
+			pauseSelect = SELECT_STAGE;
 			break;
 		default:
 			break;
@@ -1059,7 +1059,7 @@ void Game::UiUpdate()
 			//ステージ内のオブジェクトを再配置
 			InitStage();
 			break;
-		case Game::SELECTSTAGE:
+		case Game::SELECT_STAGE:
 			//全部初期化
 			selectStage = STAGE1;
 			selectChapter = CHAPTER1;
@@ -1606,6 +1606,30 @@ void Game::SortShadowDraw(void)
 		element->m_shadow->Draw();
 	}
 
+}
+
+void Game::FadeUpdate()
+{
+	if (fadeState == FADE_IN)
+	{
+		ade->m_materialDiffuse.w -= 0.01f;
+
+		if (fade->m_materialDiffuse.w <= 0.0f)
+		{
+			fadeState = NO_FADE;
+			isActive = false;
+		}
+	}
+	else if (fadeState == FADE_OUT)
+	{
+		fade->m_materialDiffuse.w += 0.01f;
+
+		if (fade->m_materialDiffuse.w >= 1.0f)
+		{
+			SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+			fadeState = FADE_IN;
+		}
+	}
 }
 
 void Game::TestMove(GameObject* _target)
