@@ -141,6 +141,7 @@
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DInput.cpp" />
     <ClCompile Include="Direct3D\Direct3D.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Direct3D\Direct3D.h" />
     <ClInclude Include="Direct3D\Shader\PixelShader.h" />
     <ClInclude Include="Direct3D\Shader\VertexShader.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />

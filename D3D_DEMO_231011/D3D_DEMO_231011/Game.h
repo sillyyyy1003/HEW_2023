@@ -5,12 +5,14 @@
 #include <vector>
 #include <list>
 
+
 class GameObject;
 class StaticObject;
 class CanvasUI;
 class Stage;
 class SceneManager;
 class Object;
+class Effect;
 
 class Game
 {
@@ -39,6 +41,10 @@ private:
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
 
 	CanvasUI* fade;
+
+	//Effect
+	Effect* testEffect;
+
 
 	//stage select
 	CanvasUI* uiSelectBg;

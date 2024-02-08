@@ -5,6 +5,12 @@
 //基本オブジェクト
 class Object
 {
+
+private:
+
+	DirectX::XMFLOAT3 m_extents = {};
+	float m_radius = {};
+
 public:
 	//----------------------------//
 	// 変数
@@ -12,12 +18,10 @@ public:
 	//図形情報を扱う
 	Sprite* m_sprite;
 
-	//Collider* m_collider = nullptr;
-
 public:
-	
+
 	Object(void);
-	
+
 	/// <summary>
 	/// 初期化を行う関数
 	/// </summary>
@@ -28,7 +32,12 @@ public:
 	/// <param name="splitY"></param>
 	void CreateObject(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
+	//拡大縮小の後に更新した
+	void GenerateColliderData();
 
+	//コライダーのデータを返す
+	DirectX::XMFLOAT3 GetExtents() { return this->m_extents; };
+	float GetRadius() { return this->m_radius; };
 
 	//毎ループ呼び出される
 	virtual void Update(void);

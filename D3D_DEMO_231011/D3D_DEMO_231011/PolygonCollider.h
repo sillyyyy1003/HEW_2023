@@ -16,9 +16,14 @@ class PolygonCollider :public Collider
 {
 private:
 
-	std::vector<Vector3> m_verticies;
+	//std::vector<Vector3> m_verticies;//多辺形に使う
+	
+	//改良の頂点
+	std::vector<DirectX::XMFLOAT3> m_verticies;
 
 	TRIANGLE_TYPE m_type = TRIANGLE_TYPE::TRI_IDLE;
+
+	
 
 public:
 
@@ -29,11 +34,11 @@ public:
 	/// <param name="Radius"></param>
 	PolygonCollider();
 
-	void InitCollider(DirectX::XMFLOAT3 center,Collide Collider);
+	void InitCollider(DirectX::XMFLOAT3 center,Collide Collider) override;
 
 	//三角形の頂点を初期化
-	std::vector<Vector3> GetTriangleVertices(void);
-
+	//std::vector<Vector3> GetTriangleVertices(void);
+	std::vector<DirectX::XMFLOAT3> InitVerticies(void);
 
 	//void UpdateRadius(float m_radius);
 	void SetRadius(float radius) { m_radius = radius; };
@@ -47,7 +52,8 @@ public:
 	//廃棄
 	//void UpdateVerticies(DirectX::XMFLOAT3 rotation);
 
-	std::vector<Vector3> GetVerticies() override;
+	std::vector<Vector3> GetVerticies();
+	std::vector<DirectX::XMFLOAT3> GetXMVerticies() { return m_verticies; };
 
 	void SetVerticies(std::vector<Vector3> ver);
 
@@ -74,6 +80,8 @@ public:
 	///</summary>
 	///<param name="collider">OBB</param>
 	bool isCollision(PolygonCollider* collider) override;
+
+	bool isCollision(Collider* collider) override;
 
 	/// <summary>
 	/// 当たり判定

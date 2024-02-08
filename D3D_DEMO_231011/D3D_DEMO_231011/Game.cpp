@@ -12,6 +12,7 @@
 #include "ObjectAnimation.h"
 #include "RailManager.h"
 #include "DInput.h"
+#include "Effect.h"
 #include "xa2.h"
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
@@ -66,6 +67,9 @@ void Game::Init()
 	housePlate = new GameObject();
 	testObj = new GameObject();
 
+	//EFFECT
+	testEffect = new Effect(28);
+
 	//stage1に使われてる
 	//移動のオブジェクトの名前を設定する
 	coconut->SetName("coconut");
@@ -97,22 +101,25 @@ void Game::Init()
 	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
 
 
-
 	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
 	testObj->CreateObject(g_Assets->tree, 200, 200, 1, 1);
-	testObj->CreateShadow(g_Assets->shadow, 200, 200, 1, 1);
+	testObj->CreateShadow(g_Assets->shadow, 200, 200, 1, 1, COLLISION_TYPE::SQUARE);
 
-	coconut->CreateObject(g_Assets->coconut, 190, 190, 1, 1);
-	coconut->CreateShadow(g_Assets->coconutShadow, 158, 159, 1, 1);
-	lamp->CreateObject(g_Assets->lamp, 163, 569, 1, 1);
-	lamp->CreateShadow(g_Assets->lampShadow, 163, 569, 1, 1);
+	coconut->CreateObject(g_Assets->coconut, 190, 192, 1, 1);
+	coconut->CreateShadow(g_Assets->coconutShadow, 158, 159, 1, 1, COLLISION_TYPE::SPHERE);
+	lamp->CreateObject(g_Assets->lamp, 216, 579, 1, 1);
+	lamp->CreateShadow(g_Assets->lampShadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
 	housePlate->CreateObject(g_Assets->housePlate, 110, 216, 1, 1);
-	housePlate->CreateShadow(g_Assets->housePlateShadow, 55, 108, 1, 1);
+	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
+	
+	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 7);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
 	lamp->InitAnimation();
 	housePlate->InitAnimation();
+		
+
 
 	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
 
@@ -127,9 +134,9 @@ void Game::Init()
 	
 	//Title の初期化
 	//位置設定
-	uiTitleBg->m_pos = { 0.0f,0.0f,0.2f };
-	uiTitle->m_pos = { 0.0f,1.5f,0.1f };
-	uiPressEnter->m_pos = { 0.0f,-1.5f,0.0f };
+	uiTitleBg->m_pos = { 0.0f,0.0f,0.3f };
+	uiTitle->m_pos = { 0.0f,1.5f,0.2f };
+	uiPressEnter->m_pos = { 0.0f,-1.5f,0.1f };
 
 	//大きさの設定
 	uiTitle->m_scale = { 0.8f,0.8f,1.0f };
@@ -162,6 +169,10 @@ void Game::Init()
 
 	fade->m_pos = { 0.0,0.0,-0.9 };
 
+	testEffect->m_pos.z = 0.0f;
+	testEffect->m_anime->SetAnimeSpeed(0.2f);
+	testEffect->Effect::SetActive(true);
+	testEffect->Effect::SetLoop(true);
 
 	//配列の初期化と設定
 	InitSoundArray();
@@ -256,10 +267,10 @@ void Game::InitStage1_1(void)
 	//本体y軸固定->-1
 	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
 	//X:LEFT2:-9 LEFT1:-4.5 MIDDLE:0.0 RIGHT1:4.5 RIGHT2:9
-	//本体
-	coconut->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
+	//本体 
+	housePlate->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
 	lamp->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
-	housePlate->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-7.5f};
+	coconut->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-7.5f};
 
 	testObj->m_obj->m_sprite->m_pos = { 0,-3,-2 };//y軸固定!!
 	testObj->m_shadow->m_sprite->m_pos.z = -1.0f;//影のY/Z軸を固定!!
@@ -270,17 +281,16 @@ void Game::InitStage1_1(void)
 	
 	
 	//影のy軸
-	coconut->m_shadow->m_sprite->m_pos.y = 3.4;
-	lamp->m_shadow->m_sprite->m_pos.y = coconut->m_shadow->m_sprite->m_pos.y - 1.7;
-	housePlate->m_shadow->m_sprite->m_pos.y = coconut->m_shadow->m_sprite->m_pos.y - 3.7;
+	coconut->m_shadow->m_sprite->m_pos.y = 7.2f;
+	lamp->m_shadow->m_sprite->m_pos.y = 4.4f;
+	housePlate->m_shadow->m_sprite->m_pos.y = 2.4f;
 	
-	//大きさ設定
 
 	//レール上の位置を設定する
-	coconut->SetRailPos(1, 0);
+	coconut->SetRailPos(1, 1);
 	lamp->SetRailPos(2, 0);
-	housePlate->SetRailPos(1, 1);
-
+	housePlate->SetRailPos(1, 0);
+	
 	//回転設定
 
 	//objectListを初期化
@@ -530,6 +540,8 @@ void Game::TitleUpdate(void)
 	uiPressEnter->Update();
 	uiTitle->Update();
 	uiTitleBg->Update();
+
+	testEffect->Update();
 }
 
 void Game::SelectUpdate(void)
@@ -641,7 +653,8 @@ void Game::SelectUpdate(void)
 		else
 		{
 			//chapterを選択する場合
-			SceneManager::Get()->SetScene(SCENENAME::TITLE);
+			SceneManager::Get()->SetScene(SCENENAME::
+				TITLE);
 
 		}
 	}
@@ -795,12 +808,26 @@ void Game::SelectStage3(void) {
 void Game::StageUpdate(void)
 {
 
-	//Input
-
 	if (!isPause) {
-
+				
+		//入力処理
 		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
 			PauseSwitch();
+		}
+
+		//移動させる目標を設定する
+		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+			for (auto it = objectList.begin(); it != objectList.end(); it++) {
+				if ((*it)->GetActive())
+				{
+					(*it)->SetActive(false);
+					auto nextIt = std::next(it) != objectList.end() ? std::next(it) : objectList.begin();
+					(*nextIt)->SetActive(true);
+					break;
+
+				}
+			}
 		}
 
 		switch (SceneManager::Get()->GetStage()) {
@@ -867,35 +894,18 @@ void Game::StageUpdate(void)
 void Game::UpdateStage1_1(void)
 {
 	
-	
-	//移動させる目標を設定する
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		for (auto it = objectList.begin(); it != objectList.end(); it++) {
-			if ((*it)->GetActive()) 
-			{
-				(*it)->SetActive(false);
-				auto nextIt = std::next(it) != objectList.end() ? std::next(it) : objectList.begin();
-				(*nextIt)->SetActive(true);
-				break;
-			}
-		}
-	}
-
 	//背景
 	stageBg->Update();
 
-	//オブジェクト
-	/*for (auto& element : objectList) {
+	
+	for (auto& element : objectList) {
 		element->Update();
-	}*/
+	}
 
-	coconut->Update();
-	lamp->Update();
-	housePlate->Update();
 
-	if (ColliderManager::Get()->ClearCollision({ COL_DOWN,COL_RIGHT }, "coconut", "lamp", ShadowObject::MEDIUM)) {
-		isPause = true;
+	//クリア判定
+	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::MEDIUM)) {
+		//isPause = true;
 	}
 
 }
@@ -938,10 +948,7 @@ void Game::ResultUpdate(void)
 
 void Game::GameUpdate(void)
 {
-	//入力処理　XXキー押して、移動させるオブジェクトをスイッチ
-
-	//オブジェクトUpdate
-
+	
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 		TitleUpdate();
@@ -1001,6 +1008,8 @@ Game::~Game()
 	delete coconut;
 	delete lamp;
 	delete housePlate;
+
+	delete testEffect;
 
 	delete circle;			//circle
 
@@ -1066,6 +1075,8 @@ void Game::UiUpdate()
 			PauseSwitch();
 			//ステージ内のオブジェクトを再配置
 			InitStage();
+			//初期化
+			pauseSelect = RESUME;
 			break;
 		case Game::SELECT_STAGE:
 			//全部初期化
@@ -1262,6 +1273,8 @@ void Game::TitleDraw(void)
 
 	uiPressEnter->Draw();	
 
+	testEffect->Draw();
+
 	//===================Debug=====================//
 	/*
 	//デバッグ表示 
@@ -1373,18 +1386,22 @@ void Game::DrawStage1_1()
 
 	//オブジェクト
 	SortObjectDraw();
-
+	
+	char step[6]="STEP:";
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
 	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.x);
+	g_DebugManager->PrintDebugLog(posX, posY, step);
 
-	posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
-	posY = ((SCREEN_HEIGHT / 2) - 80.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.y);
+	posX = (-SCREEN_WIDTH / 2 + 40.0f + 120.0f) / SCREEN_PARA;
+	
+	g_DebugManager->PrintDebugLog(posX, posY, SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+	//posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	//posY = ((SCREEN_HEIGHT / 2) - 80.0f) / SCREEN_PARA;
+	//g_DebugManager->PrintDebugLog(posX, posY, lamp->m_shadowCollider->m_center.y);
 
-	posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
-	posY = ((SCREEN_HEIGHT / 2) - 120.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, testObj->m_obj->m_sprite->m_pos.z);
+	//posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	//posY = ((SCREEN_HEIGHT / 2) - 120.0f) / SCREEN_PARA;
+	//g_DebugManager->PrintDebugLog(posX, posY, lamp->m_shadowCollider->m_center.z);
 
 	//レール上どこが空いてるのを可視化
 	posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
@@ -1634,7 +1651,7 @@ void Game::FadeUpdate()
 
 		if (fade->m_materialDiffuse.w >= 1.0f)
 		{
-			SceneManager::Get()->SetScene(SceneManager::Get()->Scene::GetNexScene());
+			//SceneManager::Get()->SetScene(SceneManager::Get()->Scene::GetNexScene());
 			fadeState = FADE_IN;
 		}
 	}

@@ -1,12 +1,11 @@
 ﻿#pragma once
 #include "Direct3D/Direct3D.h"
 #include "RailManager.h"
-#include <DirectXCollision.h>
+#include "Collider.h"
 #include <string>
 
 class Object;
 class ShadowObject;
-class Collider;
 
 struct RailPos {
 
@@ -107,7 +106,7 @@ public:
 	/// <param name="_height">高さ</param>
 	/// <param name="splitX">横分割</param>
 	/// <param name="splitY">縦分割</param>
-	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
+	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type);
 
 	// アニメーションの初期化処理
 	void InitAnimation(void);
@@ -121,12 +120,10 @@ public:
 	/// <param name="moveSpeed">移動のスビート</param>
 	/// <param name="posX">本体と被らないようにちょっとずれを設定</param>
 	void GenerateShadowPos(float moveSpeed,float posX);
-	
+	void GenerateShadowPos(void);
+
 	//影の大きさの変更
 	void GenerateShadowSize(float speed);
-
-	//影の回転
-	void GenerateShadowRotate();
 	
 	/// <summary>
 	/// レール上も位置を設定する
@@ -151,6 +148,7 @@ public:
 
 	//移動先に移動できるかどうかの判定を行う
 	bool isMoveable(DIR dir);
+	bool GetDir(void) { return m_moveDir; };
 
 	//コライダーのデータを更新する
 	void UpdateShadowColliderData(void);
@@ -163,6 +161,8 @@ public:
 
 	//移動できないのエフェクト
 	void ObjectVibration();
+
+	bool GetStill() { if (m_moveDir == STILL) { return true; } else { return false; } };
 	
 
 	//オブジェクトを描画する

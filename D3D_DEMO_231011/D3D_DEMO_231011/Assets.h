@@ -14,7 +14,6 @@ public:
 	//================//テスト用//================//
 
 	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
-	ID3D11ShaderResourceView* circle;
 	ID3D11ShaderResourceView* tree;
 	ID3D11ShaderResourceView* shadow;
 	// 図形
@@ -70,6 +69,9 @@ public:
 
 
 	ID3D11ShaderResourceView* fade;
+
+	//エフェクト用
+	ID3D11ShaderResourceView* effect1;
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

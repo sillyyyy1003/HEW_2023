@@ -13,7 +13,6 @@ Assets::Assets()
     //test
     //circle = LoadTexture("assets/Tree.png");
     tree = LoadTexture("assets/Tree.png");
-    circle = LoadTexture("assets/circle.png");
     square = LoadTexture("assets/polygon.png");
     triangle = LoadTexture("assets/triangle.png");
     ex = LoadTexture("assets/ex.png");
@@ -37,7 +36,7 @@ Assets::Assets()
     uiClear= LoadTexture("assets/ui/select/clear.png");
 
     //stage1_1
-    stageBg = LoadTexture("assets/stage1/stage1_1Bg1.png");
+    stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
@@ -59,6 +58,9 @@ Assets::Assets()
 
     fade = LoadTexture("assets/fade.png");
 
+    //effect
+    effect1 = LoadTexture("assets/Effect/effect1.png");
+
 
 }
 
@@ -78,7 +80,6 @@ Assets::~Assets()
     SAFE_RELEASE(lampShadow);
     SAFE_RELEASE(housePlateShadow);
 
-    SAFE_RELEASE(circle);
     SAFE_RELEASE(shadow);
 
     //ui
@@ -93,6 +94,10 @@ Assets::~Assets()
     SAFE_RELEASE(uiSoundBg);
 
     SAFE_RELEASE(fade);
+
+    //effect
+    SAFE_RELEASE(effect1);
+
     SAFE_RELEASE(testPause);
     SAFE_RELEASE(debugFont);
 }

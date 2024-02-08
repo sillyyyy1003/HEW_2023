@@ -96,6 +96,7 @@
       <Filter>StaticObject</Filter>
     </ClCompile>
     <ClCompile Include="xa2.cpp" />
+    <ClCompile Include="Effect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WICTextureLoader.h" />
@@ -190,6 +191,7 @@
       <Filter>StaticObject</Filter>
     </ClInclude>
     <ClInclude Include="xa2.h" />
+    <ClInclude Include="Effect.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">
