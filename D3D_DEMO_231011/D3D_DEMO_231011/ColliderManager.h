@@ -31,7 +31,7 @@ public:
 	/// <param name="dir">対象オブジェクトの相対位置</param>
 	/// <param name="name1">本体のオブジェクト</param>
 	/// <param name="name2">対象オブジェクト</param>
-	/// <param name="size">本体の影のサイズ</param>
+	/// <param name="size">対象の影のサイズ</param>
 	/// <returns></returns>
 	bool ClearCollision(Collider_Dir dir, std::string name1, std::string name12, ShadowObject::SIZE size);
 	

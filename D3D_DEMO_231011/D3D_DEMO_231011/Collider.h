@@ -85,10 +85,11 @@ public:
 	//コライダーのタイプを設定
 	virtual void InitColliderType(COLLISION_TYPE _type);
 
+	//コライダーの初期化を億なう変数
 	virtual void InitCollider(XMFLOAT3 center, Collide collider);
 
-	//コライダーの初期化を億なう変数
-	/*virtual void InitCollider(DirectX::XMFLOAT3 center, Collide collider);*/
+
+
 
 	COLLISION_TYPE GetColliderType(void) { return m_collisionType; };
 

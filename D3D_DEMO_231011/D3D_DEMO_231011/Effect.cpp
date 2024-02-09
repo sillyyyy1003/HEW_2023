@@ -1,4 +1,6 @@
 #include "Effect.h"
+#include "Game.h"
+#include "GameObject.h"
 
 extern Camera* g_WorldCamera;
 
@@ -84,6 +86,36 @@ void Effect::Update()
 
     //UV座標更新
     m_anime->Update();
+
+    //位置を確定
+    if (isTrace) {
+    
+    //
+    DirectX::XMFLOAT3 tracePos = { 0,0,0 };
+        
+        //稼働中のオブジェクトを探す
+        for (auto& element : Game::Get()->GetObjectList()) {
+
+            if (element->GetActive()) {
+             
+                //位置を獲得
+                tracePos = element->m_obj->m_sprite->m_pos;
+                m_pos = tracePos;
+         
+                //y軸の位置をずらす
+                m_pos.y += element->m_obj->GetExtents().y;
+                //z軸の位置をずらす
+                m_pos.z = tracePos.z - 0.1f;
+                break;
+
+            }
+
+        }
+        
+    }
+
+
+
 }
 
 void Effect::Draw()

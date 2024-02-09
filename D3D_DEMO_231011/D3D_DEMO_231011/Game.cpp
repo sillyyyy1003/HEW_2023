@@ -68,7 +68,7 @@ void Game::Init()
 	testObj = new GameObject();
 
 	//EFFECT
-	testEffect = new Effect(28);
+	testEffect = new Effect(36);
 
 	//stage1に使われてる
 	//移動のオブジェクトの名前を設定する
@@ -112,7 +112,7 @@ void Game::Init()
 	housePlate->CreateObject(g_Assets->housePlate, 110, 216, 1, 1);
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
 	
-	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 7);
+	testEffect->CreateModel(g_Assets->effect1, 1500, 900, 4, 9);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
@@ -121,11 +121,13 @@ void Game::Init()
 		
 
 
-	//dynamic_cast<TrackCamera*>(g_WorldCamera)->SetTarget(testWall);
-
 	//----------------------------//
 	// ここからはエフェクトの初期化
 	//----------------------------//
+	testEffect->m_pos.z = 0.0f;
+	testEffect->m_anime->SetAnimeSpeed(0.2f);
+	testEffect->Effect::SetActive(true);
+	testEffect->Effect::SetLoop(true);
 
 
 	//----------------------------//
@@ -169,10 +171,6 @@ void Game::Init()
 
 	fade->m_pos = { 0.0,0.0,-0.9 };
 
-	testEffect->m_pos.z = 0.0f;
-	testEffect->m_anime->SetAnimeSpeed(0.2f);
-	testEffect->Effect::SetActive(true);
-	testEffect->Effect::SetLoop(true);
 
 	//配列の初期化と設定
 	InitSoundArray();
@@ -249,7 +247,8 @@ void Game::InitStage()
 void Game::InitStage1_1(void)
 {
 	
-	//位置設定
+	//背景を設定する
+	SetBackGround(g_Assets->stageBg);
 
 	//オブジェクトを設定する
 	//CAUTION! 
@@ -290,7 +289,9 @@ void Game::InitStage1_1(void)
 	objectList.push_back(housePlate);
 
 	//レールの設定
+	//レールの初期化
 	RailManager::Get()->InitRail();
+	//レールの初期化
 	RailInit1_1();
 
 	//ステージ情報を初期化
@@ -301,6 +302,8 @@ void Game::InitStage1_1(void)
 	}
 	//使うステージだけ起動
 	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_1]->SetActive(true);
+	//STAGE状態をリセット
+	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_1]->ResetStage();
 
 	//移動ターゲットを設定
 	coconut->SetActive(true);
@@ -530,7 +533,8 @@ void Game::TitleUpdate(void)
 	uiTitle->Update();
 	uiTitleBg->Update();
 
-	testEffect->Update();
+	//エフェクト
+	//testEffect->Update();
 }
 
 void Game::SelectUpdate(void)
@@ -893,10 +897,18 @@ void Game::UpdateStage1_1(void)
 
 
 	//クリア判定
-	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::MEDIUM)) {
+	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
+		ColliderManager::Get()->ClearCollision({OVERLAP,COL_UP},"coconut","housePlate",ShadowObject::LARGE)) {
 		//isPause = true;
+		
+		//クリア
+		int stageNum = SceneManager::Get()->GetActiveStage();
+		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
 	}
 
+	//エフェクト
+	testEffect->SetTrace(true);
+	testEffect->Update();
 }
 
 void Game::UpdateStage1_2(void)
@@ -1262,7 +1274,7 @@ void Game::TitleDraw(void)
 
 	uiPressEnter->Draw();	
 
-	testEffect->Draw();
+	//testEffect->Draw();
 
 	//===================Debug=====================//
 	/*
@@ -1375,6 +1387,10 @@ void Game::DrawStage1_1()
 
 	//オブジェクト
 	SortObjectDraw();
+
+	
+	//エフェクト
+	testEffect->Draw();
 	
 	char step[6]="STEP:";
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;

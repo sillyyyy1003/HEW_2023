@@ -353,10 +353,6 @@ void GameObject::Update()
 		UpdateShadowColliderData();
 	}
 	
-
-	// オブジェクトの位置によって影の大きさを調整
-
-
 }
 
 bool GameObject::isMoveable(DIR dir)

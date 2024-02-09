@@ -58,7 +58,7 @@ bool ColliderManager::ClearCollision(Collider_Dir dir, std::string name1, std::s
             if (obj->m_shadowCollider->GetCollisionDir(targetObj->m_shadowCollider) == dir) {
 
                 //大きさも同じ
-                if (obj->m_shadow->m_size == size) {
+                if (targetObj->m_shadow->m_size == size) {
                     return true;
                 }
 

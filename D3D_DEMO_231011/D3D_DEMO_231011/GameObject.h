@@ -3,6 +3,7 @@
 #include "RailManager.h"
 #include "Collider.h"
 #include <string>
+#include "Object.h"
 
 class Object;
 class ShadowObject;
@@ -164,6 +165,7 @@ public:
 
 	bool GetStill() { if (m_moveDir == STILL) { return true; } else { return false; } };
 	
+	DirectX::XMFLOAT3 GetObjectPos() { return m_obj->m_sprite->m_pos; }
 
 	//オブジェクトを描画する
 	void Draw(void);
