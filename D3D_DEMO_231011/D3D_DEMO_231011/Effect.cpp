@@ -40,7 +40,7 @@ Effect::~Effect()
 void Effect::CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
     //カメラの使用を禁じる
-    isUseCamera = false;
+    //isUseCamera = false;
 
     //モデル作成
     Sprite::CreateModel(texture, _width, _height, splitX, splitY);

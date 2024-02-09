@@ -56,11 +56,11 @@ private:
 	CanvasUI* uiClearMark[3];
 
 	//stage1-1
-	StaticObject* stageBg;		//ステージ背景
-	GameObject* testObj;		//移動テスト用のオブジェクト
-	GameObject* coconut;		//円
-	GameObject* lamp;			//長細の棒
-	GameObject * housePlate;			//長方形
+	StaticObject*	stageBg;		//ステージ背景
+	GameObject*		testObj;		//移動テスト用のオブジェクト
+	GameObject*		coconut;		//円
+	GameObject*		lamp;			//長細の棒
+	GameObject *	housePlate;			//長方形
 
 	std::vector<GameObject*> objectList;
 	GameObject* circle;			//circle
@@ -270,6 +270,9 @@ public:
 	void TestMove(GameObject* _target);
 
 	void FadeUpdate(void);
+
+	//背景を入れ替わる
+	void SetBackGround(ID3D11ShaderResourceView* tex);
 
 };
 

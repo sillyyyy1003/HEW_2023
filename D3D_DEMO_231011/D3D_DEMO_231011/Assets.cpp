@@ -7,15 +7,11 @@ Assets::Assets()
 {
     //===========ここからでテクスチャファイルを追加=============//
     //要注意!! 「L」いりません
-    testPause= LoadTexture("assets/pause.png");
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 
     //test
     //circle = LoadTexture("assets/Tree.png");
     tree = LoadTexture("assets/Tree.png");
-    square = LoadTexture("assets/polygon.png");
-    triangle = LoadTexture("assets/triangle.png");
-    ex = LoadTexture("assets/ex.png");
     shadow = LoadTexture("assets/treeshadow.png");
 
     //title
@@ -67,38 +63,65 @@ Assets::Assets()
 Assets::~Assets()
 {
     //title
+
+    SAFE_RELEASE(tree);
+    SAFE_RELEASE(shadow);
+
+    // 図形
+
+    //タイトル用のリソース
     SAFE_RELEASE(uiTitleBg);
     SAFE_RELEASE(uiTitle);
     SAFE_RELEASE(uiPressEnter);
 
-    //stage1_1
+    //ステージセレクト用
+    SAFE_RELEASE(uiSelectBg);
+    SAFE_RELEASE(uiStageSelect);
+
+    SAFE_RELEASE(uiSelectCursor);
+    SAFE_RELEASE(uiSelectStage1);
+    SAFE_RELEASE(uiSelectStage2);
+    SAFE_RELEASE(uiSelectStage3);
+
+    SAFE_RELEASE(uiSelectChapter1);
+    SAFE_RELEASE(uiSelectChapter2);
+    SAFE_RELEASE(uiSelectChapter3);
+
+    SAFE_RELEASE(uiClear);
+
+
+    //stage1-1用リソース
     SAFE_RELEASE(stageBg);
+
     SAFE_RELEASE(coconut);
-    SAFE_RELEASE(lamp);
-    SAFE_RELEASE(housePlate);
     SAFE_RELEASE(coconutShadow);
+    SAFE_RELEASE(lamp);
     SAFE_RELEASE(lampShadow);
+    SAFE_RELEASE(housePlate);
     SAFE_RELEASE(housePlateShadow);
 
-    SAFE_RELEASE(shadow);
 
-    //ui
-    /*SAFE_RELEASE(railLine);*/
 
-    //pause
+    //ポーズ画面用
     SAFE_RELEASE(uiPauseBg);
     SAFE_RELEASE(uiResume);
     SAFE_RELEASE(uiRestart);
+
     SAFE_RELEASE(uiSelect);
     SAFE_RELEASE(uiSound);
-    SAFE_RELEASE(uiSoundBg);
+
+    //サウンド画面用
+    SAFE_RELEASE(uiSoundBg);//サウンド背景
+    SAFE_RELEASE(uiSoundOp_BGM);//サウンド調節
+    SAFE_RELEASE(uiSoundOp_SE);//サウンド調節
+
 
     SAFE_RELEASE(fade);
 
-    //effect
+    //エフェクト用
     SAFE_RELEASE(effect1);
 
-    SAFE_RELEASE(testPause);
+    //デバッグ用
     SAFE_RELEASE(debugFont);
 }
 

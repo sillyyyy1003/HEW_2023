@@ -13,13 +13,10 @@ public:
 	
 	//================//テスト用//================//
 
-	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
 	ID3D11ShaderResourceView* tree;
 	ID3D11ShaderResourceView* shadow;
+	
 	// 図形
-	ID3D11ShaderResourceView* square;
-	ID3D11ShaderResourceView* triangle;
-	ID3D11ShaderResourceView* ex;
 
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
@@ -71,7 +68,8 @@ public:
 	ID3D11ShaderResourceView* fade;
 
 	//エフェクト用
-	ID3D11ShaderResourceView* effect1;
+	ID3D11ShaderResourceView* effect1;	//炎
+	ID3D11ShaderResourceView* effect2;	//白いカーソル
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		

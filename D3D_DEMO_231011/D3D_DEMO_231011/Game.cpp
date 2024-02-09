@@ -248,19 +248,8 @@ void Game::InitStage()
 
 void Game::InitStage1_1(void)
 {
-	//背景設定->関数化処理
-	stageBg->m_sprite->m_rotation.x = 19.8;//カメラと垂直状態を保持するため
-	stageBg->m_sprite->m_scale = { 2.65,2.65,1.0 };//固定値
-	//y
-	float y = 21.626 - 7 / ROTATEX;
-	y += 1;
-	y = y * ROTATEX;
-	//y座標の導入
-	stageBg->m_sprite->m_pos = { 0.0f,- y,1.0f };
-
+	
 	//位置設定
-	//光源の位置を設定する
-	m_lightPos = { 0,0,-10 };
 
 	//オブジェクトを設定する
 	//CAUTION! 
@@ -1680,4 +1669,19 @@ void Game::TestMove(GameObject* _target)
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		_target->m_obj->m_sprite->m_pos = { 0,0,-2 };
 	}
+}
+
+void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
+
+	//背景設定->関数化処理
+	stageBg->m_sprite->m_rotation.x = 19.8;//カメラと垂直状態を保持するため
+	stageBg->m_sprite->m_scale = { 2.65,2.65,1.0 };//固定値
+	//y
+	float y = 21.626 - 7 / ROTATEX;
+	y += 1;
+	y = y * ROTATEX;
+	//y座標の導入
+	stageBg->m_sprite->m_pos = { 0.0f,-y,1.0f };
+	stageBg->m_sprite->SetTexture(tex);
+
 }
