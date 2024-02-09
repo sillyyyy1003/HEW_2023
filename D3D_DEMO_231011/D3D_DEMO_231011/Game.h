@@ -38,7 +38,7 @@ private:
 	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
 
-	CanvasUI* fade;
+	CanvasUI* fade;//フェード用
 
 	//stage select
 	CanvasUI* uiSelectBg;
@@ -67,6 +67,18 @@ private:
 		BGM,
 		SE,
 	};
+
+	enum SOUNDVOLUME
+	{
+		VOLUME0,
+		VOLUME1,
+		VOLUME2,
+		VOLUME3,
+		VOLUME4,
+		VOLUME5,
+
+	};
+
 
 	//ステージ選択
 	enum SELECTSTAGE
@@ -106,19 +118,21 @@ private:
 	bool isSound = false;
 	//pause
 	bool isPause = false;
-	//Active
-	bool isActive = true;
+	//select
 	bool isSelectChapter = false;
 
 	//初期設定
-	int m_soundVolume_BGM = 3;
-	int m_soundVolume_SE = 3;
+	SOUNDVOLUME soundVolume_BGM = VOLUME3;
+	SOUNDVOLUME soundVolume_SE = VOLUME3;
+
 
 	SOUNDOP soundOp = BGM;
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
 	FADE_STATE fadeState = NO_FADE;
 	PAUSESELECT pauseSelect = RESUME;
+	
+	
 
 private:
 	//コンストラクタ&デストラクタ
@@ -170,8 +184,8 @@ public:
 	void UpdateSelectAnimation(void);
 	void UpdateCursor(void);
 
-	void SelectChapter(void);
-	void SelectStageNone(void);
+	//void SelectChapter(void);
+	//void SelectStageNone(void);
 
 	void SelectStage1(void);
 	void SelectStage2(void);
@@ -220,7 +234,7 @@ public:
 	void SoundOp_BGM(void);	//BGM調節
 	void SoundOp_SE(void);	//SE調節
 
-	void FocusSwitch(void);
+	//void FocusSwitch(void);
 
 	//描画
 	void GameDraw(void);
@@ -260,10 +274,11 @@ public:
 	//影の位置によって並び替え描画する
 	void SortShadowDraw(void);
 
+	void FadeUpdate(void);
 
 	void TestMove(GameObject* _target);
 
-	void FadeUpdate(void);
+
 
 };
 

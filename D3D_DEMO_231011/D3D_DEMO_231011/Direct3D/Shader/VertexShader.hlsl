@@ -18,7 +18,7 @@ struct VS_OUT
 
 // グローバル変数の宣言
 // 定数バッファ受け取り用
-cbuffer ConstBuffer : register(b0)
+cbuffer CONSTBUFFER : register(b0)
 {
     // UV座標移動行列
     matrix matrixUV;

@@ -11,17 +11,19 @@
 // サウンドファイル
 typedef enum
 {
-	SOUND_LABEL_BGM001 = 0,		// サンプルBGM
-	SOUND_LABEL_BGM002,			// サンプルBGM
-	SOUND_LABEL_BGM003,			// サンプルBGM
-	//SOUND_LABEL_SE001,			// サンプルSE
-	//SOUND_LABEL_SE002,			// サンプルSE
-	//SOUND_LABEL_SE003,			// サンプルSE
+	BGM_Stage1 = 0,		// BGM
+	BGM_Stage2,			// BGM
+	BGM_Stage3,			// BGM
+	BGM_SelectStage,	// BGM
+	SE_Select,			// SE
+	SE_SelectDecide,	// SE
 	//SOUND_LABEL_SE004,			// サンプルSE
 	//SOUND_LABEL_SE005,			// サンプルSE
 	//SOUND_LABEL_SE006,			// サンプルSE
 	//SOUND_LABEL_SE007,			// サンプルSE
-	SOUND_LABEL_MAX,
+
+
+	SOUND_LABEL_LAST,
 } SOUND_LABEL;
 
 //*****************************************************************************
@@ -42,5 +44,7 @@ void XA_Stop(SOUND_LABEL label);
 
 // 引数で指定したサウンドの再生を再開する
 void XA_Resume(SOUND_LABEL label);
+
+void XA_SetVolume(SOUND_LABEL label, float volume);
 
 #endif

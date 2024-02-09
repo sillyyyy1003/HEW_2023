@@ -87,6 +87,9 @@ public:
 	///コンストラクタ
 	Sprite(void);
 
+	// シングルトン
+	static Sprite* Get();
+
 	/// <summary>
 	/// モデルの作成
 	/// </summary>

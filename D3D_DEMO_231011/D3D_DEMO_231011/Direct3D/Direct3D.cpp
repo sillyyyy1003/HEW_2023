@@ -361,6 +361,9 @@ void D3D_ClearScreen(void)
     UINT offsets = 0;
     GetD3D_Context()->IASetInputLayout(GetD3D_DATA()->InputLayout);
 
+    // マテリアル色を定数バッファにセット
+    CONSTBUFFER cb;
+    cb.materialDiffuse = Sprite::Get()->m_materialDiffuse;
 
     GetD3D_Context()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     GetD3D_Context()->VSSetShader(GetD3D_DATA()->VertexShader, NULL, 0);
@@ -374,7 +377,7 @@ void D3D_ClearScreen(void)
     GetD3D_Context()->VSSetConstantBuffers(0, 1, &g_ConstBuffer);
     //定数バッファをピクセルシェーダーににセットする
     GetD3D_Context()->PSSetConstantBuffers(0, 1, &g_ConstBuffer);
-
+    
 
 }
 

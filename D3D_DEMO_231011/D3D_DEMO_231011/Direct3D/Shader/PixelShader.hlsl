@@ -15,7 +15,7 @@ Texture2D myTexture : register(t0); //テクスチャー
 SamplerState mySampler : register(s0); //サンプラー
 
 // 定数バッファ受け取り用
-cbuffer ConstBuffer : register(b0)
+cbuffer CONSTBUFFER : register(b0)
 {
     // UV座標移動行列
     matrix matrixTex;

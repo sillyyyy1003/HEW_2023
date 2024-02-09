@@ -11,6 +11,12 @@ Sprite::Sprite(void)
 {
 }
 
+Sprite* Sprite::Get()
+{
+	static Sprite instance;
+	return& instance;
+}
+
 void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
 {
 	//縦横分割を設定

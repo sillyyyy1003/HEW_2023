@@ -94,6 +94,7 @@ void Game::Init()
 		uiClearMark[i]->CreateModel(g_Assets->uiClear, 300, 300, 1, 1);
 	}
 
+
 	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
 
 
@@ -160,12 +161,26 @@ void Game::Init()
 	uiSoundBg->m_pos = { 0.0f, 0.0f, 0.9f };
 	uiSoundBg->m_scale = { 0.9f,0.9f,1.0f };
 
-	fade->m_pos = { 0.0,0.0,-0.9 };
+	//fade
+	fade->m_pos = { 0.0f,0.0f,-0.9f };
+	fade->m_scale = { 4.0f,3.0f,1.0f };
+
+
 
 
 	//配列の初期化と設定
 	InitSoundArray();
 	InitSelectArray();
+
+
+	// サウンド初期化
+	HRESULT hr;
+	hr = XA_Initialize();
+	if (FAILED(hr))
+	{
+		MessageBoxA(NULL, "サウンド初期化失敗", "エラー", MB_OK | MB_ICONERROR);
+	}
+
 
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
 	RailManager::Get()->InitRail();
@@ -175,11 +190,15 @@ void Game::Init()
 
 void Game::InitStage()
 {
+
+
 	RailManager::Get()->InitRailPos();
 	//ステージの初期化
 	switch (SceneManager::Get()->GetStage()) {
 
 	case STAGE1_1:
+
+		XA_Play(BGM_Stage1);//サウンド再生
 
 		InitStage1_1();
 
@@ -187,11 +206,15 @@ void Game::InitStage()
 
 	case STAGE1_2:
 
+		XA_Play(BGM_Stage2);//サウンド再生
+
 		InitStage1_2();
 
 		break;
 
 	case STAGE1_3:
+
+		XA_Play(BGM_Stage3);//サウンド再生
 
 		InitStage1_3();
 
@@ -464,7 +487,6 @@ void Game::InitSoundArray()
 	}
 }
 
-
 void Game::InitSelectArray()
 {
 	//テクスチャ割り当て
@@ -489,6 +511,8 @@ void Game::InitSelectArray()
 	selectStage = STAGE1;
 
 }
+
+
 void Game::TitleUpdate(void)
 {	
 	/*
@@ -554,9 +578,13 @@ void Game::SelectUpdate(void)
 	//入力処理
 	//
 	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+		
+		XA_Play(SE_Select);//選択SE再生
+
 
 		//ステージをを選択する場合
 		if (isSelectChapter == false) {
+
 			switch (selectStage)
 			{
 			case Game::SELECTNONE:
@@ -595,7 +623,11 @@ void Game::SelectUpdate(void)
 	}
 
 	if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+		
+		XA_Play(SE_Select);//選択SE再生
+		
 		if (isSelectChapter == false) {
+
 			switch (selectStage)
 			{
 			case Game::SELECTNONE:
@@ -648,6 +680,8 @@ void Game::SelectUpdate(void)
 
 	//スペースキー押して進む
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		
+		XA_Play(SE_SelectDecide);//決定SE再生
 
 		if (!isSelectChapter) {
 			isSelectChapter = true;
@@ -794,7 +828,6 @@ void Game::SelectStage3(void) {
 
 void Game::StageUpdate(void)
 {
-
 	//Input
 
 	if (!isPause) {
@@ -808,7 +841,7 @@ void Game::StageUpdate(void)
 		case STAGE1_1:
 
 			UpdateStage1_1();
-
+			
 			break;
 
 		case STAGE1_2:
@@ -940,6 +973,7 @@ void Game::GameUpdate(void)
 {
 	//入力処理　XXキー押して、移動させるオブジェクトをスイッチ
 
+
 	//オブジェクトUpdate
 
 	switch (SceneManager::Get()->GetScene()) {
@@ -948,10 +982,22 @@ void Game::GameUpdate(void)
 		break;
 
 	case SCENENAME::STAGESELECT:
+
+		//セレクトにいくとサウンド停止
+		XA_Stop(BGM_Stage1);
+		XA_Stop(BGM_Stage2);
+		XA_Stop(BGM_Stage3);
+
 		SelectUpdate();
 		break;
 
 	case SCENENAME::STAGE:
+		
+		//ステージにいくとセレクトBGM停止
+		XA_Stop(BGM_SelectStage);
+		//XA_Stop(SE_Select);
+		//XA_Stop(SE_SelectDecide);
+
 		StageUpdate();
 		break;
 
@@ -960,13 +1006,14 @@ void Game::GameUpdate(void)
 		break;
 	}
 
-
 }
 
 
 
 Game::~Game()
 {
+	XA_Release();//サウンド解放
+
 	delete uiTitle;		//タイトル文字
 	delete uiTitleBg;		//タイトル背景
 	delete uiPressEnter;	//タイトルエンターキー
@@ -1145,20 +1192,26 @@ void Game::SoundVolume(void)
 {
 	if (Input::Get()->GetKeyTrigger(DIK_UP))
 	{
-		soundOp = BGM;
+		if (soundOp==SE)
+		{
+			soundOp = BGM;
+		}
 	}
 	if (Input::Get()->GetKeyTrigger(DIK_DOWN))
 	{
-		soundOp = SE;
+		if (soundOp==BGM)
+		{
+			soundOp = SE;
+		}
 	}
 
 	switch (soundOp)
 	{
-	case Game::BGM:
+	case BGM:
 		SoundOp_BGM();
 		break;
 
-	case Game::SE:
+	case SE:
 		SoundOp_SE();
 		break;
 	}
@@ -1175,46 +1228,210 @@ void Game::SoundVolume(void)
 
 void Game::SoundOp_BGM(void)
 {
-	if (m_soundVolume_BGM >= 0)
+	
+	if (Input::Get()->GetKeyTrigger(DIK_LEFT))
 	{
-		if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+		XA_Play(SE_Select);
+
+		switch (soundVolume_BGM)
 		{
-			m_soundVolume_BGM--;
+		case VOLUME0:
+			XA_SetVolume(BGM_SelectStage, 0.0f);
+			XA_SetVolume(BGM_Stage1, 0.0f);
+			XA_SetVolume(BGM_Stage2, 0.0f);
+			XA_SetVolume(BGM_Stage3, 0.0f);
+			break;
+
+		case VOLUME1:
+			soundVolume_BGM = VOLUME0;
+			XA_SetVolume(BGM_SelectStage, 0.2f);
+			XA_SetVolume(BGM_Stage1, 0.2f);
+			XA_SetVolume(BGM_Stage2, 0.2f);
+			XA_SetVolume(BGM_Stage3, 0.2f);
+			break;
+
+		case VOLUME2:
+			soundVolume_BGM = VOLUME1;
+			XA_SetVolume(BGM_SelectStage, 0.4f);
+			XA_SetVolume(BGM_Stage1, 0.4f);
+			XA_SetVolume(BGM_Stage2, 0.4f);
+			XA_SetVolume(BGM_Stage3, 0.4f);
+			break;
+
+		case VOLUME3:
+			soundVolume_BGM = VOLUME2;
+			XA_SetVolume(BGM_SelectStage, 0.6f);
+			XA_SetVolume(BGM_Stage1, 0.6f);
+			XA_SetVolume(BGM_Stage2, 0.6f);
+			XA_SetVolume(BGM_Stage3, 0.6f);
+			break;
+
+		case VOLUME4:
+			soundVolume_BGM = VOLUME3;
+			XA_SetVolume(BGM_SelectStage, 0.8f);
+			XA_SetVolume(BGM_Stage1, 0.8f);
+			XA_SetVolume(BGM_Stage2, 0.8f);
+			XA_SetVolume(BGM_Stage3, 0.8f);
+			break;
+
+		case VOLUME5:
+			soundVolume_BGM = VOLUME4;
+			XA_SetVolume(BGM_SelectStage, 1.0f);
+			XA_SetVolume(BGM_Stage1, 1.0f);
+			XA_SetVolume(BGM_Stage2, 1.0f);
+			XA_SetVolume(BGM_Stage3, 1.0f);
+			break;
 		}
 	}
-	if (m_soundVolume_BGM <= 5)
+
+
+	if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
 	{
-		if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+		XA_Play(SE_Select);
+
+		switch (soundVolume_BGM)
 		{
-			m_soundVolume_BGM++;
+		case VOLUME0:
+			soundVolume_BGM = VOLUME1;
+			XA_SetVolume(BGM_SelectStage, 0.0f);
+			XA_SetVolume(BGM_Stage1, 0.0f);
+			XA_SetVolume(BGM_Stage2, 0.0f);
+			XA_SetVolume(BGM_Stage3, 0.0f);
+			break;
+
+		case VOLUME1:
+			soundVolume_BGM = VOLUME2;
+			XA_SetVolume(BGM_SelectStage, 0.2f);
+			XA_SetVolume(BGM_Stage1, 0.2f);
+			XA_SetVolume(BGM_Stage2, 0.2f);
+			XA_SetVolume(BGM_Stage3, 0.2f);
+			break;
+
+		case VOLUME2:
+			soundVolume_BGM = VOLUME3;
+			XA_SetVolume(BGM_SelectStage, 0.4f);
+			XA_SetVolume(BGM_Stage1, 0.4f);
+			XA_SetVolume(BGM_Stage2, 0.4f);
+			XA_SetVolume(BGM_Stage3, 0.4f);
+			break;
+
+		case VOLUME3:
+			soundVolume_BGM = VOLUME4;
+			XA_SetVolume(BGM_SelectStage, 0.6f);
+			XA_SetVolume(BGM_Stage1, 0.6f);
+			XA_SetVolume(BGM_Stage2, 0.6f);
+			XA_SetVolume(BGM_Stage3, 0.6f);
+			break;
+
+		case VOLUME4:
+			soundVolume_BGM = VOLUME5;
+			XA_SetVolume(BGM_SelectStage, 0.8f);
+			XA_SetVolume(BGM_Stage1, 0.8f);
+			XA_SetVolume(BGM_Stage2, 0.8f);
+			XA_SetVolume(BGM_Stage3, 0.8f);
+			break;
+
+		case VOLUME5:
+			XA_SetVolume(BGM_SelectStage, 1.0f);
+			XA_SetVolume(BGM_Stage1, 1.0f);
+			XA_SetVolume(BGM_Stage2, 1.0f);
+			XA_SetVolume(BGM_Stage3, 1.0f);
+			break;
 		}
 	}
-	else if (m_soundVolume_BGM >= 5)
-	{
-		m_soundVolume_BGM = 5;
-	}
+
 }
 
 void Game::SoundOp_SE(void)
 {
-	if (m_soundVolume_SE >= 0)
+
+	if (Input::Get()->GetKeyTrigger(DIK_LEFT))
 	{
-		if (Input::Get()->GetKeyTrigger(DIK_LEFT))
+		XA_Play(SE_Select);
+
+		switch (soundVolume_SE)
 		{
-			m_soundVolume_SE--;
+		case VOLUME0:
+			XA_SetVolume(SE_Select, 0.0f);
+			XA_SetVolume(SE_SelectDecide, 0.0f);
+			break;
+
+		case VOLUME1:
+			soundVolume_SE = VOLUME0;
+			XA_SetVolume(SE_Select, 0.2f);
+			XA_SetVolume(SE_SelectDecide, 0.2f);
+			break;
+
+		case VOLUME2:
+			soundVolume_SE = VOLUME1;
+			XA_SetVolume(SE_Select, 0.4f);
+			XA_SetVolume(SE_SelectDecide, 0.4f);
+			break;
+
+		case VOLUME3:
+			soundVolume_SE = VOLUME2;
+			XA_SetVolume(SE_Select, 0.6f);
+			XA_SetVolume(SE_SelectDecide, 0.6f);
+			break;
+
+		case VOLUME4:
+			soundVolume_SE = VOLUME3;
+			XA_SetVolume(SE_Select, 0.8f);
+			XA_SetVolume(SE_SelectDecide, 0.8f);
+			break;
+
+		case VOLUME5:
+			soundVolume_SE = VOLUME4;
+			XA_SetVolume(SE_Select, 1.0f);
+			XA_SetVolume(SE_SelectDecide, 1.0f);
+			break;
 		}
 	}
-	if (m_soundVolume_SE <= 5)
+
+	if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
 	{
-		if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
+		XA_Play(SE_Select);
+
+		switch (soundVolume_SE)
 		{
-			m_soundVolume_SE++;
+		case VOLUME0:
+			soundVolume_SE = VOLUME1;
+			XA_SetVolume(SE_Select, 0.0f);
+			XA_SetVolume(SE_SelectDecide, 0.0f);
+			break;
+
+		case VOLUME1:
+			soundVolume_SE = VOLUME2;
+			XA_SetVolume(SE_Select, 0.2f);
+			XA_SetVolume(SE_SelectDecide, 0.2f);
+			break;
+
+		case VOLUME2:
+			soundVolume_SE = VOLUME3;
+			XA_SetVolume(SE_Select, 0.4f);
+			XA_SetVolume(SE_SelectDecide, 0.4f);
+			break;
+
+		case VOLUME3:
+			soundVolume_SE = VOLUME4;
+			XA_SetVolume(SE_Select, 0.6f);
+			XA_SetVolume(SE_SelectDecide, 0.6f);
+			break;
+
+		case VOLUME4:
+			soundVolume_SE = VOLUME5;
+			XA_SetVolume(SE_Select, 0.8f);
+			XA_SetVolume(SE_SelectDecide, 0.8f);
+			break;
+
+		case VOLUME5:
+			XA_SetVolume(SE_Select, 1.0f);
+			XA_SetVolume(SE_SelectDecide, 1.0f);
+			break;
 		}
 	}
-	else if (m_soundVolume_SE >= 5)
-	{
-		m_soundVolume_SE = 5;
-	}
+
+
 }
 
 
@@ -1490,46 +1707,40 @@ void Game::SoundVolumeDraw(void)
 	if (soundOp == BGM || soundOp == SE)
 	{
 
+		
 		//BGM音量調節描画
-		switch (m_soundVolume_BGM)
+		switch (soundVolume_BGM)
 		{
-		case 0:
+		case VOLUME0:
 			//何も描画しない
 			break;
 
-		case 1:
+		case VOLUME1:
 			uiSoundOp_BGM[1]->Draw();
 			break;
 
-		case 2:
+		case VOLUME2:
 			for (int i = 1; i < 3; i++)
 			{
 				uiSoundOp_BGM[i]->Draw();
-			}
+			}	
 			break;
 
-		case 3:
+		case VOLUME3:
 			for (int i = 1; i < 4; i++)
 			{
 				uiSoundOp_BGM[i]->Draw();
 			}
 			break;
 
-		case 4:
+		case VOLUME4:
 			for (int i = 1; i < 5; i++)
 			{
 				uiSoundOp_BGM[i]->Draw();
 			}
 			break;
 
-		case 5:
-			for (int i = 1; i < 6; i++)
-			{
-				uiSoundOp_BGM[i]->Draw();
-			}
-			break;
-
-		case 6:
+		case VOLUME5:
 			for (int i = 1; i < 6; i++)
 			{
 				uiSoundOp_BGM[i]->Draw();
@@ -1537,53 +1748,53 @@ void Game::SoundVolumeDraw(void)
 			break;
 
 		}
+		
 
+
+
+		
 		//SE音量調節描画
-		switch (m_soundVolume_SE)
+		switch (soundVolume_SE)
 		{
-		case 0:
+		case VOLUME0:
 			//何も描画しない
 			break;
 
-		case 1:
+		case VOLUME1:
 			uiSoundOp_SE[1]->Draw();
 			break;
 
-		case 2:
+		case VOLUME2:
 			for (int i = 1; i < 3; i++)
 			{
 				uiSoundOp_SE[i]->Draw();
 			}
 			break;
 
-		case 3:
+		case VOLUME3:
 			for (int i = 1; i < 4; i++)
 			{
 				uiSoundOp_SE[i]->Draw();
 			}
 			break;
 
-		case 4:
+		case VOLUME4:
 			for (int i = 1; i < 5; i++)
 			{
 				uiSoundOp_SE[i]->Draw();
 			}
 			break;
 
-		case 5:
+		case VOLUME5:
 			for (int i = 1; i < 6; i++)
 			{
 				uiSoundOp_SE[i]->Draw();
 			}
 			break;
+		}	
+		
 
-		case 6:
-			for (int i = 1; i < 6; i++)
-			{
-				uiSoundOp_SE[i]->Draw();
-			}
-			break;
-		}
+
 	}
 }
 
@@ -1625,7 +1836,7 @@ void Game::FadeUpdate()
 		if (fade->m_materialDiffuse.w <= 0.0f)
 		{
 			fadeState = NO_FADE;
-			isActive = false;
+			fade->SetActive(false);
 		}
 	}
 	else if (fadeState == FADE_OUT)
@@ -1634,11 +1845,23 @@ void Game::FadeUpdate()
 
 		if (fade->m_materialDiffuse.w >= 1.0f)
 		{
-			SceneManager::Get()->SetScene(SceneManager::Get()->Scene::GetNexScene());
-			fadeState = FADE_IN;
+			SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
 		}
 	}
 }
+
+//if (!SceneManager::Get()->GetScene())
+//{
+//	SceneManager::Get()->SetNextScene(SceneManager::Get()->GetNextScene());
+//	fadeState = FADE_OUT;
+//	fade->SetActive(true);
+//}
+//else
+//{
+//	SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+//	fadeState = FADE_IN;
+//
+//}
 
 void Game::TestMove(GameObject* _target)
 {

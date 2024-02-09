@@ -19,6 +19,7 @@ public:
 
 	~CanvasUI();
 
+
 	//モデル作成・アニメーション配置・カメラ使用
 	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY) override;
 
@@ -31,5 +32,7 @@ public:
 	void SetActive(bool status) { isActive = status; };
 
 	void Draw(void) override;
+
+	
 };
 
