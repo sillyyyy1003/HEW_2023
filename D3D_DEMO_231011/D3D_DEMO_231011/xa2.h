@@ -15,11 +15,12 @@ typedef enum
 	BGM_Stage2,			// BGM
 	BGM_Stage3,			// BGM
 	BGM_SelectStage,	// BGM
+
 	SE_Select,			// SE
 	SE_SelectDecide,	// SE
-	//SOUND_LABEL_SE004,			// サンプルSE
-	//SOUND_LABEL_SE005,			// サンプルSE
-	//SOUND_LABEL_SE006,			// サンプルSE
+	SE_Move,			// SE
+	SE_Present,			// SE
+	SE_Combine,			// SE
 	//SOUND_LABEL_SE007,			// サンプルSE
 
 
@@ -45,6 +46,7 @@ void XA_Stop(SOUND_LABEL label);
 // 引数で指定したサウンドの再生を再開する
 void XA_Resume(SOUND_LABEL label);
 
+// 引数で指定したサウンドの音量を数値で設定する
 void XA_SetVolume(SOUND_LABEL label, float volume);
 
 #endif

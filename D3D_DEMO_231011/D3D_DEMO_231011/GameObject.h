@@ -89,6 +89,8 @@ public:
 	//コンストラクタ
 	GameObject();
 
+	static GameObject* Get();
+
 	/// <summary>
 	/// オブジェクトのモデルを作る
 	/// </summary>

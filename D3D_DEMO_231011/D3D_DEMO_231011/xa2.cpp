@@ -15,15 +15,16 @@ typedef struct
 
 PARAM g_param[SOUND_LABEL_LAST] =
 {
-	{"assets/sound/bgm/stage1.wav", true},		// BGM（ループさせるのでtrue設定）
+	{"assets/sound/bgm/stage1.wav", true},		// BGM
 	{"assets/sound/bgm/stage2.wav", true},		// BGM
 	{"assets/sound/bgm/stage3.wav", true},		// BGM
 	{"assets/sound/bgm/selectBGM.wav", true},	// BGM
+
 	{"assets/sound/se/selectSE.wav", false},	// SE
 	{"assets/sound/se/decideSE.wav", false},	// SE
-	//{"asset/sound/se/laser0.wav", false},		// サンプルSE
-	//{"asset/sound/se/lockon0.wav", false},	// サンプルSE
-	//{"asset/sound/se/shot0.wav", false},		// サンプルSE
+	{"assets/sound/se/moveSE.wav", false},		// SE
+	{"assets/sound/se/presentSE.wav", false},	// SE
+	{"assets/sound/se/combineSE.wav", false},	// SE
 };
 
 #ifdef _XBOX //Big-Endian
@@ -217,6 +218,8 @@ void XA_SetVolume(SOUND_LABEL label,float volume)
 	IXAudio2SourceVoice*& pSV = g_pSourceVoice[(int)label];
 	pSV->SetVolume(volume);
 }
+
+
 
 
 //=============================================================================
