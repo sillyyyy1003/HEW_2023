@@ -67,6 +67,12 @@ void Game::Init()
 	housePlate = new GameObject();
 	testObj = new GameObject();
 
+	//stage1-2
+	stage2Bg = new StaticObject();
+	bulidingblock = new GameObject();
+	lamp2 = new GameObject();
+	iphone = new GameObject();
+
 	//EFFECT
 	testEffect = new Effect(28);
 
@@ -75,6 +81,11 @@ void Game::Init()
 	coconut->SetName("coconut");
 	lamp->SetName("lamp");
 	housePlate->SetName("housePlate");
+
+	//stage2に使われてる
+	bulidingblock->SetName("bulidingblock");
+	lamp2->SetName("lamp2");
+	iphone->SetName("iphone");
 
 	//テクスチャ読み込み・モデル作成
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
@@ -111,13 +122,27 @@ void Game::Init()
 	lamp->CreateShadow(g_Assets->lampShadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
 	housePlate->CreateObject(g_Assets->housePlate, 110, 216, 1, 1);
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
-	
+
+	//1-2
+	stage2Bg->CreateObject(g_Assets->stage2Bg, 1280, 720, 1, 1);
+	bulidingblock->CreateObject(g_Assets->bulidingblock, 190, 192, 1, 1);
+	bulidingblock->CreateShadow(g_Assets->bulidingblockShadow, 158, 159, 1, 1, COLLISION_TYPE::SQUARE);
+	lamp2->CreateObject(g_Assets->lamp2, 216, 579, 1, 1);
+	lamp2->CreateShadow(g_Assets->lamp2Shadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
+	iphone->CreateObject(g_Assets->iphone, 110, 216, 1, 1);
+	iphone->CreateShadow(g_Assets->iphoneShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
+
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 7);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
 	lamp->InitAnimation();
 	housePlate->InitAnimation();
+
+	//1-2
+	bulidingblock->InitAnimation();
+	lamp2->InitAnimation();
+	iphone->InitAnimation();
 		
 
 
@@ -193,12 +218,13 @@ void Game::InitStage()
 	case STAGE1_1:
 
 		InitStage1_1();
+		//InitStage1_2();
 
 		break;
 
 	case STAGE1_2:
 
-		InitStage1_2();
+		//InitStage1_2();
 
 		break;
 
@@ -250,7 +276,7 @@ void Game::InitStage1_1(void)
 {
 	
 	//位置設定
-
+	SetBackGround(g_Assets->stageBg);
 	//オブジェクトを設定する
 	//CAUTION! 
 	//本体y軸固定->-1
@@ -311,6 +337,60 @@ void Game::InitStage1_1(void)
 
 void Game::InitStage1_2(void)
 {
+	//位置設定
+	SetBackGround(g_Assets->stage2Bg);
+	//オブジェクトを設定する
+	//CAUTION! 
+	//本体y軸固定->-1
+	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
+	//X:LEFT2:-9 LEFT1:-4.5 MIDDLE:0.0 RIGHT1:4.5 RIGHT2:9
+	//本体 
+	bulidingblock->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
+	lamp2->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
+	iphone->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-7.5f };
+
+	bulidingblock->m_shadow->m_sprite->m_pos.z = 0.0f;
+	lamp2->m_shadow->m_sprite->m_pos.z = -0.1f;
+	iphone->m_shadow->m_sprite->m_pos.z = -0.2f;
+
+
+	//影のy軸
+	bulidingblock->m_shadow->m_sprite->m_pos.y = 7.2f;
+	lamp2->m_shadow->m_sprite->m_pos.y = 4.4f;
+	iphone->m_shadow->m_sprite->m_pos.y = 2.4f;
+
+
+	//レール上の位置を設定する
+	bulidingblock->SetRailPos(1, 1);
+	lamp2->SetRailPos(2, 0);
+	iphone->SetRailPos(1, 0);
+
+	//回転設定
+
+	//objectListを初期化
+	objectList.clear();
+	objectList.shrink_to_fit();
+	objectList.push_back(bulidingblock);
+	objectList.push_back(lamp2);
+	objectList.push_back(iphone);
+
+	//レールの設定
+	RailManager::Get()->InitRail();
+	RailInit1_2();
+
+	//ステージ情報を初期化
+	for (int i = 0; i < 9; i++) {
+		//全部のステージを無効かにする
+		SceneManager::Get()->m_stageHolder[i]->Init();
+
+	}
+	//使うステージだけ起動
+	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_2]->SetActive(true);
+
+	//移動ターゲットを設定
+	bulidingblock->SetActive(true);
+
+	//自動移動や自動回転の設定
 }
 
 void Game::InitStage1_3(void)
@@ -419,6 +499,52 @@ void Game::RailInit1_1(void)
 
 void Game::RailInit1_2(void)
 {
+	//1-2用
+	bool railData[15][8]{
+		//back row
+		//up	ru  r	rd d	ld l	lu
+		{	0,	0,	1,	0,	0,	0,	0,	0},//0
+		{	0,	0,	1,	0,	0,	0,	0,	0},//1
+		{	0,	0,	1,	0,	1,	0,	1,	0},//2
+		{	0,	0,	1,	0,	0,	0,	1,	0},//3
+		{	0,	0,	0,	0,	0,	0,	1,	0},//4
+
+		//mid row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	1,	0,	0,	0,	1,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+
+		//front row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	1,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+	};
+
+
+
+	//道を設定する
+	for (int i = 0; i < 15; i++) {
+
+		for (int j = 0; j < 8; j++) {
+
+			if (railData[i][j] == 0) {
+
+				RailManager::Get()->m_info[i].isMoveable[j] = false;
+			}
+			else {
+				RailManager::Get()->m_info[i].isMoveable[j] = true;
+			}
+
+		}
+
+	}
+
+	//オブジェクトいるところの位置情報更新
+	RailManager::Get()->InitRailPos();
 }
 
 
@@ -829,6 +955,7 @@ void Game::StageUpdate(void)
 
 		case STAGE1_2:
 
+			//UpdateStage1_2();
 
 			break;
 
@@ -887,9 +1014,9 @@ void Game::UpdateStage1_1(void)
 	stageBg->Update();
 
 	
-	for (auto& element : objectList) {
-		element->Update();
-	}
+	//for (auto& element : objectList) {
+	//	element->Update();
+	//}
 
 
 	//クリア判定
@@ -901,6 +1028,19 @@ void Game::UpdateStage1_1(void)
 
 void Game::UpdateStage1_2(void)
 {
+	//背景
+	stage2Bg->Update();
+
+
+	for (auto& element : objectList) {
+		element->Update();
+	}
+
+
+	//クリア判定
+	if (ColliderManager::Get()->ClearCollision({ OVERLAP,COL_DOWN }, "bulidingblock", "iphone", ShadowObject::MEDIUM)) {
+		//isPause = true;bulidingblockbulidingblock
+	}
 }
 
 void Game::UpdateStage1_3(void)
@@ -997,6 +1137,11 @@ Game::~Game()
 	delete coconut;
 	delete lamp;
 	delete housePlate;
+
+	delete bulidingblock;
+	delete iphone;
+	delete lamp2;
+	delete stage2Bg;
 
 	delete testEffect;
 
@@ -1314,7 +1459,7 @@ void Game::StageDraw(void)
 		break;
 
 	case STAGE1_2:
-
+		//DrawStage1_2();
 
 		break;
 
@@ -1464,6 +1609,104 @@ void Game::DrawStage1_1()
 
 }
 
+void Game::DrawStage1_2()
+{
+	stage2Bg->Draw();
+
+	//描画の順番を並び変え
+
+	//影
+	SortShadowDraw();
+
+	//オブジェクト
+	SortObjectDraw();
+
+	char step[6] = "STEP:";
+	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
+	g_DebugManager->PrintDebugLog(posX, posY, step);
+
+	posX = (-SCREEN_WIDTH / 2 + 40.0f + 120.0f) / SCREEN_PARA;
+
+	g_DebugManager->PrintDebugLog(posX, posY, SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+	//posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	//posY = ((SCREEN_HEIGHT / 2) - 80.0f) / SCREEN_PARA;
+	//g_DebugManager->PrintDebugLog(posX, posY, lamp->m_shadowCollider->m_center.y);
+
+	//posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	//posY = ((SCREEN_HEIGHT / 2) - 120.0f) / SCREEN_PARA;
+	//g_DebugManager->PrintDebugLog(posX, posY, lamp->m_shadowCollider->m_center.z);
+
+	//レール上どこが空いてるのを可視化
+	posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
+	posY = ((SCREEN_HEIGHT / 2) - 160.0f) / SCREEN_PARA;
+	char pointInfo1[20] = {};
+	for (int i = 0; i < 5; i++) {
+		if (RailManager::Get()->m_info[i].isVacant) {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
+			strcat_s(pointInfo1, tempStr);
+
+		}
+		else {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
+			strcat_s(pointInfo1, tempStr);
+		}
+
+	}
+	char pointInfo2[20] = {};
+	for (int i = 5; i < 10; i++) {
+		if (RailManager::Get()->m_info[i].isVacant) {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
+			strcat_s(pointInfo2, tempStr);
+
+		}
+		else {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
+			strcat_s(pointInfo2, tempStr);
+		}
+
+	}
+	char pointInfo3[20] = {};
+	for (int i = 10; i < 15; i++) {
+		if (RailManager::Get()->m_info[i].isVacant) {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
+			strcat_s(pointInfo3, tempStr);
+
+		}
+		else {
+			char tempStr[3];
+			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
+			strcat_s(pointInfo3, tempStr);
+		}
+
+	}
+	g_DebugManager->PrintDebugLog(posX, posY, pointInfo1);
+	posY = ((SCREEN_HEIGHT / 2) - 200.0f) / SCREEN_PARA;
+	g_DebugManager->PrintDebugLog(posX, posY, pointInfo2);
+	posY = ((SCREEN_HEIGHT / 2) - 240.0f) / SCREEN_PARA;
+	g_DebugManager->PrintDebugLog(posX, posY, pointInfo3);
+
+	//今移動しているオブジェクト
+	for (auto& element : objectList) {
+
+		if (element->GetActive()) {
+			posX = 0.0f;
+			posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
+			char name[32] = {};
+			strcpy_s(name, element->GetName().c_str());
+			g_DebugManager->PrintDebugLog(posX, posY, name);
+			break;
+
+		}
+
+	}
+
+}
 
 void Game::ResultDraw(void)
 {

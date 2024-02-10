@@ -40,6 +40,17 @@ Assets::Assets()
     housePlate = LoadTexture("assets/stage1/housePlate.png");
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
+    //stage1_2
+    stage2Bg = LoadTexture("assets/stage2/1_2_Bg.png");
+
+    bulidingblock = LoadTexture("assets/stage2/1_2_bulidingblock.png");
+    bulidingblockShadow = LoadTexture("assets/stage2/1-2_buldingblock_shadow.png");
+    iphone = LoadTexture("assets/stage2/1_2_iphone.png");
+    iphoneShadow = LoadTexture("assets/stage2/1-2_iphone_shadow.png");
+    lamp2 = LoadTexture("assets/stage2/1_2_lamp.png");
+    lamp2Shadow = LoadTexture("assets/stage2/1_2_lamp_shadow.png");
+    diamondShadow = LoadTexture("assets/stage2/1_2_diamond_shadow.png");
+
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
@@ -99,6 +110,17 @@ Assets::~Assets()
     SAFE_RELEASE(lampShadow);
     SAFE_RELEASE(housePlate);
     SAFE_RELEASE(housePlateShadow);
+
+    //stage1-2用リソース
+    SAFE_RELEASE(stage2Bg);
+
+    SAFE_RELEASE(bulidingblock);
+    SAFE_RELEASE(bulidingblockShadow);
+    SAFE_RELEASE(iphone);
+    SAFE_RELEASE(iphoneShadow);
+    SAFE_RELEASE(lamp2);
+    SAFE_RELEASE(lamp2Shadow);
+    SAFE_RELEASE(diamondShadow);
 
 
 

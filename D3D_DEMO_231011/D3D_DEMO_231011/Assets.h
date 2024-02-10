@@ -48,6 +48,17 @@ public:
 	ID3D11ShaderResourceView* lampShadow;
 	ID3D11ShaderResourceView* housePlate;
 	ID3D11ShaderResourceView* housePlateShadow;
+
+	//stage1-2用リソース
+	ID3D11ShaderResourceView* stage2Bg;
+
+	ID3D11ShaderResourceView* bulidingblock;
+	ID3D11ShaderResourceView* bulidingblockShadow;
+	ID3D11ShaderResourceView* iphone;
+	ID3D11ShaderResourceView* iphoneShadow;
+	ID3D11ShaderResourceView* lamp2;
+	ID3D11ShaderResourceView* lamp2Shadow;
+	ID3D11ShaderResourceView* diamondShadow;
 	
 
 

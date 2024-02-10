@@ -62,6 +62,12 @@ private:
 	GameObject*		lamp;			//長細の棒
 	GameObject *	housePlate;			//長方形
 
+	//stage1-2
+	StaticObject* stage2Bg;		//ステージ背景
+	GameObject* bulidingblock;	//三角
+	GameObject* iphone;			//平行四辺形（四角）
+	GameObject* lamp2;		    //台形（四角）
+
 	std::vector<GameObject*> objectList;
 	GameObject* circle;			//circle
 
