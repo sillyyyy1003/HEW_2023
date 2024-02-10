@@ -368,11 +368,11 @@ void Game::InitStage1_2(void)
 	//回転設定
 
 	//objectListを初期化
-	objectList.clear();
-	objectList.shrink_to_fit();
-	objectList.push_back(bulidingblock);
-	objectList.push_back(lamp2);
-	objectList.push_back(iphone);
+	//objectList.clear();
+	//objectList.shrink_to_fit();
+	//objectList.push_back(bulidingblock);
+	//objectList.push_back(lamp2);
+	//objectList.push_back(iphone);
 
 	//レールの設定
 	RailManager::Get()->InitRail();
@@ -1014,9 +1014,12 @@ void Game::UpdateStage1_1(void)
 	stageBg->Update();
 
 	
-	//for (auto& element : objectList) {
-	//	element->Update();
-	//}
+	for (auto& element : objectList) {
+		if (element->m_shadowCollider)
+		{
+			element->Update();
+		}
+	}
 
 
 	//クリア判定
