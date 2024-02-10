@@ -217,8 +217,8 @@ void Game::InitStage()
 
 	case STAGE1_1:
 
-		InitStage1_1();
-		//InitStage1_2();
+		//InitStage1_1();
+		InitStage1_2();
 
 		break;
 
@@ -368,11 +368,11 @@ void Game::InitStage1_2(void)
 	//回転設定
 
 	//objectListを初期化
-	//objectList.clear();
-	//objectList.shrink_to_fit();
-	//objectList.push_back(bulidingblock);
-	//objectList.push_back(lamp2);
-	//objectList.push_back(iphone);
+	objectList.clear();
+	objectList.shrink_to_fit();
+	objectList.push_back(bulidingblock);
+	objectList.push_back(lamp2);
+	objectList.push_back(iphone);
 
 	//レールの設定
 	RailManager::Get()->InitRail();
@@ -949,13 +949,14 @@ void Game::StageUpdate(void)
 
 		case STAGE1_1:
 
-			UpdateStage1_1();
+			//UpdateStage1_1();
+			UpdateStage1_2();
 
 			break;
 
 		case STAGE1_2:
 
-			//UpdateStage1_2();
+			UpdateStage1_2();
 
 			break;
 
@@ -1015,10 +1016,7 @@ void Game::UpdateStage1_1(void)
 
 	
 	for (auto& element : objectList) {
-		if (element->m_shadowCollider)
-		{
-			element->Update();
-		}
+		element->Update();
 	}
 
 
@@ -1462,7 +1460,7 @@ void Game::StageDraw(void)
 		break;
 
 	case STAGE1_2:
-		//DrawStage1_2();
+		DrawStage1_2();
 
 		break;
 
