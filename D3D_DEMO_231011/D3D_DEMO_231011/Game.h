@@ -13,6 +13,7 @@ class Stage;
 class SceneManager;
 class Object;
 class Effect;
+class CameraShaker;
 
 class Game
 {
@@ -62,8 +63,11 @@ private:
 	GameObject*		lamp;			//長細の棒
 	GameObject *	housePlate;			//長方形
 
+	//移動できるオブジェクトのリスト
 	std::vector<GameObject*> objectList;
 	GameObject* circle;			//circle
+
+	CameraShaker* cameraShaker;
 
 private:
 	
@@ -115,6 +119,9 @@ private:
 	//Active
 	bool isActive = true;
 	bool isSelectChapter = false;
+
+	bool isControl = true;
+
 
 	//初期設定
 	int m_soundVolume_BGM = 3;
@@ -268,11 +275,15 @@ public:
 
 
 	void TestMove(GameObject* _target);
+	void TestMove(Effect* _target);
 
 	void FadeUpdate(void);
 
 	//背景を入れ替わる
 	void SetBackGround(ID3D11ShaderResourceView* tex);
+
+	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
+	void SetIsControl(bool isControl) { this->isControl = isControl; };
 
 };
 

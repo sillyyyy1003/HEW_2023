@@ -9,8 +9,8 @@ private:
 
 public:
 	enum STATUS {
-		ACTIVE,		//‹N“®‚µ‚Ä‚¢‚éŽž
-		INACTIVE,	//
+		ACTIVE = 0,		//‹N“®‚µ‚Ä‚¢‚éŽž
+		INACTIVE = 1,	//
 	};
 	
 

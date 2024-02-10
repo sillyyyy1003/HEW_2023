@@ -1,8 +1,5 @@
 ﻿#include "Animation.h"
 
-//----------------------------//
-// O[oĎč`
-//----------------------------//
 
 Animation::Animation(int splitX, int splitY)
 {
@@ -33,7 +30,7 @@ void Animation::SetAnimeSpeed(float _speed)
 
 void Animation::SetAnimePattern(int _animePattern)
 {
-    m_frameY = _animePattern;
+   m_frameY = _animePattern;
 }
 
 DirectX::XMFLOAT2 Animation::GetUVOffset(void)

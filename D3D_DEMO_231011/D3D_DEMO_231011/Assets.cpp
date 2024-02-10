@@ -55,7 +55,7 @@ Assets::Assets()
     fade = LoadTexture("assets/fade.png");
 
     //effect
-    effect1 = LoadTexture("assets/Effect/effect2.png");
+    effect1 = LoadTexture("assets/Effect/effect4.png");
 
 
 }

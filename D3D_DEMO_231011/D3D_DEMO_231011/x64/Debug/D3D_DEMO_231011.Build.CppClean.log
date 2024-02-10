@@ -5,6 +5,7 @@ c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\animation.s
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\assets.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\boxcollider.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\camera.sbr
+c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\camerashaker.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\canvasui.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\collider.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\collidermanager.sbr
@@ -20,8 +21,6 @@ c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\object.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\objectanimation.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\polygoncollider.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\railmanager.sbr
-c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\satcollider.sbr
-c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\satcollider.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\railmanager.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\polygoncollider.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\objectanimation.obj
@@ -37,10 +36,12 @@ c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\debugmanage
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\collidermanager.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\collider.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\canvasui.obj
+c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\camerashaker.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\camera.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\boxcollider.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\assets.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\animation.obj
+c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\satcollider.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\scene.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\shadowobject.sbr
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\spherecollider.sbr
@@ -65,11 +66,14 @@ c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\sprite.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\spherecollider.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\shadowobject.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\scene.obj
+c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\satcollider.obj
 c:\users\58472\desktop\hew\d3d_demo_231011\x64\debug\pixelshader.cso
 c:\users\58472\desktop\hew\d3d_demo_231011\x64\debug\vertexshader.cso
 c:\users\58472\desktop\hew\d3d_demo_231011\x64\debug\d3d_demo_231011.exe
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\d3d_demo_231011.ilk
 c:\users\58472\desktop\hew\d3d_demo_231011\x64\debug\d3d_demo_231011.pdb
+c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\animation.obj.enc
+c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\game.obj.enc
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\d3d_demo_231011.tlog\bscmake.command.1.tlog
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\d3d_demo_231011.tlog\bscmake.read.1.tlog
 c:\users\58472\desktop\hew\d3d_demo_231011\d3d_demo_231011\x64\debug\d3d_demo_231011.tlog\bscmake.write.1.tlog

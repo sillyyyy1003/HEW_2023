@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include <vector>
 
 class Effect :public Sprite {
 
@@ -9,7 +10,7 @@ private:
 	//フレームの枚数
 	int m_frameNum = 0;
 
-	int* animeTable;
+	std::vector<int> animeTable;
 
 	//表示するかどうか？
 	bool isActive = false;

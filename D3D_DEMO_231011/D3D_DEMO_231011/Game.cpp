@@ -14,6 +14,7 @@
 #include "DInput.h"
 #include "Effect.h"
 #include "xa2.h"
+#include "CameraShaker.h"
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
 
@@ -26,6 +27,11 @@ extern DebugManager* g_DebugManager;
 
 void Game::Init()
 {
+	//CameraShakerの初期化
+	cameraShaker = new CameraShaker();
+	//強度、周波数、継続の時間の初期化を行う
+	cameraShaker->InitCameraShaker(0.1f, 3.0f, 20);
+
 	//=============================
 	//オブジェクト作成
 	//=============================
@@ -68,7 +74,8 @@ void Game::Init()
 	testObj = new GameObject();
 
 	//EFFECT
-	testEffect = new Effect(36);
+	testEffect = new Effect(12);
+	
 
 	//stage1に使われてる
 	//移動のオブジェクトの名前を設定する
@@ -112,7 +119,7 @@ void Game::Init()
 	housePlate->CreateObject(g_Assets->housePlate, 110, 216, 1, 1);
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
 	
-	testEffect->CreateModel(g_Assets->effect1, 1500, 900, 4, 9);
+	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 3);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
@@ -128,7 +135,9 @@ void Game::Init()
 	testEffect->m_anime->SetAnimeSpeed(0.2f);
 	testEffect->Effect::SetActive(true);
 	testEffect->Effect::SetLoop(true);
-
+	testEffect->m_scale.x = 1.2f;
+	testEffect->m_scale.y = 1.2f;
+	testEffect->m_rotation.x = 95;
 
 	//----------------------------//
 	// ここからはシーンの初期化
@@ -147,7 +156,6 @@ void Game::Init()
 	//Select画面
 	uiSelectBg->m_pos = { 0.0f,0.0f,0.9f };
 	uiStageSelect->m_pos = { -3.5f,3.0f,0.8f };
-
 	uiSelectCursor->m_pos = { 4.0f,3.6f,0.8f };//Chapterの横に出るように
 
 
@@ -347,32 +355,32 @@ void Game::InitStage3_3(void)
 void Game::RailInit1_1(void)
 {	
 	////1-1用
-	/*
+	
 	bool railData[15][8]{
 		//back row
 		//up	ru  r	rd d	ld l	lu
 		{	0,	0,	1,	0,	0,	0,	0,	0},//0
-		{	0,	0,	1,	0,	0,	0,	0,	0},//1
-		{	0,	0,	1,	0,	1,	0,	1,	0},//2
+		{	0,	0,	1,	0,	1,	0,	1,	0},//1
+		{	0,	0,	1,	0,	0,	0,	1,	0},//2
 		{	0,	0,	1,	0,	0,	0,	1,	0},//3
 		{	0,	0,	0,	0,	0,	0,	1,	0},//4
 
 		//mid row
 		{	0,	0,	0,	0,	0,	0,	0,	0},
-		{	0,	0,	0,	0,	0,	0,	0,	0},
 		{	1,	0,	0,	0,	1,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
 		{	0,	0,	0,	0,	0,	0,	0,	0},
 		{	0,	0,	0,	0,	0,	0,	0,	0},
 
 		//front row
 		{	0,	0,	0,	0,	0,	0,	0,	0},
-		{	0,	0,	0,	0,	0,	0,	0,	0},
 		{	1,	0,	0,	0,	0,	0,	0,	0},
 		{	0,	0,	0,	0,	0,	0,	0,	0},
 		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
 	};
-	*/
-
+	
+	/*
 	//テスト用
 	bool railData[15][8]{
 		//up	ru  r	rd d	ld l	lu
@@ -397,7 +405,7 @@ void Game::RailInit1_1(void)
 
 
 	};
-
+	*/
 	//道を設定する
 	for (int i = 0; i < 15; i++) {
 
@@ -414,6 +422,7 @@ void Game::RailInit1_1(void)
 		}
 
 	}
+	
 
 	//オブジェクトいるところの位置情報更新
 	RailManager::Get()->InitRailPos();
@@ -470,22 +479,22 @@ void Game::InitSoundArray()
 void Game::InitSelectArray()
 {
 	//テクスチャ割り当て
-	uiSelectStage[STAGE1]->CreateModel(g_Assets->uiSelectStage1, 425, 133, 1, 1);
-	uiSelectStage[STAGE2]->CreateModel(g_Assets->uiSelectStage2, 408, 142, 1, 1);
-	uiSelectStage[STAGE3]->CreateModel(g_Assets->uiSelectStage3, 421, 143, 1, 1);
+	uiSelectStage[STAGE1]->CreateModel(g_Assets->uiSelectStage1, 421, 133, 1, 2);
+	uiSelectStage[STAGE2]->CreateModel(g_Assets->uiSelectStage2, 421, 142, 1, 2);
+	uiSelectStage[STAGE3]->CreateModel(g_Assets->uiSelectStage3, 421, 143, 1, 2);
 
-	uiSelectChapter[CHAPTER1]->CreateModel(g_Assets->uiSelectChapter1, 234, 71, 1, 1);
-	uiSelectChapter[CHAPTER2]->CreateModel(g_Assets->uiSelectChapter2, 225, 69, 1, 1);
-	uiSelectChapter[CHAPTER3]->CreateModel(g_Assets->uiSelectChapter3, 206, 74, 1, 1);
+	uiSelectChapter[CHAPTER1]->CreateModel(g_Assets->uiSelectChapter1, 288, 57, 1, 1);
+	uiSelectChapter[CHAPTER2]->CreateModel(g_Assets->uiSelectChapter2, 300, 57, 1, 1);
+	uiSelectChapter[CHAPTER3]->CreateModel(g_Assets->uiSelectChapter3, 300, 57, 1, 1);
 	
 	//位置設定
 	uiSelectStage[STAGE1]->m_pos = { -3.5f,1.3f,0.8f };
 	uiSelectStage[STAGE2]->m_pos = { -2.7f,-0.8f,0.8f };
 	uiSelectStage[STAGE3]->m_pos = { -3.5f,-3.0f,0.8f };
 
-	uiSelectChapter[CHAPTER1]->m_pos = { 2.0f,3.3f,0.8f };
-	uiSelectChapter[CHAPTER2]->m_pos = { 2.0f,1.0f,0.8f };
-	uiSelectChapter[CHAPTER3]->m_pos = { 2.0f,-1.5f,0.8f };
+	uiSelectChapter[CHAPTER1]->m_pos = { 3.1f,3.3f,0.8f };
+	uiSelectChapter[CHAPTER2]->m_pos = { 3.1f,1.0f,0.8f };
+	uiSelectChapter[CHAPTER3]->m_pos = { 3.1f,-1.5f,0.8f };
 
 	//ステージを設定
 	selectStage = STAGE1;
@@ -534,7 +543,6 @@ void Game::TitleUpdate(void)
 	uiTitleBg->Update();
 
 	//エフェクト
-	//testEffect->Update();
 }
 
 void Game::SelectUpdate(void)
@@ -565,7 +573,6 @@ void Game::SelectUpdate(void)
 			switch (selectStage)
 			{
 			case Game::SELECTNONE:
-
 				break;
 			case Game::STAGE1:
 				selectStage = STAGE2;
@@ -706,16 +713,17 @@ void Game::SelectUpdate(void)
 
 void Game::UpdateSelectAnimation(void)
 {
+	
 	for (int i = 0; i < 3; i++) {
 
-		if (i == selectStage) {
+		if (selectStage==i) {
 			//ACTIVE
-			uiStageSelect[i].m_anime->SetAnimePattern(CanvasUI::ACTIVE);
+			uiSelectStage[i]->m_anime->SetAnimePattern(CanvasUI::ACTIVE);
 		}
 		else {
-			//INACTIVE
-			//uiStageSelect[i].m_anime->SetAnimePattern(CanvasUI::INACTIVE);
-			//uiStageSelect[i].m_anime->SetAnimePattern(CanvasUI::ACTIVE);
+			//INACTIVE	
+			uiSelectStage[i]->m_anime->SetAnimePattern(CanvasUI::INACTIVE);
+	
 		}
 
 	}
@@ -725,20 +733,28 @@ void Game::UpdateSelectAnimation(void)
 void Game::UpdateCursor(void)
 {
 
-	switch (selectChapter)
-	{
-	case Game::CHAPTER1:
+	
+	
+	if (!isSelectChapter) {
 
-		uiSelectCursor->m_pos = { 4.0f, 3.6f, 0.8f };
-		break;
-	case Game::CHAPTER2:
+		uiSelectCursor->m_pos.z = -0.8f ;
 
-		uiSelectCursor->m_pos = { 4.0f, 1.3f, 0.8f };
+	}else {
+		switch (selectChapter)
+		{
+		case Game::CHAPTER1:
 
-		break;
-	case Game::CHAPTER3:
-		uiSelectCursor->m_pos = { 4.0f,-1.2f,0.8f };
-		break;
+			uiSelectCursor->m_pos = { 0.8f, 3.6f, 0.7f };
+			break;
+		case Game::CHAPTER2:
+
+			uiSelectCursor->m_pos = { 0.8f, 1.3f, 0.7f };
+
+			break;
+		case Game::CHAPTER3:
+			uiSelectCursor->m_pos = { 0.8f,-1.2f,0.7f };
+			break;
+		}
 	}
 
 }
@@ -810,19 +826,50 @@ void Game::StageUpdate(void)
 
 		//移動させる目標を設定する
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+			
+			//オブジェクトが移動してない場合
+			if (isControl) {
+				
+				for (auto it = objectList.begin(); it != objectList.end(); it++) {
+					if ((*it)->GetActive())
+					{
+						(*it)->SetActive(false);
 
-			for (auto it = objectList.begin(); it != objectList.end(); it++) {
-				if ((*it)->GetActive())
-				{
-					(*it)->SetActive(false);
-					auto nextIt = std::next(it) != objectList.end() ? std::next(it) : objectList.begin();
-					(*nextIt)->SetActive(true);
-					break;
+						auto nextIt = std::next(it);
 
+
+
+						//もし次のオブジェクトが自動移動のオブジェクトの場合
+						if (nextIt != objectList.end()) {
+							if ((*nextIt)->GetAutoMove()) {
+
+								nextIt = objectList.begin();
+								(*nextIt)->SetActive(true);
+
+							}
+							else {
+								//次のオブジェクトを移動できる
+								(*nextIt)->SetActive(true);
+							}
+
+						}
+						else {
+							nextIt = objectList.begin();
+							//次のオブジェクトを移動できる
+							(*nextIt)->SetActive(true);
+
+						}
+						
+						
+					
+						break;
+
+					}
 				}
 			}
+		
 		}
-
+		//StageUpdate
 		switch (SceneManager::Get()->GetStage()) {
 
 		case STAGE1_1:
@@ -877,6 +924,9 @@ void Game::StageUpdate(void)
 
 		}
 
+		//CameraUpdate
+		cameraShaker->Update(g_WorldCamera);
+
 	}
 	else {
 		UiUpdate();
@@ -886,7 +936,7 @@ void Game::StageUpdate(void)
 
 void Game::UpdateStage1_1(void)
 {
-	
+	TestMove(testEffect);
 	//背景
 	stageBg->Update();
 
@@ -894,6 +944,7 @@ void Game::UpdateStage1_1(void)
 	for (auto& element : objectList) {
 		element->Update();
 	}
+
 
 
 	//クリア判定
@@ -1291,9 +1342,11 @@ void Game::SelectDraw(void)
 {
 	uiSelectBg->Draw();
 	uiStageSelect->Draw();
-	uiSelectCursor->Draw();
+	
 
 	uiSelectDraw();
+
+	uiSelectCursor->Draw();
 
 }
 
@@ -1380,17 +1433,20 @@ void Game::DrawStage1_1()
 {
 	stageBg->Draw();
 
+
 	//描画の順番を並び変え
 
 	//影
 	SortShadowDraw();
 
+
+
 	//オブジェクト
 	SortObjectDraw();
 
-	
 	//エフェクト
 	testEffect->Draw();
+
 	
 	char step[6]="STEP:";
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
@@ -1662,28 +1718,35 @@ void Game::FadeUpdate()
 	}
 }
 
-void Game::TestMove(GameObject* _target)
+void Game::TestMove(Effect* _target)
 {
-	if (Input::Get()->GetKeyPress(DIK_E)) {
-		_target->m_obj->m_sprite->m_pos.z += MOVE;
+	//if (Input::Get()->GetKeyPress(DIK_E)) {
+	//	_target->m_obj->m_sprite->m_pos.z += MOVE;
+	//}
+	//if (Input::Get()->GetKeyPress(DIK_A)) {
+	//	_target->m_obj->m_sprite->m_pos.x -= MOVE;
+	//}
+	//if (Input::Get()->GetKeyPress(DIK_D)) {
+	//	_target->m_obj->m_sprite->m_pos.x += MOVE;
+	//}
+	//if (Input::Get()->GetKeyPress(DIK_Q)) {
+	//	_target->m_obj->m_sprite->m_pos.z -= MOVE;
+	//}
+	//if (Input::Get()->GetKeyPress(DIK_W)) {
+	//	_target->m_obj->m_sprite->m_pos.y += MOVE;
+	//}
+	//if (Input::Get()->GetKeyPress(DIK_S)) {
+	//	_target->m_obj->m_sprite->m_pos.y -= MOVE;
+	//}
+	//if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+	//	_target->m_obj->m_sprite->m_pos = { 0,0,-2 };
+	//}
+
+	if (Input::Get()->GetKeyPress(DIK_1)) {
+		_target->m_rotation.x += 1.0f;
 	}
-	if (Input::Get()->GetKeyPress(DIK_A)) {
-		_target->m_obj->m_sprite->m_pos.x -= MOVE;
-	}
-	if (Input::Get()->GetKeyPress(DIK_D)) {
-		_target->m_obj->m_sprite->m_pos.x += MOVE;
-	}
-	if (Input::Get()->GetKeyPress(DIK_Q)) {
-		_target->m_obj->m_sprite->m_pos.z -= MOVE;
-	}
-	if (Input::Get()->GetKeyPress(DIK_W)) {
-		_target->m_obj->m_sprite->m_pos.y += MOVE;
-	}
-	if (Input::Get()->GetKeyPress(DIK_S)) {
-		_target->m_obj->m_sprite->m_pos.y -= MOVE;
-	}
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-		_target->m_obj->m_sprite->m_pos = { 0,0,-2 };
+	if (Input::Get()->GetKeyPress(DIK_0)) {
+		_target->m_rotation.x -= 1.0f;
 	}
 }
 

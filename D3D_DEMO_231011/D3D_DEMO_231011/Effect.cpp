@@ -8,10 +8,9 @@ Effect::Effect(int num)
 {   
     //ここでアニメーションパターンを変更
     m_frameNum = num;
-    animeTable = new int[m_frameNum + 1];
 
     for (int i = 0; i < m_frameNum; i++) {
-        animeTable[i] = i;
+        animeTable.push_back(i);
     }
   
 }
@@ -24,10 +23,10 @@ void Effect::SetLoop(bool isLoop)
     //最後の位置フレームの処理
     if (isLoop) {
 
-        animeTable[m_frameNum] = -1;
+        animeTable.push_back(-1);
     }
     else {
-        animeTable[m_frameNum] = -2;
+        animeTable.push_back(-2);
     }
     
 }
@@ -36,7 +35,7 @@ void Effect::SetLoop(bool isLoop)
 
 Effect::~Effect()
 {
-    delete[] animeTable;
+    
 }
 
 void Effect::CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
@@ -83,6 +82,8 @@ void Effect::Update()
 
     //表示させるコマのUVを計算
     m_anime->SetFrameX(animeID % m_split.x);
+    m_anime->SetAnimePattern(animeID / m_split.y);
+
 
     //UV座標更新
     m_anime->Update();

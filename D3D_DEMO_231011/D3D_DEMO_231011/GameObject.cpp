@@ -1,14 +1,16 @@
 ﻿#include "GameObject.h"
 #include "ShadowObject.h"
-
 #include "BoxCollider.h"
 #include "SphereCollider.h"
 #include "PolygonCollider.h"
 #include "StaticAnimation.h"
 #include "DInput.h"
+#include "Game.h"
+#include "CameraShaker.h"
 #include "RailManager.h"
 #include "SceneManager.h"
 #include <math.h>
+
 
 extern Camera* g_WorldCamera;
 
@@ -120,77 +122,7 @@ void GameObject::InitAnimation(void)
 
 void GameObject::GenerateShadowPos(float moveSpeed, float posX)
 {
-	/*
-	//単位ベクトル化する
-	//オブジェクトの位置取得
-	const XMFLOAT3 objPos = m_obj->m_sprite->m_pos; 
-
-	//ベクトル計算用の型に入れる
-	XMVECTOR objVector = XMLoadFloat3(&objPos);
-	XMVECTOR lightVector = XMLoadFloat3(&m_lightPos);
-	//光からオブジェクトのベクトルを計算する
-	XMVECTOR directionVector = XMVectorSubtract(objVector, lightVector);
-
-
-	// 壁と地面の角度が90度(假设墙壁垂直于地面，沿Z轴)
-	float wallZ = m_shadow->m_sprite->m_pos.z;  // 墙壁的Z坐标
-
-	// 距離比率を計算する(计算交点的Z值等于墙壁的Z值时的t)
-	float t = (wallZ - m_lightPos.z) / XMVectorGetZ(directionVector);
-
-	//影の位置を計算する
-	XMFLOAT3 shadowPosition;
-	shadowPosition.x = m_lightPos.x + t * XMVectorGetX(directionVector);
-	shadowPosition.y = m_lightPos.y + t * XMVectorGetY(directionVector);
-	shadowPosition.z = wallZ;  //影のｚ軸
-	*/
-
-	//
-	/*switch (m_moveDir)
-	{
-	case UPRIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
-		break;
-	case RIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
-		break;
-	case DOWNRIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
-		break;
-	case DOWNLEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
-		break;
-	case LEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
-		break;
-	case UPLEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
-		break;
-	case STILL:
-		switch(m_railPos.horizontalPos){
-		case 0:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - posX;
-			break;
-		case 1:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - posX*2;
-			break;
-		case 2:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
-			break;
-		case 3:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + posX;
-			break;
-		case 4:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + posX*2;
-			break;
-		}
-		break;
-	default:
-		break;
-	}*/
-
 	m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
-
 }
 
 void GameObject::GenerateShadowPos()
@@ -234,95 +166,105 @@ void GameObject::Update()
 		//八方向の入力処理
 		if (m_moveDir != STILL) {
 			ObjectMove();
+			//移動中
+		
 		}
 		else {
 			//入力
-			if (!isAutoMove) {
-				DoKeyInput();
+			DoKeyInput();
 
-				if (isGetInput) {
-					switch (m_nowInput.horInput) {
-						//左
-					case INPUT_LEFT:
-						switch (m_nowInput.verInput)
-						{
-						case INPUT_UP:
-							if (isMoveable(UPLEFT)) { m_moveDir = UPLEFT; }
-							else { ObjectVibration(); }
+			if (isGetInput) {
+				switch (m_nowInput.horInput) {
+					//左
+				case INPUT_LEFT:
+					switch (m_nowInput.verInput)
+					{
+					case INPUT_UP:
+						if (isMoveable(UPLEFT)) { m_moveDir = UPLEFT; }
+						else { ObjectVibration(); }
 
-							break;
-						case INPUT_DOWN:
-							if (isMoveable(DOWNLEFT)) { m_moveDir = DOWNLEFT; }
-							else { ObjectVibration(); }
-
-							break;
-						case INPUT_NONE:
-							if (isMoveable(LEFT)) { m_moveDir = LEFT; }
-							else { ObjectVibration(); }
-
-							break;
-						default:
-							break;
-						}
 						break;
-						//右
-					case INPUT_RIGHT:
-						switch (m_nowInput.verInput)
-						{
-						case INPUT_UP:
-							if (isMoveable(UPRIGHT)) { m_moveDir = UPRIGHT; }
-							else { ObjectVibration(); }
+					case INPUT_DOWN:
+						if (isMoveable(DOWNLEFT)) { m_moveDir = DOWNLEFT; }
+						else { ObjectVibration(); }
 
-							break;
-						case INPUT_DOWN:
-							if (isMoveable(DOWNRIGHT)) { m_moveDir = DOWNRIGHT; }
-							else { ObjectVibration(); }
-
-							break;
-						case INPUT_NONE:
-							if (isMoveable(RIGHT)) { m_moveDir = RIGHT; }
-							else { ObjectVibration(); }
-							break;
-						default:
-							break;
-						}
 						break;
-						//左右STILL
 					case INPUT_NONE:
-						switch (m_nowInput.verInput)
-						{
-						case INPUT_UP:
-							if (isMoveable(UP)) { m_moveDir = UP; }
-							else { ObjectVibration(); }
-							break;
-						case INPUT_DOWN:
-							if (isMoveable(DOWN)) { m_moveDir = DOWN; }
-							else { ObjectVibration(); }
-							break;
-						case INPUT_NONE:
-							break;
-						default:
-							break;
-						}
+						if (isMoveable(LEFT)) { m_moveDir = LEFT; }
+						else { ObjectVibration(); }
+
+						break;
+					default:
 						break;
 					}
-					isGetInput = false;
+					break;
+					//右
+				case INPUT_RIGHT:
+					switch (m_nowInput.verInput)
+					{
+					case INPUT_UP:
+						if (isMoveable(UPRIGHT)) { m_moveDir = UPRIGHT; }
+						else { ObjectVibration(); }
 
+						break;
+					case INPUT_DOWN:
+						if (isMoveable(DOWNRIGHT)) { m_moveDir = DOWNRIGHT; }
+						else { ObjectVibration(); }
+
+						break;
+					case INPUT_NONE:
+						if (isMoveable(RIGHT)) { m_moveDir = RIGHT; }
+						else { ObjectVibration(); }
+						break;
+					default:
+						break;
+					}
+					break;
+					//左右STILL
+				case INPUT_NONE:
+					switch (m_nowInput.verInput)
+					{
+					case INPUT_UP:
+						if (isMoveable(UP)) { m_moveDir = UP; }
+						else { ObjectVibration(); }
+						break;
+					case INPUT_DOWN:
+						if (isMoveable(DOWN)) { m_moveDir = DOWN; }
+						else { ObjectVibration(); }
+						break;
+					case INPUT_NONE:
+						break;
+					default:
+						break;
+					}
+					break;
 				}
+				isGetInput = false;
+
 			}
-			else {
-				//今いる位置を獲得
-
-				//次の移動方向を獲得
-
-
-				//次の移動方向を判定
-				//m_moveDir=
-			}
+			
 
 		}
 
+		//オブジェクトが移動中なら、
+		if (m_moveDir != STILL) {
+			//切り替えを不可にする
+			Game::Get()->SetIsControl(false);
+		}
+		else {
+			Game::Get()->SetIsControl(true);
+		}
+
 	}
+
+	//自動移動の場合
+	if (isAutoMove) {
+	
+		//自動移動
+		//AutoMove();
+	
+	}
+
 
 	//オブジェクト情報更新
 	m_obj->Update();
@@ -352,6 +294,8 @@ void GameObject::Update()
 	if (m_shadowCollider) {
 		UpdateShadowColliderData();
 	}
+
+
 	
 }
 
@@ -412,8 +356,8 @@ bool GameObject::isMoveable(DIR dir)
 		//There may be some bugs,So Limit the boundary
 		if (movePos < 0 || movePos>14) {
 
-			MessageBoxA(NULL, "point計算エラー！", "エラー", MB_OK | MB_ICONERROR);
-			return false;
+			//MessageBoxA(NULL, "point計算エラー！", "エラー", MB_OK | MB_ICONERROR);
+			//return false;
 		}
 
 		//その方向に移動できるか
@@ -754,69 +698,17 @@ void GameObject::ObjectMove()
 
 void GameObject::ObjectVibration()
 {
+	//振動スタート
+	if (!Game::Get()->GetCameraShaker()->GetShaker()) {
+		Game::Get()->GetCameraShaker()->SetShaker(true);
+	}
+	
+
 }
 
 void GameObject::MoveObject(Object* _target)
 {
-	/*
-	//移動入力
-	//WASD上下左右移動
-	if (Input::Get()->GetKeyTrigger(DIK_W)) {
 
-		//_target->m_sprite->m_pos.y += MOVEDISTANCEZ /2;
-		_target->m_sprite->m_pos.z += MOVEDISTANCEZ;
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_A)) {
-
-		_target->m_sprite->m_pos.x -= MOVEDISTANCEX;
-
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_D)) {
-
-		_target->m_sprite->m_pos.x += MOVEDISTANCEX;
-
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_S)) {
-
-		//_target->m_sprite->m_pos.y -= MOVEDISTANCEZ / 2;
-		_target->m_sprite->m_pos.z -= MOVEDISTANCEZ;
-
-	}
-	//↑キー/↓キーで前後移動
-
-	if (Input::Get()->GetKeyTrigger(DIK_UPARROW))
-	{
-		_target->m_sprite->m_pos.y += MOVEDISTANCEZ;
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
-	{
-		_target->m_sprite->m_pos.y -= MOVEDISTANCEZ;
-	}
-
-
-	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
-	{
-		_target->m_sprite->m_rotation.x += 1.0f;
-	}
-
-	//←キー/→キーで角度の調整
-	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
-	{
-		_target->m_sprite->m_rotation.x -= 1.0f;
-	}
-
-
-	//RESET
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		_target->m_sprite->m_rotation.x = 0.0f;
-		_target->m_sprite->m_pos.x = 0.0f;
-	}
-	*/
 }
 
 void GameObject::Draw(void)
