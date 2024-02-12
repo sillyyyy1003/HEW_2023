@@ -4,12 +4,21 @@
 #include "SatCollider.h"
 #include "Material.h"
 
+
 enum COLLISION_TYPE {
 	TRIANGLE,		//三角形
 	SPHERE,			//球体
 	SQUARE,			//BOX
 	IDLE,			//NULL
 };
+
+
+enum TRIANGLE_TYPE {
+	TRI_RIGHT,	//直角三角形
+	TRI_ISO,	//二等辺三角形
+	TRI_IDLE,
+};
+
 
 enum COLLISION_DIR {
 	INI_STATE,	//初期状態
@@ -20,6 +29,8 @@ enum COLLISION_DIR {
 	OVERLAP,	//重なる
 	
 };
+
+
 
 struct Collider_Dir {
 	

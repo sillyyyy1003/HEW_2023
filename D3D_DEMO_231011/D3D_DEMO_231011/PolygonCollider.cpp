@@ -9,11 +9,12 @@ PolygonCollider::PolygonCollider()
 
 }
 
-void PolygonCollider::InitCollider(DirectX::XMFLOAT3 center, Collide Collider)
+void PolygonCollider::InitCollider(DirectX::XMFLOAT3 center, Collide Collider, TRIANGLE_TYPE type)
 {
     m_center = center;
     m_extents = Collider.extents;
     m_radius = Collider.radius;
+    m_type = type;
     //頂点を作る
     PolygonCollider::InitVerticies();
 }
@@ -65,11 +66,10 @@ std::vector<Vector3> PolygonCollider::GetTriangleVertices(void)
 }
 */
 
-std::vector<DirectX::XMFLOAT3> PolygonCollider::InitVerticies(void) {
+std::vector<DirectX::XMFLOAT3> PolygonCollider::InitVerticies() {
 
     std::vector<DirectX::XMFLOAT3> verticies;
-        
-        
+
     switch (m_type)
     {
     case TRIANGLE_TYPE::TRI_RIGHT:

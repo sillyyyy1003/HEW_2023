@@ -108,7 +108,7 @@ void Game::Init()
 	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
 
 
-	stageBg->CreateObject(g_Assets->stageBg, 1280, 720, 1, 1);
+	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 1, 1);
 	testObj->CreateObject(g_Assets->tree, 200, 200, 1, 1);
 	testObj->CreateShadow(g_Assets->shadow, 200, 200, 1, 1, COLLISION_TYPE::SQUARE);
 
@@ -257,7 +257,7 @@ void Game::InitStage1_1(void)
 {
 	
 	//背景を設定する
-	SetBackGround(g_Assets->stageBg);
+	SetBackGround(g_Assets->stageBg1_1);
 
 	//オブジェクトを設定する
 	//CAUTION! 
@@ -1140,14 +1140,15 @@ void Game::UiUpdate()
 			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
 			break;
 		case Game::SOUND:
+			pauseSelect = RESUME;
 			SoundSwitch();// サウンド画面切り替え
 			break;
 		default:
 			break;
 		}
 	}
-	
 
+	//	ESCAPE押して　戻る
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
 	{
 		if (isSound) {

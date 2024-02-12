@@ -6,11 +6,7 @@ class BoxCollider;
 class SphereCollider;
 class SAT;
 
-enum TRIANGLE_TYPE {
-	TRI_RIGHT,	//直角三角形
-	TRI_ISO,	//二等辺三角形
-	TRI_IDLE,
-};
+
 
 class PolygonCollider :public Collider
 {
@@ -34,11 +30,11 @@ public:
 	/// <param name="Radius"></param>
 	PolygonCollider();
 
-	void InitCollider(DirectX::XMFLOAT3 center,Collide Collider) override;
+	void InitCollider(DirectX::XMFLOAT3 center,Collide Collider, TRIANGLE_TYPE type);
 
 	//三角形の頂点を初期化
 	//std::vector<Vector3> GetTriangleVertices(void);
-	std::vector<DirectX::XMFLOAT3> InitVerticies(void);
+	std::vector<DirectX::XMFLOAT3> InitVerticies();
 
 	//void UpdateRadius(float m_radius);
 	void SetRadius(float radius) { m_radius = radius; };

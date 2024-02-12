@@ -125,6 +125,13 @@ public:
 	/// <param name="splitY">縦分割</param>
 	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type);
 
+	/// <summary>
+	/// 三角形だけに使う
+	/// </summary>
+	/// <param name=""></param>
+	void CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type,TRIANGLE_TYPE _type);
+
+
 	// アニメーションの初期化処理
 	void InitAnimation(void);
 

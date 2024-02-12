@@ -87,12 +87,12 @@ void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, f
 	//コライダーの初期化処理を行う
 	switch (type)
 	{
-	case TRIANGLE:
+	/*case TRIANGLE:
 		
 		m_shadowCollider = new PolygonCollider();
 		m_shadowCollider->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide());
 
-		break;
+		break;*/
 	case SPHERE:
 
 		m_shadowCollider = new SphereCollider();
@@ -112,6 +112,16 @@ void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, f
 	default:
 		break;
 	}
+}
+
+void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type, TRIANGLE_TYPE _type)
+{
+	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
+
+	//コライダーの初期化処理を行う
+	m_shadowCollider = new PolygonCollider();
+	//dynamic_castを使って、PolygonColliderの初期化を行う
+	dynamic_cast<PolygonCollider*>(m_shadowCollider)->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide(),_type);
 }
 
 void GameObject::InitAnimation(void)
