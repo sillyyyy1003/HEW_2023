@@ -51,6 +51,17 @@ Assets::Assets()
     lamp2Shadow = LoadTexture("assets/stage2/1_2_lamp_shadow.png");
     diamondShadow = LoadTexture("assets/stage2/1_2_diamond_shadow.png");
 
+    //stage1_3
+    stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
+    sandwich = LoadTexture("assets/stage1/1_3_sandwich.png");
+    sandwichShadow = LoadTexture("assets/stage1/1_3_sandwich_shadow.png");
+    busket = LoadTexture("assets/stage1/1_3_busket.png");
+    busketShadow = LoadTexture("assets/stage1/1_3_busket_shadow.png");
+    newspaper = LoadTexture("assets/stage1/1_3_newspaper.png");
+    newspaperShadow = LoadTexture("assets/stage1/1_3_newspaper_shadow.png");
+    picnicbasket = LoadTexture("assets/stage1/1_3_picnicbasket.png");
+    picnicbasketShadow = LoadTexture("assets/stage1/1_3_picnicbasket_shadow.png");
+
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
@@ -122,7 +133,17 @@ Assets::~Assets()
     SAFE_RELEASE(lamp2Shadow);
     SAFE_RELEASE(diamondShadow);
 
+    //stage1-3用リソース
+    SAFE_RELEASE(stage3Bg);
 
+    SAFE_RELEASE(sandwich);
+    SAFE_RELEASE(sandwichShadow);
+    SAFE_RELEASE(busket);
+    SAFE_RELEASE(busketShadow);
+    SAFE_RELEASE(newspaper);
+    SAFE_RELEASE(newspaperShadow);
+    SAFE_RELEASE(picnicbasket);
+    SAFE_RELEASE(picnicbasketShadow);
 
     //ポーズ画面用
     SAFE_RELEASE(uiPauseBg);

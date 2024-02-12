@@ -73,6 +73,13 @@ void Game::Init()
 	lamp2 = new GameObject();
 	iphone = new GameObject();
 
+	//stage1-3
+	stage3Bg = new StaticObject();
+	sandwich = new GameObject();
+	newspaper = new GameObject();
+	busket = new GameObject();
+	picnicbasket = new GameObject();
+
 	//EFFECT
 	testEffect = new Effect(28);
 
@@ -86,6 +93,12 @@ void Game::Init()
 	bulidingblock->SetName("bulidingblock");
 	lamp2->SetName("lamp2");
 	iphone->SetName("iphone");
+
+	//stage2に使われてる
+	sandwich->SetName("sandwich");
+	newspaper->SetName("newspaper");
+	busket->SetName("busket");
+	picnicbasket->SetName("picnicbasket");
 
 	//テクスチャ読み込み・モデル作成
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
@@ -131,6 +144,17 @@ void Game::Init()
 	lamp2->CreateShadow(g_Assets->lamp2Shadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
 	iphone->CreateObject(g_Assets->iphone, 110, 216, 1, 1);
 	iphone->CreateShadow(g_Assets->iphoneShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
+
+	//1-3
+	stage3Bg->CreateObject(g_Assets->stage3Bg, 1280, 720, 1, 1);
+	sandwich->CreateObject(g_Assets->sandwich, 190, 192, 1, 1);
+	sandwich->CreateShadow(g_Assets->sandwichShadow, 158, 159, 1, 1, COLLISION_TYPE::SQUARE);
+	newspaper->CreateObject(g_Assets->newspaper, 216, 579, 1, 1);
+	newspaper->CreateShadow(g_Assets->newspaperShadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
+	busket->CreateObject(g_Assets->busket, 110, 216, 1, 1);
+	busket->CreateShadow(g_Assets->busketShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
+	picnicbasket->CreateObject(g_Assets->picnicbasket, 50, 105, 1, 1);
+	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
 
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 7);
 

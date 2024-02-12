@@ -60,6 +60,17 @@ public:
 	ID3D11ShaderResourceView* lamp2Shadow;
 	ID3D11ShaderResourceView* diamondShadow;
 	
+	//stage1-3用リソース
+	ID3D11ShaderResourceView* stage3Bg;
+
+	ID3D11ShaderResourceView* busket;
+	ID3D11ShaderResourceView* busketShadow;
+	ID3D11ShaderResourceView* newspaper;
+	ID3D11ShaderResourceView* newspaperShadow;
+	ID3D11ShaderResourceView* picnicbasket;
+	ID3D11ShaderResourceView* picnicbasketShadow;
+	ID3D11ShaderResourceView* sandwich;
+	ID3D11ShaderResourceView* sandwichShadow;
 
 
 	//ポーズ画面用
