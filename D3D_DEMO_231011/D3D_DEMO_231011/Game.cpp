@@ -94,7 +94,7 @@ void Game::Init()
 	lamp2->SetName("lamp2");
 	iphone->SetName("iphone");
 
-	//stage2に使われてる
+	//stage3に使われてる
 	sandwich->SetName("sandwich");
 	newspaper->SetName("newspaper");
 	busket->SetName("busket");
@@ -139,7 +139,7 @@ void Game::Init()
 	//1-2
 	stage2Bg->CreateObject(g_Assets->stage2Bg, 1280, 720, 1, 1);
 	bulidingblock->CreateObject(g_Assets->bulidingblock, 190, 192, 1, 1);
-	bulidingblock->CreateShadow(g_Assets->bulidingblockShadow, 158, 159, 1, 1, COLLISION_TYPE::SQUARE);
+	bulidingblock->CreateShadow(g_Assets->bulidingblockShadow, 158, 159, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
 	lamp2->CreateObject(g_Assets->lamp2, 216, 579, 1, 1);
 	lamp2->CreateShadow(g_Assets->lamp2Shadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
 	iphone->CreateObject(g_Assets->iphone, 110, 216, 1, 1);
@@ -147,14 +147,14 @@ void Game::Init()
 
 	//1-3
 	stage3Bg->CreateObject(g_Assets->stage3Bg, 1280, 720, 1, 1);
-	sandwich->CreateObject(g_Assets->sandwich, 190, 192, 1, 1);
-	sandwich->CreateShadow(g_Assets->sandwichShadow, 158, 159, 1, 1, COLLISION_TYPE::SQUARE);
-	newspaper->CreateObject(g_Assets->newspaper, 216, 579, 1, 1);
-	newspaper->CreateShadow(g_Assets->newspaperShadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
-	busket->CreateObject(g_Assets->busket, 110, 216, 1, 1);
-	busket->CreateShadow(g_Assets->busketShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
-	picnicbasket->CreateObject(g_Assets->picnicbasket, 50, 105, 1, 1);
-	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
+	sandwich->CreateObject(g_Assets->sandwich, 141, 159, 1, 1);
+	sandwich->CreateShadow(g_Assets->sandwichShadow, 141*2.6, 159 * 2, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
+	newspaper->CreateObject(g_Assets->newspaper, 201, 153, 1, 1);
+	newspaper->CreateShadow(g_Assets->newspaperShadow, 201 * 2.2, 153 * 2.1, 1, 1, COLLISION_TYPE::SQUARE);
+	busket->CreateObject(g_Assets->busket, 170, 146, 1, 1);
+	busket->CreateShadow(g_Assets->busketShadow, 170*2, 146*2, 1, 1, COLLISION_TYPE::SQUARE);
+	picnicbasket->CreateObject(g_Assets->picnicbasket, 306, 240, 1, 1);
+	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 306 * 2.6, 240 * 2,1, 1, COLLISION_TYPE::SQUARE);
 
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 7);
 
@@ -167,6 +167,12 @@ void Game::Init()
 	bulidingblock->InitAnimation();
 	lamp2->InitAnimation();
 	iphone->InitAnimation();
+
+	//1-3
+	sandwich->InitAnimation();
+	newspaper->InitAnimation();
+	busket->InitAnimation();
+	picnicbasket->InitAnimation();
 		
 
 
@@ -242,7 +248,8 @@ void Game::InitStage()
 	case STAGE1_1:
 
 		//InitStage1_1();
-		InitStage1_2();
+		//InitStage1_2();
+		InitStage1_3();
 
 		break;
 
@@ -419,6 +426,65 @@ void Game::InitStage1_2(void)
 
 void Game::InitStage1_3(void)
 {
+	//位置設定
+	SetBackGround(g_Assets->stage3Bg);
+	//オブジェクトを設定する
+	//CAUTION! 
+	//本体y軸固定->-1
+	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
+	//X:LEFT2:-9 LEFT1:-4.5 MIDDLE:0.0 RIGHT1:4.5 RIGHT2:9
+	//本体 
+	busket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-10.0f };
+	newspaper->m_obj->m_sprite->m_pos = { 4.5f,-4.0f,-5.0f };
+	sandwich->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
+	picnicbasket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
+
+	busket->m_shadow->m_sprite->m_pos.z = 0.0f;
+	newspaper->m_shadow->m_sprite->m_pos.z = -0.1f;
+	sandwich->m_shadow->m_sprite->m_pos.z = -0.2f;
+	picnicbasket->m_shadow->m_sprite->m_pos.z = -0.3f;
+
+
+	//影のy軸
+	busket->m_shadow->m_sprite->m_pos.y = 5.2f;
+	newspaper->m_shadow->m_sprite->m_pos.y = 2.4f;
+	sandwich->m_shadow->m_sprite->m_pos.y = 2.4f;
+	picnicbasket->m_shadow->m_sprite->m_pos.y = 3.4f;
+
+
+	//レール上の位置を設定する
+	busket->SetRailPos(1, 1);
+	newspaper->SetRailPos(2, 0);
+	sandwich->SetRailPos(1, 0);
+	picnicbasket->SetRailPos(1, 0);
+
+	//回転設定
+
+	//objectListを初期化
+	objectList.clear();
+	objectList.shrink_to_fit();
+	objectList.push_back(picnicbasket);
+	objectList.push_back(sandwich);
+	objectList.push_back(newspaper);
+	objectList.push_back(busket);
+
+	//レールの設定
+	RailManager::Get()->InitRail();
+	RailInit1_2();
+
+	//ステージ情報を初期化
+	for (int i = 0; i < 9; i++) {
+		//全部のステージを無効かにする
+		SceneManager::Get()->m_stageHolder[i]->Init();
+
+	}
+	//使うステージだけ起動
+	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_3]->SetActive(true);
+
+	//移動ターゲットを設定
+	sandwich->SetActive(true);
+
+	//自動移動や自動回転の設定
 }
 
 void Game::InitStage2_1(void)
@@ -974,7 +1040,8 @@ void Game::StageUpdate(void)
 		case STAGE1_1:
 
 			//UpdateStage1_1();
-			UpdateStage1_2();
+			//UpdateStage1_2();
+			UpdateStage1_3();
 
 			break;
 
@@ -985,7 +1052,7 @@ void Game::StageUpdate(void)
 			break;
 
 		case STAGE1_3:
-
+			UpdateStage1_3();
 
 			break;
 
@@ -1064,12 +1131,25 @@ void Game::UpdateStage1_2(void)
 
 	//クリア判定
 	if (ColliderManager::Get()->ClearCollision({ OVERLAP,COL_DOWN }, "bulidingblock", "iphone", ShadowObject::MEDIUM)) {
-		//isPause = true;bulidingblockbulidingblock
+		//isPause = true;
 	}
 }
 
 void Game::UpdateStage1_3(void)
 {
+	//背景
+	stage3Bg->Update();
+
+
+	for (auto& element : objectList) {
+		element->Update();
+	}
+
+
+	//クリア判定
+	if (ColliderManager::Get()->ClearCollision({ OVERLAP,COL_DOWN }, "sandwich", "newspaper", ShadowObject::MEDIUM)) {
+		//isPause = true;
+	}
 }
 
 void Game::UpdateStage2_1(void)
@@ -1158,15 +1238,22 @@ Game::~Game()
 		delete uiSoundOp_SE[i];	//SE設定
 	}
 
-
+	//1-1
 	delete coconut;
 	delete lamp;
 	delete housePlate;
 
+	//1-2
 	delete bulidingblock;
 	delete iphone;
 	delete lamp2;
 	delete stage2Bg;
+
+	//1-3
+	delete sandwich;
+	delete newspaper;
+	delete busket;
+	delete picnicbasket;
 
 	delete testEffect;
 
