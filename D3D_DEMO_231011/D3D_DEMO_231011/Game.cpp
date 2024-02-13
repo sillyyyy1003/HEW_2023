@@ -978,7 +978,7 @@ void Game::StageUpdate(void)
 			break;
 
 		case STAGE1_3:
-
+			UpdateStage1_3();
 
 			break;
 
@@ -1781,8 +1781,7 @@ void Game::StageDraw(void)
 		break;
 
 	case STAGE1_3:
-
-
+		DrawStage1_3();
 		break;
 
 	case STAGE2_1:
@@ -1866,6 +1865,10 @@ void Game::DrawStage1_2()
 	testEffect->Draw();
 
 	//DebugDisplay();
+}
+
+void Game::DrawStage1_3()
+{
 }
 
 

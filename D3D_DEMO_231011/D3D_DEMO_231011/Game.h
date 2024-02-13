@@ -71,6 +71,15 @@ private:
 	GameObject*		iphone;			//平行四角形
 
 	//移動できるオブジェクトのリスト
+
+
+	//stage1-3
+	StaticObject* stage3Bg;		//ステージ背景
+	GameObject* sandwich;	    //直角三角形
+	GameObject* newspaper;	    //四角
+	GameObject* busket;			//台形（四角）
+	GameObject* picnicbasket;   //台形（四角）
+
 	std::vector<GameObject*> objectList;
 	GameObject* circle;			//circle
 

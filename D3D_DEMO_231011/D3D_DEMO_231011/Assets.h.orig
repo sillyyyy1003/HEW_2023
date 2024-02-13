@@ -12,25 +12,32 @@ public:
 	//----------------------------//
 	
 	//================//テスト用//================//
-
-	ID3D11ShaderResourceView* testPause;//ポーズ画面テクスチャ
-	ID3D11ShaderResourceView* circle;
-<<<<<<< .merge_file_vzd2tS
-	ID3D11ShaderResourceView* shadow;
-=======
-	// 図形
-	//ID3D11ShaderResourceView* circle;
->>>>>>> .merge_file_lEQHTB
-	ID3D11ShaderResourceView* square;
-	ID3D11ShaderResourceView* triangle;
 	
+	// 図形
+
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
 	ID3D11ShaderResourceView* uiTitle;
 	ID3D11ShaderResourceView* uiPressEnter;
 
+	//ステージセレクト用
+	ID3D11ShaderResourceView* uiSelectBg;
+	ID3D11ShaderResourceView* uiStageSelect;
+
+	ID3D11ShaderResourceView* uiSelectCursor;
+	ID3D11ShaderResourceView* uiSelectStage1;
+	ID3D11ShaderResourceView* uiSelectStage2;
+	ID3D11ShaderResourceView* uiSelectStage3;
+
+	ID3D11ShaderResourceView* uiSelectChapter1;
+	ID3D11ShaderResourceView* uiSelectChapter2;
+	ID3D11ShaderResourceView* uiSelectChapter3;
+	
+	ID3D11ShaderResourceView* uiClear;
+
+
 	//stage1-1用リソース
-	ID3D11ShaderResourceView* stageBg;
+	ID3D11ShaderResourceView* stageBg1_1;
 
 	ID3D11ShaderResourceView* coconut;
 	ID3D11ShaderResourceView* coconutShadow;
@@ -39,12 +46,78 @@ public:
 	ID3D11ShaderResourceView* housePlate;
 	ID3D11ShaderResourceView* housePlateShadow;
 
+<<<<<<< HEAD
+	//stage1-2リソース
+	
+	ID3D11ShaderResourceView* stageBg1_2;
 
+	ID3D11ShaderResourceView* lamp_1_2;
+	ID3D11ShaderResourceView* lamp_1_2Shadow;
+	ID3D11ShaderResourceView* iphone;
+	ID3D11ShaderResourceView* iphoneShadow;
+	ID3D11ShaderResourceView* triangleBlock;
+	ID3D11ShaderResourceView* triangleBlockShadow;
+
+	//Result Comic
+	//1-1
+	ID3D11ShaderResourceView* resultComic1_1_1;
+	ID3D11ShaderResourceView* resultComic1_1_2;
+	ID3D11ShaderResourceView* resultComic1_1_3;
+	//1-2
+	ID3D11ShaderResourceView* resultComic1_2_1;
+	ID3D11ShaderResourceView* resultComic1_2_2;
+	ID3D11ShaderResourceView* resultComic1_2_3;
+=======
+	//stage1-2用リソース
+	ID3D11ShaderResourceView* stage2Bg;
+
+	ID3D11ShaderResourceView* bulidingblock;
+	ID3D11ShaderResourceView* bulidingblockShadow;
+	ID3D11ShaderResourceView* iphone;
+	ID3D11ShaderResourceView* iphoneShadow;
+	ID3D11ShaderResourceView* lamp2;
+	ID3D11ShaderResourceView* lamp2Shadow;
+	ID3D11ShaderResourceView* diamondShadow;
+	
+	//stage1-3用リソース
+	ID3D11ShaderResourceView* stage3Bg;
+
+	ID3D11ShaderResourceView* busket;
+	ID3D11ShaderResourceView* busketShadow;
+	ID3D11ShaderResourceView* newspaper;
+	ID3D11ShaderResourceView* newspaperShadow;
+	ID3D11ShaderResourceView* picnicbasket;
+	ID3D11ShaderResourceView* picnicbasketShadow;
+	ID3D11ShaderResourceView* sandwich;
+	ID3D11ShaderResourceView* sandwichShadow;
+>>>>>>> feature/Sakai03
+
+
+	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
+
+	ID3D11ShaderResourceView* uiSelect;
+	ID3D11ShaderResourceView* uiSound;
 	
-	ID3D11ShaderResourceView* ex;
+	//サウンド画面用
+	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
+	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド調節
+	ID3D11ShaderResourceView* uiMusic;	//サウンド音楽文字表示
+	ID3D11ShaderResourceView* uiSE;		//サウントSE文字表示
+
+
+	ID3D11ShaderResourceView* fade;
+
+	//エフェクト用
+	ID3D11ShaderResourceView* effect1;	//炎
+	ID3D11ShaderResourceView* effect2;	//白いカーソル
+
+	//デバッグ用
+	static ID3D11ShaderResourceView* debugFont;		
+
+
 
 public:
 	//----------------------------//

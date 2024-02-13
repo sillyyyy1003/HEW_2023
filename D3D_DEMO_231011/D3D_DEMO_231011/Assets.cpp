@@ -56,6 +56,17 @@ Assets::Assets()
     resultComic1_2_2 = LoadTexture("assets/clear/1_2_2.png");
     resultComic1_1_3 = LoadTexture("assets/clear/1_2_3.png");
 
+      //stage1_3
+    stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
+    sandwich = LoadTexture("assets/stage1/1_3_sandwich.png");
+    sandwichShadow = LoadTexture("assets/stage1/1_3_sandwich_shadow.png");
+    busket = LoadTexture("assets/stage1/1_3_busket.png");
+    busketShadow = LoadTexture("assets/stage1/1_3_bucket_shadow.png");
+    newspaper = LoadTexture("assets/stage1/1_3_newspaper.png");
+    newspaperShadow = LoadTexture("assets/stage1/1_3_newspaper_shadow.png");
+    picnicbasket = LoadTexture("assets/stage1/1_3_picnicbasket.png");
+    picnicbasketShadow = LoadTexture("assets/stage1/1_3_pinicbasket_shadow.png");
+
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
@@ -130,7 +141,19 @@ Assets::~Assets()
     //1-2
     SAFE_RELEASE(resultComic1_2_1);
     SAFE_RELEASE(resultComic1_2_2);
-    SAFE_RELEASE(resultComic1_1_3);
+    SAFE_RELEASE(resultComic1_1_3);    //stage1-2用リソース
+
+    //stage1-3用リソース
+    SAFE_RELEASE(stage3Bg);
+
+    SAFE_RELEASE(sandwich);
+    SAFE_RELEASE(sandwichShadow);
+    SAFE_RELEASE(busket);
+    SAFE_RELEASE(busketShadow);
+    SAFE_RELEASE(newspaper);
+    SAFE_RELEASE(newspaperShadow);
+    SAFE_RELEASE(picnicbasket);
+    SAFE_RELEASE(picnicbasketShadow);
 
     //ポーズ画面用
     SAFE_RELEASE(uiPauseBg);
