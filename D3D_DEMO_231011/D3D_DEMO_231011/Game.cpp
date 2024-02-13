@@ -950,7 +950,7 @@ void Game::UpdateStage1_1(void)
 			Input::Get()->GetKeyTrigger(DIK_RIGHT))
 		{
 			//ここはオブジェクトが動いた時だけSEを出したい
-			/*if ()*/ { XA_Play(SE_Move); }//このままだと連打したら毎回音が出る
+			/*if ()*/  { XA_Play(SE_Move); }//このままだと連打したら毎回音が出る
 				
 			
 			
