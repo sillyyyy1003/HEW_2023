@@ -1062,10 +1062,21 @@ void Game::UpdateStage1_1(void)
 		element->Update();
 	}
 
+
+
 	//クリア判定
-	if (ColliderManager::Get()->ClearCollision({ COL_DOWN,COL_RIGHT }, "coconut", "lamp", ShadowObject::MEDIUM)) {
-		isPause = true;
+ 	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
+		ColliderManager::Get()->ClearCollision({OVERLAP,COL_UP},"coconut","housePlate",ShadowObject::LARGE)) {
+		//isPause = true;
+		
+		//クリア
+		int stageNum = SceneManager::Get()->GetActiveStage();
+		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
 	}
+
+	//エフェクト
+	testEffect->SetTrace(true);
+	testEffect->Update();
 
 }
 
@@ -1075,6 +1086,13 @@ void Game::UpdateStage1_2(void)
 	//背景
 	stageBg->Update();
 
+	for (auto& element : objectList) {
+		if (!element->GetStill()) {
+			isPlayMoveSE = true;
+			//ループ中止
+			break;
+		}
+	}
 
 	for (auto& element : objectList) {
 		element->Update();
