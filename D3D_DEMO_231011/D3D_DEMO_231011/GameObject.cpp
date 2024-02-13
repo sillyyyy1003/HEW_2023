@@ -135,15 +135,53 @@ void GameObject::InitCollision(void)
 {
 }
 
-void GameObject::GenerateShadowPos(float moveSpeed, float posX)
+void GameObject::GenerateShadowPos(float moveSpeed, float center,float interval)
 {
-	m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
+	float pos[5] = {
+		center - 2 * interval,
+		center - interval,
+		center,
+		center + interval,
+		center + 2 * interval,
+	};
+
+	float moveSpeed = interval / 50;
+
+	switch (m_moveDir)
+	{
+	case UP:
+		break;
+	case UPRIGHT:
+		m_shadow->m_sprite->m_pos.x += moveSpeed;
+		break;
+	case RIGHT:
+		m_shadow->m_sprite->m_pos.x += moveSpeed;
+		break;
+	case DOWNRIGHT:
+		m_shadow->m_sprite->m_pos.x += moveSpeed;
+		break;
+	case DOWN:
+		break;
+	case DOWNLEFT:
+		m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		break;
+	case LEFT:
+		m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		break;
+	case UPLEFT:
+		m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		break;
+	case STILL:
+		//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
+		m_shadow->m_sprite->m_pos.x = pos[m_railPos.horizontalPos];
+		break;
+	default:
+		break;
+	}
+
+	//m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
 }
 
-void GameObject::GenerateShadowPos()
-{
-	m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
-}
 
 void GameObject::GenerateShadowSize(float speed)
 {
@@ -289,7 +327,7 @@ void GameObject::Update()
 	m_obj->Update();
 	
 	//位置を更新
-	GenerateShadowPos(0.08f, 0.1);
+	//GenerateShadowPos(0.08f, 0.1);
 	//GenerateShadowSize();
 
 	//大きさを更新
