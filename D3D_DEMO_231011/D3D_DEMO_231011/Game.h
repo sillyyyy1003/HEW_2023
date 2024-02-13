@@ -141,6 +141,8 @@ private:
 
 	bool isControl = true;
 
+	bool isPlayMoveSE = false;
+
 
 	//初期設定
 	SOUNDVOLUME soundVolume_BGM = VOLUME3;
@@ -152,7 +154,6 @@ private:
 	SELECTCHAPTER selectChapter = CHAPTER1;
 	FADE_STATE fadeState = NO_FADE;
 	PAUSESELECT pauseSelect = RESUME;
-	
 	
 
 private:
@@ -302,8 +303,6 @@ public:
 
 	void TestMove(Effect* _target);
 	void TestMove(CanvasUI* _target);
-
-	void FadeUpdate(void);
 
 	//背景を入れ替わる
 	void SetBackGround(ID3D11ShaderResourceView* tex);

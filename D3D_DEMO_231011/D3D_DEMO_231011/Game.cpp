@@ -1031,7 +1031,6 @@ void Game::StageUpdate(void)
 void Game::UpdateStage1_1(void)
 {
 	
-	
 	//移動させる目標を設定する
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		XA_Play(SE_Select);//セレクトSE再生
@@ -1051,21 +1050,19 @@ void Game::UpdateStage1_1(void)
 
 	
 	for (auto& element : objectList) {
-		element->Update();
-	}
-
-
-	for(auto& element:objectList){
-		if(element->GetStill()){
-			isPlayMoveSE=true;
+		if (!element->GetStill()) {
+			isPlayMoveSE = true;
 			//ループ中止
 			break;
 		}
 	}
-	coconut->Update();
-	lamp->Update();
-	housePlate->Update();
 
+
+	for (auto& element : objectList) {
+		element->Update();
+	}
+
+	//クリア判定
 	if (ColliderManager::Get()->ClearCollision({ COL_DOWN,COL_RIGHT }, "coconut", "lamp", ShadowObject::MEDIUM)) {
 		isPause = true;
 	}
@@ -1466,25 +1463,7 @@ void Game::SoundVolume(void)
 
 void Game::SoundOp_BGM(void)
 {
-	
-	if (Input::Get()->GetKeyTrigger(DIK_LEFT))
-	{
-		m_soundVolume_BGM--;
-	}
-	
-	if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
-	{
-			m_soundVolume_BGM++;
-	}
-	//制限
-	if (m_soundVolume_BGM >= 5)
-	{
-		m_soundVolume_BGM = 5;
-	}
-	else if (m_soundVolume_BGM <= 0) {
-		m_soundVolume_BGM = 0;
-	}
-	
+		
 	if (Input::Get()->GetKeyTrigger(DIK_LEFT))
 	{
 		XA_Play(SE_Select);//セレクトSE再生
