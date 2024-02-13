@@ -10,10 +10,6 @@ Assets::Assets()
     debugFont = LoadTexture("assets/img/ASCIILib.png");
 
     //test
-    //circle = LoadTexture("assets/Tree.png");
-    tree = LoadTexture("assets/Tree.png");
-    shadow = LoadTexture("assets/treeshadow.png");
-
     //title
     uiTitle = LoadTexture("assets/title/uiTitle.png");
     uiTitleBg = LoadTexture("assets/title/titleBg.png");
@@ -32,13 +28,33 @@ Assets::Assets()
     uiClear= LoadTexture("assets/ui/select/clear.png");
 
     //stage1_1
-    stageBg = LoadTexture("assets/stage1/stage1_1Bg.png");
+    stageBg1_1 = LoadTexture("assets/stage1/stage1_1Bg.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
     lampShadow = LoadTexture("assets/stage1/lamp_s.png");
     housePlate = LoadTexture("assets/stage1/housePlate.png");
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
+
+    //stage1_2
+    stageBg1_2 = LoadTexture("assets/stage1/1_2_Bg.png");
+
+    lamp_1_2 =  LoadTexture("assets/stage1/1_2_lamp.png");
+    lamp_1_2Shadow = LoadTexture("assets/stage1/1_2_lamp_shadow.png");
+    iphone = LoadTexture("assets/stage1/1_2_iphone.png");
+    iphoneShadow = LoadTexture("assets/stage1/1_2_iphone_shadow.png");
+    triangleBlock = LoadTexture("assets/stage1/1_2_bulidingblock.png");
+    triangleBlockShadow = LoadTexture("assets/stage1/1_2_buldingblock_shadow.png");
+
+    //Result Comic
+    //1-1
+    resultComic1_1_1 = LoadTexture("assets/clear/1_1_1.png");
+    resultComic1_1_2 = LoadTexture("assets/clear/1_1_2.png");
+    resultComic1_1_3 = LoadTexture("assets/clear/1_1_3.png");
+    //1-2
+    resultComic1_2_1 = LoadTexture("assets/clear/1_2_1.png");
+    resultComic1_2_2 = LoadTexture("assets/clear/1_2_2.png");
+    resultComic1_1_3 = LoadTexture("assets/clear/1_2_3.png");
 
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
@@ -49,8 +65,9 @@ Assets::Assets()
 
     //sound
     uiSoundBg = LoadTexture("assets/ui/soundBg.png");//サウンド背景
-    uiSoundOp_BGM = LoadTexture("assets/Tree.png");
-    uiSoundOp_SE = LoadTexture("assets/Tree.png");
+    uiMusic = LoadTexture("assets/ui/pause_music.png");
+    uiSE = LoadTexture("assets/ui/pause_se.png");
+    uiSoundOp_BGM = LoadTexture("assets/ui/pause_note.png");
 
     fade = LoadTexture("assets/fade.png");
 
@@ -62,10 +79,6 @@ Assets::Assets()
 
 Assets::~Assets()
 {
-    //title
-
-    SAFE_RELEASE(tree);
-    SAFE_RELEASE(shadow);
 
     // 図形
 
@@ -91,7 +104,7 @@ Assets::~Assets()
 
 
     //stage1-1用リソース
-    SAFE_RELEASE(stageBg);
+    SAFE_RELEASE(stageBg1_1);
 
     SAFE_RELEASE(coconut);
     SAFE_RELEASE(coconutShadow);
@@ -100,7 +113,24 @@ Assets::~Assets()
     SAFE_RELEASE(housePlate);
     SAFE_RELEASE(housePlateShadow);
 
+    //1-2
+    SAFE_RELEASE(stageBg1_2);
+    SAFE_RELEASE(lamp_1_2);
+    SAFE_RELEASE(lamp_1_2Shadow);
+    SAFE_RELEASE(iphone);
+    SAFE_RELEASE(iphoneShadow);
+    SAFE_RELEASE(triangleBlock);
+    SAFE_RELEASE(triangleBlockShadow);
 
+    //Result Comic
+    //1-1
+    SAFE_RELEASE(resultComic1_1_1);
+    SAFE_RELEASE(resultComic1_1_2);
+    SAFE_RELEASE(resultComic1_1_3);
+    //1-2
+    SAFE_RELEASE(resultComic1_2_1);
+    SAFE_RELEASE(resultComic1_2_2);
+    SAFE_RELEASE(resultComic1_1_3);
 
     //ポーズ画面用
     SAFE_RELEASE(uiPauseBg);
@@ -113,7 +143,8 @@ Assets::~Assets()
     //サウンド画面用
     SAFE_RELEASE(uiSoundBg);//サウンド背景
     SAFE_RELEASE(uiSoundOp_BGM);//サウンド調節
-    SAFE_RELEASE(uiSoundOp_SE);//サウンド調節
+    SAFE_RELEASE(uiMusic);	//サウンド音楽文字表示
+    SAFE_RELEASE(uiSE);		//サウントSE文字表示
 
 
     SAFE_RELEASE(fade);

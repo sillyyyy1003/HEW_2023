@@ -33,14 +33,16 @@ private:
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
 
-
 	CanvasUI* uiSelect;
 	CanvasUI* uiSound;
 	CanvasUI* uiSoundBg;		//SOUNDの背景
+	CanvasUI* uiMusic;			//文字表示
+	CanvasUI* uiSE;				//SE表示
+
+
 
 	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
-
 	CanvasUI* fade;
 
 	//Effect
@@ -62,6 +64,11 @@ private:
 	GameObject*		coconut;		//円
 	GameObject*		lamp;			//長細の棒
 	GameObject *	housePlate;			//長方形
+
+	//STAGE1-2
+	GameObject*		lamp1_2;		//台形
+	GameObject*		triangleBlock;	//三角形
+	GameObject*		iphone;			//平行四角形
 
 	//移動できるオブジェクトのリスト
 	std::vector<GameObject*> objectList;
@@ -94,6 +101,7 @@ private:
 		CHAPTER1,
 		CHAPTER2,
 		CHAPTER3,
+		CHAPTER_IDLE,
 	};
 
 	//フェード状態
@@ -186,9 +194,9 @@ public:
 	void SelectChapter(void);
 	void SelectStageNone(void);
 
-	void SelectStage1(void);
-	void SelectStage2(void);
-	void SelectStage3(void);
+	void SelectChapter1(void);
+	void SelectChapter2(void);
+	void SelectChapter3(void);
 
 	void ClearSwitch1(void);
 	void ClearSwitch2(void);
@@ -274,8 +282,11 @@ public:
 	void SortShadowDraw(void);
 
 
-	void TestMove(GameObject* _target);
+	//デバッグ用
+	void DebugDisplay(void);
+
 	void TestMove(Effect* _target);
+	void TestMove(CanvasUI* _target);
 
 	void FadeUpdate(void);
 

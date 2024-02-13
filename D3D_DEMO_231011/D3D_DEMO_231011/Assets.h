@@ -12,9 +12,6 @@ public:
 	//----------------------------//
 	
 	//================//テスト用//================//
-
-	ID3D11ShaderResourceView* tree;
-	ID3D11ShaderResourceView* shadow;
 	
 	// 図形
 
@@ -40,7 +37,7 @@ public:
 
 
 	//stage1-1用リソース
-	ID3D11ShaderResourceView* stageBg;
+	ID3D11ShaderResourceView* stageBg1_1;
 
 	ID3D11ShaderResourceView* coconut;
 	ID3D11ShaderResourceView* coconutShadow;
@@ -48,7 +45,27 @@ public:
 	ID3D11ShaderResourceView* lampShadow;
 	ID3D11ShaderResourceView* housePlate;
 	ID3D11ShaderResourceView* housePlateShadow;
+
+	//stage1-2リソース
 	
+	ID3D11ShaderResourceView* stageBg1_2;
+
+	ID3D11ShaderResourceView* lamp_1_2;
+	ID3D11ShaderResourceView* lamp_1_2Shadow;
+	ID3D11ShaderResourceView* iphone;
+	ID3D11ShaderResourceView* iphoneShadow;
+	ID3D11ShaderResourceView* triangleBlock;
+	ID3D11ShaderResourceView* triangleBlockShadow;
+
+	//Result Comic
+	//1-1
+	ID3D11ShaderResourceView* resultComic1_1_1;
+	ID3D11ShaderResourceView* resultComic1_1_2;
+	ID3D11ShaderResourceView* resultComic1_1_3;
+	//1-2
+	ID3D11ShaderResourceView* resultComic1_2_1;
+	ID3D11ShaderResourceView* resultComic1_2_2;
+	ID3D11ShaderResourceView* resultComic1_2_3;
 
 
 	//ポーズ画面用
@@ -62,7 +79,8 @@ public:
 	//サウンド画面用
 	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
 	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド調節
-	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
+	ID3D11ShaderResourceView* uiMusic;	//サウンド音楽文字表示
+	ID3D11ShaderResourceView* uiSE;		//サウントSE文字表示
 
 
 	ID3D11ShaderResourceView* fade;

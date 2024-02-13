@@ -12,7 +12,7 @@ private:
 	bool isClear = false;
 
 	//一回クリアしたか
-	bool isisCompleted = false;
+	bool isCompleted = false;
 
 	//Reward Gold
 	float m_rewardGold = 0;
@@ -41,10 +41,8 @@ public:
 	bool GetClear(void) { return isClear; };
 
 	//ゲームステージ一回クリア下かどうか？
-	void SetCompleted(bool isCompleted) { this->isisCompleted = isCompleted; };
-	bool GetCompleted(void) { return isisCompleted; };
-
-
+	void SetCompleted(bool isCompleted) { this->isCompleted = isCompleted; };
+	bool GetCompleted(void) { return isCompleted; };
 
 	//ステップ数を加算していく
 	void StepCount(void);
@@ -53,7 +51,5 @@ public:
 	//step数をリセット　クリア状態をリセット
 	void ResetStage(void) { m_moveStep = 0; isClear = false; };
 
-
-	
 };
 

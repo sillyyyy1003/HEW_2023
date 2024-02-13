@@ -33,5 +33,8 @@ public:
 	void Draw(void) override;
 
 	void InitPos(float x, float y, float z) { m_pos = DirectX::XMFLOAT3{ x,y,z }; };
+
+	//アニメパターンの変更
+	void SetAnimeActive(STATUS status) { m_anime->SetAnimePattern(status); };
 };
 
