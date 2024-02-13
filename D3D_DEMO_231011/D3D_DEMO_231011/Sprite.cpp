@@ -100,23 +100,17 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	}
 
 	//当たり判定のデータを入力
-	m_modelData.collider.extents.x = _width / 2;
-	m_modelData.collider.extents.y = _height / 2;
+	m_modelData.collider.extents.x = _width / 2 * 1.25 / 96;
+	m_modelData.collider.extents.y = _height / 2 * 1.25 / 96;
 	m_modelData.collider.extents.z = 0.01f;	//ｚ軸の大きさをロックする
 	
-	m_modelData.collider.radius = _width / 2;
+	m_modelData.collider.radius = _width / 2 * 1.25 / 96;
 	
 	//テクスチャを実装
 	SetTexture(texture);
 }
 
 
-void Sprite::InitPos(float x, float y, float z)
-{
-	m_pos.x = x;
-	m_pos.y = y;
-	m_pos.z = z;
-}
 
 void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 {
@@ -172,24 +166,6 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	cb.materialDiffuse = m_materialDiffuse;
 
 }
-
-void Sprite::RotateObj(XMFLOAT3& rot)
-{
-
-	enum VALUE {val = 1,};  float fval = 0.2;//テストの値
-	
-	POINT mouseMovePos = Input::Get()->GetMouseMove();
-
-	//回転する条件（回転制限）
-	if (m_rotation.x/* == 0 || m_rotation.x <= 90*/) { rot.x = m_rotation.x += mouseMovePos.y * val * fval; };
-	if (m_rotation.y/* == 0 || m_rotation.y <= 90*/) { rot.y = m_rotation.y += mouseMovePos.x * val * fval; };
-
-
-}
-
-
-
-
 
 
 void Sprite::Draw(void)

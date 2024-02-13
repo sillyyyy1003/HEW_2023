@@ -5,7 +5,7 @@
 
 void TrackCamera::Update()
 {
-
+	//追跡用の部分
 	if (m_targetObject != nullptr) //追跡する場合
 	{
 

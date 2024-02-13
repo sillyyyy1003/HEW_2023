@@ -101,11 +101,6 @@ public:
 	virtual void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY);
 
 	/// <summary>
-	/// 位置の初期化
-	/// </summary>
-	void InitPos(float x, float y, float z);
-
-	/// <summary>
 	/// シェーダーに渡す行列の処理を行う関数(回転/拡大縮小)
 	/// 平行投影用
 	/// </summary>
@@ -115,11 +110,6 @@ public:
 	DirectX::XMFLOAT3 GetExtents(void) { return m_modelData.collider.extents; };
 	Collide GetCollide(void) { return m_modelData.collider; };
 
-	/// <summary>
-	/// マウスの操作でオブジェクトを回転させる処理の関数(途中）
-	/// </summary>
-	/// <param name="rot">オブジェクトの回転</param>
-	void RotateObj(XMFLOAT3& rot);
 
 	/// <summary>
 	/// 描画を行う関数

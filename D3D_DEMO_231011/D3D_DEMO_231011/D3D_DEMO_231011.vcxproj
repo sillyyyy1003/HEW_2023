@@ -135,12 +135,14 @@
     <ClCompile Include="Assets.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraShaker.cpp" />
     <ClCompile Include="CanvasUI.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DInput.cpp" />
     <ClCompile Include="Direct3D\Direct3D.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="Assets.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraShaker.h" />
     <ClInclude Include="CanvasUI.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderManager.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="Direct3D\Direct3D.h" />
     <ClInclude Include="Direct3D\Shader\PixelShader.h" />
     <ClInclude Include="Direct3D\Shader\VertexShader.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />

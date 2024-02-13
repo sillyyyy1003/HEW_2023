@@ -9,8 +9,8 @@ private:
 
 public:
 	enum STATUS {
-		ACTIVE,		//起動している時
-		INACTIVE,	//
+		ACTIVE = 0,		//起動している時
+		INACTIVE = 1,	//
 	};
 	
 
@@ -32,6 +32,11 @@ public:
 	void SetActive(bool status) { isActive = status; };
 
 	void Draw(void) override;
+
+	void InitPos(float x, float y, float z) { m_pos = DirectX::XMFLOAT3{ x,y,z }; };
+
+	//アニメパターンの変更
+	void SetAnimeActive(STATUS status) { m_anime->SetAnimePattern(status); };
 
 	
 };

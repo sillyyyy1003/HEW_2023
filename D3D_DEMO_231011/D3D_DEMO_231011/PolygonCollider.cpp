@@ -1,4 +1,4 @@
-#include "PolygonCollider.h"
+ï»¿#include "PolygonCollider.h"
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 
@@ -9,14 +9,17 @@ PolygonCollider::PolygonCollider()
 
 }
 
-void PolygonCollider::InitCollider(DirectX::XMFLOAT3 center, Collide Collider)
+void PolygonCollider::InitCollider(DirectX::XMFLOAT3 center, Collide Collider, TRIANGLE_TYPE type)
 {
     m_center = center;
     m_extents = Collider.extents;
     m_radius = Collider.radius;
-
+    m_type = type;
+    //é ‚ç‚¹ã‚’ä½œã‚‹
+    PolygonCollider::InitVerticies();
 }
 
+/*
 std::vector<Vector3> PolygonCollider::GetTriangleVertices(void)
 {
     Collider::Triangle triangle = {};
@@ -29,7 +32,7 @@ std::vector<Vector3> PolygonCollider::GetTriangleVertices(void)
         triangle.B = { m_center.x + m_extents.x,m_center.y - m_extents.y };
         triangle.C = { m_center.x - m_extents.x,m_center.y - m_extents.y };
 
-        // 1‚Â–Ú‚Ì“Ê‘½ŠpŒ`‚Ì’¸“_À•W‚ğ’è‹`
+        // 1ã¤ç›®ã®å‡¸å¤šè§’å½¢ã®é ‚ç‚¹åº§æ¨™ã‚’å®šç¾©
         vertices = {
             Vector3(triangle.A.x, triangle.A.y,0),
             Vector3(triangle.B.x, triangle.B.y,0),
@@ -45,7 +48,7 @@ std::vector<Vector3> PolygonCollider::GetTriangleVertices(void)
         triangle.B = { m_center.x + m_extents.x ,m_center.y - m_extents.y  };
         triangle.C = { m_center.x - m_extents.x ,m_center.y - m_extents.y  };
 
-        // 1‚Â–Ú‚Ì“Ê‘½ŠpŒ`‚Ì’¸“_À•W‚ğ’è‹`
+        // 1ã¤ç›®ã®å‡¸å¤šè§’å½¢ã®é ‚ç‚¹åº§æ¨™ã‚’å®šç¾©
         vertices = {
             Vector3(triangle.A.x, triangle.A.y,0),
             Vector3(triangle.B.x, triangle.B.y,0),
@@ -61,7 +64,55 @@ std::vector<Vector3> PolygonCollider::GetTriangleVertices(void)
         break;
     }
 }
+*/
 
+std::vector<DirectX::XMFLOAT3> PolygonCollider::InitVerticies() {
+
+    std::vector<DirectX::XMFLOAT3> verticies;
+
+    switch (m_type)
+    {
+    case TRIANGLE_TYPE::TRI_RIGHT:
+
+        //triangle.A = { m_center.x + m_extents.x, m_center.y + m_extents.y };
+        //triangle.B = { m_center.x + m_extents.x,m_center.y - m_extents.y };
+        //triangle.C = { m_center.x - m_extents.x,m_center.y - m_extents.y };
+
+        // 1ã¤ç›®ã®å‡¸å¤šè§’å½¢ã®é ‚ç‚¹åº§æ¨™ã‚’å®šç¾©
+        verticies = {
+            { m_center.x + m_extents.x, m_center.y + m_extents.y,0 },
+            { m_center.x + m_extents.x, m_center.y - m_extents.y ,0},
+            { m_center.x - m_extents.x, m_center.y - m_extents.y ,0},
+        };
+
+        return verticies;
+
+        break;
+
+    case TRIANGLE_TYPE::TRI_ISO:
+        /*
+        triangle.A = { m_center.x, m_center.y + m_extents.y };
+        triangle.B = { m_center.x + m_extents.x ,m_center.y - m_extents.y };
+        triangle.C = { m_center.x - m_extents.x ,m_center.y - m_extents.y };
+        */
+        // 1ã¤ç›®ã®å‡¸å¤šè§’å½¢ã®é ‚ç‚¹åº§æ¨™ã‚’å®šç¾©
+        verticies = {
+             { m_center.x, m_center.y + m_extents.y,0 },
+             { m_center.x + m_extents.x ,m_center.y - m_extents.y,0 },
+             { m_center.x - m_extents.x ,m_center.y - m_extents.y,0 },
+        };
+        return verticies;
+        break;
+    case TRI_IDLE:
+        return {};
+        break;
+
+    default:
+        break;
+    }
+
+
+}
 
 void PolygonCollider::UpdatePos(DirectX::XMFLOAT3 m_center)
 {
@@ -71,69 +122,27 @@ void PolygonCollider::UpdatePos(DirectX::XMFLOAT3 m_center)
 void PolygonCollider::UpdateRotation(DirectX::XMFLOAT3 rotation)
 {
 
-    Collider::Triangle triangle = {};
-    std::vector<Vector3> vertices;
+    //std::vector<DirectX::XMFLOAT3> verticies;
 
-    //z²‚Ì‰ñ“]ƒ}ƒgƒŠƒNƒX‚ğŠl“¾
+    // Zè»¸ã®ãƒãƒˆãƒªã‚¯ã‚¹ã‚’ä½œã‚‹
     DirectX::XMMATRIX rotationMatrix = XMMatrixRotationZ(rotation.z);
 
-    //’¸“_‚Ìƒf[ƒ^‚ğxmfloat2‚ÉŠi”[
-    DirectX::XMFLOAT2 A = { triangle.A.x,triangle.A.y };
-    DirectX::XMFLOAT2 B = { triangle.B.x,triangle.B.y };
-    DirectX::XMFLOAT2 C = { triangle.C.x,triangle.B.y };
+    // å›è»¢ã—ã¦ãªã„é ‚ç‚¹ã‚’ç²å¾—
+    std::vector<DirectX::XMFLOAT3> verticies = this->InitVerticies();
 
-    DirectX::XMVECTOR rotatedA, rotatedB, rotatedC;
+    // æ—‹è½¬åçš„é¡¶ç‚¹åæ ‡
+    DirectX::XMVECTOR rotatedA = XMVector3Transform(XMLoadFloat3(&verticies[0]), rotationMatrix);
+    DirectX::XMVECTOR rotatedB = XMVector3Transform(XMLoadFloat3(&verticies[1]), rotationMatrix);
+    DirectX::XMVECTOR rotatedC = XMVector3Transform(XMLoadFloat3(&verticies[2]), rotationMatrix);
 
-    switch (m_type)
-    {
-    case TRI_RIGHT:
-        triangle.A = { m_center.x + m_extents.x, m_center.y + m_extents.y };
-        triangle.B = { m_center.x + m_extents.x,m_center.y - m_extents.y };
-        triangle.C = { m_center.x - m_extents.x,m_center.y - m_extents.y };
+    // æ›´æ–°é¡¶ç‚¹
+    verticies={
+        { XMVectorGetX(rotatedA), XMVectorGetY(rotatedA), 0 },
+        { XMVectorGetX(rotatedB), XMVectorGetY(rotatedB), 0 },
+        { XMVectorGetX(rotatedC), XMVectorGetY(rotatedC), 0 },
+    };
 
-        //ƒIƒuƒWƒFƒNƒg‚Æ‰ñ“]ƒ}ƒgƒŠƒNƒX‚ğ‡‚í‚¹‚ÄA‰ñ“]‚µ‚½Œã‚Ì’¸“_Vector‚ğŠl“¾
-        rotatedA = XMVector2Transform(XMLoadFloat2(&A), rotationMatrix);
-        rotatedB = XMVector2Transform(XMLoadFloat2(&B), rotationMatrix);
-        rotatedC = XMVector2Transform(XMLoadFloat2(&C), rotationMatrix);
-
-        //’¸“_‚ÌVector‚©‚çÀ•WˆÊ’u‚É•ÏŠ·
-        vertices = {
-             Vector3(XMVectorGetX(rotatedA), XMVectorGetY(rotatedA), 0),
-             Vector3(XMVectorGetX(rotatedB), XMVectorGetY(rotatedB), 0),
-             Vector3(XMVectorGetX(rotatedC), XMVectorGetY(rotatedC), 0)
-        };
-   
-        m_verticies = vertices;
-
-
-        break;
-
-    case TRI_ISO:
-        triangle.A = { m_center.x, m_center.y + m_extents.y };
-        triangle.B = { m_center.x + m_extents.x ,m_center.y - m_extents.y };
-        triangle.C = { m_center.x - m_extents.x ,m_center.y - m_extents.y };
-
-        //ƒIƒuƒWƒFƒNƒg‚Æ‰ñ“]ƒ}ƒgƒŠƒNƒX‚ğ‡‚í‚¹‚ÄA‰ñ“]‚µ‚½Œã‚Ì’¸“_Vector‚ğŠl“¾
-        rotatedA = XMVector2Transform(XMLoadFloat2(&A), rotationMatrix);
-        rotatedB = XMVector2Transform(XMLoadFloat2(&B), rotationMatrix);
-        rotatedC = XMVector2Transform(XMLoadFloat2(&C), rotationMatrix);
-
-        //’¸“_‚ÌVector‚©‚çÀ•WˆÊ’u‚É•ÏŠ·
-        vertices = {
-             Vector3(XMVectorGetX(rotatedA), XMVectorGetY(rotatedA), 0),
-             Vector3(XMVectorGetX(rotatedB), XMVectorGetY(rotatedB), 0),
-             Vector3(XMVectorGetX(rotatedC), XMVectorGetY(rotatedC), 0)
-        };
-
-        m_verticies = vertices;
-        break;
-
-    case TRI_IDLE:
-        
-        break;
-
-
-    }
+    m_verticies = verticies;
 }
 
 void PolygonCollider::UpdateExtents(DirectX::XMFLOAT3 extents)
@@ -141,24 +150,8 @@ void PolygonCollider::UpdateExtents(DirectX::XMFLOAT3 extents)
     m_extents = extents;
 }
 
+
 /*
-void PolygonCollider::UpdateVerticies(DirectX::XMFLOAT3 rotation)
-{
-    //Šp“x‚©‚çƒ‰ƒWƒAƒ“‚É•ÏŠ·
-    float roll = DirectX::XMConvertToRadians(rotation.x);      //x²‰ñ“]
-    float pitch = DirectX::XMConvertToRadians(rotation.y);     //y²‰ñ“]
-    float yaw = DirectX::XMConvertToRadians(rotation.z);       //z²‰ñ“]
-
-    PolygonSAT3D* Polygon = new PolygonSAT3D;
-    //ƒ|ƒŠƒSƒ“‚Ì’¸“_‚ğ‘ã“ü
-    Polygon->vertices = m_verticies;
-    //‰ñ“]ˆ—
-    Polygon->rotation = Quaternion::FromEulerAngles(pitch, yaw, roll);
-    //‰ñ“]‚µ‚½Œã‚Ì’¸“_‚ğŠl“¾
-    m_verticies = Polygon->GetRotatedVertices();
-
-}*/
-
 std::vector<Vector3> PolygonCollider::GetVerticies()
 {
     return m_verticies;
@@ -168,6 +161,7 @@ void PolygonCollider::SetVerticies(std::vector<Vector3> ver)
 {
     m_verticies = ver;
 }
+*/
 
 void PolygonCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents)
 {
@@ -176,46 +170,67 @@ void PolygonCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotatio
         return;
     }
     else {
-        
-        //ˆÊ’u‚ğŠl“¾
+
+        //ä½ç½®ã‚’ç²å¾—
         UpdatePos(center);
 
-        //‘å‚«‚³
+        //å¤§ãã•
         UpdateExtents(extents);
 
-        //’¸“_‚ğŠl“¾
+        //é ‚ç‚¹ã‚’ç²å¾—
         UpdateRotation(rotation);
 
-        
+
+        m_center = center;
+        m_extents = extents;
+        m_radius = extents.x;
     }
 
 }
 
 bool PolygonCollider::isCollision(BoxCollider* collider)
 {
+    /*
     PolygonSAT3D* Polygon = new PolygonSAT3D;
     PolygonSAT3D* Box = new PolygonSAT3D;
 
 
-    //‰ñ“]Œã‚Ì’¸“_‚ğŠl“¾
+    //å›è»¢å¾Œã®é ‚ç‚¹ã‚’ç²å¾—
     Polygon->vertices = m_verticies;
     Box->vertices = collider->GetVerticies();
-   
+
     bool isCollide= SAT::Collide3D(*Polygon, *Box);
     delete Polygon;
     delete Box;
 
     return isCollide;
+    */
 
+    //XMFLOAT->XMVECTORã«å¤‰æ›
+    DirectX::XMVECTOR v[3] = {};
+    for (int i = 0; i < m_verticies.size(); i++) {
+
+        v[i] = DirectX::XMLoadFloat3(&m_verticies[i]);
+    }
+
+    if (collider->GetCollider().Intersects(v[0], v[1], v[2])){
+        return true;
+    }
+    else {
+        return false;
+    }
+    
+    
 }
 
 bool PolygonCollider::isCollision(SphereCollider* collider)
 {
+    /*
     PolygonSAT3D* Polygon = new PolygonSAT3D;
     PolygonSAT3D* Sphere = new PolygonSAT3D;
 
 
-    //‰ñ“]Œã‚Ì’¸“_‚ğŠl“¾
+    //å›è»¢å¾Œã®é ‚ç‚¹ã‚’ç²å¾—
     Polygon->vertices = m_verticies;
     Sphere->vertices = collider->GetVerticies();
 
@@ -225,16 +240,36 @@ bool PolygonCollider::isCollision(SphereCollider* collider)
     delete Sphere;
     
     return isCollide;
+      */
+
+    DirectX::XMVECTOR v[3] = {};
+    for (int i = 0; i < m_verticies.size(); i++) {
+
+        v[i] = DirectX::XMLoadFloat3(&m_verticies[i]);
+    }
+
+    if (collider->GetCollider().Intersects(v[0], v[1], v[2])) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
 }
 
 bool PolygonCollider::isCollision(PolygonCollider* collider)
 {
-    PolygonSAT3D* Polygon1 = new PolygonSAT3D;
-    PolygonSAT3D* Polygon2 = new PolygonSAT3D;
+    
+    PolygonSAT3D* Polygon1 = new PolygonSAT3D;//æœ¬ä½“
+    PolygonSAT3D* Polygon2 = new PolygonSAT3D;//ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
 
-
-    //‰ñ“]Œã‚Ì’¸“_‚ğŠl“¾
-    Polygon1->vertices = m_verticies;
+    std::vector<Vector3> verticies = {
+        { m_verticies[0].x,m_verticies[0].y,m_verticies[0].z},
+        { m_verticies[1].x,m_verticies[1].y,m_verticies[1].z},
+        { m_verticies[2].x,m_verticies[2].y,m_verticies[2].z},
+    };
+    //å›è»¢å¾Œã®é ‚ç‚¹ã‚’ç²å¾—
+    Polygon1->vertices = this->GetVerticies();
     Polygon2->vertices = collider->GetVerticies();
 
     bool isCollide = SAT::Collide3D(*Polygon1, *Polygon2);
@@ -243,9 +278,43 @@ bool PolygonCollider::isCollision(PolygonCollider* collider)
     delete Polygon2;
 
     return isCollide;
+    
 }
 
-// ---}Œ`‚Ì“–‚½‚è”»’è‚Ìˆ— ---//
+bool PolygonCollider::isCollision(Collider* collider) {
+
+    switch (collider->GetColliderType())
+    {
+    case COLLISION_TYPE::TRIANGLE:		//ä¸‰è§’å½¢
+        return this->isCollision(dynamic_cast<PolygonCollider*>(collider));
+        break;
+    case COLLISION_TYPE::SPHERE:		//çƒä½“
+        return this->isCollision(dynamic_cast<SphereCollider*>(collider));
+        break;
+    case COLLISION_TYPE::SQUARE:		//BOX
+        return this->isCollision(dynamic_cast<BoxCollider*>(collider));
+        break;
+    case COLLISION_TYPE::IDLE:			//NULL
+        return false;
+        break;
+    default:
+        break;
+
+    }
+
+}
+
+std::vector<Vector3> PolygonCollider::GetVerticies() {
+    
+    std::vector<Vector3> verticies = {
+    { m_verticies[0].x,m_verticies[0].y,m_verticies[0].z},
+    { m_verticies[1].x,m_verticies[1].y,m_verticies[1].z},
+    { m_verticies[2].x,m_verticies[2].y,m_verticies[2].z},
+    };
+
+    return verticies;
+}
+// ---å›³å½¢ã®å½“ãŸã‚Šåˆ¤å®šã®å‡¦ç† ---//
 /*
 bool PolygonCollider::isBoxCollision(Collider* boxCollider)
 {
@@ -256,13 +325,13 @@ bool PolygonCollider::isBoxCollision(Collider* boxCollider)
     Polygon->vertices = verticies;
     Box->vertices = SetSquare(Lm_boxCollider.Extents.x, Lm_boxCollider.Extents.y);;
 
-    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // ‰ñ“]‚È‚µ
-    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45“x‰ñ“]
+    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // å›è»¢ãªã—
+    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45åº¦å›è»¢
 
     std::vector<Vector3> Polygonverticies = Polygon->GetRotatedVertices();
     std::vector<Vector3> Boxverticies = Box->GetRotatedVertices();
 
-    // lŠp
+    // å››è§’
     for (auto& vertex : Polygonverticies) {
         vertex.x += m_polygonCollider.Center.x;
         vertex.y += m_polygonCollider.Center.y;
@@ -282,7 +351,7 @@ bool PolygonCollider::isBoxCollision(Collider* boxCollider)
 
     bool collisionResult = SAT::Collide3D(*Polygon, *Box);
 
-    // Œ‹‰Ê‚ğ•\¦
+    // çµæœã‚’è¡¨ç¤º
     if (collisionResult)
     {
         return true;
@@ -299,14 +368,14 @@ bool PolygonCollider::isSphereCollision(Collider* sphereCollider)
     Polygon->vertices = verticies;
     Sphere->vertices = SetCircle(Lm_sphereCollider.Radius);
 
-    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // ‰ñ“]‚È‚µ
-    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45“x‰ñ“]
+    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // å›è»¢ãªã—
+    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45åº¦å›è»¢
 
     std::vector<Vector3> Polygonverticies = Polygon->GetRotatedVertices();
     std::vector<Vector3> Sphereverticies = Sphere->GetRotatedVertices();
 
-    // lŠp
-    // ‚È‚º‚©1.5”{‚·‚é•K—v‚ª‚ ‚é
+    // å››è§’
+    // ãªãœã‹1.5å€ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
     for (auto& vertex : Polygonverticies) {
         vertex.x += m_polygonCollider.Center.x;
         vertex.y += m_polygonCollider.Center.y;
@@ -326,7 +395,7 @@ bool PolygonCollider::isSphereCollision(Collider* sphereCollider)
 
     bool collisionResult = SAT::Collide3D(*Polygon, *Sphere);
 
-    // Œ‹‰Ê‚ğ•\¦
+    // çµæœã‚’è¡¨ç¤º
     if (collisionResult)
     {
         return true;
@@ -343,14 +412,14 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
     Polygon->vertices = verticies;
     EPolygon->vertices = SetTriangle(Lm_polygonCollider.Radius);;
 
-    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // ‰ñ“]‚È‚µ
-    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45“x‰ñ“]
+    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // å›è»¢ãªã—
+    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45åº¦å›è»¢
 
     std::vector<Vector3> Polygonverticies = Polygon->GetRotatedVertices();
     std::vector<Vector3> EPolygonverticies = EPolygon->GetRotatedVertices();
 
-    // lŠp
-    // ‚È‚º‚©1.5”{‚·‚é•K—v‚ª‚ ‚é
+    // å››è§’
+    // ãªãœã‹1.5å€ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
     for (auto& vertex : Polygonverticies) {
         vertex.x += m_polygonCollider.Center.x;
         vertex.y += m_polygonCollider.Center.y;
@@ -371,7 +440,7 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
 
     bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
 
-    // Œ‹‰Ê‚ğ•\¦
+    // çµæœã‚’è¡¨ç¤º
     if (collisionResult)
     {
         return true;
@@ -405,8 +474,8 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
 //        EPolygon->vertices = SetCircle(SCollider.Radius);
 //    }
 //
-//    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // ‰ñ“]‚È‚µ
-//    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45“x‰ñ“]
+//    //Polygon->rotation = Quaternion::FromEulerAngles(0, rotation.x, 0);  // å›è»¢ãªã—
+//    //Sphere->rotation = Quaternion::FromEulerAngles(1, rotation.x,1);  // 45åº¦å›è»¢
 //
 //    std::vector<Vector3> Polygonverticies = Polygon->GetRotatedVertices();
 //    std::vector<Vector3> EPolygonverticies = EPolygon->GetRotatedVertices();
@@ -417,7 +486,7 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
 //        //vertex.z += center.z;
 //    }
 //
-//    // lŠp
+//    // å››è§’
 //    for (auto& vertex : Polygonverticies) {
 //        vertex.x += Clearverticies[verNum].x;
 //        vertex.y += Clearverticies[verNum].y;
@@ -451,7 +520,7 @@ bool PolygonCollider::isPolygonCollision(Collider* polygoncollider)
 //
 //    bool collisionResult = SAT::Collide3D(*Polygon, *EPolygon);
 //
-//    // Œ‹‰Ê‚ğ•\¦
+//    // çµæœã‚’è¡¨ç¤º
 //    if (collisionResult)
 //    {
 //        return true;

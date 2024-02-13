@@ -10,7 +10,8 @@ class BoxCollider : public Collider
 {
 private:
 
-	std::vector<Vector3> m_verticies;
+	//std::vector<Vector3> m_verticies;
+	
 
 	//オブジェクトの回転もあるのでOBBを使う
 	DirectX::BoundingOrientedBox m_boxCollider;
@@ -24,10 +25,10 @@ public:
 	/// <param name="extents">中心点はモデル作成の時もうつけてるから要りません</param>
 	BoxCollider();
 
-	void InitCollider(DirectX::XMFLOAT3 center, Collide collider);
+	void InitCollider(DirectX::XMFLOAT3 center, Collide collider) override;
 
-	std::vector<Vector3> GetSquareVerticies(void);
-
+	//std::vector<Vector3> GetSquareVerticies(void);
+	std::vector<DirectX::XMFLOAT3> InitVerticies(void);//最初の頂点データを作る
 
 	//四角形の幅を更新する関数
 	void UpdateExtents(DirectX::XMFLOAT3 extents);
@@ -64,14 +65,16 @@ public:
 	/// <param name="sphereCollider">Polygon</param>
 	bool isCollision(PolygonCollider* collider) override;
 
+	bool isCollision(Collider* collider) override;
 
-	DirectX::BoundingOrientedBox GetColldier(void) { return m_boxCollider; };
+
+	DirectX::BoundingOrientedBox GetCollider(void) { return m_boxCollider; };
 
 	//bool isClearCollision(Collider* polygoncollider, float verNum)override;
 
 	//頂点データ
-	void SetVerticies(std::vector<Vector3> ver) { m_verticies = ver; };
+	//void SetVerticies(std::vector<Vector3> ver) { m_verticies = ver; };
 
-	std::vector<Vector3> GetVerticies() override{ return m_verticies; };
+	//std::vector<Vector3> GetVerticies() override{ return m_verticies; };
 };
 

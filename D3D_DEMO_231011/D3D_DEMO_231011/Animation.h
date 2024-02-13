@@ -25,13 +25,15 @@ protected:
 	//横フレームの何番目まで終わる
 	int m_endFrame = 0;
 
+
+
+public:
+
 	// アニメーションのカウンター
 	float m_animeCounter = 0.0f;
 
 	//再生速度
 	float m_animeSpeed = 0.0f;
-
-public:
 
 	//現在再生中かを表す変数
 	bool isPlaying = true;
@@ -84,4 +86,3 @@ public:
 	void SetFrameX(int _frameX);
 
 };
-

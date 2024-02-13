@@ -23,25 +23,35 @@ void BoxCollider::InitCollider(DirectX::XMFLOAT3 center, Collide collider)
     m_boxCollider.Orientation = { 0,0,0,0 };
 
     //多辺形判定用の頂点データ更新
-    m_verticies = GetSquareVerticies();
+    //m_verticies = InitVerticies();
 }
 
-std::vector<Vector3> BoxCollider::GetSquareVerticies(void)
+std::vector<DirectX::XMFLOAT3> BoxCollider::InitVerticies(void)
 {
-    Collider::SQUARE square;
-    square.A = { m_center.x - m_extents.x, m_center.y + m_extents.y };
-    square.B = { m_center.x + m_extents.x, m_center.y + m_extents.y };
-    square.C = { m_center.x + m_extents.x, m_center.y - m_extents.y };
-    square.D = { m_center.x - m_extents.x, m_center.y - m_extents.y };
+    //Collider::SQUARE square;
+    //square.A = { m_center.x - m_extents.x, m_center.y + m_extents.y };
+    //square.B = { m_center.x + m_extents.x, m_center.y + m_extents.y };
+    //square.C = { m_center.x + m_extents.x, m_center.y - m_extents.y };
+    //square.D = { m_center.x - m_extents.x, m_center.y - m_extents.y };
 
 
     //1つ目の凸多角形の頂点座標を定義
-    std::vector<Vector3> vertices = {
-        Vector3(square.A.x, square.A.y,0),
-        Vector3(square.B.x, square.B.y,0),
-        Vector3(square.C.x, square.C.y,0),
-        Vector3(square.D.x, square.D.y,0),
+    //std::vector<Vector3> vertices = {
+    //    Vector3(square.A.x, square.A.y,0),
+    //    Vector3(square.B.x, square.B.y,0),
+    //    Vector3(square.C.x, square.C.y,0),
+    //    Vector3(square.D.x, square.D.y,0),
+    //};
+
+    std::vector<DirectX::XMFLOAT3> vertices = {
+        
+        { m_center.x - m_extents.x, m_center.y + m_extents.y ,0},
+        { m_center.x + m_extents.x, m_center.y + m_extents.y ,0},
+        { m_center.x + m_extents.x, m_center.y - m_extents.y ,0},
+        { m_center.x - m_extents.x, m_center.y - m_extents.y ,0},
+
     };
+
 
     return vertices;
 }
@@ -95,17 +105,19 @@ void BoxCollider::UpdateVerticies(DirectX::XMFLOAT3 rotation)
     //回転した後の頂点を獲得
     m_verticies = Polygon->GetRotatedVertices();
     */
+
     //std::vector<Vector3> verticies;
-    // 
+     
     //頂点の位置データを獲得
-    std::vector<DirectX::XMFLOAT3> verticies(8);
-    m_boxCollider.GetCorners(verticies.data());
-    
-    for (int i = 0; i < m_verticies.size(); i++) {
-        m_verticies[i].x = verticies[i].x;
-        m_verticies[i].y = verticies[i].y;
-        m_verticies[i].z = verticies[i].z;
-    }
+    //std::vector<DirectX::XMFLOAT3> verticies(8);
+
+    //m_boxCollider.GetCorners(verticies.data());
+    //
+    //for (int i = 0; i < m_verticies.size(); i++) {
+    //    m_verticies[i].x = verticies[i].x;
+    //    m_verticies[i].y = verticies[i].y;
+    //    m_verticies[i].z = verticies[i].z;
+    //}
 
 }
 
@@ -117,12 +129,17 @@ void BoxCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, D
     }
     else 
     {
-        //回転
-        UpdateRotation(rotation);
         //大きさ
         UpdateExtents(extents);
         //位置
         UpdatePos(center);
+        //回転
+        UpdateRotation(rotation);
+
+        m_center = center;
+        m_extents = extents;
+        m_radius = extents.x;
+
         //頂点   
         //UpdateVerticies(rotation);
     }
@@ -140,7 +157,7 @@ bool BoxCollider::isCollision(SphereCollider* collider)
 
 bool BoxCollider::isCollision(BoxCollider* collider)
 {
-    if (this->m_boxCollider.Intersects(collider->GetColldier())) {
+    if (this->m_boxCollider.Intersects(collider->GetCollider())) {
         return true;
     }
     else {
@@ -150,20 +167,60 @@ bool BoxCollider::isCollision(BoxCollider* collider)
 
 bool BoxCollider::isCollision(PolygonCollider* collider)
 {
-    PolygonSAT3D* Polygon = new PolygonSAT3D;
-    PolygonSAT3D* Box = new PolygonSAT3D;
+    //PolygonSAT3D* Polygon = new PolygonSAT3D;
+    //PolygonSAT3D* Box = new PolygonSAT3D;
 
 
-    //回転後の頂点を獲得
-    Box->vertices = m_verticies;
-    Polygon->vertices = collider->GetVerticies();
+    ////回転後の頂点を獲得
+    //Box->vertices = m_verticies;
+    //Polygon->vertices = collider->GetVerticies();
 
-    bool isCollide = SAT::Collide3D(*Box, *Polygon);
+    //bool isCollide = SAT::Collide3D(*Box, *Polygon);
 
-    delete Polygon;
-    delete Box;
+    //delete Polygon;
+    //delete Box;
 
-    return isCollide;
+    //return isCollide;
+    std::vector<DirectX::XMFLOAT3> verticies = collider->GetXMVerticies();
+
+    DirectX::XMVECTOR v[3] = {};
+    for (int i = 0; i < verticies.size(); i++) {
+
+        v[i] = DirectX::XMLoadFloat3(&verticies[i]);
+    }
+
+    if (m_boxCollider.Intersects(v[0], v[1], v[2])) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+
+}
+
+
+bool BoxCollider::isCollision(Collider* collider) {
+
+    switch (collider->GetColliderType())
+    {
+    case COLLISION_TYPE::TRIANGLE:		//三角形
+        return this->isCollision(dynamic_cast<PolygonCollider*>(collider));
+        break;
+    case COLLISION_TYPE::SPHERE:		//球体
+        return this->isCollision(dynamic_cast<SphereCollider*>(collider));
+        break;
+    case COLLISION_TYPE::SQUARE:		//BOX
+        return this->isCollision(dynamic_cast<BoxCollider*>(collider));
+        break;
+    case COLLISION_TYPE::IDLE:			//NULL
+        return false;
+        break;
+    default:
+        break;
+
+    }
+
 }
 
 

@@ -1,9 +1,9 @@
 #pragma once
 #include <DirectXCollision.h>
 #include "SatCollider.h"
-#include "GameObject.h"
 #include "SatCollider.h"
 #include "Material.h"
+
 
 enum COLLISION_TYPE {
 	TRIANGLE,		//三角形
@@ -11,6 +11,14 @@ enum COLLISION_TYPE {
 	SQUARE,			//BOX
 	IDLE,			//NULL
 };
+
+
+enum TRIANGLE_TYPE {
+	TRI_RIGHT,	//直角三角形
+	TRI_ISO,	//二等辺三角形
+	TRI_IDLE,
+};
+
 
 enum COLLISION_DIR {
 	INI_STATE,	//初期状態
@@ -22,9 +30,12 @@ enum COLLISION_DIR {
 	
 };
 
+
+
 struct Collider_Dir {
-	COLLISION_DIR vertical;//上下
+	
 	COLLISION_DIR horizontal;//左右
+	COLLISION_DIR vertical;//上下
 
 	bool operator==(const Collider_Dir& other) const {
 		return (vertical == other.vertical) && (horizontal == other.horizontal);
@@ -65,10 +76,10 @@ protected:
 public:
 
 	//コライダーは起動しているか
-	bool isActive = false;
+	bool isActive = true;
 	//中心点の位置
 	DirectX::XMFLOAT3 m_center = { 0,0,0 };
-	//xyz軸の大きさ
+	//xyz軸の半辺長
 	DirectX::XMFLOAT3 m_extents = { 0,0,0 };
 	//半径
 	float m_radius = 0.0f;
@@ -80,13 +91,16 @@ public:
 
 	Collider();
 
-	virtual std::vector<Vector3> GetVerticies();
+	//virtual std::vector<Vector3> GetVerticies();
 
 	//コライダーのタイプを設定
 	virtual void InitColliderType(COLLISION_TYPE _type);
 
 	//コライダーの初期化を億なう変数
-	/*virtual void InitCollider(DirectX::XMFLOAT3 center, Collide collider);*/
+	virtual void InitCollider(XMFLOAT3 center, Collide collider);
+
+
+
 
 	COLLISION_TYPE GetColliderType(void) { return m_collisionType; };
 
@@ -94,10 +108,10 @@ public:
 	virtual void Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, DirectX::XMFLOAT3 extents);
 
 
-	virtual bool isCollision(BoxCollider* boxColliser) { return false; };
-	virtual bool isCollision(SphereCollider* sphereCollider) { return false; };
-	virtual bool isCollision(PolygonCollider* polygonCollider) { return false; };
-	virtual bool isCollision(Collider* collider) { return false; };
+	virtual bool isCollision(BoxCollider* boxColliser) { return false;};
+	virtual bool isCollision(SphereCollider* sphereCollider) { return false;  };
+	virtual bool isCollision(PolygonCollider* polygonCollider) { return false;  };
+	virtual bool isCollision(Collider* collider) { return false;  };
 
 	//virtual void Update();
 

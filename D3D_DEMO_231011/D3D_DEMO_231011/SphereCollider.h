@@ -27,9 +27,9 @@ public:
 	/// <param name="Radius"></param>
 	SphereCollider();
 
-	std::vector<Vector3> SetCircle();
+	//std::vector<Vector3> SetCircle();
 
-	void InitCollider(DirectX::XMFLOAT3 center, float Radius);
+	void InitCollider(DirectX::XMFLOAT3 center, Collide collider) override;
 
 	void UpdateRadius(float radius);
 	void UpdatePos(DirectX::XMFLOAT3 m_center);
@@ -59,12 +59,15 @@ public:
 	/// <param name="sphereCollider">三角形</param>
 	bool isCollision(PolygonCollider* polygonCollider)override;
 
+	//
+	bool isCollision(Collider* Collider) override;
+
 	//コライダーを返す
 	DirectX::BoundingSphere GetCollider() { return m_sphereCollider; };
 
 	//bool isClearCollision(Collider* polygoncollider, float verNum);
 
-	void SetVerticies(std::vector<Vector3> ver) { m_verticies = ver; };
-	std::vector<Vector3> GetVerticies() override { return m_verticies; };
+	//void SetVerticies(std::vector<Vector3> ver) { m_verticies = ver; };
+	//std::vector<Vector3> GetVerticies() override { return m_verticies; };
 
 };

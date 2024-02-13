@@ -1,35 +1,18 @@
 ﻿#include "GameObject.h"
 #include "ShadowObject.h"
-#include "SphereCollider.h"
-#include "StaticAnimation.h"
 #include "BoxCollider.h"
+#include "SphereCollider.h"
+#include "PolygonCollider.h"
+#include "StaticAnimation.h"
 #include "DInput.h"
+#include "Game.h"
+#include "CameraShaker.h"
 #include "RailManager.h"
 #include "SceneManager.h"
 #include <math.h>
-#include "DInput.h"
 
-//#define MOVEDISTANCEZ 2.5
-#define MOVEDISTANCEZ 1
-//#define MOVEDISTANCEX 4.4
-#define MOVEDISTANCEX 1
-#define BOXMEDIUM 1.5f
-#define BOXLARGE 2.1f
-#define SPHEREMEDIUM 1.8f
-#define SPHERELARGE 2.5f
-#define POLYGONMEDIUM 1.5f
-#define POLYGONLARGE 2.1f
 
 extern Camera* g_WorldCamera;
-
-#define BOXMEDIUM 1.5f
-#define BOXLARGE 2.1f
-
-#define SPHEREMEDIUM 1.8f
-#define SPHERELARGE 2.5f
-
-#define POLYGONMEDIUM 1.5f
-#define POLYGONLARGE 2.1f
 
 void GameObject::DoKeyInput(void)
 {
@@ -103,9 +86,43 @@ void GameObject::CreateObject(ID3D11ShaderResourceView* texture, float _width, f
 	m_obj->CreateObject(texture, _width, _height, splitX, splitY);
 }
 
-void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)
+void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type)
 {
 	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
+
+	//コライダーの初期化処理を行う
+	switch (type)
+	{
+	//triangleは個別で初期化をする
+	case SPHERE:
+
+		m_shadowCollider = new SphereCollider();
+		m_shadowCollider->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide());
+
+		break;
+	case SQUARE:
+
+		m_shadowCollider = new BoxCollider();
+		m_shadowCollider->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide());
+
+		break;
+	case IDLE:
+		//
+		m_shadowCollider = nullptr;
+		break;
+	default:
+		break;
+	}
+}
+
+void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type, TRIANGLE_TYPE _type)
+{
+	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
+
+	//コライダーの初期化処理を行う
+	m_shadowCollider = new PolygonCollider();
+	//dynamic_castを使って、PolygonColliderの初期化を行う
+	dynamic_cast<PolygonCollider*>(m_shadowCollider)->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide(),_type);
 }
 
 void GameObject::InitAnimation(void)
@@ -114,90 +131,50 @@ void GameObject::InitAnimation(void)
 	m_shadow->m_sprite->m_anime = new StaticAnimation(1, 1);
 }
 
+void GameObject::InitCollision(void)
+{
+}
+
 void GameObject::GenerateShadowPos(float moveSpeed, float posX)
 {
-	/*
-	//単位ベクトル化する
-	//オブジェクトの位置取得
-	const XMFLOAT3 objPos = m_obj->m_sprite->m_pos; 
-
-	//ベクトル計算用の型に入れる
-	XMVECTOR objVector = XMLoadFloat3(&objPos);
-	XMVECTOR lightVector = XMLoadFloat3(&m_lightPos);
-	//光からオブジェクトのベクトルを計算する
-	XMVECTOR directionVector = XMVectorSubtract(objVector, lightVector);
-
-
-	// 壁と地面の角度が90度(假设墙壁垂直于地面，沿Z轴)
-	float wallZ = m_shadow->m_sprite->m_pos.z;  // 墙壁的Z坐标
-
-	// 距離比率を計算する(计算交点的Z值等于墙壁的Z值时的t)
-	float t = (wallZ - m_lightPos.z) / XMVectorGetZ(directionVector);
-
-	//影の位置を計算する
-	XMFLOAT3 shadowPosition;
-	shadowPosition.x = m_lightPos.x + t * XMVectorGetX(directionVector);
-	shadowPosition.y = m_lightPos.y + t * XMVectorGetY(directionVector);
-	shadowPosition.z = wallZ;  //影のｚ軸
-	*/
-
-	//
-	switch (m_moveDir)
-	{
-	case UPRIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
-		break;
-	case RIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
-		break;
-	case DOWNRIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
-		break;
-	case DOWNLEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
-		break;
-	case LEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
-		break;
-	case UPLEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
-		break;
-	case STILL:
-		switch(m_railPos.horizontalPos){
-		case 0:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - posX;
-			break;
-		case 1:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x - posX*2;
-			break;
-		case 2:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
-			break;
-		case 3:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + posX;
-			break;
-		case 4:
-			m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x + posX*2;
-			break;
-		}
-		break;
-	default:
-		break;
-	}
-
-
+	m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
 }
 
-
-void GameObject::GenerateShadowRotate()
+void GameObject::GenerateShadowPos()
 {
-	
+	m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
 }
+
+void GameObject::GenerateShadowSize(float speed)
+{
+}
+
 
 void GameObject::SetRailPos(int horPos, int verPos)
 {
 	m_railPos.horizontalPos = horPos;
 	m_railPos.verticalPos = verPos;
+
+
+	//ここでオブジェクトの大きさの初期値を調整する
+	switch (m_railPos.verticalPos)
+	{
+	case 0://BACK
+		m_obj->m_sprite->m_scale = { 0.8f,0.8f,1.0f };
+
+		break;
+	case 1://MIDDLE
+		m_obj->m_sprite->m_scale = { 0.9f,0.9f,1.0f };
+		break;
+	case 2:
+		m_obj->m_sprite->m_scale = { 1.0f,1.0f,1.0f };
+		break;
+	default:
+		break;
+
+	}
+
+
 }
 
 void GameObject::Update()
@@ -208,115 +185,112 @@ void GameObject::Update()
 		//八方向の入力処理
 		if (m_moveDir != STILL) {
 			ObjectMove();
+			//移動中
+		
 		}
 		else {
 			//入力
-			if (!isAutoMove) {
-				DoKeyInput();
+			DoKeyInput();
 
-				if(isGetInput){
-					switch (m_nowInput.horInput) {
-						//左
-					case INPUT_LEFT:
-						switch (m_nowInput.verInput)
-						{
-						case INPUT_UP:
-							if (isMoveable(UPLEFT)) { m_moveDir = UPLEFT; }
-							else { ObjectVibration(); }
-	
-							break;
-						case INPUT_DOWN:
-							if (isMoveable(DOWNLEFT)) { m_moveDir = DOWNLEFT; }
-							else { ObjectVibration(); }
+			if (isGetInput) {
+				switch (m_nowInput.horInput) {
+					//左
+				case INPUT_LEFT:
+					switch (m_nowInput.verInput)
+					{
+					case INPUT_UP:
+						if (isMoveable(UPLEFT)) { m_moveDir = UPLEFT; }
+						else { ObjectVibration(); }
 
-							break;
-						case INPUT_NONE:
-							if (isMoveable(LEFT)) { m_moveDir = LEFT; }
-							else { ObjectVibration(); }
-
-							break;
-						default:
-							break;
-						}
 						break;
-						//右
-					case INPUT_RIGHT:
-						switch (m_nowInput.verInput)
-						{
-						case INPUT_UP:
-							if (isMoveable(UPRIGHT)) { m_moveDir = UPRIGHT; }
-							else { ObjectVibration(); }
+					case INPUT_DOWN:
+						if (isMoveable(DOWNLEFT)) { m_moveDir = DOWNLEFT; }
+						else { ObjectVibration(); }
 
-							break;
-						case INPUT_DOWN:
-							if (isMoveable(DOWNRIGHT)) { m_moveDir = DOWNRIGHT; }
-							else { ObjectVibration(); }
-
-							break;
-						case INPUT_NONE:
-							if (isMoveable(RIGHT)) { m_moveDir = RIGHT; }
-							else { ObjectVibration(); }
-							break;
-						default:
-							break;
-						}
 						break;
-						//左右STILL
 					case INPUT_NONE:
-						switch (m_nowInput.verInput)
-						{
-						case INPUT_UP:
-							if (isMoveable(UP)) { m_moveDir = UP; }
-							else { ObjectVibration(); }
-							break;
-						case INPUT_DOWN:
-							if (isMoveable(DOWN)) { m_moveDir = DOWN; }
-							else { ObjectVibration(); }
-							break;
-						case INPUT_NONE:
-							break;
-						default:
-							break;
-						}
+						if (isMoveable(LEFT)) { m_moveDir = LEFT; }
+						else { ObjectVibration(); }
+
+						break;
+					default:
 						break;
 					}
-					isGetInput = false;
-					
+					break;
+					//右
+				case INPUT_RIGHT:
+					switch (m_nowInput.verInput)
+					{
+					case INPUT_UP:
+						if (isMoveable(UPRIGHT)) { m_moveDir = UPRIGHT; }
+						else { ObjectVibration(); }
+
+						break;
+					case INPUT_DOWN:
+						if (isMoveable(DOWNRIGHT)) { m_moveDir = DOWNRIGHT; }
+						else { ObjectVibration(); }
+
+						break;
+					case INPUT_NONE:
+						if (isMoveable(RIGHT)) { m_moveDir = RIGHT; }
+						else { ObjectVibration(); }
+						break;
+					default:
+						break;
+					}
+					break;
+					//左右STILL
+				case INPUT_NONE:
+					switch (m_nowInput.verInput)
+					{
+					case INPUT_UP:
+						if (isMoveable(UP)) { m_moveDir = UP; }
+						else { ObjectVibration(); }
+						break;
+					case INPUT_DOWN:
+						if (isMoveable(DOWN)) { m_moveDir = DOWN; }
+						else { ObjectVibration(); }
+						break;
+					case INPUT_NONE:
+						break;
+					default:
+						break;
+					}
+					break;
 				}
+				isGetInput = false;
+
 			}
-			else{
-				//今いる位置を獲得
-
-				//次の移動方向を獲得
-
-
-				//次の移動方向を判定
-				//m_moveDir=
-			}
+			
 
 		}
-		//移動完成後
-		int stageInfo = SceneManager::Get()->GetActiveStage();
-		SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
+
+		//オブジェクトが移動中なら、
+		if (m_moveDir != STILL) {
+			//切り替えを不可にする
+			Game::Get()->SetIsControl(false);
+		}
+		else {
+			Game::Get()->SetIsControl(true);
+		}
+
 	}
+
+	//自動移動の場合
+	if (isAutoMove) {
 	
+		//自動移動
+		//AutoMove();
+	
+	}
+
+
 	//オブジェクト情報更新
 	m_obj->Update();
 	
 	//位置を更新
 	GenerateShadowPos(0.08f, 0.1);
 	//GenerateShadowSize();
-
-	//影の情報更新
-	m_shadow->Update();
-
-	//Collider情報更新
-	if (m_shadowCollider) {
-		UpdateShadowColliderData();
-	}
-	
-
-	// オブジェクトの位置によって影の大きさを調整
 
 	//大きさを更新
 	switch (m_railPos.verticalPos)
@@ -331,6 +305,17 @@ void GameObject::Update()
 		m_shadow->m_size = ShadowObject::SIZE::LARGE;
 		break;
 	}
+
+	//影の情報更新
+	m_shadow->Update();
+
+	//Collider情報更新
+	if (m_shadowCollider) {
+		UpdateShadowColliderData();
+	}
+
+
+	
 }
 
 bool GameObject::isMoveable(DIR dir)
@@ -390,8 +375,8 @@ bool GameObject::isMoveable(DIR dir)
 		//There may be some bugs,So Limit the boundary
 		if (movePos < 0 || movePos>14) {
 
-			MessageBoxA(NULL, "point計算エラー！", "エラー", MB_OK | MB_ICONERROR);
-			return false;
+			//MessageBoxA(NULL, "point計算エラー！", "エラー", MB_OK | MB_ICONERROR);
+			//return false;
 		}
 
 		//その方向に移動できるか
@@ -414,53 +399,27 @@ bool GameObject::isMoveable(DIR dir)
 
 void GameObject::UpdateShadowColliderData(void)
 {
-	//dynamic_castを使って、コライダーのデータを更新する
-	
-	switch (m_shadowCollider->GetColliderType()) {
-	case SPHERE:
-	
-	
-		dynamic_cast<SphereCollider*>(m_shadowCollider)->m_center = m_shadow->m_sprite->m_pos;
-		dynamic_cast<SphereCollider*>(m_shadowCollider)->m_radius = 1.0f;
-		//dynamic_cast<SphereCollider*>(m_shadowCollider)->Update(Collider::m_center, rotation, extents);
+	//OVERLOADで、コライダーのデータを更新する
+	DirectX::XMFLOAT3 center = m_shadow->m_sprite->m_pos;
+	DirectX::XMFLOAT3 rotation = m_shadow->m_sprite->m_rotation;
+	DirectX::XMFLOAT3 extents = m_shadow->Object::GetExtents();
 
-	//更新したデータを本体のColliderに更新する
-	//m_shadowCollider->Update();
-	break;
-
-
-
-
-
-	case SQUARE:
-		DirectX::XMFLOAT3 center = m_shadow->m_sprite->m_pos;
-		DirectX::XMFLOAT3 extents = m_shadow->m_sprite->GetExtents();
-		DirectX::XMFLOAT3 rotation = m_shadow->m_sprite->m_rotation;
-		//dynamic_cast<BoxCollider*>(m_shadowCollider)->Update(center, rotation, extents);
-
-	break;
-
-	//default:
-
-	break;
-	}
-
-
-
-
+	m_shadowCollider->Update(center, rotation, extents);
 }
 
 void GameObject::ObjectMove()
 {
 	DirectX::XMFLOAT3 moveSpeed = { 0,0,0 };
-
 	switch (m_moveDir) {
 	case UP:
 		m_moveCount++;
-		moveSpeed.z = 0.05f;
-		if (m_moveCount * moveSpeed.z <= 2.5f) {
+		//moveSpeed.z = 0.05f;
+		moveSpeed.z = 0.05;
+		if (m_moveCount * moveSpeed.z <= 2.5) {
 
 			m_obj->m_sprite->m_pos.z += moveSpeed.z;
+			m_obj->m_sprite->m_scale.x -= 0.002;
+			m_obj->m_sprite->m_scale.y -= 0.002;
 		}
 		else {
 			//移動終了
@@ -476,6 +435,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動したの情報更新する
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 
 		break;
@@ -485,8 +447,19 @@ void GameObject::ObjectMove()
 		moveSpeed.x = 0.09f;
 		moveSpeed.z = 0.05f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
+			
 			m_obj->m_sprite->m_pos.z += moveSpeed.z;
-			m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			//大きさを調整する
+			m_obj->m_sprite->m_scale.x -= 0.002;
+			m_obj->m_sprite->m_scale.y -= 0.002;
+
+			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
+				m_obj->m_sprite->m_pos.x = 0;
+			}
+			else {
+				m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			}
+			
 		}
 		else {
 			//移動終了
@@ -503,6 +476,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動したの情報更新する
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 
 		break;
@@ -512,9 +488,15 @@ void GameObject::ObjectMove()
 		moveSpeed.x = 0.09f;
 		m_moveCount++;
 
-		if (m_moveCount * moveSpeed.x <= 4.5f) {
+		if ((m_moveCount * moveSpeed.x) <= 4.5f) {
 
-			m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
+				m_obj->m_sprite->m_pos.x = 0;
+			}
+			else {
+				m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			}
+			
 		}
 		else {
 			//移動終了
@@ -530,6 +512,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動前の情報更新
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 	
 		}
 
@@ -541,8 +526,20 @@ void GameObject::ObjectMove()
 		moveSpeed.x = 0.09f;
 		moveSpeed.z = 0.05f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
+			
 			m_obj->m_sprite->m_pos.z -= moveSpeed.z;
-			m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			//大きさを調整する
+			m_obj->m_sprite->m_scale.x += 0.002;
+			m_obj->m_sprite->m_scale.y += 0.002;
+
+			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
+				m_obj->m_sprite->m_pos.x = 0;
+			}
+			else {
+				m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			}
+
+			
 		}
 		else {
 			//移動終了
@@ -558,6 +555,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動前の情報更新
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 
 		break;
@@ -570,6 +570,9 @@ void GameObject::ObjectMove()
 		if (m_moveCount * moveSpeed.z <= 2.5f) {
 
 			m_obj->m_sprite->m_pos.z -= moveSpeed.z;
+			//大きさを調整する
+			m_obj->m_sprite->m_scale.x += 0.002;
+			m_obj->m_sprite->m_scale.y += 0.002;
 		}
 		else {
 			//移動終了
@@ -584,6 +587,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動前の情報更新
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 		break;
 
@@ -593,7 +599,18 @@ void GameObject::ObjectMove()
 		moveSpeed.z = 0.05f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
 			m_obj->m_sprite->m_pos.z -= moveSpeed.z;
-			m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			//大きさを調整する
+			m_obj->m_sprite->m_scale.x += 0.002;
+			m_obj->m_sprite->m_scale.y += 0.002;
+
+			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
+				m_obj->m_sprite->m_pos.x = 0;
+			}
+			else {
+				m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+
+			}
+		
 		}
 		else {
 			//移動終了
@@ -610,6 +627,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動したの情報更新する
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 		break;
 
@@ -621,7 +641,13 @@ void GameObject::ObjectMove()
 
 		if (m_moveCount * moveSpeed.x <= 4.5) {
 
-			m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
+				m_obj->m_sprite->m_pos.x = 0;
+			}
+			else {
+				m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			}
+
 		}
 		else {
 			//移動終了
@@ -636,7 +662,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動前の情報更新
 			RailManager::Get()->m_info[pos].isVacant = false;
-			//isGetInput = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 
 		break;
@@ -648,7 +676,17 @@ void GameObject::ObjectMove()
 		moveSpeed.z = 0.05f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
 			m_obj->m_sprite->m_pos.z += moveSpeed.z;
-			m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			//大きさを調整する
+			m_obj->m_sprite->m_scale.x -= 0.002;
+			m_obj->m_sprite->m_scale.y -= 0.002;
+
+			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
+				m_obj->m_sprite->m_pos.x = 0;
+			}
+			else {
+				m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			}
+			
 		}
 		else {
 			//移動終了
@@ -665,6 +703,9 @@ void GameObject::ObjectMove()
 			pos = m_railPos.verticalPos * 5 + m_railPos.horizontalPos;
 			//移動したの情報更新する
 			RailManager::Get()->m_info[pos].isVacant = false;
+			//移動完成後ステップ加算
+			int stageInfo = SceneManager::Get()->GetActiveStage();
+			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
 		break;
 
@@ -676,67 +717,17 @@ void GameObject::ObjectMove()
 
 void GameObject::ObjectVibration()
 {
+	//振動スタート
+	if (!Game::Get()->GetCameraShaker()->GetShaker()) {
+		Game::Get()->GetCameraShaker()->SetShaker(true);
+	}
+	
+
 }
 
 void GameObject::MoveObject(Object* _target)
 {
-	//移動入力
-	//WASD上下左右移動
-	if (Input::Get()->GetKeyTrigger(DIK_W)) {
 
-		//_target->m_sprite->m_pos.y += MOVEDISTANCEZ /2;
-		_target->m_sprite->m_pos.z += MOVEDISTANCEZ;
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_A)) {
-
-		_target->m_sprite->m_pos.x -= MOVEDISTANCEX;
-
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_D)) {
-
-		_target->m_sprite->m_pos.x += MOVEDISTANCEX;
-
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_S)) {
-
-		//_target->m_sprite->m_pos.y -= MOVEDISTANCEZ / 2;
-		_target->m_sprite->m_pos.z -= MOVEDISTANCEZ;
-
-	}
-	//↑キー/↓キーで前後移動
-
-	if (Input::Get()->GetKeyTrigger(DIK_UPARROW))
-	{
-		_target->m_sprite->m_pos.y += MOVEDISTANCEZ;
-	}
-
-	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
-	{
-		_target->m_sprite->m_pos.y -= MOVEDISTANCEZ;
-	}
-
-
-	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
-	{
-		_target->m_sprite->m_rotation.x += 1.0f;
-	}
-
-	//←キー/→キーで角度の調整
-	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
-	{
-		_target->m_sprite->m_rotation.x -= 1.0f;
-	}
-
-
-	//RESET
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-		_target->m_sprite->m_rotation.x = 0.0f;
-		_target->m_sprite->m_pos.x = 0.0f;
-	}
 }
 
 void GameObject::Draw(void)

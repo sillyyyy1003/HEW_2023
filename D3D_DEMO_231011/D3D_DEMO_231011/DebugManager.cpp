@@ -72,7 +72,7 @@ void DebugManager::PrintDebugLog(float _posX, float _posY, const float _num)
 {
 	//文字列に転換
 	char str[32];
-	snprintf(str, 31, "%f", _num);
+	snprintf(str, 32, "%f", _num);
 	//スタート位置を設定
 	SetPosition(_posX, _posY);
 	//更新と描画
