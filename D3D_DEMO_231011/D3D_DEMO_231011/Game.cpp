@@ -16,6 +16,7 @@
 #include "xa2.h"
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
+#include "Result.h"
 
 #define MOVE 0.3f
 #define INITROTATE	(19.8)
@@ -23,6 +24,7 @@
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
+extern Result* g_result;
 
 void Game::Init()
 {
@@ -80,6 +82,9 @@ void Game::Init()
 	busket = new GameObject();
 	picnicbasket = new GameObject();
 
+	//result
+	g_result->Init();
+	
 	//EFFECT
 	testEffect = new Effect(28);
 
@@ -485,6 +490,8 @@ void Game::InitStage1_3(void)
 	sandwich->SetActive(true);
 
 	//自動移動や自動回転の設定
+
+	g_result->SetStarNum({ 3,5,8,11 });
 }
 
 void Game::InitStage2_1(void)
@@ -1178,6 +1185,7 @@ void Game::UpdateStage3_3(void)
 
 void Game::ResultUpdate(void)
 {
+	g_result->Update();
 }
 
 void Game::GameUpdate(void)
@@ -1185,7 +1193,8 @@ void Game::GameUpdate(void)
 	
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
-		TitleUpdate();
+		//TitleUpdate();
+		ResultUpdate();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1485,7 +1494,8 @@ void Game::GameDraw()
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 
-		TitleDraw();
+		//TitleDraw();
+		ResultDraw();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1495,7 +1505,10 @@ void Game::GameDraw()
 
 	case SCENENAME::STAGE:
 		StageDraw();
-
+		if (Input::Get()->GetKeyPress(DIK_L))
+		{
+			SceneManager::Get()->SetScene(SCENENAME::RESULT);
+		}
 		break;
 	case SCENENAME::RESULT:
 		ResultDraw();
@@ -1822,6 +1835,7 @@ void Game::DrawStage1_2()
 
 void Game::ResultDraw(void)
 {
+	g_result->Draw();
 }
 
 void Game::UiDraw(void)

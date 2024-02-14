@@ -1,20 +1,10 @@
-﻿  Game.cpp
+﻿  Result.cpp
 C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,23): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,22): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(151,97): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(153,103): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(157,106): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(225,31): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1638,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1654,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1701,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1711,54): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1738,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1754,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1801,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1811,54): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2032,40): warning C4305: '=': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2033,47): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2035,32): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
-C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2037,8): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Result.cpp(36,15): warning C4154: 配列の delete が定義されていません。配列は、ポインターに変換されます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Result.cpp(37,21): warning C4154: 配列の delete が定義されていません。配列は、ポインターに変換されます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Result.cpp(90,41): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Result.cpp(91,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Result.cpp(93,32): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Result.cpp(95,8): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

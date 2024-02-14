@@ -97,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="xa2.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="ResultProcess.cpp">
+      <Filter>Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>Result</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WICTextureLoader.h" />
@@ -192,6 +198,12 @@
     </ClInclude>
     <ClInclude Include="xa2.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="ResultProcess.h">
+      <Filter>Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Result</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Animation">
@@ -262,6 +274,9 @@
     </Filter>
     <Filter Include="StaticObject">
       <UniqueIdentifier>{53fbd55a-34d3-4f10-9dca-4ae98c5b1172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Result">
+      <UniqueIdentifier>{ca0bed48-2f4a-45e2-8471-e7a602e994e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
