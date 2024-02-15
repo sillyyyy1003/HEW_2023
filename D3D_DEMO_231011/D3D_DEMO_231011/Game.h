@@ -85,6 +85,7 @@ private:
 		SE,
 	};
 
+	// 音量設定
 	enum SOUNDVOLUME
 	{
 		VOLUME0,
@@ -145,14 +146,15 @@ private:
 
 
 	//初期設定
+	SOUNDOP soundOp = BGM;
 	SOUNDVOLUME soundVolume_BGM = VOLUME3;
 	SOUNDVOLUME soundVolume_SE = VOLUME3;
 
 
-	SOUNDOP soundOp = BGM;
+	
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
-	FADE_STATE fadeState = NO_FADE;
+	FADE_STATE fadeState=NO_FADE;
 	PAUSESELECT pauseSelect = RESUME;
 	
 
@@ -197,6 +199,7 @@ public:
 
 	//ゲーム本体
 	void GameUpdate(void);
+
 
 	//Title Update
 	void TitleUpdate(void);
@@ -256,7 +259,6 @@ public:
 	void SoundOp_BGM(void);	//BGM調節
 	void SoundOp_SE(void);	//SE調節
 
-	//void FocusSwitch(void);
 
 	//描画
 	void GameDraw(void);
@@ -296,11 +298,11 @@ public:
 	//影の位置によって並び替え描画する
 	void SortShadowDraw(void);
 
-	void FadeUpdate(void);
 
 	//デバッグ用
 	void DebugDisplay(void);
 
+<<<<<<< HEAD
 	void TestMove(Effect* _target);
 	void TestMove(CanvasUI* _target);
 
@@ -309,6 +311,9 @@ public:
 
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
+=======
+	void TestFade(void);
+>>>>>>> 53090019303508a0fcb3f0b0825425b592bf719e
 
 };
 
