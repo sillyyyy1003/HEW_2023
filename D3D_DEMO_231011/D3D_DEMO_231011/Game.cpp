@@ -17,6 +17,7 @@
 #include "CameraShaker.h"
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
+#include "Result.h"
 
 #define MOVE 0.1f
 #define INITROTATE	(19.8)
@@ -24,6 +25,7 @@
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
+extern Result* g_result;
 
 void Game::Init()
 {
@@ -80,6 +82,9 @@ void Game::Init()
 	triangleBlock = new GameObject();
 
 
+	//result
+	g_result->Init();
+	
 	//EFFECT
 	testEffect = new Effect(12);
 	
@@ -424,6 +429,70 @@ void Game::InitStage1_2(void)
 
 void Game::InitStage1_3(void)
 {
+<<<<<<< .merge_file_1FrTcu
+=======
+	//位置設定
+	SetBackGround(g_Assets->stage3Bg);
+	//オブジェクトを設定する
+	//CAUTION! 
+	//本体y軸固定->-1
+	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
+	//X:LEFT2:-9 LEFT1:-4.5 MIDDLE:0.0 RIGHT1:4.5 RIGHT2:9
+	//本体 
+	busket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-10.0f };
+	newspaper->m_obj->m_sprite->m_pos = { 4.5f,-4.0f,-5.0f };
+	sandwich->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
+	picnicbasket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
+
+	busket->m_shadow->m_sprite->m_pos.z = 0.0f;
+	newspaper->m_shadow->m_sprite->m_pos.z = -0.1f;
+	sandwich->m_shadow->m_sprite->m_pos.z = -0.2f;
+	picnicbasket->m_shadow->m_sprite->m_pos.z = -0.3f;
+
+
+	//影のy軸
+	busket->m_shadow->m_sprite->m_pos.y = 5.2f;
+	newspaper->m_shadow->m_sprite->m_pos.y = 2.4f;
+	sandwich->m_shadow->m_sprite->m_pos.y = 2.4f;
+	picnicbasket->m_shadow->m_sprite->m_pos.y = 3.4f;
+
+
+	//レール上の位置を設定する
+	busket->SetRailPos(1, 1);
+	newspaper->SetRailPos(2, 0);
+	sandwich->SetRailPos(1, 0);
+	picnicbasket->SetRailPos(1, 0);
+
+	//回転設定
+
+	//objectListを初期化
+	objectList.clear();
+	objectList.shrink_to_fit();
+	objectList.push_back(picnicbasket);
+	objectList.push_back(sandwich);
+	objectList.push_back(newspaper);
+	objectList.push_back(busket);
+
+	//レールの設定
+	RailManager::Get()->InitRail();
+	RailInit1_2();
+
+	//ステージ情報を初期化
+	for (int i = 0; i < 9; i++) {
+		//全部のステージを無効かにする
+		SceneManager::Get()->m_stageHolder[i]->Init();
+
+	}
+	//使うステージだけ起動
+	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_3]->SetActive(true);
+
+	//移動ターゲットを設定
+	sandwich->SetActive(true);
+
+	//自動移動や自動回転の設定
+
+	g_result->SetStarNum({ 3,5,8,11 });
+>>>>>>> .merge_file_p97HWa
 }
 
 void Game::InitStage2_1(void)
@@ -1180,6 +1249,7 @@ void Game::UpdateStage3_3(void)
 
 void Game::ResultUpdate(void)
 {
+<<<<<<< .merge_file_1FrTcu
 	switch (SceneManager::Get()->GetStage()) {
 
 	case STAGE1_1:
@@ -1247,6 +1317,9 @@ void Game::UpdateResult1_1(void)
 
 void Game::UpdateResult1_2(void)
 {
+=======
+	g_result->Update();
+>>>>>>> .merge_file_p97HWa
 }
 
 void Game::GameUpdate(void)
@@ -1254,7 +1327,8 @@ void Game::GameUpdate(void)
 
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
-		TitleUpdate();
+		//TitleUpdate();
+		ResultUpdate();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1791,7 +1865,8 @@ void Game::GameDraw()
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 
-		TitleDraw();
+		//TitleDraw();
+		ResultDraw();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1801,7 +1876,10 @@ void Game::GameDraw()
 
 	case SCENENAME::STAGE:
 		StageDraw();
-
+		if (Input::Get()->GetKeyPress(DIK_L))
+		{
+			SceneManager::Get()->SetScene(SCENENAME::RESULT);
+		}
 		break;
 	case SCENENAME::RESULT:
 		ResultDraw();
@@ -1977,6 +2055,7 @@ void Game::DrawStage1_3()
 
 void Game::ResultDraw(void)
 {
+	g_result->Draw();
 }
 
 void Game::UiDraw(void)

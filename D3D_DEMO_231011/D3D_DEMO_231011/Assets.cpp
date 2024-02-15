@@ -67,6 +67,18 @@ Assets::Assets()
     picnicbasket = LoadTexture("assets/stage1/1_3_picnicbasket.png");
     picnicbasketShadow = LoadTexture("assets/stage1/1_3_pinicbasket_shadow.png");
 
+    //result
+    resultBg = LoadTexture("assets/result/result＿BG.png");
+    Button_again = LoadTexture("assets/result/result_button_again.png");
+    Button_next = LoadTexture("assets/result/result_button_next.png");
+    Button_return = LoadTexture("assets/result/result_button_return.png");
+    result = LoadTexture("assets/result/result_result.png");
+    Result_score = LoadTexture("assets/result/result_score.png");
+    Result_stepcount = LoadTexture("assets/result/result_stepcount.png");
+    Result_num = LoadTexture("assets/result/result_suuji.png");
+    star = LoadTexture("assets/result/Star_shadow.png");
+    starShadow = LoadTexture("assets/result/Star.png");
+
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
@@ -154,6 +166,20 @@ Assets::~Assets()
     SAFE_RELEASE(newspaperShadow);
     SAFE_RELEASE(picnicbasket);
     SAFE_RELEASE(picnicbasketShadow);
+
+    //result
+    SAFE_RELEASE(resultBg);
+
+    SAFE_RELEASE(Button_again);
+    SAFE_RELEASE(Button_next);
+    SAFE_RELEASE(Button_return);
+    SAFE_RELEASE(result);
+    SAFE_RELEASE(Result_score);
+    SAFE_RELEASE(Result_stepcount);
+    SAFE_RELEASE(Result_num);
+    SAFE_RELEASE(star);
+    SAFE_RELEASE(starShadow);
+
 
     //ポーズ画面用
     SAFE_RELEASE(uiPauseBg);

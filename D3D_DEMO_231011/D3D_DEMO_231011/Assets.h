@@ -80,6 +80,17 @@ public:
 		ID3D11ShaderResourceView* sandwich;
 	ID3D11ShaderResourceView* sandwichShadow;
 
+	//result用
+	ID3D11ShaderResourceView* resultBg;
+	ID3D11ShaderResourceView* Button_again;
+	ID3D11ShaderResourceView* Button_next;
+	ID3D11ShaderResourceView* Button_return;
+	ID3D11ShaderResourceView* result;
+	ID3D11ShaderResourceView* Result_score;
+	ID3D11ShaderResourceView* Result_stepcount;
+	ID3D11ShaderResourceView* Result_num;
+	ID3D11ShaderResourceView* star;
+	ID3D11ShaderResourceView* starShadow;
 
 	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
