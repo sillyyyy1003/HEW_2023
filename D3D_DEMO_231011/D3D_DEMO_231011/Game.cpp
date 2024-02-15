@@ -17,6 +17,7 @@
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
 #include "Result.h"
+#include "ResultAnimation.h"
 
 #define MOVE 0.3f
 #define INITROTATE	(19.8)
@@ -25,6 +26,7 @@ extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
 extern Result* g_result;
+extern ResultAnimation* g_ResultAnimation;
 
 void Game::Init()
 {
@@ -70,13 +72,11 @@ void Game::Init()
 	testObj = new GameObject();
 
 	//stage1-2
-	stage2Bg = new StaticObject();
 	bulidingblock = new GameObject();
 	lamp2 = new GameObject();
 	iphone = new GameObject();
 
 	//stage1-3
-	stage3Bg = new StaticObject();
 	sandwich = new GameObject();
 	newspaper = new GameObject();
 	busket = new GameObject();
@@ -84,6 +84,8 @@ void Game::Init()
 
 	//result
 	g_result->Init();
+	//resultAnimation
+	g_ResultAnimation->Init();
 	
 	//EFFECT
 	testEffect = new Effect(28);
@@ -142,7 +144,6 @@ void Game::Init()
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
 
 	//1-2
-	stage2Bg->CreateObject(g_Assets->stage2Bg, 1280, 720, 1, 1);
 	bulidingblock->CreateObject(g_Assets->bulidingblock, 190, 192, 1, 1);
 	bulidingblock->CreateShadow(g_Assets->bulidingblockShadow, 158, 159, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
 	lamp2->CreateObject(g_Assets->lamp2, 216, 579, 1, 1);
@@ -151,7 +152,6 @@ void Game::Init()
 	iphone->CreateShadow(g_Assets->iphoneShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
 
 	//1-3
-	stage3Bg->CreateObject(g_Assets->stage3Bg, 1280, 720, 1, 1);
 	sandwich->CreateObject(g_Assets->sandwich, 141, 159, 1, 1);
 	sandwich->CreateShadow(g_Assets->sandwichShadow, 141*2.6, 159 * 2, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
 	newspaper->CreateObject(g_Assets->newspaper, 201, 153, 1, 1);
@@ -254,6 +254,8 @@ void Game::InitStage()
 
 		//InitStage1_1();
 		//InitStage1_2();
+
+		// テスト用
 		InitStage1_3();
 
 		break;
@@ -491,6 +493,7 @@ void Game::InitStage1_3(void)
 
 	//自動移動や自動回転の設定
 
+	// ステップ数による星の獲得数の設定
 	g_result->SetStarNum({ 3,5,8,11 });
 }
 
@@ -1048,6 +1051,8 @@ void Game::StageUpdate(void)
 
 			//UpdateStage1_1();
 			//UpdateStage1_2();
+			
+			// テスト用
 			UpdateStage1_3();
 
 			break;
@@ -1112,6 +1117,8 @@ void Game::UpdateStage1_1(void)
 	//背景
 	stageBg->Update();
 
+	//リザルトアニメーション待機（isclearがtrueになると開始）
+	g_ResultAnimation->Update();
 	
 	for (auto& element : objectList) {
 		element->Update();
@@ -1121,6 +1128,9 @@ void Game::UpdateStage1_1(void)
 	//クリア判定
 	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::MEDIUM)) {
 		//isPause = true;
+		
+		// クリアをtrueにする
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetClear(true);
 	}
 
 }
@@ -1128,7 +1138,10 @@ void Game::UpdateStage1_1(void)
 void Game::UpdateStage1_2(void)
 {
 	//背景
-	stage2Bg->Update();
+	stageBg->Update();
+
+	//リザルトアニメーション待機（isclearがtrueになると開始）
+	g_ResultAnimation->Update();
 
 
 	for (auto& element : objectList) {
@@ -1139,13 +1152,19 @@ void Game::UpdateStage1_2(void)
 	//クリア判定
 	if (ColliderManager::Get()->ClearCollision({ OVERLAP,COL_DOWN }, "bulidingblock", "iphone", ShadowObject::MEDIUM)) {
 		//isPause = true;
+		
+		// クリアをtrueにする
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetClear(true);
 	}
 }
 
 void Game::UpdateStage1_3(void)
 {
 	//背景
-	stage3Bg->Update();
+	stageBg->Update();
+
+	//リザルトアニメーション待機（isclearがtrueになると開始）
+	g_ResultAnimation->Update();
 
 
 	for (auto& element : objectList) {
@@ -1156,6 +1175,15 @@ void Game::UpdateStage1_3(void)
 	//クリア判定
 	if (ColliderManager::Get()->ClearCollision({ OVERLAP,COL_DOWN }, "sandwich", "newspaper", ShadowObject::MEDIUM)) {
 		//isPause = true;
+		
+		// クリアをtrueにする
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetClear(true);
+	}
+
+	// テスト用
+	if (Input::Get()->GetKeyPress(DIK_L))
+	{
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetClear(true);
 	}
 }
 
@@ -1190,11 +1218,9 @@ void Game::ResultUpdate(void)
 
 void Game::GameUpdate(void)
 {
-	
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
-		//TitleUpdate();
-		ResultUpdate();
+		TitleUpdate();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1256,7 +1282,6 @@ Game::~Game()
 	delete bulidingblock;
 	delete iphone;
 	delete lamp2;
-	delete stage2Bg;
 
 	//1-3
 	delete sandwich;
@@ -1494,8 +1519,7 @@ void Game::GameDraw()
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 
-		//TitleDraw();
-		ResultDraw();
+		TitleDraw();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1505,10 +1529,6 @@ void Game::GameDraw()
 
 	case SCENENAME::STAGE:
 		StageDraw();
-		if (Input::Get()->GetKeyPress(DIK_L))
-		{
-			SceneManager::Get()->SetScene(SCENENAME::RESULT);
-		}
 		break;
 	case SCENENAME::RESULT:
 		ResultDraw();
@@ -1584,12 +1604,12 @@ void Game::StageDraw(void)
 		break;
 
 	case STAGE1_2:
-		DrawStage1_2();
+		DrawStage1_1();
 
 		break;
 
 	case STAGE1_3:
-
+		DrawStage1_1();
 
 		break;
 
@@ -1645,6 +1665,9 @@ void Game::DrawStage1_1()
 
 	//オブジェクト
 	SortObjectDraw();
+
+	// リザルトアニメーション待機させる
+	g_ResultAnimation->Draw();
 	
 	char step[6]="STEP:";
 	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
@@ -1731,105 +1754,6 @@ void Game::DrawStage1_1()
 
 	}
 	
-
-}
-
-void Game::DrawStage1_2()
-{
-	stage2Bg->Draw();
-
-	//描画の順番を並び変え
-
-	//影
-	SortShadowDraw();
-
-	//オブジェクト
-	SortObjectDraw();
-
-	char step[6] = "STEP:";
-	float posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
-	float posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, step);
-
-	posX = (-SCREEN_WIDTH / 2 + 40.0f + 120.0f) / SCREEN_PARA;
-
-	g_DebugManager->PrintDebugLog(posX, posY, SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
-	//posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
-	//posY = ((SCREEN_HEIGHT / 2) - 80.0f) / SCREEN_PARA;
-	//g_DebugManager->PrintDebugLog(posX, posY, lamp->m_shadowCollider->m_center.y);
-
-	//posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
-	//posY = ((SCREEN_HEIGHT / 2) - 120.0f) / SCREEN_PARA;
-	//g_DebugManager->PrintDebugLog(posX, posY, lamp->m_shadowCollider->m_center.z);
-
-	//レール上どこが空いてるのを可視化
-	posX = (-SCREEN_WIDTH / 2 + 40.0f) / SCREEN_PARA;
-	posY = ((SCREEN_HEIGHT / 2) - 160.0f) / SCREEN_PARA;
-	char pointInfo1[20] = {};
-	for (int i = 0; i < 5; i++) {
-		if (RailManager::Get()->m_info[i].isVacant) {
-			char tempStr[3];
-			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
-			strcat_s(pointInfo1, tempStr);
-
-		}
-		else {
-			char tempStr[3];
-			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
-			strcat_s(pointInfo1, tempStr);
-		}
-
-	}
-	char pointInfo2[20] = {};
-	for (int i = 5; i < 10; i++) {
-		if (RailManager::Get()->m_info[i].isVacant) {
-			char tempStr[3];
-			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
-			strcat_s(pointInfo2, tempStr);
-
-		}
-		else {
-			char tempStr[3];
-			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
-			strcat_s(pointInfo2, tempStr);
-		}
-
-	}
-	char pointInfo3[20] = {};
-	for (int i = 10; i < 15; i++) {
-		if (RailManager::Get()->m_info[i].isVacant) {
-			char tempStr[3];
-			std::snprintf(tempStr, sizeof(tempStr), " %d", 0);
-			strcat_s(pointInfo3, tempStr);
-
-		}
-		else {
-			char tempStr[3];
-			std::snprintf(tempStr, sizeof(tempStr), " %d", 1);
-			strcat_s(pointInfo3, tempStr);
-		}
-
-	}
-	g_DebugManager->PrintDebugLog(posX, posY, pointInfo1);
-	posY = ((SCREEN_HEIGHT / 2) - 200.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, pointInfo2);
-	posY = ((SCREEN_HEIGHT / 2) - 240.0f) / SCREEN_PARA;
-	g_DebugManager->PrintDebugLog(posX, posY, pointInfo3);
-
-	//今移動しているオブジェクト
-	for (auto& element : objectList) {
-
-		if (element->GetActive()) {
-			posX = 0.0f;
-			posY = ((SCREEN_HEIGHT / 2) - 40.0f) / SCREEN_PARA;
-			char name[32] = {};
-			strcpy_s(name, element->GetName().c_str());
-			g_DebugManager->PrintDebugLog(posX, posY, name);
-			break;
-
-		}
-
-	}
 
 }
 

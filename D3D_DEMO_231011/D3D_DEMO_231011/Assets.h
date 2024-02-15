@@ -84,6 +84,11 @@ public:
 	ID3D11ShaderResourceView* star;
 	ID3D11ShaderResourceView* starShadow;
 
+	//clear用
+	ID3D11ShaderResourceView* clear1_1_1;
+	ID3D11ShaderResourceView* clear1_1_2;
+	ID3D11ShaderResourceView* clear1_1_3;
+
 	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;

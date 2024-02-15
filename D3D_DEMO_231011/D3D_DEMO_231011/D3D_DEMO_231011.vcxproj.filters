@@ -103,6 +103,9 @@
     <ClCompile Include="Result.cpp">
       <Filter>Result</Filter>
     </ClCompile>
+    <ClCompile Include="ResultAnimation.cpp">
+      <Filter>Result</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WICTextureLoader.h" />
@@ -202,6 +205,9 @@
       <Filter>Result</Filter>
     </ClInclude>
     <ClInclude Include="Result.h">
+      <Filter>Result</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultAnimation.h">
       <Filter>Result</Filter>
     </ClInclude>
   </ItemGroup>
