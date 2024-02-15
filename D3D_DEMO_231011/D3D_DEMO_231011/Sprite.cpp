@@ -177,8 +177,6 @@ void Sprite::Draw(void)
 	CONSTBUFFER cb;
 	GenerateMatrix(cb);
 
-	//行列をシェーダーに渡す
-	GetD3D_Context()->UpdateSubresource(g_ConstBuffer, 0, NULL, &cb, 0, 0);
 
 	//描画する頂点バッファ(モデル)を指定する
 	GetD3D_Context()->IASetVertexBuffers(0, 1, &Material::m_modelData.vertexBuffer, &strides, &offsets);
@@ -186,10 +184,15 @@ void Sprite::Draw(void)
 	//ピクセルシェーダーにテクスチャを渡す
 	GetD3D_Context()->PSSetShaderResources(0, 1, &Material::m_modelData.texture);
 
+
+	//行列をシェーダーに渡す
+	GetD3D_Context()->UpdateSubresource(g_ConstBuffer, 0, NULL, &cb, 0, 0);
+
 	//描画命令
 	GetD3D_Context()->Draw(6, 0);
 
 }
+
 
 Sprite::~Sprite(void)
 {

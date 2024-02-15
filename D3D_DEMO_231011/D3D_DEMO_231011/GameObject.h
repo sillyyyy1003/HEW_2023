@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Direct3D/Direct3D.h"
+#include "Direct3D.h"
 #include "RailManager.h"
 #include "Collider.h"
 #include <string>
@@ -61,12 +61,12 @@ private:
 	};
 	bool isInit = true; //前回の記録スタートしたかどうか？
 
-	//入力野結果
+	//入力の結果
 	InputCom m_nowInput = { INPUT_NONE,INPUT_NONE };
 	//入力の時間計算
 	int m_countTime = 0;
 
-	//自動移動しているかどうか
+	//自動移動しているObjectかどうか
 	bool isAutoMove = false;
 
 	//今影の大きさ
@@ -147,12 +147,21 @@ public:
 	/// 影の位置移動
 	/// </summary>
 	/// <param name="moveSpeed">移動のスビート</param>
-	/// <param name="posX">本体と被らないようにちょっとずれを設定</param>
-	void GenerateShadowPos(float moveSpeed, float posX);
-	void GenerateShadowPos(void);
+	/// <param name="posX">中心点の位置を設定</param>
+	/// <param name="interval">ポイントとポイントの間隔</param>
+	void GenerateShadowPos(float center, float interval);
+	//void GenerateShadowPos(void);
 
 	//影の大きさの変更
 	void GenerateShadowSize(float speed);
+
+	/// <summary>
+	/// 影の更新
+	/// </summary>
+	/// <param name="center">中心点</param>
+	/// <param name="interval">間隔</param>
+	void ShadowUpdate(float center, float interval);
+	
 
 	/// <summary>
 	/// レール上も位置を設定する
@@ -199,6 +208,7 @@ public:
 	//移動できないのエフェクト
 	void ObjectVibration();
 
+	//今移動中かどうか？
 	bool GetStill() { if (m_moveDir == STILL) { return true; } else { return false; } };
 	
 	DirectX::XMFLOAT3 GetObjectPos() { return m_obj->m_sprite->m_pos; }

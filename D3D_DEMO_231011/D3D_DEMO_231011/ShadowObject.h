@@ -28,7 +28,7 @@ public:
 	void Update(void) override;
 
 	//描画関数
-	void Draw(void) override;
+	void Draw(void);
 
 	~ShadowObject(void);
 

@@ -11,7 +11,6 @@ SceneManager::~SceneManager()
 		delete m_stageHolder[i];
 	}
 
-	delete[] m_stageHolder;
 }
 
 SceneManager* SceneManager::Get()

@@ -1,5 +1,6 @@
-﻿#pragma once
-#include"Direct3D/Direct3D.h"
+﻿
+#pragma once
+#include"Direct3D.h"
 #include"WICTextureLoader.h"	//テクスチャ読み込みライブラリ
 
 //テクスチャ·サウンドファイル読み込みを行う関数
@@ -12,6 +13,9 @@ public:
 	//----------------------------//
 	
 	//================//テスト用//================//
+
+	ID3D11ShaderResourceView* tree;
+	ID3D11ShaderResourceView* shadow;
 	
 	// 図形
 
@@ -22,7 +26,6 @@ public:
 
 	//ステージセレクト用
 	ID3D11ShaderResourceView* uiSelectBg;
-	ID3D11ShaderResourceView* uiStageSelect;
 
 	ID3D11ShaderResourceView* uiSelectCursor;
 	ID3D11ShaderResourceView* uiSelectStage1;
@@ -35,10 +38,14 @@ public:
 	
 	ID3D11ShaderResourceView* uiClear;
 
+	//HINT用
+	ID3D11ShaderResourceView* stageHint1_1;
+	ID3D11ShaderResourceView* stageHint1_2;
+	ID3D11ShaderResourceView* stageHint1_3;
+	ID3D11ShaderResourceView* stageHintBg;
 
 	//stage1-1用リソース
 	ID3D11ShaderResourceView* stageBg1_1;
-
 	ID3D11ShaderResourceView* coconut;
 	ID3D11ShaderResourceView* coconutShadow;
 	ID3D11ShaderResourceView* lamp;
@@ -46,10 +53,7 @@ public:
 	ID3D11ShaderResourceView* housePlate;
 	ID3D11ShaderResourceView* housePlateShadow;
 
-	//stage1-2リソース
-	
 	ID3D11ShaderResourceView* stageBg1_2;
-
 	ID3D11ShaderResourceView* lamp_1_2;
 	ID3D11ShaderResourceView* lamp_1_2Shadow;
 	ID3D11ShaderResourceView* iphone;
@@ -67,6 +71,29 @@ public:
 	ID3D11ShaderResourceView* resultComic1_2_2;
 	ID3D11ShaderResourceView* resultComic1_2_3;
 
+	//stage1-3用リソース
+	ID3D11ShaderResourceView* stage3Bg;
+
+	ID3D11ShaderResourceView* busket;
+	ID3D11ShaderResourceView* busketShadow;
+	ID3D11ShaderResourceView* newspaper;
+	ID3D11ShaderResourceView* newspaperShadow;
+	ID3D11ShaderResourceView* picnicbasket;
+	ID3D11ShaderResourceView* picnicbasketShadow;
+	ID3D11ShaderResourceView* sandwich;
+	ID3D11ShaderResourceView* sandwichShadow;
+
+	//result用
+	ID3D11ShaderResourceView* resultBg;
+	ID3D11ShaderResourceView* Button_again;
+	ID3D11ShaderResourceView* Button_next;
+	ID3D11ShaderResourceView* Button_return;
+	ID3D11ShaderResourceView* result;
+	ID3D11ShaderResourceView* Result_score;
+	ID3D11ShaderResourceView* Result_stepcount;
+	ID3D11ShaderResourceView* Result_num;
+	ID3D11ShaderResourceView* star;
+	ID3D11ShaderResourceView* starShadow;
 
 	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
@@ -79,6 +106,7 @@ public:
 	//サウンド画面用
 	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
 	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド調節
+	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
 	ID3D11ShaderResourceView* uiMusic;	//サウンド音楽文字表示
 	ID3D11ShaderResourceView* uiSE;		//サウントSE文字表示
 

@@ -14,6 +14,7 @@ class SceneManager;
 class Object;
 class Effect;
 class CameraShaker;
+class Result;
 
 class Game
 {
@@ -51,12 +52,16 @@ private:
 
 	//stage select
 	CanvasUI* uiSelectBg;
-	CanvasUI* uiStageSelect;
+
 	CanvasUI* uiSelectCursor;
 
 	CanvasUI* uiSelectStage[3];
 	CanvasUI* uiSelectChapter[3];
 	CanvasUI* uiClearMark[3];
+
+	//STAGE HINT
+	CanvasUI* stageHint[9];
+	CanvasUI* stageHintBg;
 
 	//stage1-1
 	StaticObject*	stageBg;		//ステージ背景
@@ -71,10 +76,18 @@ private:
 	GameObject*		iphone;			//平行四角形
 
 	//移動できるオブジェクトのリスト
+
+	//stage1-3
+	GameObject* sandwich;	    //直角三角形
+	GameObject* newspaper;	    //四角
+	GameObject* busket;			//台形（四角）
+	GameObject* picnicbasket;   //台形（四角）
+
 	std::vector<GameObject*> objectList;
 	GameObject* circle;			//circle
 
 	CameraShaker* cameraShaker;
+	Result* resultGenerator;
 
 private:
 	
@@ -197,6 +210,9 @@ public:
 	//セレクトステージ配列Init
 	void InitSelectArray();
 
+	//ヒントの配列の初期化
+	void InitHintArray();
+
 	//ゲーム本体
 	void GameUpdate(void);
 
@@ -215,10 +231,6 @@ public:
 	void SelectChapter1(void);
 	void SelectChapter2(void);
 	void SelectChapter3(void);
-
-	void ClearSwitch1(void);
-	void ClearSwitch2(void);
-	void ClearSwitch3(void);
 
 	//Stage Update
 	void StageUpdate(void);
@@ -302,18 +314,23 @@ public:
 	//デバッグ用
 	void DebugDisplay(void);
 
-<<<<<<< HEAD
 	void TestMove(Effect* _target);
 	void TestMove(CanvasUI* _target);
+	void TestMove(void);
 
 	//背景を入れ替わる
 	void SetBackGround(ID3D11ShaderResourceView* tex);
 
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
-=======
+
 	void TestFade(void);
->>>>>>> 53090019303508a0fcb3f0b0825425b592bf719e
+
+	void ComicUpdate();
+	void Result1_1Comic(void);
+
+	void DrawComic1_1(void);
+	void DrawResult1_1(void);
 
 };
 

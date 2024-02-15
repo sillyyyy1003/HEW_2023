@@ -141,7 +141,7 @@
     <ClCompile Include="ColliderManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DInput.cpp" />
-    <ClCompile Include="Direct3D\Direct3D.cpp" />
+    <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -151,6 +151,8 @@
     <ClCompile Include="ObjectAnimation.cpp" />
     <ClCompile Include="PolygonCollider.cpp" />
     <ClCompile Include="RailManager.cpp" />
+    <ClCompile Include="Result.cpp" />
+    <ClCompile Include="ResultProcess.cpp" />
     <ClCompile Include="SatCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="ShadowObject.cpp" />
@@ -176,9 +178,7 @@
     <ClInclude Include="ColliderManager.h" />
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="DInput.h" />
-    <ClInclude Include="Direct3D\Direct3D.h" />
-    <ClInclude Include="Direct3D\Shader\PixelShader.h" />
-    <ClInclude Include="Direct3D\Shader\VertexShader.h" />
+    <ClInclude Include="Direct3D.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -186,8 +186,11 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
+    <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PolygonCollider.h" />
     <ClInclude Include="RailManager.h" />
+    <ClInclude Include="Result.h" />
+    <ClInclude Include="ResultProcess.h" />
     <ClInclude Include="SatCollider.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="ShadowObject.h" />
@@ -198,21 +201,26 @@
     <ClInclude Include="StaticAnimation.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />
+    <ClInclude Include="VertexShader.h" />
     <ClInclude Include="WICTextureLoader.h" />
     <ClInclude Include="xa2.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
+    <FxCompile Include="PixelShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ps_main</EntryPointName>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ps_main</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PixelShader.h</HeaderFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PixelShader.h</HeaderFileOutput>
     </FxCompile>
-    <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
+    <FxCompile Include="VertexShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vs_main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vs_main</EntryPointName>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VertexShader.h</HeaderFileOutput>
+      <HeaderFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VertexShader.h</HeaderFileOutput>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

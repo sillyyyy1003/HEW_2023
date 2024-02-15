@@ -16,8 +16,7 @@ Assets::Assets()
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
     //select
-    uiSelectBg = LoadTexture("assets/ui/select/selectbg.png");
-    uiStageSelect = LoadTexture("assets/ui/select/stageselect.png");
+    uiSelectBg = LoadTexture("assets/ui/select/Select_bg.png");
     uiSelectCursor = LoadTexture("assets/ui/select/hane.png");
     uiSelectStage1 = LoadTexture("assets/ui/select/stage1.png");
     uiSelectStage2 = LoadTexture("assets/ui/select/stage2.png");
@@ -27,8 +26,18 @@ Assets::Assets()
     uiSelectChapter3 = LoadTexture("assets/ui/select/chapter3.png");
     uiClear= LoadTexture("assets/ui/select/clear.png");
 
+    //stage hint
+    //stageHint1_1 = LoadTexture("assets/1_1_hint.png");
+    //stageHint1_2 = LoadTexture("assets/1_2_hint.png");
+    //stageHint1_3 = LoadTexture("assets/1_3_hint.png");
+    stageHint1_1 = LoadTexture("assets/1_1_image_hint.png");
+    stageHint1_2 = LoadTexture("assets/1_2_image_hint.png");
+    stageHint1_3 = LoadTexture("assets/1_3_image_hint.png");
+    stageHintBg = LoadTexture("assets/bg_shadow.png");
+
+
     //stage1_1
-    stageBg1_1 = LoadTexture("assets/stage1/stage1_1Bg.png");
+    stageBg1_1 = LoadTexture("assets/stage1/1_1_BG.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
@@ -37,7 +46,7 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
     //stage1_2
-    stageBg1_2 = LoadTexture("assets/stage1/1_2_Bg.png");
+    stageBg1_2 = LoadTexture("assets/stage1/1-2Bg.png");
 
     lamp_1_2 =  LoadTexture("assets/stage1/1_2_lamp.png");
     lamp_1_2Shadow = LoadTexture("assets/stage1/1_2_lamp_shadow.png");
@@ -56,6 +65,29 @@ Assets::Assets()
     resultComic1_2_2 = LoadTexture("assets/clear/1_2_2.png");
     resultComic1_1_3 = LoadTexture("assets/clear/1_2_3.png");
 
+    //stage1_3
+    stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
+    sandwich = LoadTexture("assets/stage1/1_3_sandwich.png");
+    sandwichShadow = LoadTexture("assets/stage1/1_3_sandwich_shadow.png");
+    busket = LoadTexture("assets/stage1/1_3_busket.png");
+    busketShadow = LoadTexture("assets/stage1/1_3_bucket_shadow.png");
+    newspaper = LoadTexture("assets/stage1/1_3_newspaper.png");
+    newspaperShadow = LoadTexture("assets/stage1/1_3_newspaper_shadow.png");
+    picnicbasket = LoadTexture("assets/stage1/1_3_picnicbasket.png");
+    picnicbasketShadow = LoadTexture("assets/stage1/1_3_pinicbasket_shadow.png");
+
+    //result
+    resultBg = LoadTexture("assets/result/result＿BG.png");
+    Button_again = LoadTexture("assets/result/result_button_again.png");
+    Button_next = LoadTexture("assets/result/result_button_next.png");
+    Button_return = LoadTexture("assets/result/result_button_return.png");
+    result = LoadTexture("assets/result/result_result.png");
+    Result_score = LoadTexture("assets/result/result_score.png");
+    Result_stepcount = LoadTexture("assets/result/result_stepcount.png");
+    Result_num = LoadTexture("assets/result/result_suuji.png");
+    star = LoadTexture("assets/result/Star_shadow.png");
+    starShadow = LoadTexture("assets/result/Star.png");
+
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
@@ -72,7 +104,7 @@ Assets::Assets()
     fade = LoadTexture("assets/fade.png");
 
     //effect
-    effect1 = LoadTexture("assets/Effect/effect4.png");
+    effect1 = LoadTexture("assets/Effect/cursor.png");
 
 
 }
@@ -89,7 +121,7 @@ Assets::~Assets()
 
     //ステージセレクト用
     SAFE_RELEASE(uiSelectBg);
-    SAFE_RELEASE(uiStageSelect);
+
 
     SAFE_RELEASE(uiSelectCursor);
     SAFE_RELEASE(uiSelectStage1);
@@ -101,7 +133,10 @@ Assets::~Assets()
     SAFE_RELEASE(uiSelectChapter3);
 
     SAFE_RELEASE(uiClear);
-
+    SAFE_RELEASE(stageHint1_1);
+    SAFE_RELEASE(stageHint1_2);
+    SAFE_RELEASE(stageHint1_3);
+    SAFE_RELEASE(stageHintBg);
 
     //stage1-1用リソース
     SAFE_RELEASE(stageBg1_1);
@@ -130,7 +165,33 @@ Assets::~Assets()
     //1-2
     SAFE_RELEASE(resultComic1_2_1);
     SAFE_RELEASE(resultComic1_2_2);
-    SAFE_RELEASE(resultComic1_1_3);
+    SAFE_RELEASE(resultComic1_1_3);    //stage1-2用リソース
+
+    //stage1-3用リソース
+    SAFE_RELEASE(stage3Bg);
+
+    SAFE_RELEASE(sandwich);
+    SAFE_RELEASE(sandwichShadow);
+    SAFE_RELEASE(busket);
+    SAFE_RELEASE(busketShadow);
+    SAFE_RELEASE(newspaper);
+    SAFE_RELEASE(newspaperShadow);
+    SAFE_RELEASE(picnicbasket);
+    SAFE_RELEASE(picnicbasketShadow);
+
+    //result
+    SAFE_RELEASE(resultBg);
+
+    SAFE_RELEASE(Button_again);
+    SAFE_RELEASE(Button_next);
+    SAFE_RELEASE(Button_return);
+    SAFE_RELEASE(result);
+    SAFE_RELEASE(Result_score);
+    SAFE_RELEASE(Result_stepcount);
+    SAFE_RELEASE(Result_num);
+    SAFE_RELEASE(star);
+    SAFE_RELEASE(starShadow);
+
 
     //ポーズ画面用
     SAFE_RELEASE(uiPauseBg);

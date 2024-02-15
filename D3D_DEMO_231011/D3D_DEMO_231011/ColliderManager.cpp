@@ -61,7 +61,7 @@ bool ColliderManager::ClearCollision(Collider_Dir dir, std::string name1, std::s
                 if (targetObj->m_shadow->m_size == size) {
                     return true;
                 }
-
+                
             }
 
         }

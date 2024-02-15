@@ -104,7 +104,7 @@ void Effect::Update()
                 m_pos = tracePos;
          
                 //yŽ²‚ÌˆÊ’u‚ð‚¸‚ç‚·
-                m_pos.y += element->m_obj->GetExtents().y;
+                m_pos.y = element->m_obj->m_sprite->m_pos.y;
                 //zŽ²‚ÌˆÊ’u‚ð‚¸‚ç‚·
                 m_pos.z = tracePos.z - 0.1f;
                 break;
