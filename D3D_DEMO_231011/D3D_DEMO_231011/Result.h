@@ -2,6 +2,7 @@
 #include "ResultProcess.h"
 
 class StaticObject;
+class ResultProcess;
 
 class Result 
 {
@@ -28,7 +29,7 @@ private:
     };
 
     //ボタン管理するための変数
-    int buttonnum = 0;
+    int buttonnum = NEXT;
 
     //スターの表示する数を管理する変数
     int AllStar = 0;
@@ -60,6 +61,9 @@ private:
     void StarEvent(int StarScore);
 
 public:
+
+    ResultProcess* processor;
+
     Result();
 
     ~Result();

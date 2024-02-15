@@ -25,12 +25,17 @@ cbuffer CONSTBUFFER : register(b0)
     matrix matrixWorld;
     // マテリアル色
     float4 materialDiffuse;
+
 }
 
 // ピクセルシェーダーのエントリポイント
 float4 ps_main(PS_IN input) : SV_Target
 {
     // Sample関数→テクスチャから指定したUVを元にピクセル色を取って来る
-    float4 color = myTexture.Sample(mySampler, input.tex);    
-    return color * materialDiffuse;
+    float4 color = myTexture.Sample(mySampler, input.tex);
+    
+    color = color * materialDiffuse;
+    
+    return color;
+    
 }

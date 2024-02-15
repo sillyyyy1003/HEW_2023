@@ -16,8 +16,7 @@ Assets::Assets()
     uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
 
     //select
-    uiSelectBg = LoadTexture("assets/ui/select/selectbg.png");
-    uiStageSelect = LoadTexture("assets/ui/select/stageselect.png");
+    uiSelectBg = LoadTexture("assets/ui/select/Select_bg.png");
     uiSelectCursor = LoadTexture("assets/ui/select/hane.png");
     uiSelectStage1 = LoadTexture("assets/ui/select/stage1.png");
     uiSelectStage2 = LoadTexture("assets/ui/select/stage2.png");
@@ -27,8 +26,18 @@ Assets::Assets()
     uiSelectChapter3 = LoadTexture("assets/ui/select/chapter3.png");
     uiClear= LoadTexture("assets/ui/select/clear.png");
 
+    //stage hint
+    //stageHint1_1 = LoadTexture("assets/1_1_hint.png");
+    //stageHint1_2 = LoadTexture("assets/1_2_hint.png");
+    //stageHint1_3 = LoadTexture("assets/1_3_hint.png");
+    stageHint1_1 = LoadTexture("assets/1_1_image_hint.png");
+    stageHint1_2 = LoadTexture("assets/1_2_image_hint.png");
+    stageHint1_3 = LoadTexture("assets/1_3_image_hint.png");
+    stageHintBg = LoadTexture("assets/bg_shadow.png");
+
+
     //stage1_1
-    stageBg1_1 = LoadTexture("assets/stage1/stage1_1Bg.png");
+    stageBg1_1 = LoadTexture("assets/stage1/1_1_BG.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
@@ -56,7 +65,7 @@ Assets::Assets()
     resultComic1_2_2 = LoadTexture("assets/clear/1_2_2.png");
     resultComic1_1_3 = LoadTexture("assets/clear/1_2_3.png");
 
-      //stage1_3
+    //stage1_3
     stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
     sandwich = LoadTexture("assets/stage1/1_3_sandwich.png");
     sandwichShadow = LoadTexture("assets/stage1/1_3_sandwich_shadow.png");
@@ -95,7 +104,7 @@ Assets::Assets()
     fade = LoadTexture("assets/fade.png");
 
     //effect
-    effect1 = LoadTexture("assets/Effect/effect4.png");
+    effect1 = LoadTexture("assets/Effect/cursor.png");
 
 
 }
@@ -112,7 +121,7 @@ Assets::~Assets()
 
     //ステージセレクト用
     SAFE_RELEASE(uiSelectBg);
-    SAFE_RELEASE(uiStageSelect);
+
 
     SAFE_RELEASE(uiSelectCursor);
     SAFE_RELEASE(uiSelectStage1);
@@ -124,7 +133,10 @@ Assets::~Assets()
     SAFE_RELEASE(uiSelectChapter3);
 
     SAFE_RELEASE(uiClear);
-
+    SAFE_RELEASE(stageHint1_1);
+    SAFE_RELEASE(stageHint1_2);
+    SAFE_RELEASE(stageHint1_3);
+    SAFE_RELEASE(stageHintBg);
 
     //stage1-1用リソース
     SAFE_RELEASE(stageBg1_1);

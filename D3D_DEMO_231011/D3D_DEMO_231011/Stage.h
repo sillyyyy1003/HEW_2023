@@ -6,7 +6,8 @@ class GameObject;
 class Stage
 {
 private:
-
+	//ヒントが出されたかどうか
+	bool isHint = true;
 
 	//ステージクリアしたかどうか？
 	bool isClear = false;
@@ -25,6 +26,7 @@ private:
 
 
 public:
+
 
 	//ここでステージの初期配置を行う
 	void Init(void);
@@ -50,6 +52,11 @@ public:
 
 	//step数をリセット　クリア状態をリセット
 	void ResetStage(void) { m_moveStep = 0; isClear = false; };
+
+	//hintの判断
+	bool GetHint(void) { return isHint; };
+	void SetHint(bool isHint) { this->isHint = isHint; };
+
 
 };
 

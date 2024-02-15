@@ -14,6 +14,7 @@ class SceneManager;
 class Object;
 class Effect;
 class CameraShaker;
+class Result;
 
 class Game
 {
@@ -51,12 +52,16 @@ private:
 
 	//stage select
 	CanvasUI* uiSelectBg;
-	CanvasUI* uiStageSelect;
+
 	CanvasUI* uiSelectCursor;
 
 	CanvasUI* uiSelectStage[3];
 	CanvasUI* uiSelectChapter[3];
 	CanvasUI* uiClearMark[3];
+
+	//STAGE HINT
+	CanvasUI* stageHint[9];
+	CanvasUI* stageHintBg;
 
 	//stage1-1
 	StaticObject*	stageBg;		//ステージ背景
@@ -72,9 +77,7 @@ private:
 
 	//移動できるオブジェクトのリスト
 
-
 	//stage1-3
-	StaticObject* stage3Bg;		//ステージ背景
 	GameObject* sandwich;	    //直角三角形
 	GameObject* newspaper;	    //四角
 	GameObject* busket;			//台形（四角）
@@ -84,6 +87,7 @@ private:
 	GameObject* circle;			//circle
 
 	CameraShaker* cameraShaker;
+	Result* resultGenerator;
 
 private:
 	
@@ -204,6 +208,9 @@ public:
 	//セレクトステージ配列Init
 	void InitSelectArray();
 
+	//ヒントの配列の初期化
+	void InitHintArray();
+
 	//ゲーム本体
 	void GameUpdate(void);
 
@@ -221,10 +228,6 @@ public:
 	void SelectChapter1(void);
 	void SelectChapter2(void);
 	void SelectChapter3(void);
-
-	void ClearSwitch1(void);
-	void ClearSwitch2(void);
-	void ClearSwitch3(void);
 
 	//Stage Update
 	void StageUpdate(void);

@@ -1,6 +1,6 @@
 ﻿
 #pragma once
-#include"Direct3D/Direct3D.h"
+#include"Direct3D.h"
 #include"WICTextureLoader.h"	//テクスチャ読み込みライブラリ
 
 //テクスチャ·サウンドファイル読み込みを行う関数
@@ -26,7 +26,6 @@ public:
 
 	//ステージセレクト用
 	ID3D11ShaderResourceView* uiSelectBg;
-	ID3D11ShaderResourceView* uiStageSelect;
 
 	ID3D11ShaderResourceView* uiSelectCursor;
 	ID3D11ShaderResourceView* uiSelectStage1;
@@ -39,10 +38,14 @@ public:
 	
 	ID3D11ShaderResourceView* uiClear;
 
+	//HINT用
+	ID3D11ShaderResourceView* stageHint1_1;
+	ID3D11ShaderResourceView* stageHint1_2;
+	ID3D11ShaderResourceView* stageHint1_3;
+	ID3D11ShaderResourceView* stageHintBg;
 
 	//stage1-1用リソース
 	ID3D11ShaderResourceView* stageBg1_1;
-
 	ID3D11ShaderResourceView* coconut;
 	ID3D11ShaderResourceView* coconutShadow;
 	ID3D11ShaderResourceView* lamp;
@@ -77,7 +80,7 @@ public:
 	ID3D11ShaderResourceView* newspaperShadow;
 	ID3D11ShaderResourceView* picnicbasket;
 	ID3D11ShaderResourceView* picnicbasketShadow;
-		ID3D11ShaderResourceView* sandwich;
+	ID3D11ShaderResourceView* sandwich;
 	ID3D11ShaderResourceView* sandwichShadow;
 
 	//result用

@@ -19,13 +19,13 @@
 #include <algorithm> // 必要なヘッダーファイル
 #include "Result.h"
 
+
 #define MOVE 0.1f
 #define INITROTATE	(19.8)
 
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
-extern Result* g_result;
 
 void Game::Init()
 {
@@ -33,6 +33,8 @@ void Game::Init()
 	cameraShaker = new CameraShaker();
 	//強度、周波数、継続の時間の初期化を行う
 	cameraShaker->InitCameraShaker(0.1f, 3.0f, 20);
+
+	resultGenerator = new Result();
 
 	//=============================
 	//オブジェクト作成
@@ -56,7 +58,6 @@ void Game::Init()
 	}
 
 	uiSelectBg = new CanvasUI();
-	uiStageSelect = new CanvasUI();
 	uiSelectCursor = new CanvasUI();
 
 	for (int i = 0; i < 3; i++)
@@ -81,9 +82,15 @@ void Game::Init()
 	iphone = new GameObject();
 	triangleBlock = new GameObject();
 
+	//STAGE1-3
+    sandwich = new GameObject();	    //直角三角形
+	newspaper = new GameObject();	    //四角
+	busket = new GameObject();			//台形（四角）
+	picnicbasket = new GameObject(); //台形（四角）
+
 
 	//result
-	g_result->Init();
+	resultGenerator->Init();
 	
 	//EFFECT
 	testEffect = new Effect(12);
@@ -94,11 +101,13 @@ void Game::Init()
 	coconut->SetName("coconut");
 	lamp->SetName("lamp");
 	housePlate->SetName("housePlate");
-	//stage1に使われてる
+	//stage2に使われてる
 	//移動のオブジェクトの名前を設定する
 	lamp1_2->SetName("lamp1_2");
 	iphone->SetName("iphone");
 	triangleBlock->SetName("triangleBlock");
+	//stage3に使われてる
+	//移動のオブジェクトの名前を設定する
 
 	//テクスチャ読み込み・モデル作成
 	uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
@@ -112,14 +121,12 @@ void Game::Init()
 	uiSound->CreateModel(g_Assets->uiSound, 280, 92, 1, 2);
 
 	uiSoundBg->CreateModel(g_Assets->uiSoundBg, 687, 550, 1, 1);
-
 	uiSelectBg->CreateModel(g_Assets->uiSelectBg, 1280, 720, 1, 1);
-	uiStageSelect->CreateModel(g_Assets->uiStageSelect, 394, 100, 1, 1);
 	uiSelectCursor->CreateModel(g_Assets->uiSelectCursor, 76, 84, 1, 1);
 
 	for (int i = 0; i < 3; i++)
 	{
-		uiClearMark[i]->CreateModel(g_Assets->uiClear, 300, 300, 1, 1);
+		uiClearMark[i]->CreateModel(g_Assets->uiClear, 87, 87, 1, 1);
 	}
 
 
@@ -142,9 +149,7 @@ void Game::Init()
 	triangleBlock->CreateObject(g_Assets->triangleBlock, 378, 348, 1, 1);
 	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
 
-
-
-	testEffect->CreateModel(g_Assets->effect1, 256, 256, 4, 3);
+	testEffect->CreateModel(g_Assets->effect1, 256, 256, 3, 4);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
@@ -181,16 +186,18 @@ void Game::Init()
 	uiPressEnter->m_scale = { 0.3f,0.3f,1.0f };
 
 	//Select画面
-	uiSelectBg->m_pos = { 0.0f,0.0f,0.9f };
-	uiStageSelect->m_pos = { -3.5f,3.0f,0.8f };
+	uiSelectBg->m_pos = { 0.0f,0.04f,0.9f };
+	uiSelectBg->m_scale = { 0.98f,0.98f,0.9f };
 	uiSelectCursor->m_pos = { 5.2f,3.6f,0.8f };//Chapterの横に出るように
 
 
-	for (int i = 0; i < 3; i++)
-	{
-		uiClearMark[i]->m_pos = { -2.0f,1.3f,0.7f };
-		uiClearMark[i]->m_scale = { 0.2f,0.2f,1.0f };
-	}
+
+	float posy = 2.3;
+	uiClearMark[0]->m_pos = { 4.5f,posy,0.7f };
+	posy = 2.3 - 2.5;
+	uiClearMark[1]->m_pos = { 5.0f,posy,0.7f };
+	posy = 2.3 - 2.5 * 2;
+	uiClearMark[2]->m_pos = { 4.8f,posy,0.7f };
 
 
 	//uiPause
@@ -209,11 +216,10 @@ void Game::Init()
 	fade->m_scale = { 4.0f,3.0f,1.0f };
 
 
-
-
 	//配列の初期化と設定
 	InitSoundArray();
 	InitSelectArray();
+	InitHintArray();
 
 
 	// サウンド初期化
@@ -234,8 +240,8 @@ void Game::Init()
 void Game::InitStage()
 {
 
-
 	RailManager::Get()->InitRailPos();
+
 	//ステージの初期化
 	switch (SceneManager::Get()->GetStage()) {
 
@@ -243,7 +249,6 @@ void Game::InitStage()
 
 		XA_Play(BGM_Stage1);//サウンド再生
 		InitStage1_1();
-
 
 		break;
 
@@ -304,6 +309,13 @@ void Game::InitStage()
 		break;
 
 	}
+
+	//ヒントの状態を全部inactiveにします。
+	for (int i = 0; i < 9; i++) {
+		SceneManager::Get()->m_stageHolder[i]->SetHint(false);
+	}
+	//ヒントを出す
+	SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetHint(true);
 }
 
 void Game::InitStage1_1(void)
@@ -366,6 +378,9 @@ void Game::InitStage1_1(void)
 	coconut->SetActive(true);
 
 	//自動移動や自動回転の設定
+	
+	//クリアのレベルを設定
+	resultGenerator->SetStarNum({ 3,5,8,11 });
 
 }
 
@@ -425,12 +440,14 @@ void Game::InitStage1_2(void)
 	//自動移動や自動回転の設定
 
 
+
+	//クリアのレベルを設定
+	resultGenerator->SetStarNum({ 3,5,8,11 });
 }
 
 void Game::InitStage1_3(void)
 {
-<<<<<<< .merge_file_1FrTcu
-=======
+
 	//位置設定
 	SetBackGround(g_Assets->stage3Bg);
 	//オブジェクトを設定する
@@ -491,8 +508,8 @@ void Game::InitStage1_3(void)
 
 	//自動移動や自動回転の設定
 
-	g_result->SetStarNum({ 3,5,8,11 });
->>>>>>> .merge_file_p97HWa
+	//クリアのレベルを設定
+	resultGenerator->SetStarNum({ 3,5,8,11 });
 }
 
 void Game::InitStage2_1(void)
@@ -625,16 +642,20 @@ void Game::InitSoundArray()
 
 	for (int i = 0; i < 6; i++)
 	{
-		uiSoundOp_BGM[i]->CreateModel(g_Assets->uiSoundOp_BGM, 313,324, 1, 1);
+		uiSoundOp_BGM[i]->CreateModel(g_Assets->uiSoundOp_BGM, 313, 324, 1, 1);
 		uiSoundOp_SE[i]->CreateModel(g_Assets->uiSoundOp_BGM, 313, 324, 1, 1);
-		
-		uiSoundOp_BGM[i]->m_pos = { pos.x + i * 0.9f,0.7f, pos.z };
-		uiSoundOp_SE[i]->m_pos = { pos.x + i * 0.9f, -0.7f, pos.z };
-		
+
+		uiSoundOp_BGM[i]->m_pos = { pos.x + i * 0.8f,0.7f, pos.z };
+		uiSoundOp_SE[i]->m_pos = { pos.x + i * 0.8f, -0.7f, pos.z };
+
 		uiSoundOp_BGM[i]->m_scale = { 0.2,0.2,0.2 };
 		uiSoundOp_SE[i]->m_scale = { 0.2,0.2,0.2 };
 
 	}
+
+	
+
+
 }
 
 
@@ -650,9 +671,9 @@ void Game::InitSelectArray()
 	uiSelectChapter[CHAPTER3]->CreateModel(g_Assets->uiSelectChapter3, 300, 57, 1, 1);
 	
 	//位置設定
-	uiSelectStage[STAGE1]->m_pos = { -3.5f,1.3f,0.8f };
-	uiSelectStage[STAGE2]->m_pos = { -2.7f,-0.8f,0.8f };
-	uiSelectStage[STAGE3]->m_pos = { -3.5f,-3.0f,0.8f };
+	uiSelectStage[STAGE1]->m_pos = { -3.2f,1.3f,0.8f };
+	uiSelectStage[STAGE2]->m_pos = { -2.7f,-0.6f,0.8f };
+	uiSelectStage[STAGE3]->m_pos = { -3.1f,-2.5f,0.8f };
 
 	uiSelectChapter[CHAPTER1]->m_pos = { 3.1f,3.3f,0.8f };
 	uiSelectChapter[CHAPTER2]->m_pos = { 3.1f,1.0f,0.8f };
@@ -661,6 +682,35 @@ void Game::InitSelectArray()
 	//ステージを設定
 	selectStage = STAGE1;
 
+}
+
+void Game::InitHintArray()
+{
+	for (int i = 0; i < 9; i++) {
+		stageHint[i] = new CanvasUI();
+	}
+	
+	stageHintBg = new CanvasUI();
+
+	//テクスチャ割り当て
+	for (int i = 0; i < 9; i++) {
+		/*stageHint[i]->CreateModel(g_Assets->stageHint1_1, 1280, 720, 1, 1);*/
+		stageHint[i]->CreateModel(g_Assets->stageHint1_1, 883, 657, 1, 1);
+	}
+	
+	stageHintBg->CreateModel(g_Assets->stageHintBg, 1280, 720, 1, 1);
+
+
+	stageHint[STAGE1_1]->SetTexture(g_Assets->stageHint1_1);
+	stageHint[STAGE1_2]->SetTexture(g_Assets->stageHint1_2);
+	stageHint[STAGE1_3]->SetTexture(g_Assets->stageHint1_3);
+
+	//位置設定
+	for (int i = 0; i < 9; i++) {
+		stageHint[i]->m_pos = { 0,0,0.2};
+	}
+	stageHintBg->m_pos = { 0,0,0.3 };
+	//位置設定
 }
 
 
@@ -683,6 +733,9 @@ void Game::TitleUpdate(void)
 			SceneManager::Get()->m_stageHolder[i]->SetCompleted(false);
 			//念のため、ステージのクリア判定をfalseにする
 			SceneManager::Get()->m_stageHolder[i]->SetClear(false);
+
+		
+		
 		}
 
 	}
@@ -977,161 +1030,155 @@ void Game::SelectChapter3(void) {
 
 void Game::StageUpdate(void)
 {
+	//もしヒント出されていない
+	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint()) {
 
-	if (!isPause) {
-				
-		//入力処理
-		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
-
-			XA_Play(SE_SelectDecide);//決定SE再生
-
-			PauseSwitch();
-		}
-
-		//移動させる目標を設定する
+		//スペースキーを押したら
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-			
-			//オブジェクトが移動してない場合
-			if (isControl) {
-				
-				for (auto it = objectList.begin(); it != objectList.end(); it++) {
-					if ((*it)->GetActive())
-					{
-						(*it)->SetActive(false);
 
-						auto nextIt = std::next(it);
-
-
-
-						//もし次のオブジェクトが自動移動のオブジェクトの場合
-						if (nextIt != objectList.end()) {
-							if ((*nextIt)->GetAutoMove()) {
-
-								nextIt = objectList.begin();
-								(*nextIt)->SetActive(true);
-
-							}
-							else {
-								//次のオブジェクトを移動できる
-								(*nextIt)->SetActive(true);
-							}
-
-						}
-						else {
-							nextIt = objectList.begin();
-							//次のオブジェクトを移動できる
-							(*nextIt)->SetActive(true);
-
-						}
-						
-						
-					
-						break;
-
-					}
-				}
-			}
+			stageHint[SceneManager::Get()->GetStage()]->SetActive(false);
+			stageHintBg->SetActive(false);
+			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetHint(false);
+		}
+		else {
+			stageHint[SceneManager::Get()->GetStage()]->SetActive(true);
+			stageHintBg->SetActive(true);
 		
 		}
-		//StageUpdate
-		switch (SceneManager::Get()->GetStage()) {
-
-		case STAGE1_1:
-
-			UpdateStage1_1();
-			
-			break;
-
-		case STAGE1_2:
-			UpdateStage1_2();
-
-			break;
-
-		case STAGE1_3:
-			UpdateStage1_3();
-
-			break;
-
-		case STAGE2_1:
-
-
-			break;
-
-		case STAGE2_2:
-
-
-
-			break;
-
-		case STAGE2_3:
-
-
-
-			break;
-
-		case STAGE3_1:
-
-
-
-			break;
-		case STAGE3_2:
-
-
-
-			break;
-
-		case STAGE3_3:
-
-
-
-			break;
-
-		}
-
-		//CameraUpdate
-		cameraShaker->Update(g_WorldCamera);
 
 	}
 	else {
-		UiUpdate();
+		if (!isPause) {
+
+
+
+			//入力処理
+			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
+
+				XA_Play(SE_SelectDecide);//決定SE再生
+
+				PauseSwitch();
+			}
+
+			//移動させる目標を設定する
+			if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+				//オブジェクトが移動してない場合
+				if (isControl) {
+
+					for (auto it = objectList.begin(); it != objectList.end(); it++) {
+						if ((*it)->GetActive())
+						{
+							(*it)->SetActive(false);
+							auto nextIt = std::next(it);
+
+
+
+							//もし次のオブジェクトが自動移動のオブジェクトの場合
+							if (nextIt != objectList.end()) {
+								if ((*nextIt)->GetAutoMove()) {
+									XA_Play(SE_Select);//セレクトSE再生
+									nextIt = objectList.begin();
+									(*nextIt)->SetActive(true);
+
+								}
+								else {
+									//次のオブジェクトを移動できる
+									XA_Play(SE_Select);//セレクトSE再生
+									(*nextIt)->SetActive(true);
+								}
+
+							}
+							else {
+								XA_Play(SE_Select);//セレクトSE再生
+								nextIt = objectList.begin();
+								//次のオブジェクトを移動できる
+								(*nextIt)->SetActive(true);
+
+							}
+
+							break;
+
+						}
+					}
+				}
+
+			}
+
+			//StageUpdate
+			switch (SceneManager::Get()->GetStage()) {
+
+			case STAGE1_1:
+
+				UpdateStage1_1();
+
+				break;
+
+			case STAGE1_2:
+				UpdateStage1_2();
+
+				break;
+
+			case STAGE1_3:
+				UpdateStage1_3();
+
+				break;
+
+			case STAGE2_1:
+
+
+				break;
+
+			case STAGE2_2:
+
+
+
+				break;
+
+			case STAGE2_3:
+
+
+
+				break;
+
+			case STAGE3_1:
+
+
+
+				break;
+			case STAGE3_2:
+
+
+
+				break;
+
+			case STAGE3_3:
+
+
+
+				break;
+
+			}
+
+			//CameraUpdate
+			cameraShaker->Update(g_WorldCamera);
+
+		}
+		else {
+			UiUpdate();
+		}
 	}
+
+
+
 
 }
 
 void Game::UpdateStage1_1(void)
 {
 
-	//移動させる目標を設定する
-	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-		XA_Play(SE_Select);//セレクトSE再生
-		
-		for (auto it = objectList.begin(); it != objectList.end(); it++) {
-			
-			if ((*it)->GetActive())
-			{
-				//次のオブジェクトのポインターを取得
-				auto nextIt = std::next(it) != objectList.end() ? std::next(it) : objectList.begin();
-
-				//
-				if ((*nextIt)->GetAutoMove()) {
-					nextIt = objectList.begin();
-				}
-
-				//静止の時だけswitchできる
-				if ((*it)->GetStill())
-				{
-					(*it)->SetActive(false);
-					(*nextIt)->SetActive(true);
-					break;
-				}
-	
-			}
-		}
-	}
-
 	//背景
 	stageBg->Update();
-
 
 	for (auto& element : objectList) {
 		if (!element->GetStill()) {
@@ -1166,7 +1213,7 @@ void Game::UpdateStage1_1(void)
 		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {
 		
 		//クリア
-		int stageNum = SceneManager::Get()->GetActiveStage();
+		int stageNum = SceneManager::Get()->GetStage();
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
 		SceneManager::Get()->m_stageHolder[stageNum]->SetCompleted(true);
 		SceneManager::Get()->SetScene(RESULT);
@@ -1249,7 +1296,7 @@ void Game::UpdateStage3_3(void)
 
 void Game::ResultUpdate(void)
 {
-<<<<<<< .merge_file_1FrTcu
+	/*
 	switch (SceneManager::Get()->GetStage()) {
 
 	case STAGE1_1:
@@ -1304,6 +1351,9 @@ void Game::ResultUpdate(void)
 		break;
 
 	}
+	*/
+
+	resultGenerator->Update();
 }
 
 void Game::UpdateResult1_1(void)
@@ -1312,14 +1362,13 @@ void Game::UpdateResult1_1(void)
 
 
 	//ResultUpdate();
+	resultGenerator->Update();
 
 }
 
 void Game::UpdateResult1_2(void)
 {
-=======
-	g_result->Update();
->>>>>>> .merge_file_p97HWa
+	resultGenerator->Update();
 }
 
 void Game::GameUpdate(void)
@@ -1327,8 +1376,8 @@ void Game::GameUpdate(void)
 
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
-		//TitleUpdate();
-		ResultUpdate();
+		TitleUpdate();
+		
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1345,8 +1394,8 @@ void Game::GameUpdate(void)
 		
 		//ステージにいくとセレクトBGM停止
 		XA_Stop(BGM_SelectStage);
-		//XA_Stop(SE_Select);
-		//XA_Stop(SE_SelectDecide);
+
+
 
 		StageUpdate();
 		break;
@@ -1369,7 +1418,6 @@ Game::~Game()
 	delete uiPressEnter;	//タイトルエンターキー
 
 	delete uiSelectBg;
-	delete uiStageSelect;
 	delete uiSelectCursor;
 	
 	for (int i = 0; i < 3; i++)
@@ -1377,8 +1425,9 @@ Game::~Game()
 		delete uiSelectStage[i];
 		delete uiSelectChapter[i];
 		delete uiClearMark[i];
+		delete stageHint[i];
 	}
-
+	delete stageHintBg;
 
 	delete uiPauseBg;	//PAUSEのボタン
 	delete uiResume;
@@ -1394,7 +1443,7 @@ Game::~Game()
 		delete uiSoundOp_SE[i];	//SE設定
 	}
 
-
+	delete stageBg;
 	delete coconut;
 	delete lamp;
 	delete housePlate;
@@ -1403,10 +1452,17 @@ Game::~Game()
 	delete triangleBlock;	//三角形
 	delete iphone;			//平行四角形
 
+	delete sandwich;	    //直角三角形
+	delete newspaper;	    //四角
+	delete busket;			//台形（四角）
+	delete picnicbasket;   //台形（四角）
+
+
 	delete testEffect;
 
 	delete circle;			//circle
-
+	delete cameraShaker;
+	delete resultGenerator;
 }
 
 Game* Game::Get()
@@ -1487,11 +1543,11 @@ void Game::UiUpdate()
 			//全部初期化
 			selectStage = STAGE1;
 			selectChapter = CHAPTER1;
-			pauseSelect = RESUME;			
+			pauseSelect = RESUME;	
+			
 			PauseSwitch();
 
 			XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
-
 			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
 			break;
 		case Game::SOUND:
@@ -1865,8 +1921,7 @@ void Game::GameDraw()
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 
-		//TitleDraw();
-		ResultDraw();
+		TitleDraw();
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1876,10 +1931,12 @@ void Game::GameDraw()
 
 	case SCENENAME::STAGE:
 		StageDraw();
-		if (Input::Get()->GetKeyPress(DIK_L))
-		{
-			SceneManager::Get()->SetScene(SCENENAME::RESULT);
-		}
+		//今のステージのヒントを描画する
+
+		SetBlendState(GetBlendMultiply());
+		stageHintBg->Draw();
+		SetBlendState(GetBlendAlpha());
+		stageHint[SceneManager::Get()->GetStage()]->Draw();
 		break;
 	case SCENENAME::RESULT:
 		ResultDraw();
@@ -1919,11 +1976,8 @@ void Game::TitleDraw(void)
 void Game::SelectDraw(void)
 {
 	uiSelectBg->Draw();
-	uiStageSelect->Draw();
 	
-
 	uiSelectDraw();
-
 	uiSelectCursor->Draw();
 
 }
@@ -2016,13 +2070,11 @@ void Game::DrawStage1_1()
 	//影
 	SortShadowDraw();
 
-
-
 	//オブジェクト
 	SortObjectDraw();
 
 	//エフェクト
-	testEffect->Draw();
+	//testEffect->Draw();
 
 	//DebugDisplay();
 }
@@ -2055,7 +2107,7 @@ void Game::DrawStage1_3()
 
 void Game::ResultDraw(void)
 {
-	g_result->Draw();
+	resultGenerator->Draw();
 }
 
 void Game::UiDraw(void)
@@ -2182,16 +2234,52 @@ void Game::SoundVolumeDraw(void)
 
 void Game::SortObjectDraw(void)
 {
+	//並び替え
 	std::sort(objectList.begin(), objectList.end(), [](GameObject* obj1, GameObject* obj2) {
-		if (obj1->GetRailPos().verticalPos == obj2->GetRailPos().verticalPos) {
+		if (obj1->m_obj->m_sprite->m_pos.z == obj2->m_obj->m_sprite->m_pos.z) {
 			return obj1->GetRailPos().horizontalPos <  obj2->GetRailPos().horizontalPos;
 		}
-		return obj1->GetRailPos().verticalPos <  obj2->GetRailPos().verticalPos;
+		//return obj1->GetRailPos().verticalPos <  obj2->GetRailPos().verticalPos;
+		return obj1->m_obj->m_sprite->m_pos.z > obj2->m_obj->m_sprite->m_pos.z;
 		});
 
-	for (auto& element : objectList) {
-		element->m_obj->Draw();
+	
+	//修正いる
+	for (auto it = objectList.end() - 1; it != objectList.begin(); it--) {
+		
+		bool isOverlap = false; //
+
+		if (it != objectList.begin()) {
+			for (auto nextIt = it - 1; nextIt != objectList.begin(); nextIt--) {
+				// 被重叠
+				if ((*it)->GetRailPos().horizontalPos == (*nextIt)->GetRailPos().horizontalPos) {
+					isOverlap = true;
+					//break; // 重なったら
+				}
+			}
+		}
+		
+		// 
+		if (isOverlap) {
+			(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 0.7 };
+		}
+		else {
+			(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 1.0 };
+		}
 	}
+	
+	//描画
+	for (auto& element : objectList) {
+
+		if (element->GetActive()) {
+
+			testEffect->Draw();
+		}
+
+		element->Draw();
+	}
+
+
 }
 
 void Game::SortShadowDraw(void)
@@ -2203,8 +2291,9 @@ void Game::SortShadowDraw(void)
 	});
 
 	for (auto& element : objectList) {
-		
+
 		element->m_shadow->Draw();
+
 	}
 
 }
@@ -2232,18 +2321,6 @@ void Game::FadeUpdate()
 	}
 }
 
-//if (!SceneManager::Get()->GetScene())
-//{
-//	SceneManager::Get()->SetNextScene(SceneManager::Get()->GetNextScene());
-//	fadeState = FADE_OUT;
-//	fade->SetActive(true);
-//}
-//else
-//{
-//	SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
-//	fadeState = FADE_IN;
-//
-//}
 
 void Game::DebugDisplay(void)
 {

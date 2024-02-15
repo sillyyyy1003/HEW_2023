@@ -14,17 +14,19 @@ enum SCENENAME {
 };
 
 enum STAGEINFO {
-	STAGE1_1,
-	STAGE1_2,
-	STAGE1_3,
+	STAGE1_1 = 0,
+	STAGE1_2 = 1,
+	STAGE1_3 = 2,
 
-	STAGE2_1,
-	STAGE2_2,
-	STAGE2_3,
+	STAGE2_1 = 3,
+	STAGE2_2 = 4,
+	STAGE2_3 = 5,
 
-	STAGE3_1,
-	STAGE3_2,
-	STAGE3_3,
+	STAGE3_1 = 6,
+	STAGE3_2 = 7,
+	STAGE3_3 = 8,
+
+	STAGE_IDLE = 99,
 };
 
 enum RESULTINFO {
@@ -67,9 +69,13 @@ public:
 
 	void SetStage(STAGEINFO _stage) { m_stage = _stage; };
 	STAGEINFO GetStage() { return m_stage; };
+	//次のステージを取得
+	STAGEINFO GetNextStage();
 
 	void SetResult(RESULTINFO _result) { m_result = _result; };
 	RESULTINFO GetResult() { return m_result; };
+
+	
 
 };
 

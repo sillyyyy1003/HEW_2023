@@ -5,7 +5,7 @@ struct VS_IN
 {
     float4 pos : POSITION0; // 位置座標が入る
     float2 tex : TEX; // UV座標が入る
-    float4 normal : NORMAL; //法線ベクトル
+   //float4 normal : NORMAL; //法線ベクトル
 };
 
 // 頂点のデータを表す構造体（送信用） 
@@ -13,7 +13,7 @@ struct VS_OUT
 {
     float4 pos : SV_POSITION;
     float2 tex : TEXCOORD;
-    float4 normal : NORMAL; //法線ベクトル
+    //float4 normal : NORMAL; //法線ベクトル
 };
 
 // グローバル変数の宣言
@@ -54,7 +54,7 @@ VS_OUT vs_main (VS_IN input)
     
     output.tex = uv.xy; // 掛け算の結果を送信用変数にセット
     
-    output.normal = mul(input.normal, matrixRotate);
+    //output.normal = mul(input.normal, matrixRotate);
     
     return output;
 }

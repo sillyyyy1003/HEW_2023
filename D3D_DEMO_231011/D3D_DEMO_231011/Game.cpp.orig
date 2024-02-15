@@ -429,7 +429,7 @@ void Game::InitStage1_2(void)
 
 void Game::InitStage1_3(void)
 {
-<<<<<<< HEAD
+<<<<<<< .merge_file_1FrTcu
 =======
 	//位置設定
 	SetBackGround(g_Assets->stage3Bg);
@@ -492,7 +492,7 @@ void Game::InitStage1_3(void)
 	//自動移動や自動回転の設定
 
 	g_result->SetStarNum({ 3,5,8,11 });
->>>>>>> feature/Sakai04Result
+>>>>>>> .merge_file_p97HWa
 }
 
 void Game::InitStage2_1(void)
@@ -1249,7 +1249,7 @@ void Game::UpdateStage3_3(void)
 
 void Game::ResultUpdate(void)
 {
-<<<<<<< HEAD
+<<<<<<< .merge_file_1FrTcu
 	switch (SceneManager::Get()->GetStage()) {
 
 	case STAGE1_1:
@@ -1319,7 +1319,7 @@ void Game::UpdateResult1_2(void)
 {
 =======
 	g_result->Update();
->>>>>>> feature/Sakai04Result
+>>>>>>> .merge_file_p97HWa
 }
 
 void Game::GameUpdate(void)
@@ -2055,6 +2055,7 @@ void Game::DrawStage1_3()
 
 void Game::ResultDraw(void)
 {
+	g_result->Draw();
 }
 
 void Game::UiDraw(void)
@@ -2334,7 +2335,6 @@ void Game::DebugDisplay(void)
 
 void Game::TestMove(Effect* _target)
 {
-<<<<<<< HEAD
 	//if (Input::Get()->GetKeyPress(DIK_E)) {
 	//	_target->m_obj->m_sprite->m_pos.z += MOVE;
 	//}
@@ -2356,21 +2356,6 @@ void Game::TestMove(Effect* _target)
 	//if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 	//	_target->m_obj->m_sprite->m_pos = { 0,0,-2 };
 	//}
-=======
-	g_result->Draw();
-}
-
-void Game::UiDraw(void)
-{
-
-	if (!isSound)
-	{
-		uiPauseBg->Draw();
-		uiResume->Draw();
-		uiRestart->Draw();
-		uiSelect->Draw();
-		uiSound->Draw();
->>>>>>> feature/Sakai04Result
 
 	if (Input::Get()->GetKeyPress(DIK_1)) {
 		_target->m_rotation.x += 1.0f;

@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Direct3D\Shader\PixelShader.hlsl">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </FxCompile>
-    <FxCompile Include="Direct3D\Shader\VertexShader.hlsl">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Animation.cpp">
@@ -40,9 +32,6 @@
     </ClCompile>
     <ClCompile Include="DInput.cpp">
       <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Direct3D\Direct3D.cpp">
-      <Filter>DirectFile</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Input</Filter>
@@ -106,6 +95,9 @@
     <ClCompile Include="CameraShaker.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Direct3D.cpp">
+      <Filter>DirectFile\ShaderFile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WICTextureLoader.h" />
@@ -139,9 +131,6 @@
     <ClInclude Include="DInput.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="Direct3D\Direct3D.h">
-      <Filter>DirectFile</Filter>
-    </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -159,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="ObjectAnimation.h">
       <Filter>Animation\ObjectAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct3D\Shader\PixelShader.h">
-      <Filter>DirectFile\ShaderFile</Filter>
     </ClInclude>
     <ClInclude Include="PolygonCollider.h">
       <Filter>Collider\PolygonCollider</Filter>
@@ -193,9 +179,6 @@
     <ClInclude Include="Stage.h">
       <Filter>SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="Direct3D\Shader\VertexShader.h">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </ClInclude>
     <ClInclude Include="StaticObject.h">
       <Filter>StaticObject</Filter>
     </ClInclude>
@@ -209,6 +192,15 @@
     </ClInclude>
     <ClInclude Include="CameraShaker.h">
       <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct3D.h">
+      <Filter>DirectFile\ShaderFile</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>DirectFile\ShaderFile</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>DirectFile\ShaderFile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,5 +276,13 @@
     <Filter Include="Result">
       <UniqueIdentifier>{ca0bed48-2f4a-45e2-8471-e7a602e994e1}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>DirectFile\ShaderFile</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>DirectFile\ShaderFile</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

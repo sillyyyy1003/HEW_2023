@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Direct3D/Direct3D.h"
+#include "Direct3D.h"
 #include "RailManager.h"
 #include "Collider.h"
 #include <string>

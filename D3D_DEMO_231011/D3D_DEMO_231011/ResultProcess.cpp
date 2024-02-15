@@ -3,7 +3,6 @@
 #include "Assets.h"
 
 extern Assets* g_Assets;
-extern ResultProcess* g_resultprocess = new ResultProcess;
 
 ResultProcess::ResultProcess()
 {
@@ -15,7 +14,6 @@ ResultProcess::~ResultProcess()
 	for (auto& stepnum : StepNum) {
 		delete stepnum;
 	}
-	delete[] StepNum;
 }
 
 void ResultProcess::Init(float posX, float posY)

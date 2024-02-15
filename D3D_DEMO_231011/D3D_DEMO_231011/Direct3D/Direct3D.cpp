@@ -1,6 +1,6 @@
 ﻿#include "Direct3D.h"
-#include "Shader/PixelShader.h"
-#include "Shader/VertexShader.h"
+#include "PixelShader.h"
+#include "VertexShader.h"
 #include <atltypes.h>		// CRectを使うためのヘッダーファイル
 #include "../Sprite.h"
 
@@ -25,6 +25,10 @@ ID3D11DeviceContext* GetD3D_Context(void) { return g_pD3D->Context; }
 ID3D11BlendState* GetBlendAlpha(void) { return g_pD3D->BlendAlpha; }
 
 ID3D11BlendState* GetBlendAdd(void) { return g_pD3D->BlendAdd; }
+
+void SetBlendState(ID3D11BlendState* _blendState)
+{
+}
 
 
 

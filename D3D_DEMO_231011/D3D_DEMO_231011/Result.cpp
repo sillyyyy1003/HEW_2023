@@ -4,13 +4,15 @@
 #include "StaticObject.h"
 #include "DInput.h"
 #include "SceneManager.h"
+#include "ResultProcess.h"
+#include "Game.h"
 
 extern Assets* g_Assets;
-extern Result* g_result = new Result();
-extern ResultProcess* g_resultprocess;
 
 Result::Result()
 {
+	processor = new ResultProcess();
+
 	//30以下まで星５
 	//31以上40まで星４
 	//41以上50まで星３
@@ -21,6 +23,7 @@ Result::Result()
 
 Result::~Result()
 {
+	delete processor;
 	delete uiResult;
 	delete resultBg;
 	delete Button_again;
@@ -33,14 +36,13 @@ Result::~Result()
 		delete star[i];
 		delete starShadow[i];
 	}
-	delete[] star;
-	delete[] starShadow;
+
 }
 
 void Result::Init()
 {
 	//StepNumの初期化
-	g_resultprocess->Init(2.0f, 0.0f);
+	processor->Init(2.0f, 0.0f);
 
 	uiResult = new CanvasUI();
 	resultBg = new StaticObject();
@@ -103,7 +105,7 @@ void Result::Update()
 {
 	//スターの処理
 	//引数１：ステージ終了時のステップ数　引数２：ステップ数によって星の数を変更するための制限
-	StarEvent(ResultScore(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep(), Starnum));
+	StarEvent(ResultScore(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep(), Starnum));
 	//キーの処理
 	DoResultKeyEvent();
 	//ボタンの処理
@@ -146,7 +148,7 @@ void Result::Draw()
 	}
 
 	//ステージ終了時のステップ数を表示
-	g_resultprocess->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+	processor->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
 }
 
 void Result::DoResultKeyEvent()
@@ -182,9 +184,10 @@ void Result::ButtonEvent()
 		//スペースを押したときにもう一度同じステージに遷移する
 		if (Input::Get()->GetKeyPress(DIK_SPACE))
 		{
-			SceneManager::Get()->SetStage(SceneManager::Get()->GetStage());//修正--------------------------
-			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
-			buttonnum = 0;
+			SceneManager::Get()->SetScene(SCENENAME::STAGE);
+			//同じステージだから、直接初期化をもう一回やったらいい
+			Game::Get()->InitStage();
+			buttonnum = NEXT;
 		}
 		break;
 	case RETURN://タイトルへ
@@ -195,8 +198,8 @@ void Result::ButtonEvent()
 		//スペースを押したときにタイトルに遷移する
 		if (Input::Get()->GetKeyPress(DIK_SPACE))
 		{
-			SceneManager::Get()->SetScene(SCENENAME::TITLE);
-			buttonnum = 0;
+			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
+			buttonnum = NEXT;
 		}
 		break;
 	case NEXT://次のステージへ
@@ -207,9 +210,14 @@ void Result::ButtonEvent()
 		//スペースを押したときに次のステージに遷移する
 		if (Input::Get()->GetKeyPress(DIK_SPACE))
 		{
-			SceneManager::Get()->SetStage(SceneManager::Get()->GetStage());//修正-----------------------------
-			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
-			buttonnum = 0;
+			//ステージに戻る
+			SceneManager::Get()->SetScene(SCENENAME::STAGE);
+			//ステージを次のステージにする
+			SceneManager::Get()->SetStage(SceneManager::Get()->GetNextStage());
+			//初期化を行う
+			Game::Get()->InitStage();
+			
+			buttonnum = NEXT;
 		}
 		break;
 	default:

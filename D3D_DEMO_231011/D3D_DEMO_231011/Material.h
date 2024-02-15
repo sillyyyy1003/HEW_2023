@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "Direct3D/Direct3D.h"
+#include "Direct3D.h"
+
 
 struct Collide {
 
@@ -28,7 +29,6 @@ protected:
 	//モデル情報
 	MODELDATA m_modelData = {};
 
-	DirectX::XMFLOAT4 materialDiffuse = { 1,1,1,1 };
 public:
 
 	//----------------------------//

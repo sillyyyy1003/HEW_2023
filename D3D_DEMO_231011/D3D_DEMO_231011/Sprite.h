@@ -114,7 +114,7 @@ public:
 	/// <summary>
 	/// 描画を行う関数
 	/// </summary>
-	virtual void Draw(void);
+	virtual void Draw(void);	
 
 	/// <summary>
 	/// 後片付け
