@@ -50,6 +50,7 @@ private:
 
 	SCENENAME m_scene;
 	SCENENAME m_nextScene;
+	SCENENAME m_newScene;
 
 
 	STAGEINFO m_stage;
@@ -65,11 +66,15 @@ public:
 	void SetNextScene(SCENENAME _next) { m_nextScene = _next; };
 	SCENENAME GetNextScene() { return m_nextScene; };
 
+	void SetNewScene(SCENENAME _new) { m_newScene = _new; };
+	SCENENAME GetNewScene() { return m_newScene; };
+
 	void SetStage(STAGEINFO _stage) { m_stage = _stage; };
 	STAGEINFO GetStage() { return m_stage; };
 
 	void SetResult(RESULTINFO _result) { m_result = _result; };
 	RESULTINFO GetResult() { return m_result; };
+
 
 };
 
