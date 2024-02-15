@@ -66,7 +66,7 @@ private:
 	//入力の時間計算
 	int m_countTime = 0;
 
-	//自動移動しているかどうか
+	//自動移動しているObjectかどうか
 	bool isAutoMove = false;
 
 	//今影の大きさ
@@ -149,12 +149,18 @@ public:
 	/// <param name="moveSpeed">移動のスビート</param>
 	/// <param name="posX">中心点の位置を設定</param>
 	/// <param name="interval">ポイントとポイントの間隔</param>
-	void GenerateShadowPos(float moveSpeed, float center, float interval);
-	void GenerateShadowPos(void);
+	void GenerateShadowPos(float center, float interval);
+	//void GenerateShadowPos(void);
 
 	//影の大きさの変更
 	void GenerateShadowSize(float speed);
 
+	/// <summary>
+	/// 影の更新
+	/// </summary>
+	/// <param name="center">中心点</param>
+	/// <param name="interval">間隔</param>
+	void ShadowUpdate(float center, float interval);
 	
 
 	/// <summary>

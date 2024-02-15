@@ -135,7 +135,7 @@ void GameObject::InitCollision(void)
 {
 }
 
-void GameObject::GenerateShadowPos(float moveSpeed, float center,float interval)
+void GameObject::GenerateShadowPos(float center,float interval)
 {
 	float pos[5] = {
 		center - 2 * interval,
@@ -179,12 +179,106 @@ void GameObject::GenerateShadowPos(float moveSpeed, float center,float interval)
 		break;
 	}
 
-	//m_shadow->m_sprite->m_pos.x = m_obj->m_sprite->m_pos.x;
 }
 
 
 void GameObject::GenerateShadowSize(float speed)
 {
+	if (isActive) {
+		switch (m_moveDir)
+		{
+		case UP:
+			m_shadow->m_sprite->m_scale.x -= speed;
+			m_shadow->m_sprite->m_scale.y -= speed;
+
+			break;
+		case UPRIGHT:
+			m_shadow->m_sprite->m_scale.x -= speed;
+			m_shadow->m_sprite->m_scale.y -= speed;
+
+			break;
+		case RIGHT:
+
+			break;
+		case DOWNRIGHT:
+			m_shadow->m_sprite->m_scale.x += speed;
+			m_shadow->m_sprite->m_scale.y += speed;
+
+			break;
+		case DOWN:
+			m_shadow->m_sprite->m_scale.x += speed;
+			m_shadow->m_sprite->m_scale.y += speed;
+			break;
+		case DOWNLEFT:
+			m_shadow->m_sprite->m_scale.x += speed;
+			m_shadow->m_sprite->m_scale.y += speed;
+
+			break;
+		case LEFT:
+
+			break;
+		case UPLEFT:
+			m_shadow->m_sprite->m_scale.x -= speed;
+			m_shadow->m_sprite->m_scale.y -= speed;
+
+			break;
+		case STILL:
+
+			switch (m_railPos.verticalPos) {
+
+			case 0:
+				m_shadow->m_size = ShadowObject::SIZE::SMALL;//当たり判定用
+				m_shadow->m_sprite->m_scale.x = 1.0f;
+				m_shadow->m_sprite->m_scale.y = 1.0f;
+				break;
+
+			case 1:
+				m_shadow->m_size = ShadowObject::SIZE::MEDIUM;//当たり判定用
+				m_shadow->m_sprite->m_scale.x = 1.5f;
+				m_shadow->m_sprite->m_scale.y = 1.5f;
+				break;
+
+			case 2:
+				m_shadow->m_size = ShadowObject::SIZE::LARGE;//当たり判定用
+				m_shadow->m_sprite->m_scale.x = 2.0f;
+				m_shadow->m_sprite->m_scale.y = 2.0f;
+				break;
+
+			}
+
+			break;
+		default:
+			break;
+		}
+
+
+
+	}
+		
+
+
+
+}
+
+void GameObject::ShadowUpdate(float center, float interval)
+{
+	//位置の変更
+	GenerateShadowPos(center, interval);
+
+	//大きさの変更
+	GenerateShadowSize(0.01); //0.5/50frame=0.01
+
+	//本体の変更
+	m_shadow->Update();
+
+	//当たり判定の変更
+	if (m_shadowCollider != nullptr) {
+		UpdateShadowColliderData();
+	}
+
+
+
+
 }
 
 
@@ -199,13 +293,22 @@ void GameObject::SetRailPos(int horPos, int verPos)
 	{
 	case 0://BACK
 		m_obj->m_sprite->m_scale = { 0.8f,0.8f,1.0f };
-
+		m_shadow->m_sprite->m_scale.x = 1.0f;
+		m_shadow->m_sprite->m_scale.y = 1.0f;
+		m_shadow->m_size = ShadowObject::SMALL;
+	
 		break;
 	case 1://MIDDLE
 		m_obj->m_sprite->m_scale = { 0.9f,0.9f,1.0f };
+		m_shadow->m_sprite->m_scale.x = 1.5f;
+		m_shadow->m_sprite->m_scale.y = 1.5f;
+		m_shadow->m_size = ShadowObject::MEDIUM;
 		break;
 	case 2:
 		m_obj->m_sprite->m_scale = { 1.0f,1.0f,1.0f };
+		m_shadow->m_sprite->m_scale.x = 2.0f;
+		m_shadow->m_sprite->m_scale.y = 2.0f;
+		m_shadow->m_size = ShadowObject::LARGE;
 		break;
 	default:
 		break;
@@ -326,31 +429,14 @@ void GameObject::Update()
 	//オブジェクト情報更新
 	m_obj->Update();
 	
-	//位置を更新
-	//GenerateShadowPos(0.08f, 0.1);
-	//GenerateShadowSize();
 
-	//大きさを更新
-	switch (m_railPos.verticalPos)
-	{
-	case 0:	//back
-		m_shadow->m_size = ShadowObject::SIZE::SMALL;
-		break;
-	case 1:
-		m_shadow->m_size = ShadowObject::SIZE::MEDIUM;
-		break;
-	case 2:
-		m_shadow->m_size = ShadowObject::SIZE::LARGE;
-		break;
-	}
+	////影の情報更新
+	//m_shadow->Update();
 
-	//影の情報更新
-	m_shadow->Update();
-
-	//Collider情報更新
-	if (m_shadowCollider) {
-		UpdateShadowColliderData();
-	}
+	////Collider情報更新
+	//if (m_shadowCollider) {
+	//	UpdateShadowColliderData();
+	//}
 
 
 	
@@ -439,6 +525,7 @@ void GameObject::UpdateShadowColliderData(void)
 {
 	//OVERLOADで、コライダーのデータを更新する
 	DirectX::XMFLOAT3 center = m_shadow->m_sprite->m_pos;
+	center.z = 0.0f;
 	DirectX::XMFLOAT3 rotation = m_shadow->m_sprite->m_rotation;
 	DirectX::XMFLOAT3 extents = m_shadow->Object::GetExtents();
 
@@ -712,7 +799,8 @@ void GameObject::ObjectMove()
 		m_moveCount++;
 		moveSpeed.x = 0.09f;
 		moveSpeed.z = 0.05f;
-		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
+		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) 
+		{
 			m_obj->m_sprite->m_pos.z += moveSpeed.z;
 			//大きさを調整する
 			m_obj->m_sprite->m_scale.x -= 0.002;
@@ -770,9 +858,6 @@ void GameObject::MoveObject(Object* _target)
 
 void GameObject::Draw(void)
 {
-
-	//影を描画する
-	m_shadow->Draw();
 
 	//オブジェクトを描画する
 	m_obj->Draw();

@@ -37,7 +37,7 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
     //stage1_2
-    stageBg1_2 = LoadTexture("assets/stage1/1_2_Bg.png");
+    stageBg1_2 = LoadTexture("assets/stage1/1-2Bg.png");
 
     lamp_1_2 =  LoadTexture("assets/stage1/1_2_lamp.png");
     lamp_1_2Shadow = LoadTexture("assets/stage1/1_2_lamp_shadow.png");

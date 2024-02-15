@@ -312,12 +312,19 @@ public:
 
 	void TestMove(Effect* _target);
 	void TestMove(CanvasUI* _target);
+	void TestMove(void);
 
 	//背景を入れ替わる
 	void SetBackGround(ID3D11ShaderResourceView* tex);
 
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
+
+	void ComicUpdate();
+	void Result1_1Comic(void);
+
+	void DrawComic1_1(void);
+	void DrawResult1_1(void);
 
 };
 

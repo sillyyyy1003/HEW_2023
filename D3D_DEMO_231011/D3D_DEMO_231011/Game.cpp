@@ -130,12 +130,12 @@ void Game::Init()
 	housePlate->CreateObject(g_Assets->housePlate, 110, 216, 1, 1);
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
 	//stage1-2
-	lamp1_2->CreateObject(g_Assets->lamp_1_2, 176, 178, 1, 1);
-	lamp1_2->CreateShadow(g_Assets->lamp_1_2Shadow, 88, 88, 1, 1, COLLISION_TYPE::SQUARE);
-	iphone->CreateObject(g_Assets->iphone, 124, 94, 1, 1);
-	iphone->CreateShadow(g_Assets->iphoneShadow, 62, 45, 1, 1, COLLISION_TYPE::SQUARE);
-	triangleBlock->CreateObject(g_Assets->triangleBlock, 252, 232, 1, 1);
-	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 254, 229, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
+	lamp1_2->CreateObject(g_Assets->lamp_1_2, 264, 267, 1, 1);
+	lamp1_2->CreateShadow(g_Assets->lamp_1_2Shadow, 217.5, 217.5, 1, 1, COLLISION_TYPE::SQUARE);
+	iphone->CreateObject(g_Assets->iphone, 186, 141, 1, 1);
+	iphone->CreateShadow(g_Assets->iphoneShadow, 186, 141, 1, 1, COLLISION_TYPE::SQUARE);
+	triangleBlock->CreateObject(g_Assets->triangleBlock, 378, 348, 1, 1);
+	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
 
 
 
@@ -178,7 +178,7 @@ void Game::Init()
 	//Select画面
 	uiSelectBg->m_pos = { 0.0f,0.0f,0.9f };
 	uiStageSelect->m_pos = { -3.5f,3.0f,0.8f };
-	uiSelectCursor->m_pos = { 4.0f,3.6f,0.8f };//Chapterの横に出るように
+	uiSelectCursor->m_pos = { 5.2f,3.6f,0.8f };//Chapterの横に出るように
 
 
 	for (int i = 0; i < 3; i++)
@@ -374,6 +374,7 @@ void Game::InitStage1_2(void)
 	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
 	//X:LEFT2:-9 LEFT1:-4.5 MIDDLE:0.0 RIGHT1:4.5 RIGHT2:9
 	//本体 
+	//lamp1_2->m_obj->m_sprite->m_pos = { 0.0f,0.0f,-10.0f };
 	lamp1_2->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-10.0f };
 	iphone->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-10.0f };
 	triangleBlock->m_obj->m_sprite->m_pos = {0.0f,-4.0f,-5.0f };
@@ -835,15 +836,15 @@ void Game::UpdateCursor(void)
 		{
 		case Game::CHAPTER1:
 
-			uiSelectCursor->m_pos = { 0.8f, 3.6f, 0.7f };
+			uiSelectCursor->m_pos = { 1.3f, 3.6f, 0.7f };
 			break;
 		case Game::CHAPTER2:
 
-			uiSelectCursor->m_pos = { 0.8f, 1.3f, 0.7f };
+			uiSelectCursor->m_pos = { 1.3f, 1.3f, 0.7f };
 
 			break;
 		case Game::CHAPTER3:
-			uiSelectCursor->m_pos = { 0.8f,-1.2f,0.7f };
+			uiSelectCursor->m_pos = { 1.3f,-1.2f,0.7f };
 			break;
 		}
 	}
@@ -1030,17 +1031,31 @@ void Game::StageUpdate(void)
 
 void Game::UpdateStage1_1(void)
 {
-	
+
 	//移動させる目標を設定する
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		XA_Play(SE_Select);//セレクトSE再生
+		
 		for (auto it = objectList.begin(); it != objectList.end(); it++) {
-			if ((*it)->GetActive()) 
+			
+			if ((*it)->GetActive())
 			{
-				(*it)->SetActive(false);
+				//次のオブジェクトのポインターを取得
 				auto nextIt = std::next(it) != objectList.end() ? std::next(it) : objectList.begin();
-				(*nextIt)->SetActive(true);
-				break;
+
+				//
+				if ((*nextIt)->GetAutoMove()) {
+					nextIt = objectList.begin();
+				}
+
+				//静止の時だけswitchできる
+				if ((*it)->GetStill())
+				{
+					(*it)->SetActive(false);
+					(*nextIt)->SetActive(true);
+					break;
+				}
+	
 			}
 		}
 	}
@@ -1048,7 +1063,7 @@ void Game::UpdateStage1_1(void)
 	//背景
 	stageBg->Update();
 
-	
+
 	for (auto& element : objectList) {
 		if (!element->GetStill()) {
 			isPlayMoveSE = true;
@@ -1057,21 +1072,35 @@ void Game::UpdateStage1_1(void)
 		}
 	}
 
+	if (isPlayMoveSE) {
 
+		XA_Play(SE_Move);
+
+	}
+
+	//本体の更新
 	for (auto& element : objectList) {
 		element->Update();
+	}
+
+	//影の更新
+	for (auto& element : objectList) {
+
+		element->ShadowUpdate(0.0f, 4.5f);
+
 	}
 
 
 
 	//クリア判定
  	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
-		ColliderManager::Get()->ClearCollision({OVERLAP,COL_UP},"coconut","housePlate",ShadowObject::LARGE)) {
-		//isPause = true;
+		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {
 		
 		//クリア
 		int stageNum = SceneManager::Get()->GetActiveStage();
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+		SceneManager::Get()->m_stageHolder[stageNum]->SetCompleted(true);
+		SceneManager::Get()->SetScene(RESULT);
 	}
 
 	//エフェクト
@@ -1097,10 +1126,17 @@ void Game::UpdateStage1_2(void)
 	for (auto& element : objectList) {
 		element->Update();
 	}
+	
+	TestMove();
+
+	//
+	lamp1_2->ShadowUpdate(0.35f, 4);
+	iphone->ShadowUpdate(-1.4f, 4);
+	triangleBlock->ShadowUpdate(0, 4);
 
 
-	//クリア判定
- //	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
+	//クリア判定     
+	//if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
 	//	ColliderManager::Get()->ClearCollision({OVERLAP,COL_UP},"coconut","housePlate",ShadowObject::LARGE)) {
 	//	//isPause = true;
 	//	
@@ -1143,6 +1179,73 @@ void Game::UpdateStage3_3(void)
 }
 
 void Game::ResultUpdate(void)
+{
+	switch (SceneManager::Get()->GetStage()) {
+
+	case STAGE1_1:
+
+		UpdateResult1_1();
+
+		break;
+
+	case STAGE1_2:
+
+		UpdateResult1_2();
+
+		break;
+
+	case STAGE1_3:
+
+
+		break;
+
+	case STAGE2_1:
+
+
+		break;
+
+	case STAGE2_2:
+
+
+
+		break;
+
+	case STAGE2_3:
+
+
+
+		break;
+
+	case STAGE3_1:
+
+
+
+		break;
+	case STAGE3_2:
+
+
+
+		break;
+
+	case STAGE3_3:
+
+
+
+		break;
+
+	}
+}
+
+void Game::UpdateResult1_1(void)
+{
+	//ComicUpdate();
+
+
+	//ResultUpdate();
+
+}
+
+void Game::UpdateResult1_2(void)
 {
 }
 
@@ -2202,6 +2305,33 @@ void Game::TestMove(CanvasUI* _target)
 	}
 }
 
+void Game::TestMove(void)
+{
+	if (Input::Get()->GetKeyPress(DIK_W)) {
+
+		for (auto& element : objectList) {
+			if (element->GetActive()) {
+				element->m_shadow->m_sprite->m_pos.y += 0.1f;
+				break;
+			}
+		}
+	
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_S)) {
+
+		for (auto& element : objectList) {
+			if (element->GetActive()) {
+				element->m_shadow->m_sprite->m_pos.y -= 0.1f;
+				break;
+			}
+		}
+
+	}
+
+
+}
+
 void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 
 	//背景設定->関数化処理
@@ -2215,4 +2345,20 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 	stageBg->m_sprite->m_pos = { 0.0f,-y,1.0f };
 	stageBg->m_sprite->SetTexture(tex);
 
+}
+
+void Game::ComicUpdate()
+{
+}
+
+void Game::Result1_1Comic(void)
+{
+}
+
+void Game::DrawComic1_1(void)
+{
+}
+
+void Game::DrawResult1_1(void)
+{
 }
