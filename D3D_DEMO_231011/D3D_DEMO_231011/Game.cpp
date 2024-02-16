@@ -1109,8 +1109,6 @@ void Game::UpdateStage1_1(void)
 
 	}
 
-
-
 	//クリア判定
  	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
 		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {
@@ -1118,8 +1116,8 @@ void Game::UpdateStage1_1(void)
 		//クリア
 		int stageNum = SceneManager::Get()->GetStage();
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
-		//SceneManager::Get()->m_stageHolder[stageNum]->SetCompleted(true);
-		//SceneManager::Get()->SetScene(RESULT);
+		SceneManager::Get()->SetScene(RESULT);
+		isResultAnime = true;
 	}
 
 	//エフェクト
@@ -1201,8 +1199,13 @@ void Game::UpdateStage3_3(void)
 
 void Game::ResultUpdate(void)
 {
-	
-	resultGenerator->Update();
+	if (isResultAnime) {
+		resultAnimator->Update();
+	}
+	else {
+		resultGenerator->Update();
+	}
+
 }
 
 
@@ -1435,12 +1438,12 @@ void Game::UiUpdate()
 				break;
 			}
 		}
+	}
 
 		//	ESCAPE押して　戻る
 		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
 		{
 			XA_Play(SE_Select);//セレクトSE再生
-
 
 			if (isSound) {
 				SoundSwitch();
@@ -1449,7 +1452,7 @@ void Game::UiUpdate()
 				PauseSwitch();
 			}
 		}
-	}
+	
 
 		//今どのボタンが選択されたの状態変更(改良必要)
 		switch (pauseSelect)
@@ -2152,7 +2155,7 @@ void Game::StageDraw(void)
 		break;
 
 	}
-	if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint()) {
+	if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint()&&!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear()) {
 	
 		uiStepTitle->Draw();
 		uiStepNum->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep());
@@ -2166,8 +2169,6 @@ void Game::StageDraw(void)
 
 void Game::DrawStage1_1()
 {
-	if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear())
-	{
 		stageBg->Draw();
 
 
@@ -2179,11 +2180,6 @@ void Game::DrawStage1_1()
 		//オブジェクト
 		SortObjectDraw();
 
-	}
-	
-
-	//リザルトアニメーション待機させる
-	resultAnimator->Draw();	
 
 }
 
@@ -2203,13 +2199,22 @@ void Game::DrawStage1_2()
 	//エフェクト
 	testEffect->Draw();
 
-	//DebugDisplay();
 }
 
 
 void Game::ResultDraw(void)
 {
-	resultGenerator->Draw();
+	if (isResultAnime) {
+
+		//リザルトアニメーション待機させる
+		resultAnimator->Draw();
+
+	}
+	else {
+
+		resultGenerator->Draw();
+	}
+
 }
 
 void Game::UiDraw(void)
@@ -2510,8 +2515,6 @@ void Game::StageUpdate(void)
 	else {
 		if (!isPause) {
 
-
-
 			//入力処理
 			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
 
@@ -2698,20 +2701,4 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 	stageBg->m_sprite->m_pos = { 0.0f,-y,1.0f };
 	stageBg->m_sprite->SetTexture(tex);
 
-}
-
-void Game::ComicUpdate()
-{
-}
-
-void Game::Result1_1Comic(void)
-{
-}
-
-void Game::DrawComic1_1(void)
-{
-}
-
-void Game::DrawResult1_1(void)
-{
 }

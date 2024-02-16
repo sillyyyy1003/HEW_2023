@@ -3,13 +3,14 @@
 #include "Assets.h"
 #include "DInput.h"
 #include "SceneManager.h"
-
+#include "Game.h"
 extern Assets* g_Assets;
-extern ResultAnimation* g_ResultAnimation = new ResultAnimation();
 
 ResultAnimation::ResultAnimation()
 {
-
+	clear1_1_1 = new CanvasUI();
+	clear1_1_2 = new CanvasUI();
+	clear1_1_3 = new CanvasUI();
 }
 
 ResultAnimation::~ResultAnimation()
@@ -21,10 +22,6 @@ ResultAnimation::~ResultAnimation()
 
 void ResultAnimation::Init()
 {
-	clear1_1_1 = new CanvasUI();
-	clear1_1_2 = new CanvasUI();
-	clear1_1_3 = new CanvasUI();
-
 	//テクスチャ読み込み・モデル作成
 	clear1_1_1->CreateModel(g_Assets->clear1_1_1, 485, 319, 1, 1);
 	clear1_1_2->CreateModel(g_Assets->clear1_1_2, 483, 316, 1, 1);
@@ -43,8 +40,7 @@ void ResultAnimation::Init()
 
 void ResultAnimation::Update()
 {
-	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear())
-	{
+
 		// 画像の移動が完了したか、一度クリアしたステージかで判定
 		if (Move() || SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetCompleted())
 		{
@@ -58,7 +54,8 @@ void ResultAnimation::Update()
 
 				// ステージを一度クリアした判定にする
 				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetCompleted(true);
-				SceneManager::Get()->SetScene(RESULT);
+				//演出終了後次の段階に入る
+				Game::Get()->SetResultAnime(false);
 
 			}
 		}
@@ -66,17 +63,15 @@ void ResultAnimation::Update()
 		clear1_1_1->Update();
 		clear1_1_2->Update();
 		clear1_1_3->Update();
-	}
+	
 }
 
 void ResultAnimation::Draw()
 {
-	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetClear())
-	{
-		clear1_1_1->Draw();
-		clear1_1_2->Draw();
-		clear1_1_3->Draw();
-	}
+	clear1_1_1->Draw();
+	clear1_1_2->Draw();
+	clear1_1_3->Draw();
+
 }
 
 bool ResultAnimation::Move()

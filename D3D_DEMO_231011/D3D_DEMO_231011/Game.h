@@ -156,10 +156,15 @@ private:
 	bool isPause = false;
 	//select
 	bool isSelectChapter = false;
-
+	//操作できるかどうか
 	bool isControl = true;
-
+	//SE出すかどうか？
 	bool isPlayMoveSE = false;
+	//ヒントを出すかどうか？
+	bool isHint = false;
+
+	//リザルト演出
+	bool isResultAnime = false;
 
 
 	//初期設定
@@ -218,7 +223,6 @@ public:
 	//ゲーム本体
 	void GameUpdate(void);
 
-
 	//Title Update
 	void TitleUpdate(void);
 
@@ -226,9 +230,6 @@ public:
 	void SelectUpdate(void);
 	void UpdateSelectAnimation(void);
 	void UpdateCursor(void);
-
-	//void SelectChapter(void);
-	//void SelectStageNone(void);
 
 	void SelectChapter1(void);
 	void SelectChapter2(void);
@@ -248,17 +249,6 @@ public:
 
 	//result Update
 	void ResultUpdate(void);
-	void UpdateResult1_1(void);
-	void UpdateResult1_2(void);
-	void UpdateResult1_3(void);
-	void UpdateResult2_1(void);
-	void UpdateResult2_2(void);
-	void UpdateResult2_3(void);
-	void UpdateResult3_1(void);
-	void UpdateResult3_2(void);
-	void UpdateResult3_3(void);
-
-
 
 	//ui Update
 	void UiUpdate();
@@ -312,7 +302,6 @@ public:
 	//影の位置によって並び替え描画する
 	void SortShadowDraw(void);
 
-
 	//デバッグ用
 	void DebugDisplay(void);
 
@@ -326,13 +315,11 @@ public:
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
 
+	bool GetResultAnime() { return this->isResultAnime; };
+	void SetResultAnime(bool isAnime) { this->isResultAnime = isAnime; };
+
 	void TestFade(void);
 
-	void ComicUpdate();
-	void Result1_1Comic(void);
-
-	void DrawComic1_1(void);
-	void DrawResult1_1(void);
 
 };
 

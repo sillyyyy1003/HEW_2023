@@ -43,6 +43,7 @@ void Result::Init()
 {
 	//StepNumの初期化
 	processor->Init(2.0f, 0.0f);
+	processor->SetSize(1.0);
 
 	uiResult = new CanvasUI();
 	resultBg = new StaticObject();
@@ -148,25 +149,26 @@ void Result::Draw()
 	}
 
 	//ステージ終了時のステップ数を表示
-	processor->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+	//processor->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep());
+	processor->PrintDebugLog(3);
 }
 
 void Result::DoResultKeyEvent()
 {
 	// ボタン
-	if (Input::Get()->GetKeyPress(DIK_DOWNARROW))
+	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
 	{
 		buttonnum = RETURN;
 	}
-	if (Input::Get()->GetKeyPress(DIK_RIGHTARROW))
+	if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW))
 	{
 		buttonnum = AGAIN;
 	}
-	if (Input::Get()->GetKeyPress(DIK_LEFTARROW))
+	if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW))
 	{
 		buttonnum = NEXT;
 	}
-	if (buttonnum == RETURN && Input::Get()->GetKeyPress(DIK_UPARROW))
+	if (buttonnum == RETURN && Input::Get()->GetKeyTrigger(DIK_UPARROW))
 	{
 		buttonnum = AGAIN;
 	}
@@ -182,7 +184,7 @@ void Result::ButtonEvent()
 		Button_return->m_anime->SetAnimePattern(0);
 
 		//スペースを押したときにもう一度同じステージに遷移する
-		if (Input::Get()->GetKeyPress(DIK_SPACE))
+		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
 			SceneManager::Get()->SetScene(SCENENAME::STAGE);
 			//同じステージだから、直接初期化をもう一回やったらいい
@@ -208,7 +210,7 @@ void Result::ButtonEvent()
 		Button_return->m_anime->SetAnimePattern(0);
 
 		//スペースを押したときに次のステージに遷移する
-		if (Input::Get()->GetKeyPress(DIK_SPACE))
+		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
 			//ステージに戻る
 			SceneManager::Get()->SetScene(SCENENAME::STAGE);
@@ -223,7 +225,7 @@ void Result::ButtonEvent()
 	default:
 		Button_again->m_anime->SetAnimePattern(0);
 		Button_return->m_anime->SetAnimePattern(0);
-		Button_next->m_anime->SetAnimePattern(0);
+		Button_next->m_anime->SetAnimePattern(1);
 		break;
 	}
 }
