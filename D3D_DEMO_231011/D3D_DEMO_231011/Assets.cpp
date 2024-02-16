@@ -94,6 +94,7 @@ Assets::Assets()
     uiRestart = LoadTexture("assets/ui/restart.png");
     uiSelect= LoadTexture("assets/ui/select.png");
     uiSound = LoadTexture("assets/ui/sound.png");
+    uiPauseCursor= LoadTexture("assets/ui/select/hane.png");
 
     //sound
     uiSoundBg = LoadTexture("assets/ui/soundBg.png");//サウンド背景
