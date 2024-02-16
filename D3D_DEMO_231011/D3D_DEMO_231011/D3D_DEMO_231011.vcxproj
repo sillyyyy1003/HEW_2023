@@ -152,6 +152,7 @@
     <ClCompile Include="PolygonCollider.cpp" />
     <ClCompile Include="RailManager.cpp" />
     <ClCompile Include="Result.cpp" />
+    <ClCompile Include="ResultAnimation.cpp" />
     <ClCompile Include="ResultProcess.cpp" />
     <ClCompile Include="SatCollider.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="PolygonCollider.h" />
     <ClInclude Include="RailManager.h" />
     <ClInclude Include="Result.h" />
+    <ClInclude Include="ResultAnimation.h" />
     <ClInclude Include="ResultProcess.h" />
     <ClInclude Include="SatCollider.h" />
     <ClInclude Include="Scene.h" />

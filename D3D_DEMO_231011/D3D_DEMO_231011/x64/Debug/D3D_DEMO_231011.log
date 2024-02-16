@@ -1,4 +1,5 @@
 ﻿  Game.cpp
+<<<<<<< HEAD
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,23): warning C4305: “参数”: 从“double”到“float”截断
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,22): warning C4305: “参数”: 从“double”到“float”截断
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(196,18): warning C4305: “初始化”: 从“double”到“float”截断
@@ -19,3 +20,20 @@ C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2723,32): wa
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2725,8): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
 BSCMAKE : error BK1506: 无法打: Permission denied
+=======
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,23): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,22): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(156,97): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(158,103): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(162,106): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(230,31): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1674,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1690,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1737,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1747,54): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1970,40): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1971,47): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1973,32): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1975,8): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  D3D_DEMO_231011.vcxproj -> C:\Users\taiyo\Documents\HEW 2024_2\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+>>>>>>> feature/Sakai04Result

@@ -88,6 +88,11 @@ Assets::Assets()
     star = LoadTexture("assets/result/Star_shadow.png");
     starShadow = LoadTexture("assets/result/Star.png");
 
+    //clear
+    clear1_1_1 = LoadTexture("assets/clear/1_1_1.png");
+    clear1_1_2 = LoadTexture("assets/clear/1_1_2.png");
+    clear1_1_3 = LoadTexture("assets/clear/1_1_3.png");
+
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
     uiResume = LoadTexture("assets/ui/resume.png");
@@ -132,11 +137,16 @@ Assets::~Assets()
     SAFE_RELEASE(uiSelectChapter2);
     SAFE_RELEASE(uiSelectChapter3);
 
+    //clear
     SAFE_RELEASE(uiClear);
     SAFE_RELEASE(stageHint1_1);
     SAFE_RELEASE(stageHint1_2);
     SAFE_RELEASE(stageHint1_3);
-    SAFE_RELEASE(stageHintBg);
+    SAFE_RELEASE(stageHintBg);    
+    SAFE_RELEASE(clear1_1_1);
+    SAFE_RELEASE(clear1_1_2);
+    SAFE_RELEASE(clear1_1_3);
+
 
     //stage1-1用リソース
     SAFE_RELEASE(stageBg1_1);

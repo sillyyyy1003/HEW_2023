@@ -255,25 +255,30 @@ void Result::StarEvent(int StarScore)
 
 int Result::ResultScore(int resultStep, std::vector<int> StarNum)
 {
+	//¯‚T‚Ì”»’è
 	if (resultStep <= StarNum[0])
 	{
-		return STARFIVE;
+		return STARFIVE;//¯‚T
 	}
+	//¯‚S‚Ì”»’è
 	else if (resultStep <= StarNum[1])
 	{
-		return STARFOUR;
+		return STARFOUR;//¯‚S
 	}
+	//¯‚R‚Ì”»’è
 	else if (resultStep <= StarNum[2])
 	{
-		return STARTHREE;
+		return STARTHREE;//¯‚R
 	}
+	//¯‚Q‚Ì”»’è
 	else if (resultStep <= StarNum[3])
 	{
-		return STARTWO;
+		return STARTWO;//¯‚Q
 	}
+	//¯‚P‚Ì”»’è
 	else
 	{
-		return STARONE;
+		return STARONE;//¯‚P
 	}
 
 	return 0;

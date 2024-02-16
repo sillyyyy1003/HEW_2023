@@ -18,6 +18,7 @@
 #include <stdio.h> 
 #include <algorithm> // 必要なヘッダーファイル
 #include "Result.h"
+#include "ResultAnimation.h"
 
 
 #define MOVE 0.1f
@@ -26,6 +27,9 @@
 extern Assets* g_Assets;
 extern Camera* g_WorldCamera;
 extern DebugManager* g_DebugManager;
+extern Result* g_result;
+extern ResultAnimation* g_ResultAnimation;
+
 
 void Game::Init()
 {
@@ -82,16 +86,18 @@ void Game::Init()
 	iphone = new GameObject();
 	triangleBlock = new GameObject();
 
-	//STAGE1-3
-    sandwich = new GameObject();	    //直角三角形
-	newspaper = new GameObject();	    //四角
-	busket = new GameObject();			//台形（四角）
-	picnicbasket = new GameObject(); //台形（四角）
-
+	//stage1-3
+	stage3Bg = new StaticObject();
+	sandwich = new GameObject();
+	newspaper = new GameObject();
+	busket = new GameObject();
+	picnicbasket = new GameObject();
 
 	//result
 	resultGenerator->Init();
-	
+	g_result->Init();
+	g_ResultAnimation->Init();
+
 	//EFFECT
 	testEffect = new Effect(12);
 	
@@ -142,7 +148,8 @@ void Game::Init()
 	lamp->CreateShadow(g_Assets->lampShadow, 216, 579, 1, 1, COLLISION_TYPE::SQUARE);
 	housePlate->CreateObject(g_Assets->housePlate, 110, 216, 1, 1);
 	housePlate->CreateShadow(g_Assets->housePlateShadow, 50, 105, 1, 1, COLLISION_TYPE::SQUARE);
-	//stage1-2
+
+//stage1-2
 	lamp1_2->CreateObject(g_Assets->lamp_1_2, 264, 267, 1, 1);
 	lamp1_2->CreateShadow(g_Assets->lamp_1_2Shadow, 217.5, 217.5, 1, 1, COLLISION_TYPE::SQUARE);
 	iphone->CreateObject(g_Assets->iphone, 186, 141, 1, 1);
@@ -150,12 +157,26 @@ void Game::Init()
 	triangleBlock->CreateObject(g_Assets->triangleBlock, 378, 348, 1, 1);
 	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
 
+
+
+	//1-3
+	stage3Bg->CreateObject(g_Assets->stage3Bg, 1280, 720, 1, 1);
+	sandwich->CreateObject(g_Assets->sandwich, 141, 159, 1, 1);
+	sandwich->CreateShadow(g_Assets->sandwichShadow, 141*2.6, 159 * 2, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
+	newspaper->CreateObject(g_Assets->newspaper, 201, 153, 1, 1);
+	newspaper->CreateShadow(g_Assets->newspaperShadow, 201 * 2.2, 153 * 2.1, 1, 1, COLLISION_TYPE::SQUARE);
+	busket->CreateObject(g_Assets->busket, 170, 146, 1, 1);
+	busket->CreateShadow(g_Assets->busketShadow, 170*2, 146*2, 1, 1, COLLISION_TYPE::SQUARE);
+	picnicbasket->CreateObject(g_Assets->picnicbasket, 306, 240, 1, 1);
+	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 306 * 2.6, 240 * 2,1, 1, COLLISION_TYPE::SQUARE);
+
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 3, 4);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
 	lamp->InitAnimation();
 	housePlate->InitAnimation();
+	
 	lamp1_2->InitAnimation();
 	iphone->InitAnimation();
 	triangleBlock->InitAnimation();
@@ -250,6 +271,8 @@ void Game::InitStage()
 
 		XA_Play(BGM_Stage1);//サウンド再生
 		InitStage1_1();
+		//InitStage1_2();
+		//InitStage1_3();
 
 		break;
 
@@ -508,6 +531,7 @@ void Game::InitStage1_3(void)
 	sandwich->SetActive(true);
 
 	//自動移動や自動回転の設定
+
 
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
@@ -1157,11 +1181,11 @@ void Game::ResultUpdate(void)
 	/*
 	switch (SceneManager::Get()->GetStage()) {
 
-	case STAGE1_1:
+		case STAGE1_1:
 
 		UpdateResult1_1();
 
-		break;
+			break;
 
 	case STAGE1_2:
 
@@ -1210,30 +1234,58 @@ void Game::ResultUpdate(void)
 
 	}
 	*/
-
 	resultGenerator->Update();
 }
 
 void Game::UpdateResult1_1(void)
 {
-	//ComicUpdate();
-
-
-	//ResultUpdate();
 	resultGenerator->Update();
-
 }
+
 
 void Game::UpdateResult1_2(void)
 {
 	resultGenerator->Update();
 }
 
+
+void Game::UpdateStage1_3(void)
+{
+	resultGenerator->Update();
+}
+
+void Game::UpdateStage2_1(void)
+{
+}
+
+void Game::UpdateStage2_2(void)
+{
+}
+
+void Game::UpdateStage2_3(void)
+{
+}
+
+void Game::UpdateStage3_1(void)
+{
+}
+
+void Game::UpdateStage3_2(void)
+{
+}
+
+void Game::UpdateStage3_3(void)
+{
+}
+
+void Game::ResultUpdate(void)
+{
+	g_result->Update();
+}
+
+
 void Game::GameUpdate(void)
 {
-	//入力処理　XXキー押して、移動させるオブジェクトをスイッチ
-
-	
 	//TestFade();
 
 	if (fadeState == FADE_IN)
@@ -1259,13 +1311,9 @@ void Game::GameUpdate(void)
 			/*SceneManager::Get()->SetScene(SceneManager::Get()->GetNewScene());*/
 		}
 	}
-	
-	//オブジェクトUpdate
-
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 		TitleUpdate();
-		
 		break;
 
 	case SCENENAME::STAGESELECT:
@@ -1293,6 +1341,8 @@ void Game::GameUpdate(void)
 	}
 	
 }
+
+
 
 
 
@@ -1340,15 +1390,16 @@ Game::~Game()
 	delete lamp;
 	delete housePlate;
 
+	//1-2
 	delete lamp1_2;		//台形
 	delete triangleBlock;	//三角形
 	delete iphone;			//平行四角形
 
-	delete sandwich;	    //直角三角形
-	delete newspaper;	    //四角
-	delete busket;			//台形（四角）
-	delete picnicbasket;   //台形（四角）
-
+	//1-3
+	delete sandwich;
+	delete newspaper;
+	delete busket;
+	delete picnicbasket;
 
 	delete testEffect;
 
@@ -2141,12 +2192,13 @@ void Game::StageDraw(void)
 		break;
 
 	case STAGE1_2:
-		DrawStage1_2();
+		DrawStage1_1();
 
 		break;
 
 	case STAGE1_3:
 		DrawStage1_3();
+
 		break;
 
 	case STAGE2_1:
@@ -2202,16 +2254,16 @@ void Game::DrawStage1_1()
 
 	//オブジェクト
 	SortObjectDraw();
+	
 
-	//エフェクト
-	//testEffect->Draw();
+		// リザルトアニメーション待機させる
+	g_ResultAnimation->Draw();	
 
-	//DebugDisplay();
 }
 
 void Game::DrawStage1_2()
 {
-	stageBg->Draw();
+		stageBg->Draw();
 
 
 	//描画の順番を並び変え
@@ -2228,10 +2280,6 @@ void Game::DrawStage1_2()
 	testEffect->Draw();
 
 	//DebugDisplay();
-}
-
-void Game::DrawStage1_3()
-{
 }
 
 
