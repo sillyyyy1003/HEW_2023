@@ -12,8 +12,8 @@ Assets::Assets()
     //test
     //title
     uiTitle = LoadTexture("assets/title/uiTitle.png");
-    uiTitleBg = LoadTexture("assets/title/titleBg.png");
-    uiPressEnter = LoadTexture("assets/title/uiPressEnter.png");
+    uiTitleBg = LoadTexture("assets/title/title_animation.png");
+    uiPressSpace = LoadTexture("assets/title/hint_button.png");
 
     //select
     uiSelectBg = LoadTexture("assets/ui/select/Select_bg.png");
@@ -122,7 +122,7 @@ Assets::~Assets()
     //タイトル用のリソース
     SAFE_RELEASE(uiTitleBg);
     SAFE_RELEASE(uiTitle);
-    SAFE_RELEASE(uiPressEnter);
+    SAFE_RELEASE(uiPressSpace);
 
     //ステージセレクト用
     SAFE_RELEASE(uiSelectBg);

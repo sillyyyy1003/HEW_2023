@@ -15,6 +15,8 @@ class Object;
 class Effect;
 class CameraShaker;
 class Result;
+class ResultProcess;
+class ResultAnimation;
 
 class Game
 {
@@ -29,7 +31,7 @@ private:
 	//ui
 	CanvasUI*	uiTitle;		//タイトル文字
 	CanvasUI*	uiTitleBg;		//タイトル背景
-	CanvasUI*	uiPressEnter;	//タイトルエンターキー
+	CanvasUI*	uiPressSpace;	//タイトルエンターキー
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
@@ -39,8 +41,6 @@ private:
 	CanvasUI* uiSoundBg;		//SOUNDの背景
 	CanvasUI* uiMusic;			//文字表示
 	CanvasUI* uiSE;				//SE表示
-
-
 
 	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
@@ -52,12 +52,15 @@ private:
 
 	//stage select
 	CanvasUI* uiSelectBg;
-
 	CanvasUI* uiSelectCursor;
-
 	CanvasUI* uiSelectStage[3];
 	CanvasUI* uiSelectChapter[3];
 	CanvasUI* uiClearMark[3];
+
+	//手数の表示
+	CanvasUI* uiStepTitle;
+	ResultProcess* uiStepNum;
+
 
 	//STAGE HINT
 	CanvasUI* stageHint[9];
@@ -88,6 +91,7 @@ private:
 
 	CameraShaker* cameraShaker;
 	Result* resultGenerator;
+	ResultAnimation* resultAnimator;
 
 private:
 	
@@ -163,8 +167,6 @@ private:
 	SOUNDVOLUME soundVolume_BGM = VOLUME3;
 	SOUNDVOLUME soundVolume_SE = VOLUME3;
 
-
-	
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
 	FADE_STATE fadeState=NO_FADE;

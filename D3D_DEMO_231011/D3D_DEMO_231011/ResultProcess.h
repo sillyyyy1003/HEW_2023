@@ -12,6 +12,8 @@ private:
     //初期位置(頭の文字の位置)
     float m_sPosX = 0;
     float m_sPosY = 0;
+    
+    float m_size = 0;
 
 public:
 
@@ -23,6 +25,8 @@ public:
     void Init(float posX, float posY);
 
     CanvasUI* StepNum[maxChars];//ステップ数表示用
+
+    void SetSize(float size) { m_size = size; };
 
     //ステップ数の表示
     void UpdateChar(char* outputChar);

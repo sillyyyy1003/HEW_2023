@@ -537,7 +537,7 @@ void GameObject::ObjectMove()
 	DirectX::XMFLOAT3 moveSpeed = { 0,0,0 };
 	switch (m_moveDir) {
 	case UP:
-		m_moveCount++;
+
 		//moveSpeed.z = 0.1f;
 		moveSpeed.z = 0.1;
 		if (m_moveCount * moveSpeed.z <= 2.5) {
@@ -564,11 +564,10 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
-
+		m_moveCount++;
 		break;
 
 	case UPRIGHT:
-		m_moveCount++;
 		moveSpeed.x = 0.18f;
 		moveSpeed.z = 0.1f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
@@ -605,14 +604,12 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
-
+		m_moveCount++;
 		break;
 
 	case RIGHT:
 
 		moveSpeed.x = 0.18f;
-		m_moveCount++;
-
 		if ((m_moveCount * moveSpeed.x) <= 4.5f) {
 
 			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
@@ -642,12 +639,11 @@ void GameObject::ObjectMove()
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 	
 		}
-
+		m_moveCount++;
 		break;
 
 	case DOWNRIGHT:
 
-		m_moveCount++;
 		moveSpeed.x = 0.18f;
 		moveSpeed.z = 0.1f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
@@ -684,13 +680,12 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
-
+		m_moveCount++;
 		break;
 
 	case DOWN:
 
 		moveSpeed.z= 0.1f;
-		m_moveCount++;
 
 		if (m_moveCount * moveSpeed.z <= 2.5f) {
 
@@ -716,10 +711,10 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
+		m_moveCount++;
 		break;
 
 	case DOWNLEFT:
-		m_moveCount++;
 		moveSpeed.x = 0.18f;
 		moveSpeed.z = 0.1f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) {
@@ -756,14 +751,12 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
+		m_moveCount++;
 		break;
 
 	case LEFT:
 
 		moveSpeed.x = 0.18f;
-
-		m_moveCount++;
-
 		if (m_moveCount * moveSpeed.x <= 4.5) {
 
 			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
@@ -791,12 +784,11 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
-
+		m_moveCount++;
 		break;
 
 	case UPLEFT:
 
-		m_moveCount++;
 		moveSpeed.x = 0.18f;
 		moveSpeed.z = 0.1f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) 
@@ -833,6 +825,7 @@ void GameObject::ObjectMove()
 			int stageInfo = SceneManager::Get()->GetActiveStage();
 			SceneManager::Get()->m_stageHolder[stageInfo]->StepCount();
 		}
+		m_moveCount++;
 		break;
 
 	case STILL:

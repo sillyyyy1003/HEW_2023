@@ -23,8 +23,7 @@ void ResultProcess::Init(float posX, float posY)
 		//初期化
 		stepnum = new CanvasUI();
 		//モデル作成
-		//stepnum->CreateModel(Assets::debugFont, 60.0f, 80.0f, 12, 8);
-		stepnum->CreateModel(g_Assets->Result_num, 5238 / 70, 1105 / 10, 10, 1);
+		stepnum->CreateModel(g_Assets->Result_num, m_size * 5238 / 70, m_size * 1105 / 10, 10, 1);
 	}
 	//位置調整
 	SetPosition(posX,posY);
@@ -45,12 +44,8 @@ void ResultProcess::UpdateChar(char* outputChar)
 		//オブジェクトにセットする
 		StepNum[i]->m_anime->SetFrameX(frameX);
 
-		////文字の縦番目を取得
-		//int frameY = ((int)outputChar[i] - 32) / 12;
-		//StepNum[i]->m_anime->SetAnimePattern(frameY);
-
 		//文字の位置を設定する
-		float posX = 20.0f / SCREEN_PARA * 4 * i;
+		float posX = 74 / SCREEN_PARA * i / 2;
 		StepNum[i]->InitPos(m_sPosX + posX, m_sPosY, 0.1);
 
 		//UVOFFSET更新

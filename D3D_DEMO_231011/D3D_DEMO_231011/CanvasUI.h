@@ -1,11 +1,20 @@
 #pragma once
 #include "Sprite.h"
+#include <vector>
 
 class CanvasUI :public Sprite
 {
 private:
 	//表示の切り替え
 	bool isActive = true;
+
+	//Has Animation or Not
+	bool isAnimated = false;
+
+	//フレームの枚数
+	int m_frameNum = 0;
+
+	std::vector<int> animeTable;
 
 public:
 	enum STATUS {
@@ -38,5 +47,10 @@ public:
 	//アニメパターンの変更
 	void SetAnimeActive(STATUS status) { m_anime->SetAnimePattern(status); };
 
+	//アニメション用
+	void InitAnimation(int num);
+
+	void SetAnimeted(bool isAnimated) { this->isAnimated = isAnimated; };
 	
+
 };

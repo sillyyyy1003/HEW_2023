@@ -30,7 +30,6 @@ public:
 	/*Init*/
 	void Init();
 
-
 	/*Update*/
 	void Update();
 

@@ -43,13 +43,13 @@ void ResultAnimation::Init()
 
 void ResultAnimation::Update()
 {
-	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetClear())
+	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear())
 	{
 		// ‰æ‘œ‚ÌˆÚ“®‚ªŠ®—¹‚µ‚½‚©Aˆê“xƒNƒŠƒA‚µ‚½ƒXƒe[ƒW‚©‚Å”»’è
-		if (Move() || SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetCompleted())
+		if (Move() || SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetCompleted())
 		{
 			// ƒXƒy[ƒX‚ð‰Ÿ‚·‚ÆƒŠƒUƒ‹ƒg‰æ–Ê‚É‘JˆÚ‚·‚é
-			if (Input::Get()->GetKeyPress(DIK_SPACE))
+			if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 			{
 				// ‰æ‘œ‚P‚©‚ç‚R‚ÌˆÊ’u‚ð‰Šú’li‰æ–ÊŠOj‚É–ß‚·
 				clear1_1_1->m_pos = { -3.3f,6.6f,0.3f };
@@ -57,10 +57,9 @@ void ResultAnimation::Update()
 				clear1_1_3->m_pos = { 11.1f,0.0f,0.3f };
 
 				// ƒXƒe[ƒW‚ðˆê“xƒNƒŠƒA‚µ‚½”»’è‚É‚·‚é
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetCompleted(true);
+				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetCompleted(true);
+				SceneManager::Get()->SetScene(RESULT);
 
-				// ƒŠƒUƒ‹ƒg‚É‘JˆÚ‚·‚é
-				SceneManager::Get()->SetScene(SCENENAME::RESULT);
 			}
 		}
 
@@ -84,28 +83,29 @@ bool ResultAnimation::Move()
 {
 	// ‰æ‘œ‚P`‚R‚ð‡”Ô‚ÉˆÚ“®‚·‚é‚æ‚¤‚É‚³‚¹‚é
 	// ‰æ‘œ‚P‚ªã‚©‚ç‰º‚É~‚è‚Ä‚­‚é
-	clear1_1_1->m_pos.y -= 0.1f;
+	clear1_1_3->m_pos.x -= 0.1f;
 
-	if (clear1_1_1->m_pos.y < 2.1f)
+
+	if (clear1_1_3->m_pos.x < 3.1f)
 	{
-		// ‰æ‘œ‚P‚ðŽw’è‚ÌˆÊ’u‚ÉŽ~‚ß‚é
-		clear1_1_1->m_pos.y = 2.1f;
+		// ‰æ‘œ‚R‚ðŽw’è‚ÌˆÊ’u‚ÉŽ~‚ß‚é
+		clear1_1_3->m_pos.x = 3.1f;
 
-		// ‰æ‘œ‚Q‚ð¶‚©‚ç‰E‚ÉˆÚ“®‚³‚¹‚é
-		clear1_1_2->m_pos.x += 0.1f;
+		// ‰æ‘œ1‚ð¶‚©‚ç‰E‚ÉˆÚ“®‚³‚¹‚é
+		clear1_1_1->m_pos.y -= 0.1f;
 
-		if (clear1_1_2->m_pos.x > -3.3f)
+		if (clear1_1_1->m_pos.y < 2.1f)
 		{
-			// ‰æ‘œ‚Q‚ðŽw’è‚ÌˆÊ’u‚ÉŽ~‚ß‚é
-			clear1_1_2->m_pos.x = -3.3f;
+			// ‰æ‘œ‚P‚ðŽw’è‚ÌˆÊ’u‚ÉŽ~‚ß‚é
+			clear1_1_1->m_pos.y = 2.1f;
 
-			// ‰æ‘œ‚R‚ð‰E‚©‚ç¶‚ÖˆÚ“®‚³‚¹‚é
-			clear1_1_3->m_pos.x -= 0.1f;
+			// ‰æ‘œ‚Q‚ð¶‚©‚ç‰E‚ÉˆÚ“®‚³‚¹‚é
+			clear1_1_2->m_pos.x += 0.15f;
 
-			if (clear1_1_3->m_pos.x < 3.1f)
+			if (clear1_1_2->m_pos.x > -3.3f)
 			{
-				// ‰æ‘œ‚R‚ðŽw’è‚ÌˆÊ’u‚ÉŽ~‚ß‚é
-				clear1_1_3->m_pos.x = 3.1f;
+				// ‰æ‘œ‚Q‚ðŽw’è‚ÌˆÊ’u‚ÉŽ~‚ß‚é
+				clear1_1_2->m_pos.x = -3.3f;
 
 				// ‰æ‘œ‚ÌˆÚ“®‚ªŠ®—¹
 				return true;

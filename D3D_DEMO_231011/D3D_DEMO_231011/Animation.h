@@ -73,6 +73,9 @@ public:
 	/// </summary>
 	/// <param name="_animePattern">縦フレーム何番目 アニメーションのパターン</param>
 	void SetAnimePattern(int _animePattern);
+	int GetAnimePattern(void) { return m_frameY; };
+	
+	
 
 	/// <summary>
 	/// UV座標を返す関数
@@ -84,5 +87,7 @@ public:
 	/// 横何番目を設定する
 	/// </summary>
 	void SetFrameX(int _frameX);
+	int GetFrameX(void) { return m_frameX; };
+
 
 };

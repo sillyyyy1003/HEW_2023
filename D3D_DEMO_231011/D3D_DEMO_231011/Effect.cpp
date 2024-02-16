@@ -33,6 +33,7 @@ void Effect::SetLoop(bool isLoop)
 
 
 
+
 Effect::~Effect()
 {
     

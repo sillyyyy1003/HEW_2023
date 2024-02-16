@@ -22,7 +22,7 @@ public:
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
 	ID3D11ShaderResourceView* uiTitle;
-	ID3D11ShaderResourceView* uiPressEnter;
+	ID3D11ShaderResourceView* uiPressSpace;
 
 	//ステージセレクト用
 	ID3D11ShaderResourceView* uiSelectBg;

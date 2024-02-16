@@ -73,6 +73,7 @@ public:
 
 	void SetStage(STAGEINFO _stage) { m_stage = _stage; };
 	STAGEINFO GetStage() { return m_stage; };
+	
 	//次のステージを取得
 	STAGEINFO GetNextStage();
 

@@ -10,6 +10,9 @@ private:
 	CanvasUI* clear1_1_2;
 	// ‰æ‘œ‚R
 	CanvasUI* clear1_1_3;
+
+public :
+	bool isAnimated = false;
 public:
 	ResultAnimation();
 
