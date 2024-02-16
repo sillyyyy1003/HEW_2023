@@ -414,6 +414,9 @@ void Game::InitStage1_1(void)
 
 	//自動移動や自動回転の設定
 	
+	//リザルトアニメーションの画像の設定
+	resultAnimator->SetTexture(g_Assets->resultComic1_1_1, g_Assets->resultComic1_1_2, g_Assets->resultComic1_1_3);
+
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
 
@@ -474,7 +477,8 @@ void Game::InitStage1_2(void)
 
 	//自動移動や自動回転の設定
 
-
+	//リザルトアニメーションの画像の設定
+	resultAnimator->SetTexture(g_Assets->resultComic1_2_1, g_Assets->resultComic1_2_2, g_Assets->resultComic1_2_3);
 
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
@@ -543,6 +547,8 @@ void Game::InitStage1_3(void)
 
 	//自動移動や自動回転の設定
 
+	//リザルトアニメーションの画像の設定
+	//resultAnimator->SetTexture(g_Assets->resultComic1_2_1, g_Assets->resultComic1_2_2, g_Assets->resultComic1_2_3);
 
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
@@ -1154,7 +1160,6 @@ void Game::UpdateStage1_2(void)
 	lamp1_2->ShadowUpdate(0.35f, 4);
 	iphone->ShadowUpdate(-1.4f, 4);
 	triangleBlock->ShadowUpdate(0, 4);
-
 
 	//クリア判定     
 	//if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&

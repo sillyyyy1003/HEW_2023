@@ -63,7 +63,7 @@ Assets::Assets()
     //1-2
     resultComic1_2_1 = LoadTexture("assets/clear/1_2_1.png");
     resultComic1_2_2 = LoadTexture("assets/clear/1_2_2.png");
-    resultComic1_1_3 = LoadTexture("assets/clear/1_2_3.png");
+    resultComic1_2_3 = LoadTexture("assets/clear/1_2_3.png");
 
     //stage1_3
     stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
@@ -175,7 +175,7 @@ Assets::~Assets()
     //1-2
     SAFE_RELEASE(resultComic1_2_1);
     SAFE_RELEASE(resultComic1_2_2);
-    SAFE_RELEASE(resultComic1_1_3);    //stage1-2用リソース
+    SAFE_RELEASE(resultComic1_2_3);    //stage1-2用リソース
 
     //stage1-3用リソース
     SAFE_RELEASE(stage3Bg);
