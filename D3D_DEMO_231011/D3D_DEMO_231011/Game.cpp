@@ -101,6 +101,7 @@ void Game::Init()
 	coconut->SetName("coconut");
 	lamp->SetName("lamp");
 	housePlate->SetName("housePlate");
+
 	//stage2に使われてる
 	//移動のオブジェクトの名前を設定する
 	lamp1_2->SetName("lamp1_2");
@@ -1370,8 +1371,6 @@ void Game::UiUpdate()
 	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
 	{
 
-
-
 		if (!isSound)
 		{
 			XA_Play(SE_Select);//セレクトSE再生
@@ -1398,8 +1397,6 @@ void Game::UiUpdate()
 	}
 	//移動
 	if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
-
-
 
 		if (!isSound)
 		{
@@ -1475,12 +1472,12 @@ void Game::UiUpdate()
 				PauseSwitch();
 			}
 		}
+	}
 
 		//今どのボタンが選択されたの状態変更(改良必要)
 		switch (pauseSelect)
 		{
 		case Game::RESUME:
-
 			uiResume->SetAnimeActive(CanvasUI::ACTIVE);
 			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
@@ -1542,7 +1539,6 @@ void Game::UiUpdate()
 
 		uiPauseBg->Update();
 
-	}
 }
 
 void Game::PauseSwitch(void)
