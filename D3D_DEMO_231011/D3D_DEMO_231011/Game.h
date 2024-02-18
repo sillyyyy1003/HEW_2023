@@ -58,9 +58,10 @@ private:
 	CanvasUI* uiClearMark[3];
 
 	//手数の表示
-	CanvasUI* uiStepTitle;
 	ResultProcess* uiStepNum;
 
+	CanvasUI* stageMask;
+	CanvasUI* controlPanel;
 
 	//STAGE HINT
 	CanvasUI* stageHint[9];

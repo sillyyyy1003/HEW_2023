@@ -36,17 +36,15 @@ Result::~Result()
 		delete star[i];
 		delete starShadow[i];
 	}
-
 }
-
 void Result::Init()
 {
 	//StepNumの初期化
-	processor->Init(2.0f, 0.0f);
 	processor->SetSize(1.0);
+	processor->Init(2.0f, 0.0f);
 
 	uiResult = new CanvasUI();
-	resultBg = new StaticObject();
+	resultBg = new CanvasUI();
 	Result_score = new CanvasUI();
 	Result_stepcount = new CanvasUI();
 	Button_again = new CanvasUI();
@@ -55,7 +53,7 @@ void Result::Init()
 
 	//テクスチャ読み込み・モデル作成
 	uiResult->CreateModel(g_Assets->result, 430, 104, 1, 1);
-	resultBg->CreateObject(g_Assets->resultBg, 1029, 713, 1, 1);
+	resultBg->CreateModel(g_Assets->resultBg, 1029, 713, 1, 1);
 	Result_score->CreateModel(g_Assets->Result_score, 139, 66, 1, 1);
 	Result_stepcount->CreateModel(g_Assets->Result_stepcount, 375, 72, 1, 1);
 	Button_again->CreateModel(g_Assets->Button_again, 299, 192 / 2, 1, 2);
@@ -63,6 +61,7 @@ void Result::Init()
 	Button_return->CreateModel(g_Assets->Button_return, 311, 208 / 2, 1, 2);
 
 	//座標
+	resultBg->m_pos = { 0.0f,0.0f,0.4f };
 	uiResult->m_pos = { 0.0f,3.0f,0.3f };
 	Result_score->m_pos = { -4.0f,1.5f,0.3f };
 	Result_stepcount->m_pos = { -2.5f,0.0f,0.3f };
@@ -90,14 +89,7 @@ void Result::Init()
 	}
 
 	//背景
-	resultBg->m_sprite->m_rotation.x = 19.8;//カメラと垂直状態を保持するため
-	resultBg->m_sprite->m_scale = { 2.65,2.65,1.0 };//固定値
-	//y
-	float y = 21.626 - 7 / ROTATEX;
-	y += 1;
-	y = y * ROTATEX;
-	//y座標の導入
-	resultBg->m_sprite->m_pos = { 0.0f,-y,1.0f };
+
 
 	buttonnum = 0;
 }
@@ -131,7 +123,7 @@ void Result::Update()
 
 void Result::Draw()
 {
-	// 背景
+	//背景
 	resultBg->Draw();
 	uiResult->Draw();
 	Result_score->Draw();
@@ -149,8 +141,7 @@ void Result::Draw()
 	}
 
 	//ステージ終了時のステップ数を表示
-	//processor->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep());
-	processor->PrintDebugLog(3);
+	processor->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());//
 }
 
 void Result::DoResultKeyEvent()

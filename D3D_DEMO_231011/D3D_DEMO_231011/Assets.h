@@ -38,6 +38,9 @@ public:
 	
 	ID3D11ShaderResourceView* uiClear;
 
+	ID3D11ShaderResourceView* stageMask;
+	ID3D11ShaderResourceView* controlPanel;
+
 	//HINT用
 	ID3D11ShaderResourceView* stageHint1_1;
 	ID3D11ShaderResourceView* stageHint1_2;

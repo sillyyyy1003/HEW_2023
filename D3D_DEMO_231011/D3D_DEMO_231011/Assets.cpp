@@ -26,14 +26,16 @@ Assets::Assets()
     uiSelectChapter3 = LoadTexture("assets/ui/select/chapter3.png");
     uiClear= LoadTexture("assets/ui/select/clear.png");
 
+    stageMask = LoadTexture("assets/img/bg_mask.png");
+    controlPanel = LoadTexture("assets/ui/controlPanel.png");
     //stage hint
     //stageHint1_1 = LoadTexture("assets/1_1_hint.png");
     //stageHint1_2 = LoadTexture("assets/1_2_hint.png");
     //stageHint1_3 = LoadTexture("assets/1_3_hint.png");
-    stageHint1_1 = LoadTexture("assets/1_1_image_hint.png");
-    stageHint1_2 = LoadTexture("assets/1_2_image_hint.png");
-    stageHint1_3 = LoadTexture("assets/1_3_image_hint.png");
-    stageHintBg = LoadTexture("assets/bg_shadow.png");
+    stageHint1_1 = LoadTexture("assets/hint/1_1_image_hint.png");
+    stageHint1_2 = LoadTexture("assets/hint/1_2_image_hint.png");
+    stageHint1_3 = LoadTexture("assets/hint/1_3_image_hint.png");
+    stageHintBg = LoadTexture("assets/hint/bg_shadow.png");
 
 
     //stage1_1
@@ -46,8 +48,7 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
     //stage1_2
-    stageBg1_2 = LoadTexture("assets/stage1/1-2Bg.png");
-
+    stageBg1_2 = LoadTexture("assets/stage1/1_2_Bg.png");
     lamp_1_2 =  LoadTexture("assets/stage1/1_2_lamp.png");
     lamp_1_2Shadow = LoadTexture("assets/stage1/1_2_lamp_shadow.png");
     iphone = LoadTexture("assets/stage1/1_2_iphone.png");
@@ -136,6 +137,10 @@ Assets::~Assets()
     SAFE_RELEASE(uiSelectChapter1);
     SAFE_RELEASE(uiSelectChapter2);
     SAFE_RELEASE(uiSelectChapter3);
+
+    //UI用
+    SAFE_RELEASE(stageMask);
+    SAFE_RELEASE(controlPanel);
 
     //clear
     SAFE_RELEASE(uiClear);

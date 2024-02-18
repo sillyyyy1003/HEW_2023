@@ -37,24 +37,47 @@ void ResultProcess::SetPosition(float posX, float posY)
 
 void ResultProcess::UpdateChar(char* outputChar)
 {
-	for (int i = 0; i < strlen(outputChar); i++)
+	//for (int i = 0; i < strlen(outputChar); i++)
+	//{
+	//	//文字の横番目を取得 SPACE ASCII->32
+	//	int frameX = ((int)outputChar[i] - 32) % 16;
+	//	//オブジェクトにセットする
+	//	StepNum[i]->m_anime->SetFrameX(frameX);
+
+	//	//文字の位置を設定する
+	//	float posX = (74 / SCREEN_PARA / 2) * i;
+	//	StepNum[i]->InitPos(m_sPosX + posX, m_sPosY, 0.1);
+
+	//	//UVOFFSET更新
+	//	StepNum[i]->m_anime->Update();
+
+	//	//描画
+	//	StepNum[i]->Draw();
+
+	//}
+	
+	int totalCharacters = strlen(outputChar);
+	float totalWidth = totalCharacters * (74 / SCREEN_PARA / 2);
+
+	for (int i = 0; i < totalCharacters; i++)
 	{
-		//文字の横番目を取得 SPACE ASCII->32
+		// 文字の横番目を取得 SPACE ASCII->32
 		int frameX = ((int)outputChar[i] - 32) % 16;
-		//オブジェクトにセットする
+		// オブジェクトにセットする
 		StepNum[i]->m_anime->SetFrameX(frameX);
 
-		//文字の位置を設定する
-		float posX = 74 / SCREEN_PARA * i / 2;
-		StepNum[i]->InitPos(m_sPosX + posX, m_sPosY, 0.1);
+		// 文字の位置を設定する（中央に調整）
+		float posX = m_sPosX - totalWidth / 2 + i * (74 / SCREEN_PARA / 2);
+		
+		StepNum[i]->InitPos(posX, m_sPosY, 0.1);
 
-		//UVOFFSET更新
+		// UVOFFSET更新
 		StepNum[i]->m_anime->Update();
 
-		//描画
+		// 描画
 		StepNum[i]->Draw();
-
 	}
+
 }
 
 void ResultProcess::PrintDebugLog(const int _num)

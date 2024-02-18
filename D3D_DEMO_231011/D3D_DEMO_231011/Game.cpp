@@ -71,9 +71,11 @@ void Game::Init()
 	}
 
 	fade = new CanvasUI();
+	//mask&panel
+	stageMask = new CanvasUI();
+	controlPanel = new CanvasUI();
 
 	//stepの手数
-	uiStepTitle = new CanvasUI();
 	uiStepNum = new ResultProcess();
 
 	//共通の背景
@@ -101,7 +103,7 @@ void Game::Init()
 
 	//EFFECT
 	testEffect = new Effect(12);
-	
+
 
 	//stage1に使われてる
 	//移動のオブジェクトの名前を設定する
@@ -115,8 +117,8 @@ void Game::Init()
 	iphone->SetName("iphone");
 	triangleBlock->SetName("triangleBlock");
 	//stage3に使われてる
-	 
-	
+
+
 	//移動のオブジェクトの名前を設定する
 
 	//テクスチャ読み込み・モデル作成
@@ -125,7 +127,7 @@ void Game::Init()
 	uiPressSpace->CreateModel(g_Assets->uiPressSpace, 301, 45, 1, 1);
 
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 647, 702, 1, 1);
-	uiResume->CreateModel(g_Assets->uiResume,280, 92, 1, 2);
+	uiResume->CreateModel(g_Assets->uiResume, 280, 92, 1, 2);
 	uiRestart->CreateModel(g_Assets->uiRestart, 280, 92, 1, 2);
 	uiSelect->CreateModel(g_Assets->uiSelect, 280, 92, 1, 2);
 	uiSound->CreateModel(g_Assets->uiSound, 280, 92, 1, 2);
@@ -141,14 +143,14 @@ void Game::Init()
 
 
 	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
-	
+
+	stageMask->CreateModel(g_Assets->stageMask, 1280, 720, 1, 1);
+	controlPanel->CreateModel(g_Assets->controlPanel, 1280, 720, 1, 1);
+
 	//手数表示
-	uiStepTitle->CreateModel(g_Assets->Result_stepcount, 375, 72, 1, 1);
-	uiStepTitle->m_pos = { 5.0, 3.9,0.1 };
-	uiStepTitle->m_scale = { 0.6,0.6,1.0 };
 	//表示の大きさを変える
 	uiStepNum->SetSize(0.5);
-	uiStepNum->Init(7.0, 3.9);//調整いる
+	uiStepNum->Init(-6.7, 3.3);//調整いる
 
 	//stage1
 	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 1, 1);
@@ -170,13 +172,13 @@ void Game::Init()
 
 	//1-3
 	sandwich->CreateObject(g_Assets->sandwich, 141, 159, 1, 1);
-	sandwich->CreateShadow(g_Assets->sandwichShadow, 141*2.6, 159 * 2, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
+	sandwich->CreateShadow(g_Assets->sandwichShadow, 141 * 2.6, 159 * 2, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
 	newspaper->CreateObject(g_Assets->newspaper, 201, 153, 1, 1);
 	newspaper->CreateShadow(g_Assets->newspaperShadow, 201 * 2.2, 153 * 2.1, 1, 1, COLLISION_TYPE::SQUARE);
 	busket->CreateObject(g_Assets->busket, 170, 146, 1, 1);
-	busket->CreateShadow(g_Assets->busketShadow, 170*2, 146*2, 1, 1, COLLISION_TYPE::SQUARE);
+	busket->CreateShadow(g_Assets->busketShadow, 170 * 2, 146 * 2, 1, 1, COLLISION_TYPE::SQUARE);
 	picnicbasket->CreateObject(g_Assets->picnicbasket, 306, 240, 1, 1);
-	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 306 * 2.6, 240 * 2,1, 1, COLLISION_TYPE::SQUARE);
+	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 306 * 2.6, 240 * 2, 1, 1, COLLISION_TYPE::SQUARE);
 
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 3, 4);
 
@@ -184,7 +186,7 @@ void Game::Init()
 	coconut->InitAnimation();
 	lamp->InitAnimation();
 	housePlate->InitAnimation();
-	
+
 	lamp1_2->InitAnimation();
 	iphone->InitAnimation();
 	triangleBlock->InitAnimation();
@@ -204,7 +206,7 @@ void Game::Init()
 	//----------------------------//
 	// ここからはシーンの初期化
 	//----------------------------//
-	
+
 	//Title の初期化
 	//位置設定
 	uiTitleBg->m_pos = { 0.0f,0.0f,0.3f };
@@ -213,10 +215,10 @@ void Game::Init()
 	uiTitleBg->m_anime->SetAnimePattern(0);
 	uiTitleBg->m_anime->SetFrameX(3);
 	//uiTitleBg->SetAnimeted(true);
-	
+
 	//uiTitle->m_pos = { 0.0f,1.5f,0.2f };
 	uiPressSpace->m_pos = { 0.0f,-2.5f,0.1f };
-	
+
 
 	//大きさの設定
 
@@ -224,7 +226,6 @@ void Game::Init()
 	uiSelectBg->m_pos = { 0.0f,0.04f,0.9f };
 	uiSelectBg->m_scale = { 0.98f,0.98f,0.9f };
 	uiSelectCursor->m_pos = { 5.2f,3.6f,0.8f };//Chapterの横に出るように
-
 	float posy = 2.3;
 	uiClearMark[0]->m_pos = { 4.5f,posy,0.7f };
 	posy = 2.3 - 2.5;
@@ -239,11 +240,16 @@ void Game::Init()
 	uiRestart->m_pos = { -6.0f, 0.35f, 0.8f };
 	uiSelect->m_pos = { -6.0f, -1.0f, 0.8f };
 	uiSound->m_pos = { -6.0f, -2.35f, 0.8f };
-	
+
 	//uiSound
 	uiSoundBg->m_pos = { 1.0f, 0.2f, 0.7f };
 	uiSoundBg->m_scale = { 1.0f,1.0f,1.0f };
 
+	//controlPanel;
+	//controlPanel->m_pos = { 0,(360 - 77) / SCREEN_PARA,0.6 };
+	controlPanel->m_pos = { 0,0,0.6};
+	controlPanel->m_scale = { 0.96,0.96,0.96 };
+	stageMask->m_pos.z = { 0.7 };
 	//fade
 	fade->m_pos = { 0.0f,0.0f,-0.9f };
 	fade->m_scale = { 4.0f,3.0f,1.0f };
@@ -375,9 +381,9 @@ void Game::InitStage1_1(void)
 
 
 	//影のy軸
-	coconut->m_shadow->m_sprite->m_pos.y = 7.2f;
-	lamp->m_shadow->m_sprite->m_pos.y = 4.4f;
-	housePlate->m_shadow->m_sprite->m_pos.y = 2.4f;
+	coconut->m_shadow->m_sprite->m_pos.y = 7.1f;
+	lamp->m_shadow->m_sprite->m_pos.y = 4.3f;
+	housePlate->m_shadow->m_sprite->m_pos.y = 2.3f;
 
 	
 	//レール上の位置を設定する
@@ -438,6 +444,11 @@ void Game::InitStage1_2(void)
 	lamp1_2->m_shadow->m_sprite->m_pos.z = 0.0f;
 	iphone->m_shadow->m_sprite->m_pos.z = -0.1f;
 	triangleBlock->m_shadow->m_sprite->m_pos.z = -0.2f;
+
+	lamp1_2->m_shadow->m_sprite->m_pos.y = 3.0f;
+	iphone->m_shadow->m_sprite->m_pos.y = 4.2f;
+	triangleBlock->m_shadow->m_sprite->m_pos.y =2.2f;
+
 
 	//レール上の位置を設定する
 	lamp1_2->SetRailPos(2, 2);
@@ -743,9 +754,9 @@ void Game::InitHintArray()
 
 	//位置設定
 	for (int i = 0; i < 9; i++) {
-		stageHint[i]->m_pos = { 0,0,0.2};
+		stageHint[i]->m_pos = { 0,0,0.3};
 	}
-	stageHintBg->m_pos = { 0,0,0.3 };
+	stageHintBg->m_pos = { 0,0,0.4 };
 	//位置設定
 }
 
@@ -1300,6 +1311,9 @@ Game::~Game()
 	delete uiSound;
 	delete uiSoundBg;
 
+	delete stageMask;
+	delete controlPanel;
+
 	//配列の分を解放
 	for (int i = 0; i < 6; i++)
 	{
@@ -1333,7 +1347,6 @@ Game::~Game()
 	delete cameraShaker;
 	delete resultGenerator;	
 	delete resultAnimator;
-	delete uiStepTitle;
 	delete uiStepNum;
 
 }
@@ -2030,23 +2043,41 @@ void Game::GameDraw()
 	
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
-
 		TitleDraw();
 		break;
-
 	case SCENENAME::STAGESELECT:
-
 		SelectDraw();
 		break;
-
 	case SCENENAME::STAGE:
 		StageDraw();
 
+
 		//今のステージのヒントを描画する
 		SetBlendState(GetBlendMultiply());
+		////MASKの描画
+		stageMask->Draw();
+		//ヒントの背景
 		stageHintBg->Draw();
+	
 		SetBlendState(GetBlendAlpha());
+
+		if (!isPause) {
+
+			controlPanel->Draw();
+		}
+
+		if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint() && !SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear()) {
+			if (!isPause) {
+				uiStepNum->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+			}
+
+		}
+
+
 		stageHint[SceneManager::Get()->GetStage()]->Draw();
+
+
+
 		break;
 	case SCENENAME::RESULT:
 		ResultDraw();
@@ -2155,11 +2186,7 @@ void Game::StageDraw(void)
 		break;
 
 	}
-	if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint()&&!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear()) {
-	
-		uiStepTitle->Draw();
-		uiStepNum->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep());
-	}
+
 
 
 	if (isPause) {

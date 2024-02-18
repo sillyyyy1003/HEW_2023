@@ -24,7 +24,6 @@ void GameObject::DoKeyInput(void)
 			isInputCount = true;
 			m_lastPressTime = m_inputCount;
 		}
-
 	}
 	//カウト開始
 	if (isInputCount) {
@@ -38,7 +37,6 @@ void GameObject::DoKeyInput(void)
 			{
 				m_nowInput.verInput = INPUT_UP;
 			}
-
 			// 处理水平方向输入
 			if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW) && !Input::Get()->GetKeyTrigger(DIK_RIGHTARROW))
 			{
@@ -48,7 +46,6 @@ void GameObject::DoKeyInput(void)
 			{
 				m_nowInput.horInput = INPUT_RIGHT;
 			}
-
 		}
 		else {
 			isGetInput = true;
@@ -60,17 +57,14 @@ void GameObject::DoKeyInput(void)
 		m_nowInput.horInput = INPUT_NONE;
 		m_nowInput.verInput = INPUT_NONE;
 	}
-
 }
 
 GameObject::GameObject()
 {
 	//オブジェクトの初期化
 	m_obj = new Object();
-
 	//オブジェクトの原点を設定する
 	m_obj->m_sprite->m_spriteType = Sprite::OBJECT;
-
 	//影の初期化
 	m_shadow = new ShadowObject();
 }
@@ -95,19 +89,14 @@ void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, f
 	{
 	//triangleは個別で初期化をする
 	case SPHERE:
-
 		m_shadowCollider = new SphereCollider();
 		m_shadowCollider->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide());
-
 		break;
 	case SQUARE:
-
 		m_shadowCollider = new BoxCollider();
 		m_shadowCollider->InitCollider(m_shadow->m_sprite->m_pos, m_shadow->m_sprite->GetCollide());
-
 		break;
 	case IDLE:
-		//
 		m_shadowCollider = nullptr;
 		break;
 	default:
@@ -118,7 +107,6 @@ void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, f
 void GameObject::CreateShadow(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY, COLLISION_TYPE type, TRIANGLE_TYPE _type)
 {
 	m_shadow->CreateObject(texture, _width, _height, splitX, splitY);
-
 	//コライダーの初期化処理を行う
 	m_shadowCollider = new PolygonCollider();
 	//dynamic_castを使って、PolygonColliderの初期化を行う
@@ -250,14 +238,7 @@ void GameObject::GenerateShadowSize(float speed)
 		default:
 			break;
 		}
-
-
-
 	}
-		
-
-
-
 }
 
 void GameObject::ShadowUpdate(float center, float interval)
@@ -275,10 +256,6 @@ void GameObject::ShadowUpdate(float center, float interval)
 	if (m_shadowCollider != nullptr) {
 		UpdateShadowColliderData();
 	}
-
-
-
-
 }
 
 
@@ -286,8 +263,6 @@ void GameObject::SetRailPos(int horPos, int verPos)
 {
 	m_railPos.horizontalPos = horPos;
 	m_railPos.verticalPos = verPos;
-
-
 	//ここでオブジェクトの大きさの初期値を調整する
 	switch (m_railPos.verticalPos)
 	{
@@ -314,8 +289,6 @@ void GameObject::SetRailPos(int horPos, int verPos)
 		break;
 
 	}
-
-
 }
 
 void GameObject::Update()
@@ -327,12 +300,10 @@ void GameObject::Update()
 		if (m_moveDir != STILL) {
 			ObjectMove();
 			//移動中
-		
 		}
 		else {
 			//入力
 			DoKeyInput();
-
 			if (isGetInput) {
 				switch (m_nowInput.horInput) {
 					//左
@@ -400,12 +371,8 @@ void GameObject::Update()
 					break;
 				}
 				isGetInput = false;
-
 			}
-			
-
 		}
-
 		//オブジェクトが移動中なら、
 		if (m_moveDir != STILL) {
 			//切り替えを不可にする
@@ -414,32 +381,16 @@ void GameObject::Update()
 		else {
 			Game::Get()->SetIsControl(true);
 		}
-
 	}
-
 	//自動移動の場合
 	if (isAutoMove) {
-	
 		//自動移動
 		//AutoMove();
-	
 	}
 
 
 	//オブジェクト情報更新
 	m_obj->Update();
-	
-
-	////影の情報更新
-	//m_shadow->Update();
-
-	////Collider情報更新
-	//if (m_shadowCollider) {
-	//	UpdateShadowColliderData();
-	//}
-
-
-	
 }
 
 bool GameObject::isMoveable(DIR dir)

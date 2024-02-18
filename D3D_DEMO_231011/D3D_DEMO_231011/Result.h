@@ -42,9 +42,8 @@ private:
     std::vector<int> Starnum;
 
     // result
-
     CanvasUI* uiResult;		    //リザルト文字
-    StaticObject* resultBg;	    //リザルト背景
+    CanvasUI* resultBg;	        //リザルト背景
     CanvasUI* Button_again;	    //リトライボタン
     CanvasUI* Button_next;	    //次のステージへのボタン
     CanvasUI* Button_return;    //タイトルへのボタン
