@@ -2,15 +2,15 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe</FullPath>
+      <FullPath>C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\PixelShader.cso</FullPath>
+      <FullPath>C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\PixelShader.cso</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\VertexShader.cso</FullPath>
+      <FullPath>C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\VertexShader.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

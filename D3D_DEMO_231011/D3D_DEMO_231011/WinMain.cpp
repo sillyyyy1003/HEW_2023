@@ -191,7 +191,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//ゲーム/Inputの解放処理->Singleton
 
-	//Direct3D解放処理
+	//解放処理
 	D3D_Release();
 
 
