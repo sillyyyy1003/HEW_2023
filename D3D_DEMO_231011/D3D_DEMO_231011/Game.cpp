@@ -1284,14 +1284,12 @@ void Game::GameUpdate(void)
 	case SCENENAME::TITLE:
 		TitleUpdate();
 		break;
-
 	case SCENENAME::STAGESELECT:
 
 		//セレクトにいくとサウンド停止
 		XA_Stop(BGM_Stage1);
 		XA_Stop(BGM_Stage2);
 		XA_Stop(BGM_Stage3);
-
 		SelectUpdate();
 		break;
 
@@ -1299,8 +1297,6 @@ void Game::GameUpdate(void)
 		
 		//ステージにいくとセレクトBGM停止
 		XA_Stop(BGM_SelectStage);
-
-
 		StageUpdate();
 		break;
 
@@ -1493,9 +1489,9 @@ void Game::UiUpdate()
 		}
 	}
 
-		//	ESCAPE押して　戻る
-		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
-		{
+	//	ESCAPE押して　戻る
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+	{
 			XA_Play(SE_Select);//セレクトSE再生
 
 			if (isSound) {
@@ -1504,12 +1500,12 @@ void Game::UiUpdate()
 			else {
 				PauseSwitch();
 			}
-		}
+	}
 	
 
-		//今どのボタンが選択されたの状態変更(改良必要)
-		switch (pauseSelect)
-		{
+	//今どのボタンが選択されたの状態変更(改良必要)
+	switch (pauseSelect)
+	{
 		case Game::RESUME:
 			uiResume->SetAnimeActive(CanvasUI::ACTIVE);
 			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
@@ -2646,11 +2642,15 @@ void Game::StageUpdate(void)
 		controlPanel->SetActive(false);
 	}
 	else {
+		
+
 		if (!isPause) {
+
 			controlPanel->SetActive(true);
 
 			//入力処理
-			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
+			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+			{
 
 				XA_Play(SE_SelectDecide);//決定SE再生
 
@@ -2660,19 +2660,16 @@ void Game::StageUpdate(void)
 				}
 				else//サウンドに入っている時
 				{
-					PauseSwitch();
 					SoundSwitch();
 				}
 			}
+
+
 
 			if (isSound)
 			{
 				SoundVolume();//BGM,SE音量設定
 			}
-
-
-
-			if (!isPause) {
 
 				//移動させる目標を設定する
 				if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
@@ -2792,8 +2789,8 @@ void Game::StageUpdate(void)
 			}
 
 		}
-	}
 }
+
 
 void Game::TestMove(Effect* _target)
 {
