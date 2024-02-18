@@ -110,6 +110,8 @@ public:
 
 	ID3D11ShaderResourceView* uiSelect;
 	ID3D11ShaderResourceView* uiSound;
+	ID3D11ShaderResourceView* uiPauseCursor;
+
 	
 	//サウンド画面用
 	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景

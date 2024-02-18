@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "ResultProcess.h"
 #include "Game.h"
+#include "xa2.h"
 
 extern Assets* g_Assets;
 
@@ -192,6 +193,8 @@ void Result::ButtonEvent()
 		{
 			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
 			buttonnum = NEXT;
+
+			XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
 		}
 		break;
 	case NEXT://次のステージへ

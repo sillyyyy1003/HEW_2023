@@ -1,30 +1,21 @@
-﻿  Assets.cpp
+  Assets.cpp
   Game.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,23): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,22): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(155,33): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(177,99): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(179,103): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(183,107): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(242,18): warning C4305: “初始化”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(244,18): warning C4305: “=”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(246,22): warning C4305: “=”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(262,33): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(263,43): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(717,45): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(718,44): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(776,34): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(778,33): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2417,70): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2420,70): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2423,70): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2478,58): warning C4305: “初始化”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2494,53): warning C4305: “=”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2541,53): warning C4305: “=”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2551,54): warning C4305: “=”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2763,40): warning C4305: “=”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2764,47): warning C4305: “参数”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2766,32): warning C4305: “初始化”: 从“double”到“float”截断
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2768,8): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-  正在生成代码...
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,23): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,22): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(195,18): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(197,18): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(199,22): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(651,45): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(652,44): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(710,34): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(712,33): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2398,69): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2440,58): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2456,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2503,53): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2513,54): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2724,40): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2725,47): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2727,32): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2729,8): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

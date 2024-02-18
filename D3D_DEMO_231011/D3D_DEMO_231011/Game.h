@@ -35,6 +35,7 @@ private:
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
+	CanvasUI*	uiPauseCursor;	//PAUSEのカーソル
 
 	CanvasUI* uiSelect;
 	CanvasUI* uiSound;
@@ -53,7 +54,9 @@ private:
 
 	//stage select
 	CanvasUI* uiSelectBg;
-	CanvasUI* uiSelectCursor;
+
+	CanvasUI* uiSelectCursor;//ステージセレクトのカーソル
+
 	CanvasUI* uiSelectStage[3];
 	CanvasUI* uiSelectChapter[3];
 	CanvasUI* uiClearMark[3];
@@ -161,17 +164,21 @@ private:
 	bool isSound = false;
 	//pause
 	bool isPause = false;
+
 	//select
 	bool isSelectChapter = false;
 	//操作できるかどうか
 	bool isControl = true;
 	//SE出すかどうか？
 	bool isPlayMoveSE = false;
+
 	//ヒントを出すかどうか？
 	bool isHint = false;
 
 	//リザルト演出
 	bool isResultAnime = false;
+
+
 
 
 	//初期設定
@@ -263,6 +270,7 @@ public:
 
 	//ポーズ関数
 	void PauseSwitch(void);
+	void PauseCursorUpdate(void);
 
 	//サウンド関数
 	void SoundSwitch(void);
@@ -326,6 +334,8 @@ public:
 	void SetResultAnime(bool isAnime) { this->isResultAnime = isAnime; };
 
 	void TestFade(void);
+
+	void FadeUpdate(void);// フェード用のアップデート
 
 
 };

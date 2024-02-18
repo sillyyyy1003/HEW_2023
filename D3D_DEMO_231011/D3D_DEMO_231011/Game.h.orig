@@ -15,6 +15,8 @@ class Object;
 class Effect;
 class CameraShaker;
 class Result;
+class ResultProcess;
+class ResultAnimation;
 
 class Game
 {
@@ -29,10 +31,11 @@ private:
 	//ui
 	CanvasUI*	uiTitle;		//タイトル文字
 	CanvasUI*	uiTitleBg;		//タイトル背景
-	CanvasUI*	uiPressEnter;	//タイトルエンターキー
+	CanvasUI*	uiPressSpace;	//タイトルエンターキー
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
+	CanvasUI*	uiPauseCursor;	//PAUSEのカーソル
 
 	CanvasUI* uiSelect;
 	CanvasUI* uiSound;
@@ -40,24 +43,38 @@ private:
 	CanvasUI* uiMusic;			//文字表示
 	CanvasUI* uiSE;				//SE表示
 
-
-
 	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
 	CanvasUI* fade;
 
 	//Effect
 	Effect* testEffect;
+	
 
 
 	//stage select
 	CanvasUI* uiSelectBg;
-
+<<<<<<< HEAD
 	CanvasUI* uiSelectCursor;
+=======
 
+	CanvasUI* uiSelectCursor;//ステージセレクトのカーソル
+
+>>>>>>> feature/Saka
 	CanvasUI* uiSelectStage[3];
 	CanvasUI* uiSelectChapter[3];
 	CanvasUI* uiClearMark[3];
+
+	//手数の表示
+	ResultProcess* uiStepNum;
+
+	//操作方法表示
+	CanvasUI* controlPanel;
+	CanvasUI* uiArrow;
+	//MASK
+	CanvasUI* stageMask; //ステージを両端を暗くするmask
+	CanvasUI* pauseMask; //pauseの時画面を全体的に暗くなるmask
+	CanvasUI* resultMask;//リザルト画面のマスク
 
 	//STAGE HINT
 	CanvasUI* stageHint[9];
@@ -70,19 +87,12 @@ private:
 	GameObject*		lamp;			//長細の棒
 	GameObject *	housePlate;			//長方形
 
-<<<<<<< HEAD
 	//STAGE1-2
 	GameObject*		lamp1_2;		//台形
 	GameObject*		triangleBlock;	//三角形
 	GameObject*		iphone;			//平行四角形
 
 	//移動できるオブジェクトのリスト
-=======
-	//stage1-2
-	GameObject* bulidingblock;	//三角
-	GameObject* iphone;			//平行四辺形（四角）
-	GameObject* lamp2;		    //台形（四角）
->>>>>>> feature/Sakai04Result
 
 	//stage1-3
 	GameObject* sandwich;	    //直角三角形
@@ -95,6 +105,7 @@ private:
 
 	CameraShaker* cameraShaker;
 	Result* resultGenerator;
+	ResultAnimation* resultAnimator;
 
 private:
 	
@@ -157,12 +168,20 @@ private:
 	bool isSound = false;
 	//pause
 	bool isPause = false;
+
 	//select
 	bool isSelectChapter = false;
-
+	//操作できるかどうか
 	bool isControl = true;
-
+	//SE出すかどうか？
 	bool isPlayMoveSE = false;
+	//ヒントを出すかどうか？
+	bool isHint = false;
+
+	//リザルト演出
+	bool isResultAnime = false;
+
+
 
 
 	//初期設定
@@ -170,8 +189,6 @@ private:
 	SOUNDVOLUME soundVolume_BGM = VOLUME3;
 	SOUNDVOLUME soundVolume_SE = VOLUME3;
 
-
-	
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
 	FADE_STATE fadeState=NO_FADE;
@@ -223,7 +240,6 @@ public:
 	//ゲーム本体
 	void GameUpdate(void);
 
-
 	//Title Update
 	void TitleUpdate(void);
 
@@ -231,9 +247,6 @@ public:
 	void SelectUpdate(void);
 	void UpdateSelectAnimation(void);
 	void UpdateCursor(void);
-
-	//void SelectChapter(void);
-	//void SelectStageNone(void);
 
 	void SelectChapter1(void);
 	void SelectChapter2(void);
@@ -253,17 +266,6 @@ public:
 
 	//result Update
 	void ResultUpdate(void);
-	void UpdateResult1_1(void);
-	void UpdateResult1_2(void);
-	void UpdateResult1_3(void);
-	void UpdateResult2_1(void);
-	void UpdateResult2_2(void);
-	void UpdateResult2_3(void);
-	void UpdateResult3_1(void);
-	void UpdateResult3_2(void);
-	void UpdateResult3_3(void);
-
-
 
 	//ui Update
 	void UiUpdate();
@@ -271,6 +273,7 @@ public:
 
 	//ポーズ関数
 	void PauseSwitch(void);
+	void PauseCursorUpdate(void);
 
 	//サウンド関数
 	void SoundSwitch(void);
@@ -317,7 +320,6 @@ public:
 	//影の位置によって並び替え描画する
 	void SortShadowDraw(void);
 
-
 	//デバッグ用
 	void DebugDisplay(void);
 
@@ -331,13 +333,12 @@ public:
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
 
+	bool GetResultAnime() { return this->isResultAnime; };
+	void SetResultAnime(bool isAnime) { this->isResultAnime = isAnime; };
+
 	void TestFade(void);
+	void FadeUpdate(void);// フェード用のアップデート
 
-	void ComicUpdate();
-	void Result1_1Comic(void);
-
-	void DrawComic1_1(void);
-	void DrawResult1_1(void);
 
 };
 
