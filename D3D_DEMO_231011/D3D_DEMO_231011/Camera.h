@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Direct3D.h"
+#include "Direct3D/Direct3D.h"
 
 #define ROTATEX		(0.360022153096)	//カメラの回転角度tan19.8°
 
