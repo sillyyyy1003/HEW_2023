@@ -72,9 +72,11 @@ void Game::Init()
 
 	fade = new CanvasUI();
 	//mask&panel
-	stageMask = new CanvasUI();
 	controlPanel = new CanvasUI();
-
+	stageMask = new CanvasUI();
+	pauseMask = new CanvasUI();
+	resultMask = new CanvasUI();
+	uiArrow = new  CanvasUI();
 	//stepの手数
 	uiStepNum = new ResultProcess();
 
@@ -120,11 +122,9 @@ void Game::Init()
 
 
 	//移動のオブジェクトの名前を設定する
-
 	//テクスチャ読み込み・モデル作成
-	//uiTitle->CreateModel(g_Assets->uiTitle, 1280, 300, 1, 1);
-	uiTitleBg->CreateModel(g_Assets->uiTitleBg, 1280, 720, 4, 2);
-	uiPressSpace->CreateModel(g_Assets->uiPressSpace, 301, 45, 1, 1);
+	uiTitleBg->CreateModel(g_Assets->uiTitleBg, 1280, 720, 8, 2);
+	uiPressSpace->CreateModel(g_Assets->uiPressSpace, 415, 38, 1, 1);
 
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 647, 702, 1, 1);
 	uiResume->CreateModel(g_Assets->uiResume, 280, 92, 1, 2);
@@ -145,12 +145,14 @@ void Game::Init()
 	fade->CreateModel(g_Assets->fade, 256, 256, 1, 1);
 
 	stageMask->CreateModel(g_Assets->stageMask, 1280, 720, 1, 1);
+	pauseMask->CreateModel(g_Assets->resultMask, 1280, 720, 1, 1);
+	resultMask->CreateModel(g_Assets->resultMask, 1280, 720, 1, 1);
 	controlPanel->CreateModel(g_Assets->controlPanel, 1280, 720, 1, 1);
 
 	//手数表示
 	//表示の大きさを変える
 	uiStepNum->SetSize(0.5);
-	uiStepNum->Init(-6.7, 3.3);//調整いる
+	uiStepNum->Init(-7.7, 3.3,0.5,1);//調整いる
 
 	//stage1
 	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 1, 1);
@@ -166,7 +168,7 @@ void Game::Init()
 	lamp1_2->CreateObject(g_Assets->lamp_1_2, 264, 267, 1, 1);
 	lamp1_2->CreateShadow(g_Assets->lamp_1_2Shadow, 217.5, 217.5, 1, 1, COLLISION_TYPE::SQUARE);
 	iphone->CreateObject(g_Assets->iphone, 186, 141, 1, 1);
-	iphone->CreateShadow(g_Assets->iphoneShadow, 186, 141, 1, 1, COLLISION_TYPE::SQUARE);
+	iphone->CreateShadow(g_Assets->iphoneShadow, 205, 155, 1, 1, COLLISION_TYPE::SQUARE);
 	triangleBlock->CreateObject(g_Assets->triangleBlock, 378, 348, 1, 1);
 	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
 
@@ -181,6 +183,7 @@ void Game::Init()
 	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 306 * 2.6, 240 * 2, 1, 1, COLLISION_TYPE::SQUARE);
 
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 3, 4);
+	uiArrow->CreateModel(g_Assets->uiArrow, 160, 172, 4, 2);
 
 	//アニメーションの設定
 	coconut->InitAnimation();
@@ -203,24 +206,34 @@ void Game::Init()
 	testEffect->m_scale.y = 1.2f;
 	testEffect->m_rotation.x = 95;
 
+
 	//----------------------------//
 	// ここからはシーンの初期化
 	//----------------------------//
 
 	//Title の初期化
 	//位置設定
-	uiTitleBg->m_pos = { 0.0f,0.0f,0.3f };
-	//uiTitleBg->InitAnimation(4);
-	//uiTitleBg->m_anime->m_animeSpeed = 0.02f;
+	uiTitleBg->m_pos = { 0.0f,0.0f,0.9f };
 	uiTitleBg->m_anime->SetAnimePattern(0);
-	uiTitleBg->m_anime->SetFrameX(3);
-	//uiTitleBg->SetAnimeted(true);
+	uiTitleBg->m_anime->SetAnimeSpeed(0.15f);
 
-	//uiTitle->m_pos = { 0.0f,1.5f,0.2f };
+	//Title Animation
+	uiTitleBg->InitAnimation(8);
+	uiTitleBg->SetAnimeted(true);
+
 	uiPressSpace->m_pos = { 0.0f,-2.5f,0.1f };
+	uiPressSpace->SetActive(false);	//最初で隠す
 
+	//ARROW
 
-	//大きさの設定
+	uiArrow->m_pos = { 0.0f,0.0f,0.1f };
+	uiArrow->m_anime->SetAnimeSpeed(0.15f);
+
+	//Title Animation
+	uiArrow->InitAnimation(8);
+	uiArrow->SetAnimeted(true);
+	uiArrow->SetLoop(true);
+
 
 	//Select画面
 	uiSelectBg->m_pos = { 0.0f,0.04f,0.9f };
@@ -235,21 +248,26 @@ void Game::Init()
 
 
 	//uiPause
-	uiPauseBg->m_pos = { -300 / SCREEN_PARA, 0.0f, 0.9f };
-	uiResume->m_pos = { -6.0f, 1.7f, 0.8f };
-	uiRestart->m_pos = { -6.0f, 0.35f, 0.8f };
-	uiSelect->m_pos = { -6.0f, -1.0f, 0.8f };
-	uiSound->m_pos = { -6.0f, -2.35f, 0.8f };
+	uiPauseBg->m_pos = { -300 / SCREEN_PARA, 0.0f, 0.8f };
+	uiResume->m_pos = { -6.0f, 1.7f, 0.7f };
+	uiRestart->m_pos = { -6.0f, 0.35f, 0.7f };
+	uiSelect->m_pos = { -6.0f, -1.0f, 0.7f };
+	uiSound->m_pos = { -6.0f, -2.35f, 0.7f };
 
 	//uiSound
-	uiSoundBg->m_pos = { 1.0f, 0.2f, 0.7f };
-	uiSoundBg->m_scale = { 1.0f,1.0f,1.0f };
+	uiSoundBg->m_pos = { 1.0f, 0.2f, 0.6f };
+	uiSoundBg->m_scale = { 1.0f,1.0f,1.0f };//サウンドのPOSZ ->0.5f
 
 	//controlPanel;
-	//controlPanel->m_pos = { 0,(360 - 77) / SCREEN_PARA,0.6 };
-	controlPanel->m_pos = { 0,0,0.6};
+	controlPanel->m_pos = { 0,0,0.2};//一番手前にする
 	controlPanel->m_scale = { 0.96,0.96,0.96 };
-	stageMask->m_pos.z = { 0.7 };
+
+	//マスクの位置設定
+	stageMask->m_pos.z = 0.7f;//hintの後ろ
+	pauseMask->m_pos.z = 0.9f;
+	resultMask->m_pos.z = 0.9f;
+
+
 	//fade
 	fade->m_pos = { 0.0f,0.0f,-0.9f };
 	fade->m_scale = { 4.0f,3.0f,1.0f };
@@ -288,8 +306,6 @@ void Game::InitStage()
 
 		XA_Play(BGM_Stage1);//サウンド再生
 		InitStage1_1();
-		//InitStage1_2();
-		//InitStage1_3();
 
 		break;
 
@@ -355,8 +371,10 @@ void Game::InitStage()
 	for (int i = 0; i < 9; i++) {
 		SceneManager::Get()->m_stageHolder[i]->SetHint(false);
 	}
+
 	//ヒントを出す
-	SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetHint(true);
+	SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+
 }
 
 void Game::InitStage1_1(void)
@@ -422,6 +440,8 @@ void Game::InitStage1_1(void)
 	
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
+	//アニメションのテクスチャ読み込み
+	resultAnimator->SetTexture(g_Assets->resultComic1_1_1, g_Assets->resultComic1_1_2, g_Assets->resultComic1_1_3);
 
 }
 
@@ -445,8 +465,8 @@ void Game::InitStage1_2(void)
 	iphone->m_shadow->m_sprite->m_pos.z = -0.1f;
 	triangleBlock->m_shadow->m_sprite->m_pos.z = -0.2f;
 
-	lamp1_2->m_shadow->m_sprite->m_pos.y = 3.0f;
-	iphone->m_shadow->m_sprite->m_pos.y = 4.2f;
+	lamp1_2->m_shadow->m_sprite->m_pos.y = 3.09f;
+	iphone->m_shadow->m_sprite->m_pos.y = 4.275f;
 	triangleBlock->m_shadow->m_sprite->m_pos.y =2.2f;
 
 
@@ -485,10 +505,9 @@ void Game::InitStage1_2(void)
 
 	//自動移動や自動回転の設定
 
-
-
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
+	resultAnimator->SetTexture(g_Assets->resultComic1_2_1, g_Assets->resultComic1_2_2, g_Assets->resultComic1_2_3);
 }
 
 void Game::InitStage1_3(void)
@@ -685,7 +704,7 @@ void Game::RailInit1_2(void)
 
 void Game::InitSoundArray()
 {
-	DirectX::XMFLOAT3 pos = { -0.3f, 0.7f, 0.6f };
+	DirectX::XMFLOAT3 pos = { -0.3f, 0.7f, 0.5f };
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -754,7 +773,7 @@ void Game::InitHintArray()
 
 	//位置設定
 	for (int i = 0; i < 9; i++) {
-		stageHint[i]->m_pos = { 0,0,0.3};
+		stageHint[i]->m_pos = { 0,0,0.1};
 	}
 	stageHintBg->m_pos = { 0,0,0.4 };
 	//位置設定
@@ -763,7 +782,6 @@ void Game::InitHintArray()
 
 void Game::TitleUpdate(void)
 {	
-
 
 	//スペースキーを押すと　ステージセレクト画面に遷移
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
@@ -779,26 +797,19 @@ void Game::TitleUpdate(void)
 			SceneManager::Get()->m_stageHolder[i]->SetClear(false);
 		}
 		SceneManager::Get()->SetScene(STAGESELECT);
-		////アニメを始まる
-		//uiTitleBg->m_anime->isPlaying = true;
-		////アニメパターンを変える
-		//uiTitleBg->m_anime->SetAnimePattern(1);
 	}
 
-	////アニメション終了
-	//if (uiTitleBg->m_anime->GetFrameX() == -1) {
+	//アニメション終了
+	if (!uiTitleBg->GetAnimated()&&!uiTitleBg->GetLoop()) {
+		
+		uiTitleBg->SetLoop(true);
+		uiTitleBg->SetAnimeted(true);
+		uiTitleBg->m_anime->isPlaying = true;
+		uiTitleBg->m_anime->SetAnimePattern(1);
+		uiPressSpace->SetActive(true);
+	}
 
-	//	switch (uiTitleBg->m_anime->GetAnimePattern()) {
-	//	case 0:
-	//		uiTitleBg->m_anime->SetFrameX(3);
-	//		break;
-	//	case 1:
-	//		SceneManager::Get()->SetScene(STAGESELECT);
-	//		break;
-	//	}
-	//}
 	uiPressSpace->Update();
-	//uiTitle->Update();
 	uiTitleBg->Update();
 	
 }
@@ -1166,14 +1177,16 @@ void Game::UpdateStage1_2(void)
 
 
 	//クリア判定     
-	//if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
-	//	ColliderManager::Get()->ClearCollision({OVERLAP,COL_UP},"coconut","housePlate",ShadowObject::LARGE)) {
-	//	//isPause = true;
-	//	
-	//	//クリア
-	//	int stageNum = SceneManager::Get()->GetActiveStage();
-	//	SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
-	//}
+	if (ColliderManager::Get()->ClearCollision({COL_LEFT,COL_UP }, "triangleBlock", "iphone", ShadowObject::SMALL)&&
+		ColliderManager::Get()->ClearCollision({OVERLAP,OVERLAP}, "triangleBlock","lamp1_2",ShadowObject::MEDIUM)) {
+		//isPause = true;
+		
+		//クリア
+		int stageNum = SceneManager::Get()->GetStage();
+		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+		SceneManager::Get()->SetScene(RESULT);
+		isResultAnime = true;
+	}
 
 	//エフェクト
 	testEffect->SetTrace(true);
@@ -1279,12 +1292,6 @@ void Game::GameUpdate(void)
 }
 
 
-
-
-
-
-
-
 Game::~Game()
 {
 	XA_Release();//サウンド解放
@@ -1313,6 +1320,8 @@ Game::~Game()
 
 	delete stageMask;
 	delete controlPanel;
+	delete pauseMask; //pauseの時画面を全体的に暗くなるmask
+	delete resultMask;//リザルト画面のマスク
 
 	//配列の分を解放
 	for (int i = 0; i < 6; i++)
@@ -1322,9 +1331,10 @@ Game::~Game()
 	}
 
 
+
+
 	delete fade;
 
-	/*delete stageBg;*/
 	delete stageBg;
 	delete coconut;
 	delete lamp;
@@ -1348,7 +1358,7 @@ Game::~Game()
 	delete resultGenerator;	
 	delete resultAnimator;
 	delete uiStepNum;
-
+	delete uiArrow;
 }
 
 Game* Game::Get()
@@ -1475,40 +1485,40 @@ void Game::UiUpdate()
 			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSound->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->m_pos = { -5.5f,1.7f, 0.8f };
-			uiRestart->m_pos = { -6.0f, 0.35f, 0.8f };
-			uiSelect->m_pos = { -6.0f,-1.0f, 0.8f };
-			uiSound->m_pos = { -6.0f, -2.35f, 0.8f };
+			uiResume->m_pos.x =  -5.5f;
+			uiRestart->m_pos.x = -6.0f;
+			uiSelect->m_pos.x = -6.0f;
+			uiSound->m_pos.x = -6.0f;
 			break;
 		case Game::RESTART:
 			uiRestart->SetAnimeActive(CanvasUI::ACTIVE);
 			uiResume->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSound->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->m_pos = { -6.0f,1.7f, 0.8f };
-			uiRestart->m_pos = { -5.5f, 0.35f, 0.8f };
-			uiSelect->m_pos = { -6.0f,-1.0f, 0.8f };
-			uiSound->m_pos = { -6.0f, -2.35f, 0.8f };
+			uiResume->m_pos.x = -6.0f;
+			uiRestart->m_pos.x = -5.5f;
+			uiSelect->m_pos.x = -6.0f;
+			uiSound->m_pos.x = -6.0f;
 			break;
 		case Game::SELECT_STAGE:
 			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
 			uiResume->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSelect->SetAnimeActive(CanvasUI::ACTIVE);
 			uiSound->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->m_pos = { -6.0f, 1.7f, 0.8f };
-			uiRestart->m_pos = { -6.0f,0.35f, 0.8f };
-			uiSelect->m_pos = { -5.5f,-1.0f, 0.8f };
-			uiSound->m_pos = { -6.0f, -2.35f, 0.8f };
+			uiResume->m_pos.x = -6.0f;
+			uiRestart->m_pos.x = -6.0f;
+			uiSelect->m_pos.x = -5.5f;
+			uiSound->m_pos.x = -6.0f;
 			break;
 		case Game::SOUND:
 			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
 			uiResume->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
 			uiSound->SetAnimeActive(CanvasUI::ACTIVE);
-			uiResume->m_pos = { -6.0f, 1.7f, 0.8f };
-			uiRestart->m_pos = { -6.0f,0.35f, 0.8f };
-			uiSelect->m_pos = { -6.0f,-1.0f, 0.8f };
-			uiSound->m_pos = { -5.5f,-2.35f, 0.8f };
+			uiResume->m_pos.x =  -6.0f;
+			uiRestart->m_pos.x = -6.0f;
+			uiSelect->m_pos.x = -6.0f;
+			uiSound->m_pos.x = -5.5f;
 			break;
 		}
 
@@ -1539,10 +1549,21 @@ void Game::PauseSwitch(void)
 	if (isPause)
 	{
 		isPause = false;
+		//画面エフェクトの切り替え
+		pauseMask->SetActive(false);
+		stageMask->SetActive(true);
+		controlPanel->SetActive(true);
+		uiArrow->SetActive(false);
+
 	}
 	else
 	{
 		isPause = true;
+		//画面エフェクトの切り替え
+		pauseMask->SetActive(true);
+		stageMask->SetActive(false);
+		controlPanel->SetActive(false);
+		uiArrow->SetActive(false);
 	}
 
 }
@@ -2049,35 +2070,8 @@ void Game::GameDraw()
 		SelectDraw();
 		break;
 	case SCENENAME::STAGE:
+
 		StageDraw();
-
-
-		//今のステージのヒントを描画する
-		SetBlendState(GetBlendMultiply());
-		////MASKの描画
-		stageMask->Draw();
-		//ヒントの背景
-		stageHintBg->Draw();
-	
-		SetBlendState(GetBlendAlpha());
-
-		if (!isPause) {
-
-			controlPanel->Draw();
-		}
-
-		if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint() && !SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear()) {
-			if (!isPause) {
-				uiStepNum->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
-			}
-
-		}
-
-
-		stageHint[SceneManager::Get()->GetStage()]->Draw();
-
-
-
 		break;
 	case SCENENAME::RESULT:
 		ResultDraw();
@@ -2097,8 +2091,6 @@ void Game::TitleDraw(void)
 {
 	uiTitleBg->Draw();
 
-	//uiTitle->Draw();
-
 	uiPressSpace->Draw();	
 
 
@@ -2109,7 +2101,6 @@ void Game::TitleDraw(void)
 void Game::SelectDraw(void)
 {
 	uiSelectBg->Draw();
-	
 	uiSelectDraw();
 	uiSelectCursor->Draw();
 
@@ -2144,7 +2135,7 @@ void Game::StageDraw(void)
 		break;
 
 	case STAGE1_2:
-		DrawStage1_1();
+		DrawStage1_2();
 
 		break;
 
@@ -2187,15 +2178,36 @@ void Game::StageDraw(void)
 
 	}
 
-
-
 	if (isPause) {
 		UiDraw();
 	}
+
+	//今のステージのヒントを描画する
+	SetBlendState(GetBlendMultiply());
+	//ヒントの背景
+	stageHintBg->Draw();
+	stageMask->Draw();
+	SetBlendState(GetBlendAlpha());
+
+	//pauseじゃない時操作方法出る
+	controlPanel->Draw();
+
+	//ステップ数表示
+	if (!isPause) {
+		if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint())
+		uiStepNum->PrintDebugLogCenter(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+
+	}
+
+	//hint描画
+	stageHint[SceneManager::Get()->GetActiveStage()]->Draw();
+
+
 }
 
 void Game::DrawStage1_1()
 {
+	
 		stageBg->Draw();
 
 
@@ -2231,14 +2243,17 @@ void Game::DrawStage1_2()
 
 void Game::ResultDraw(void)
 {
-	if (isResultAnime) {
+	stageBg->Draw();
+	//maskをつける
+	SetBlendState(GetBlendMultiply());
+	resultMask->Draw();
+	SetBlendState(GetBlendAlpha());
 
+	if (isResultAnime) {
 		//リザルトアニメーション待機させる
 		resultAnimator->Draw();
-
 	}
 	else {
-
 		resultGenerator->Draw();
 	}
 
@@ -2247,6 +2262,10 @@ void Game::ResultDraw(void)
 void Game::UiDraw(void)
 {
 
+	//一番後にマスクが描画される
+	SetBlendState(GetBlendMultiply());
+	pauseMask->Draw();
+	SetBlendState(GetBlendAlpha());
 	if (!isSound)
 	{
 		uiPauseBg->Draw();
@@ -2373,35 +2392,54 @@ void Game::SortObjectDraw(void)
 		if (obj1->m_obj->m_sprite->m_pos.z == obj2->m_obj->m_sprite->m_pos.z) {
 			return obj1->GetRailPos().horizontalPos <  obj2->GetRailPos().horizontalPos;
 		}
-		//return obj1->GetRailPos().verticalPos <  obj2->GetRailPos().verticalPos;
-		return obj1->m_obj->m_sprite->m_pos.z > obj2->m_obj->m_sprite->m_pos.z;
+		return obj1->m_obj->m_sprite->m_pos.z < obj2->m_obj->m_sprite->m_pos.z;
 		});
 
 	
-	//修正いる
-	for (auto it = objectList.end() - 1; it != objectList.begin(); it--) {
+	for (auto it = objectList.begin(); it != objectList.end()-1; it++) {
 		
-		bool isOverlap = false; //
-
-		if (it != objectList.begin()) {
-			for (auto nextIt = it - 1; nextIt != objectList.begin(); nextIt--) {
-				// 被重叠
+		bool isOverlap = false;
+		
+		if (it != objectList.end() - 1) {
+			auto nextIt = it + 1;
+			while (nextIt != objectList.end()) {
 				if ((*it)->GetRailPos().horizontalPos == (*nextIt)->GetRailPos().horizontalPos) {
 					isOverlap = true;
-					//break; // 重なったら
 				}
+				nextIt += 1;
 			}
 		}
-		
-		// 
+
 		if (isOverlap) {
-			(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 0.7 };
+
+			switch ((*it)->GetRailPos().verticalPos) {
+			case 0:
+				(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 0.8 };
+				break;
+			case 1:
+				(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 0.6 };
+				break;
+			case 2:
+				(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 0.3 };
+				break;
+			}	
 		}
 		else {
 			(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0, 1.0, 1.0, 1.0 };
 		}
 	}
 	
+
+	//並び替え
+	std::sort(objectList.begin(), objectList.end(), [](GameObject* obj1, GameObject* obj2) {
+		if (obj1->m_obj->m_sprite->m_pos.z == obj2->m_obj->m_sprite->m_pos.z) {
+			return obj1->GetRailPos().horizontalPos < obj2->GetRailPos().horizontalPos;
+		}
+		//return obj1->GetRailPos().verticalPos <  obj2->GetRailPos().verticalPos;
+		return obj1->m_obj->m_sprite->m_pos.z > obj2->m_obj->m_sprite->m_pos.z;
+		});
+
+
 	//描画
 	for (auto& element : objectList) {
 
@@ -2520,27 +2558,30 @@ void Game::DebugDisplay(void)
 
 	}
 }
+
 void Game::StageUpdate(void)
 {
 	//もしヒント出されていない
-	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetHint()) {
+	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
 
 		//スペースキーを押したら
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
-			stageHint[SceneManager::Get()->GetStage()]->SetActive(false);
+			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
 			stageHintBg->SetActive(false);
-			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetHint(false);
+			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
 		}
 		else {
-			stageHint[SceneManager::Get()->GetStage()]->SetActive(true);
+			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
 			stageHintBg->SetActive(true);
 
 		}
 
+		controlPanel->SetActive(false);
 	}
 	else {
 		if (!isPause) {
+			controlPanel->SetActive(true);
 
 			//入力処理
 			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
@@ -2655,6 +2696,7 @@ void Game::StageUpdate(void)
 
 		}
 		else {
+			//マスクを閉める
 			UiUpdate();
 		}
 

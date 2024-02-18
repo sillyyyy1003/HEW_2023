@@ -13,7 +13,9 @@ private:
     float m_sPosX = 0;
     float m_sPosY = 0;
     
-    float m_size = 0;
+    float m_size = 0;//キャラの設定
+    float m_interval = 0;   //間隔を設定する
+
 
 public:
 
@@ -21,16 +23,22 @@ public:
 
     ~ResultProcess();
 
-    //任意のタイミングで初期化するため
-    void Init(float posX, float posY);
-
-    CanvasUI* StepNum[maxChars];//ステップ数表示用
 
     void SetSize(float size) { m_size = size; };
 
+    //任意のタイミングで初期化するため
+    void Init(float posX, float posY, float size, float interval);
+
+    CanvasUI* StepNum[maxChars];//ステップ数表示用
+
+   
+
     //ステップ数の表示
-    void UpdateChar(char* outputChar);
-    void PrintDebugLog(const int _num);
+    void UpdateCharCenter(char* outputChar);//中央揃え
+    void UpdateCharLeft(char* outputChar);//左揃え
+
+    void PrintDebugLogCenter(const int _num);//中央揃え
+    void PrintDebugLogLeft(const int _num);//左揃え
 
     //文字列のスタート位置を設定
     void SetPosition(float posX, float posY);

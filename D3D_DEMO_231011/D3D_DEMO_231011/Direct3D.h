@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include <d3d11.h>		// DirectX11を使うためのヘッダーファイル
 #include <DirectXMath.h>// DirextXの数学関連のヘッダーファイル
 using namespace DirectX;

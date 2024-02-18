@@ -40,8 +40,7 @@ Result::~Result()
 void Result::Init()
 {
 	//StepNumの初期化
-	processor->SetSize(1.0);
-	processor->Init(2.0f, 0.0f);
+	processor->Init(2.0f, 0.0f, 1.0, 10);
 
 	uiResult = new CanvasUI();
 	resultBg = new CanvasUI();
@@ -56,9 +55,9 @@ void Result::Init()
 	resultBg->CreateModel(g_Assets->resultBg, 1029, 713, 1, 1);
 	Result_score->CreateModel(g_Assets->Result_score, 139, 66, 1, 1);
 	Result_stepcount->CreateModel(g_Assets->Result_stepcount, 375, 72, 1, 1);
-	Button_again->CreateModel(g_Assets->Button_again, 299, 192 / 2, 1, 2);
-	Button_next->CreateModel(g_Assets->Button_next, 316, 214 / 2, 1, 2);
-	Button_return->CreateModel(g_Assets->Button_return, 311, 208 / 2, 1, 2);
+	Button_again->CreateModel(g_Assets->Button_again, 299, 96, 1, 2);
+	Button_next->CreateModel(g_Assets->Button_next, 316, 107, 1, 2);
+	Button_return->CreateModel(g_Assets->Button_return, 311, 104, 1, 2);
 
 	//座標
 	resultBg->m_pos = { 0.0f,0.0f,0.4f };
@@ -141,7 +140,7 @@ void Result::Draw()
 	}
 
 	//ステージ終了時のステップ数を表示
-	processor->PrintDebugLog(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());//
+	processor->PrintDebugLogLeft(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());//
 }
 
 void Result::DoResultKeyEvent()

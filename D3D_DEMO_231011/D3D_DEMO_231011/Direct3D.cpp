@@ -15,7 +15,6 @@ static UINT g_ScreenWidth;      //画面の幅
 static UINT g_ScreenHeight;     //画面の高さ
 ID3D11Buffer* g_ConstBuffer; //定数バッファ用変数
 
-
 D3D_DATA* GetD3D_DATA(void) { return g_pD3D; }
 
 ID3D11Device* GetD3D_Device(void) { return g_pD3D->Device; }

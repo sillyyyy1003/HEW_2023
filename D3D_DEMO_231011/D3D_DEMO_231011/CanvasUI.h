@@ -16,6 +16,10 @@ private:
 
 	std::vector<int> animeTable;
 
+	//ループするかどうか
+	bool isLoop = false;
+
+
 public:
 	enum STATUS {
 		ACTIVE = 0,		//起動している時
@@ -50,7 +54,12 @@ public:
 	//アニメション用
 	void InitAnimation(int num);
 
+	//アニメションの状態
 	void SetAnimeted(bool isAnimated) { this->isAnimated = isAnimated; };
+	bool GetAnimated(void) { return this->isAnimated; };
+
+	void SetLoop(bool isLoop) { this->isLoop = isLoop; };
+	bool GetLoop(void) { return isLoop; };
 	
 
 };

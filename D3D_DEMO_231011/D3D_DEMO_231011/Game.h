@@ -48,6 +48,7 @@ private:
 
 	//Effect
 	Effect* testEffect;
+	
 
 
 	//stage select
@@ -60,8 +61,13 @@ private:
 	//手数の表示
 	ResultProcess* uiStepNum;
 
-	CanvasUI* stageMask;
+	//操作方法表示
 	CanvasUI* controlPanel;
+	CanvasUI* uiArrow;
+	//MASK
+	CanvasUI* stageMask; //ステージを両端を暗くするmask
+	CanvasUI* pauseMask; //pauseの時画面を全体的に暗くなるmask
+	CanvasUI* resultMask;//リザルト画面のマスク
 
 	//STAGE HINT
 	CanvasUI* stageHint[9];

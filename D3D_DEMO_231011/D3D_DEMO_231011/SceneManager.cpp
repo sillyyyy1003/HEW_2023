@@ -43,17 +43,19 @@ void SceneManager::Update()
 
 int SceneManager::GetActiveStage(void)
 {
-	for (int i = 0; i < STAGE_NUM; i++) {
+	//for (int i = 0; i < STAGE_NUM; i++) {
 
-		if (m_stageHolder[i]->GetActive()) {
+	//	if (m_stageHolder[i]->GetActive()) {
 
-			return i;
-		}
+	//		return i;
+	//	}
+	//	else {
+	//		return 0;
+	//	}
+	//}
+	int num = Scene::GetStage();
+	return static_cast<STAGEINFO>(num);
 
-		else {
-			return 0;
-		}
-	}
 }
 
 

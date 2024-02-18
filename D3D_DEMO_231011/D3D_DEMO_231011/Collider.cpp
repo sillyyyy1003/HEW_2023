@@ -30,8 +30,6 @@ Collider_Dir Collider::GetCollisionDir(Collider* collider)
 	int x_Result = this->m_center.x - collider->m_center.x;
 	int y_Result = this->m_center.y - collider->m_center.y;
 
-	
-
 	//TargetObject は本体の左
 	if (x_Result > 0) {
 

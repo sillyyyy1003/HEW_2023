@@ -11,9 +11,8 @@ Assets::Assets()
 
     //test
     //title
-    uiTitle = LoadTexture("assets/title/uiTitle.png");
     uiTitleBg = LoadTexture("assets/title/title_animation.png");
-    uiPressSpace = LoadTexture("assets/title/hint_button.png");
+    uiPressSpace = LoadTexture("assets/title/title_pressspace_button.png");
 
     //select
     uiSelectBg = LoadTexture("assets/ui/select/Select_bg.png");
@@ -28,15 +27,13 @@ Assets::Assets()
 
     stageMask = LoadTexture("assets/img/bg_mask.png");
     controlPanel = LoadTexture("assets/ui/controlPanel.png");
+    resultMask = LoadTexture("assets/img/result_mask.png");
+    
     //stage hint
-    //stageHint1_1 = LoadTexture("assets/1_1_hint.png");
-    //stageHint1_2 = LoadTexture("assets/1_2_hint.png");
-    //stageHint1_3 = LoadTexture("assets/1_3_hint.png");
-    stageHint1_1 = LoadTexture("assets/hint/1_1_image_hint.png");
-    stageHint1_2 = LoadTexture("assets/hint/1_2_image_hint.png");
-    stageHint1_3 = LoadTexture("assets/hint/1_3_image_hint.png");
+    stageHint1_1 = LoadTexture("assets/hint/1_1_hint.png");
+    stageHint1_2 = LoadTexture("assets/hint/1_2_hint.png");
+    stageHint1_3 = LoadTexture("assets/hint/1_3_hint.png");
     stageHintBg = LoadTexture("assets/hint/bg_shadow.png");
-
 
     //stage1_1
     stageBg1_1 = LoadTexture("assets/stage1/1_1_BG.png");
@@ -48,7 +45,7 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
     //stage1_2
-    stageBg1_2 = LoadTexture("assets/stage1/1_2_Bg.png");
+    stageBg1_2 = LoadTexture("assets/stage1/1_2Bg.png");
     lamp_1_2 =  LoadTexture("assets/stage1/1_2_lamp.png");
     lamp_1_2Shadow = LoadTexture("assets/stage1/1_2_lamp_shadow.png");
     iphone = LoadTexture("assets/stage1/1_2_iphone.png");
@@ -64,7 +61,11 @@ Assets::Assets()
     //1-2
     resultComic1_2_1 = LoadTexture("assets/clear/1_2_1.png");
     resultComic1_2_2 = LoadTexture("assets/clear/1_2_2.png");
-    resultComic1_1_3 = LoadTexture("assets/clear/1_2_3.png");
+    resultComic1_2_3 = LoadTexture("assets/clear/1_2_3.png");
+
+    resultComic1_3_1 = LoadTexture("assets/clear/1_3_1.png");
+    resultComic1_3_2 = LoadTexture("assets/clear/1_3_2.png");
+    resultComic1_3_3 = LoadTexture("assets/clear/1_3_3.png");
 
     //stage1_3
     stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
@@ -89,10 +90,6 @@ Assets::Assets()
     star = LoadTexture("assets/result/Star_shadow.png");
     starShadow = LoadTexture("assets/result/Star.png");
 
-    //clear
-    clear1_1_1 = LoadTexture("assets/clear/1_1_1.png");
-    clear1_1_2 = LoadTexture("assets/clear/1_1_2.png");
-    clear1_1_3 = LoadTexture("assets/clear/1_1_3.png");
 
     //pause
     uiPauseBg = LoadTexture("assets/ui/pauseBg.png");
@@ -107,10 +104,11 @@ Assets::Assets()
     uiSE = LoadTexture("assets/ui/pause_se.png");
     uiSoundOp_BGM = LoadTexture("assets/ui/pause_note.png");
 
-    fade = LoadTexture("assets/fade.png");
+    fade = LoadTexture("assets/hint/fade.png");
 
     //effect
     effect1 = LoadTexture("assets/Effect/cursor.png");
+    uiArrow = LoadTexture("assets/ui/direction_animation.png");
 
 
 }
@@ -122,7 +120,7 @@ Assets::~Assets()
 
     //タイトル用のリソース
     SAFE_RELEASE(uiTitleBg);
-    SAFE_RELEASE(uiTitle);
+ 
     SAFE_RELEASE(uiPressSpace);
 
     //ステージセレクト用
@@ -141,6 +139,7 @@ Assets::~Assets()
     //UI用
     SAFE_RELEASE(stageMask);
     SAFE_RELEASE(controlPanel);
+    SAFE_RELEASE(resultMask);
 
     //clear
     SAFE_RELEASE(uiClear);
@@ -148,9 +147,6 @@ Assets::~Assets()
     SAFE_RELEASE(stageHint1_2);
     SAFE_RELEASE(stageHint1_3);
     SAFE_RELEASE(stageHintBg);    
-    SAFE_RELEASE(clear1_1_1);
-    SAFE_RELEASE(clear1_1_2);
-    SAFE_RELEASE(clear1_1_3);
 
 
     //stage1-1用リソース
@@ -180,7 +176,11 @@ Assets::~Assets()
     //1-2
     SAFE_RELEASE(resultComic1_2_1);
     SAFE_RELEASE(resultComic1_2_2);
-    SAFE_RELEASE(resultComic1_1_3);    //stage1-2用リソース
+    SAFE_RELEASE(resultComic1_2_3);    //stage1-2用リソース
+    //1-3
+    SAFE_RELEASE(resultComic1_3_1);
+    SAFE_RELEASE(resultComic1_3_2);
+    SAFE_RELEASE(resultComic1_3_3);    //stage1-2用リソース
 
     //stage1-3用リソース
     SAFE_RELEASE(stage3Bg);
@@ -227,6 +227,7 @@ Assets::~Assets()
 
     //エフェクト用
     SAFE_RELEASE(effect1);
+    SAFE_RELEASE(uiArrow);
 
     //デバッグ用
     SAFE_RELEASE(debugFont);

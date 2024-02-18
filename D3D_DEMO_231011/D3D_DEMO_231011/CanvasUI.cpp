@@ -9,6 +9,8 @@ CanvasUI::CanvasUI()
 
 CanvasUI::~CanvasUI()
 {
+	//animeTableが空になっても問題起こさない
+	animeTable.clear();
 }
 
 
@@ -34,23 +36,33 @@ void CanvasUI::Update(void)
 
 		// 表示させるコマIDを取得
 		int animeID = animeTable[(int)m_anime->m_animeCounter];
+
 		if (m_anime->isPlaying)
 		{
 			// アニメーションのカウンターを進める
 			m_anime->m_animeCounter += m_anime->m_animeSpeed;
 
-			//ループしない場合
-			if (animeTable[(int)m_anime->m_animeCounter] == -1) {
-				m_anime->isPlaying = false;
-				m_anime->m_animeCounter = 0.0f;
-				isAnimated = false;
+			//ループする場合
+			if (isLoop) {
+				
+				if (animeTable[(int)m_anime->m_animeCounter] == -1) {
+					m_anime->m_animeCounter = 0.0f;
+				}
+			
+			}//ループしない場合
+			else {
+
+				if (animeTable[(int)m_anime->m_animeCounter] == -1) {
+					m_anime->m_animeCounter = 0.0f;
+					m_anime->isPlaying = false;
+					isAnimated = false;
+				}
+			
 			}
 		}
 
 		//表示させるコマのUVを計算
 		m_anime->SetFrameX(animeID % m_split.x);
-		m_anime->SetAnimePattern(animeID / m_split.y);
-	
 	}
 
 	//UV座標の更新

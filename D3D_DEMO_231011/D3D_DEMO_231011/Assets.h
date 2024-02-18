@@ -21,7 +21,6 @@ public:
 
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
-	ID3D11ShaderResourceView* uiTitle;
 	ID3D11ShaderResourceView* uiPressSpace;
 
 	//ステージセレクト用
@@ -40,6 +39,7 @@ public:
 
 	ID3D11ShaderResourceView* stageMask;
 	ID3D11ShaderResourceView* controlPanel;
+	ID3D11ShaderResourceView* resultMask;
 
 	//HINT用
 	ID3D11ShaderResourceView* stageHint1_1;
@@ -73,6 +73,10 @@ public:
 	ID3D11ShaderResourceView* resultComic1_2_1;
 	ID3D11ShaderResourceView* resultComic1_2_2;
 	ID3D11ShaderResourceView* resultComic1_2_3;
+	//1-3
+	ID3D11ShaderResourceView* resultComic1_3_1;
+	ID3D11ShaderResourceView* resultComic1_3_2;
+	ID3D11ShaderResourceView* resultComic1_3_3;
 
 	//stage1-3用リソース
 	ID3D11ShaderResourceView* stage3Bg;
@@ -98,11 +102,7 @@ public:
 	ID3D11ShaderResourceView* star;
 	ID3D11ShaderResourceView* starShadow;
 
-	//clear用
-	ID3D11ShaderResourceView* clear1_1_1;
-	ID3D11ShaderResourceView* clear1_1_2;
-	ID3D11ShaderResourceView* clear1_1_3;
-
+	//clear
 	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
 	ID3D11ShaderResourceView* uiResume;
@@ -124,6 +124,7 @@ public:
 	//エフェクト用
 	ID3D11ShaderResourceView* effect1;	//炎
 	ID3D11ShaderResourceView* effect2;	//白いカーソル
+	ID3D11ShaderResourceView* uiArrow;	
 
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		
