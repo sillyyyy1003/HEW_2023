@@ -1265,39 +1265,39 @@ void Game::GameUpdate(void)
 	TestFade();
 	FadeUpdate();
 	
-	//switch (SceneManager::Get()->GetScene()) {
-	//case SCENENAME::TITLE:
-	//	TitleUpdate();
-	//	break;
+	switch (SceneManager::Get()->GetScene()) {
+	case SCENENAME::TITLE:
+		TitleUpdate();
+		break;
 
-	//case SCENENAME::STAGESELECT:
+	case SCENENAME::STAGESELECT:
 
-	//	//セレクトにいくとサウンド停止
-	//	XA_Stop(BGM_Stage1);
-	//	XA_Stop(BGM_Stage2);
-	//	XA_Stop(BGM_Stage3);
+		//セレクトにいくとサウンド停止
+		XA_Stop(BGM_Stage1);
+		XA_Stop(BGM_Stage2);
+		XA_Stop(BGM_Stage3);
 
-	//	SelectUpdate();
-	//	break;
+		SelectUpdate();
+		break;
 
-	//case SCENENAME::STAGE:
+	case SCENENAME::STAGE:
 
-	//	//ステージにいくとセレクトBGM停止
-	//	XA_Stop(BGM_SelectStage);
-
-
-	//	StageUpdate();
-	//	break;
-
-	//case SCENENAME::RESULT:
-	//	XA_Stop(BGM_Stage1);
-	//	XA_Stop(BGM_Stage2);
-	//	XA_Stop(BGM_Stage3);
+		//ステージにいくとセレクトBGM停止
+		XA_Stop(BGM_SelectStage);
 
 
-	//	ResultUpdate();
-	//	break;
-	//}
+		StageUpdate();
+		break;
+
+	case SCENENAME::RESULT:
+		XA_Stop(BGM_Stage1);
+		XA_Stop(BGM_Stage2);
+		XA_Stop(BGM_Stage3);
+
+
+		ResultUpdate();
+		break;
+	}
 	
 
 }
@@ -2859,7 +2859,7 @@ void Game::TestFade(void)
 
 		if (SceneManager::Get()->GetScene()!= SceneManager::Get()->GetNextScene())
 	{
-		SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+		SceneManager::Get()->SetNewScene(SceneManager::Get()->GetScene());
 		/*m_newScene = m_nextScene;*/
 		fadeState = FADE_OUT;
 		fade->SetActive(true);
