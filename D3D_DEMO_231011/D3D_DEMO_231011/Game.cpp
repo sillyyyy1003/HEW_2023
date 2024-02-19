@@ -49,6 +49,7 @@ void Game::Init()
 	uiSound = new CanvasUI();
 	uiPauseBg = new CanvasUI();
 	uiPauseCursor = new CanvasUI();
+	uiSoundCursor = new CanvasUI();
 
 	uiSoundBg = new CanvasUI();
 
@@ -1641,6 +1642,27 @@ void Game::PauseCursorUpdate(void)
 
 }
 
+void Game::SoundCursorUpdate(void)
+{
+	if (!isSound)
+	{
+		uiSoundCursor->m_pos.z = -0.8f;
+
+	}
+	else {
+		switch (soundOp)
+		{
+		case BGM:
+			uiSoundCursor->m_pos = { -2.0f, 0.65f, 0.6f };
+			break;
+
+		case SE:
+			uiSoundCursor->m_pos = { -2.0f, -0.7f, 0.6f };
+			break;
+		}
+	}
+}
+
 void Game::SoundSwitch(void)
 {
 	if (isSound)
@@ -2337,7 +2359,7 @@ void Game::UiDraw(void)
 		uiRestart->Draw();
 		uiSelect->Draw();
 		uiSound->Draw();
-		uiPauseCursor->Draw();
+		//uiPauseCursor->Draw();
 
 	}
 	else//サウンド画面に入る
@@ -2348,7 +2370,8 @@ void Game::UiDraw(void)
 		uiSelect->Draw();
 		uiSound->Draw();
 		uiSoundBg->Draw();
-		uiPauseCursor->Draw();
+		//uiPauseCursor->Draw();
+		uiSoundCursor->Draw();
 
 		//音量調節の描画
 		SoundVolumeDraw();
@@ -2648,6 +2671,7 @@ void Game::StageUpdate(void)
 			if (isSound)
 			{
 				SoundVolume();//BGM,SE音量設定
+				SoundCursorUpdate();
 			}
 
 
