@@ -802,7 +802,6 @@ void GameObject::MoveObject(Object* _target)
 
 void GameObject::Draw(void)
 {
-
 	//オブジェクトを描画する
 	m_obj->Draw();
 }

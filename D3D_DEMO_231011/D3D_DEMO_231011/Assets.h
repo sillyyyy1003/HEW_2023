@@ -79,7 +79,7 @@ public:
 	ID3D11ShaderResourceView* resultComic1_3_3;
 
 	//stage1-3用リソース
-	ID3D11ShaderResourceView* stage3Bg;
+	ID3D11ShaderResourceView* stageBg1_3;
 
 	ID3D11ShaderResourceView* busket;
 	ID3D11ShaderResourceView* busketShadow;

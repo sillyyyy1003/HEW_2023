@@ -224,6 +224,8 @@ public:
 	//レールの情報を初期化->使用方法：railDataの配列だけ更新する
 	void RailInit1_1(void);
 	void RailInit1_2(void);
+	void RailInit1_3(void);
+
 
 	//サウンド配列Init
 	void InitSoundArray();
@@ -293,17 +295,6 @@ public:
 
 	//音量調節
 	void SoundVolumeDraw(void);
-
-	//ステージ描画
-	void DrawStage1_1();
-	void DrawStage1_2();
-	void DrawStage1_3();
-	void DrawStage2_1();
-	void DrawStage2_2();
-	void DrawStage2_3();
-	void DrawStage3_1();
-	void DrawStage3_2();
-	void DrawStage3_3();
 
 	//リザルト描画
 	void ResultDraw(void);

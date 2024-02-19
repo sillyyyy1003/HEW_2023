@@ -158,7 +158,7 @@ void Game::Init()
 	uiStepNum->Init(-7.7, 3.3,0.5,1);//調整いる
 
 	//stage1
-	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 1, 1);
+	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 6, 1);
 	//stage1-1
 	coconut->CreateObject(g_Assets->coconut, 190, 192, 1, 1);
 	coconut->CreateShadow(g_Assets->coconutShadow, 158, 159, 1, 1, COLLISION_TYPE::SPHERE);
@@ -196,6 +196,11 @@ void Game::Init()
 	lamp1_2->InitAnimation();
 	iphone->InitAnimation();
 	triangleBlock->InitAnimation();
+
+	sandwich->InitAnimation();	    //直角三角形
+	newspaper->InitAnimation();	    //四角
+	busket->InitAnimation();		//台形（四角）
+	picnicbasket->InitAnimation();   //台形（四角）
 
 
 	//----------------------------//
@@ -527,7 +532,7 @@ void Game::InitStage1_3(void)
 {
 
 	//位置設定
-	SetBackGround(g_Assets->stage3Bg);
+	SetBackGround(g_Assets->stageBg1_3);
 	//オブジェクトを設定する
 	//CAUTION! 
 	//本体y軸固定->-1
@@ -570,7 +575,7 @@ void Game::InitStage1_3(void)
 
 	//レールの設定
 	RailManager::Get()->InitRail();
-	RailInit1_2();
+	RailInit1_3();
 
 	//ステージ情報を初期化
 	for (int i = 0; i < 9; i++) {
@@ -667,6 +672,55 @@ void Game::RailInit1_1(void)
 }
 
 void Game::RailInit1_2(void)
+{
+	bool railData[15][8]{
+		//back row
+		//up	ru  r	rd d	ld l	lu
+		{	0,	0,	0,	0,	0,	0,	0,	0},//0
+		{	0,	0,	0,	0,	0,	0,	0,	0},//1
+		{	0,	0,	0,	0,	1,	0,	0,	0},//2
+		{	0,	0,	0,	0,	0,	0,	0,	0},//3
+		{	0,	0,	0,	0,	0,	0,	0,	0},//4
+
+		//mid row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	1,	0,	0,	1,	0,	1,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+
+		//front row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	1,	1,	0,	0,	0,	0,	0},
+		{	0,	0,	1,	0,	0,	0,	1,	0},
+		{	0,	0,	0,	0,	0,	0,	1,	1},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+	};
+
+	//道を設定する
+	for (int i = 0; i < 15; i++) {
+
+		for (int j = 0; j < 8; j++) {
+
+			if (railData[i][j] == 0) {
+
+				RailManager::Get()->m_info[i].isMoveable[j] = false;
+			}
+			else {
+				RailManager::Get()->m_info[i].isMoveable[j] = true;
+			}
+
+		}
+
+	}
+
+
+	//オブジェクトいるところの位置情報更新
+	RailManager::Get()->InitRailPos();
+}
+
+
+void Game::RailInit1_3(void)
 {
 	bool railData[15][8]{
 		//back row
@@ -831,8 +885,6 @@ void Game::TitleUpdate(void)
 
 void Game::SelectUpdate(void)
 {
-	
-
 	//クリア印の判定->関数化
 	//今のステージを獲得
 	int stageNum = selectStage * 3;
@@ -1034,8 +1086,6 @@ void Game::UpdateSelectAnimation(void)
 void Game::UpdateCursor(void)
 {
 
-	
-	
 	if (!isSelectChapter) {
 
 		uiSelectCursor->m_pos.z = -0.8f ;
@@ -1118,8 +1168,6 @@ void Game::SelectChapter3(void) {
 
 void Game::UpdateStage1_1(void)
 {
-	
-	
 	//背景
 	stageBg->Update();
 
@@ -1174,10 +1222,10 @@ void Game::UpdateStage1_1(void)
 
 void Game::UpdateStage1_2(void)
 {
-	TestMove(testEffect);
 	//背景
 	stageBg->Update();
 
+	//MOVE SE
 	for (auto& element : objectList) {
 		if (!element->GetStill()) {
 			isPlayMoveSE = true;
@@ -1186,13 +1234,12 @@ void Game::UpdateStage1_2(void)
 		}
 	}
 
+	//OBJECT UPDATE
 	for (auto& element : objectList) {
 		element->Update();
 	}
 	
-	TestMove();
-
-	//
+	//SHADOW UPDATE
 	lamp1_2->ShadowUpdate(0.35f, 4);
 	iphone->ShadowUpdate(-1.4f, 4);
 	triangleBlock->ShadowUpdate(0, 4);
@@ -1213,10 +1260,54 @@ void Game::UpdateStage1_2(void)
 	//エフェクト
 	testEffect->SetTrace(true);
 	testEffect->Update();
+	resultAnimator->Update();
 }
 
 void Game::UpdateStage1_3(void)
 {
+
+	//背景
+	stageBg->Update();
+
+	//MOVE SE
+	for (auto& element : objectList) {
+		if (!element->GetStill()) {
+			isPlayMoveSE = true;
+			//ループ中止
+			break;
+		}
+	}
+
+	//OBJECT UPDATE
+	for (auto& element : objectList) {
+		element->Update();
+	}
+
+	//SHADOW UPDATE
+	//lamp1_2->ShadowUpdate(0.35f, 4);
+	//iphone->ShadowUpdate(-1.4f, 4);
+	//triangleBlock->ShadowUpdate(0, 4);
+
+
+	//クリア判定     
+	////if (ColliderManager::Get()->ClearCollision({ COL_LEFT,COL_UP }, "triangleBlock", "iphone", ShadowObject::SMALL) &&
+	////	ColliderManager::Get()->ClearCollision({ OVERLAP,OVERLAP }, "triangleBlock", "lamp1_2", ShadowObject::MEDIUM)) {
+	////	//isPause = true;
+
+	////	//クリア
+	////	int stageNum = SceneManager::Get()->GetStage();
+	////	SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+	////	SceneManager::Get()->SetScene(RESULT);
+	////	isResultAnime = true;
+	////}
+
+	//エフェクト
+	//エフェクト
+	testEffect->SetTrace(true);
+	testEffect->Update();
+	resultAnimator->Update();
+
+
 }
 
 void Game::UpdateStage2_1(void)
@@ -1246,9 +1337,11 @@ void Game::UpdateStage3_3(void)
 void Game::ResultUpdate(void)
 {
 	if (isResultAnime) {
+
 		resultAnimator->Update();
 	}
 	else {	
+
 		resultGenerator->Update();
 	
 	}
@@ -1596,7 +1689,6 @@ void Game::PauseSwitch(void)
 	}
 
 }
-
 
 void Game::PauseCursorUpdate(void)
 {
@@ -2153,9 +2245,6 @@ void Game::TitleDraw(void)
 
 	uiPressSpace->Draw();	
 
-
-	//===================Debug=====================//
-
 }
 
 void Game::SelectDraw(void)
@@ -2217,31 +2306,6 @@ void Game::StageDraw(void)
 
 	//hint描画
 	stageHint[SceneManager::Get()->GetActiveStage()]->Draw();
-
-
-}
-
-void Game::DrawStage1_1()
-{
-	
-		stageBg->Draw();
-
-
-		//描画の順番を並び変え
-
-		//影
-		SortShadowDraw();
-
-		//オブジェクト
-		SortObjectDraw();
-
-
-}
-
-void Game::DrawStage1_2()
-{
-	
-
 
 
 }
@@ -2799,6 +2863,9 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 	//y座標の導入
 	stageBg->m_sprite->m_pos = { 0.0f,-y,1.0f };
 	stageBg->m_sprite->SetTexture(tex);
+	stageBg->m_sprite->m_anime->SetAnimeSpeed(0.05f);
+	static_cast<StaticAnimation*>(stageBg->m_sprite->m_anime)->SetLoop(true);
+
 
 }
 
