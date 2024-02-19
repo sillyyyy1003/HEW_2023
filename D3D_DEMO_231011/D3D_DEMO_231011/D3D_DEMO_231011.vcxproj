@@ -143,6 +143,7 @@
     <ClCompile Include="DInput.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="DInput.h" />
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />

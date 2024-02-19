@@ -51,7 +51,7 @@ class Scene
 private:
 
 	SCENENAME m_scene;
-	SCENENAME m_nextScene;
+	SCENENAME m_nextScene = NONE;
 	SCENENAME m_newScene;
 
 
@@ -79,6 +79,8 @@ public:
 
 	void SetResult(RESULTINFO _result) { m_result = _result; };
 	RESULTINFO GetResult() { return m_result; };
+
+	void ChangeScene(SCENENAME _scene);
 
 
 };

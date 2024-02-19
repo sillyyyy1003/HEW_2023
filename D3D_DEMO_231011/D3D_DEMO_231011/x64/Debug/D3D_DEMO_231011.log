@@ -1,1 +1,25 @@
-﻿  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
+﻿  Game.cpp
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,23): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,22): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(162,33): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(187,93): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(189,87): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(191,99): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(255,18): warning C4305: “初始化”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(257,18): warning C4305: “=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(259,22): warning C4305: “=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(275,33): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(276,43): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(793,45): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(794,44): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(850,34): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(852,33): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(1293,28): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2460,70): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2463,70): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2466,70): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2852,40): warning C4305: “=”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2853,47): warning C4305: “参数”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2855,32): warning C4305: “初始化”: 从“double”到“float”截断
+C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2857,8): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe

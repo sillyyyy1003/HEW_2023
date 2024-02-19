@@ -179,7 +179,7 @@ void Result::ButtonEvent()
 		//スペースを押したときにもう一度同じステージに遷移する
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
-			SceneManager::Get()->SetScene(SCENENAME::STAGE);
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			//同じステージだから、直接初期化をもう一回やったらいい
 			Game::Get()->InitStage();
 			buttonnum = NEXT;
@@ -193,7 +193,7 @@ void Result::ButtonEvent()
 		//スペースを押したときにタイトルに遷移する
 		if (Input::Get()->GetKeyPress(DIK_SPACE))
 		{
-			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGESELECT);
 			buttonnum = NEXT;
 
 			XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
@@ -208,7 +208,7 @@ void Result::ButtonEvent()
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
 			//ステージに戻る
-			SceneManager::Get()->SetScene(SCENENAME::STAGE);
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			//ステージを次のステージにする
 			SceneManager::Get()->SetStage(SceneManager::Get()->GetNextStage());
 			//初期化を行う

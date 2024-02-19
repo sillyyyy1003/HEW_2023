@@ -108,6 +108,7 @@ Assets::Assets()
     uiMusic = LoadTexture("assets/ui/pause_music.png");
     uiSE = LoadTexture("assets/ui/pause_se.png");
     uiSoundOp_BGM = LoadTexture("assets/ui/pause_note.png");
+    uiSoundCursor = LoadTexture("assets/ui/pause_select.png");
 
     fade = LoadTexture("assets/hint/fade.png");
 
@@ -227,6 +228,7 @@ Assets::~Assets()
     SAFE_RELEASE(uiSoundOp_BGM);//サウンド調節
     SAFE_RELEASE(uiMusic);	//サウンド音楽文字表示
     SAFE_RELEASE(uiSE);		//サウントSE文字表示
+    SAFE_RELEASE(uiSoundCursor);
 
 
     SAFE_RELEASE(fade);

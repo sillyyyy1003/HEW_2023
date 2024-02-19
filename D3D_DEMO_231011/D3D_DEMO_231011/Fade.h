@@ -1,42 +1,36 @@
 #pragma once
-#include"CanvasUI.h"
+#include "SceneManager.h"
 
-class Fade:public CanvasUI
+class CanvasUI;
+
+class Fade
 {
+private:
+	//fadeの速度
+	float m_fadeSpeed = 0.01f;
 
 public:
+
+	CanvasUI* m_fadePanel; // 画面にかぶせるスプライト
 	Fade();
 	~Fade();
 
-	void Initialize();
 	void Update();
 	void Draw();
 
-private:
+	// 開始関数
+	void FadeIn();
+	void FadeOut();
 
-	//ID3D11Device* m_device;
-	//ID3D11DeviceContext* m_deviceContext;
-	//ID3D11Buffer* m_vertexBuffer;
-	//ID3D11VertexShader* m_vertexShader;
-	//ID3D11PixelShader* m_pixelShader;
-	//ID3D11InputLayout* m_inputLayout;
+	void SetFadeSpeed(float speed) { m_fadeSpeed = speed; };
 
-	//float m_currentFade;
-	//float m_fadeDuration;
-
-	//フェード状態
-	enum FADE_STATE
-	{
-		NO_FADE,
-		FADE_IN,
-		FADE_OUT,
+	// 現在のフェードの状態
+	enum {
+		NONE,		// 何もフェードしていない状態
+		FADE_IN,	// フェードイン中
+		FADE_OUT,	// フェードアウト中
 	};
-	FADE_STATE fadeState = NO_FADE;
 
-
-
-
-	
+	int mState;
 
 };
-

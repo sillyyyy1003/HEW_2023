@@ -17,6 +17,7 @@ class CameraShaker;
 class Result;
 class ResultProcess;
 class ResultAnimation;
+class Fade;
 
 class Game
 {
@@ -35,7 +36,7 @@ private:
 	CanvasUI*	uiPauseBg;		//PAUSEの背景
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
-	CanvasUI*	uiPauseCursor;	//PAUSEのカーソル
+	CanvasUI*	uiSoundCursor;
 
 	CanvasUI* uiSelect;
 	CanvasUI* uiSound;
@@ -45,7 +46,6 @@ private:
 
 	CanvasUI* uiSoundOp_BGM[6];	//BGM設定
 	CanvasUI* uiSoundOp_SE[6];	//SE設定
-	CanvasUI* fade;
 
 	//Effect
 	Effect* testEffect;
@@ -102,6 +102,7 @@ private:
 	CameraShaker* cameraShaker;
 	Result* resultGenerator;
 	ResultAnimation* resultAnimator;
+	Fade* fade;
 
 private:
 	
@@ -144,15 +145,6 @@ private:
 		CHAPTER_IDLE,
 	};
 
-	//フェード状態
-	enum FADE_STATE
-	{
-		NO_FADE,
-		FADE_IN,
-		FADE_OUT,
-	};
-
-
 	enum PAUSESELECT {
 		RESUME,			//ゲームに戻る
 		RESTART,		//ゲーム再開
@@ -188,7 +180,6 @@ private:
 
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
-	FADE_STATE fadeState=NO_FADE;
 	PAUSESELECT pauseSelect = RESUME;
 	
 
@@ -196,6 +187,14 @@ private:
 	//コンストラクタ&デストラクタ
 	Game() {};
 	~Game();
+
+
+public:
+	//fade演出のタイムカウンター
+	int fadeTime = 0;
+	//くりあした後　本物に変換のタイムカウンター
+	int resultTime = 0;
+
 
 public:
 	//唯一のインスタンスを返す関数
@@ -272,7 +271,7 @@ public:
 
 	//ポーズ関数
 	void PauseSwitch(void);
-	void PauseCursorUpdate(void);
+	void SoundCursorUpdate(void);
 
 	//サウンド関数
 	void SoundSwitch(void);
@@ -318,14 +317,12 @@ public:
 	void SetBackGround(ID3D11ShaderResourceView* tex);
 
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
+	Fade* GetFade(void) { return fade; };
+
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
 
 	bool GetResultAnime() { return this->isResultAnime; };
 	void SetResultAnime(bool isAnime) { this->isResultAnime = isAnime; };
-
-	void TestFade(void);
-
-	void FadeUpdate(void);// フェード用のアップデート
 
 	void SwitchControlObject();
 
