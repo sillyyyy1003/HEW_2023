@@ -48,6 +48,7 @@ public:
 
 	//ステップ数を加算していく
 	void StepCount(void);
+	void HintPunish(int step) { m_moveStep += step; };
 	int GetStep(void) { return m_moveStep; };
 
 	//step数をリセット　クリア状態をリセット

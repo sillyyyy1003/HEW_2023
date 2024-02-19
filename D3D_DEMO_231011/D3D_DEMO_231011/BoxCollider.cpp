@@ -140,6 +140,17 @@ void BoxCollider::Update(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 rotation, D
         m_extents = extents;
         m_radius = extents.x;
 
+
+        ////‘å‚«‚³
+        //UpdateExtents(extents);
+        ////ˆÊ’u
+        //UpdatePos(center);
+        ////‰ñ“]
+        //UpdateRotation(rotation);
+
+        //m_center = center;
+        //m_extents = extents;
+        //m_radius = extents.x;
         //’¸“_   
         //UpdateVerticies(rotation);
     }

@@ -140,24 +140,42 @@ void GameObject::GenerateShadowPos(float center,float interval)
 	case UP:
 		break;
 	case UPRIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
+		if (moveSpeed * m_moveCount <= interval) {
+			m_shadow->m_sprite->m_pos.x += moveSpeed;
+		}
+	
 		break;
 	case RIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
+		if (moveSpeed * m_moveCount <= interval) {
+			m_shadow->m_sprite->m_pos.x += moveSpeed;
+		}
+
 		break;
 	case DOWNRIGHT:
-		m_shadow->m_sprite->m_pos.x += moveSpeed;
+		if (moveSpeed * m_moveCount <= interval) {
+			m_shadow->m_sprite->m_pos.x += moveSpeed;
+		}
+
 		break;
 	case DOWN:
 		break;
 	case DOWNLEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		if (moveSpeed * m_moveCount <= interval) {
+			m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		}
+
 		break;
 	case LEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		if (moveSpeed * m_moveCount <= interval) {
+			m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		}
+
 		break;
 	case UPLEFT:
-		m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		if (moveSpeed * m_moveCount <= interval) {
+			m_shadow->m_sprite->m_pos.x -= moveSpeed;
+		}
+
 		break;
 	case STILL:
 		//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
@@ -247,7 +265,7 @@ void GameObject::ShadowUpdate(float center, float interval)
 	GenerateShadowPos(center, interval);
 
 	//大きさの変更
-	GenerateShadowSize(0.01); //0.5/50frame=0.01
+	GenerateShadowSize(0.02); //0.5/25frame=0.01
 
 	//本体の変更
 	m_shadow->Update();
@@ -478,7 +496,7 @@ void GameObject::UpdateShadowColliderData(void)
 	DirectX::XMFLOAT3 center = m_shadow->m_sprite->m_pos;
 	center.z = 0.0f;
 	DirectX::XMFLOAT3 rotation = m_shadow->m_sprite->m_rotation;
-	DirectX::XMFLOAT3 extents = m_shadow->Object::GetExtents();
+	DirectX::XMFLOAT3 extents = m_shadow->m_sprite->GetExtents();
 
 	m_shadowCollider->Update(center, rotation, extents);
 }
@@ -528,13 +546,10 @@ void GameObject::ObjectMove()
 			m_obj->m_sprite->m_scale.x -= 0.004;
 			m_obj->m_sprite->m_scale.y -= 0.004;
 
-			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
-				m_obj->m_sprite->m_pos.x = 0;
+			m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			if (std::abs(m_obj->m_sprite->m_pos.x) < std::numeric_limits<float>::epsilon()) {
+				m_obj->m_sprite->m_pos.x = 0.0f;  // 修正为零，防止失去有效值
 			}
-			else {
-				m_obj->m_sprite->m_pos.x += moveSpeed.x;
-			}
-			
 		}
 		else {
 			//移動終了
@@ -561,13 +576,15 @@ void GameObject::ObjectMove()
 	case RIGHT:
 
 		moveSpeed.x = 0.18f;
+
 		if ((m_moveCount * moveSpeed.x) <= 4.5f) {
 
-			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
-				m_obj->m_sprite->m_pos.x = 0;
-			}
-			else {
-				m_obj->m_sprite->m_pos.x += moveSpeed.x;
+			
+			m_obj->m_sprite->m_pos.x += moveSpeed.x;
+
+			// 检查x值是否接近零
+			if (std::abs(m_obj->m_sprite->m_pos.x) < std::numeric_limits<float>::epsilon()) {
+				m_obj->m_sprite->m_pos.x = 0.0f;  // 修正为零，防止失去有效值
 			}
 			
 		}
@@ -603,15 +620,11 @@ void GameObject::ObjectMove()
 			//大きさを調整する
 			m_obj->m_sprite->m_scale.x += 0.004;
 			m_obj->m_sprite->m_scale.y += 0.004;
-
-			if (m_obj->m_sprite->m_pos.x >= -0.10 && m_obj->m_sprite->m_pos.x < 0) {
-				m_obj->m_sprite->m_pos.x = 0;
-			}
-			else {
-				m_obj->m_sprite->m_pos.x += moveSpeed.x;
-			}
-
+			m_obj->m_sprite->m_pos.x += moveSpeed.x;
 			
+			if (std::abs(m_obj->m_sprite->m_pos.x) < std::numeric_limits<float>::epsilon()) {
+				m_obj->m_sprite->m_pos.x = 0.0f;  // 修正为零，防止失去有效值
+			}
 		}
 		else {
 			//移動終了
@@ -644,6 +657,7 @@ void GameObject::ObjectMove()
 			//大きさを調整する
 			m_obj->m_sprite->m_scale.x += 0.004;
 			m_obj->m_sprite->m_scale.y += 0.004;
+		
 		}
 		else {
 			//移動終了
@@ -673,15 +687,10 @@ void GameObject::ObjectMove()
 			//大きさを調整する
 			m_obj->m_sprite->m_scale.x += 0.004;
 			m_obj->m_sprite->m_scale.y += 0.004;
-
-			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
-				m_obj->m_sprite->m_pos.x = 0;
+			m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			if (std::abs(m_obj->m_sprite->m_pos.x) < std::numeric_limits<float>::epsilon()) {
+				m_obj->m_sprite->m_pos.x = 0.0f;  // 修正为零，防止失去有效值
 			}
-			else {
-				m_obj->m_sprite->m_pos.x -= moveSpeed.x;
-
-			}
-		
 		}
 		else {
 			//移動終了
@@ -709,14 +718,10 @@ void GameObject::ObjectMove()
 
 		moveSpeed.x = 0.18f;
 		if (m_moveCount * moveSpeed.x <= 4.5) {
-
-			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
-				m_obj->m_sprite->m_pos.x = 0;
+			m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			if (std::abs(m_obj->m_sprite->m_pos.x) < std::numeric_limits<float>::epsilon()) {
+				m_obj->m_sprite->m_pos.x = 0.0f;  // 修正为零，防止失去有效值
 			}
-			else {
-				m_obj->m_sprite->m_pos.x -= moveSpeed.x;
-			}
-
 		}
 		else {
 			//移動終了
@@ -744,16 +749,14 @@ void GameObject::ObjectMove()
 		moveSpeed.z = 0.1f;
 		if (m_moveCount * moveSpeed.z <= 2.5f && m_moveCount * moveSpeed.x <= 4.5) 
 		{
-			m_obj->m_sprite->m_pos.z += moveSpeed.z;
+			
 			//大きさを調整する
 			m_obj->m_sprite->m_scale.x -= 0.004;
 			m_obj->m_sprite->m_scale.y -= 0.004;
-
-			if (m_obj->m_sprite->m_pos.x <= 0.10 && m_obj->m_sprite->m_pos.x > 0) {
-				m_obj->m_sprite->m_pos.x = 0;
-			}
-			else {
-				m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			m_obj->m_sprite->m_pos.z += moveSpeed.z;
+			m_obj->m_sprite->m_pos.x -= moveSpeed.x;
+			if (std::abs(m_obj->m_sprite->m_pos.x) < std::numeric_limits<float>::epsilon()) {
+				m_obj->m_sprite->m_pos.x = 0.0f;  // 修正为零，防止失去有效值
 			}
 			
 		}
@@ -792,6 +795,36 @@ void GameObject::ObjectVibration()
 		Game::Get()->GetCameraShaker()->SetShaker(true);
 	}
 	
+
+}
+
+void GameObject::ResetMove(void)
+{
+	m_moveDir = STILL;
+
+	//移動用のカウンター
+	m_moveCount = 0;
+
+	//入力待ちカウンター
+	m_inputCount = 0;
+
+	//入力
+	m_lastPressTime = 0;
+
+	//時間測定開始
+	isInputCount = false;
+
+	//方向を受ける
+	isGetInput = false;
+
+	//移動しているかどうか？
+	isMove = false;
+
+	//入力の結果
+	InputCom m_nowInput = { INPUT_NONE,INPUT_NONE };
+
+	//入力の時間計算
+	int m_countTime = 0;
 
 }
 

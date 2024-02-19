@@ -16,7 +16,6 @@ void ShadowObject::Update(void)
 	//アニメーションの更新
 	Object::Update();
 
-
 }
 
 

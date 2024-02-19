@@ -93,7 +93,7 @@ private:
 	//stage1-3
 	GameObject* sandwich;	    //直角三角形
 	GameObject* newspaper;	    //四角
-	GameObject* busket;			//台形（四角）
+	GameObject* bucket;			//台形（四角）
 	GameObject* picnicbasket;   //台形（四角）
 
 	std::vector<GameObject*> objectList;
@@ -315,6 +315,7 @@ public:
 	void TestMove(CanvasUI* _target);
 	void TestMove(void);
 
+	
 	//背景を入れ替わる
 	void SetBackGround(ID3D11ShaderResourceView* tex);
 
@@ -327,6 +328,8 @@ public:
 	void TestFade(void);
 
 	void FadeUpdate(void);// フェード用のアップデート
+
+	void SwitchControlObject();
 
 
 };
