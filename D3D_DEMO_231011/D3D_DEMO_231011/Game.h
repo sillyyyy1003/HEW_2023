@@ -188,7 +188,7 @@ private:
 
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
-	FADE_STATE fadeState=NO_FADE;
+	FADE_STATE fadeState = NO_FADE;
 	PAUSESELECT pauseSelect = RESUME;
 	
 
@@ -336,6 +336,7 @@ public:
 	void TestFade(void);
 
 	void FadeUpdate(void);// フェード用のアップデート
+
 
 
 

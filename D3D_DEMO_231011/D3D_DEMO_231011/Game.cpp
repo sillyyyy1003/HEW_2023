@@ -272,9 +272,9 @@ void Game::Init()
 
 
 	//fade
-	fade->m_pos = { 0.0f,0.0f,-0.9f };
+	fade->m_pos = { 0.0f,0.0f,0.2f };
 	fade->m_scale = { 4.0f,3.0f,1.0f };
-	//fade->SetActive(true);
+	fade->m_materialDiffuse = { 1.0f,1.0f, 1.0f, 1.0f };
 
 
 	//配列の初期化と設定
@@ -811,7 +811,8 @@ void Game::TitleUpdate(void)
 		}
 		
 		SceneManager::Get()->SetScene(STAGESELECT);
-		FadeUpdate();
+		
+		
 	}
 
 	//アニメション終了
@@ -827,7 +828,7 @@ void Game::TitleUpdate(void)
 	uiPressSpace->Update();
 	uiTitleBg->Update();
 
-
+	FadeUpdate();
 	
 }
 
@@ -1133,13 +1134,13 @@ void Game::UpdateStage1_1(void)
 		}
 	}
 
-	if (isPlayMoveSE) {
+	//if (isPlayMoveSE) {
 
-		XA_Play(SE_Move);
-		
-		//いったんOFFにしてまた再生されるように
-		isPlayMoveSE = false;
-	}
+	//	XA_Play(SE_Move);
+	//	
+	//	//いったんOFFにしてまた再生されるように
+	//	isPlayMoveSE = false;
+	//}
 
 	//本体の更新
 	for (auto& element : objectList) {
@@ -1254,47 +1255,51 @@ void Game::ResultUpdate(void)
 		resultGenerator->Update();
 	
 	}
+
+	FadeUpdate();
 }
 
 void Game::GameUpdate(void)
 {
-
-	FadeUpdate();
-
-	switch (SceneManager::Get()->GetScene()) {
-	case SCENENAME::TITLE:
-		TitleUpdate();
-		break;
-
-	case SCENENAME::STAGESELECT:
-
-		//セレクトにいくとサウンド停止
-		XA_Stop(BGM_Stage1);
-		XA_Stop(BGM_Stage2);
-		XA_Stop(BGM_Stage3);
-
-		SelectUpdate();
-		break;
-
-	case SCENENAME::STAGE:
-		
-		//ステージにいくとセレクトBGM停止
-		XA_Stop(BGM_SelectStage);
-
-
-		StageUpdate();
-		break;
-
-	case SCENENAME::RESULT:
-		XA_Stop(BGM_Stage1);
-		XA_Stop(BGM_Stage2);
-		XA_Stop(BGM_Stage3);
-
-		
-		ResultUpdate();
-		break;
-	}
 	
+	TestFade();
+	FadeUpdate();
+	
+	//switch (SceneManager::Get()->GetScene()) {
+	//case SCENENAME::TITLE:
+	//	TitleUpdate();
+	//	break;
+
+	//case SCENENAME::STAGESELECT:
+
+	//	//セレクトにいくとサウンド停止
+	//	XA_Stop(BGM_Stage1);
+	//	XA_Stop(BGM_Stage2);
+	//	XA_Stop(BGM_Stage3);
+
+	//	SelectUpdate();
+	//	break;
+
+	//case SCENENAME::STAGE:
+
+	//	//ステージにいくとセレクトBGM停止
+	//	XA_Stop(BGM_SelectStage);
+
+
+	//	StageUpdate();
+	//	break;
+
+	//case SCENENAME::RESULT:
+	//	XA_Stop(BGM_Stage1);
+	//	XA_Stop(BGM_Stage2);
+	//	XA_Stop(BGM_Stage3);
+
+
+	//	ResultUpdate();
+	//	break;
+	//}
+	
+
 }
 
 
@@ -2318,7 +2323,7 @@ void Game::UiDraw(void)
 		uiRestart->Draw();
 		uiSelect->Draw();
 		uiSound->Draw();
-		uiPauseCursor->Draw();
+		//uiPauseCursor->Draw();
 
 	}
 	else//サウンド画面に入る
@@ -2329,7 +2334,7 @@ void Game::UiDraw(void)
 		uiSelect->Draw();
 		uiSound->Draw();
 		uiSoundBg->Draw();
-		uiPauseCursor->Draw();
+		//uiPauseCursor->Draw();
 
 		//音量調節の描画
 		SoundVolumeDraw();
@@ -2627,29 +2632,32 @@ void Game::StageUpdate(void)
 		controlPanel->SetActive(false);
 	}
 	else {
+
+
+		//入力処理
+		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
+
+			XA_Play(SE_SelectDecide);//決定SE再生
+
+			if (!isSound)
+			{
+				PauseSwitch();
+			}
+			else//サウンドに入っている時
+			{
+				PauseSwitch();
+				SoundSwitch();
+			}
+		}
+
+		if (isSound)
+		{
+			SoundVolume();//BGM,SE音量設定
+		}
+
 		if (!isPause) {
 			controlPanel->SetActive(true);
 
-			//入力処理
-			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
-
-				XA_Play(SE_SelectDecide);//決定SE再生
-
-				if (!isSound)
-				{
-					PauseSwitch();
-				}
-				else//サウンドに入っている時
-				{
-					PauseSwitch();
-					SoundSwitch();
-				}
-			}
-
-			if (isSound)
-			{
-				SoundVolume();//BGM,SE音量設定
-			}
 
 
 
@@ -2848,10 +2856,11 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 
 void Game::TestFade(void)
 {
-	if (SceneManager::Get()->GetNextScene() != SceneManager::Get()->GetNewScene())
+
+		if (SceneManager::Get()->GetScene()!= SceneManager::Get()->GetNextScene())
 	{
-		SceneManager::Get()->SetNewScene(SceneManager::Get()->GetNextScene());
-		/*m_newScene = nextScene;*/
+		SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
+		/*m_newScene = m_nextScene;*/
 		fadeState = FADE_OUT;
 		fade->SetActive(true);
 
@@ -2861,26 +2870,57 @@ void Game::TestFade(void)
 		SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
 		/*m_scene = m_nextScene;*/
 		fadeState = FADE_IN;
+		
+		
 
 
 
+		switch (SceneManager::Get()->GetScene()) {
+		case SCENENAME::TITLE:
+			TitleUpdate();
+			break;
+
+		case SCENENAME::STAGESELECT:
+
+			//セレクトにいくとサウンド停止
+			XA_Stop(BGM_Stage1);
+			XA_Stop(BGM_Stage2);
+			XA_Stop(BGM_Stage3);
+
+			SelectUpdate();
+			break;
+
+		case SCENENAME::STAGE:
+
+			//ステージにいくとセレクトBGM停止
+			XA_Stop(BGM_SelectStage);
 
 
+			StageUpdate();
+			break;
 
+		case SCENENAME::RESULT:
+			XA_Stop(BGM_Stage1);
+			XA_Stop(BGM_Stage2);
+			XA_Stop(BGM_Stage3);
+
+
+			ResultUpdate();
+			break;
+		}
+
+		FadeUpdate();
 	}
 }
 
 void Game::FadeUpdate(void)
 {
-	//if (!fade->GetActive())
-	//{
-	//	return;
-	//}
-	
 
+	
 
 	if (fadeState == FADE_IN)
 	{
+		
 		fade->m_materialDiffuse.w -= 0.01f;
 
 		if (fade->m_materialDiffuse.w <= 0.0f)
@@ -2891,29 +2931,15 @@ void Game::FadeUpdate(void)
 	}
 	else if (fadeState == FADE_OUT)
 	{
+		
 		fade->m_materialDiffuse.w += 0.01f;
 
 		if (fade->m_materialDiffuse.w >= 1.0f)
 		{
 			fadeState = NO_FADE;
+			
 			SceneManager::Get()->SetScene(SceneManager::Get()->GetNewScene());
 		}
-	}
-
-	switch (SceneManager::Get()->GetScene())
-	{
-	case SCENENAME::TITLE:
-
-		break;
-	case SCENENAME::STAGESELECT:
-
-		break;
-	case SCENENAME::STAGE:
-
-		break;
-
-	case SCENENAME::RESULT:
-		break;
 	}
 
 }
