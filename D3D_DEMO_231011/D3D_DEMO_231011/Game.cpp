@@ -798,7 +798,8 @@ void Game::TitleUpdate(void)
 
 	//スペースキーを押すと　ステージセレクト画面に遷移
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
+		
+		XA_Stop(SE_TITLE);
 		XA_Play(BGM_SelectStage);//セレクトBGM再生
 
 		//タイトルに戻る時全部のクリア判定を無しにする　
@@ -822,6 +823,7 @@ void Game::TitleUpdate(void)
 		uiTitleBg->SetAnimeted(true);
 		uiTitleBg->m_anime->isPlaying = true;
 		uiTitleBg->m_anime->SetAnimePattern(1);
+		XA_Play(SE_TITLE);
 		uiPressSpace->SetActive(true);
 	}
 
@@ -2104,6 +2106,28 @@ void Game::SoundOp_SE(void)
 }
 
 
+void Game::SoundCursorUpdate(void)
+{// サウンドのカーソル
+	if (!isSound)
+	{
+		uiSoundCursor->m_pos.z = -0.8f;
+
+	}
+	else {
+		switch (soundOp)
+		{
+		case BGM:
+			uiSoundCursor->m_pos = { -2.0f, 0.65f, 0.6f };
+			break;
+
+		case SE:
+			uiSoundCursor->m_pos = { -2.0f, -0.7f, 0.6f };
+			break;
+		}
+	}
+}
+
+
 
 void Game::GameDraw()
 {
@@ -2653,6 +2677,7 @@ void Game::StageUpdate(void)
 		if (isSound)
 		{
 			SoundVolume();//BGM,SE音量設定
+			SoundCursorUpdate();
 		}
 
 		if (!isPause) {
@@ -2856,7 +2881,7 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 
 void Game::TestFade(void)
 {
-
+	//----------------ここから条件こんがらがって分からないです----------------------//
 		if (SceneManager::Get()->GetScene()!= SceneManager::Get()->GetNextScene())
 	{
 		SceneManager::Get()->SetNewScene(SceneManager::Get()->GetScene());
@@ -2871,6 +2896,7 @@ void Game::TestFade(void)
 		/*m_scene = m_nextScene;*/
 		fadeState = FADE_IN;
 		
+		//----------------ここまで-------------------------------------------------//
 		
 
 

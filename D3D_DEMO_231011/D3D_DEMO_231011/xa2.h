@@ -19,10 +19,11 @@ typedef enum
 
 	SE_Select,			// SE
 	SE_SelectDecide,	// SE
-	SE_Move,			// SE
+	SE_TITLE,			// SE
 	SE_Present,			// SE
 	SE_Combine,			// SE
 	SE_Result,
+	//SE_Press,
 	//SOUND_LABEL_SE007,			// ƒTƒ“ƒvƒ‹SE
 
 

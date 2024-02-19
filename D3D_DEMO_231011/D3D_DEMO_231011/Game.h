@@ -36,6 +36,7 @@ private:
 	CanvasUI*	uiResume;		//PAUSEのボタン
 	CanvasUI*	uiRestart;		//ステージのボタン
 	CanvasUI*	uiPauseCursor;	//PAUSEのカーソル
+	CanvasUI*	uiSoundCursor;
 
 	CanvasUI* uiSelect;
 	CanvasUI* uiSound;
@@ -272,12 +273,13 @@ public:
 	void PauseSwitch(void);
 	void PauseCursorUpdate(void);
 
+
 	//サウンド関数
 	void SoundSwitch(void);
 	void SoundVolume(void);
 	void SoundOp_BGM(void);	//BGM調節
 	void SoundOp_SE(void);	//SE調節
-
+	void SoundCursorUpdate(void);
 
 	//描画
 	void GameDraw(void);

@@ -119,7 +119,7 @@ public:
 	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
 	ID3D11ShaderResourceView* uiMusic;	//サウンド音楽文字表示
 	ID3D11ShaderResourceView* uiSE;		//サウントSE文字表示
-
+	ID3D11ShaderResourceView* uiSoundCursor;	//サウンドカーソル
 
 	ID3D11ShaderResourceView* fade;
 
