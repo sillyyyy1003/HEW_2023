@@ -2,8 +2,6 @@
 
 StaticAnimation::StaticAnimation(int splitX, int splitY) :Animation(splitX, splitY)
 {
-<<<<<<< .merge_file_FEkagb
-=======
 	int num = splitX * splitY;
 
 	//アニメショの配列
@@ -15,13 +13,12 @@ StaticAnimation::StaticAnimation(int splitX, int splitY) :Animation(splitX, spli
 	animeTable.push_back(-1);
 
 
->>>>>>> .merge_file_6O7OTj
+
 }
 
 void StaticAnimation::Update(void)
 {
-<<<<<<< .merge_file_FEkagb
-=======
+
 	int animeID = animeTable[(int)m_animeCounter];
 
 	if (isPlaying)
@@ -48,6 +45,6 @@ void StaticAnimation::Update(void)
 	}
 	
 	SetFrameX(animeID % m_split.x);
->>>>>>> .merge_file_6O7OTj
+
 	Animation::Update();
 }

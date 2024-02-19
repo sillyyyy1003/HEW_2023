@@ -102,12 +102,7 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	//当たり判定のデータを入力
 	m_modelData.collider.extents.x = _width / 2 * 1.25 / 96;
 	m_modelData.collider.extents.y = _height / 2 * 1.25 / 96;
-<<<<<<< .merge_file_LNrkeF
-	m_modelData.collider.extents.z = 0.01f;	//ｚ軸の大きさをロックする
-=======
 	m_modelData.collider.extents.z = 1.0f;	//ｚ軸の大きさをロックする
->>>>>>> .merge_file_JGacJz
-	
 	m_modelData.collider.radius = _width / 2 * 1.25 / 96;
 	
 	//テクスチャを実装

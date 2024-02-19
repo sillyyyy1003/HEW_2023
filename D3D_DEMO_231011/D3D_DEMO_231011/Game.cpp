@@ -531,7 +531,7 @@ void Game::InitStage1_2(void)
 
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
-	resultAnimator->SetTexture(g_Assets->resultComic1_3_1, g_Assets->resultComic1_3_2, g_Assets->resultComic1_3_3);
+	resultAnimator->SetTexture( g_Assets->resultComic1_2_2, g_Assets->resultComic1_2_3, g_Assets->resultComic1_2_1);
 
 	//状態のリセット
 	for (auto& element : objectList) {
@@ -603,9 +603,12 @@ void Game::InitStage1_3(void)
 
 	//自動移動や自動回転の設定
 
+	resultGenerator->SetStarNum({ 3,5,8,11 });
+	resultAnimator->SetTexture(g_Assets->resultComic1_3_1, g_Assets->resultComic1_3_2, g_Assets->resultComic1_3_3);
 
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
+	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_3]->SetClear(true);
 }
 
 void Game::InitStage2_1(void)
@@ -2551,7 +2554,7 @@ void Game::SortShadowDraw(void)
 
 }
 
-
+/*
 void Game::DebugDisplay(void)
 {
 	char step[6] = "STEP:";
@@ -2639,6 +2642,9 @@ void Game::DebugDisplay(void)
 
 	}
 }
+*/
+
+
 
 void Game::StageUpdate(void)
 {
@@ -2662,7 +2668,6 @@ void Game::StageUpdate(void)
 		controlPanel->SetActive(false);
 	}
 	else {
-		
 
 		if (!isPause) {
 			controlPanel->SetActive(true);
@@ -2693,125 +2698,125 @@ void Game::StageUpdate(void)
 				//移動させる目標を設定する
 				if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
-				//オブジェクトが移動してない場合
-				if (isControl) {
+					//オブジェクトが移動してない場合
+					if (isControl) {
 
-					for (auto it = objectList.begin(); it != objectList.end(); it++) {
-						if ((*it)->GetActive())
-						{
-							(*it)->SetActive(false);
-							auto nextIt = std::next(it);
+						for (auto it = objectList.begin(); it != objectList.end(); it++) {
+							if ((*it)->GetActive())
+							{
+								(*it)->SetActive(false);
+								auto nextIt = std::next(it);
 
-							//もし次のオブジェクトが自動移動のオブジェクトの場合
-							if (nextIt != objectList.end()) {
-								if ((*nextIt)->GetAutoMove()) {
-									XA_Play(SE_Select);//セレクトSE再生
-									nextIt = objectList.begin();
-									(*nextIt)->SetActive(true);
+								//もし次のオブジェクトが自動移動のオブジェクトの場合
+								if (nextIt != objectList.end()) {
+									if ((*nextIt)->GetAutoMove()) {
+										XA_Play(SE_Select);//セレクトSE再生
+										nextIt = objectList.begin();
+										(*nextIt)->SetActive(true);
+
+									}
+									else {
+										//次のオブジェクトを移動できる
+										XA_Play(SE_Select);//セレクトSE再生
+										(*nextIt)->SetActive(true);
+									}
 
 								}
 								else {
-									//次のオブジェクトを移動できる
 									XA_Play(SE_Select);//セレクトSE再生
+									nextIt = objectList.begin();
+									//次のオブジェクトを移動できる
 									(*nextIt)->SetActive(true);
+
 								}
 
-							}
-							else {
-								XA_Play(SE_Select);//セレクトSE再生
-								nextIt = objectList.begin();
-								//次のオブジェクトを移動できる
-								(*nextIt)->SetActive(true);
+								break;
 
 							}
-
-							break;
-
 						}
 					}
+
 				}
 
+				if (Input::Get()->GetKeyTrigger(DIK_H)) {
+
+					SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+					SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->HintPunish(10);
+
+				}
+
+				//StageUpdate
+				switch (SceneManager::Get()->GetStage()) {
+
+				case STAGE1_1:
+
+					XA_SetVolume(BGM_Stage1, 0.6f);
+
+					UpdateStage1_1();
+
+					break;
+
+				case STAGE1_2:
+
+					XA_SetVolume(BGM_Stage2, 0.6f);
+
+					UpdateStage1_2();
+
+					break;
+
+				case STAGE1_3:
+
+					XA_SetVolume(BGM_Stage3, 0.6f);
+
+					UpdateStage1_3();
+
+					break;
+
+				case STAGE2_1:
+
+
+					break;
+
+				case STAGE2_2:
+
+
+
+					break;
+
+				case STAGE2_3:
+
+
+
+					break;
+
+				case STAGE3_1:
+
+
+
+					break;
+				case STAGE3_2:
+
+
+
+					break;
+
+				case STAGE3_3:
+
+
+
+					break;
+
+				}
+
+				//CameraUpdate
+				cameraShaker->Update(g_WorldCamera);
 			}
-
-			if (Input::Get()->GetKeyTrigger(DIK_H)) {
-
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->HintPunish(10);
-
-			}
-
-			//StageUpdate
-			switch (SceneManager::Get()->GetStage()) {
-
-			case STAGE1_1:
-
-				XA_SetVolume(BGM_Stage1, 0.6f);
-
-				UpdateStage1_1();
-
-				break;
-
-			case STAGE1_2:
-
-				XA_SetVolume(BGM_Stage2, 0.6f);
-
-				UpdateStage1_2();
-
-				break;
-
-			case STAGE1_3:
-
-				XA_SetVolume(BGM_Stage3, 0.6f);
-
-				UpdateStage1_3();
-
-				break;
-
-			case STAGE2_1:
-
-
-				break;
-
-			case STAGE2_2:
-
-
-
-				break;
-
-			case STAGE2_3:
-
-
-
-				break;
-
-			case STAGE3_1:
-
-
-
-				break;
-			case STAGE3_2:
-
-
-
-				break;
-
-			case STAGE3_3:
-
-
-
-				break;
-
-			}
-
-			//CameraUpdate
-			cameraShaker->Update(g_WorldCamera);
 		}
-			else {
-				//マスクを閉める
-				UiUpdate();
-			}
-
+		else {
+			//マスクを閉める
+			UiUpdate();
 		}
+	}
 
 }
 

@@ -8,7 +8,7 @@
 #include "Game.h"
 #include "xa2.h"
 
-#define SIZECHANGE 0.85f
+#define SIZECHANGE 0.95f
 
 extern Assets* g_Assets;
 

@@ -15,11 +15,6 @@ void ShadowObject::Update(void)
 	
 	//アニメーションの更新
 	Object::Update();
-
-<<<<<<< .merge_file_UrQRpV
-
-=======
->>>>>>> .merge_file_AlqEzZ
 }
 
 
