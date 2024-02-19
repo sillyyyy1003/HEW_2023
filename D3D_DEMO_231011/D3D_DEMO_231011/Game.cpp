@@ -877,6 +877,7 @@ void Game::TitleUpdate(void)
 			SceneManager::Get()->m_stageHolder[i]->SetClear(false);
 		}
 		SceneManager::Get()->SetScene(STAGESELECT);
+		FadeUpdate();
 	}
 
 	//アニメション終了
@@ -1367,7 +1368,7 @@ void Game::ResultUpdate(void)
 
 void Game::GameUpdate(void)
 {
-	//TestFade();
+	FadeUpdate();
 
 	if (fadeState == FADE_IN)
 	{
@@ -2954,12 +2955,45 @@ void Game::TestFade(void)
 
 void Game::FadeUpdate(void)
 {
-	if (!fade->GetActive())
+	if (fadeState == FADE_IN)
 	{
-		return;
+		fade->m_materialDiffuse.w -= 0.01f;
+
+		if (fade->m_materialDiffuse.w <= 0.0f)
+		{
+			fadeState = NO_FADE;
+			fade->SetActive(false);
+		}
+	}
+	else if (fadeState == FADE_OUT)
+	{
+		fade->m_materialDiffuse.w += 0.01f;
+
+		if (fade->m_materialDiffuse.w >= 1.0f)
+		{
+			fadeState = NO_FADE;
+			SceneManager::Get()->SetScene(SceneManager::Get()->GetNewScene());
+		}
+	}
+
+	switch (SceneManager::Get()->GetScene())
+	{
+	case SCENENAME::TITLE:
+
+		break;
+	case SCENENAME::STAGESELECT:
+
+		break;
+	case SCENENAME::STAGE:
+
+		break;
+
+	case SCENENAME::RESULT:
+		break;
 	}
 
 }
+
 
 void Game::SwitchControlObject()
 {

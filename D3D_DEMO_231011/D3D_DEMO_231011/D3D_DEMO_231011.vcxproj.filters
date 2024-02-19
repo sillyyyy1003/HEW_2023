@@ -199,12 +199,6 @@
     <ClInclude Include="CameraShaker.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="VertexShader.h">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShader.h">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </ClInclude>
     <ClInclude Include="Direct3D.h">
       <Filter>DirectFile\ShaderFile</Filter>
     </ClInclude>

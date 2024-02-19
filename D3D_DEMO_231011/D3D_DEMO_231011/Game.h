@@ -93,11 +93,7 @@ private:
 	//stage1-3
 	GameObject* sandwich;	    //直角三角形
 	GameObject* newspaper;	    //四角
-<<<<<<< .merge_file_I1j7sS
 	GameObject* bucket;			//台形（四角）
-=======
-	GameObject* busket;			//台形（四角）
->>>>>>> .merge_file_IEldTG
 	GameObject* picnicbasket;   //台形（四角）
 
 	std::vector<GameObject*> objectList;
@@ -228,11 +224,8 @@ public:
 	//レールの情報を初期化->使用方法：railDataの配列だけ更新する
 	void RailInit1_1(void);
 	void RailInit1_2(void);
-<<<<<<< .merge_file_I1j7sS
 	void RailInit1_3(void);
 
-=======
->>>>>>> .merge_file_IEldTG
 
 	//サウンド配列Init
 	void InitSoundArray();
@@ -303,20 +296,6 @@ public:
 	//音量調節
 	void SoundVolumeDraw(void);
 
-<<<<<<< .merge_file_I1j7sS
-=======
-	//ステージ描画
-	void DrawStage1_1();
-	void DrawStage1_2();
-	void DrawStage1_3();
-	void DrawStage2_1();
-	void DrawStage2_2();
-	void DrawStage2_3();
-	void DrawStage3_1();
-	void DrawStage3_2();
-	void DrawStage3_3();
-
->>>>>>> .merge_file_IEldTG
 	//リザルト描画
 	void ResultDraw(void);
 
@@ -335,11 +314,6 @@ public:
 	void TestMove(Effect* _target);
 	void TestMove(CanvasUI* _target);
 	void TestMove(void);
-
-<<<<<<< .merge_file_I1j7sS
-	
-=======
->>>>>>> .merge_file_IEldTG
 	//背景を入れ替わる
 	void SetBackGround(ID3D11ShaderResourceView* tex);
 
@@ -353,11 +327,7 @@ public:
 
 	void FadeUpdate(void);// フェード用のアップデート
 
-<<<<<<< .merge_file_I1j7sS
 	void SwitchControlObject();
-=======
->>>>>>> .merge_file_IEldTG
-
 
 };
 

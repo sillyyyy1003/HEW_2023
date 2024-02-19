@@ -187,7 +187,6 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
-    <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PolygonCollider.h" />
     <ClInclude Include="RailManager.h" />
     <ClInclude Include="Result.h" />
@@ -203,7 +202,6 @@
     <ClInclude Include="StaticAnimation.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />
-    <ClInclude Include="VertexShader.h" />
     <ClInclude Include="WICTextureLoader.h" />
     <ClInclude Include="xa2.h" />
   </ItemGroup>
