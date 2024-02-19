@@ -809,7 +809,9 @@ void Game::TitleUpdate(void)
 			//念のため、ステージのクリア判定をfalseにする
 			SceneManager::Get()->m_stageHolder[i]->SetClear(false);
 		}
+		
 		SceneManager::Get()->SetScene(STAGESELECT);
+		FadeUpdate();
 	}
 
 	//アニメション終了
@@ -825,7 +827,7 @@ void Game::TitleUpdate(void)
 	uiPressSpace->Update();
 	uiTitleBg->Update();
 
-	FadeUpdate();
+
 	
 }
 
@@ -1256,29 +1258,8 @@ void Game::ResultUpdate(void)
 
 void Game::GameUpdate(void)
 {
-	//TestFade();
 
-	if (fadeState == FADE_IN)
-	{
-		fade->m_materialDiffuse.w -= 0.01f;
-
-		if (fade->m_materialDiffuse.w <= 0.0f)
-		{
-			fadeState = NO_FADE;
-			fade->SetActive(false);
-		}
-	}
-	else if (fadeState == FADE_OUT)
-	{
-		fade->m_materialDiffuse.w += 0.01f;
-
-		if (fade->m_materialDiffuse.w >= 1.0f)
-		{
-			fadeState = NO_FADE;
-
-			SceneManager::Get()->SetScene(SceneManager::Get()->GetNewScene());
-		}
-	}
+	FadeUpdate();
 
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
@@ -2867,7 +2848,7 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 
 void Game::TestFade(void)
 {
-	if (SceneManager::Get()->GetNextScene() !=SceneManager::Get()->GetNewScene())
+	if (SceneManager::Get()->GetNextScene() != SceneManager::Get()->GetNewScene())
 	{
 		SceneManager::Get()->SetNewScene(SceneManager::Get()->GetNextScene());
 		/*m_newScene = nextScene;*/
@@ -2882,21 +2863,7 @@ void Game::TestFade(void)
 		fadeState = FADE_IN;
 
 
-		switch (SceneManager::Get()->GetScene())
-		{
-		case SCENENAME::TITLE:
-	
-			break;
-		case SCENENAME::STAGESELECT:
-	
-			break;
-		case SCENENAME::STAGE:
 
-			break;
-
-		case SCENENAME::RESULT:
-			break;
-		}
 
 
 
@@ -2905,9 +2872,48 @@ void Game::TestFade(void)
 
 void Game::FadeUpdate(void)
 {
-	if (!fade->GetActive())
+	//if (!fade->GetActive())
+	//{
+	//	return;
+	//}
+	
+
+
+	if (fadeState == FADE_IN)
 	{
-		return;
+		fade->m_materialDiffuse.w -= 0.01f;
+
+		if (fade->m_materialDiffuse.w <= 0.0f)
+		{
+			fadeState = NO_FADE;
+			fade->SetActive(false);
+		}
+	}
+	else if (fadeState == FADE_OUT)
+	{
+		fade->m_materialDiffuse.w += 0.01f;
+
+		if (fade->m_materialDiffuse.w >= 1.0f)
+		{
+			fadeState = NO_FADE;
+			SceneManager::Get()->SetScene(SceneManager::Get()->GetNewScene());
+		}
+	}
+
+	switch (SceneManager::Get()->GetScene())
+	{
+	case SCENENAME::TITLE:
+
+		break;
+	case SCENENAME::STAGESELECT:
+
+		break;
+	case SCENENAME::STAGE:
+
+		break;
+
+	case SCENENAME::RESULT:
+		break;
 	}
 
 }

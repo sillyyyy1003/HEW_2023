@@ -338,5 +338,6 @@ public:
 	void FadeUpdate(void);// フェード用のアップデート
 
 
+
 };
 
