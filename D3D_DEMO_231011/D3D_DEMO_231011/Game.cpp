@@ -1493,18 +1493,18 @@ void Game::UiUpdate()
 		}
 	}
 
-		//	ESCAPE押して　戻る
-		if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
-		{
-			XA_Play(SE_Select);//セレクトSE再生
+	//	ESCAPE押して　戻る
+	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+	{
+		XA_Play(SE_Select);//セレクトSE再生
 
-			if (isSound) {
-				SoundSwitch();
-			}
-			else {
-				PauseSwitch();
-			}
+		if (isSound) {
+			SoundSwitch();
 		}
+		else {
+			PauseSwitch();
+		}
+	}
 	
 
 		//今どのボタンが選択されたの状態変更(改良必要)
@@ -1567,14 +1567,10 @@ void Game::UiUpdate()
 		}
 		else if (isSound)
 		{
-
 			uiSoundBg->Update();
-			
-
-			TestMove(uiSoundOp_BGM[0]);
-			
+			//TestMove(uiSoundOp_BGM[0]);
 		}
-		uiPauseBg->Update();
+
 }
 
 void Game::PauseSwitch(void)
@@ -2190,57 +2186,13 @@ void Game::uiSelectDraw(void)
 void Game::StageDraw(void)
 {
 
-	switch (SceneManager::Get()->GetStage()) {
+	stageBg->Draw();
 
-	case STAGE1_1:
+	//描画の順番を並び変え
+	SortShadowDraw();
 
-		DrawStage1_1();
-
-		break;
-
-	case STAGE1_2:
-		DrawStage1_2();
-
-		break;
-
-	case STAGE1_3:
-		//DrawStage1_3();
-
-		break;
-
-	case STAGE2_1:
-
-
-		break;
-
-	case STAGE2_2:
-
-
-
-		break;
-
-	case STAGE2_3:
-
-
-
-		break;
-
-	case STAGE3_1:
-
-
-
-		break;
-	case STAGE3_2:
-
-
-
-		break;
-
-	case STAGE3_3:
-
-		break;
-
-	}
+	//オブジェクト
+	SortObjectDraw();
 
 	if (isPause) {
 		UiDraw();
@@ -2288,19 +2240,9 @@ void Game::DrawStage1_1()
 
 void Game::DrawStage1_2()
 {
-	stageBg->Draw();
+	
 
 
-	//描画の順番を並び変え
-
-	//影
-	SortShadowDraw();
-
-	//オブジェクト
-	SortObjectDraw();
-
-	//エフェクト
-	testEffect->Draw();
 
 }
 
@@ -2634,8 +2576,9 @@ void Game::StageUpdate(void)
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
 			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
-			stageHintBg->SetActive(false);
 			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
+			stageHintBg->SetActive(false);
+			controlPanel->SetActive(true);
 		}
 		else {
 			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
@@ -2647,8 +2590,8 @@ void Game::StageUpdate(void)
 	}
 	else {
 		if (!isPause) {
-			controlPanel->SetActive(true);
 
+			controlPanel->SetActive(true);
 			//入力処理
 			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE)) {
 
@@ -2660,7 +2603,6 @@ void Game::StageUpdate(void)
 				}
 				else//サウンドに入っている時
 				{
-					PauseSwitch();
 					SoundSwitch();
 				}
 			}
@@ -2670,129 +2612,124 @@ void Game::StageUpdate(void)
 				SoundVolume();//BGM,SE音量設定
 			}
 
+			//移動させる目標を設定する
+			if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
+				//オブジェクトが移動してない場合
+				if (isControl) {
 
-			if (!isPause) {
-
-				//移動させる目標を設定する
-				if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-					//オブジェクトが移動してない場合
-					if (isControl) {
-
-						for (auto it = objectList.begin(); it != objectList.end(); it++) {
-							if ((*it)->GetActive())
-							{
-								(*it)->SetActive(false);
-								auto nextIt = std::next(it);
+					for (auto it = objectList.begin(); it != objectList.end(); it++) {
+						if ((*it)->GetActive())
+						{
+							(*it)->SetActive(false);
+							auto nextIt = std::next(it);
 
 
 
-								//もし次のオブジェクトが自動移動のオブジェクトの場合
-								if (nextIt != objectList.end()) {
-									if ((*nextIt)->GetAutoMove()) {
-										XA_Play(SE_Select);//セレクトSE再生
-										nextIt = objectList.begin();
-										(*nextIt)->SetActive(true);
-
-									}
-									else {
-										//次のオブジェクトを移動できる
-										XA_Play(SE_Select);//セレクトSE再生
-										(*nextIt)->SetActive(true);
-									}
-
-								}
-								else {
+							//もし次のオブジェクトが自動移動のオブジェクトの場合
+							if (nextIt != objectList.end()) {
+								if ((*nextIt)->GetAutoMove()) {
 									XA_Play(SE_Select);//セレクトSE再生
 									nextIt = objectList.begin();
-									//次のオブジェクトを移動できる
 									(*nextIt)->SetActive(true);
 
 								}
-
-								break;
+								else {
+									//次のオブジェクトを移動できる
+									XA_Play(SE_Select);//セレクトSE再生
+									(*nextIt)->SetActive(true);
+								}
 
 							}
+							else {
+								XA_Play(SE_Select);//セレクトSE再生
+								nextIt = objectList.begin();
+								//次のオブジェクトを移動できる
+								(*nextIt)->SetActive(true);
+
+							}
+
+							break;
+
 						}
 					}
-
 				}
-
-				//StageUpdate
-				switch (SceneManager::Get()->GetStage()) {
-
-				case STAGE1_1:
-
-					XA_SetVolume(BGM_Stage1, 0.6f);
-
-					UpdateStage1_1();
-
-					break;
-
-				case STAGE1_2:
-
-					XA_SetVolume(BGM_Stage2, 0.6f);
-
-					UpdateStage1_2();
-
-					break;
-
-				case STAGE1_3:
-
-					XA_SetVolume(BGM_Stage3, 0.6f);
-
-					UpdateStage1_3();
-
-					break;
-
-				case STAGE2_1:
-
-
-					break;
-
-				case STAGE2_2:
-
-
-
-					break;
-
-				case STAGE2_3:
-
-
-
-					break;
-
-				case STAGE3_1:
-
-
-
-					break;
-				case STAGE3_2:
-
-
-
-					break;
-
-				case STAGE3_3:
-
-
-
-					break;
-
-				}
-
-				//CameraUpdate
-				cameraShaker->Update(g_WorldCamera);
 
 			}
+
+			//StageUpdate
+			switch (SceneManager::Get()->GetStage()) {
+
+			case STAGE1_1:
+
+				XA_SetVolume(BGM_Stage1, 0.6f);
+
+				UpdateStage1_1();
+
+				break;
+
+			case STAGE1_2:
+
+				XA_SetVolume(BGM_Stage2, 0.6f);
+
+				UpdateStage1_2();
+
+				break;
+
+			case STAGE1_3:
+
+				XA_SetVolume(BGM_Stage3, 0.6f);
+
+				UpdateStage1_3();
+
+				break;
+
+			case STAGE2_1:
+
+
+				break;
+
+			case STAGE2_2:
+
+
+
+				break;
+
+			case STAGE2_3:
+
+
+
+				break;
+
+			case STAGE3_1:
+
+
+
+				break;
+			case STAGE3_2:
+
+
+
+				break;
+
+			case STAGE3_3:
+
+
+
+				break;
+
+			}
+
+			//CameraUpdate
+			cameraShaker->Update(g_WorldCamera);
+		}
 			else {
 				//マスクを閉める
 				UiUpdate();
 			}
 
 		}
-	}
+
 }
 
 void Game::TestMove(Effect* _target)
