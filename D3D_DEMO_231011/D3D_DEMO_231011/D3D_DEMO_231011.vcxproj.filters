@@ -193,6 +193,9 @@
     <ClInclude Include="Result.h">
       <Filter>Result</Filter>
     </ClInclude>
+    <ClInclude Include="ResultAnimation.h">
+      <Filter>Result</Filter>
+    </ClInclude>
     <ClInclude Include="CameraShaker.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -204,9 +207,6 @@
     </ClInclude>
     <ClInclude Include="Direct3D.h">
       <Filter>DirectFile\ShaderFile</Filter>
-    </ClInclude>
-    <ClInclude Include="ResultAnimation.h">
-      <Filter>Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +264,6 @@
     <Filter Include="Animation\ObjectAnimation">
       <UniqueIdentifier>{a48fac5b-fca0-4524-a4e1-6bce43fc9a82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Collider\PolygonCollider">
-      <UniqueIdentifier>{5df98a4e-2af3-4903-b679-acb9393ab3df}</UniqueIdentifier>
-    </Filter>
     <Filter Include="RailManager">
       <UniqueIdentifier>{268ef5c8-9f01-40f5-9e5e-4c1ed1d91ba0}</UniqueIdentifier>
     </Filter>
@@ -281,6 +278,9 @@
     </Filter>
     <Filter Include="Result">
       <UniqueIdentifier>{ca0bed48-2f4a-45e2-8471-e7a602e994e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\PolygonCollider">
+      <UniqueIdentifier>{5df98a4e-2af3-4903-b679-acb9393ab3df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

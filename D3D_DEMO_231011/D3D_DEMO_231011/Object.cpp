@@ -21,11 +21,19 @@ void Object::CreateObject(ID3D11ShaderResourceView* texture, float _width, float
 
 void Object::GenerateColliderData()
 {
+<<<<<<< .merge_file_PCOtqO
 	m_extents.x = m_sprite->GetExtents().x * m_sprite->m_scale.x;
 	m_extents.y = m_sprite->GetExtents().y * m_sprite->m_scale.y;
 	m_extents.z = m_sprite->GetExtents().z * m_sprite->m_scale.z;
 
 	m_radius = m_sprite->GetCollide().radius * m_sprite->m_scale.x;
+=======
+	//m_extents.x = m_sprite->GetExtents().x * m_sprite->m_scale.x;
+	//m_extents.y = m_sprite->GetExtents().y * m_sprite->m_scale.y;
+	//m_extents.z = m_sprite->GetExtents().z * m_sprite->m_scale.z;
+
+	//m_radius = m_sprite->GetCollide().radius * m_sprite->m_scale.x;
+>>>>>>> .merge_file_uG8SRG
 }
 
 
@@ -34,7 +42,11 @@ void Object::Update(void)
 {
 
 	//モデルのextents&radiusを更新する
+<<<<<<< .merge_file_PCOtqO
 	GenerateColliderData();
+=======
+	/*GenerateColliderData();*/
+>>>>>>> .merge_file_uG8SRG
 
 	//アニメーション更新
 	m_sprite->m_anime->Update();

@@ -10,7 +10,7 @@
 
 
 #define CLASS_NAME		L"HEW_DEMO"		//ウインドウクラスの名前
-#define WINDOW_NAME		L"GAME_TITLE"	//ウィンドウの名前
+#define WINDOW_NAME		L"かげくみ"	//ウィンドウの名前
 #define FPS_DATA		(60)
 //----------------------------//
 // グローバル変数定義

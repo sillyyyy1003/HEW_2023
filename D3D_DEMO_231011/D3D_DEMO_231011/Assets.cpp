@@ -36,7 +36,8 @@ Assets::Assets()
     stageHintBg = LoadTexture("assets/hint/bg_shadow.png");
 
     //stage1_1
-    stageBg1_1 = LoadTexture("assets/stage1/1_1_BG.png");
+    //stageBg1_1 = LoadTexture("assets/stage1/1_1_BG.png");
+    stageBg1_1 = LoadTexture("assets/stage1/1_1_bgA.png");
     coconut = LoadTexture("assets/stage1/coconut.png");
     coconutShadow = LoadTexture("assets/stage1/coconut_s.png");
     lamp = LoadTexture("assets/stage1/lamp.png");
@@ -45,7 +46,8 @@ Assets::Assets()
     housePlateShadow = LoadTexture("assets/stage1/housePlate_s.png");
 
     //stage1_2
-    stageBg1_2 = LoadTexture("assets/stage1/1_2Bg.png");
+    //stageBg1_2 = LoadTexture("assets/stage1/1_2Bg.png");
+    stageBg1_2 = LoadTexture("assets/stage1/1_2_bgA.png");
     lamp_1_2 =  LoadTexture("assets/stage1/1_2_lamp.png");
     lamp_1_2Shadow = LoadTexture("assets/stage1/1_2_lamp_shadow.png");
     iphone = LoadTexture("assets/stage1/1_2_iphone.png");
@@ -68,7 +70,8 @@ Assets::Assets()
     resultComic1_3_3 = LoadTexture("assets/clear/1_3_3.png");
 
     //stage1_3
-    stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
+    //stage3Bg = LoadTexture("assets/stage1/1_3_BG.png");
+    stageBg1_3 = LoadTexture("assets/stage1/1_3_bgA.png");
     sandwich = LoadTexture("assets/stage1/1_3_sandwich.png");
     sandwichShadow = LoadTexture("assets/stage1/1_3_sandwich_shadow.png");
     busket = LoadTexture("assets/stage1/1_3_busket.png");
@@ -185,7 +188,7 @@ Assets::~Assets()
     SAFE_RELEASE(resultComic1_3_3);    //stage1-2用リソース
 
     //stage1-3用リソース
-    SAFE_RELEASE(stage3Bg);
+    SAFE_RELEASE(stageBg1_3);
 
     SAFE_RELEASE(sandwich);
     SAFE_RELEASE(sandwichShadow);
@@ -267,5 +270,3 @@ ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)
     }
 
 }
-
-

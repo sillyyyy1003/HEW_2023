@@ -98,7 +98,7 @@ void Game::Init()
 	//stage1-3
 	sandwich = new GameObject();
 	newspaper = new GameObject();
-	busket = new GameObject();
+	bucket = new GameObject();
 	picnicbasket = new GameObject();
 
 	//result
@@ -121,6 +121,11 @@ void Game::Init()
 	iphone->SetName("iphone");
 	triangleBlock->SetName("triangleBlock");
 	//stage3に使われてる
+
+	sandwich->SetName("sandwich");		//直角三角形
+	newspaper->SetName("newspaper");		//四角
+	bucket->SetName("bucket");			//台形（四角）
+	picnicbasket->SetName("picnicbasket");;  //台形（四角）
 
 
 	//移動のオブジェクトの名前を設定する
@@ -158,7 +163,7 @@ void Game::Init()
 	uiStepNum->Init(-7.7, 3.3,0.5,1);//調整いる
 
 	//stage1
-	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 1, 1);
+	stageBg->CreateObject(g_Assets->stageBg1_1, 1280, 720, 6, 1);
 	//stage1-1
 	coconut->CreateObject(g_Assets->coconut, 190, 192, 1, 1);
 	coconut->CreateShadow(g_Assets->coconutShadow, 158, 159, 1, 1, COLLISION_TYPE::SPHERE);
@@ -173,18 +178,19 @@ void Game::Init()
 	iphone->CreateObject(g_Assets->iphone, 186, 141, 1, 1);
 	iphone->CreateShadow(g_Assets->iphoneShadow, 205, 155, 1, 1, COLLISION_TYPE::SQUARE);
 	triangleBlock->CreateObject(g_Assets->triangleBlock, 378, 348, 1, 1);
-	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
+	//->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::TRIANGLE, TRIANGLE_TYPE::TRI_ISO);
+	triangleBlock->CreateShadow(g_Assets->triangleBlockShadow, 190.5, 172.5, 1, 1, COLLISION_TYPE::SQUARE);
 
 	//1-3
-	sandwich->CreateObject(g_Assets->sandwich, 141, 159, 1, 1);
-	sandwich->CreateShadow(g_Assets->sandwichShadow, 141 * 2.6, 159 * 2, 1, 1, COLLISION_TYPE::SQUARE);// 修正　三角
-	newspaper->CreateObject(g_Assets->newspaper, 201, 153, 1, 1);
-	newspaper->CreateShadow(g_Assets->newspaperShadow, 201 * 2.2, 153 * 2.1, 1, 1, COLLISION_TYPE::SQUARE);
-	busket->CreateObject(g_Assets->busket, 170, 146, 1, 1);
-	busket->CreateShadow(g_Assets->busketShadow, 170 * 2, 146 * 2, 1, 1, COLLISION_TYPE::SQUARE);
+	sandwich->CreateObject(g_Assets->sandwich, 211.5, 238.5, 1, 1);
+	sandwich->CreateShadow(g_Assets->sandwichShadow, 126, 144, 1, 1, COLLISION_TYPE::SQUARE);
+	newspaper->CreateObject(g_Assets->newspaper, 301.5, 229.5, 1, 1);
+	newspaper->CreateShadow(g_Assets->newspaperShadow, 361.8, 300, 1, 1, COLLISION_TYPE::SQUARE);
+	bucket->CreateObject(g_Assets->busket, 255, 219, 1, 1);
+	bucket->CreateShadow(g_Assets->busketShadow, 306, 262.8, 1, 1, COLLISION_TYPE::SQUARE);
 	picnicbasket->CreateObject(g_Assets->picnicbasket, 306, 240, 1, 1);
-	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 306 * 2.6, 240 * 2, 1, 1, COLLISION_TYPE::SQUARE);
-
+	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 275.4, 216, 1, 1, COLLISION_TYPE::SQUARE);
+	
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 3, 4);
 	uiArrow->CreateModel(g_Assets->uiArrow, 160, 172, 4, 2);
 
@@ -196,6 +202,11 @@ void Game::Init()
 	lamp1_2->InitAnimation();
 	iphone->InitAnimation();
 	triangleBlock->InitAnimation();
+
+	sandwich->InitAnimation();	    
+	newspaper->InitAnimation();	    //四角
+	bucket->InitAnimation();		//台形（四角）
+	picnicbasket->InitAnimation();   //台形（四角）
 
 
 	//----------------------------//
@@ -520,43 +531,49 @@ void Game::InitStage1_2(void)
 
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 3,5,8,11 });
-	resultAnimator->SetTexture(g_Assets->resultComic1_2_1, g_Assets->resultComic1_2_2, g_Assets->resultComic1_2_3);
+	resultAnimator->SetTexture(g_Assets->resultComic1_3_1, g_Assets->resultComic1_3_2, g_Assets->resultComic1_3_3);
+
+	//状態のリセット
+	for (auto& element : objectList) {
+	
+		element->ResetMove();
+	}
 }
 
 void Game::InitStage1_3(void)
 {
 
 	//位置設定
-	SetBackGround(g_Assets->stage3Bg);
+	SetBackGround(g_Assets->stageBg1_3);
 	//オブジェクトを設定する
 	//CAUTION! 
 	//本体y軸固定->-1
 	//Z:FRONT:-10 MIDDLE:-7.5 BACK:-5
 	//X:LEFT2:-9 LEFT1:-4.5 MIDDLE:0.0 RIGHT1:4.5 RIGHT2:9
 	//本体 
-	busket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-10.0f };
-	newspaper->m_obj->m_sprite->m_pos = { 4.5f,-4.0f,-5.0f };
-	sandwich->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
-	picnicbasket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
+	bucket->m_obj->m_sprite->m_pos = { -4.5f,-4.0f,-5.0f };
+	newspaper->m_obj->m_sprite->m_pos = { 0.0f,-4.0f,-5.0f };
+	sandwich->m_obj->m_sprite->m_pos = { 4.5f,-4.0f,-5.0f };
+	picnicbasket->m_obj->m_sprite->m_pos = { 4.5f,-4.0f,-10.0f };
 
-	busket->m_shadow->m_sprite->m_pos.z = 0.0f;
-	newspaper->m_shadow->m_sprite->m_pos.z = -0.1f;
-	sandwich->m_shadow->m_sprite->m_pos.z = -0.2f;
-	picnicbasket->m_shadow->m_sprite->m_pos.z = -0.3f;
+	bucket->m_shadow->m_sprite->m_pos.z = 0.5f;
+	newspaper->m_shadow->m_sprite->m_pos.z = 0.4f;
+	sandwich->m_shadow->m_sprite->m_pos.z = 0.3f;
+	picnicbasket->m_shadow->m_sprite->m_pos.z = 0.2f;
 
-
+	
 	//影のy軸
-	busket->m_shadow->m_sprite->m_pos.y = 5.2f;
-	newspaper->m_shadow->m_sprite->m_pos.y = 2.4f;
-	sandwich->m_shadow->m_sprite->m_pos.y = 2.4f;
-	picnicbasket->m_shadow->m_sprite->m_pos.y = 3.4f;
+	bucket->m_shadow->m_sprite->m_pos.y = 5.0f;
+	newspaper->m_shadow->m_sprite->m_pos.y = 2.5f;
+	sandwich->m_shadow->m_sprite->m_pos.y = 2.46f;
+	picnicbasket->m_shadow->m_sprite->m_pos.y = 3.45f;
 
 
 	//レール上の位置を設定する
-	busket->SetRailPos(1, 1);
+	bucket->SetRailPos(1, 0);
 	newspaper->SetRailPos(2, 0);
-	sandwich->SetRailPos(1, 0);
-	picnicbasket->SetRailPos(1, 0);
+	sandwich->SetRailPos(3, 0);
+	picnicbasket->SetRailPos(3, 2);
 
 	//回転設定
 
@@ -566,11 +583,11 @@ void Game::InitStage1_3(void)
 	objectList.push_back(picnicbasket);
 	objectList.push_back(sandwich);
 	objectList.push_back(newspaper);
-	objectList.push_back(busket);
+	objectList.push_back(bucket);
 
 	//レールの設定
 	RailManager::Get()->InitRail();
-	RailInit1_2();
+	RailInit1_3();
 
 	//ステージ情報を初期化
 	for (int i = 0; i < 9; i++) {
@@ -715,6 +732,55 @@ void Game::RailInit1_2(void)
 }
 
 
+void Game::RailInit1_3(void)
+{
+	bool railData[15][8]{
+		//back row
+		//up	ru  r	rd d	ld l	lu
+		{	0,	0,	0,	0,	0,	0,	0,	0},//0
+		{	0,	0,	1,	0,	0,	0,	0,	0},//1
+		{	0,	0,	1,	0,	0,	1,	1,	0},//2
+		{	0,	0,	1,	0,	0,	1,	1,	0},//3
+		{	0,	0,	0,	0,	0,	0,	1,	0},//4
+
+		//mid row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	1,	0,	1,	0,	0,	0,	0},
+		{	0,	1,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+
+		//front row
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+		{	0,	0,	1,	0,	0,	0,	0,	1},
+		{	0,	0,	0,	0,	0,	0,	1,	0},
+		{	0,	0,	0,	0,	0,	0,	0,	0},
+	};
+
+	//道を設定する
+	for (int i = 0; i < 15; i++) {
+
+		for (int j = 0; j < 8; j++) {
+
+			if (railData[i][j] == 0) {
+
+				RailManager::Get()->m_info[i].isMoveable[j] = false;
+			}
+			else {
+				RailManager::Get()->m_info[i].isMoveable[j] = true;
+			}
+
+		}
+
+	}
+
+
+	//オブジェクトいるところの位置情報更新
+	RailManager::Get()->InitRailPos();
+}
+
+
 void Game::InitSoundArray()
 {
 	DirectX::XMFLOAT3 pos = { -0.3f, 0.7f, 0.5f };
@@ -731,8 +797,6 @@ void Game::InitSoundArray()
 		uiSoundOp_SE[i]->m_scale = { 0.2,0.2,0.2 };
 
 	}
-
-	
 
 
 }
@@ -831,8 +895,6 @@ void Game::TitleUpdate(void)
 
 void Game::SelectUpdate(void)
 {
-	
-
 	//クリア印の判定->関数化
 	//今のステージを獲得
 	int stageNum = selectStage * 3;
@@ -1034,8 +1096,6 @@ void Game::UpdateSelectAnimation(void)
 void Game::UpdateCursor(void)
 {
 
-	
-	
 	if (!isSelectChapter) {
 
 		uiSelectCursor->m_pos.z = -0.8f ;
@@ -1114,12 +1174,8 @@ void Game::SelectChapter3(void) {
 
 }
 
-
-
 void Game::UpdateStage1_1(void)
 {
-	
-	
 	//背景
 	stageBg->Update();
 
@@ -1174,10 +1230,10 @@ void Game::UpdateStage1_1(void)
 
 void Game::UpdateStage1_2(void)
 {
-	TestMove(testEffect);
 	//背景
 	stageBg->Update();
 
+	//MOVE SE
 	for (auto& element : objectList) {
 		if (!element->GetStill()) {
 			isPlayMoveSE = true;
@@ -1186,13 +1242,12 @@ void Game::UpdateStage1_2(void)
 		}
 	}
 
+	//OBJECT UPDATE
 	for (auto& element : objectList) {
 		element->Update();
 	}
 	
-	TestMove();
-
-	//
+	//SHADOW UPDATE
 	lamp1_2->ShadowUpdate(0.35f, 4);
 	iphone->ShadowUpdate(-1.4f, 4);
 	triangleBlock->ShadowUpdate(0, 4);
@@ -1213,10 +1268,61 @@ void Game::UpdateStage1_2(void)
 	//エフェクト
 	testEffect->SetTrace(true);
 	testEffect->Update();
+	resultAnimator->Update();
 }
 
 void Game::UpdateStage1_3(void)
 {
+
+	//背景
+	stageBg->Update();
+
+	//MOVE SE
+	for (auto& element : objectList) {
+		if (!element->GetStill()) {
+			isPlayMoveSE = true;
+			//ループ中止
+			break;
+		}
+	}
+
+	//OBJECT UPDATE
+	for (auto& element : objectList) {
+		element->Update();
+	}
+
+	//TestMove();
+
+	//SHADOW UPDATE
+	newspaper->ShadowUpdate(0.0,3.6f);
+	sandwich->ShadowUpdate(1.0f,2.8f);
+	picnicbasket->ShadowUpdate(1.5,3.0f);
+	bucket->ShadowUpdate(3,3.2);
+
+		
+	//クリア判定     
+	if (ColliderManager::Get()->ClearCollision({ COL_RIGHT,OVERLAP }, "picnicbasket", "sandwich", ShadowObject::LARGE)&&
+		ColliderManager::Get()->ClearCollision({COL_RIGHT,COL_DOWN},"bucket","newspaper",ShadowObject::SMALL)) {
+		//isPause = true;
+		if (newspaper->GetRailPos().verticalPos == 0 && newspaper->GetRailPos().horizontalPos == 4&&picnicbasket->GetRailPos().verticalPos==2) {
+			//クリア
+			int stageNum = SceneManager::Get()->GetStage();
+			SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+			SceneManager::Get()->SetScene(RESULT);
+			isResultAnime = true;
+		}
+		
+	}
+
+
+
+
+	//エフェクト
+	testEffect->SetTrace(true);
+	testEffect->Update();
+	resultAnimator->Update();
+
+
 }
 
 void Game::UpdateStage2_1(void)
@@ -1246,9 +1352,11 @@ void Game::UpdateStage3_3(void)
 void Game::ResultUpdate(void)
 {
 	if (isResultAnime) {
+
 		resultAnimator->Update();
 	}
 	else {	
+
 		resultGenerator->Update();
 	
 	}
@@ -1370,7 +1478,7 @@ Game::~Game()
 	//1-3
 	delete sandwich;
 	delete newspaper;
-	delete busket;
+	delete bucket;
 	delete picnicbasket;
 
 	delete testEffect;
@@ -1492,63 +1600,62 @@ void Game::UiUpdate()
 	//	ESCAPE押して　戻る
 	if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
 	{
-			XA_Play(SE_Select);//セレクトSE再生
+		XA_Play(SE_Select);//セレクトSE再生
 
-			if (isSound) {
-				SoundSwitch();
-			}
-			else {
-				PauseSwitch();
-			}
+		if (isSound) {
+			SoundSwitch();
+		}
+		else {
+			PauseSwitch();
+		}
 	}
-	
 
-	//今どのボタンが選択されたの状態変更(改良必要)
+		//今どのボタンが選択されたの状態変更(改良必要)
 	switch (pauseSelect)
 	{
-		case Game::RESUME:
-			uiResume->SetAnimeActive(CanvasUI::ACTIVE);
-			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSound->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->m_pos.x =  -5.5f;
-			uiRestart->m_pos.x = -6.0f;
-			uiSelect->m_pos.x = -6.0f;
-			uiSound->m_pos.x = -6.0f;
-			break;
-		case Game::RESTART:
-			uiRestart->SetAnimeActive(CanvasUI::ACTIVE);
-			uiResume->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSound->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->m_pos.x = -6.0f;
-			uiRestart->m_pos.x = -5.5f;
-			uiSelect->m_pos.x = -6.0f;
-			uiSound->m_pos.x = -6.0f;
-			break;
-		case Game::SELECT_STAGE:
-			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSelect->SetAnimeActive(CanvasUI::ACTIVE);
-			uiSound->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->m_pos.x = -6.0f;
-			uiRestart->m_pos.x = -6.0f;
-			uiSelect->m_pos.x = -5.5f;
-			uiSound->m_pos.x = -6.0f;
-			break;
-		case Game::SOUND:
-			uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
-			uiResume->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
-			uiSound->SetAnimeActive(CanvasUI::ACTIVE);
-			uiResume->m_pos.x =  -6.0f;
-			uiRestart->m_pos.x = -6.0f;
-			uiSelect->m_pos.x = -6.0f;
-			uiSound->m_pos.x = -5.5f;
-			break;
+	case Game::RESUME:
+		uiResume->SetAnimeActive(CanvasUI::ACTIVE);
+		uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSound->SetAnimeActive(CanvasUI::INACTIVE);
+		uiResume->m_pos.x =  -5.5f;
+		uiRestart->m_pos.x = -6.0f;
+		uiSelect->m_pos.x = -6.0f;
+		uiSound->m_pos.x = -6.0f;
+		break;
+	case Game::RESTART:
+		uiRestart->SetAnimeActive(CanvasUI::ACTIVE);
+		uiResume->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSound->SetAnimeActive(CanvasUI::INACTIVE);
+		uiResume->m_pos.x = -6.0f;
+		uiRestart->m_pos.x = -5.5f;
+		uiSelect->m_pos.x = -6.0f;
+		uiSound->m_pos.x = -6.0f;
+		break;
+	case Game::SELECT_STAGE:
+		uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
+		uiResume->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSelect->SetAnimeActive(CanvasUI::ACTIVE);
+		uiSound->SetAnimeActive(CanvasUI::INACTIVE);
+		uiResume->m_pos.x = -6.0f;
+		uiRestart->m_pos.x = -6.0f;
+		uiSelect->m_pos.x = -5.5f;
+		uiSound->m_pos.x = -6.0f;
+		break;
+	case Game::SOUND:
+		uiRestart->SetAnimeActive(CanvasUI::INACTIVE);
+		uiResume->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSelect->SetAnimeActive(CanvasUI::INACTIVE);
+		uiSound->SetAnimeActive(CanvasUI::ACTIVE);
+		uiResume->m_pos.x =  -6.0f;
+		uiRestart->m_pos.x = -6.0f;
+		uiSelect->m_pos.x = -6.0f;
+		uiSound->m_pos.x = -5.5f;
+		break;
 
 			
-		}
+	}
 
 		//Sound画面
 		if (!isSound)
@@ -1563,14 +1670,9 @@ void Game::UiUpdate()
 		}
 		else if (isSound)
 		{
-
 			uiSoundBg->Update();
-			
-
-			TestMove(uiSoundOp_BGM[0]);
-			
 		}
-		uiPauseBg->Update();
+
 }
 
 void Game::PauseSwitch(void)
@@ -1596,7 +1698,6 @@ void Game::PauseSwitch(void)
 	}
 
 }
-
 
 void Game::PauseCursorUpdate(void)
 {
@@ -2153,9 +2254,6 @@ void Game::TitleDraw(void)
 
 	uiPressSpace->Draw();	
 
-
-	//===================Debug=====================//
-
 }
 
 void Game::SelectDraw(void)
@@ -2186,57 +2284,13 @@ void Game::uiSelectDraw(void)
 void Game::StageDraw(void)
 {
 
-	switch (SceneManager::Get()->GetStage()) {
+	stageBg->Draw();
 
-	case STAGE1_1:
+	//描画の順番を並び変え
+	SortShadowDraw();
 
-		DrawStage1_1();
-
-		break;
-
-	case STAGE1_2:
-		DrawStage1_2();
-
-		break;
-
-	case STAGE1_3:
-		//DrawStage1_3();
-
-		break;
-
-	case STAGE2_1:
-
-
-		break;
-
-	case STAGE2_2:
-
-
-
-		break;
-
-	case STAGE2_3:
-
-
-
-		break;
-
-	case STAGE3_1:
-
-
-
-		break;
-	case STAGE3_2:
-
-
-
-		break;
-
-	case STAGE3_3:
-
-		break;
-
-	}
+	//オブジェクト
+	SortObjectDraw();
 
 	if (isPause) {
 		UiDraw();
@@ -2262,41 +2316,6 @@ void Game::StageDraw(void)
 	//hint描画
 	stageHint[SceneManager::Get()->GetActiveStage()]->Draw();
 
-
-}
-
-void Game::DrawStage1_1()
-{
-	
-		stageBg->Draw();
-
-
-		//描画の順番を並び変え
-
-		//影
-		SortShadowDraw();
-
-		//オブジェクト
-		SortObjectDraw();
-
-
-}
-
-void Game::DrawStage1_2()
-{
-	stageBg->Draw();
-
-
-	//描画の順番を並び変え
-
-	//影
-	SortShadowDraw();
-
-	//オブジェクト
-	SortObjectDraw();
-
-	//エフェクト
-	testEffect->Draw();
 
 }
 
@@ -2458,7 +2477,7 @@ void Game::SortObjectDraw(void)
 		});
 
 	
-	for (auto it = objectList.begin(); it != objectList.end()-1; it++) {
+	for (auto it = objectList.begin(); it != objectList.end(); it++) {
 		
 		bool isOverlap = false;
 		
@@ -2630,8 +2649,9 @@ void Game::StageUpdate(void)
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
 			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
-			stageHintBg->SetActive(false);
 			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
+			stageHintBg->SetActive(false);
+			controlPanel->SetActive(true);
 		}
 		else {
 			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
@@ -2645,9 +2665,7 @@ void Game::StageUpdate(void)
 		
 
 		if (!isPause) {
-
 			controlPanel->SetActive(true);
-
 			//入力処理
 			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
 			{
@@ -2663,132 +2681,138 @@ void Game::StageUpdate(void)
 					SoundSwitch();
 				}
 			}
-
-
-
 			if (isSound)
 			{
 				SoundVolume();//BGM,SE音量設定
 			}
 
+
+
+			if (!isPause) {
+
 				//移動させる目標を設定する
 				if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
-					//オブジェクトが移動してない場合
-					if (isControl) {
+				//オブジェクトが移動してない場合
+				if (isControl) {
 
-						for (auto it = objectList.begin(); it != objectList.end(); it++) {
-							if ((*it)->GetActive())
-							{
-								(*it)->SetActive(false);
-								auto nextIt = std::next(it);
+					for (auto it = objectList.begin(); it != objectList.end(); it++) {
+						if ((*it)->GetActive())
+						{
+							(*it)->SetActive(false);
+							auto nextIt = std::next(it);
 
-
-
-								//もし次のオブジェクトが自動移動のオブジェクトの場合
-								if (nextIt != objectList.end()) {
-									if ((*nextIt)->GetAutoMove()) {
-										XA_Play(SE_Select);//セレクトSE再生
-										nextIt = objectList.begin();
-										(*nextIt)->SetActive(true);
-
-									}
-									else {
-										//次のオブジェクトを移動できる
-										XA_Play(SE_Select);//セレクトSE再生
-										(*nextIt)->SetActive(true);
-									}
-
-								}
-								else {
+							//もし次のオブジェクトが自動移動のオブジェクトの場合
+							if (nextIt != objectList.end()) {
+								if ((*nextIt)->GetAutoMove()) {
 									XA_Play(SE_Select);//セレクトSE再生
 									nextIt = objectList.begin();
-									//次のオブジェクトを移動できる
 									(*nextIt)->SetActive(true);
 
 								}
-
-								break;
+								else {
+									//次のオブジェクトを移動できる
+									XA_Play(SE_Select);//セレクトSE再生
+									(*nextIt)->SetActive(true);
+								}
 
 							}
+							else {
+								XA_Play(SE_Select);//セレクトSE再生
+								nextIt = objectList.begin();
+								//次のオブジェクトを移動できる
+								(*nextIt)->SetActive(true);
+
+							}
+
+							break;
+
 						}
 					}
-
 				}
-
-				//StageUpdate
-				switch (SceneManager::Get()->GetStage()) {
-
-				case STAGE1_1:
-
-					XA_SetVolume(BGM_Stage1, 0.6f);
-
-					UpdateStage1_1();
-
-					break;
-
-				case STAGE1_2:
-
-					XA_SetVolume(BGM_Stage2, 0.6f);
-
-					UpdateStage1_2();
-
-					break;
-
-				case STAGE1_3:
-
-					XA_SetVolume(BGM_Stage3, 0.6f);
-
-					UpdateStage1_3();
-
-					break;
-
-				case STAGE2_1:
-
-
-					break;
-
-				case STAGE2_2:
-
-
-
-					break;
-
-				case STAGE2_3:
-
-
-
-					break;
-
-				case STAGE3_1:
-
-
-
-					break;
-				case STAGE3_2:
-
-
-
-					break;
-
-				case STAGE3_3:
-
-
-
-					break;
-
-				}
-
-				//CameraUpdate
-				cameraShaker->Update(g_WorldCamera);
 
 			}
+
+			if (Input::Get()->GetKeyTrigger(DIK_H)) {
+
+				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->HintPunish(10);
+
+			}
+
+			//StageUpdate
+			switch (SceneManager::Get()->GetStage()) {
+
+			case STAGE1_1:
+
+				XA_SetVolume(BGM_Stage1, 0.6f);
+
+				UpdateStage1_1();
+
+				break;
+
+			case STAGE1_2:
+
+				XA_SetVolume(BGM_Stage2, 0.6f);
+
+				UpdateStage1_2();
+
+				break;
+
+			case STAGE1_3:
+
+				XA_SetVolume(BGM_Stage3, 0.6f);
+
+				UpdateStage1_3();
+
+				break;
+
+			case STAGE2_1:
+
+
+				break;
+
+			case STAGE2_2:
+
+
+
+				break;
+
+			case STAGE2_3:
+
+
+
+				break;
+
+			case STAGE3_1:
+
+
+
+				break;
+			case STAGE3_2:
+
+
+
+				break;
+
+			case STAGE3_3:
+
+
+
+				break;
+
+			}
+
+			//CameraUpdate
+			cameraShaker->Update(g_WorldCamera);
+		}
 			else {
 				//マスクを閉める
 				UiUpdate();
 			}
 
 		}
+
 }
 
 
@@ -2810,9 +2834,6 @@ void Game::TestMove(CanvasUI* _target)
 	if (Input::Get()->GetKeyPress(DIK_D)) {
 		_target->m_pos.x += MOVE;
 	}
-	if (Input::Get()->GetKeyPress(DIK_Q)) {
-		_target->m_pos.z -= MOVE;
-	}
 	if (Input::Get()->GetKeyPress(DIK_W)) {
 		_target->m_pos.y += MOVE;
 	}
@@ -2831,7 +2852,7 @@ void Game::TestMove(void)
 				break;
 			}
 		}
-	
+
 	}
 
 	if (Input::Get()->GetKeyPress(DIK_S)) {
@@ -2843,9 +2864,32 @@ void Game::TestMove(void)
 			}
 		}
 	}
+	if (Input::Get()->GetKeyPress(DIK_A)) {
 
+		for (auto& element : objectList) {
+			if (element->GetActive()) {
+				element->m_shadow->m_sprite->m_pos.x -= 0.1f;
+				break;
+			}
+		}
 
+	}
+
+	if (Input::Get()->GetKeyPress(DIK_D)) {
+
+		for (auto& element : objectList) {
+			if (element->GetActive()) {
+				element->m_shadow->m_sprite->m_pos.x += 0.1f;
+				break;
+			}
+		}
+	}
+
+	
+
+	
 }
+
 
 void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 
@@ -2859,6 +2903,9 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 	//y座標の導入
 	stageBg->m_sprite->m_pos = { 0.0f,-y,1.0f };
 	stageBg->m_sprite->SetTexture(tex);
+	stageBg->m_sprite->m_anime->SetAnimeSpeed(0.05f);
+	static_cast<StaticAnimation*>(stageBg->m_sprite->m_anime)->SetLoop(true);
+
 
 }
 
@@ -2907,5 +2954,19 @@ void Game::FadeUpdate(void)
 		return;
 	}
 
+}
+
+void Game::SwitchControlObject()
+{
+	for (auto it = objectList.begin(); it != objectList.end(); ++it) {
+		auto nextIt = std::next(it); 
+
+		if (nextIt == objectList.end()) {
+			nextIt = objectList.begin(); 
+		}
+
+		(*it)->SetActive(false);
+		(*nextIt)->SetActive(true);
+	}
 }
 

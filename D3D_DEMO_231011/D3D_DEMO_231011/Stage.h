@@ -48,6 +48,10 @@ public:
 
 	//ステップ数を加算していく
 	void StepCount(void);
+<<<<<<< .merge_file_PiacuO
+=======
+	void HintPunish(int step) { m_moveStep += step; };
+>>>>>>> .merge_file_pKg0rb
 	int GetStep(void) { return m_moveStep; };
 
 	//step数をリセット　クリア状態をリセット

@@ -63,6 +63,7 @@ private:
 
 	//入力の結果
 	InputCom m_nowInput = { INPUT_NONE,INPUT_NONE };
+
 	//入力の時間計算
 	int m_countTime = 0;
 
@@ -210,6 +211,8 @@ public:
 
 	//今移動中かどうか？
 	bool GetStill() { if (m_moveDir == STILL) { return true; } else { return false; } };
+
+	void ResetMove(void);
 	
 	DirectX::XMFLOAT3 GetObjectPos() { return m_obj->m_sprite->m_pos; }
 
