@@ -101,6 +101,7 @@ public:
 	ID3D11ShaderResourceView* Result_num;
 	ID3D11ShaderResourceView* star;
 	ID3D11ShaderResourceView* starShadow;
+	ID3D11ShaderResourceView* Button_skip;
 
 	//clear
 	//ポーズ画面用

@@ -1156,7 +1156,7 @@ void Game::UpdateStage1_1(void)
 		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {
 		
 
-		//クリア
+		////クリア
 		int stageNum = SceneManager::Get()->GetStage();
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
 		SceneManager::Get()->SetScene(RESULT);

@@ -11,6 +11,13 @@ private:
 	CanvasUI* clear2;
 	// 画像３
 	CanvasUI* clear3;
+	// スキップボタン
+	CanvasUI* skip;
+
+	//２枚目の画像を表示するまでの待機時間を管理する変数
+	float waitcount = 0;
+	//３枚目の画像を表示するまでの待機時間を管理する変数
+	float waitcount2 = 0;
 
 public :
 	bool isAnimated = false;

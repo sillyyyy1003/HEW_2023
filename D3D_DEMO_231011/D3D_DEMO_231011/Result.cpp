@@ -8,6 +8,8 @@
 #include "Game.h"
 #include "xa2.h"
 
+#define SIZECHANGE 0.85f
+
 extern Assets* g_Assets;
 
 Result::Result()
@@ -41,7 +43,7 @@ Result::~Result()
 void Result::Init()
 {
 	//StepNumの初期化
-	processor->Init(2.0f, 0.0f, 1.0, 10);
+	processor->Init(1.8f * SIZECHANGE, 0.0f, 1.0 * SIZECHANGE, 10);
 
 	uiResult = new CanvasUI();
 	resultBg = new CanvasUI();
@@ -52,22 +54,22 @@ void Result::Init()
 	Button_return = new CanvasUI();
 
 	//テクスチャ読み込み・モデル作成
-	uiResult->CreateModel(g_Assets->result, 430, 104, 1, 1);
-	resultBg->CreateModel(g_Assets->resultBg, 1029, 713, 1, 1);
-	Result_score->CreateModel(g_Assets->Result_score, 139, 66, 1, 1);
-	Result_stepcount->CreateModel(g_Assets->Result_stepcount, 375, 72, 1, 1);
-	Button_again->CreateModel(g_Assets->Button_again, 299, 96, 1, 2);
-	Button_next->CreateModel(g_Assets->Button_next, 316, 107, 1, 2);
-	Button_return->CreateModel(g_Assets->Button_return, 311, 104, 1, 2);
+	uiResult->CreateModel(g_Assets->result, 430* SIZECHANGE, 104 * SIZECHANGE, 1, 1);
+	resultBg->CreateModel(g_Assets->resultBg, 1029 * SIZECHANGE, 713 * SIZECHANGE, 1, 1);
+	Result_score->CreateModel(g_Assets->Result_score, 139 * SIZECHANGE, 66 * SIZECHANGE, 1, 1);
+	Result_stepcount->CreateModel(g_Assets->Result_stepcount, 375 * SIZECHANGE, 72 * SIZECHANGE, 1, 1);
+	Button_again->CreateModel(g_Assets->Button_again, 299 * SIZECHANGE, 96 * SIZECHANGE, 1, 2);
+	Button_next->CreateModel(g_Assets->Button_next, 316 * SIZECHANGE, 107 * SIZECHANGE, 1, 2);
+	Button_return->CreateModel(g_Assets->Button_return, 311 * SIZECHANGE, 104 * SIZECHANGE, 1, 2);
 
 	//座標
 	resultBg->m_pos = { 0.0f,0.0f,0.4f };
-	uiResult->m_pos = { 0.0f,3.0f,0.3f };
-	Result_score->m_pos = { -4.0f,1.5f,0.3f };
-	Result_stepcount->m_pos = { -2.5f,0.0f,0.3f };
-	Button_again->m_pos = { 2.0f,-1.5f,0.3f };
-	Button_next->m_pos = { -2.3f,-1.5f,0.3f };
-	Button_return->m_pos = { 0.0f,-3.0f,0.3f };
+	uiResult->m_pos = { 0.0f,3.1f* SIZECHANGE,0.3f };
+	Result_score->m_pos = { -4.0f * SIZECHANGE,1.5f * SIZECHANGE,0.3f };
+	Result_stepcount->m_pos = { -2.5f * SIZECHANGE,0.0f,0.3f };
+	Button_again->m_pos = { 2.0f * SIZECHANGE,-1.5f * SIZECHANGE,0.3f };
+	Button_next->m_pos = { -2.3f * SIZECHANGE,-1.5f * SIZECHANGE,0.3f };
+	Button_return->m_pos = { 0.0f,-3.0f* SIZECHANGE,0.3f };
 
 	//アニメーション
 	Button_again->m_anime->SetAnimePattern(0);
@@ -80,12 +82,12 @@ void Result::Init()
 		starShadow[i] = new CanvasUI();
 
 		//テクスチャ読み込み・モデル作成
-		star[i]->CreateModel(g_Assets->star, 88, 85, 1, 1);
-		starShadow[i]->CreateModel(g_Assets->starShadow, 88, 85, 1, 1);
+		star[i]->CreateModel(g_Assets->star, 88 * SIZECHANGE, 85 * SIZECHANGE, 1, 1);
+		starShadow[i]->CreateModel(g_Assets->starShadow, 88 * SIZECHANGE, 85 * SIZECHANGE, 1, 1);
 
 		//座標
-		star[i]->m_pos = { -2.0f + 1.5f*i,1.5f,0.3f };
-		starShadow[i]->m_pos = { -2.0f + 1.5f * i,1.5f,0.3f };
+		star[i]->m_pos = { -2.1f * SIZECHANGE + 1.5f*i * SIZECHANGE,1.5f * SIZECHANGE,0.3f };
+		starShadow[i]->m_pos = { -2.1f * SIZECHANGE + 1.5f * i * SIZECHANGE,1.5f * SIZECHANGE,0.3f };
 	}
 
 	//背景

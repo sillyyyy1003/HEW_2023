@@ -89,6 +89,7 @@ Assets::Assets()
     Result_num = LoadTexture("assets/result/result_suuji.png");
     star = LoadTexture("assets/result/Star_shadow.png");
     starShadow = LoadTexture("assets/result/Star.png");
+    Button_skip = LoadTexture("assets/result/result_skip_botton.png");
 
 
     //pause
@@ -207,6 +208,7 @@ Assets::~Assets()
     SAFE_RELEASE(Result_num);
     SAFE_RELEASE(star);
     SAFE_RELEASE(starShadow);
+    SAFE_RELEASE(Button_skip);
 
 
     //ポーズ画面用

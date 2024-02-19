@@ -193,9 +193,6 @@
     <ClInclude Include="Result.h">
       <Filter>Result</Filter>
     </ClInclude>
-    <ClInclude Include="ResultAnimation.h">
-      <Filter>Result</Filter>
-    </ClInclude>
     <ClInclude Include="CameraShaker.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -207,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="Direct3D.h">
       <Filter>DirectFile\ShaderFile</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultAnimation.h">
+      <Filter>Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
