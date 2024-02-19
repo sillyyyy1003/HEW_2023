@@ -126,6 +126,7 @@ void Game::Init()
 	uiSoundBg->CreateModel(g_Assets->uiSoundBg, 687, 550, 1, 1);
 	uiSelectBg->CreateModel(g_Assets->uiSelectBg, 1280, 720, 1, 1);
 	uiSelectCursor->CreateModel(g_Assets->uiSelectCursor, 76, 84, 1, 1);
+	uiSoundCursor->CreateModel(g_Assets->uiSoundCursor, 56, 51, 1, 1);
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -214,6 +215,7 @@ void Game::Init()
 	//uiSound
 	uiSoundBg->m_pos = { 1.0f, 0.2f, 0.7f };
 	uiSoundBg->m_scale = { 1.0f,1.0f,1.0f };
+	uiSoundCursor->m_pos = { -2.0f, 0.65f, 0.6f };
 
 	//fade
 	fade->m_pos = { 0.0f,0.0f,-0.9f };
@@ -1357,6 +1359,7 @@ Game::~Game()
 	delete uiSelect;
 	delete uiSound;
 	delete uiSoundBg;
+	delete uiSoundCursor;
 
 	//配列の分を解放
 	for (int i = 0; i < 6; i++)
