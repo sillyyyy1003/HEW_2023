@@ -129,6 +129,18 @@ private:
 	CanvasUI* clear3_2;
 	// 画像３
 	CanvasUI* clear3_3;
+
+	CanvasUI* tutorial1;
+	CanvasUI* tutorial1loop;
+	CanvasUI* tutorial2;
+	CanvasUI* tutorial2loop;
+	CanvasUI* tutorial3;
+	CanvasUI* tutorial3loop;
+	CanvasUI* tutorial4;
+	CanvasUI* tutorial4loop;
+	CanvasUI* tutorial5;
+	CanvasUI* tutorial5loop;
+
 private:
 	
 	//soundSetting
@@ -178,11 +190,11 @@ private:
 	};
 
 	enum TUTORIAL {
-		tutorial1,
-		tutorial2,
-		tutorial3,
-		tutorial4,
-		tutorial5,
+		TUTORIAL1,
+		TUTORIAL2,
+		TUTORIAL3,
+		TUTORIAL4,
+		TUTORIAL5,
 	};
 
 	//sound
@@ -217,7 +229,7 @@ private:
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
 	PAUSESELECT pauseSelect = RESUME;
-	TUTORIAL tutorial = tutorial1;
+	TUTORIAL tutorial = TUTORIAL1;
 	
 
 private:
@@ -324,6 +336,8 @@ public:
 
 	//タイトル描画
 	void TitleDraw(void);
+
+	void TutorialDraw(void);
 
 	void StageDraw(void);
 	void StageUndoneDraw(void);

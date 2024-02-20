@@ -120,15 +120,15 @@ Assets::Assets()
     comingSoonLoop = LoadTexture("assets/stage1/comingsoon_loop.png");
 
     tutorial1 = LoadTexture("assets/tutorial/01_nextpage.png");
-    tutorial1loop = LoadTexture("assets/tutorial/comingsoon_1.png");
-     tutorial2 = LoadTexture("assets/tutorial/comingsoon_1.png");
-    tutorial2loop = LoadTexture("assets/tutorial/comingsoon_1.png");
-     tutorial3 = LoadTexture("assets/tutorial/comingsoon_1.png");
-    tutorial3loop = LoadTexture("assets/tutorial/comingsoon_1.png");
-     tutorial4 = LoadTexture("assets/tutorial/comingsoon_1.png");
-    tutorial4loop = LoadTexture("assets/tutorial/comingsoon_1.png");
-   tutorial5 = LoadTexture("assets/tutorial/comingsoon_1.png");
-   tutorial5loop = LoadTexture("assets/tutorial/comingsoon_1.png");
+    tutorial1loop = LoadTexture("assets/tutorial/02_loop.png");
+     tutorial2 = LoadTexture("assets/tutorial/03_nextpage.png");
+    tutorial2loop = LoadTexture("assets/tutorial/04_loop.png");
+     tutorial3 = LoadTexture("assets/tutorial/05_nextpage.png");
+    tutorial3loop = LoadTexture("assets/tutorial/06_loop.png");
+     tutorial4 = LoadTexture("assets/tutorial/07_nextpage.png");
+    tutorial4loop = LoadTexture("assets/tutorial/08_loop.png");
+   tutorial5 = LoadTexture("assets/tutorial/09_nextpage.png");
+   tutorial5loop = LoadTexture("assets/tutorial/10_loop.png");
 
 
 
