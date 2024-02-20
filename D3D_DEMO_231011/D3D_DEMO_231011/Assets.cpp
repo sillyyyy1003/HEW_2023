@@ -118,6 +118,20 @@ Assets::Assets()
 
     comingSoon = LoadTexture("assets/stage1/comingsoon_1.png");
     comingSoonLoop = LoadTexture("assets/stage1/comingsoon_loop.png");
+
+    tutorial1 = LoadTexture("assets/tutorial/01_nextpage.png");
+    tutorial1loop = LoadTexture("assets/tutorial/comingsoon_1.png");
+     tutorial2 = LoadTexture("assets/tutorial/comingsoon_1.png");
+    tutorial2loop = LoadTexture("assets/tutorial/comingsoon_1.png");
+     tutorial3 = LoadTexture("assets/tutorial/comingsoon_1.png");
+    tutorial3loop = LoadTexture("assets/tutorial/comingsoon_1.png");
+     tutorial4 = LoadTexture("assets/tutorial/comingsoon_1.png");
+    tutorial4loop = LoadTexture("assets/tutorial/comingsoon_1.png");
+   tutorial5 = LoadTexture("assets/tutorial/comingsoon_1.png");
+   tutorial5loop = LoadTexture("assets/tutorial/comingsoon_1.png");
+
+
+
 }
 
 Assets::~Assets()
@@ -243,7 +257,17 @@ Assets::~Assets()
     
 
     //デバッグ用
-    SAFE_RELEASE(debugFont);
+    SAFE_RELEASE(debugFont);    
+    SAFE_RELEASE(tutorial1);
+    SAFE_RELEASE(tutorial1loop);
+    SAFE_RELEASE(tutorial2);
+    SAFE_RELEASE(tutorial2loop);
+    SAFE_RELEASE(tutorial3);
+    SAFE_RELEASE(tutorial3loop);
+    SAFE_RELEASE(tutorial4);
+    SAFE_RELEASE(tutorial4loop);
+    SAFE_RELEASE(tutorial5);
+    SAFE_RELEASE(tutorial5loop);
 
 }
 

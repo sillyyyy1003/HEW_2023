@@ -100,7 +100,7 @@ void Result::Update()
 {
 	//スターの処理
 	//引数１：ステージ終了時のステップ数　引数２：ステップ数によって星の数を変更するための制限
-	StarEvent(ResultScore(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep(), Starnum));
+	StarEvent(ResultScore(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep(), Starnum));
 	//キーの処理
 	DoResultKeyEvent();
 	//ボタンの処理
@@ -162,10 +162,6 @@ void Result::DoResultKeyEvent()
 	{
 		buttonnum = NEXT;
 	}
-	if (buttonnum == RETURN && Input::Get()->GetKeyTrigger(DIK_UPARROW))
-	{
-		buttonnum = AGAIN;
-	}
 }
 
 void Result::ButtonEvent()
@@ -180,8 +176,8 @@ void Result::ButtonEvent()
 		//スペースを押したときにもう一度同じステージに遷移する
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
-			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			//同じステージだから、直接初期化をもう一回やったらいい
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			//Game::Get()->InitStage();
 			buttonnum = NEXT;
 		}
@@ -196,7 +192,6 @@ void Result::ButtonEvent()
 		{
 			SceneManager::Get()->ChangeScene(SCENENAME::STAGESELECT);
 			buttonnum = NEXT;
-
 			XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
 		}
 		break;
@@ -210,8 +205,8 @@ void Result::ButtonEvent()
 		{
 			//ステージに戻る
 			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
-			//ステージを次のステージにする
-			SceneManager::Get()->SetStage(SceneManager::Get()->GetNextStage());
+	
+
 			//初期化を行う
 			//Game::Get()->InitStage();
 			

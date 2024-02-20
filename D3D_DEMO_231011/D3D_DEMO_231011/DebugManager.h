@@ -30,6 +30,7 @@ public:
 	//文字を出力する
 	void PrintDebugLog(float _posX, float _posY, const char* word);
 
+
 	//float型数字を出力する
 	void PrintDebugLog(float _posX, float _posY, const float _num);
 

@@ -5,12 +5,6 @@
 class ResultAnimation
 {
 private:
-	// 画像１
-	CanvasUI* clear1;
-	// 画像２
-	CanvasUI* clear2;
-	// 画像３
-	CanvasUI* clear3;
 	// スキップボタン
 	CanvasUI* skip;
 
@@ -26,17 +20,14 @@ public:
 
 	~ResultAnimation();
 
-	// ステージ事に画像を設定する
-	void SetTexture(ID3D11ShaderResourceView* clear1, ID3D11ShaderResourceView* clear2, ID3D11ShaderResourceView* clear3);
-
 	// 任意のタイミングで初期化
 	void Init();
 
-	void Update();
+	void Update(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear3);
 
-	void Draw();
+	void Draw(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear3);
 
 	// 画像の移動
-	bool Move();
+	bool Move(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear3);
 };
 

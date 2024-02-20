@@ -6,6 +6,8 @@ enum SCENENAME {
 
 	TITLE,//タイトル
 
+	TUTORIAL,//
+
 	STAGESELECT,//ステージセレクト
 
 	STAGE,//ステージ

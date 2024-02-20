@@ -32,13 +32,12 @@ void RailManager::InitRail()
 void RailManager::InitRailPos(void)
 {
 
-
 	for (auto& element : Game::Get()->GetObjectList()) {
 		//ˆÊ’u‚ðŠl“¾
 		int pos = element->GetRailPos().verticalPos * 5 + element->GetRailPos().horizontalPos;
 
 		//î•ñXV
-		RailManager::Get()->m_info[pos].isVacant = true;
+		RailManager::Get()->m_info[pos].isVacant = false;
 	}
 
 }

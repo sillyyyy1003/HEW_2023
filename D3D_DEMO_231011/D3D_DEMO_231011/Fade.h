@@ -32,5 +32,9 @@ public:
 	};
 
 	int mState;
+	
+	bool isFinishedFade = true;
+	
+	bool isStartFade = false;
 
 };

@@ -106,6 +106,29 @@ private:
 	ResultAnimation* resultAnimator;
 	Fade* fade;
 
+	//ステージ１
+	// 画像１
+	CanvasUI* clear1_1;
+	// 画像２
+	CanvasUI* clear1_2;
+	// 画像３
+	CanvasUI* clear1_3;
+
+	//ステージ２
+	// 画像１
+	CanvasUI* clear2_1;
+	// 画像２
+	CanvasUI* clear2_2;
+	// 画像３
+	CanvasUI* clear2_3;
+
+	//ステージ３
+	// 画像１
+	CanvasUI* clear3_1;
+	// 画像２
+	CanvasUI* clear3_2;
+	// 画像３
+	CanvasUI* clear3_3;
 private:
 	
 	//soundSetting
@@ -154,6 +177,14 @@ private:
 		SOUND,			//サウンドの画面
 	};
 
+	enum TUTORIAL {
+		tutorial1,
+		tutorial2,
+		tutorial3,
+		tutorial4,
+		tutorial5,
+	};
+
 	//sound
 	bool isSound = false;
 	//pause
@@ -172,7 +203,7 @@ private:
 	//リザルト演出
 	bool isResultAnime = false;
 
-
+	bool isFade = false;
 
 
 	//初期設定
@@ -186,6 +217,7 @@ private:
 	SELECTSTAGE selectStage = SELECTNONE;
 	SELECTCHAPTER selectChapter = CHAPTER1;
 	PAUSESELECT pauseSelect = RESUME;
+	TUTORIAL tutorial = tutorial1;
 	
 
 private:
@@ -246,6 +278,8 @@ public:
 
 	//Title Update
 	void TitleUpdate(void);
+
+	void TutorialUpdate(void);
 
 	//Select Update
 	void SelectUpdate(void);

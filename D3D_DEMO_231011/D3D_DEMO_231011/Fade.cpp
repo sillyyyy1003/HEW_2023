@@ -37,6 +37,8 @@ void Fade::Update()
 		{
 			mState = NONE; // 何もしない状態
 
+			isStartFade = false;
+
 			//タイムをリセットする
 			Game::Get()->fadeTime = 0;
 		}
@@ -63,6 +65,8 @@ void Fade::FadeIn()
 {
 	if (mState == NONE)
 		mState = FADE_IN;
+	isStartFade = true;
+
 }
 
 void Fade::FadeOut()

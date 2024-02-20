@@ -20,47 +20,27 @@ ResultAnimation::ResultAnimation()
 
 ResultAnimation::~ResultAnimation()
 {
-	delete clear1;
-	delete clear2;
-	delete clear3;
-}
-
-void ResultAnimation::SetTexture(ID3D11ShaderResourceView* texture_clear1, ID3D11ShaderResourceView* texture_clear2, ID3D11ShaderResourceView* texture_clear3)
-{
-	clear1->SetTexture(texture_clear1);
-	clear2->SetTexture(texture_clear2);
-	clear3->SetTexture(texture_clear3);
 }
 
 void ResultAnimation::Init()
 {
-	clear1 = new CanvasUI();
-	clear2 = new CanvasUI();
-	clear3 = new CanvasUI();
-
 	skip = new CanvasUI();
 
-	//テクスチャ読み込み・モデル作成
-	clear1->CreateModel(g_Assets->resultComic1_1_1, 650, 476, 1, 1);
-	clear2->CreateModel(g_Assets->resultComic1_1_2, 707, 503, 1, 1);
-	clear3->CreateModel(g_Assets->resultComic1_1_3, 502, 642, 1, 1);
-
 	skip->CreateModel(g_Assets->Button_skip, 892/4, 265/4, 1, 1);
-
-	// 画像１～３の移動前の初期位置
-	clear1->m_pos = { 12.0f,7.6f,0.4f };   //右上　z座標　真ん中 
-	clear2->m_pos = { -12.1f,7.6f,0.3f };  //左上　z座標　手前
-	clear3->m_pos = { 0.0f,-8.6f,0.5f };   //下　　z座標　奥
 
 	skip->m_pos = { 6.53f,3.97f,0.3f }; //スキップボタン
 }
 
-void ResultAnimation::Update()
+void ResultAnimation::Update(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear3)
 {
-	
+
 		// 画像の移動が完了したか、一度クリアしたステージかで判定
-		if (Move() || SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetCompleted())
+		if (Move(clear1, clear2, clear3))
 		{
+			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetCompleted(true);
+		}
+
+		if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetCompleted()) {
 			// スペースを押すとリザルト画面に遷移する
 			if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 			{
@@ -75,7 +55,7 @@ void ResultAnimation::Update()
 				waitcount = 0; //カウントリセット
 
 				// ステージを一度クリアした判定にする
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetCompleted(true);
+				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetCompleted(true);
 				Game::Get()->SetResultAnime(false);
 			}
 		}
@@ -85,12 +65,9 @@ void ResultAnimation::Update()
 		clear3->Update();
 		skip->Update();
 	
-		if (Move()) {
-			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetCompleted(true);
-		}
 }
 
-void ResultAnimation::Draw()
+void ResultAnimation::Draw(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear3)
 {
 
 	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetClear())
@@ -108,7 +85,7 @@ void ResultAnimation::Draw()
 
 }
 
-bool ResultAnimation::Move()
+bool ResultAnimation::Move(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear3)
 {
 	// 画像１～３を順番に移動するようにさせる
 	

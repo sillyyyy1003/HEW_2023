@@ -12,6 +12,11 @@ struct RailPos {
 
 	int verticalPos=0;	//縦	 0:BACK 1:MIDDLE 2:FRONT
 	int horizontalPos=0;	//横 0:LEFT1 1:LEFT2 2:MIDDLE 3:RIGHT1 4:RIGHT2
+	
+	bool operator==(const RailPos& other) const {
+		return (verticalPos == other.verticalPos) && (horizontalPos == other.horizontalPos);
+	}
+
 };
 
 class GameObject

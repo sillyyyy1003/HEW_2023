@@ -329,6 +329,51 @@ void Game::Init()
 	{
 		MessageBoxA(NULL, "サウンド初期化失敗", "エラー", MB_OK | MB_ICONERROR);
 	}
+
+	// リザルト初期化
+	clear1_1 = new CanvasUI();
+	clear1_2 = new CanvasUI();
+	clear1_3 = new CanvasUI();
+
+	//テクスチャ読み込み・モデル作成
+	clear1_1->CreateModel(g_Assets->resultComic1_1_2, 707, 503, 1, 1);
+	clear1_2->CreateModel(g_Assets->resultComic1_1_3, 650, 476, 1, 1);
+	clear1_3->CreateModel(g_Assets->resultComic1_1_1, 502, 642, 1, 1);
+
+	// 画像１～３の移動前の初期位置
+	clear1_1->m_pos = { 12.0f,7.6f,0.4f };   //右上　z座標　真ん中 
+	clear1_2->m_pos = { -12.1f,7.6f,0.3f };  //左上　z座標　手前
+	clear1_3->m_pos = { 0.0f,-8.6f,0.5f };   //下　　z座標　奥
+
+	clear2_1 = new CanvasUI();
+	clear2_2 = new CanvasUI();
+	clear2_3 = new CanvasUI();
+
+	//テクスチャ読み込み・モデル作成
+	clear2_1->CreateModel(g_Assets->resultComic1_2_2, 707, 503, 1, 1);
+	clear2_2->CreateModel(g_Assets->resultComic1_2_3, 502, 642, 1, 1);
+	clear2_3->CreateModel(g_Assets->resultComic1_2_1, 650, 476, 1, 1);
+
+	// 画像１～３の移動前の初期位置
+	clear2_1->m_pos = { 12.0f,7.6f,0.4f };   //右上　z座標　真ん中 
+	clear2_2->m_pos = { -12.1f,7.6f,0.3f };  //左上　z座標　手前
+	clear2_3->m_pos = { 0.0f,-8.6f,0.5f };   //下　　z座標　奥
+
+	clear3_1 = new CanvasUI();
+	clear3_2 = new CanvasUI();
+	clear3_3 = new CanvasUI();
+
+	//テクスチャ読み込み・モデル作成
+	clear3_1->CreateModel(g_Assets->resultComic1_3_2, 707, 503, 1, 1);
+	clear3_2->CreateModel(g_Assets->resultComic1_3_3, 650, 476, 1, 1);
+	clear3_3->CreateModel(g_Assets->resultComic1_3_1, 502, 642, 1, 1);
+
+	// 画像１～３の移動前の初期位置
+	clear3_1->m_pos = { 12.0f,7.6f,0.4f };   //右上　z座標　真ん中 
+	clear3_2->m_pos = { -12.1f,7.6f,0.3f };  //左上　z座標　手前
+	clear3_3->m_pos = { 0.0f,-8.6f,0.5f };   //下　　z座標　奥
+
+
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
 	RailManager::Get()->InitRail();
 	
@@ -347,8 +392,6 @@ void Game::InitTitle(void)
 
 void Game::InitStage()
 {
-
-	RailManager::Get()->InitRailPos();
 
 	//ステージの初期化
 	switch (SceneManager::Get()->GetStage()) {
@@ -484,6 +527,8 @@ void Game::InitStage1_1(void)
 	objectList.push_back(lamp);
 	objectList.push_back(housePlate);
 
+	RailManager::Get()->InitRail();
+	RailManager::Get()->InitRailPos();
 	//レールの初期化
 	RailInit1_1();
 
@@ -508,9 +553,7 @@ void Game::InitStage1_1(void)
 	//自動移動や自動回転の設定
 	
 	//クリアのレベルを設定
-	resultGenerator->SetStarNum({ 3,5,8,11 });
-	//アニメションのテクスチャ読み込み
-	resultAnimator->SetTexture(g_Assets->resultComic1_1_1, g_Assets->resultComic1_1_2, g_Assets->resultComic1_1_3);
+	resultGenerator->SetStarNum({ 12,14,19,22 });
 
 }
 
@@ -579,8 +622,7 @@ void Game::InitStage1_2(void)
 	//自動移動や自動回転の設定
 
 	//クリアのレベルを設定
-	resultGenerator->SetStarNum({ 3,5,8,11 });
-	resultAnimator->SetTexture( g_Assets->resultComic1_2_2, g_Assets->resultComic1_2_3, g_Assets->resultComic1_2_1);
+	resultGenerator->SetStarNum({ 8,10,15,18 });
 
 	//状態のリセット
 	for (auto& element : objectList) {
@@ -656,10 +698,9 @@ void Game::InitStage1_3(void)
 
 	//自動移動や自動回転の設定
 
-	resultGenerator->SetStarNum({ 3,5,8,11 });
-	resultAnimator->SetTexture(g_Assets->resultComic1_3_3, g_Assets->resultComic1_3_2, g_Assets->resultComic1_3_1);
+	resultGenerator->SetStarNum({ 24,26,30,33 });
 
-	//クリアのレベルを設定
+
 
 }
 
@@ -690,7 +731,7 @@ void Game::InitStage3_3(void)
 void Game::RailInit1_1(void)
 {	
 	////1-1用
-	
+
 	bool railData[15][8]{
 		//back row
 		//up	ru  r	rd d	ld l	lu
@@ -938,6 +979,10 @@ void Game::TitleUpdate(void)
 	
 }
 
+void Game::TutorialUpdate(void)
+{
+}
+
 void Game::SelectUpdate(void)
 {
 	//クリア印の判定->関数化
@@ -964,7 +1009,7 @@ void Game::SelectUpdate(void)
 
 
 		//ステージをを選択する場合
-		if (isSelectChapter == true) {
+ 		if (isSelectChapter == false) {
 
 			switch (selectStage)
 			{
@@ -1006,7 +1051,7 @@ void Game::SelectUpdate(void)
 		
 		XA_Play(SE_Select);//選択SE再生
 		
-		if (isSelectChapter == true) {
+		if (isSelectChapter == false) {
 
 			switch (selectStage)
 			{
@@ -1231,9 +1276,7 @@ void Game::UpdateStage1_1(void)
 
 	//クリア判定
  	if (ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN }, "coconut", "lamp", ShadowObject::SMALL)&&
-		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {
-		
-
+		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {		
 		////クリア
 		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetClear(true);
 		SceneManager::Get()->ChangeScene(RESULT);
@@ -1244,8 +1287,6 @@ void Game::UpdateStage1_1(void)
 	//エフェクト
 	testEffect->SetTrace(true);
 	testEffect->Update();
-
-	resultAnimator->Update();
 
 }
 
@@ -1289,7 +1330,6 @@ void Game::UpdateStage1_2(void)
 	//エフェクト
 	testEffect->SetTrace(true);
 	testEffect->Update();
-	resultAnimator->Update();
 }
 
 void Game::UpdateStage1_3(void)
@@ -1322,10 +1362,11 @@ void Game::UpdateStage1_3(void)
 
 		
 	//クリア判定     
-	if (ColliderManager::Get()->ClearCollision({ COL_RIGHT,OVERLAP }, "picnicbasket", "sandwich", ShadowObject::LARGE)&&
-		ColliderManager::Get()->ClearCollision({COL_RIGHT,COL_DOWN},"bucket","newspaper",ShadowObject::SMALL)) {
+	if (ColliderManager::Get()->ClearCollision({ COL_RIGHT,OVERLAP }, "picnicbasket", "sandwich", ShadowObject::LARGE) &&
+		ColliderManager::Get()->ClearCollision({ COL_RIGHT,COL_DOWN }, "bucket", "newspaper", ShadowObject::SMALL)) {
 		//isPause = true;
-		if (newspaper->GetRailPos().verticalPos == 0 && newspaper->GetRailPos().horizontalPos == 4&&picnicbasket->GetRailPos().verticalPos==2) {
+		RailPos pos = { 0,3 };
+		if (bucket->GetRailPos() == pos) {
 			//クリア
 			int stageNum = SceneManager::Get()->GetStage();
 			SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
@@ -1341,9 +1382,6 @@ void Game::UpdateStage1_3(void)
 	//エフェクト
 	testEffect->SetTrace(true);
 	testEffect->Update();
-	resultAnimator->Update();
-
-
 }
 
 void Game::UpdateStage2_1(void)
@@ -1388,39 +1426,73 @@ void Game::UpdateStageUndone(void)
 
 void Game::ResultUpdate(void)
 {
+
 	if (isResultAnime) {
+		int stageNum = SceneManager::Get()->GetActiveStage();
 
-		resultAnimator->Update();
+		switch (stageNum)
+		{
+		case STAGE1_1:
+			resultAnimator->Update(clear1_1, clear1_2, clear1_3);
+			break;
+		case STAGE1_2:
+			resultAnimator->Update(clear2_1, clear2_2, clear2_3);
+			break;
+		case STAGE1_3:
+			resultAnimator->Update(clear3_1, clear3_2, clear3_3);
+			break;
+		}
 	}
-	else {	
-
+	else {
 		resultGenerator->Update();
-	
+
 	}
 }
 
 void Game::GameUpdate(void)
 {
 	if (SceneManager::Get()->GetNextScene() != NONE) {
-	
+
 		if (fade->mState != Fade::FADE_OUT)
 		{
 			SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
 			SceneManager::Get()->SetNextScene(NONE);
 			fade->FadeIn();
-		}
-		//ここで初期化を行う
-		if (SceneManager::Get()->GetScene() == STAGE) {
-			//修正待ち
-			if (SceneManager::Get()->GetNextScene() != RESULT&&SceneManager::Get()->GetNextScene() != STAGESELECT ) {
+			if (SceneManager::Get()->GetScene() == STAGE) {
 				InitStage();
 			}
+
 		}
-	}
+		
+		
+
+
+		//if (SceneManager::Get()->GetScene() == RESULT) {
+		//	if (SceneManager::Get()->GetNextScene() == STAGE) {
+		//		InitStage();
+		//	}
+		//
+		//	/*if (SceneManager::Get()->GetScene() == STAGE) {
+		//		InitStage();
+		//	}*/
+		//}
+		////FADE OUTの途中
+		//if (SceneManager::Get()->GetScene() == RESULT) {
+		//	
+		//}
+		
+	}	
+	
+	//if(i)
+
+
 
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 		TitleUpdate();
+		break;
+	case SCENENAME::TUTORIAL:
+
 		break;
 	case SCENENAME::STAGESELECT:
 		//セレクトにいくとサウンド停止
@@ -1513,6 +1585,21 @@ Game::~Game()
 	delete resultAnimator;
 	delete uiStepNum;
 	delete uiArrow;
+
+
+	delete clear1_1;
+	delete clear1_2;
+	delete clear1_3;
+
+	delete clear2_1;
+	delete clear2_2;
+
+	delete clear2_3;
+
+	delete clear3_1;
+
+	delete clear3_2;
+	delete clear3_3;
 }
 
 Game* Game::Get()
@@ -1617,9 +1704,9 @@ void Game::UiUpdate()
 				PauseSwitch();
 				break;
 			case Game::RESTART:
-				PauseSwitch();
 				//ステージ内のオブジェクトを再配置
 				InitStage();
+				PauseSwitch();
 				//初期化
 				pauseSelect = RESUME;
 				break;
@@ -2370,17 +2457,15 @@ void Game::StageDraw(void)
 
 		//pauseじゃない時操作方法出る
 		controlPanel->Draw();
-		uiArrow->Draw();
+		
 
 		//ステップ数表示
 		if (!isPause) {
 			if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
-				//修正待ち //fadeを邪魔しないように
-
+				//修正待ち //fadeを邪魔しないよう
 				uiStepNum->PrintDebugLogCenter(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+				uiArrow->Draw();
 			}
-
-
 		}
 
 		//hint描画
@@ -2415,11 +2500,25 @@ void Game::ResultDraw(void)
 
 	if (isResultAnime) {
 		//リザルトアニメーション待機させる
-		resultAnimator->Draw();
+		int stageNum = SceneManager::Get()->GetStage();
+
+		switch (stageNum)
+		{
+		case STAGE1_1:// ステージ１
+			resultAnimator->Draw(clear1_1, clear1_2, clear1_3);
+			break;
+		case STAGE1_2:// ステージ２
+			resultAnimator->Draw(clear2_1, clear2_2, clear2_3);
+			break;
+		case STAGE1_3:// ステージ３
+			resultAnimator->Draw(clear3_1, clear3_2, clear3_3);
+			break;
+		}
 	}
 	else {
 		resultGenerator->Draw();
 	}
+
 
 }
 
@@ -2746,7 +2845,7 @@ void Game::StageUpdate(void)
 
 				case STAGE1_1:
 
-					XA_SetVolume(BGM_Stage1, 0.6f);
+					XA_SetVolume(BGM_Stage1, bgmVolume*0.2);
 
 					UpdateStage1_1();
 
@@ -2754,7 +2853,7 @@ void Game::StageUpdate(void)
 
 				case STAGE1_2:
 
-					XA_SetVolume(BGM_Stage2, 0.6f);
+					XA_SetVolume(BGM_Stage2, bgmVolume * 0.2);
 
 					UpdateStage1_2();
 
@@ -2762,7 +2861,7 @@ void Game::StageUpdate(void)
 
 				case STAGE1_3:
 
-					XA_SetVolume(BGM_Stage3, 0.6f);
+					XA_SetVolume(BGM_Stage3, bgmVolume * 0.2);
 
 					UpdateStage1_3();
 

@@ -131,6 +131,18 @@ public:
 	ID3D11ShaderResourceView* effect2;	//白いカーソル
 	ID3D11ShaderResourceView* uiArrow;	
 
+	ID3D11ShaderResourceView* tutorial1;
+	ID3D11ShaderResourceView* tutorial1loop;
+	ID3D11ShaderResourceView* tutorial2;
+	ID3D11ShaderResourceView* tutorial2loop;
+	ID3D11ShaderResourceView* tutorial3;
+	ID3D11ShaderResourceView* tutorial3loop;
+	ID3D11ShaderResourceView* tutorial4;
+	ID3D11ShaderResourceView* tutorial4loop;
+	ID3D11ShaderResourceView* tutorial5;
+	ID3D11ShaderResourceView* tutorial5loop;
+
+
 	//デバッグ用
 	static ID3D11ShaderResourceView* debugFont;		
 
