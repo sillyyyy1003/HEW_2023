@@ -1308,6 +1308,7 @@ void Game::GameUpdate(void)
 		XA_Stop(BGM_SelectStage);
 
 
+
 		StageUpdate();
 		break;
 
@@ -2760,6 +2761,7 @@ void Game::StageUpdate(void)
 				case STAGE1_1:
 
 					XA_SetVolume(BGM_Stage1, 0.6f);
+					XA_Stop(SE_Present);
 
 					UpdateStage1_1();
 
@@ -2768,6 +2770,7 @@ void Game::StageUpdate(void)
 				case STAGE1_2:
 
 					XA_SetVolume(BGM_Stage2, 0.6f);
+					XA_Stop(SE_Present);
 
 					UpdateStage1_2();
 
@@ -2776,6 +2779,7 @@ void Game::StageUpdate(void)
 				case STAGE1_3:
 
 					XA_SetVolume(BGM_Stage3, 0.6f);
+					XA_Stop(SE_Present);
 
 					UpdateStage1_3();
 

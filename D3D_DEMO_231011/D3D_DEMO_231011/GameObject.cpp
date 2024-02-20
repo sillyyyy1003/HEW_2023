@@ -10,6 +10,7 @@
 #include "RailManager.h"
 #include "SceneManager.h"
 #include <math.h>
+#include "xa2.h"
 
 
 extern Camera* g_WorldCamera;
@@ -468,6 +469,8 @@ bool GameObject::isMoveable(DIR dir)
 			}
 		}
 		else {
+
+			XA_Play(SE_Limitation);//動かせない場合のSE再生
 			return false;
 		}
 }
