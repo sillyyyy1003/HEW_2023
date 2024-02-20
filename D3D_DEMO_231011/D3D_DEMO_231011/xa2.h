@@ -23,7 +23,11 @@ typedef enum
 	SE_Present,			// SE
 	SE_Combine,			// SE
 	SE_Result,
-	//SE_Press,
+	SE_Press,
+	SE_Plant,
+	SE_Interval1,
+	SE_Interval2,
+	SE_Limitation,
 	//SOUND_LABEL_SE007,			// サンプルSE
 
 
@@ -51,5 +55,10 @@ void XA_Resume(SOUND_LABEL label);
 
 // 引数で指定したサウンドの音量を数値で設定する
 void XA_SetVolume(SOUND_LABEL label, float volume);
+
+
+
+
+
 
 #endif

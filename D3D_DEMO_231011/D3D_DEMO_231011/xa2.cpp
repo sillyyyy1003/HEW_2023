@@ -27,7 +27,11 @@ PARAM g_param[SOUND_LABEL_LAST] =
 	{"assets/sound/se/presentSE.wav", false},	// SE
 	{"assets/sound/se/combineSE.wav", false},	// SE
 	{"assets/sound/se/resultSE.wav", false},
-	/*{"assets/sound/se/presskeySE.wav", false},*/
+	{"assets/sound/se/presskeySE.wav", false},
+	{"assets/sound/se/plantSE.wav", false},
+	{"assets/sound/se/intervalSE1.wav", false},
+	{"assets/sound/se/intervalSE2.wav", false},
+	{"assets/sound/se/limitationSE.wav", false},
 };
 
 #ifdef _XBOX //Big-Endian

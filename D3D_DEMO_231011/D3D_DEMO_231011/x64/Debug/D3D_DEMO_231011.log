@@ -1,4 +1,48 @@
-﻿  Game.cpp
+﻿  Animation.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(22,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Animation.cpp(23,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Assets.cpp
+  BoxCollider.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Camera.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  CameraShaker.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  CanvasUI.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Collider.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Collider.cpp(30,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Collider.cpp(31,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  ColliderManager.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  DInput.cpp
+  DebugManager.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(39,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\DebugManager.cpp(40,53): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Direct3D.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(264,30): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(265,31): warning C4244: '=': 'UINT' から 'FLOAT' への変換です。データが失われる可能性があります。
+  Effect.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Game.cpp
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
@@ -35,4 +79,123 @@ C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2871,38): warning C4305:
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2871,33): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2873,10): warning C4305: '初期化中': 'double' から 'float' へ切り詰めます。
 C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(2875,8): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  GameObject.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(250,21): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(493,17): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(497,39): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(498,39): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(528,39): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(529,39): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(604,39): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(605,39): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(645,39): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(646,39): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(674,39): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(675,39): warning C4305: '+=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(749,39): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\GameObject.cpp(750,39): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+  Input.cpp
+  Material.cpp
+  Object.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  ObjectAnimation.cpp
+  PolygonCollider.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  RailManager.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  コードを生成中...
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\PolygonCollider.cpp(115): warning C4715: 'PolygonCollider::InitVerticies': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\PolygonCollider.cpp(305): warning C4715: 'PolygonCollider::isCollision': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(124): warning C4715: 'D3D_CreateDevice': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(156): warning C4715: 'D3D_CreateRenderTarget': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(203): warning C4715: 'D3D_CreateDepthStencil': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(289): warning C4715: 'D3D_CreateSampler': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(311): warning C4715: 'D3D_CreateBuffer': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(255): warning C4715: 'D3D_CreateShader': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Direct3D.cpp(362): warning C4715: 'D3D_CreateBlendState': 値を返さないコントロール パスがあります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\BoxCollider.cpp(224): warning C4715: 'BoxCollider::isCollision': 値を返さないコントロール パスがあります。
+  コンパイル中...
+  Result.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  ResultAnimation.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  ResultProcess.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(30,69): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(30,53): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(45,22): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(46,19): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(56,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(58,38): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(79,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(80,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  SatCollider.cpp
+  Scene.cpp
+  SceneManager.cpp
+  ShadowObject.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  SphereCollider.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Sprite.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(31,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(31,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(32,22): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(32,16): warning C4244: '初期化中': 'double' から 'const float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(40,34): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(41,34): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(42,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(43,37): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(49,34): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(50,34): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(52,26): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(57,34): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(58,34): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(59,33): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(60,37): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(103,53): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(104,54): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(107,50): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Sprite.cpp(129,71): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  Stage.cpp
+  StaticAnimation.cpp
+  StaticObject.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  TrackCamera.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\TrackCamera.cpp(65,27): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\TrackCamera.cpp(67,27): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  WICTextureLoader.cpp
+  WinMain.cpp
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,48): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(22,40): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\Camera.h(24,52): warning C4305: '引数': 'double' から 'float' へ切り詰めます。
+  xa2.cpp
+  コードを生成中...
+C:\23_1110_HEW\D3D_DEMO_231011\D3D_DEMO_231011\SphereCollider.cpp(165): warning C4715: 'SphereCollider::isCollision': 値を返さないコントロール パスがあります。
   D3D_DEMO_231011.vcxproj -> C:\23_1110_HEW\D3D_DEMO_231011\x64\Debug\D3D_DEMO_231011.exe
