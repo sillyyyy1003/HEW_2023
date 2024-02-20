@@ -799,7 +799,11 @@ void Game::TitleUpdate(void)
 	//スペースキーを押すと　ステージセレクト画面に遷移
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		
+		XA_Stop(BGM_TITLE);
 		XA_Stop(SE_TITLE);
+		
+		XA_Play(SE_Press);// テスト用
+
 		XA_Play(BGM_SelectStage);//セレクトBGM再生
 
 		//タイトルに戻る時全部のクリア判定を無しにする　
@@ -824,6 +828,7 @@ void Game::TitleUpdate(void)
 		uiTitleBg->m_anime->isPlaying = true;
 		uiTitleBg->m_anime->SetAnimePattern(1);
 		XA_Play(SE_TITLE);
+		XA_Play(BGM_TITLE);
 		uiPressSpace->SetActive(true);
 	}
 
@@ -1130,19 +1135,19 @@ void Game::UpdateStage1_1(void)
 
 	for (auto& element : objectList) {
 		if (!element->GetStill()) {
-			isPlayMoveSE = true;
+			isPlaySE = true;
 			//ループ中止
 			break;
 		}
 	}
 
-	//if (isPlayMoveSE) {
+	if (isPlaySE) {
 
-	//	XA_Play(SE_Move);
-	//	
-	//	//いったんOFFにしてまた再生されるように
-	//	isPlayMoveSE = false;
-	//}
+		XA_Play(SE_Plant);
+		
+		//いったんOFFにしてまた再生されるように
+		isPlaySE = false;
+	}
 
 	//本体の更新
 	for (auto& element : objectList) {
@@ -1166,7 +1171,8 @@ void Game::UpdateStage1_1(void)
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
 		SceneManager::Get()->SetScene(RESULT);
 		isResultAnime = true;
-		XA_Play(SE_Result);//リザルトに遷移した後、SE再生
+		XA_Play(SE_Interval1);//リザルトに遷移した後、SE再生
+
 	}
 
 	//エフェクト
@@ -1185,10 +1191,19 @@ void Game::UpdateStage1_2(void)
 
 	for (auto& element : objectList) {
 		if (!element->GetStill()) {
-			isPlayMoveSE = true;
+			isPlaySE = true;
 			//ループ中止
 			break;
 		}
+	}
+
+	if (isPlaySE) {
+		
+		
+		XA_Play(SE_Plant);
+
+		//いったんOFFにしてまた再生されるように
+		isPlaySE = false;
 	}
 
 	for (auto& element : objectList) {
@@ -1213,6 +1228,8 @@ void Game::UpdateStage1_2(void)
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
 		SceneManager::Get()->SetScene(RESULT);
 		isResultAnime = true;
+		XA_Play(SE_Interval2);
+
 	}
 
 	//エフェクト
@@ -1253,8 +1270,11 @@ void Game::ResultUpdate(void)
 	if (isResultAnime) {
 		resultAnimator->Update();
 	}
-	else {	
+	else {
+
+		
 		resultGenerator->Update();
+		XA_Play(SE_Result);
 	
 	}
 
@@ -1296,7 +1316,7 @@ void Game::GameUpdate(void)
 		XA_Stop(BGM_Stage2);
 		XA_Stop(BGM_Stage3);
 
-
+		XA_Play(SE_Result);
 		ResultUpdate();
 		break;
 	}
@@ -2693,10 +2713,11 @@ void Game::StageUpdate(void)
 
 					//オブジェクトが移動してない場合
 					if (isControl) {
-
+						
 						for (auto it = objectList.begin(); it != objectList.end(); it++) {
 							if ((*it)->GetActive())
 							{
+								
 								(*it)->SetActive(false);
 								auto nextIt = std::next(it);
 
@@ -2930,7 +2951,7 @@ void Game::TestFade(void)
 			XA_Stop(BGM_Stage2);
 			XA_Stop(BGM_Stage3);
 
-
+			
 			ResultUpdate();
 			break;
 		}

@@ -15,18 +15,19 @@ typedef enum
 	BGM_Stage2,			// BGM
 	BGM_Stage3,			// BGM
 	BGM_SelectStage,	// BGM
+	BGM_TITLE,			// BGM
 	
 
+	SE_TITLE,			// SE
 	SE_Select,			// SE
 	SE_SelectDecide,	// SE
-	SE_TITLE,			// SE
 	SE_Present,			// SE
 	SE_Combine,			// SE
 	SE_Result,
 	SE_Press,
-	SE_Plant,
+	SE_Plant,		
 	SE_Interval1,
-	SE_Interval2,
+	SE_Interval2,   
 	SE_Limitation,
 	//SOUND_LABEL_SE007,			// ƒTƒ“ƒvƒ‹SE
 

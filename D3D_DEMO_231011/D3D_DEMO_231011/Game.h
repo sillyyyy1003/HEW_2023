@@ -171,7 +171,7 @@ private:
 	//操作できるかどうか
 	bool isControl = true;
 	//SE出すかどうか？
-	bool isPlayMoveSE = false;
+	bool isPlaySE = false;
 
 	//ヒントを出すかどうか？
 	bool isHint = false;

@@ -19,19 +19,22 @@ PARAM g_param[SOUND_LABEL_LAST] =
 	{"assets/sound/bgm/stage2.wav", true},		// BGM
 	{"assets/sound/bgm/stage3.wav", true},		// BGM
 	{"assets/sound/bgm/selectBGM.wav", true},	// BGM
-	
+	{"assets/sound/bgm/titleBGM.wav", true},	// BGM
 
-	{"assets/sound/se/selectSE.wav", false},	// SE
-	{"assets/sound/se/decideSE.wav", false},	// SE
-	{"assets/sound/se/titleSE.wav", false},		// SE
-	{"assets/sound/se/presentSE.wav", false},	// SE
-	{"assets/sound/se/combineSE.wav", false},	// SE
-	{"assets/sound/se/resultSE.wav", false},
-	{"assets/sound/se/presskeySE.wav", false},
-	{"assets/sound/se/plantSE.wav", false},
-	{"assets/sound/se/intervalSE1.wav", false},
-	{"assets/sound/se/intervalSE2.wav", false},
-	{"assets/sound/se/limitationSE.wav", false},
+	{"assets/sound/se/titleSE.wav", false},
+	{"assets/sound/se/selectSE.wav", false},	 // SE
+	{"assets/sound/se/decideSE.wav", false},	 // SE
+	{"assets/sound/se/presentSE.wav", false},	 // SE
+	{"assets/sound/se/combineSE.wav", false},	 // SE
+	{"assets/sound/se/resultSE.wav", false},	 // SE
+	{"assets/sound/se/presskeySE.wav", false},	 // SE
+	{"assets/sound/se/plantSE.wav", false},		 //	SE
+	{"assets/sound/se/intervalSE1.wav", false},	 // SE
+	{"assets/sound/se/intervalSE2.wav", false},	 // SE
+	{"assets/sound/se/limitationSE.wav", false}, // SE
+
+
+
 };
 
 #ifdef _XBOX //Big-Endian
