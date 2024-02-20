@@ -1,6 +1,8 @@
 #include "ResultProcess.h"
 #include "CanvasUI.h"
 #include "Assets.h"
+#include "Game.h"
+#include "Fade.h"
 
 extern Assets* g_Assets;
 
@@ -28,6 +30,8 @@ void ResultProcess::Init(float posX, float posY, float size, float interval)
 		stepnum = new CanvasUI();
 		//ƒ‚ƒfƒ‹ì¬
 		stepnum->CreateModel(g_Assets->Result_num, m_size * 74.83, m_size * 110.5, 10, 1);
+
+		stepnum->m_pos.z = m_posz;
 	}
 	//ˆÊ’u’²®
 	SetPosition(posX,posY);
@@ -60,8 +64,10 @@ void ResultProcess::UpdateCharCenter(char* outputChar)
 		// UVOFFSETXV
 		StepNum[i]->m_anime->Update();
 
-		// •`‰æ
-		StepNum[i]->Draw();
+		if (Game::Get()->GetFade()->m_fadePanel->m_materialDiffuse.w <= 0.01) {
+			// •`‰æ
+			StepNum[i]->Draw();
+		}
 	}
 
 }
@@ -82,9 +88,10 @@ void ResultProcess::UpdateCharLeft(char* outputChar)
 		//UVOFFSETXV
 		StepNum[i]->m_anime->Update();
 
+		if (Game::Get()->GetFade()->m_fadePanel->m_materialDiffuse.w <= 0.01) {
 		//•`‰æ
 		StepNum[i]->Draw();
-
+		}
 	}
 
 }

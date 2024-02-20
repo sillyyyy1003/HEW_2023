@@ -38,7 +38,7 @@ void RailManager::InitRailPos(void)
 		int pos = element->GetRailPos().verticalPos * 5 + element->GetRailPos().horizontalPos;
 
 		//î•ñXV
-		RailManager::Get()->m_info[pos].isVacant = false;
+		RailManager::Get()->m_info[pos].isVacant = true;
 	}
 
 }

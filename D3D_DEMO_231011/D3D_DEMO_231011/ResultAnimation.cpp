@@ -57,8 +57,7 @@ void ResultAnimation::Init()
 
 void ResultAnimation::Update()
 {
-	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetClear())
-	{
+	
 		// 画像の移動が完了したか、一度クリアしたステージかで判定
 		if (Move() || SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetCompleted())
 		{
@@ -85,7 +84,10 @@ void ResultAnimation::Update()
 		clear2->Update();
 		clear3->Update();
 		skip->Update();
-	}
+	
+		if (Move()) {
+			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetCompleted(true);
+		}
 }
 
 void ResultAnimation::Draw()

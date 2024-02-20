@@ -49,6 +49,8 @@ void Game::Init()
 	//uiTitle = new CanvasUI();
 	uiTitleBg = new CanvasUI();
 	uiPressSpace = new CanvasUI();
+	comingSoon = new CanvasUI();
+	comingSoonLoop = new CanvasUI();
 
 	uiRestart = new CanvasUI();
 	uiResume = new CanvasUI();
@@ -58,6 +60,7 @@ void Game::Init()
 	uiSoundCursor = new CanvasUI();
 
 	uiSoundBg = new CanvasUI();
+	
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -83,6 +86,8 @@ void Game::Init()
 	uiArrow = new  CanvasUI();
 	//stepの手数
 	uiStepNum = new ResultProcess();
+
+
 
 	//共通の背景
 	stageBg = new StaticObject();
@@ -133,6 +138,8 @@ void Game::Init()
 	//移動のオブジェクトの名前を設定する
 	//テクスチャ読み込み・モデル作成
 	uiTitleBg->CreateModel(g_Assets->uiTitleBg, 1280, 720, 8, 2);
+	comingSoon->CreateModel(g_Assets->comingSoon, 1280, 720, 6, 6);
+	comingSoonLoop->CreateModel(g_Assets->comingSoonLoop, 1280, 720, 6, 2);
 	uiPressSpace->CreateModel(g_Assets->uiPressSpace, 415, 38, 1, 1);
 
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 647, 702, 1, 1);
@@ -145,6 +152,14 @@ void Game::Init()
 	uiSelectBg->CreateModel(g_Assets->uiSelectBg, 1280, 720, 1, 1);
 	uiSelectCursor->CreateModel(g_Assets->uiSelectCursor, 76, 84, 1, 1);
 	uiSoundCursor->CreateModel(g_Assets->uiSoundCursor, 56, 51, 1, 1);
+
+	uiSelectStage[STAGE1]->CreateModel(g_Assets->uiSelectStage1, 421, 133, 1, 2);
+	uiSelectStage[STAGE2]->CreateModel(g_Assets->uiSelectStage2, 421, 142, 1, 2);
+	uiSelectStage[STAGE3]->CreateModel(g_Assets->uiSelectStage3, 421, 143, 1, 2);
+
+	uiSelectChapter[CHAPTER1]->CreateModel(g_Assets->uiSelectChapter1, 288, 57, 1, 1);
+	uiSelectChapter[CHAPTER2]->CreateModel(g_Assets->uiSelectChapter2, 300, 57, 1, 1);
+	uiSelectChapter[CHAPTER3]->CreateModel(g_Assets->uiSelectChapter3, 300, 57, 1, 1);
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -191,7 +206,8 @@ void Game::Init()
 	picnicbasket->CreateShadow(g_Assets->picnicbasketShadow, 275.4, 216, 1, 1, COLLISION_TYPE::SQUARE);
 	
 	testEffect->CreateModel(g_Assets->effect1, 256, 256, 3, 4);
-	uiArrow->CreateModel(g_Assets->uiArrow, 160, 172, 4, 2);
+	uiArrow->CreateModel(g_Assets->uiArrow, 17, 17, 8, 1);
+
 
 	//アニメーションの設定
 	coconut->InitAnimation();
@@ -226,20 +242,38 @@ void Game::Init()
 
 	//Title の初期化
 	//位置設定
+	
 	uiTitleBg->m_pos = { 0.0f,0.0f,0.9f };
 	uiTitleBg->m_anime->SetAnimePattern(0);
 	uiTitleBg->m_anime->SetAnimeSpeed(0.15f);
+	uiTitleBg->SetLoop(false);
+	uiTitleBg->isMultiPattern = true;
+
+	comingSoon->m_pos = { 0.0f,0.0f,0.8f };
+	comingSoon->m_anime->SetAnimeSpeed(0.15f);
+	comingSoon->SetLoop(false);
+	comingSoon->isMultiPattern = false;
+	comingSoonLoop->m_pos = { 0.0f,0.0f,0.9f };
+	comingSoonLoop->m_anime->SetAnimeSpeed(0.15f);
+	comingSoonLoop->SetLoop(true);
+	comingSoonLoop->isMultiPattern = false;
 
 	//Title Animation
 	uiTitleBg->InitAnimation(8);
 	uiTitleBg->SetAnimeted(true);
 
+	//coming soon Animation
+	comingSoon->InitAnimation(36);
+	comingSoonLoop->InitAnimation(12);
+	comingSoon->SetAnimeted(true);
+	comingSoonLoop->SetAnimeted(true);
+	
 	uiPressSpace->m_pos = { 0.0f,-2.5f,0.2f };
 	uiPressSpace->SetActive(false);	//最初で隠す
 
 	//ARROW
 
-	uiArrow->m_pos = { 0.0f,0.0f,0.1f };
+	uiArrow->m_pos = { 6,325 / SCREEN_PARA,0.1 };
 	uiArrow->m_anime->SetAnimeSpeed(0.15f);
 
 	//Title Animation
@@ -295,13 +329,21 @@ void Game::Init()
 	{
 		MessageBoxA(NULL, "サウンド初期化失敗", "エラー", MB_OK | MB_ICONERROR);
 	}
-
-
 	SceneManager::Get()->SetScene(SCENENAME::TITLE);
 	RailManager::Get()->InitRail();
 	
 }
 
+
+void Game::InitTitle(void)
+{
+	uiTitleBg->m_pos = { 0.0f,0.0f,0.9f };
+	uiTitleBg->m_anime->SetAnimePattern(0);
+	uiTitleBg->m_anime->SetAnimeSpeed(0.15f);
+	uiTitleBg->SetLoop(false);
+	uiTitleBg->isMultiPattern = true;
+	uiTitleBg->SetAnimeted(true);
+}
 
 void Game::InitStage()
 {
@@ -380,18 +422,26 @@ void Game::InitStage()
 		XA_SetVolume(BGM_Stage3, 0.0f);
 		InitStage3_3();
 
-
 		break;
-
+	case STAGE_IDLE:
+		//範囲に超えたらタイトルに戻る
+		break;
 	}
 
-	//ヒントの状態を全部inactiveにします。
-	for (int i = 0; i < 9; i++) {
-		SceneManager::Get()->m_stageHolder[i]->SetHint(false);
+	if (SceneManager::Get()->GetStage() != STAGE_UNDONE) {
+
+		//ヒントの状態を全部inactiveにします。
+		for (int i = 0; i < STAGE_NUM; i++) {
+			SceneManager::Get()->m_stageHolder[i]->SetHint(false);
+		}
+		//ヒントを出す
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
 	}
 
-	//ヒントを出す
-	SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+	for (int i = 0; i < STAGE_NUM; i++) {
+		SceneManager::Get()->m_stageHolder[i]->SetClear(false);
+	}
+
 
 }
 
@@ -434,9 +484,6 @@ void Game::InitStage1_1(void)
 	objectList.push_back(lamp);
 	objectList.push_back(housePlate);
 
-	//レールの設定
-	//レールの初期化
-	RailManager::Get()->InitRail();
 	//レールの初期化
 	RailInit1_1();
 
@@ -450,7 +497,11 @@ void Game::InitStage1_1(void)
 	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_1]->SetActive(true);
 	//STAGE状態をリセット
 	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_1]->ResetStage();
-
+	
+	//全部のオブジェクトをINACTIVEに設定する
+	for (auto& element : objectList) {
+		element->SetActive(false);
+	}
 	//移動ターゲットを設定
 	coconut->SetActive(true);
 
@@ -518,6 +569,10 @@ void Game::InitStage1_2(void)
 	//STAGE状態をリセット
 	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_2]->ResetStage();
 
+	//全部のオブジェクトをINACTIVEに設定する
+	for (auto& element : objectList) {
+		element->SetActive(false);
+	}
 	//移動ターゲットを設定
 	lamp1_2->SetActive(true);
 
@@ -555,7 +610,7 @@ void Game::InitStage1_3(void)
 	sandwich->m_shadow->m_sprite->m_pos.z = 0.3f;
 	picnicbasket->m_shadow->m_sprite->m_pos.z = 0.2f;
 
-	
+
 	//影のy軸
 	bucket->m_shadow->m_sprite->m_pos.y = 5.0f;
 	newspaper->m_shadow->m_sprite->m_pos.y = 2.5f;
@@ -592,6 +647,10 @@ void Game::InitStage1_3(void)
 	//使うステージだけ起動
 	SceneManager::Get()->m_stageHolder[STAGEINFO::STAGE1_3]->SetActive(true);
 
+	//全部のオブジェクトをINACTIVEに設定する
+	for (auto& element : objectList) {
+		element->SetActive(false);
+	}
 	//移動ターゲットを設定
 	sandwich->SetActive(true);
 
@@ -779,7 +838,7 @@ void Game::RailInit1_3(void)
 
 void Game::InitSoundArray()
 {
-	DirectX::XMFLOAT3 pos = { -0.3f, 0.7f, 0.5f };
+	DirectX::XMFLOAT3 pos = { 1.0f, 0.7f, 0.5f };
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -800,15 +859,6 @@ void Game::InitSoundArray()
 
 void Game::InitSelectArray()
 {
-	//テクスチャ割り当て
-	uiSelectStage[STAGE1]->CreateModel(g_Assets->uiSelectStage1, 421, 133, 1, 2);
-	uiSelectStage[STAGE2]->CreateModel(g_Assets->uiSelectStage2, 421, 142, 1, 2);
-	uiSelectStage[STAGE3]->CreateModel(g_Assets->uiSelectStage3, 421, 143, 1, 2);
-
-	uiSelectChapter[CHAPTER1]->CreateModel(g_Assets->uiSelectChapter1, 288, 57, 1, 1);
-	uiSelectChapter[CHAPTER2]->CreateModel(g_Assets->uiSelectChapter2, 300, 57, 1, 1);
-	uiSelectChapter[CHAPTER3]->CreateModel(g_Assets->uiSelectChapter3, 300, 57, 1, 1);
-	
 	//位置設定
 	uiSelectStage[STAGE1]->m_pos = { -3.2f,1.3f,0.8f };
 	uiSelectStage[STAGE2]->m_pos = { -2.7f,-0.6f,0.8f };
@@ -820,6 +870,7 @@ void Game::InitSelectArray()
 
 	//ステージを設定
 	selectStage = STAGE1;
+	selectChapter = CHAPTER1;
 
 }
 
@@ -905,7 +956,6 @@ void Game::SelectUpdate(void)
 
 	}
 
-
 	//入力処理
 	//
 	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
@@ -914,7 +964,7 @@ void Game::SelectUpdate(void)
 
 
 		//ステージをを選択する場合
-		if (isSelectChapter == false) {
+		if (isSelectChapter == true) {
 
 			switch (selectStage)
 			{
@@ -956,7 +1006,7 @@ void Game::SelectUpdate(void)
 		
 		XA_Play(SE_Select);//選択SE再生
 		
-		if (isSelectChapter == false) {
+		if (isSelectChapter == true) {
 
 			switch (selectStage)
 			{
@@ -974,6 +1024,14 @@ void Game::SelectUpdate(void)
 			default:
 				break;
 			}
+		/*	
+			if (selectStage == STAGE1) 
+			{
+				selectStage = STAGE3;
+			}
+			else {
+				selectStage = static_cast<SELECTSTAGE>(selectStage - 1);
+			}*/
 		}
 		else {
 			switch (selectChapter)
@@ -990,6 +1048,15 @@ void Game::SelectUpdate(void)
 			default:
 				break;
 			}
+
+			/*if (selectChapter == CHAPTER1)
+			{
+				selectChapter = CHAPTER3;
+			}
+			else {
+				selectChapter = static_cast<SELECTCHAPTER>(selectChapter - 1);
+			}
+			*/
 		}
 	}
 
@@ -1016,29 +1083,13 @@ void Game::SelectUpdate(void)
 		XA_Play(SE_SelectDecide);//決定SE再生
 
 		if (!isSelectChapter) {
+
 			isSelectChapter = true;
 		}
 		else {
-			//Chapterを選択
-			switch (selectStage)
-			{
-			case Game::SELECTNONE:
-				break;
-
-			case Game::STAGE1:
-				SelectChapter1();
-				break;
-			case Game::STAGE2:
-				SelectChapter2();
-				break;
-
-			case Game::STAGE3:
-				SelectChapter3();
-				break;
-
-			}
-			//選択した後　初期化を行う
-			InitStage();
+			
+			SelectChapter();
+			
 			//シーンの切り替えを行う
 			SceneManager::Get()->ChangeScene(STAGE);
 
@@ -1058,6 +1109,7 @@ void Game::SelectUpdate(void)
 	//アニメション更新
 
 	for (int i = 0; i < 3; i++) {
+
 		uiSelectStage[i]->Update();
 		uiSelectChapter[i]->Update();
 		uiClearMark[i]->Update();
@@ -1112,9 +1164,9 @@ void Game::UpdateCursor(void)
 
 }
 
-void Game::SelectChapter1(void) {
+void Game::SelectChapter(void) {
 
-	switch (selectChapter)
+	/*switch (selectChapter)
 	{
 	case Game::CHAPTER1:
 		SceneManager::Get()->SetStage(STAGEINFO::STAGE1_1);
@@ -1127,41 +1179,19 @@ void Game::SelectChapter1(void) {
 		break;
 	default:
 		break;
+	}*/
+
+
+	int num = selectStage;
+
+	num = num * 3 + selectChapter;
+
+	if (num > 2) {
+		SceneManager::Get()->SetStage(STAGEINFO::STAGE_UNDONE);
 	}
-}
+	else {
+		SceneManager::Get()->SetStage(static_cast<STAGEINFO>(num));
 
-void Game::SelectChapter2(void) {
-	switch (selectChapter)
-	{
-	case Game::CHAPTER1:
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE2_1);
-		break;
-	case Game::CHAPTER2:
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE2_2);
-		break;
-	case Game::CHAPTER3:
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE2_3);
-		break;
-	default:
-		break;
-	}
-}
-
-void Game::SelectChapter3(void) {
-
-	switch (selectChapter)
-	{
-	case Game::CHAPTER1:
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE3_1);
-		break;
-	case Game::CHAPTER2:
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE3_2);
-		break;
-	case Game::CHAPTER3:
-		SceneManager::Get()->SetStage(STAGEINFO::STAGE3_3);
-		break;
-	default:
-		break;
 	}
 
 }
@@ -1205,8 +1235,7 @@ void Game::UpdateStage1_1(void)
 		
 
 		////クリア
-		int stageNum = SceneManager::Get()->GetStage();
-		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetClear(true);
 		SceneManager::Get()->ChangeScene(RESULT);
 		isResultAnime = true;
 		XA_Play(SE_Result);//リザルトに遷移した後、SE再生
@@ -1341,6 +1370,22 @@ void Game::UpdateStage3_3(void)
 {
 }
 
+void Game::UpdateStageUndone(void)
+{
+	if (!comingSoon->GetAnimated()) {
+		comingSoon->SetActive(false);
+		comingSoonLoop->SetActive(true);
+	}
+
+	comingSoon->Update();
+	comingSoonLoop->Update();
+
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+		SceneManager::Get()->ChangeScene(TITLE);
+	}
+
+}
+
 void Game::ResultUpdate(void)
 {
 	if (isResultAnime) {
@@ -1363,6 +1408,13 @@ void Game::GameUpdate(void)
 			SceneManager::Get()->SetScene(SceneManager::Get()->GetNextScene());
 			SceneManager::Get()->SetNextScene(NONE);
 			fade->FadeIn();
+		}
+		//ここで初期化を行う
+		if (SceneManager::Get()->GetScene() == STAGE) {
+			//修正待ち
+			if (SceneManager::Get()->GetNextScene() != RESULT&&SceneManager::Get()->GetNextScene() != STAGESELECT ) {
+				InitStage();
+			}
 		}
 	}
 
@@ -1401,6 +1453,8 @@ Game::~Game()
 
 	delete uiTitle;		//タイトル文字
 	delete uiTitleBg;		//タイトル背景
+	delete comingSoon;
+	delete comingSoonLoop;
 	delete uiPressSpace;	//タイトルエンターキー
 	delete uiPauseBg;	//PAUSEのボタン
 	delete uiResume;
@@ -1575,7 +1629,6 @@ void Game::UiUpdate()
 				selectChapter = CHAPTER1;
 				pauseSelect = RESUME;
 				PauseSwitch();
-
 				XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
 				SceneManager::Get()->ChangeScene(SCENENAME::STAGESELECT);
 				break;
@@ -1755,7 +1808,7 @@ void Game::SoundOp_BGM(void)
 	if (Input::Get()->GetKeyTrigger(DIK_LEFT))
 	{
 		XA_Play(SE_Select);//セレクトSE再生
-
+		/*
 		switch (soundVolume_BGM)
 		{
 
@@ -1855,6 +1908,15 @@ void Game::SoundOp_BGM(void)
 
 			break;
 		}
+				*/
+		if (bgmVolume <= 0) {
+			bgmVolume = 0;
+		}
+		else {
+			bgmVolume--;
+			
+		}
+	
 	}
 
 
@@ -1862,6 +1924,7 @@ void Game::SoundOp_BGM(void)
 	{
 		XA_Play(SE_Select);//セレクトSE再生
 
+		/*
 		switch (soundVolume_BGM)
 		{
 
@@ -1961,8 +2024,21 @@ void Game::SoundOp_BGM(void)
 
 			break;
 		}
-	}
+		*/
 
+		if (bgmVolume >= 5) {
+			bgmVolume = 5;
+		}
+		else {
+			bgmVolume++;
+		}
+
+	}	
+
+	XA_SetVolume(BGM_SelectStage, bgmVolume * 0.2f);
+	XA_SetVolume(BGM_Stage1, bgmVolume * 0.2f);
+	XA_SetVolume(BGM_Stage2, bgmVolume * 0.2f);
+	XA_SetVolume(BGM_Stage3, bgmVolume * 0.2f);
 }
 
 void Game::SoundOp_SE(void)
@@ -1971,7 +2047,7 @@ void Game::SoundOp_SE(void)
 	if (Input::Get()->GetKeyTrigger(DIK_LEFT))
 	{
 		XA_Play(SE_Select);//セレクトSE再生
-
+		/*
 		switch (soundVolume_SE)
 		{
 		case VOLUME0:
@@ -2068,12 +2144,20 @@ void Game::SoundOp_SE(void)
 
 			break;
 		}
+		*/
+		if (seVolume <= 0) {
+			seVolume = 0;
+		}
+		else {
+			seVolume--;
+		}
+
 	}
 
 	if (Input::Get()->GetKeyTrigger(DIK_RIGHT))
 	{
 		XA_Play(SE_Select);//セレクトSE再生
-
+		/*
 		switch (soundVolume_SE)
 		{
 
@@ -2173,9 +2257,21 @@ void Game::SoundOp_SE(void)
 
 			break;
 		}
+		*/
+		if (seVolume >= 0) {
+			seVolume = 0;
+		}
+		else {
+			seVolume++;
+		}
 	}
-
-
+	
+	XA_SetVolume(SE_Select, seVolume * 0.2f);
+	XA_SetVolume(SE_SelectDecide, seVolume * 0.2f);
+	XA_SetVolume(SE_Move, seVolume * 0.2f);
+	XA_SetVolume(SE_Present, seVolume * 0.2f);
+	XA_SetVolume(SE_Combine, seVolume * 0.2f);
+	XA_SetVolume(SE_Result, seVolume * 0.2f);
 }
 
 
@@ -2186,6 +2282,8 @@ void Game::GameDraw()
 	D3D_ClearScreen();
 
 	//============ ここから描画処理 ============//
+	
+
 	
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
@@ -2206,6 +2304,7 @@ void Game::GameDraw()
 	}
 
 	fade->Draw();
+
 	//============ ここまで描画処理 ============//
 	 
 	//ダブルバッファの切り替えを行い画面を更新する
@@ -2247,39 +2346,61 @@ void Game::uiSelectDraw(void)
 
 void Game::StageDraw(void)
 {
+	if (SceneManager::Get()->GetStage() != STAGE_UNDONE)
+	{
 
-	stageBg->Draw();
+		stageBg->Draw();
 
-	//描画の順番を並び変え
-	SortShadowDraw();
+		//描画の順番を並び変え
+		SortShadowDraw();
 
-	//オブジェクト
-	SortObjectDraw();
+		//オブジェクト
+		SortObjectDraw();
 
-	if (isPause) {
-		UiDraw();
+		if (isPause) {
+			UiDraw();
+		}
+
+		//今のステージのヒントを描画する
+		SetBlendState(GetBlendMultiply());
+		//ヒントの背景
+		stageHintBg->Draw();
+		stageMask->Draw();
+		SetBlendState(GetBlendAlpha());
+
+		//pauseじゃない時操作方法出る
+		controlPanel->Draw();
+		uiArrow->Draw();
+
+		//ステップ数表示
+		if (!isPause) {
+			if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
+				//修正待ち //fadeを邪魔しないように
+
+				uiStepNum->PrintDebugLogCenter(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+			}
+
+
+		}
+
+		//hint描画
+		stageHint[SceneManager::Get()->GetActiveStage()]->Draw();
+
+
+	}
+	else {
+	
+		StageUndoneDraw();
 	}
 
-	//今のステージのヒントを描画する
-	SetBlendState(GetBlendMultiply());
-	//ヒントの背景
-	stageHintBg->Draw();
-	stageMask->Draw();
-	SetBlendState(GetBlendAlpha());
 
-	//pauseじゃない時操作方法出る
-	controlPanel->Draw();
 
-	//ステップ数表示
-	if (!isPause) {
-		if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint())
-		uiStepNum->PrintDebugLogCenter(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
+}
 
-	}
-
-	//hint描画
-	stageHint[SceneManager::Get()->GetActiveStage()]->Draw();
-
+void Game::StageUndoneDraw(void)
+{
+	comingSoonLoop->Draw();
+	comingSoon->Draw();
 
 }
 
@@ -2338,92 +2459,14 @@ void Game::UiDraw(void)
 
 void Game::SoundVolumeDraw(void)
 {
-	if (soundOp == BGM || soundOp == SE)
-	{
-
-		//BGM音量調節描画
-		switch (soundVolume_BGM)
-		{
-		case VOLUME0:
-			//何も描画しない
-			break;
-
-		case VOLUME1:
-			uiSoundOp_BGM[1]->Draw();
-			break;
-
-		case VOLUME2:
-			for (int i = 1; i < 3; i++)
-			{
-				uiSoundOp_BGM[i]->Draw();//１～２描画
-			}	
-			break;
-
-		case VOLUME3:
-			for (int i = 1; i < 4; i++)
-			{
-				uiSoundOp_BGM[i]->Draw();//１～３描画
-			}
-			break;
-
-		case VOLUME4:
-			for (int i = 1; i < 5; i++)
-			{
-				uiSoundOp_BGM[i]->Draw();//１～４描画
-			}
-			break;
-
-		case VOLUME5:
-			for (int i = 1; i < 6; i++)
-			{
-				uiSoundOp_BGM[i]->Draw();//１～５描画
-			}
-			break;
-
+	if (isSound) {
+		for (int i = 0; i < bgmVolume; i++) {
+			uiSoundOp_BGM[i]->Draw();
 		}
 		
-		//SE音量調節描画
-		switch (soundVolume_SE)
-		{
-		case VOLUME0:
-			//何も描画しない
-			break;
-
-		case VOLUME1:
-			uiSoundOp_SE[1]->Draw();
-			break;
-
-		case VOLUME2:
-			for (int i = 1; i < 3; i++)
-			{
-				uiSoundOp_SE[i]->Draw();//１～２描画
-			}
-			break;
-
-		case VOLUME3:
-			for (int i = 1; i < 4; i++)//１～３描画
-			{
-				uiSoundOp_SE[i]->Draw();
-			}
-			break;
-
-		case VOLUME4:
-			for (int i = 1; i < 5; i++)//１～４描画
-			{
-				uiSoundOp_SE[i]->Draw();
-			}
-			break;
-
-		case VOLUME5:
-			for (int i = 1; i < 6; i++)//１～５描画
-			{
-				uiSoundOp_SE[i]->Draw();
-			}
-			break;
-		}	
-		
-
-
+		for (int i = 0; i < seVolume; i++) {
+			uiSoundOp_SE[i]->Draw();
+		}
 	}
 }
 
@@ -2606,46 +2649,50 @@ void Game::DebugDisplay(void)
 
 void Game::StageUpdate(void)
 {
-	//もしヒント出されていない
-	if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
+	if (SceneManager::Get()->GetStage() != STAGE_UNDONE) {
+		//もしヒント出されていない
+		if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
 
-		//スペースキーを押したら
-		if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+			//スペースキーを押したら
+			if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
-			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
-			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
-			stageHintBg->SetActive(false);
-			controlPanel->SetActive(true);
+				stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
+				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
+				stageHintBg->SetActive(false);
+				controlPanel->SetActive(true);
+			}
+			else {
+				stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
+				stageHintBg->SetActive(true);
+
+			}
+
+			controlPanel->SetActive(false);
+			uiArrow->SetActive(false);
 		}
 		else {
-			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
-			stageHintBg->SetActive(true);
 
-		}
+			if (!isPause) {
+				controlPanel->SetActive(true);
+				uiArrow->SetActive(true);
 
-		controlPanel->SetActive(false);
-	}
-	else {
-
-		if (!isPause) {
-			controlPanel->SetActive(true);
-			//入力処理
-			if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
-			{
-
-				XA_Play(SE_SelectDecide);//決定SE再生
-
-				if (!isSound)
+				//入力処理
+				if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
 				{
-					PauseSwitch();
+
+					XA_Play(SE_SelectDecide);//決定SE再生
+
+					if (!isSound)
+					{
+						PauseSwitch();
+					}
+					else//サウンドに入っている時
+					{
+						SoundSwitch();
+					}
 				}
-				else//サウンドに入っている時
-				{
-					SoundSwitch();
-				}
-			}
 				//移動させる目標を設定する
-			if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+				if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 
 					//オブジェクトが移動してない場合
 					if (isControl) {
@@ -2687,85 +2734,92 @@ void Game::StageUpdate(void)
 
 				}
 
-			if (Input::Get()->GetKeyTrigger(DIK_H)) {
+				if (Input::Get()->GetKeyTrigger(DIK_H)) {
 
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->HintPunish(10);
+					SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+					SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->HintPunish(10);
 
+				}
+
+				//StageUpdate
+				switch (SceneManager::Get()->GetStage()) {
+
+				case STAGE1_1:
+
+					XA_SetVolume(BGM_Stage1, 0.6f);
+
+					UpdateStage1_1();
+
+					break;
+
+				case STAGE1_2:
+
+					XA_SetVolume(BGM_Stage2, 0.6f);
+
+					UpdateStage1_2();
+
+					break;
+
+				case STAGE1_3:
+
+					XA_SetVolume(BGM_Stage3, 0.6f);
+
+					UpdateStage1_3();
+
+					break;
+
+				case STAGE2_1:
+
+
+					break;
+
+				case STAGE2_2:
+
+
+
+					break;
+
+				case STAGE2_3:
+
+
+
+					break;
+
+				case STAGE3_1:
+
+
+
+					break;
+				case STAGE3_2:
+
+
+
+					break;
+
+				case STAGE3_3:
+
+
+
+					break;
+				case STAGE_UNDONE:
+					UpdateStageUndone();
+
+				}
+
+				//CameraUpdate
+				cameraShaker->Update(g_WorldCamera);
+				uiArrow->Update();
 			}
-
-			//StageUpdate
-			switch (SceneManager::Get()->GetStage()) {
-
-			case STAGE1_1:
-
-				XA_SetVolume(BGM_Stage1, 0.6f);
-
-				UpdateStage1_1();
-
-				break;
-
-			case STAGE1_2:
-
-				XA_SetVolume(BGM_Stage2, 0.6f);
-
-				UpdateStage1_2();
-
-				break;
-
-			case STAGE1_3:
-
-				XA_SetVolume(BGM_Stage3, 0.6f);
-
-				UpdateStage1_3();
-
-				break;
-
-			case STAGE2_1:
-
-
-				break;
-
-			case STAGE2_2:
-
-
-
-				break;
-
-			case STAGE2_3:
-
-
-
-				break;
-
-			case STAGE3_1:
-
-
-
-				break;
-			case STAGE3_2:
-
-
-
-				break;
-
-			case STAGE3_3:
-
-
-
-				break;
-
+			else {
+				//マスクを閉める
+				UiUpdate();
 			}
-
-			//CameraUpdate
-			cameraShaker->Update(g_WorldCamera);
-			
-		}
-		else {
-			//マスクを閉める
-			UiUpdate();
 		}
 	}
+	else {
+		UpdateStageUndone();
+	}
+	
 
 }
 
@@ -2859,7 +2913,6 @@ void Game::SetBackGround(ID3D11ShaderResourceView* tex) {
 	stageBg->m_sprite->SetTexture(tex);
 	stageBg->m_sprite->m_anime->SetAnimeSpeed(0.05f);
 	static_cast<StaticAnimation*>(stageBg->m_sprite->m_anime)->SetLoop(true);
-
 
 }
 

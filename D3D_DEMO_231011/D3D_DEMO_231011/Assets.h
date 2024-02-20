@@ -80,6 +80,8 @@ public:
 
 	//stage1-3用リソース
 	ID3D11ShaderResourceView* stageBg1_3;
+	ID3D11ShaderResourceView* comingSoon;
+	ID3D11ShaderResourceView* comingSoonLoop;
 
 	ID3D11ShaderResourceView* busket;
 	ID3D11ShaderResourceView* busketShadow;

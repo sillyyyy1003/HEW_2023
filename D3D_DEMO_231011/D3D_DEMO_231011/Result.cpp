@@ -143,6 +143,7 @@ void Result::Draw()
 	}
 
 	//ステージ終了時のステップ数を表示
+	
 	processor->PrintDebugLogLeft(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());//
 }
 
@@ -181,7 +182,7 @@ void Result::ButtonEvent()
 		{
 			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			//同じステージだから、直接初期化をもう一回やったらいい
-			Game::Get()->InitStage();
+			//Game::Get()->InitStage();
 			buttonnum = NEXT;
 		}
 		break;
@@ -212,7 +213,7 @@ void Result::ButtonEvent()
 			//ステージを次のステージにする
 			SceneManager::Get()->SetStage(SceneManager::Get()->GetNextStage());
 			//初期化を行う
-			Game::Get()->InitStage();
+			//Game::Get()->InitStage();
 			
 			buttonnum = NEXT;
 		}

@@ -15,6 +15,7 @@ private:
     
     float m_size = 0;//ƒLƒƒƒ‰‚Ìİ’è
     float m_interval = 0;   //ŠÔŠu‚ğİ’è‚·‚é
+    float m_posz = 0.2f;
 
 
 public:

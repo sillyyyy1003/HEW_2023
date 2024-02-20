@@ -116,7 +116,8 @@ Assets::Assets()
     effect1 = LoadTexture("assets/Effect/cursor.png");
     uiArrow = LoadTexture("assets/ui/direction_animation.png");
 
-
+    comingSoon = LoadTexture("assets/stage1/comingsoon_1.png");
+    comingSoonLoop = LoadTexture("assets/stage1/comingsoon_loop.png");
 }
 
 Assets::~Assets()
@@ -237,8 +238,13 @@ Assets::~Assets()
     SAFE_RELEASE(effect1);
     SAFE_RELEASE(uiArrow);
 
+    SAFE_RELEASE(comingSoon);
+    SAFE_RELEASE(comingSoonLoop);
+    
+
     //デバッグ用
     SAFE_RELEASE(debugFont);
+
 }
 
 ID3D11ShaderResourceView* Assets::LoadTexture(const char* _fileName)

@@ -17,7 +17,8 @@ private:
 	std::vector<int> animeTable;
 
 	//ループするかどうか
-	bool isLoop = false;
+	bool isLoop = true;
+
 
 
 public:
@@ -26,6 +27,8 @@ public:
 		INACTIVE = 1,	//
 	};
 	
+	//多種のアニメパターンを持つかどうか
+	bool isMultiPattern = false;
 
 public:
 	CanvasUI();

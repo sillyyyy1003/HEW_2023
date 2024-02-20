@@ -1,5 +1,6 @@
 #pragma once
-
+//現在のステージ数
+#define STAGE_NUM	(9)
 enum SCENENAME {
 	NONE,//何もない
 
@@ -27,6 +28,8 @@ enum STAGEINFO {
 	STAGE3_3 = 8,
 
 	STAGE_IDLE = 99,
+	STAGE_UNDONE = 100,
+
 };
 
 enum RESULTINFO {

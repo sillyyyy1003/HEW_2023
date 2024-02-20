@@ -31,10 +31,10 @@ void CanvasUI::CreateModel(ID3D11ShaderResourceView* texture, float _width, floa
 
 void CanvasUI::Update(void)
 {	
+	// 表示させるコマIDを取得
 
 	if (isAnimated) {
 
-		// 表示させるコマIDを取得
 		int animeID = animeTable[(int)m_anime->m_animeCounter];
 
 		if (m_anime->isPlaying)
@@ -61,9 +61,19 @@ void CanvasUI::Update(void)
 			}
 		}
 
-		//表示させるコマのUVを計算
-		m_anime->SetFrameX(animeID % m_split.x);
+		if (isMultiPattern) {
+			//表示させるコマのUVを計算
+			m_anime->SetFrameX(animeID % m_split.x);
+		}
+		else {
+			//表示させるコマのUVを計算
+			m_anime->SetFrameX(animeID % m_split.x);
+			m_anime->SetAnimePattern(animeID / m_split.x);
+		}
+
 	}
+
+
 
 	//UV座標の更新
 	m_anime->Update();

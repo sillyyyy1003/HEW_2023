@@ -1,9 +1,6 @@
 #include "SceneManager.h"
 #include "Game.h"
 #include "Stage.h"
-//現在のステージ数
-#define STAGE_NUM	(9)
-
 
 SceneManager::~SceneManager()
 {

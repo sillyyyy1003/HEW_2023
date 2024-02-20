@@ -99,6 +99,8 @@ private:
 	std::vector<GameObject*> objectList;
 	GameObject* circle;			//circle
 
+	CanvasUI* comingSoon;		//stageUndone用素材
+	CanvasUI* comingSoonLoop;	//Loop用
 	CameraShaker* cameraShaker;
 	Result* resultGenerator;
 	ResultAnimation* resultAnimator;
@@ -176,6 +178,9 @@ private:
 	//初期設定
 	SOUNDOP soundOp = BGM;
 	SOUNDVOLUME soundVolume_BGM = VOLUME3;
+	
+	int seVolume = 3;
+	int bgmVolume = 3;
 	SOUNDVOLUME soundVolume_SE = VOLUME3;
 
 	SELECTSTAGE selectStage = SELECTNONE;
@@ -207,6 +212,7 @@ public:
 	//初期化を行う関数 
 	void Init();//
 
+	void InitTitle(void);
 	void InitStage();
 
 	//ステージの初期化を行う関数：キャラの位置、大きさなど
@@ -246,9 +252,7 @@ public:
 	void UpdateSelectAnimation(void);
 	void UpdateCursor(void);
 
-	void SelectChapter1(void);
-	void SelectChapter2(void);
-	void SelectChapter3(void);
+	void SelectChapter(void);
 
 	//Stage Update
 	void StageUpdate(void);
@@ -261,6 +265,7 @@ public:
 	void UpdateStage3_1(void);
 	void UpdateStage3_2(void);
 	void UpdateStage3_3(void);
+	void UpdateStageUndone(void);
 
 	//result Update
 	void ResultUpdate(void);
@@ -287,6 +292,7 @@ public:
 	void TitleDraw(void);
 
 	void StageDraw(void);
+	void StageUndoneDraw(void);
 
 	void SelectDraw(void);
 
