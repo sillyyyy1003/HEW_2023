@@ -9,16 +9,7 @@ private:
 	bool isActive = true;
 
 	//Has Animation or Not
-	bool isAnimated = false;
-
-	//フレームの枚数
-	int m_frameNum = 0;
-
-	std::vector<int> animeTable;
-
-	//ループするかどうか
-	bool isLoop = false;
-
+	bool isAnimated = true;
 
 public:
 	enum STATUS {
@@ -27,6 +18,7 @@ public:
 	};
 	
 
+
 public:
 	CanvasUI();
 
@@ -34,7 +26,15 @@ public:
 
 
 	//モデル作成・アニメーション配置・カメラ使用
-	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY) override;
+	void CreateModel(ID3D11ShaderResourceView* texture, float _width, float _height, int splitX, int splitY)override;
+
+	/// <summary>
+	/// アニメションの初期化・アニメテーブルの作成
+	/// true: ONE LINE ONE PATTERN 
+	/// false: FRON START TO END
+	/// </summary>
+	/// <param name="isMultiPattern">多種類のアニメパターンをおもつかどうか</param>
+	void InitAnimation(bool isMultiPattern);
 
 	//UV座標更新
 	void Update(void);
@@ -51,15 +51,10 @@ public:
 	//アニメパターンの変更
 	void SetAnimeActive(STATUS status) { m_anime->SetAnimePattern(status); };
 
-	//アニメション用
-	void InitAnimation(int num);
 
 	//アニメションの状態
 	void SetAnimeted(bool isAnimated) { this->isAnimated = isAnimated; };
 	bool GetAnimated(void) { return this->isAnimated; };
-
-	void SetLoop(bool isLoop) { this->isLoop = isLoop; };
-	bool GetLoop(void) { return isLoop; };
 	
 
 };

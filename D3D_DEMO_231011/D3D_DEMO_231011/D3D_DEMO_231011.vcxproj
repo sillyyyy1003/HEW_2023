@@ -143,6 +143,7 @@
     <ClCompile Include="DInput.cpp" />
     <ClCompile Include="Direct3D.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="StaticAnimation.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="TrackCamera.cpp" />
+    <ClCompile Include="UiManager.cpp" />
     <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="xa2.cpp" />
@@ -181,13 +183,13 @@
     <ClInclude Include="DInput.h" />
     <ClInclude Include="Direct3D.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectAnimation.h" />
-    <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PolygonCollider.h" />
     <ClInclude Include="RailManager.h" />
     <ClInclude Include="Result.h" />
@@ -203,7 +205,7 @@
     <ClInclude Include="StaticAnimation.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="TrackCamera.h" />
-    <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="UiManager.h" />
     <ClInclude Include="WICTextureLoader.h" />
     <ClInclude Include="xa2.h" />
   </ItemGroup>

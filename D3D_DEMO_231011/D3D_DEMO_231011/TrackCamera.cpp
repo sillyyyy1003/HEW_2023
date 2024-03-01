@@ -62,9 +62,9 @@ void TrackCamera::Update()
 			XMStoreFloat3(&cameraToPlane, cameraVector);
 
 			newCameraFocus.x = newCameraPos.x;
-			newCameraFocus.y = 2.0 * cameraToPlane.y;
+			newCameraFocus.y = 2.0f * cameraToPlane.y;
 			newCameraFocus.y = m_targetObject->m_sprite->m_pos.y + newCameraFocus.y;
-			newCameraFocus.z = 2.0 * cameraToPlane.z;
+			newCameraFocus.z = 2.0f * cameraToPlane.z;
 			newCameraFocus.z = m_targetObject->m_sprite->m_pos.z + newCameraFocus.z;
 
 			//カメラの注視点を設定する

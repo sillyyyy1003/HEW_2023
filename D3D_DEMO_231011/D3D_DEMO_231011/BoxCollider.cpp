@@ -217,6 +217,7 @@ bool BoxCollider::isCollision(Collider* collider) {
         return false;
         break;
     default:
+        return false;
         break;
 
     }

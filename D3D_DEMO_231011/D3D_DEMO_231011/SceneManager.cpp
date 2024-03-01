@@ -1,9 +1,6 @@
 #include "SceneManager.h"
 #include "Game.h"
 #include "Stage.h"
-//現在のステージ数
-#define STAGE_NUM	(9)
-
 
 SceneManager::~SceneManager()
 {
@@ -43,19 +40,8 @@ void SceneManager::Update()
 
 int SceneManager::GetActiveStage(void)
 {
-	//for (int i = 0; i < STAGE_NUM; i++) {
-
-	//	if (m_stageHolder[i]->GetActive()) {
-
-	//		return i;
-	//	}
-	//	else {
-	//		return 0;
-	//	}
-	//}
 	int num = Scene::GetStage();
 	return static_cast<STAGEINFO>(num);
-
 }
 
 

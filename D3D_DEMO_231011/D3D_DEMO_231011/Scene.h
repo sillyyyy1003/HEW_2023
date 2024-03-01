@@ -1,9 +1,12 @@
 #pragma once
-
+//現在のステージ数
+#define STAGE_NUM	(9)
 enum SCENENAME {
 	NONE,//何もない
 
 	TITLE,//タイトル
+
+	TUTORIAL,//
 
 	STAGESELECT,//ステージセレクト
 
@@ -27,6 +30,8 @@ enum STAGEINFO {
 	STAGE3_3 = 8,
 
 	STAGE_IDLE = 99,
+	STAGE_UNDONE = 100,
+
 };
 
 enum RESULTINFO {
@@ -50,8 +55,8 @@ class Scene
 {
 private:
 
-	SCENENAME m_scene;
-	SCENENAME m_nextScene;
+	SCENENAME m_scene = NONE;
+	SCENENAME m_nextScene = NONE;
 	SCENENAME m_newScene;
 
 
@@ -79,6 +84,8 @@ public:
 
 	void SetResult(RESULTINFO _result) { m_result = _result; };
 	RESULTINFO GetResult() { return m_result; };
+
+	void ChangeScene(SCENENAME _scene);
 
 
 };

@@ -25,6 +25,8 @@ protected:
 	//横フレームの何番目まで終わる
 	int m_endFrame = 0;
 
+	//ループするかどうか
+	bool isLoop = false;
 
 
 public:
@@ -45,7 +47,7 @@ public:
 	/// </summary>
 	/// <param name="splitX">横分割数</param>
 	/// <param name="splitY">縦分割数</param>
-	Animation(int splitX,int splitY);
+	Animation(int splitX, int splitY);
 
 	/// <summary>
 	/// 縦横分割の初期設定
@@ -55,7 +57,7 @@ public:
 
 
 	DirectX::XMINT2 GetSplit(void);
-		
+
 	/// <summary>
 	/// UV座標の更新を行う関数
 	/// </summary>
@@ -74,8 +76,8 @@ public:
 	/// <param name="_animePattern">縦フレーム何番目 アニメーションのパターン</param>
 	void SetAnimePattern(int _animePattern);
 	int GetAnimePattern(void) { return m_frameY; };
-	
-	
+
+
 
 	/// <summary>
 	/// UV座標を返す関数
@@ -89,5 +91,8 @@ public:
 	void SetFrameX(int _frameX);
 	int GetFrameX(void) { return m_frameX; };
 
+	//ループの情報を取得
+	void SetLoop(bool isLoop) { this->isLoop = isLoop; };
+	bool GetLoop(void) { return isLoop; };
 
 };

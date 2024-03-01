@@ -10,6 +10,8 @@ Animation::Animation(int splitX, int splitY)
 void Animation::SetSplit(XMINT2 _split)
 {
     m_split = _split;
+    //動かないアニメにする
+    isPlaying = false;
 }
 
 DirectX::XMINT2 Animation::GetSplit(void)
@@ -19,8 +21,8 @@ DirectX::XMINT2 Animation::GetSplit(void)
 
 void Animation::Update()
 {
-    m_offsetUV.x = 1.0 / m_split.x * m_frameX;
-    m_offsetUV.y = 1.0 / m_split.y * m_frameY;
+    m_offsetUV.x = 1.0f / m_split.x * m_frameX;
+    m_offsetUV.y = 1.0f / m_split.y * m_frameY;
 }
 
 void Animation::SetAnimeSpeed(float _speed)

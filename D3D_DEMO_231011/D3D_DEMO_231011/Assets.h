@@ -1,5 +1,4 @@
-﻿
-#pragma once
+﻿#pragma once
 #include"Direct3D.h"
 #include"WICTextureLoader.h"	//テクスチャ読み込みライブラリ
 
@@ -21,19 +20,18 @@ public:
 
 	//タイトル用のリソース
 	ID3D11ShaderResourceView* uiTitleBg;	
-	ID3D11ShaderResourceView* uiPressSpace;
+	
+	//tutorial
+	ID3D11ShaderResourceView* uiTutorialAnimation[8];
+	ID3D11ShaderResourceView* uiTutorial[8];
+
 
 	//ステージセレクト用
 	ID3D11ShaderResourceView* uiSelectBg;
 
 	ID3D11ShaderResourceView* uiSelectCursor;
-	ID3D11ShaderResourceView* uiSelectStage1;
-	ID3D11ShaderResourceView* uiSelectStage2;
-	ID3D11ShaderResourceView* uiSelectStage3;
-
-	ID3D11ShaderResourceView* uiSelectChapter1;
-	ID3D11ShaderResourceView* uiSelectChapter2;
-	ID3D11ShaderResourceView* uiSelectChapter3;
+	ID3D11ShaderResourceView* uiSelectStage[3];
+	ID3D11ShaderResourceView* uiSelectChapter[3];
 	
 	ID3D11ShaderResourceView* uiClear;
 
@@ -79,7 +77,9 @@ public:
 	ID3D11ShaderResourceView* resultComic1_3_3;
 
 	//stage1-3用リソース
-	ID3D11ShaderResourceView* stage3Bg;
+	ID3D11ShaderResourceView* stageBg1_3;
+	ID3D11ShaderResourceView* comingSoon;
+	ID3D11ShaderResourceView* comingSoonLoop;
 
 	ID3D11ShaderResourceView* busket;
 	ID3D11ShaderResourceView* busketShadow;
@@ -100,26 +100,25 @@ public:
 	ID3D11ShaderResourceView* Result_stepcount;
 	ID3D11ShaderResourceView* Result_num;
 	ID3D11ShaderResourceView* star;
-	ID3D11ShaderResourceView* starShadow;
+	ID3D11ShaderResourceView* starShadow;	
+	ID3D11ShaderResourceView* Button_skip;
 
 	//clear
 	//ポーズ画面用
 	ID3D11ShaderResourceView* uiPauseBg;
+	ID3D11ShaderResourceView* uiPauseButton[4];
+
 	ID3D11ShaderResourceView* uiResume;
 	ID3D11ShaderResourceView* uiRestart;
-
 	ID3D11ShaderResourceView* uiSelect;
 	ID3D11ShaderResourceView* uiSound;
-	ID3D11ShaderResourceView* uiPauseCursor;
 
 	
 	//サウンド画面用
 	ID3D11ShaderResourceView* uiSoundBg;//サウンド背景
 	ID3D11ShaderResourceView* uiSoundOp_BGM;//サウンド調節
 	ID3D11ShaderResourceView* uiSoundOp_SE;//サウンド調節
-	ID3D11ShaderResourceView* uiMusic;	//サウンド音楽文字表示
-	ID3D11ShaderResourceView* uiSE;		//サウントSE文字表示
-	ID3D11ShaderResourceView* uiSoundCursor;	//サウンドカーソル
+	ID3D11ShaderResourceView* uiSoundCursor;
 
 	ID3D11ShaderResourceView* fade;
 

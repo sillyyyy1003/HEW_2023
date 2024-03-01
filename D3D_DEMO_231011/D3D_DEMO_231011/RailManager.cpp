@@ -24,14 +24,12 @@ void RailManager::InitRail()
 		{
 			m_info[i].isMoveable[j] = false;
 		}
-		
 	}
 
 }
 
 void RailManager::InitRailPos(void)
 {
-
 
 	for (auto& element : Game::Get()->GetObjectList()) {
 		//ˆÊ’u‚ğŠl“¾

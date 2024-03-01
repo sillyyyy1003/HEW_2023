@@ -37,7 +37,7 @@ void DebugManager::UpdateChar(char* outputChar)
 
 		//文字の位置を設定する
 		float posX = 20.0f / SCREEN_PARA * i;
-		m_debugASCII[i]->InitPos(m_sPosX + posX, m_sPosY, 0.1);
+		m_debugASCII[i]->InitPos(m_sPosX + posX, m_sPosY, 0.1f);
 
 		//UVOFFSET更新
 		m_debugASCII[i]->m_anime->Update();

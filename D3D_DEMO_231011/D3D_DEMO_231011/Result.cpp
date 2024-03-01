@@ -1,4 +1,4 @@
-#include "Result.h"
+ï»¿#include "Result.h"
 #include "CanvasUI.h"
 #include "Assets.h"
 #include "StaticObject.h"
@@ -13,12 +13,6 @@ extern Assets* g_Assets;
 Result::Result()
 {
 	processor = new ResultProcess();
-
-	//30ˆÈ‰º‚Ü‚Å¯‚T
-	//31ˆÈã40‚Ü‚Å¯‚S
-	//41ˆÈã50‚Ü‚Å¯‚R
-	//51ˆÈã60‚Ü‚Å¯‚Q
-	//61ˆÈã‚©‚ç¯‚P
 	SetStarNum({ 30,40,50,60 });
 }
 
@@ -40,9 +34,8 @@ Result::~Result()
 }
 void Result::Init()
 {
-	//StepNum‚Ì‰Šú‰»
-	processor->Init(2.0f, 0.0f, 1.0, 10);
-
+	//StepNumã®åˆæœŸåŒ–
+	processor->Init(1.8f, 0.0f, 0.95f, 10);
 	uiResult = new CanvasUI();
 	resultBg = new CanvasUI();
 	Result_score = new CanvasUI();
@@ -51,57 +44,60 @@ void Result::Init()
 	Button_next = new CanvasUI();
 	Button_return = new CanvasUI();
 
-	//ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İEƒ‚ƒfƒ‹ì¬
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿ãƒ»ãƒ¢ãƒ‡ãƒ«ä½œæˆ
 	uiResult->CreateModel(g_Assets->result, 430, 104, 1, 1);
 	resultBg->CreateModel(g_Assets->resultBg, 1029, 713, 1, 1);
 	Result_score->CreateModel(g_Assets->Result_score, 139, 66, 1, 1);
 	Result_stepcount->CreateModel(g_Assets->Result_stepcount, 375, 72, 1, 1);
 	Button_again->CreateModel(g_Assets->Button_again, 299, 96, 1, 2);
 	Button_next->CreateModel(g_Assets->Button_next, 316, 107, 1, 2);
-	Button_return->CreateModel(g_Assets->Button_return, 311, 104, 1, 2);
+	Button_return->CreateModel(g_Assets->Button_return, 624, 114, 1, 2);
 
-	//À•W
+	//åº§æ¨™
 	resultBg->m_pos = { 0.0f,0.0f,0.4f };
-	uiResult->m_pos = { 0.0f,3.0f,0.3f };
-	Result_score->m_pos = { -4.0f,1.5f,0.3f };
-	Result_stepcount->m_pos = { -2.5f,0.0f,0.3f };
-	Button_again->m_pos = { 2.0f,-1.5f,0.3f };
-	Button_next->m_pos = { -2.3f,-1.5f,0.3f };
+	uiResult->m_pos = { 0.0f,3.1f,0.3f };
+	Result_score->m_pos = { -4.0f ,1.5f ,0.3f };
+	Result_stepcount->m_pos = { -2.5f ,0.0f,0.3f };
+	Button_again->m_pos = { 2.0f ,-1.5f ,0.3f };
+	Button_next->m_pos = { -2.3f ,-1.5f ,0.3f };
 	Button_return->m_pos = { 0.0f,-3.0f,0.3f };
+	
+	resultBg->m_scale = { 0.95f,0.95f,1.0f };
+	uiResult->m_scale = { 0.95f,0.95f,1.0f };
+	Result_score->m_scale = { 0.95f,0.95f,1.0f };
+	Result_stepcount->m_scale = { 0.95f,0.95f,1.0f };
+	Button_again->m_scale = { 0.95f,0.95f,1.0f };
+	Button_next->m_scale = { 0.95f,0.95f,1.0f };
+	Button_return->m_scale = { 0.95f,0.95f,1.0f };
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ“
-	Button_again->m_anime->SetAnimePattern(0);
-	Button_next->m_anime->SetAnimePattern(0);
-	Button_return->m_anime->SetAnimePattern(0);
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 
 	for (int i = 0; i < 5; i++)
 	{
 		star[i] = new CanvasUI();
 		starShadow[i] = new CanvasUI();
 
-		//ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İEƒ‚ƒfƒ‹ì¬
-		star[i]->CreateModel(g_Assets->star, 88, 85, 1, 1);
-		starShadow[i]->CreateModel(g_Assets->starShadow, 88, 85, 1, 1);
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿ãƒ»ãƒ¢ãƒ‡ãƒ«ä½œæˆ
+		star[i]->CreateModel(g_Assets->star, 88 , 85 , 1, 1);
+		starShadow[i]->CreateModel(g_Assets->starShadow, 88 , 85 , 1, 1);
 
-		//À•W
-		star[i]->m_pos = { -2.0f + 1.5f*i,1.5f,0.3f };
-		starShadow[i]->m_pos = { -2.0f + 1.5f * i,1.5f,0.3f };
+		//åº§æ¨™
+		star[i]->m_pos = { -2.1f  + 1.5f*i ,1.5f ,0.3f };
+		starShadow[i]->m_pos = { -2.1f  + 1.5f * i ,1.5f ,0.3f };
 	}
 
-	//”wŒi
-
-
+	//èƒŒæ™¯
 	buttonnum = 0;
 }
 
 void Result::Update()
 {
-	//ƒXƒ^[‚Ìˆ—
-	//ˆø”‚PFƒXƒe[ƒWI—¹‚ÌƒXƒeƒbƒv”@ˆø”‚QFƒXƒeƒbƒv”‚É‚æ‚Á‚Ä¯‚Ì”‚ğ•ÏX‚·‚é‚½‚ß‚Ì§ŒÀ
-	StarEvent(ResultScore(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->GetStep(), Starnum));
-	//ƒL[‚Ìˆ—
+	//ã‚¹ã‚¿ãƒ¼ã®å‡¦ç†
+	//å¼•æ•°ï¼‘ï¼šã‚¹ãƒ†ãƒ¼ã‚¸çµ‚äº†æ™‚ã®ã‚¹ãƒ†ãƒƒãƒ—æ•°ã€€å¼•æ•°ï¼’ï¼šã‚¹ãƒ†ãƒƒãƒ—æ•°ã«ã‚ˆã£ã¦æ˜Ÿã®æ•°ã‚’å¤‰æ›´ã™ã‚‹ãŸã‚ã®åˆ¶é™
+	StarEvent(ResultScore(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep(), Starnum));
+	//ã‚­ãƒ¼ã®å‡¦ç†
 	DoResultKeyEvent();
-	//ƒ{ƒ^ƒ“‚Ìˆ—
+	//ãƒœã‚¿ãƒ³ã®å‡¦ç†
 	ButtonEvent();
 
 	uiResult->Update();
@@ -123,7 +119,7 @@ void Result::Update()
 
 void Result::Draw()
 {
-	//”wŒi
+	//èƒŒæ™¯
 	resultBg->Draw();
 	uiResult->Draw();
 	Result_score->Draw();
@@ -140,78 +136,132 @@ void Result::Draw()
 		starShadow[i]->Draw();
 	}
 
-	//ƒXƒe[ƒWI—¹‚ÌƒXƒeƒbƒv”‚ğ•\¦
+	//ã‚¹ãƒ†ãƒ¼ã‚¸çµ‚äº†æ™‚ã®ã‚¹ãƒ†ãƒƒãƒ—æ•°ã‚’è¡¨ç¤º
+	
 	processor->PrintDebugLogLeft(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());//
 }
 
 void Result::DoResultKeyEvent()
 {
-	// ƒ{ƒ^ƒ“
-	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
-	{
-		buttonnum = RETURN;
+	// ãƒœã‚¿ãƒ³
+	if (Input::Get()->GetKeyTrigger(DIK_UPARROW)) {
+		XA_Play(SE_Select);
+		switch (buttonnum)
+		{
+		case NEXT:
+			buttonnum = RETURN;
+			break;
+		case AGAIN:
+			buttonnum = RETURN;
+			break;
+		case RETURN:
+			buttonnum = NEXT;
+			break;
+		default:
+			break;
+		}
 	}
-	if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW))
-	{
-		buttonnum = AGAIN;
+
+	if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW)) {
+		XA_Play(SE_Select);
+		switch (buttonnum)
+		{
+		case NEXT:
+			buttonnum = RETURN;
+			break;
+		case AGAIN:
+			buttonnum = RETURN;
+			break;
+		case RETURN:
+			buttonnum = NEXT;
+			break;
+		default:
+			break;
+		}
+	
 	}
-	if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW))
-	{
-		buttonnum = NEXT;
+
+	if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)) {
+		XA_Play(SE_Select);
+		switch (buttonnum)
+		{
+		case NEXT:
+			buttonnum = AGAIN;
+			break;
+		case AGAIN:
+			buttonnum = NEXT;
+			break;
+		case RETURN:
+			break;
+		default:
+			break;
+		}
 	}
-	if (buttonnum == RETURN && Input::Get()->GetKeyTrigger(DIK_UPARROW))
-	{
-		buttonnum = AGAIN;
+
+	if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW)) {
+		XA_Play(SE_Select);
+		switch (buttonnum)
+		{
+		case NEXT:
+			buttonnum = AGAIN;
+			break;
+		case AGAIN:
+			buttonnum = NEXT;
+			break;
+		case RETURN:
+			break;
+		default:
+			break;
+		}
+	
 	}
+
 }
 
 void Result::ButtonEvent()
 {
 	switch (buttonnum)
 	{
-	case AGAIN://‚à‚¤ˆê“x“¯‚¶ƒXƒe[ƒW‚Ö
+
+	case AGAIN://ã‚‚ã†ä¸€åº¦åŒã˜ã‚¹ãƒ†ãƒ¼ã‚¸ã¸
 		Button_again->m_anime->SetAnimePattern(1);
 		Button_next->m_anime->SetAnimePattern(0);
 		Button_return->m_anime->SetAnimePattern(0);
 
-		//ƒXƒy[ƒX‚ğ‰Ÿ‚µ‚½‚Æ‚«‚É‚à‚¤ˆê“x“¯‚¶ƒXƒe[ƒW‚É‘JˆÚ‚·‚é
+		//ã‚¹ãƒšãƒ¼ã‚¹ã‚’æŠ¼ã—ãŸã¨ãã«ã‚‚ã†ä¸€åº¦åŒã˜ã‚¹ãƒ†ãƒ¼ã‚¸ã«é·ç§»ã™ã‚‹
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
-			SceneManager::Get()->SetScene(SCENENAME::STAGE);
-			//“¯‚¶ƒXƒe[ƒW‚¾‚©‚çA’¼Ú‰Šú‰»‚ğ‚à‚¤ˆê‰ñ‚â‚Á‚½‚ç‚¢‚¢
-			Game::Get()->InitStage();
+			XA_Play(SE_SelectDecide);
+			//åŒã˜ã‚¹ãƒ†ãƒ¼ã‚¸ã ã‹ã‚‰ã€ç›´æ¥åˆæœŸåŒ–ã‚’ã‚‚ã†ä¸€å›ã‚„ã£ãŸã‚‰ã„ã„
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			buttonnum = NEXT;
 		}
 		break;
-	case RETURN://ƒ^ƒCƒgƒ‹‚Ö
+	case RETURN://ã‚¿ã‚¤ãƒˆãƒ«ã¸
 		Button_return->m_anime->SetAnimePattern(1);
 		Button_again->m_anime->SetAnimePattern(0);
 		Button_next->m_anime->SetAnimePattern(0);
 
-		//ƒXƒy[ƒX‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Éƒ^ƒCƒgƒ‹‚É‘JˆÚ‚·‚é
+		//ã‚¹ãƒšãƒ¼ã‚¹ã‚’æŠ¼ã—ãŸã¨ãã«ã‚¿ã‚¤ãƒˆãƒ«ã«é·ç§»ã™ã‚‹
 		if (Input::Get()->GetKeyPress(DIK_SPACE))
 		{
-			SceneManager::Get()->SetScene(SCENENAME::STAGESELECT);
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGESELECT);
 			buttonnum = NEXT;
-
-			XA_Play(BGM_SelectStage);// ƒZƒŒƒNƒg‰æ–Ê‚É–ß‚Á‚½‚ÉBGMÄ¶
+			XA_Play(BGM_SelectStage);// ã‚»ãƒ¬ã‚¯ãƒˆç”»é¢ã«æˆ»ã£ãŸæ™‚ã«BGMå†ç”Ÿ
 		}
 		break;
-	case NEXT://Ÿ‚ÌƒXƒe[ƒW‚Ö
+	case NEXT://æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã¸
 		Button_next->m_anime->SetAnimePattern(1);
 		Button_again->m_anime->SetAnimePattern(0);
 		Button_return->m_anime->SetAnimePattern(0);
 
-		//ƒXƒy[ƒX‚ğ‰Ÿ‚µ‚½‚Æ‚«‚ÉŸ‚ÌƒXƒe[ƒW‚É‘JˆÚ‚·‚é
+		//ã‚¹ãƒšãƒ¼ã‚¹ã‚’æŠ¼ã—ãŸã¨ãã«æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ã«é·ç§»ã™ã‚‹
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
-			//ƒXƒe[ƒW‚É–ß‚é
-			SceneManager::Get()->SetScene(SCENENAME::STAGE);
-			//ƒXƒe[ƒW‚ğŸ‚ÌƒXƒe[ƒW‚É‚·‚é
+			XA_Play(SE_SelectDecide);
+			//ã‚¹ãƒ†ãƒ¼ã‚¸ã«æˆ»ã‚‹
 			SceneManager::Get()->SetStage(SceneManager::Get()->GetNextStage());
-			//‰Šú‰»‚ğs‚¤
-			Game::Get()->InitStage();
-			
+			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
 			buttonnum = NEXT;
 		}
 		break;
@@ -219,6 +269,7 @@ void Result::ButtonEvent()
 		Button_again->m_anime->SetAnimePattern(0);
 		Button_return->m_anime->SetAnimePattern(0);
 		Button_next->m_anime->SetAnimePattern(1);
+		buttonnum = NEXT;
 		break;
 	}
 }
@@ -227,22 +278,22 @@ void Result::StarEvent(int StarScore)
 {
 	switch (StarScore)
 	{
-	case STARONE://¯‚P
+	case STARONE://æ˜Ÿï¼‘
 		AllStar = STARONE;
 		break;
-	case STARTWO://¯‚Q
+	case STARTWO://æ˜Ÿï¼’
 		AllStar = STARTWO;
 		break;
-	case STARTHREE://¯‚R
+	case STARTHREE://æ˜Ÿï¼“
 		AllStar = STARTHREE;
 		break;
-	case STARFOUR://¯‚S
+	case STARFOUR://æ˜Ÿï¼”
 		AllStar = STARFOUR;
 		break;
-	case STARFIVE://¯‚T
+	case STARFIVE://æ˜Ÿï¼•
 		AllStar = STARFIVE;
 		break;
-	default://Å’á¯1
+	default://æœ€ä½æ˜Ÿ1
 		AllStar = STARONE;
 		break;
 	}
@@ -250,30 +301,30 @@ void Result::StarEvent(int StarScore)
 
 int Result::ResultScore(int resultStep, std::vector<int> StarNum)
 {
-	//¯‚T‚Ì”»’è
+	//æ˜Ÿï¼•ã®åˆ¤å®š
 	if (resultStep <= StarNum[0])
 	{
-		return STARFIVE;//¯‚T
+		return STARFIVE;//æ˜Ÿï¼•
 	}
-	//¯‚S‚Ì”»’è
+	//æ˜Ÿï¼”ã®åˆ¤å®š
 	else if (resultStep <= StarNum[1])
 	{
-		return STARFOUR;//¯‚S
+		return STARFOUR;//æ˜Ÿï¼”
 	}
-	//¯‚R‚Ì”»’è
+	//æ˜Ÿï¼“ã®åˆ¤å®š
 	else if (resultStep <= StarNum[2])
 	{
-		return STARTHREE;//¯‚R
+		return STARTHREE;//æ˜Ÿï¼“
 	}
-	//¯‚Q‚Ì”»’è
+	//æ˜Ÿï¼’ã®åˆ¤å®š
 	else if (resultStep <= StarNum[3])
 	{
-		return STARTWO;//¯‚Q
+		return STARTWO;//æ˜Ÿï¼’
 	}
-	//¯‚P‚Ì”»’è
+	//æ˜Ÿï¼‘ã®åˆ¤å®š
 	else
 	{
-		return STARONE;//¯‚P
+		return STARONE;//æ˜Ÿï¼‘
 	}
 
 	return 0;

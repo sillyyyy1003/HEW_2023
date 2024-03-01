@@ -12,10 +12,6 @@ private:
 	~SceneManager();// デストラクタ
 
 	//コピーとかを禁止にする
-	SceneManager(const SceneManager&) = delete;// オブジェクトのコピー
-	SceneManager& operator=(const SceneManager&) = delete;// オブジェクトの代入
-	SceneManager(SceneManager&&) = delete;// オブジェクトのムーブ
-	SceneManager& operator=(SceneManager&&) = delete;// オブジェクトのムーブ代入
 
 public:
 

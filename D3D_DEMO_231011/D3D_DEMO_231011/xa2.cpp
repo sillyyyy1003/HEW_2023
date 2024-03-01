@@ -85,7 +85,7 @@ HRESULT XA_Initialize()
 	DWORD                filetype;
 		
 	// ＣＯＭの初期化
-	CoInitializeEx( NULL , COINIT_MULTITHREADED );
+	CoInitializeEx( NULL, COINIT_MULTITHREADED );
 	
 	/**** Create XAudio2 ****/
 	hr = XAudio2Create( &g_pXAudio2, 0);		// 第二引数は､動作フラグ デバッグモードの指定(現在は未使用なので0にする)

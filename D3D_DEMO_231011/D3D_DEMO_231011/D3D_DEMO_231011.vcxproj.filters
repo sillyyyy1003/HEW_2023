@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="WICTextureLoader.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Animation.cpp">
       <Filter>Animation</Filter>
@@ -84,8 +83,6 @@
     <ClCompile Include="StaticObject.cpp">
       <Filter>StaticObject</Filter>
     </ClCompile>
-    <ClCompile Include="xa2.cpp" />
-    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="ResultProcess.cpp">
       <Filter>Result</Filter>
     </ClCompile>
@@ -101,9 +98,23 @@
     <ClCompile Include="Direct3D.cpp">
       <Filter>DirectFile\ShaderFile</Filter>
     </ClCompile>
+    <ClCompile Include="xa2.cpp">
+      <Filter>Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="WICTextureLoader.cpp">
+      <Filter>DirectFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UiManager.cpp">
+      <Filter>UIManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WICTextureLoader.h" />
     <ClInclude Include="Animation.h">
       <Filter>Animation</Filter>
     </ClInclude>
@@ -185,8 +196,6 @@
     <ClInclude Include="StaticObject.h">
       <Filter>StaticObject</Filter>
     </ClInclude>
-    <ClInclude Include="xa2.h" />
-    <ClInclude Include="Effect.h" />
     <ClInclude Include="ResultProcess.h">
       <Filter>Result</Filter>
     </ClInclude>
@@ -199,14 +208,23 @@
     <ClInclude Include="CameraShaker.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="VertexShader.h">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShader.h">
-      <Filter>DirectFile\ShaderFile</Filter>
-    </ClInclude>
     <ClInclude Include="Direct3D.h">
       <Filter>DirectFile\ShaderFile</Filter>
+    </ClInclude>
+    <ClInclude Include="xa2.h">
+      <Filter>Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="WICTextureLoader.h">
+      <Filter>DirectFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UiManager.h">
+      <Filter>UIManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,23 +282,32 @@
     <Filter Include="Animation\ObjectAnimation">
       <UniqueIdentifier>{a48fac5b-fca0-4524-a4e1-6bce43fc9a82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Collider\PolygonCollider">
-      <UniqueIdentifier>{5df98a4e-2af3-4903-b679-acb9393ab3df}</UniqueIdentifier>
-    </Filter>
     <Filter Include="RailManager">
       <UniqueIdentifier>{268ef5c8-9f01-40f5-9e5e-4c1ed1d91ba0}</UniqueIdentifier>
     </Filter>
     <Filter Include="SceneManager">
       <UniqueIdentifier>{078cc37e-f0b8-4f6f-aebb-5d6f21ba99b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ShadowObject">
-      <UniqueIdentifier>{8e801169-b9de-4e10-b118-e0a5c4a49242}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StaticObject">
       <UniqueIdentifier>{53fbd55a-34d3-4f10-9dca-4ae98c5b1172}</UniqueIdentifier>
     </Filter>
     <Filter Include="Result">
       <UniqueIdentifier>{ca0bed48-2f4a-45e2-8471-e7a602e994e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collider\PolygonCollider">
+      <UniqueIdentifier>{5df98a4e-2af3-4903-b679-acb9393ab3df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{066ae721-ddff-4dca-8e3e-80c6a4d67fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShadowObject">
+      <UniqueIdentifier>{8e801169-b9de-4e10-b118-e0a5c4a49242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIManager">
+      <UniqueIdentifier>{d7c6c5e1-591f-41d9-a453-b5fb0d687b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CanvasManager">
+      <UniqueIdentifier>{c3eb6e00-5a9e-4fab-8546-9967aedebfca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

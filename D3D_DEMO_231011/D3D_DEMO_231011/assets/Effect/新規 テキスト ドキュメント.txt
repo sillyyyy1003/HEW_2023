@@ -1,7 +1,0 @@
-effect1
-4x7 28
-
-effect2 
-4x9 36
-
-objectCursor

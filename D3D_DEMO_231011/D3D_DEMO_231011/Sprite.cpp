@@ -28,8 +28,8 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	float left, right, top, bottom, z = 0.0f;
 
 	//割った後のテクスチャ、一枚ずつの大きさ（幅、高）
-	const float u = 1.0 / m_split.x;
-	const float v = 1.0 / m_split.y;
+	const float u = 1.0f / m_split.x;
+	const float v = 1.0f / m_split.y;
 
 	//モデル頂点データ作成
 	//Notion:*1.25/96 -> 入力した画像の大きさをそのまま表示するため
@@ -37,27 +37,27 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	switch (m_spriteType) {
 	
 	case SHADOW:
-		left = -(_width / 2.0f) * 1.25 / 96;
-		right = (_width / 2.0f) * 1.25 / 96;
-		top = (_height / 2.0f) * 1.25 / 96;
-		bottom = -(_height / 2.0f) * 1.25 / 96;
+		left = -(_width / 2.0f) /SCREEN_PARA;
+		right = (_width / 2.0f) /SCREEN_PARA;
+		top = (_height / 2.0f) /SCREEN_PARA;
+		bottom = -(_height / 2.0f) /SCREEN_PARA;
 
 		break;
 
 	case OBJECT:
 
-		left = -(_width / 2.0f) * 1.25 / 96;
-		right = (_width / 2.0f) * 1.25 / 96;
+		left = -(_width / 2.0f) / SCREEN_PARA;
+		right = (_width / 2.0f) / SCREEN_PARA;
 		bottom = 0;
-		top = (_height) * 1.25 / 96;
+		top = (_height) / SCREEN_PARA;
 		break;
 
 	case STATIC_OBJECT:
 
-		left = -(_width / 2.0f) * 1.25 / 96;
-		right = (_width / 2.0f) * 1.25 / 96;
-		top = (_height / 2.0f) * 1.25 / 96;
-		bottom = -(_height / 2.0f) * 1.25 / 96;
+		left = -(_width / 2.0f) / SCREEN_PARA;
+		right = (_width / 2.0f) / SCREEN_PARA;
+		top = (_height / 2.0f) / SCREEN_PARA;
+		bottom = -(_height / 2.0f) / SCREEN_PARA;
 
 		break;
 	}
@@ -100,11 +100,10 @@ void Sprite::CreateModel(ID3D11ShaderResourceView* texture, float _width, float 
 	}
 
 	//当たり判定のデータを入力
-	m_modelData.collider.extents.x = _width / 2 * 1.25 / 96;
-	m_modelData.collider.extents.y = _height / 2 * 1.25 / 96;
-	m_modelData.collider.extents.z = 0.01f;	//ｚ軸の大きさをロックする
-	
-	m_modelData.collider.radius = _width / 2 * 1.25 / 96;
+	m_modelData.collider.extents.x = _width / 2 /SCREEN_PARA;
+	m_modelData.collider.extents.y = _height / 2 /SCREEN_PARA;
+	m_modelData.collider.extents.z = 1.0f;	//ｚ軸の大きさをロックする
+	m_modelData.collider.radius = _width / 2 /SCREEN_PARA;
 	
 	//テクスチャを実装
 	SetTexture(texture);
@@ -122,11 +121,10 @@ void Sprite::GenerateMatrix(CONSTBUFFER& cb)
 	XMMATRIX matrixProj;
 
 	if(isUseCamera){//カメラを使う場合
-
 		//カメラの行列作成
 		matrixView = m_camera->GetMatrixView();
 		//透視投影の行列作成
-		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(54.43), RATIO_W / RATIO_H, 0.01f, 100.0f);
+		matrixProjPerspective = XMMatrixPerspectiveFovLH(XMConvertToRadians(54.43f), RATIO_W / RATIO_H, 0.01f, 100.0f);
 	
 	}
 	else {//カメラを使わない→uiなどに使われている

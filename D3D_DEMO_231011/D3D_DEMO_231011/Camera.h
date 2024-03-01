@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Direct3D.h"
 
-#define ROTATEX		(0.360022153096)	//カメラの回転角度tan19.8°
+#define ROTATEX		(0.360022f)	//カメラの回転角度tan19.8°
 
 class Camera
 {
@@ -19,11 +19,11 @@ protected:
 	//rotation X= 19.8°
 	
 	//カメラの位置
-	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 7.119, -21.626);
+	XMFLOAT3 m_CameraPos = XMFLOAT3(0.0f, 7.119f, -21.626f);
 	//注視点
-	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0, 0.0, -(21.626 - 7 / ROTATEX));
+	XMFLOAT3 m_FocusPos = XMFLOAT3(0.0f, 0.0f, -(21.626f - 7.0f / ROTATEX));
 	//カメラの上方向
-	XMFLOAT3 m_UpDir = XMFLOAT3(0.0,1.0f,0.0f);
+	XMFLOAT3 m_UpDir = XMFLOAT3(0.0f,1.0f,0.0f);
 
 
 public:
