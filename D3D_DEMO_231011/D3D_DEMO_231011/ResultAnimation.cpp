@@ -45,6 +45,8 @@ void ResultAnimation::Update(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear
 			// スペースを押すとリザルト画面に遷移する
 			if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 			{
+				XA_Play(SE_Result);//リザルトSE再生
+
 				// 画像１から３の位置を初期値（画面外）に戻す
 				clear1->m_pos = { 12.0f,7.6f,0.4f };   //右上　z座標　真ん中 
 				clear2->m_pos = { -12.1f,7.6f,0.3f };  //左上　z座標　手前
@@ -58,7 +60,7 @@ void ResultAnimation::Update(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear
 				// ステージを一度クリアした判定にする
 				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetCompleted(true);
 				Game::Get()->SetResultAnime(false);
-				XA_Play(SE_Result);
+				
 			}
 		}
 

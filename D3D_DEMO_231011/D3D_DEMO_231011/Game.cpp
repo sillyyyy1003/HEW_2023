@@ -1111,6 +1111,9 @@ void Game::GameUpdate(void)
 				uiManager->InitStage();
 			}
 			if (SceneManager::Get()->GetScene() == STAGESELECT) {
+
+				XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
+				
 				/*UiManager::Get()->InitUi();*/
 				uiManager->InitStageSelect();
 			}
@@ -1144,7 +1147,7 @@ void Game::GameUpdate(void)
 		XA_Stop(BGM_Stage1);
 		XA_Stop(BGM_Stage2);
 		XA_Stop(BGM_Stage3);
-		XA_Play(SE_Result);
+
 		ResultUpdate();
 		break;
 	}

@@ -403,8 +403,6 @@ void UiManager::TutorialUpdate()
 			//シーンの切り替え
 			XA_Play(SE_SelectDecide);
 			SceneManager::Get()->ChangeScene(STAGESELECT);
-			XA_Stop(BGM_TITLE);
-			XA_Play(BGM_SelectStage);
 
 		}
 	}
@@ -418,6 +416,8 @@ void UiManager::SelectUpdate()
 	SetSelectStatus();
 	uiSelectBg->Update();
 	uiSelectCursor->Update();
+
+
 	
 	for (int i = 0; i < stageNum; i++) {
 		uiSelectStage[i]->Update();
@@ -728,10 +728,10 @@ void UiManager::DoStageKey()
 				InitUi();//PAUSE画面の設定を最初に戻る
 				break;
 			case UiManager::BACKSELECT:
-				XA_Play(BGM_SelectStage);// セレクト画面に戻った時にBGM再生
 				Game::Get()->PauseSwitch();
 				InitUi();//PAUSE画面の設定を最初に戻る
 				SceneManager::Get()->ChangeScene(SCENENAME::STAGESELECT);
+				
 				break;
 			case UiManager::SOUND:
 				isSound = true;

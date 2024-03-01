@@ -107,6 +107,7 @@ void Result::Update()
 	Button_again->Update();
 	Button_next->Update();
 	Button_return->Update();
+
 	for (int i = 0; i < AllStar; i++)
 	{
 		star[i]->Update();
