@@ -79,6 +79,8 @@ private:
 	CanvasUI** uiSelectStage;//ステージ
 	CanvasUI** uiSelectChapter;//チャプター
 	CanvasUI** uiClearMark;//クリアの印
+	CanvasUI* stageMask;
+	CanvasUI* chapterMask;
 
 	//PAUSE
 	UiList* pauseList;

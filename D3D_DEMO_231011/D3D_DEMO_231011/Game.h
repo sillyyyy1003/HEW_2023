@@ -44,7 +44,10 @@ private:
 
 	//STAGE HINT
 	CanvasUI* stageHint[9];
+	CanvasUI* stageShapeHint[9];
 	CanvasUI* stageHintBg;
+
+	CanvasUI* stageTutorial[3];
 
 	//stage1-1
 	StaticObject* stageBg;		//ステージ背景
@@ -98,8 +101,21 @@ private:
 	// 画像３
 	CanvasUI* clear3_3;
 
+	
+
 private:
 
+
+	enum {
+
+		MOVETUTORIAL = 0,
+		SPACETUTORIAL = 1,
+		HINTTUTORIAL = 2,
+		IDLETUTORIAL = 99,
+	};
+
+	int tutorialNum = 0;
+	bool isNextTutorial = false;
 
 	//pause
 	bool isPause = false;
@@ -114,6 +130,8 @@ private:
 
 	//リザルト演出
 	bool isResultAnime = false;
+
+	int tutorialCounter = 0;
 
 
 	//初期設定
@@ -168,6 +186,7 @@ public:
 
 	//Stage Update
 	void StageUpdate(void);
+	void StageTutorialUpdate();
 	void UpdateStage1_1(void);
 	void UpdateStage1_2(void);
 	void UpdateStage1_3(void);
@@ -177,6 +196,8 @@ public:
 	void UpdateStageUndone(void);
 	void SwitchObject();
 
+	void DoHintKeyEvent(void);
+	void DoShapeKeyEvent(void);
 
 	//result Update
 	void ResultUpdate(void);
@@ -209,6 +230,7 @@ public:
 	//デバッグ用
 	//void DebugDisplay(void);
 
+
 	void TestMove(Effect* _target);
 	void TestMove(CanvasUI* _target);
 	void TestMove(void);
@@ -218,8 +240,10 @@ public:
 
 	CameraShaker* GetCameraShaker(void) { return cameraShaker; };
 	Fade* GetFade(void) { return fade; };
+	Result* GetResult(void) { return resultGenerator; };
 
 	void SetIsControl(bool isControl) { this->isControl = isControl; };
+	bool GetControl() { return isControl; };
 
 	bool GetResultAnime() { return this->isResultAnime; };
 	void SetResultAnime(bool isAnime) { this->isResultAnime = isAnime; };

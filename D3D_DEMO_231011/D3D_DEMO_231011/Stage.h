@@ -24,6 +24,7 @@ private:
 	//ステージは作動中かどうか？
 	bool isActive = false;
 
+	bool isShapeHint = false;
 
 public:
 
@@ -59,6 +60,8 @@ public:
 	bool GetHint(void) { return isHint; };
 	void SetHint(bool isHint) { this->isHint = isHint; };
 
+	bool GetShapeHint(void) { return isShapeHint; }
+	void SetShapeHint(bool isShapeHint) { this->isShapeHint = isShapeHint; };
 
 };
 

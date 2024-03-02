@@ -22,11 +22,15 @@ private:
 
     //Resultボタン遷移用
     enum {
-        NONE,
+     
         AGAIN,  //もう一度同じステージに挑戦する
         RETURN, //タイトルへ
         NEXT,   //次のステージに進む
+        NONE,
     };
+
+
+    int resultCounter = 0;
 
     //ボタン管理するための変数
     int buttonnum = NEXT;
@@ -44,13 +48,14 @@ private:
     // result
     CanvasUI* uiResult;		    //リザルト文字
     CanvasUI* resultBg;	        //リザルト背景
-    CanvasUI* Button_again;	    //リトライボタン
-    CanvasUI* Button_next;	    //次のステージへのボタン
-    CanvasUI* Button_return;    //タイトルへのボタン
+    CanvasUI* Button[3];	    //リトライボタン
     CanvasUI* Result_score;	    //リザルトのスコア
     CanvasUI* Result_stepcount;	//リザルトのステップ数
     CanvasUI* star[5];	        //リザルトの星
     CanvasUI* starShadow[5];	//リザルトの星の暗いバージョン
+    ResultProcess* processor;
+
+    bool isGetNextStage = false;
 
     //キー押した時の処理
     void DoResultKeyEvent();
@@ -59,9 +64,10 @@ private:
     //スターの処理
     void StarEvent(int StarScore);
 
+    void ObjectMove(CanvasUI* ui, float moveSpeed, float moveHeight);
+
 public:
 
-    ResultProcess* processor;
 
     Result();
 
@@ -88,5 +94,7 @@ public:
     std::vector<int> GetStarNum() {
         return Starnum;
     }
+
+    void SetButton(int num) { buttonnum = num; };
 };
 

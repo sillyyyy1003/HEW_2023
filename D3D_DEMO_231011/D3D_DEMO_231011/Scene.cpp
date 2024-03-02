@@ -35,6 +35,8 @@ void Scene::ChangeScene(SCENENAME _scene)
 	//fade Out‚ğs‚¤
 	Game::Get()->GetFade()->FadeOut();
 
+	Game::Get()->SetIsControl(false);
+
 	//‘S‚Ä‚Ì‰¹º‚ğÁ‚·
 	XA_Stop(BGM_TITLE);
 	XA_Stop(BGM_Stage1);

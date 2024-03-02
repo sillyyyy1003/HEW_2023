@@ -41,6 +41,9 @@ Assets::Assets()
     uiSelectChapter[0] = LoadTexture("assets/img/ui/select/chapter1.png");
     uiSelectChapter[1] = LoadTexture("assets/img/ui/select/chapter2.png");
     uiSelectChapter[2] = LoadTexture("assets/img/ui/select/chapter3.png");
+
+    selectMask = LoadTexture("assets/img/ui/select/stage_select_left_mask.png");
+    chapterMask= LoadTexture("assets/img/ui/select/stage_select_right_mask.png");
     uiClear= LoadTexture("assets/img/ui/select/clear.png");
 
     stageMask = LoadTexture("assets/img/bg_mask.png");
@@ -48,10 +51,18 @@ Assets::Assets()
     resultMask = LoadTexture("assets/img/result_mask.png");
     
     //stage hint
-    stageHint1_1 = LoadTexture("assets/img/stage1/1_1_hint.png");
-    stageHint1_2 = LoadTexture("assets/img/stage1/1_2_hint.png");
-    stageHint1_3 = LoadTexture("assets/img/stage1/1_3_hint.png");
+    stageHint[0] = LoadTexture("assets/img/stage1/1_1_hint.png");
+    stageHint[1] = LoadTexture("assets/img/stage1/1_2_hint.png");
+    stageHint[2] = LoadTexture("assets/img/stage1/1_3_hint.png");
+    stageShapeHint[0] = LoadTexture("assets/img/stage1/1_1_ingame_hint.png");
+    stageShapeHint[1] = LoadTexture("assets/img/stage1/1_2_ingame_hint.png");
+    stageShapeHint[2] = LoadTexture("assets/img/stage1/1_3_ingame_hint.png");
     stageHintBg = LoadTexture("assets/img/ui/bg_shadow.png");
+
+    stageTutorial[0]= LoadTexture("assets/img/stage1/hint_direction_animation.png");
+    stageTutorial[1] = LoadTexture("assets/img/stage1/hint_space_animation.png");
+    stageTutorial[2] = LoadTexture("assets/img/stage1/hint_h_animation.png");
+
 
     //stage1_1
     stageBg1_1 = LoadTexture("assets/img/stage1/1_1_bgA.png");
@@ -158,8 +169,13 @@ Assets::~Assets()
     for (int i = 0; i < 3; i++) {
         SAFE_RELEASE(uiSelectStage[i]);
         SAFE_RELEASE(uiSelectChapter[i]);
+        SAFE_RELEASE(stageHint[i]);
+        SAFE_RELEASE(stageShapeHint[i]);
+        SAFE_RELEASE(stageTutorial[i]);
+
     }
-    
+    SAFE_RELEASE(selectMask);
+    SAFE_RELEASE(chapterMask);
 
     //UI用
     SAFE_RELEASE(stageMask);
@@ -168,9 +184,6 @@ Assets::~Assets()
 
     //clear
     SAFE_RELEASE(uiClear);
-    SAFE_RELEASE(stageHint1_1);
-    SAFE_RELEASE(stageHint1_2);
-    SAFE_RELEASE(stageHint1_3);
     SAFE_RELEASE(stageHintBg);    
 
 

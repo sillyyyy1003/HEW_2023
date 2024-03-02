@@ -48,6 +48,11 @@ void Game::Init()
 	//共通の背景
 	stageBg = new StaticObject();
 
+	for (int i = 0; i < 3; i++) {
+	
+		stageTutorial[i] = new CanvasUI();
+	}
+
 	//stage1-1
 	coconut = new GameObject();
 	lamp = new GameObject();
@@ -67,17 +72,13 @@ void Game::Init()
 	//EFFECT
 	testEffect = new Effect(12);
 
-	//tutorial1 = new CanvasUI();
-	////uiTutorial[TUTORIAL1] = new CanvasUI();
-	//tutorial2 = new CanvasUI();
-	//tutorial2loop = new CanvasUI();
-	//tutorial3 = new CanvasUI();
-	//tutorial3loop = new CanvasUI();
-	//tutorial4 = new CanvasUI();
-	//tutorial4loop = new CanvasUI();
-	//tutorial5 = new CanvasUI();
-	//tutorial5loop = new CanvasUI();
+	//HINT
+	for (int i = 0; i < 9; i++) {
+		stageHint[i] = new CanvasUI();
+		stageShapeHint[i] = new CanvasUI();
+	}
 
+	stageHintBg = new CanvasUI();
 
 	//stage1に使われてる
 	//移動のオブジェクトの名前を設定する
@@ -106,6 +107,15 @@ void Game::Init()
 	stageMask->CreateModel(g_Assets->stageMask, 1280, 720, 1, 1);
 	resultMask->CreateModel(g_Assets->resultMask, 1280, 720, 1, 1);
 	controlPanel->CreateModel(g_Assets->controlPanel, 1280, 720, 1, 1);
+
+	for (int i = 0; i < 3; i++) {
+
+		stageHint[i]->CreateModel(g_Assets->stageHint[i], 883, 657, 1, 1);
+		stageShapeHint[i]->CreateModel(g_Assets->stageShapeHint[i], 883, 657, 1, 1);
+		stageTutorial[i]->CreateModel(g_Assets->stageTutorial[i], 350, 720, 17, 2);
+	}
+
+	stageHintBg->CreateModel(g_Assets->stageHintBg, 1280, 720, 1, 1);
 
 
 	//手数表示
@@ -179,24 +189,19 @@ void Game::Init()
 
 	//Title の初期化
 	//位置設定
-
-	//comingSoon->m_pos = { 0.0f,0.0f,0.8f };
-	//comingSoon->m_anime->SetAnimeSpeed(0.15f);
-	//comingSoon->SetLoop(false);
-	//comingSoon->isMultiPattern = false;
-	//comingSoonLoop->m_pos = { 0.0f,0.0f,0.9f };
-	//comingSoonLoop->m_anime->SetAnimeSpeed(0.15f);
-	//comingSoonLoop->SetLoop(true);
-	//comingSoonLoop->isMultiPattern = false;
-
 	//coming soon Animation
 	comingSoon->InitAnimation(false);
 	comingSoonLoop->InitAnimation(false);
 	comingSoon->SetAnimeted(true);
 	comingSoonLoop->SetAnimeted(true);
-	
 
-	//ARROW
+	comingSoon->m_pos = { 0.0f,0.0f,0.8f };
+	comingSoon->m_anime->SetAnimeSpeed(0.15f);
+	comingSoon->m_anime->SetLoop(false);
+	comingSoonLoop->m_pos = { 0.0f,0.0f,0.9f };
+	comingSoonLoop->m_anime->SetAnimeSpeed(0.15f);
+	comingSoonLoop->m_anime->SetLoop(true);
+	
 
 	uiArrow->m_pos = { 6.0f,325.0f / SCREEN_PARA,0.1f };
 	uiArrow->m_anime->SetAnimeSpeed(0.15f);
@@ -213,7 +218,6 @@ void Game::Init()
 
 	//配列の初期化と設定
 	InitHintArray();
-
 
 	// サウンド初期化
 	HRESULT hr;
@@ -345,9 +349,15 @@ void Game::InitStage()
 		//ヒントの状態を全部inactiveにします。
 		for (int i = 0; i < STAGE_NUM; i++) {
 			SceneManager::Get()->m_stageHolder[i]->SetHint(false);
+			SceneManager::Get()->m_stageHolder[i]->SetShapeHint(false);
+			stageHint[i]->SetActive(false);
+			stageShapeHint[i]->SetActive(false);
+
 		}
 		//ヒントを出す
 		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetShapeHint(false);
+
 	}
 
 	for (int i = 0; i < STAGE_NUM; i++) {
@@ -415,14 +425,33 @@ void Game::InitStage1_1(void)
 	//全部のオブジェクトをINACTIVEに設定する
 	for (auto& element : objectList) {
 		element->SetActive(false);
+		element->ResetMove();
 	}
 	//移動ターゲットを設定
 	coconut->SetActive(true);
-
-	//自動移動や自動回転の設定
 	
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 12,14,19,22 });
+
+	//stageTutorial
+	for (int i = 0; i < 3; i++) {
+
+		//アニメション設定
+		stageTutorial[i]->InitAnimation(false);
+		stageTutorial[i]->m_anime->isPlaying = false;
+		stageTutorial[i]->m_anime->SetLoop(false);//最初はループしないように設定
+		stageTutorial[i]->m_anime->SetAnimeSpeed(0.2f);
+
+		//位置設定
+		stageTutorial[i]->m_scale = { 0.6,0.6,1.0f };
+		
+		stageTutorial[i]->m_pos = { 510.0f / SCREEN_PARA, -144.0 / SCREEN_PARA,0.1f };
+		stageTutorial[i]->SetActive(false);
+		tutorialNum = MOVETUTORIAL;
+	}
+	//最初のアニメション
+	stageTutorial[0]->m_anime->isPlaying = true;
+	tutorialCounter = 0;
 
 }
 
@@ -484,6 +513,7 @@ void Game::InitStage1_2(void)
 	//全部のオブジェクトをINACTIVEに設定する
 	for (auto& element : objectList) {
 		element->SetActive(false);
+		element->ResetMove();
 	}
 	//移動ターゲットを設定
 	lamp1_2->SetActive(true);
@@ -493,11 +523,7 @@ void Game::InitStage1_2(void)
 	//クリアのレベルを設定
 	resultGenerator->SetStarNum({ 8,10,15,18 });
 
-	//状態のリセット
-	for (auto& element : objectList) {
-	
-		element->ResetMove();
-	}
+
 }
 
 void Game::InitStage1_3(void)
@@ -561,6 +587,7 @@ void Game::InitStage1_3(void)
 	//全部のオブジェクトをINACTIVEに設定する
 	for (auto& element : objectList) {
 		element->SetActive(false);
+		element->ResetMove();
 	}
 	//移動ターゲットを設定
 	sandwich->SetActive(true);
@@ -568,8 +595,6 @@ void Game::InitStage1_3(void)
 	//自動移動や自動回転の設定
 
 	resultGenerator->SetStarNum({ 24,26,30,33 });
-
-
 
 }
 
@@ -735,28 +760,11 @@ void Game::RailInit1_3(void)
 
 void Game::InitHintArray()
 {
-	for (int i = 0; i < 9; i++) {
-		stageHint[i] = new CanvasUI();
-	}
-	
-	stageHintBg = new CanvasUI();
-
-	//テクスチャ割り当て
-	for (int i = 0; i < 9; i++) {
-	
-		stageHint[i]->CreateModel(g_Assets->stageHint1_1, 883, 657, 1, 1);
-	}
-	
-	stageHintBg->CreateModel(g_Assets->stageHintBg, 1280, 720, 1, 1);
-
-
-	stageHint[STAGE1_1]->SetTexture(g_Assets->stageHint1_1);
-	stageHint[STAGE1_2]->SetTexture(g_Assets->stageHint1_2);
-	stageHint[STAGE1_3]->SetTexture(g_Assets->stageHint1_3);
 
 	//位置設定
 	for (int i = 0; i < 9; i++) {
 		stageHint[i]->m_pos = { 0,0,0.2f};
+		stageHint[i]->m_pos = { 0,0,0.2f };
 	}
 	stageHintBg->m_pos = { 0,0,0.4f };
 	//位置設定
@@ -772,74 +780,6 @@ void Game::TitleUpdate(void)
 
 void Game::TutorialUpdate(void)
 {
-
-	//switch (tutorial)
-	//{
-	//case Game::TUTORIAL1:
-	//	if (!tutorial1->GetAnimated()) {
-	//		tutorial1->SetActive(false);
-	//		/*uiTutorial[TUTORIAL1]->SetActive(true);*/
-	//	}
-	//	tutorial1->Update();
-	//	/*uiTutorial[TUTORIAL1]->Update();*/
-	//	break;
-	//case Game::TUTORIAL2:
-	//	if (!tutorial2->GetAnimated()) {
-	//		tutorial2->SetActive(false);
-	//		tutorial2loop->SetActive(true);
-	//	}
-
-	//	tutorial2->Update();
-	//	tutorial2loop->Update();
-	//	break;
-	//case Game::TUTORIAL3:
-	//	if (!tutorial3->GetAnimated()) {
-	//		tutorial3->SetActive(false);
-	//		tutorial3loop->SetActive(true);
-	//	}
-
-	//	tutorial3->Update();
-	//	tutorial3loop->Update();
-	//	break;
-	//case Game::TUTORIAL4:
-	//	if (!tutorial4->GetAnimated()) {
-	//		tutorial4->SetActive(false);
-	//		tutorial4loop->SetActive(true);
-	//	}
-
-	//	tutorial4->Update();
-	//	tutorial4loop->Update();
-	//	break;
-	//case Game::TUTORIAL5:
-
-	//	if (!tutorial5->GetAnimated()) {
-	//		tutorial5->SetActive(false);
-	//		tutorial5loop->SetActive(true);
-	//	}
-
-	//	tutorial5->Update();
-	//	tutorial5loop->Update();
-	//	break;
-	//default:
-	//	break;
-	//}
-
-	//if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-	//
-	//	int num = tutorial;
-	//	num++;
-	//	tutorial = static_cast<TUTORIAL>(num);
-
-	//	if (num > 4) {
-	//		SceneManager::Get()->SetScene(STAGESELECT);
-	//		XA_Stop(BGM_TITLE);
-	//		XA_Stop(SE_TITLE);
-	//		XA_Play(SE_Press);// テスト用
-	//		XA_Play(BGM_SelectStage);//セレクトBGM再生
-	//	}
-	//
-	//}
-
 	uiManager->TutorialUpdate();
 }
 
@@ -850,6 +790,7 @@ void Game::SelectUpdate(void)
 
 void Game::UpdateStage1_1(void)
 {
+	StageTutorialUpdate();
 	//背景
 	stageBg->Update();
 
@@ -884,6 +825,7 @@ void Game::UpdateStage1_1(void)
 		ColliderManager::Get()->ClearCollision({OVERLAP,COL_DOWN},"lamp","housePlate",ShadowObject::LARGE)) {		
 		////クリア
 		SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetStage()]->SetClear(true);
+		uiArrow->SetActive(false);
 		SceneManager::Get()->ChangeScene(RESULT);
 		isResultAnime = true;
 		XA_Play(SE_Interval1);//リザルトに遷移した後、SE再生
@@ -938,6 +880,7 @@ void Game::UpdateStage1_2(void)
 		//クリア
 		int stageNum = SceneManager::Get()->GetStage();
 		SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+		uiArrow->SetActive(false);
 		SceneManager::Get()->ChangeScene(RESULT);
 		isResultAnime = true;
 		XA_Play(SE_Interval2);
@@ -991,11 +934,12 @@ void Game::UpdateStage1_3(void)
 	if (ColliderManager::Get()->ClearCollision({ COL_RIGHT,OVERLAP }, "picnicbasket", "sandwich", ShadowObject::LARGE) &&
 		ColliderManager::Get()->ClearCollision({ COL_RIGHT,COL_DOWN }, "bucket", "newspaper", ShadowObject::SMALL)) {
 		//isPause = true;
-		RailPos pos = { 0,3 };
+		RailPos pos = { 2,3 };
 		if (bucket->GetRailPos() == pos) {
 			//クリア
 			int stageNum = SceneManager::Get()->GetStage();
 			SceneManager::Get()->m_stageHolder[stageNum]->SetClear(true);
+			uiArrow->SetActive(false);
 			SceneManager::Get()->ChangeScene(RESULT);
 			isResultAnime = true;
 		}
@@ -1039,8 +983,7 @@ void Game::SwitchObject()
 {
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		//オブジェクトが移動してない場合
-		if (isControl) {
-			for (auto it = objectList.begin(); it != objectList.end(); it++) {
+		for (auto it = objectList.begin(); it != objectList.end(); it++) {
 				if ((*it)->GetActive())
 				{
 
@@ -1068,8 +1011,55 @@ void Game::SwitchObject()
 
 				}
 			}
-		}
 	}
+}
+
+void Game::DoHintKeyEvent(void)
+{
+	//スペースキーを押したら
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
+			stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
+			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
+
+		}
+		stageHintBg->SetActive(false);
+		controlPanel->SetActive(true);
+		uiArrow->SetActive(true);
+	}
+	else {
+		stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
+		stageHintBg->SetActive(true);
+		controlPanel->SetActive(false);
+		uiArrow->SetActive(false);
+	}
+
+	
+}
+
+void Game::DoShapeKeyEvent(void)
+{
+	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+
+		if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetShapeHint()) {
+			//図形を隠す
+			stageShapeHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
+			SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetShapeHint(false);
+
+		}
+		stageHintBg->SetActive(false);
+		controlPanel->SetActive(true);
+		uiArrow->SetActive(true);
+	}
+	else {
+		stageShapeHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
+		stageHintBg->SetActive(true);
+		controlPanel->SetActive(false);
+		uiArrow->SetActive(false);
+	}
+
+	
 }
 
 void Game::ResultUpdate(void)
@@ -1098,7 +1088,14 @@ void Game::ResultUpdate(void)
 }
 
 void Game::GameUpdate(void)
-{
+{	
+	//リセット印
+	if (Input::Get()->GetKeyTrigger(DIK_F12)) {
+		for (int i = 0; i < STAGE_NUM; i++) {
+			SceneManager::Get()->m_stageHolder[i]->SetCompleted(false);
+		}
+	}
+
 	if (SceneManager::Get()->GetNextScene() != NONE) {
 
 		if (fade->mState != Fade::FADE_OUT)
@@ -1123,7 +1120,6 @@ void Game::GameUpdate(void)
 			}
 		}
 	}
-
 	switch (SceneManager::Get()->GetScene()) {
 	case SCENENAME::TITLE:
 		TitleUpdate();
@@ -1151,6 +1147,7 @@ void Game::GameUpdate(void)
 		ResultUpdate();
 		break;
 	}
+
 	fade->Update();
 }
 
@@ -1162,9 +1159,10 @@ Game::~Game()
 	delete comingSoon;
 	delete comingSoonLoop;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < STAGE_NUM; i++)
 	{
 		delete stageHint[i];
+		delete stageShapeHint[i];
 	}
 
 	delete stageHintBg;
@@ -1321,28 +1319,35 @@ void Game::StageDraw(void)
 
 		//pauseじゃない時操作方法出る
 		controlPanel->Draw();
-		
+
 
 		//ステップ数表示
 		if (!isPause) {
-			if (!SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
+			if (!(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()||
+				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetShapeHint())) {
 				//修正待ち //fadeを邪魔しないよう
 				uiStepNum->PrintDebugLogCenter(SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetStep());
-				uiArrow->Draw();
-			}
+			}	
 		}
 
+		uiArrow->Draw();
 		//hint描画
 		stageHint[SceneManager::Get()->GetActiveStage()]->Draw();
+		stageShapeHint[SceneManager::Get()->GetActiveStage()]->Draw();
 
+		for (int i = 0; i < 3; i++) {
+
+			stageTutorial[i]->Draw();
+
+		}
 
 	}
 	else {
 	
 		StageUndoneDraw();
 	}
-
-
+	
+	
 
 }
 
@@ -1420,7 +1425,7 @@ void Game::SortObjectDraw(void)
 				(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0f, 1.0f, 1.0f, 0.6f };
 				break;
 			case 2:
-				(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0f, 1.0f, 1.0f, 0.3f };
+				(*it)->m_obj->m_sprite->m_materialDiffuse = { 1.0f, 1.0f, 1.0f, 0.45f };
 				break;
 			}	
 		}
@@ -1567,45 +1572,37 @@ void Game::StageUpdate(void)
 	if (SceneManager::Get()->GetStage() != STAGE_UNDONE) {
 		//もしヒント出されていない
 		if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetHint()) {
-
-			//スペースキーを押したら
-			if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
-
-				stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(false);
-				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(false);
-				stageHintBg->SetActive(false);
-				controlPanel->SetActive(true);
-			}
-			else {
-				stageHint[SceneManager::Get()->GetActiveStage()]->SetActive(true);
-				stageHintBg->SetActive(true);
-
-			}
-
-			controlPanel->SetActive(false);
-			uiArrow->SetActive(false);
+			DoHintKeyEvent();
 		}
-		else {
+		else if (SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->GetShapeHint()) {
+			DoShapeKeyEvent();
+		}else {
 
 			if (isPause) {
 				uiManager->StageUpdate();
 			}
 			else {
+
 				controlPanel->SetActive(true);
 				uiArrow->SetActive(true);
-
 				//入力処理
-				if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
-				{
-					XA_Play(SE_SelectDecide);//決定SE再生
-					PauseSwitch();
+				if (tutorialNum == IDLETUTORIAL) {
+					//tutorialの時PAUSEできない
+					if (Input::Get()->GetKeyTrigger(DIK_ESCAPE))
+					{
+						XA_Play(SE_SelectDecide);//決定SE再生
+						PauseSwitch();
+					}
+
 				}
-				//移動させる目標を設定する
-				SwitchObject();
+			
 
 				if (Input::Get()->GetKeyTrigger(DIK_H)) {
-					SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetHint(true);
+					SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetShapeHint(true);
 				}
+
+				//移動させる目標を設定する
+				SwitchObject();
 
 				//StageUpdate
 				switch (SceneManager::Get()->GetStage()) {
@@ -1619,7 +1616,6 @@ void Game::StageUpdate(void)
 				case STAGE1_2:
 					XA_Stop(SE_Present);
 					UpdateStage1_2();
-
 					break;
 
 				case STAGE1_3:
@@ -1649,14 +1645,93 @@ void Game::StageUpdate(void)
 				//CameraUpdate
 				cameraShaker->Update(g_WorldCamera);
 				uiArrow->Update();
-
-			}	
+			}
+		
+			
 		}
 	}
 	else {
 		UpdateStageUndone();
 	}
 
+}
+
+void Game::StageTutorialUpdate()
+{
+	
+	if (fade->mState != Fade::FADE_IN) {
+		
+		switch (tutorialNum) {
+		case MOVETUTORIAL:
+		
+			if (Input::Get()->GetKeyTrigger(DIK_UPARROW) ||
+				Input::Get()->GetKeyTrigger(DIK_DOWNARROW) ||
+				Input::Get()->GetKeyTrigger(DIK_LEFTARROW) ||
+				Input::Get()->GetKeyTrigger(DIK_RIGHTARROW)
+				) {
+				isNextTutorial = true;
+			}
+			if (isNextTutorial) {
+				//buffer time
+				tutorialCounter++;
+
+				if (tutorialCounter >= 60) {
+					tutorialNum = SPACETUTORIAL;
+					stageTutorial[tutorialNum]->m_anime->isPlaying = true;
+					tutorialCounter = 0;
+				}
+			}
+			break;
+		case SPACETUTORIAL:
+			if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
+				isNextTutorial = true;
+	
+			}
+
+			if (isNextTutorial) {
+				//buffer time
+				tutorialCounter++;
+
+				if (tutorialCounter >= 60) {
+					tutorialNum = HINTTUTORIAL;
+					stageTutorial[tutorialNum]->m_anime->isPlaying = true;
+					tutorialCounter = 0;
+				}
+			}
+			break;
+		case HINTTUTORIAL:
+			if (Input::Get()->GetKeyTrigger(DIK_H)) {
+				tutorialNum = IDLETUTORIAL;
+			}
+			break;
+
+		case IDLETUTORIAL:
+			return;
+			break;
+		}
+
+		for (int i = 0; i < 3; i++) {
+
+			if (i == tutorialNum) {
+				stageTutorial[i]->SetActive(true);
+				if (!stageTutorial[i]->m_anime->isPlaying) {
+					stageTutorial[i]->m_anime->SetFrameX(16);
+					stageTutorial[i]->m_anime->SetAnimePattern(1);
+					stageHintBg->SetActive(false);
+				}
+				else {
+					stageHintBg->SetActive(true);
+				}
+			}
+			else {
+				stageTutorial[i]->SetActive(false);
+			}
+
+			stageTutorial[i]->Update();
+		}
+
+	}
+	
 }
 
 
@@ -1729,9 +1804,6 @@ void Game::TestMove(void)
 		}
 	}
 
-	
-
-	
 }
 
 
