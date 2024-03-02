@@ -1679,6 +1679,7 @@ void Game::StageTutorialUpdate()
 					tutorialNum = SPACETUTORIAL;
 					stageTutorial[tutorialNum]->m_anime->isPlaying = true;
 					tutorialCounter = 0;
+					isNextTutorial = false;
 				}
 			}
 			break;

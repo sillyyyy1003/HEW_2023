@@ -1,22 +1,9 @@
-﻿  ColliderManager.cpp
-  Effect.cpp
-  Fade.cpp
-  Game.cpp
+﻿  Game.cpp
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(446,46): warning C4305: “参数”: 从“double”到“float”截断
 C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\Game.cpp(448,79): warning C4305: “参数”: 从“double”到“float”截断
-  GameObject.cpp
-  RailManager.cpp
-  Result.cpp
-  ResultAnimation.cpp
-  ResultProcess.cpp
-C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\D3D_DEMO_231011\ResultProcess.cpp(53,42): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
-  Scene.cpp
-  SceneManager.cpp
-  UiManager.cpp
-  WinMain.cpp
   正在生成代码
-  30 of 921 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
+  2 of 921 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    19 functions had inline decision re-evaluated but remain unchanged
+    8 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   D3D_DEMO_231011.vcxproj -> C:\Users\58472\Desktop\HEW\D3D_DEMO_231011\x64\Release\D3D_DEMO_231011.exe
