@@ -29,23 +29,25 @@ void GameObject::DoKeyInput(void)
 	//カウト開始
 	if (isInputCount) {
 		if (m_inputCount <= m_lastPressTime + 5) {
-			//处理垂直方向输入
-			if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW) && !Input::Get()->GetKeyTrigger(DIK_UPARROW))
-			{
-				m_nowInput.verInput = INPUT_DOWN;
-			}
-			if (Input::Get()->GetKeyTrigger(DIK_UPARROW) && !Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
-			{
-				m_nowInput.verInput = INPUT_UP;
-			}
-			// 处理水平方向输入
-			if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW) && !Input::Get()->GetKeyTrigger(DIK_RIGHTARROW))
-			{
-				m_nowInput.horInput = INPUT_LEFT;
-			}
-			if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW) && !Input::Get()->GetKeyTrigger(DIK_LEFTARROW))
-			{
-				m_nowInput.horInput = INPUT_RIGHT;
+			if(Game::Get()->GetControl()){
+				//处理垂直方向输入
+				if (Input::Get()->GetKeyTrigger(DIK_DOWNARROW) && !Input::Get()->GetKeyTrigger(DIK_UPARROW))
+				{
+					m_nowInput.verInput = INPUT_DOWN;
+				}
+				if (Input::Get()->GetKeyTrigger(DIK_UPARROW) && !Input::Get()->GetKeyTrigger(DIK_DOWNARROW))
+				{
+					m_nowInput.verInput = INPUT_UP;
+				}
+				// 处理水平方向输入
+				if (Input::Get()->GetKeyTrigger(DIK_LEFTARROW) && !Input::Get()->GetKeyTrigger(DIK_RIGHTARROW))
+				{
+					m_nowInput.horInput = INPUT_LEFT;
+				}
+				if (Input::Get()->GetKeyTrigger(DIK_RIGHTARROW) && !Input::Get()->GetKeyTrigger(DIK_LEFTARROW))
+				{
+					m_nowInput.horInput = INPUT_RIGHT;
+				}
 			}
 		}
 		else {

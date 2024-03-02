@@ -1,7 +1,6 @@
 ﻿#include "Result.h"
 #include "CanvasUI.h"
 #include "Assets.h"
-#include "StaticObject.h"
 #include "DInput.h"
 #include "SceneManager.h"
 #include "ResultProcess.h"
@@ -21,11 +20,13 @@ Result::~Result()
 	delete processor;
 	delete uiResult;
 	delete resultBg;
-	delete Button_again;
-	delete Button_next;
 	delete Result_score;
-	delete Button_return;
 	delete Result_stepcount;
+
+	for (int i = 0; i < 3; i++) {
+		delete Button[i];
+	}
+
 	for (int i = 0; i < 5; i++)
 	{
 		delete star[i];
@@ -40,35 +41,36 @@ void Result::Init()
 	resultBg = new CanvasUI();
 	Result_score = new CanvasUI();
 	Result_stepcount = new CanvasUI();
-	Button_again = new CanvasUI();
-	Button_next = new CanvasUI();
-	Button_return = new CanvasUI();
 
+	for (int i = 0; i < 3; i++) {
+		Button[i]=new CanvasUI();
+	}
+	
 	//テクスチャ読み込み・モデル作成
 	uiResult->CreateModel(g_Assets->result, 430, 104, 1, 1);
 	resultBg->CreateModel(g_Assets->resultBg, 1029, 713, 1, 1);
 	Result_score->CreateModel(g_Assets->Result_score, 139, 66, 1, 1);
 	Result_stepcount->CreateModel(g_Assets->Result_stepcount, 375, 72, 1, 1);
-	Button_again->CreateModel(g_Assets->Button_again, 299, 96, 1, 2);
-	Button_next->CreateModel(g_Assets->Button_next, 316, 107, 1, 2);
-	Button_return->CreateModel(g_Assets->Button_return, 624, 114, 1, 2);
+	Button[AGAIN]->CreateModel(g_Assets->Button_again, 299, 96, 1, 2);
+	Button[NEXT]->CreateModel(g_Assets->Button_next, 316, 107, 1, 2);
+	Button[RETURN]->CreateModel(g_Assets->Button_return, 624, 114, 1, 2);
 
 	//座標
 	resultBg->m_pos = { 0.0f,0.0f,0.4f };
 	uiResult->m_pos = { 0.0f,3.1f,0.3f };
 	Result_score->m_pos = { -4.0f ,1.5f ,0.3f };
 	Result_stepcount->m_pos = { -2.5f ,0.0f,0.3f };
-	Button_again->m_pos = { 2.0f ,-1.5f ,0.3f };
-	Button_next->m_pos = { -2.3f ,-1.5f ,0.3f };
-	Button_return->m_pos = { 0.0f,-3.0f,0.3f };
+	Button[AGAIN]->m_pos = { 2.0f ,-1.5f ,0.3f };
+	Button[NEXT]->m_pos = { -2.3f ,-1.5f ,0.3f };
+	Button[RETURN]->m_pos = { 0.0f,-3.0f,0.3f };
 	
 	resultBg->m_scale = { 0.95f,0.95f,1.0f };
 	uiResult->m_scale = { 0.95f,0.95f,1.0f };
 	Result_score->m_scale = { 0.95f,0.95f,1.0f };
 	Result_stepcount->m_scale = { 0.95f,0.95f,1.0f };
-	Button_again->m_scale = { 0.95f,0.95f,1.0f };
-	Button_next->m_scale = { 0.95f,0.95f,1.0f };
-	Button_return->m_scale = { 0.95f,0.95f,1.0f };
+	Button[AGAIN]->m_scale = { 0.95f,0.95f,1.0f };
+	Button[NEXT]->m_scale = { 0.95f,0.95f,1.0f };
+	Button[RETURN]->m_scale = { 0.95f,0.95f,1.0f };
 
 	//アニメーション
 
@@ -104,9 +106,11 @@ void Result::Update()
 	resultBg->Update();
 	Result_score->Update();
 	Result_stepcount->Update();
-	Button_again->Update();
-	Button_next->Update();
-	Button_return->Update();
+	
+	for (int i = 0; i < 3; i++) 
+	{
+		Button[i]->Update();
+	}
 	for (int i = 0; i < AllStar; i++)
 	{
 		star[i]->Update();
@@ -124,9 +128,10 @@ void Result::Draw()
 	uiResult->Draw();
 	Result_score->Draw();
 	Result_stepcount->Draw();
-	Button_again->Draw();
-	Button_next->Draw();
-	Button_return->Draw();
+	for (int i = 0; i < 3; i++)
+	{
+		Button[i]->Draw();
+	}
 	for (int i = 0; i < AllStar; i++)
 	{
 		star[i]->Draw();
@@ -224,10 +229,6 @@ void Result::ButtonEvent()
 	{
 
 	case AGAIN://もう一度同じステージへ
-		Button_again->m_anime->SetAnimePattern(1);
-		Button_next->m_anime->SetAnimePattern(0);
-		Button_return->m_anime->SetAnimePattern(0);
-
 		//スペースを押したときにもう一度同じステージに遷移する
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
@@ -238,10 +239,6 @@ void Result::ButtonEvent()
 		}
 		break;
 	case RETURN://タイトルへ
-		Button_return->m_anime->SetAnimePattern(1);
-		Button_again->m_anime->SetAnimePattern(0);
-		Button_next->m_anime->SetAnimePattern(0);
-
 		//スペースを押したときにタイトルに遷移する
 		if (Input::Get()->GetKeyPress(DIK_SPACE))
 		{
@@ -251,27 +248,30 @@ void Result::ButtonEvent()
 		}
 		break;
 	case NEXT://次のステージへ
-		Button_next->m_anime->SetAnimePattern(1);
-		Button_again->m_anime->SetAnimePattern(0);
-		Button_return->m_anime->SetAnimePattern(0);
-
 		//スペースを押したときに次のステージに遷移する
 		if (Input::Get()->GetKeyTrigger(DIK_SPACE))
 		{
 			XA_Play(SE_SelectDecide);
 			//ステージに戻る
-			SceneManager::Get()->SetStage(SceneManager::Get()->GetNextStage());
 			SceneManager::Get()->ChangeScene(SCENENAME::STAGE);
-			buttonnum = NEXT;
+			buttonnum = NONE;
 		}
 		break;
 	default:
-		Button_again->m_anime->SetAnimePattern(0);
-		Button_return->m_anime->SetAnimePattern(0);
-		Button_next->m_anime->SetAnimePattern(1);
-		buttonnum = NEXT;
+		
 		break;
 	}
+
+	for (int i = 0; i < 3; i++) {
+		if (buttonnum == i) {
+			Button[i]->m_anime->SetAnimePattern(1);
+			ObjectMove(Button[i], 0.1f, 0.03f);
+		}
+		else {
+			Button[i]->m_anime->SetAnimePattern(0);
+		}
+	}
+
 }
 
 void Result::StarEvent(int StarScore)
@@ -297,6 +297,13 @@ void Result::StarEvent(int StarScore)
 		AllStar = STARONE;
 		break;
 	}
+}
+
+void Result::ObjectMove(CanvasUI* ui, float moveSpeed, float moveHeight)
+{
+	float rate = 0.1f;
+	ui->m_pos.y = ui->m_pos.y + moveHeight * rate * sinf(resultCounter * moveSpeed);
+	resultCounter++;
 }
 
 int Result::ResultScore(int resultStep, std::vector<int> StarNum)

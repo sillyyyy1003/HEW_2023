@@ -32,6 +32,8 @@ public:
 	ID3D11ShaderResourceView* uiSelectCursor;
 	ID3D11ShaderResourceView* uiSelectStage[3];
 	ID3D11ShaderResourceView* uiSelectChapter[3];
+	ID3D11ShaderResourceView* selectMask;
+	ID3D11ShaderResourceView* chapterMask;
 	
 	ID3D11ShaderResourceView* uiClear;
 
@@ -40,10 +42,11 @@ public:
 	ID3D11ShaderResourceView* resultMask;
 
 	//HINT用
-	ID3D11ShaderResourceView* stageHint1_1;
-	ID3D11ShaderResourceView* stageHint1_2;
-	ID3D11ShaderResourceView* stageHint1_3;
+	ID3D11ShaderResourceView* stageHint[3];
+	ID3D11ShaderResourceView* stageShapeHint[3];
 	ID3D11ShaderResourceView* stageHintBg;
+
+	ID3D11ShaderResourceView* stageTutorial[3];
 
 	//stage1-1用リソース
 	ID3D11ShaderResourceView* stageBg1_1;

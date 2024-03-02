@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "xa2.h"
 #include <DirectXMath.h>
+#include "Fade.h"
 
 extern Assets* g_Assets;
 
@@ -30,6 +31,9 @@ UiManager::~UiManager()
 		delete uiSelectChapter[i];
 		delete uiClearMark[i];
 	}
+	delete stageMask;
+	delete chapterMask;
+
 	//pause
 	delete uiPauseBg;		//PAUSEの背景
 	for (int i = 0; i < pauseNum; i++) {
@@ -102,7 +106,8 @@ void UiManager::Init()
 		uiSelectChapter[i] = new CanvasUI();
 		uiClearMark[i] = new CanvasUI();
 	}
-
+	stageMask = new CanvasUI();
+	chapterMask = new CanvasUI();
 	//pause
 	uiPauseBg = new CanvasUI();		//PAUSEの背景
 	uiPauseButton = new CanvasUI * [pauseNum];
@@ -161,6 +166,10 @@ void UiManager::Init()
 	{
 		uiClearMark[i]->CreateModel(g_Assets->uiClear, 87, 87, 1, 1);
 	}
+	
+	stageMask->CreateModel(g_Assets->selectMask, 1280, 720, 1, 1);
+	chapterMask->CreateModel(g_Assets->chapterMask, 1280, 720, 1, 1);
+
 
 	//pause
 	uiPauseBg->CreateModel(g_Assets->uiPauseBg, 647, 702, 1, 1);
@@ -296,6 +305,8 @@ void UiManager::InitStageSelect()
 	uiSelectChapter[CHAPTER1]->m_pos = { 3.1f,3.2f,0.8f };
 	uiSelectChapter[CHAPTER2]->m_pos = { 3.1f,0.8f,0.8f };
 	uiSelectChapter[CHAPTER3]->m_pos = { 3.1f,-1.5f,0.8f };
+	stageMask->m_pos = { 0.0,0.0,0.2f };
+	chapterMask->m_pos = { 0.0,0.0,0.2f };
 
 	//クリアの印の位置設定
 	float posy = 2.3f;
@@ -318,7 +329,8 @@ void UiManager::InitStageSelect()
 	selectStage = STAGE1;
 	selectChapter = CHAPTER1;
 	isSelectStage = true;
-
+	stageMask->SetActive(false);
+	chapterMask->SetActive(true);
 }
 
 void UiManager::InitStage()
@@ -433,12 +445,15 @@ void UiManager::SelectUpdate()
 void UiManager::ObjectMove(CanvasUI* pObject, float moveSpeed,float bounceHeight)
 {
 	float rate = 0.1f;
-		pObject->m_pos.y = pObject->m_pos.y + bounceHeight * rate * sinf(selectCounter * moveSpeed);
+	pObject->m_pos.y = pObject->m_pos.y + bounceHeight * rate * sinf(selectCounter * moveSpeed);
 	selectCounter++;
 }
 
 void UiManager::DoSelectKey()
 {
+	if (Game::Get()->GetFade()->mState != Fade::FADE_IN) {
+	
+	
 	//スペースキー押した時
 	if (Input::Get()->GetKeyTrigger(DIK_SPACE)) {
 		XA_Play(SE_SelectDecide);//決定SE再生
@@ -528,6 +543,8 @@ void UiManager::DoSelectKey()
 			selectChapter = CHAPTER1;
 		}
 	}
+
+	}
 }
 
 void UiManager::SetSelectStatus()
@@ -567,6 +584,15 @@ void UiManager::SetSelectStatus()
 			uiClearMark[i]->SetActive(false);
 		}
 	}
+	if (!isSelectStage) {
+		stageMask->SetActive(true);
+		chapterMask->SetActive(false);
+	}
+	else {
+		stageMask->SetActive(false);
+		chapterMask->SetActive(true);
+	}
+
 	
 }
 
@@ -579,11 +605,12 @@ void UiManager::StageUpdate()
 		//アニメションの変更
 		for (int i = 0; i < pauseNum; i++) {
 			if (pauseSelect == i) {
-				uiPauseButton[i]->SetAnimeActive(CanvasUI::INACTIVE);
+				uiPauseButton[i]->SetAnimeActive(CanvasUI::ACTIVE);
+				ObjectMove(uiPauseButton[i], 0.1f, 0.03f);
 				uiPauseButton[i]->m_pos.x = -5.5f;
 			}
 			else {
-				uiPauseButton[i]->SetAnimeActive(CanvasUI::ACTIVE);
+				uiPauseButton[i]->SetAnimeActive(CanvasUI::INACTIVE);
 				uiPauseButton[i]->m_pos.x = -6.0f;
 			}
 		}
@@ -793,6 +820,11 @@ void UiManager::SelectDraw()
 	}
 
 	uiSelectCursor->Draw();
+
+	SetBlendState(GetBlendMultiply());
+	stageMask->Draw();
+	chapterMask->Draw();
+	SetBlendState(GetBlendAlpha());
 
 }
 

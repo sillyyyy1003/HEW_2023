@@ -7,7 +7,7 @@ class Fade
 {
 private:
 	//fade‚Ì‘¬“x
-	float m_fadeSpeed = 0.01f;
+	float m_fadeSpeed = 0.02f;
 
 public:
 

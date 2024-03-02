@@ -59,6 +59,8 @@ void ResultAnimation::Update(CanvasUI* clear1, CanvasUI* clear2, CanvasUI* clear
 				SceneManager::Get()->m_stageHolder[SceneManager::Get()->GetActiveStage()]->SetCompleted(true);
 				Game::Get()->SetResultAnime(false);
 				XA_Play(SE_Result);
+				//BUTTON‚Ì‰Šú‰»
+				Game::Get()->GetResult()->SetButton(2);
 			}
 		}
 
