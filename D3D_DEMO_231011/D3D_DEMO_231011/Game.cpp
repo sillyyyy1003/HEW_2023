@@ -1696,6 +1696,7 @@ void Game::StageTutorialUpdate()
 				if (tutorialCounter >= 60) {
 					tutorialNum = HINTTUTORIAL;
 					stageTutorial[tutorialNum]->m_anime->isPlaying = true;
+					isNextTutorial = false;
 					tutorialCounter = 0;
 				}
 			}
